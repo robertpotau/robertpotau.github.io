@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Post -->
+  <rect x="46" y="32" width="8" height="62" rx="4" fill="#374151" stroke="#1f2937" stroke-width="2"/>
+  <!-- Curved arm -->
+  <path d="M50 32 Q50 16 66 14" fill="none" stroke="#374151" stroke-width="8" stroke-linecap="round"/>
+  <!-- Lamp housing -->
+  <path d="M56 6 Q66 4 76 6 L80 14 Q74 20 66 20 Q58 20 52 14 Z" fill="#374151" stroke="#1f2937" stroke-width="2"/>
+  <!-- Glass bulb -->
+  <ellipse cx="66" cy="14" rx="12" ry="8" fill="#fef08a" stroke="#d97706" stroke-width="1.5"/>
+  <!-- Light glow -->
+  <ellipse cx="66" cy="14" rx="8" ry="5" fill="#fbbf24" opacity="0.8"/>
+  <!-- Light rays -->
+  <path d="M66 22 L60 36 L66 32 L72 36 Z" fill="#fef08a" opacity="0.5"/>
+  <path d="M54 18 L40 28" stroke="#fef08a" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+  <path d="M78 18 L92 28" stroke="#fef08a" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+  <!-- Base -->
+  <rect x="38" y="92" width="24" height="6" rx="3" fill="#1f2937"/>
+  <!-- Ground shadow -->
+  <ellipse cx="50" cy="97" rx="20" ry="3" fill="#d1d5db" opacity="0.5"/>
+</svg>

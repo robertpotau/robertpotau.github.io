@@ -1,0 +1,38 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cap -->
+  <circle cx="50" cy="21" r="10" fill="#f5cba7" stroke="#c0835a" stroke-width="1.2"/>
+  <!-- Gorra plana blanca -->
+  <ellipse cx="50" cy="15" rx="12" ry="4" fill="#f5f5f5" stroke="#d1d5db" stroke-width="0.8"/>
+  <rect x="38" y="12" width="24" height="5" rx="1" fill="#f5f5f5" stroke="#d1d5db" stroke-width="0.8"/>
+  <!-- Visera -->
+  <rect x="36" y="15" width="12" height="3" rx="1" fill="#e5e7eb"/>
+  <!-- Cuell -->
+  <rect x="46" y="29" width="8" height="5" fill="#f5cba7"/>
+  <!-- Granota blanca amb taques -->
+  <rect x="36" y="33" width="28" height="24" rx="3" fill="#f5f5f5" stroke="#e5e7eb" stroke-width="0.5"/>
+  <!-- Taques de color -->
+  <ellipse cx="43" cy="39" rx="4" ry="3" fill="#ef4444" opacity="0.85"/>
+  <ellipse cx="55" cy="44" rx="3" ry="4" fill="#3b82f6" opacity="0.85"/>
+  <ellipse cx="46" cy="51" rx="3" ry="2" fill="#fde047" opacity="0.9"/>
+  <circle cx="58" cy="36" r="2" fill="#ef4444" opacity="0.7"/>
+  <!-- Braç esquerre -->
+  <rect x="24" y="34" width="12" height="8" rx="3" fill="#f5f5f5" stroke="#e5e7eb" stroke-width="0.5"/>
+  <!-- Braç dret amb corró -->
+  <rect x="64" y="34" width="12" height="8" rx="3" fill="#f5f5f5" stroke="#e5e7eb" stroke-width="0.5"/>
+  <!-- Corró de pintar -->
+  <rect x="73" y="25" width="5" height="20" rx="2" fill="#92400e"/>
+  <rect x="70" y="25" width="11" height="8" rx="3" fill="#6b7280"/>
+  <!-- Pintura al corró -->
+  <rect x="70" y="25" width="11" height="4" rx="2" fill="#3b82f6" opacity="0.7"/>
+  <!-- Cames -->
+  <rect x="36" y="57" width="12" height="18" rx="2" fill="#f5f5f5" stroke="#e5e7eb" stroke-width="0.5"/>
+  <rect x="52" y="57" width="12" height="18" rx="2" fill="#f5f5f5" stroke="#e5e7eb" stroke-width="0.5"/>
+  <!-- Taca a les cames -->
+  <ellipse cx="42" cy="65" rx="2" ry="3" fill="#fde047" opacity="0.8"/>
+  <ellipse cx="56" cy="62" rx="2" ry="2" fill="#ef4444" opacity="0.7"/>
+  <!-- Sabates -->
+  <rect x="35" y="73" width="14" height="4" rx="2" fill="#374151"/>
+  <rect x="51" y="73" width="14" height="4" rx="2" fill="#374151"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PINTOR</text>
+</svg>

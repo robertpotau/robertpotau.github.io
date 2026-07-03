@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Tomato body -->
+  <circle cx="46" cy="58" r="28" fill="#ef4444"/>
+  <!-- Shallow grooves (lobes) -->
+  <path d="M46 30 Q42 40 42 58 Q42 74 46 84" stroke="#dc2626" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <path d="M46 30 Q50 40 52 58 Q52 74 46 84" stroke="#dc2626" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <path d="M46 30 Q36 38 34 56 Q34 72 46 84" stroke="#dc2626" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M46 30 Q56 38 58 56 Q60 72 46 84" stroke="#dc2626" stroke-width="1" fill="none" opacity="0.4"/>
+  <!-- Calyx (star-shaped green crown) -->
+  <polygon points="46,27 44,34 38,30 42,36 36,36 42,40 40,46 46,42 52,46 50,40 56,36 50,36 54,30 48,34" fill="#15803d"/>
+  <!-- Center of calyx -->
+  <circle cx="46" cy="38" r="4" fill="#15803d"/>
+  <!-- Stem -->
+  <rect x="44.5" y="22" width="3" height="7" rx="1.5" fill="#15803d"/>
+  <!-- Highlight -->
+  <circle cx="34" cy="46" r="8" fill="#f87171" opacity="0.4"/>
+  <!-- Slice (right side) -->
+  <path d="M72 46 A18 18 0 0 1 72 70 L72 58Z" fill="#fca5a5"/>
+  <path d="M72 46 A18 18 0 0 1 72 70" fill="none" stroke="#ef4444" stroke-width="2.5"/>
+  <!-- Slice segments -->
+  <line x1="72" y1="58" x2="88" y2="50" stroke="#ef4444" stroke-width="1"/>
+  <line x1="72" y1="58" x2="90" y2="58" stroke="#ef4444" stroke-width="1"/>
+  <line x1="72" y1="58" x2="88" y2="66" stroke="#ef4444" stroke-width="1"/>
+  <!-- Seeds -->
+  <ellipse cx="82" cy="54" rx="2" ry="1.5" fill="#fde047"/>
+  <ellipse cx="83" cy="62" rx="2" ry="1.5" fill="#fde047"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TOMÀQUET</text>
+</svg>

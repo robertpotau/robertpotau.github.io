@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" fill="#fffbeb" rx="12"/>
+  <!-- Baguette body -->
+  <rect x="8" y="38" width="84" height="26" rx="13" fill="#d97706" stroke="#b45309" stroke-width="2.5"/>
+  <!-- Crumb interior (miga) - lighter color center -->
+  <rect x="14" y="44" width="72" height="14" rx="7" fill="#fef3c7" opacity="0.6"/>
+  <!-- Diagonal score marks (talls) -->
+  <line x1="28" y1="36" x2="22" y2="66" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="40" y1="36" x2="34" y2="66" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="52" y1="36" x2="46" y2="66" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="64" y1="36" x2="58" y2="66" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="76" y1="36" x2="70" y2="66" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Crust sheen along top -->
+  <ellipse cx="50" cy="42" rx="36" ry="4" fill="#f59e0b" opacity="0.5"/>
+  <!-- Pointed ends -->
+  <ellipse cx="8" cy="51" rx="5" ry="8" fill="#b45309"/>
+  <ellipse cx="92" cy="51" rx="5" ry="8" fill="#b45309"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">BARRA PA</text>
+</svg>

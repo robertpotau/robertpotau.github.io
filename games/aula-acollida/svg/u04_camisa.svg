@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Body -->
+  <path d="M26 36 L16 90 L84 90 L74 36 Z" fill="#dbeafe" stroke="#3b82f6" stroke-width="2.5"/>
+  <!-- Left sleeve + collar flap -->
+  <path d="M26 36 Q18 32 10 38 L6 56 Q6 62 12 62 L18 46 Z" fill="#dbeafe" stroke="#3b82f6" stroke-width="2.5"/>
+  <!-- Right sleeve + collar flap -->
+  <path d="M74 36 Q82 32 90 38 L94 56 Q94 62 88 62 L82 46 Z" fill="#dbeafe" stroke="#3b82f6" stroke-width="2.5"/>
+  <!-- Collar left -->
+  <path d="M34 14 Q34 36 26 36 Q30 28 34 14 Z" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <!-- Collar right -->
+  <path d="M66 14 Q66 36 74 36 Q70 28 66 14 Z" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <!-- Collar centre V -->
+  <path d="M34 14 L50 26 L66 14" fill="none" stroke="#3b82f6" stroke-width="2"/>
+  <!-- Buttons -->
+  <circle cx="50" cy="48" r="2.5" fill="#3b82f6"/>
+  <circle cx="50" cy="60" r="2.5" fill="#3b82f6"/>
+  <circle cx="50" cy="72" r="2.5" fill="#3b82f6"/>
+  <circle cx="50" cy="84" r="2.5" fill="#3b82f6"/>
+  <!-- Button placket -->
+  <line x1="50" y1="36" x2="50" y2="90" stroke="#93c5fd" stroke-width="1.5"/>
+</svg>

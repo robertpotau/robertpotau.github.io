@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Head outline -->
+  <ellipse cx="50" cy="55" rx="32" ry="36" fill="#ffd68a" stroke="#d97706" stroke-width="2"/>
+  <!-- Hair at top -->
+  <path d="M18 45 Q20 22 50 20 Q80 22 82 45" fill="#92400e"/>
+  <!-- Forehead highlight area -->
+  <ellipse cx="50" cy="38" rx="22" ry="10" fill="#ffe082" opacity="0.7"/>
+  <!-- Arrow pointing to forehead -->
+  <line x1="78" y1="25" x2="64" y2="36" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="62" cy="37" r="4" fill="#ef4444"/>
+  <!-- Eyes (lower, not highlighted) -->
+  <ellipse cx="38" cy="58" rx="6" ry="4" fill="white" stroke="#374151" stroke-width="1.5"/>
+  <ellipse cx="62" cy="58" rx="6" ry="4" fill="white" stroke="#374151" stroke-width="1.5"/>
+  <circle cx="38" cy="58" r="2.5" fill="#374151"/>
+  <circle cx="62" cy="58" r="2.5" fill="#374151"/>
+  <!-- Nose -->
+  <path d="M46 66 Q50 72 54 66" stroke="#c2850a" stroke-width="1.5" fill="none"/>
+  <!-- Mouth -->
+  <path d="M38 76 Q50 82 62 76" stroke="#c2850a" stroke-width="2" fill="none"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">FRONT</text>
+</svg>

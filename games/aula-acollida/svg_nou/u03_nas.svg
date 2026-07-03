@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="nas_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#nas_bg)"/>
+  <ellipse cx="50" cy="84" rx="20" ry="4" fill="#0f172a" opacity=".08"/>
+  <path d="M44 18 q4 -4 10 -2 l2 34 q10 4 8 14 q-2 10 -14 10 q-12 0 -14 -10 l8 -4 q-2 -28 0 -42" fill="#fcd9b8"/>
+  <path d="M50 16 q3 -1 4 0 l2 36 q-4 -2 -6 -1 z" fill="#f5c9a4"/>
+  <ellipse cx="42" cy="68" rx="3.5" ry="2.5" fill="#b07a4f" transform="rotate(-20 42 68)"/>
+  <ellipse cx="58" cy="68" rx="3.5" ry="2.5" fill="#b07a4f" transform="rotate(20 58 68)"/>
+  <path d="M36 64 q-2 6 4 9 M64 64 q2 6 -4 9" stroke="#e7b08a" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M22 38 q-5 4 -3 9 M78 38 q5 4 3 9" stroke="#fdba74" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".7"/>
+</svg>

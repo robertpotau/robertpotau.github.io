@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="sar_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0f9ff"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient>
+  <linearGradient id="sar_cos" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfdbfe"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#64748b"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#sar_bg)"/>
+  <ellipse cx="50" cy="78" rx="32" ry="4" fill="#0f172a" opacity=".08"/>
+  <g transform="rotate(-8 50 50)">
+    <ellipse cx="46" cy="52" rx="30" ry="12" fill="url(#sar_cos)"/>
+    <polygon points="72,52 88,42 88,62" fill="#64748b"/>
+    <polygon points="74,52 86,45 86,59" fill="#94a3b8"/>
+    <path d="M40 40.5 q4 5 0 11 M52 41 q4 5 0 11" stroke="#64748b" stroke-width="1.4" fill="none" opacity=".6"/>
+    <path d="M46 64 q4 -4 8 0 l-4 4 z" fill="#64748b" opacity="0"/>
+    <path d="M44 63 l4 6 l4 -6" fill="#94a3b8"/>
+    <circle cx="26" cy="50" r="2.6" fill="#1e293b"/>
+    <circle cx="25.2" cy="49.2" r=".9" fill="#fff"/>
+    <path d="M18 54 q3 2 6 1" stroke="#475569" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <path d="M20 44 q24 -6 50 2" stroke="#e2e8f0" stroke-width="1.8" fill="none" opacity=".8"/>
+  </g>
+  <circle cx="22" cy="24" r="2" fill="#bae6fd"/>
+  <circle cx="28" cy="17" r="1.5" fill="#bae6fd"/>
+</svg>

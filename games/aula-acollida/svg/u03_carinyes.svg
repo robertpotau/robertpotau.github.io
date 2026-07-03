@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Warm heart background -->
+  <circle cx="50" cy="45" r="35" fill="#fce7f3" stroke="#fbcfe8" stroke-width="1.5"/>
+  <!-- Loving face with hearts -->
+  <circle cx="50" cy="45" r="26" fill="#ffd68a" stroke="#d97706" stroke-width="2"/>
+  <!-- Heart eyes -->
+  <!-- Left heart eye -->
+  <path d="M26 38 Q26 32 32 32 Q38 32 38 38 Q38 44 32 48 Q26 44 26 38 Z" fill="#ef4444"/>
+  <!-- Right heart eye -->
+  <path d="M62 38 Q62 32 68 32 Q74 32 74 38 Q74 44 68 48 Q62 44 62 38 Z" fill="#ef4444"/>
+  <!-- Big loving smile -->
+  <path d="M30 58 Q50 72 70 58" stroke="#c2850a" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Rosy cheeks -->
+  <circle cx="26" cy="56" r="8" fill="#fca5a5" opacity="0.5"/>
+  <circle cx="74" cy="56" r="8" fill="#fca5a5" opacity="0.5"/>
+  <!-- Floating hearts -->
+  <text x="12" y="22" font-family="Arial,sans-serif" font-size="14" fill="#f43f5e">♥</text>
+  <text x="72" y="18" font-family="Arial,sans-serif" font-size="12" fill="#ec4899">♥</text>
+  <text x="44" y="14" font-family="Arial,sans-serif" font-size="10" fill="#f97316">♥</text>
+  <text x="82" y="30" font-family="Arial,sans-serif" font-size="8" fill="#f43f5e">♥</text>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="7.5" fill="#1e1b4b" font-weight="700" text-anchor="middle">CARINYÓS</text>
+</svg>

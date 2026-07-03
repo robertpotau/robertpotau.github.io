@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="por2_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fdf2f8"/><stop offset="1" stop-color="#fce7f3"/></linearGradient>
+  <radialGradient id="por2_cos" cx=".4" cy=".35" r="1"><stop offset="0" stop-color="#fbcfe8"/><stop offset="1" stop-color="#f472b6"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#por2_bg)"/>
+  <ellipse cx="50" cy="86" rx="28" ry="4" fill="#0f172a" opacity=".08"/>
+  <polygon points="26,38 22,18 42,26" fill="#ec4899"/>
+  <polygon points="28,34 26,23 37,27" fill="#f9a8d4"/>
+  <polygon points="74,38 78,18 58,26" fill="#db2777"/>
+  <polygon points="72,34 74,23 63,27" fill="#f9a8d4"/>
+  <circle cx="50" cy="54" r="30" fill="url(#por2_cos)"/>
+  <circle cx="40" cy="46" r="3" fill="#1e293b"/>
+  <circle cx="60" cy="46" r="3" fill="#1e293b"/>
+  <circle cx="39" cy="45" r="1" fill="#fff"/>
+  <circle cx="59" cy="45" r="1" fill="#fff"/>
+  <ellipse cx="50" cy="62" rx="13" ry="9.5" fill="#ec4899"/>
+  <ellipse cx="50" cy="62" rx="13" ry="9.5" fill="none" stroke="#be185d" stroke-width="1.4"/>
+  <ellipse cx="45" cy="62" rx="2.4" ry="3.6" fill="#9d174d"/>
+  <ellipse cx="55" cy="62" rx="2.4" ry="3.6" fill="#9d174d"/>
+  <circle cx="30" cy="58" r="4" fill="#f9a8d4" opacity=".8"/>
+  <circle cx="70" cy="58" r="4" fill="#f9a8d4" opacity=".8"/>
+</svg>

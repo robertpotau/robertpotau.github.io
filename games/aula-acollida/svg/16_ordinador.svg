@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 90">
+  <!-- pantalla (marc gris) -->
+  <rect x="12" y="4" width="96" height="62" rx="6" fill="#374151"/>
+  <!-- pantalla interior (blau) -->
+  <rect x="18" y="10" width="84" height="50" rx="3" fill="#1d4ed8"/>
+  <!-- detall pantalla: barra superior -->
+  <rect x="18" y="10" width="84" height="6" rx="3" fill="#1e3a8a"/>
+  <!-- càmera -->
+  <circle cx="60" cy="13" r="2.5" fill="#111827"/>
+  <!-- frontissa -->
+  <rect x="22" y="63" width="76" height="5" rx="2" fill="#6b7280"/>
+  <!-- base del teclat -->
+  <rect x="4" y="68" width="112" height="18" rx="5" fill="#6b7280"/>
+  <!-- teclat (línies) -->
+  <rect x="12" y="71" width="55" height="11" rx="2" fill="#9ca3af" opacity="0.5"/>
+  <!-- touchpad -->
+  <rect x="40" y="71" width="40" height="12" rx="3" fill="#9ca3af"/>
+</svg>

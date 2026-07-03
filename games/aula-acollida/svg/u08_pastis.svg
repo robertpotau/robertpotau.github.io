@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Pastís de celebració -->
+  <!-- Cos del pastís (cercle) amb rodanxa tallada -->
+  <!-- Pastís complet -->
+  <path d="M 50 20 L 50 80 A 32 32 0 1 1 25 35 Z" fill="#f97316"/>
+  <!-- Capa de crema superior -->
+  <ellipse cx="50" cy="20" rx="32" ry="10" fill="#f5f5f5"/>
+  <!-- Rodanxa visible -->
+  <path d="M 50 20 L 25 35 L 32 78 L 50 80 Z" fill="#fb923c"/>
+  <path d="M 50 20 L 25 35 L 32 78 L 50 80 Z" fill="#fef3c7" opacity="0.3"/>
+  <!-- Capa crema interior de la rodanxa -->
+  <path d="M 50 20 L 25 35" stroke="#f5f5f5" stroke-width="4"/>
+  <path d="M 50 80 L 32 78" stroke="#f5f5f5" stroke-width="4"/>
+  <!-- Decoració de crema a dalt -->
+  <path d="M 20 20 Q 25 14 30 20 Q 35 14 40 20 Q 45 14 50 20 Q 55 14 60 20 Q 65 14 70 20 Q 75 14 80 20" fill="none" stroke="#f5f5f5" stroke-width="4" stroke-linecap="round"/>
+  <!-- Maduixa a sobre -->
+  <ellipse cx="55" cy="16" rx="8" ry="9" fill="#ef4444"/>
+  <ellipse cx="55" cy="14" rx="6" ry="7" fill="#f87171"/>
+  <!-- Sementes de la maduixa -->
+  <ellipse cx="53" cy="13" rx="0.8" ry="1.2" fill="#fca5a5"/>
+  <ellipse cx="57" cy="15" rx="0.8" ry="1.2" fill="#fca5a5"/>
+  <ellipse cx="55" cy="18" rx="0.8" ry="1.2" fill="#fca5a5"/>
+  <!-- Full verd maduixa -->
+  <path d="M 51 8 Q 55 5 59 8" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/>
+  <line x1="55" y1="5" x2="55" y2="9" stroke="#16a34a" stroke-width="1.5"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PASTÍS</text>
+</svg>

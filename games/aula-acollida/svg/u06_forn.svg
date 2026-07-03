@@ -1,0 +1,25 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cos forn -->
+  <rect x="12" y="15" width="76" height="72" rx="6" fill="#374151"/>
+  <!-- Panell de control superior -->
+  <rect x="12" y="15" width="76" height="16" rx="5" fill="#4b5563"/>
+  <!-- Manetes panell -->
+  <circle cx="28" cy="23" r="5" fill="#6b7280"/>
+  <circle cx="28" cy="23" r="2" fill="#374151"/>
+  <circle cx="45" cy="23" r="5" fill="#6b7280"/>
+  <circle cx="45" cy="23" r="2" fill="#374151"/>
+  <circle cx="62" cy="23" r="5" fill="#6b7280"/>
+  <circle cx="62" cy="23" r="2" fill="#374151"/>
+  <circle cx="78" cy="23" r="5" fill="#6b7280"/>
+  <circle cx="78" cy="23" r="2" fill="#374151"/>
+  <!-- Porta de vidre -->
+  <rect x="18" y="35" width="64" height="44" rx="4" fill="#1f2937"/>
+  <rect x="20" y="37" width="60" height="40" rx="3" fill="#4b5563" opacity="0.6"/>
+  <!-- Marc porta -->
+  <rect x="18" y="35" width="64" height="44" rx="4" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <!-- Maneta porta -->
+  <rect x="30" y="79" width="40" height="5" rx="2.5" fill="#6b7280"/>
+  <!-- Llum interior simulat -->
+  <ellipse cx="50" cy="57" rx="18" ry="12" fill="#f59e0b" opacity="0.15"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">FORN</text>
+</svg>

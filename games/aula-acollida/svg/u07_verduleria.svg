@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Building facade -->
+  <rect x="10" y="30" width="80" height="55" rx="2" fill="#fef9c3"/>
+  <!-- Awning -->
+  <polygon points="5,30 95,30 88,45 12,45" fill="#f97316"/>
+  <line x1="5" y1="30" x2="12" y2="45" stroke="#ea580c" stroke-width="1"/>
+  <line x1="25" y1="30" x2="26" y2="45" stroke="#ea580c" stroke-width="1"/>
+  <line x1="45" y1="30" x2="45" y2="45" stroke="#ea580c" stroke-width="1"/>
+  <line x1="65" y1="30" x2="64" y2="45" stroke="#ea580c" stroke-width="1"/>
+  <line x1="85" y1="30" x2="83" y2="45" stroke="#ea580c" stroke-width="1"/>
+  <!-- Sign -->
+  <rect x="18" y="18" width="64" height="14" rx="3" fill="#f97316"/>
+  <text x="50" y="28" font-family="Arial,sans-serif" font-size="7" fill="white" font-weight="700" text-anchor="middle">VERDULERIA</text>
+  <!-- Door -->
+  <rect x="38" y="60" width="24" height="25" rx="2" fill="#92400e"/>
+  <circle cx="57" cy="73" r="1.5" fill="#fbbf24"/>
+  <!-- Display shelf -->
+  <rect x="8" y="52" width="84" height="8" rx="2" fill="#a16207"/>
+  <!-- Lettuce -->
+  <ellipse cx="20" cy="49" rx="7" ry="6" fill="#4ade80"/>
+  <ellipse cx="20" cy="49" rx="5" ry="4" fill="#86efac"/>
+  <ellipse cx="20" cy="49" rx="3" ry="2.5" fill="#4ade80"/>
+  <!-- Carrots -->
+  <path d="M38 44 L40 54 L36 54Z" fill="#f97316"/>
+  <path d="M38 44 Q37 41 36 39" stroke="#15803d" stroke-width="1.5" fill="none"/>
+  <path d="M38 44 Q39 41 40 39" stroke="#15803d" stroke-width="1.5" fill="none"/>
+  <path d="M44 44 L46 54 L42 54Z" fill="#f97316"/>
+  <path d="M44 44 Q43 41 42 39" stroke="#15803d" stroke-width="1.5" fill="none"/>
+  <!-- Tomatoes -->
+  <circle cx="60" cy="49" r="5.5" fill="#ef4444"/>
+  <path d="M58 43.5 Q60 41 62 43.5" stroke="#15803d" stroke-width="1.5" fill="none"/>
+  <circle cx="72" cy="49" r="5.5" fill="#ef4444"/>
+  <path d="M70 43.5 Q72 41 74 43.5" stroke="#15803d" stroke-width="1.5" fill="none"/>
+  <!-- Pepper -->
+  <path d="M82 47 Q85 43 88 47 Q88 53 85 54 Q82 53 82 47Z" fill="#ef4444"/>
+  <rect x="84.5" y="43" width="1" height="3" fill="#15803d"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">VERDULERIA</text>
+</svg>

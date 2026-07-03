@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Pas/porta ESTRET: dues parets gruixudes amb un forat molt estret al mig -->
+
+  <!-- Paret esquerra -->
+  <rect x="2" y="10" width="34" height="80" rx="3" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>
+  <!-- Textura de maons (paret esquerra) -->
+  <line x1="2" y1="28" x2="36" y2="28" stroke="#64748b" stroke-width="0.8" opacity="0.5"/>
+  <line x1="2" y1="46" x2="36" y2="46" stroke="#64748b" stroke-width="0.8" opacity="0.5"/>
+  <line x1="2" y1="64" x2="36" y2="64" stroke="#64748b" stroke-width="0.8" opacity="0.5"/>
+  <line x1="2" y1="82" x2="36" y2="82" stroke="#64748b" stroke-width="0.8" opacity="0.5"/>
+  <line x1="19" y1="10" x2="19" y2="90" stroke="#64748b" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Paret dreta -->
+  <rect x="64" y="10" width="34" height="80" rx="3" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>
+  <!-- Textura de maons (paret dreta) -->
+  <line x1="64" y1="28" x2="98" y2="28" stroke="#64748b" stroke-width="0.8" opacity="0.5"/>
+  <line x1="64" y1="46" x2="98" y2="46" stroke="#64748b" stroke-width="0.8" opacity="0.5"/>
+  <line x1="64" y1="64" x2="98" y2="64" stroke="#64748b" stroke-width="0.8" opacity="0.5"/>
+  <line x1="64" y1="82" x2="98" y2="82" stroke="#64748b" stroke-width="0.8" opacity="0.5"/>
+  <line x1="81" y1="10" x2="81" y2="90" stroke="#64748b" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Pas estret al mig (molt estret) -->
+  <rect x="36" y="10" width="28" height="80" fill="#e0f2fe"/>
+
+  <!-- Persona que gairebé no hi cap (cos simplificat) -->
+  <!-- Cap -->
+  <circle cx="50" cy="30" r="7" fill="#f5cba7" stroke="#c0835a" stroke-width="1.5"/>
+  <!-- Cos -->
+  <rect x="43" y="38" width="14" height="20" rx="4" fill="#6366f1"/>
+  <!-- Braços apretats contra el cos (molt estrets) -->
+  <line x1="43" y1="42" x2="38" y2="52" stroke="#f5cba7" stroke-width="3" stroke-linecap="round"/>
+  <line x1="57" y1="42" x2="62" y2="52" stroke="#f5cba7" stroke-width="3" stroke-linecap="round"/>
+  <!-- Cames -->
+  <line x1="47" y1="58" x2="46" y2="72" stroke="#1e3a5f" stroke-width="4" stroke-linecap="round"/>
+  <line x1="53" y1="58" x2="54" y2="72" stroke="#1e3a5f" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Fletxes cap a dins mostrant l'estretor -->
+  <line x1="36" y1="5" x2="64" y2="5" stroke="#ef4444" stroke-width="2"/>
+  <polygon points="36,5 42,2 42,8" fill="#ef4444"/>
+  <polygon points="64,5 58,2 58,8" fill="#ef4444"/>
+</svg>

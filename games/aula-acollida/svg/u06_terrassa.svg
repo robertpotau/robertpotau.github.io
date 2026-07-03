@@ -1,0 +1,28 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cel -->
+  <rect x="5" y="5" width="90" height="35" rx="4" fill="#bae6fd"/>
+  <!-- Rajoles terra (quadrícula) -->
+  <rect x="5" y="60" width="90" height="25" rx="2" fill="#d97706"/>
+  <line x1="5" y1="68" x2="95" y2="68" stroke="#b45309" stroke-width="1"/>
+  <line x1="5" y1="76" x2="95" y2="76" stroke="#b45309" stroke-width="1"/>
+  <line x1="20" y1="60" x2="20" y2="85" stroke="#b45309" stroke-width="1"/>
+  <line x1="35" y1="60" x2="35" y2="85" stroke="#b45309" stroke-width="1"/>
+  <line x1="50" y1="60" x2="50" y2="85" stroke="#b45309" stroke-width="1"/>
+  <line x1="65" y1="60" x2="65" y2="85" stroke="#b45309" stroke-width="1"/>
+  <line x1="80" y1="60" x2="80" y2="85" stroke="#b45309" stroke-width="1"/>
+  <!-- Barana -->
+  <rect x="5" y="38" width="90" height="4" rx="1" fill="#6b7280"/>
+  <rect x="5" y="55" width="90" height="5" rx="1" fill="#6b7280"/>
+  <rect x="10" y="42" width="2.5" height="13" fill="#6b7280"/>
+  <rect x="20" y="42" width="2.5" height="13" fill="#6b7280"/>
+  <rect x="30" y="42" width="2.5" height="13" fill="#6b7280"/>
+  <rect x="40" y="42" width="2.5" height="13" fill="#6b7280"/>
+  <rect x="50" y="42" width="2.5" height="13" fill="#6b7280"/>
+  <rect x="60" y="42" width="2.5" height="13" fill="#6b7280"/>
+  <rect x="70" y="42" width="2.5" height="13" fill="#6b7280"/>
+  <rect x="80" y="42" width="2.5" height="13" fill="#6b7280"/>
+  <rect x="87.5" y="42" width="2.5" height="13" fill="#6b7280"/>
+  <!-- Taula -->
+  <ellipse cx="50" cy="56" rx="16" ry="5" fill="#f5f5f5" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TERRASSA</text>
+</svg>

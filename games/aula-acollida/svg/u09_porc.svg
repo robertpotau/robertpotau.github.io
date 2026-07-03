@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Cos gran i rodó -->
+  <ellipse cx="50" cy="64" rx="30" ry="22" fill="#ffb6c1"/>
+  <!-- Cap rodó -->
+  <circle cx="50" cy="38" r="18" fill="#ffb6c1"/>
+  <!-- Orella esquerra triangular -->
+  <polygon points="35,28 28,16 42,24" fill="#ff9bb0"/>
+  <!-- Orella dreta triangular -->
+  <polygon points="65,28 72,16 58,24" fill="#ff9bb0"/>
+  <!-- Morro gran (cercle) -->
+  <circle cx="50" cy="47" r="10" fill="#ff8fa3"/>
+  <!-- Forats del nas -->
+  <ellipse cx="46" cy="47" rx="2.5" ry="2" fill="#cc5566"/>
+  <ellipse cx="54" cy="47" rx="2.5" ry="2" fill="#cc5566"/>
+  <!-- Ulls -->
+  <circle cx="42" cy="34" r="3.5" fill="#fff"/>
+  <circle cx="42" cy="34" r="2" fill="#1a1a1a"/>
+  <circle cx="41" cy="33" r="0.8" fill="#fff"/>
+  <circle cx="58" cy="34" r="3.5" fill="#fff"/>
+  <circle cx="58" cy="34" r="2" fill="#1a1a1a"/>
+  <circle cx="57" cy="33" r="0.8" fill="#fff"/>
+  <!-- Cua en espiral -->
+  <path d="M80 60 Q88 55 87 63 Q86 70 79 68 Q74 66 76 72" stroke="#ff8fa3" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Potes curtes davanteres -->
+  <rect x="32" y="79" width="9" height="10" rx="4.5" fill="#ff9bb0"/>
+  <rect x="59" y="79" width="9" height="10" rx="4.5" fill="#ff9bb0"/>
+  <!-- Potes curtes darrere -->
+  <rect x="22" y="77" width="9" height="10" rx="4.5" fill="#ff8fa3"/>
+  <rect x="69" y="77" width="9" height="10" rx="4.5" fill="#ff8fa3"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PORC</text>
+</svg>

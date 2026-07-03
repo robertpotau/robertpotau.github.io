@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="psn_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0f9ff"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#psn_bg)"/>
+  <rect x="18" y="12" width="64" height="74" rx="4" fill="#92400e"/>
+  <rect x="22" y="16" width="56" height="66" rx="2" fill="#bae6fd"/>
+  <rect x="22" y="16" width="56" height="10" fill="#e7e5e4"/>
+  <g fill="#d6d3d1" stroke="#a8a29e" stroke-width=".8">
+    <rect x="22" y="16" width="56" height="7" rx="2"/>
+    <rect x="22" y="24" width="56" height="7" rx="2"/>
+    <rect x="22" y="32" width="56" height="7" rx="2"/>
+    <rect x="22" y="40" width="56" height="7" rx="2"/>
+    <rect x="22" y="48" width="56" height="7" rx="2"/>
+  </g>
+  <path d="M26 20 h10 M26 28 h10 M26 36 h10 M26 44 h10 M26 52 h10" stroke="#f5f5f4" stroke-width="1.6" stroke-linecap="round"/>
+  <rect x="24" y="57" width="52" height="23" fill="#7dd3fc"/>
+  <circle cx="64" cy="64" r="4" fill="#fde047"/>
+  <path d="M30 70 q3 -3 6 -1 q1 -2 4 -1 q3 0 3 3 q2 1 0 3 l-12 0 q-2 -2 -1 -4" fill="#fff" opacity=".85"/>
+  <path d="M72 57 v14 q0 3 -2 3" stroke="#78716c" stroke-width="2" fill="none"/>
+  <circle cx="70" cy="76" r="2.2" fill="#57534e"/>
+</svg>

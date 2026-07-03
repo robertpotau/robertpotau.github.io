@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Thigh -->
+  <path d="M30 5 Q20 8 18 40 Q18 48 28 52 Q38 54 42 52 Q52 48 52 40 Q50 8 42 5 Z" fill="#f5cba7" stroke="#c0835a" stroke-width="2"/>
+  <!-- Calf -->
+  <path d="M21 56 Q18 76 22 92 Q26 98 35 98 Q44 98 48 92 Q52 76 49 56 Z" fill="#f5cba7" stroke="#c0835a" stroke-width="2"/>
+  <!-- Knee highlight -->
+  <circle cx="35" cy="54" r="16" fill="#ef4444" opacity="0.85"/>
+  <circle cx="35" cy="54" r="11" fill="#fca5a5"/>
+  <!-- Label -->
+  <text x="58" y="50" font-family="Arial,sans-serif" font-size="8.5" fill="#991b1b" font-weight="700">genoll</text>
+  <line x1="51" y1="52" x2="56" y2="52" stroke="#991b1b" stroke-width="1.5"/>
+</svg>

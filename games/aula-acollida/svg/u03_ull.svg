@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Eye white -->
+  <ellipse cx="50" cy="50" rx="42" ry="28" fill="white" stroke="#374151" stroke-width="3"/>
+  <!-- Upper eyelid curve -->
+  <path d="M8 50 Q30 20 50 18 Q70 20 92 50" fill="none" stroke="#374151" stroke-width="3.5"/>
+  <!-- Iris -->
+  <circle cx="50" cy="50" r="18" fill="#3b82f6"/>
+  <!-- Pupil -->
+  <circle cx="50" cy="50" r="10" fill="#111"/>
+  <!-- Light reflection -->
+  <circle cx="57" cy="43" r="4" fill="white" opacity="0.9"/>
+  <circle cx="43" cy="57" r="2" fill="white" opacity="0.6"/>
+  <!-- Eyelashes top -->
+  <line x1="30" y1="26" x2="26" y2="18" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="42" y1="20" x2="40" y2="12" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="55" y1="18" x2="54" y2="10" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="67" y1="20" x2="68" y2="12" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="77" y1="26" x2="80" y2="19" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

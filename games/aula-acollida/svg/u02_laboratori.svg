@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Lab bench -->
+  <rect x="10" y="60" width="80" height="12" rx="2" fill="#d1d5db" stroke="#9ca3af" stroke-width="1.5"/>
+  <!-- Flask (Erlenmeyer) -->
+  <path d="M42 25 L42 48 L30 65 L58 65 L46 48 L46 25 Z" fill="#bfdbfe" stroke="#3b82f6" stroke-width="2"/>
+  <ellipse cx="44" cy="25" rx="5" ry="3" fill="#e5e7eb" stroke="#6b7280" stroke-width="1.5"/>
+  <!-- Liquid in flask -->
+  <path d="M33 58 Q44 54 55 58 L58 65 L30 65 Z" fill="#60a5fa" opacity="0.7"/>
+  <!-- Bubbles -->
+  <circle cx="40" cy="61" r="2" fill="white" opacity="0.7"/>
+  <circle cx="46" cy="59" r="1.5" fill="white" opacity="0.7"/>
+  <!-- Test tube -->
+  <rect x="62" y="30" width="8" height="28" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <line x1="62" y1="38" x2="70" y2="38" stroke="#16a34a" stroke-width="1"/>
+  <!-- Test tube rack -->
+  <rect x="58" y="56" width="16" height="6" rx="1" fill="#92400e" stroke="#78350f" stroke-width="1"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">LABORATORI</text>
+</svg>

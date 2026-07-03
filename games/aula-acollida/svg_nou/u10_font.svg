@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="fon_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient>
+  <linearGradient id="fon_pedra" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#64748b"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#fon_bg)"/>
+  <ellipse cx="50" cy="90" rx="32" ry="3.5" fill="#0f172a" opacity=".1"/>
+  <path d="M50 22 q-3 6 -3 10 h6 q0 -4 -3 -10" fill="#38bdf8"/>
+  <path d="M47 32 q-12 2 -12 12 q4 8 12 4 M53 32 q12 2 12 12 q-4 8 -12 4" stroke="#38bdf8" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <ellipse cx="50" cy="36" rx="5" ry="2.5" fill="#7dd3fc"/>
+  <rect x="44" y="36" width="12" height="22" rx="3" fill="url(#fon_pedra)"/>
+  <path d="M20 58 h60 q4 0 4 5 q0 14 -12 17 H28 q-12 -3 -12 -17 q0 -5 4 -5" fill="url(#fon_pedra)"/>
+  <ellipse cx="50" cy="62" rx="26" ry="5" fill="#38bdf8"/>
+  <ellipse cx="50" cy="61" rx="26" ry="5" fill="#7dd3fc"/>
+  <circle cx="36" cy="52" r="1.8" fill="#bae6fd"/>
+  <circle cx="64" cy="50" r="1.8" fill="#bae6fd"/>
+  <circle cx="58" cy="44" r="1.4" fill="#bae6fd"/>
+</svg>

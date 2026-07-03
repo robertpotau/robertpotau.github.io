@@ -1,0 +1,31 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Barret de cuiner (cilindre blanc alt) -->
+  <rect x="42" y="4" width="16" height="16" rx="2" fill="#f5f5f5" stroke="#d1d5db" stroke-width="0.8"/>
+  <ellipse cx="50" cy="20" rx="10" ry="3" fill="#f5f5f5" stroke="#d1d5db" stroke-width="0.8"/>
+  <ellipse cx="50" cy="4" rx="8" ry="2.5" fill="#e5e7eb"/>
+  <!-- Cap -->
+  <circle cx="50" cy="26" r="10" fill="#f5cba7" stroke="#c0835a" stroke-width="1.2"/>
+  <!-- Cuell -->
+  <rect x="46" y="34" width="8" height="5" fill="#f5cba7"/>
+  <!-- Uniforme fosc -->
+  <rect x="38" y="38" width="24" height="22" rx="3" fill="#374151"/>
+  <!-- Davantal blanc -->
+  <rect x="42" y="38" width="16" height="22" rx="2" fill="#f5f5f5"/>
+  <!-- Llaçada davantal -->
+  <rect x="46" y="37" width="8" height="3" rx="1" fill="#e5e7eb"/>
+  <!-- Braç esquerre -->
+  <rect x="26" y="39" width="12" height="8" rx="3" fill="#374151"/>
+  <!-- Braç dret amb cullera -->
+  <rect x="62" y="39" width="12" height="8" rx="3" fill="#374151"/>
+  <!-- Cullera a la mà dreta -->
+  <line x1="74" y1="43" x2="82" y2="35" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <ellipse cx="83" cy="33" rx="3" ry="4" fill="#9ca3af" stroke="#6b7280" stroke-width="0.8"/>
+  <!-- Cames -->
+  <rect x="38" y="60" width="10" height="18" rx="2" fill="#374151"/>
+  <rect x="52" y="60" width="10" height="18" rx="2" fill="#374151"/>
+  <!-- Sabates -->
+  <rect x="37" y="76" width="12" height="4" rx="2" fill="#1f2937"/>
+  <rect x="51" y="76" width="12" height="4" rx="2" fill="#1f2937"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CUINER</text>
+</svg>

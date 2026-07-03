@@ -1,0 +1,25 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Columnes de suport -->
+  <rect x="10" y="38" width="6" height="42" rx="2" fill="#92400e"/>
+  <rect x="84" y="38" width="6" height="42" rx="2" fill="#92400e"/>
+  <!-- Tendal triangular (ratlles vermell/blanc) -->
+  <polygon points="5,38 50,12 95,38" fill="#ef4444"/>
+  <!-- Ratlles blanques del tendal -->
+  <polygon points="5,38 15,38 26,20 20,14" fill="#f5f5f5"/>
+  <polygon points="35,38 49,38 50,12 36,31" fill="#f5f5f5"/>
+  <polygon points="65,38 79,38 80,20 65,31" fill="#f5f5f5"/>
+  <!-- Voladís tendal -->
+  <rect x="5" y="36" width="90" height="5" rx="2" fill="#dc2626"/>
+  <!-- Taula de mercat -->
+  <rect x="12" y="58" width="76" height="6" rx="2" fill="#92400e"/>
+  <!-- Potes taula -->
+  <rect x="15" y="64" width="5" height="16" rx="1" fill="#78350f"/>
+  <rect x="80" y="64" width="5" height="16" rx="1" fill="#78350f"/>
+  <!-- Productes sobre la taula -->
+  <circle cx="28" cy="54" r="7" fill="#ef4444"/>
+  <circle cx="44" cy="53" r="8" fill="#fbbf24"/>
+  <circle cx="60" cy="54" r="7" fill="#4ade80"/>
+  <circle cx="76" cy="53" r="7" fill="#fb923c"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MERCAT</text>
+</svg>

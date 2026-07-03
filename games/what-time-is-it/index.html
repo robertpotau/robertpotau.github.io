@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's the Time? ⏰</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:            linear-gradient(145deg,#4a0e8f 0%,#1a4fd6 55%,#0bbde8 100%);
+  --card-bg:       #ffffff;
+  --card-border:   #dde;
+  --badge-grad:    linear-gradient(135deg,#6c22bd,#1a5fe8);
+  --hour-hand:     #1a1a2e;
+  --min-hand:      #6c22bd;
+  --center-dot:    #1a1a2e;
+  --tick-12:       #e53935;
+  --tick-quarter:  #1a5fe8;
+  --tick-hour:     #999;
+  --answer-bg:     linear-gradient(135deg,#f0f4ff,#e6ecff);
+  --answer-border: #c5d0ff;
+  --answer-text:   #2d3a8c;
+  --answer-hover:  linear-gradient(135deg,#6c22bd,#1a5fe8);
+  --clock-shadow:  rgba(108,34,189,0.28);
+  --mode-active:   #2d3a8c;
+  --swatch:        linear-gradient(135deg,#4a0e8f,#0bbde8);
+  --prompt-color:      #1a1a2e;
+  --num-special-color: #1a1a2e;
+  --num-normal-color:  #555;
+  --tick-minor-color:  #ccc;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 16px 80px;
+  overflow-x: hidden;
+  position: relative;
+  transition: background 0.5s ease;
+}
+
+.bubble {
+  position: fixed;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  pointer-events: none;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  from { transform: translateY(110vh) rotate(0deg); }
+  to   { transform: translateY(-10vh) rotate(360deg); }
+}
+
+/* ── Header ── */
+header {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  z-index: 1;
+}
+h1 {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.35);
+  letter-spacing: -0.5px;
+}
+.score-box {
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255,255,255,0.35);
+  border-radius: 22px;
+  padding: 8px 22px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  min-width: 80px;
+  text-align: center;
+}
+
+/* ── Mode selector ── */
+.mode-selector {
+  display: flex;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 28px;
+  padding: 4px;
+  gap: 4px;
+  margin-bottom: 10px;
+  z-index: 1;
+}
+.mode-btn {
+  background: transparent;
+  border: none;
+  border-radius: 22px;
+  padding: 9px 18px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.72);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.mode-btn.active {
+  background: rgba(255,255,255,0.92);
+  color: var(--mode-active);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+}
+.mode-btn:hover:not(.active) {
+  color: #fff;
+  background: rgba(255,255,255,0.15);
+}
+
+/* ── How to play button ── */
+.howto-btn {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 2px solid rgba(255,255,255,0.38);
+  border-radius: 22px;
+  padding: 9px 22px;
+  color: rgba(255,255,255,0.92);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  margin-bottom: 12px;
+  z-index: 1;
+  transition: background 0.15s, transform 0.12s;
+  letter-spacing: 0.3px;
+}
+.howto-btn:hover {
+  background: rgba(255,255,255,0.28);
+  transform: translateY(-2px);
+}
+
+/* ── Game card ── */
+.game-card {
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
+  border-radius: 32px;
+  padding: 26px 26px 22px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.32);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+.round-badge {
+  background: var(--badge-grad);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 6px 18px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: background 0.4s ease;
+}
+.prompt-text {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: var(--prompt-color, #1a1a2e);
+  text-align: center;
+  line-height: 1.25;
+  min-height: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── SVG Clock (game) ── */
+.clock-wrapper { width: 230px; height: 230px; flex-shrink: 0; }
+#clock-svg {
+  width: 230px; height: 230px;
+  filter: drop-shadow(0 8px 22px var(--clock-shadow));
+  cursor: grab;
+  user-select: none; -webkit-user-select: none;
+  touch-action: none;
+  transition: filter 0.4s ease;
+}
+#clock-svg.no-drag { cursor: default; }
+#clock-svg:active  { cursor: grabbing; }
+
+/* SVG theming (shared by game + how-to clocks via classes) */
+#clock-face  { fill: var(--card-bg);    stroke: var(--card-border); }
+#ht-face     { fill: white;             stroke: #dde; }
+#hour-hand   { stroke: var(--hour-hand);   transition: stroke 0.4s; }
+#minute-hand { stroke: var(--min-hand);    transition: stroke 0.4s; }
+#ht-hour-hand   { stroke: var(--hour-hand); }
+#ht-minute-hand { stroke: var(--min-hand);  }
+#clock-center, #ht-center { fill: var(--center-dot); transition: fill 0.4s; }
+
+.tick-12      { stroke: var(--tick-12);      stroke-width: 3.5; stroke-linecap: round; transition: stroke 0.4s; }
+.tick-quarter { stroke: var(--tick-quarter); stroke-width: 3;   stroke-linecap: round; transition: stroke 0.4s; }
+.tick-hour    { stroke: var(--tick-hour);    stroke-width: 2.5; stroke-linecap: round; transition: stroke 0.4s; }
+.tick-minor   { stroke: var(--tick-minor-color, #ccc); stroke-width: 1; stroke-linecap: round; }
+.num-special  { fill: var(--num-special-color, #1a1a2e); font-size: 15px; font-weight: 900; font-family: Nunito,sans-serif; }
+.num-normal   { fill: var(--num-normal-color,  #555);    font-size: 13px; font-weight: 700; font-family: Nunito,sans-serif; }
+
+/* How-to clock rotation groups */
+#ht-hour-g, #ht-minute-g {
+  transform-origin: 100px 100px;
+  transition: transform 0.65s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Answer buttons ── */
+.answers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+.answer-btn {
+  background: var(--answer-bg);
+  border: 3px solid var(--answer-border);
+  border-radius: 18px;
+  padding: 14px 8px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem; font-weight: 800;
+  color: var(--answer-text);
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s, background 0.12s, border-color 0.12s;
+  text-align: center; line-height: 1.3;
+}
+.answer-btn:hover:not(:disabled) {
+  background: var(--answer-hover);
+  color: #fff; border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+.answer-btn.correct { background: linear-gradient(135deg,#00c853,#69f0ae) !important; color:#fff !important; border-color:transparent !important; }
+.answer-btn.wrong   { background: linear-gradient(135deg,#f44336,#ff7961) !important; color:#fff !important; border-color:transparent !important; }
+.answer-btn:disabled { cursor: default; }
+
+/* ── Game buttons ── */
+.btn-row { display: flex; gap: 10px; width: 100%; }
+#btn-check {
+  flex: 1;
+  background: linear-gradient(135deg,#00c853,#00e676);
+  color: #fff; border: none; border-radius: 18px; padding: 15px;
+  font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 900;
+  cursor: pointer; transition: transform 0.12s, box-shadow 0.12s;
+  box-shadow: 0 5px 18px rgba(0,200,83,0.4);
+}
+#btn-check:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,200,83,0.5); }
+#btn-skip {
+  background: rgba(0,0,0,0.07); color: #888;
+  border: 2px solid rgba(0,0,0,0.1); border-radius: 18px; padding: 15px 20px;
+  font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: transform 0.12s, background 0.12s;
+}
+#btn-skip:hover { background: rgba(0,0,0,0.13); transform: translateY(-2px); }
+
+/* ── Feedback overlay ── */
+.feedback-overlay {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 6rem; border-radius: 32px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.18s; z-index: 10;
+}
+.feedback-overlay.show { opacity: 1; pointer-events: all; }
+.feedback-overlay.ok  { background: rgba(0,200,83,0.14); }
+.feedback-overlay.bad { background: rgba(244,67,54,0.14); }
+
+/* ── Animations ── */
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20% { transform: translateX(-9px); } 40% { transform: translateX(9px); }
+  60% { transform: translateX(-6px); } 80% { transform: translateX(6px); }
+}
+.shake { animation: shake 0.42s ease; }
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0; } 70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.pop-in { animation: popIn 0.35s cubic-bezier(.34,1.56,.64,1) forwards; }
+
+/* ── Confetti ── */
+#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+
+/* ── Skin button ── */
+.skin-btn {
+  position: fixed; bottom: 22px; right: 22px;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(255,255,255,0.92); border: none;
+  font-size: 1.5rem; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.28); z-index: 300;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.skin-btn:hover { transform: scale(1.12); box-shadow: 0 6px 28px rgba(0,0,0,0.35); }
+
+/* ── Skin panel ── */
+.skin-panel {
+  position: fixed; bottom: 84px; right: 22px;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px; padding: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3); z-index: 300;
+  display: flex; flex-direction: column; gap: 6px;
+  transform: scale(0); transform-origin: bottom right;
+  transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), opacity 0.18s;
+  opacity: 0; pointer-events: none; min-width: 165px;
+}
+.skin-panel.open { transform: scale(1); opacity: 1; pointer-events: all; }
+.skin-panel-title {
+  font-size: 0.72rem; font-weight: 800; color: #999;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  padding: 2px 8px 6px; border-bottom: 1.5px solid #eee; margin-bottom: 2px;
+}
+.swatch-row {
+  display: flex; align-items: center; gap: 10px; padding: 7px 10px;
+  border-radius: 12px; cursor: pointer; border: none; background: transparent;
+  font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 800;
+  color: #333; width: 100%; text-align: left; transition: background 0.14s;
+}
+.swatch-row:hover  { background: rgba(0,0,0,0.06); }
+.swatch-row.active { background: rgba(0,0,0,0.09); }
+.swatch-dot { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+
+/* ══════════════════════════════════════════════════════
+   HOW TO OVERLAY
+   ══════════════════════════════════════════════════════ */
+
+.howto-overlay {
+  position: fixed; inset: 0;
+  background: rgba(10,5,30,0.75);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  z-index: 400;
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.28s;
+}
+.howto-overlay.open { opacity: 1; pointer-events: all; }
+
+.howto-modal {
+  background: #fff;
+  border-radius: 28px;
+  width: 100%; max-width: 880px;
+  max-height: 90vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 32px 90px rgba(0,0,0,0.55);
+  transform: scale(0.88) translateY(20px);
+  transition: transform 0.3s cubic-bezier(.34,1.4,.64,1);
+}
+.howto-overlay.open .howto-modal { transform: scale(1) translateY(0); }
+
+/* Coloured header strip */
+.howto-header {
+  padding: 16px 22px;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: background 0.45s ease;
+  flex-shrink: 0;
+  gap: 12px;
+}
+.howto-htitle {
+  font-size: 1.35rem; font-weight: 900;
+  color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  flex: 1;
+}
+.howto-close {
+  background: rgba(255,255,255,0.25); border: none; border-radius: 50%;
+  width: 38px; height: 38px; font-size: 1.15rem; font-weight: 900;
+  color: white; cursor: pointer; flex-shrink: 0;
+  transition: background 0.15s, transform 0.12s;
+  display: flex; align-items: center; justify-content: center;
+}
+.howto-close:hover { background: rgba(255,255,255,0.42); transform: scale(1.1); }
+
+/* Body = clock panel + content panel */
+.howto-body {
+  display: flex; flex: 1; overflow: hidden; min-height: 0;
+}
+
+/* ── Left: clock panel ── */
+.howto-clock-panel {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 24px 18px; gap: 12px;
+  background: #f6f7ff;
+  border-right: 2px solid #eef;
+  flex-shrink: 0; width: 285px;
+}
+#ht-clock-svg {
+  width: 250px; height: 250px;
+  filter: drop-shadow(0 6px 20px rgba(108,34,189,0.22));
+  cursor: grab;
+  user-select: none; -webkit-user-select: none; touch-action: none;
+}
+#ht-clock-svg:active { cursor: grabbing; }
+
+.ht-drag-hint {
+  font-size: 0.82rem; font-weight: 800; color: #aaa;
+  text-align: center; letter-spacing: 0.3px;
+}
+.ht-time-display {
+  font-size: 1.05rem; font-weight: 900;
+  color: var(--mode-active, #2d3a8c);
+  background: white;
+  border: 2px solid var(--answer-border, #c5d0ff);
+  border-radius: 14px; padding: 9px 18px;
+  text-align: center; width: 100%;
+  transition: color 0.4s, border-color 0.4s;
+}
+
+/* ── Right: content panel ── */
+.howto-content-panel {
+  flex: 1; overflow-y: auto; padding: 28px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+/* ── Nav bar ── */
+.howto-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 22px; border-top: 1.5px solid #eef;
+  flex-shrink: 0; background: #fafbff;
+}
+.ht-nav-btn {
+  background: var(--badge-grad); color: white; border: none;
+  border-radius: 14px; padding: 10px 22px;
+  font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 900;
+  cursor: pointer; transition: opacity 0.15s, transform 0.12s;
+  min-width: 90px; text-align: center;
+}
+.ht-nav-btn:hover:not(:disabled) { transform: translateY(-2px); }
+.ht-nav-btn:disabled { opacity: 0.32; cursor: default; transform: none; }
+
+.ht-dots { display: flex; gap: 8px; align-items: center; }
+.ht-dot {
+  width: 10px; height: 10px; border-radius: 50%; background: #ddd;
+  cursor: pointer; border: none;
+  transition: background 0.22s, transform 0.22s;
+}
+.ht-dot.active { background: var(--mode-active,#6c22bd); transform: scale(1.35); }
+
+/* ══ Slide content styles ══ */
+.ht-slide { display: flex; flex-direction: column; gap: 14px; }
+
+.ht-big-emoji {
+  font-size: 4.5rem; text-align: center; line-height: 1;
+  animation: popIn 0.4s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+
+.ht-hand-cards { display: flex; gap: 12px; }
+.ht-hand-card {
+  flex: 1; border: 3px solid; border-radius: 16px;
+  padding: 14px 10px; text-align: center;
+  font-family: 'Nunito', sans-serif;
+}
+.ht-hand-card .hc-emoji { font-size: 2.2rem; display: block; margin-bottom: 6px; }
+.ht-hand-card .hc-desc  { font-size: 0.88rem; font-weight: 700; color: #555; line-height: 1.4; }
+.ht-hand-card .hc-name  { font-size: 1.05rem; font-weight: 900; margin-top: 6px; display: block; }
+
+.ht-rule {
+  background: #f0f4ff;
+  border-left: 5px solid var(--mode-active,#6c22bd);
+  border-radius: 0 14px 14px 0;
+  padding: 13px 16px;
+  font-size: 1.05rem; font-weight: 700; color: #1a1a2e; line-height: 1.55;
+}
+.ht-rule strong { font-size: 1.1em; }
+
+.ht-example {
+  background: #fffde7;
+  border: 2.5px solid #ffd600;
+  border-radius: 16px; padding: 14px 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.ht-ex-emoji { font-size: 2.8rem; flex-shrink: 0; }
+.ht-ex-body  { font-size: 1rem; font-weight: 700; color: #4a3000; line-height: 1.45; }
+.ht-ex-phrase {
+  font-size: 1.25rem; font-weight: 900; color: #1a1a2e;
+  background: rgba(255,214,0,0.35);
+  padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 4px;
+}
+
+.ht-mini-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+.ht-pill {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 12px; border-radius: 12px;
+  font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 800;
+  line-height: 1.3;
+}
+.ht-pill-past { background: #e8f5e9; color: #1b5e20; border: 2px solid #a5d6a7; }
+.ht-pill-to   { background: #fce4ec; color: #880e4f; border: 2px solid #f48fb1; }
+
+.ht-note {
+  background: rgba(255,255,255,0.7);
+  border: 2px dashed #ccc;
+  border-radius: 12px; padding: 10px 14px;
+  font-size: 0.88rem; font-weight: 700; color: #666;
+  line-height: 1.4;
+}
+
+/* ── Credits button ── */
+.credits-btn {
+  position: fixed; bottom: 84px; left: 22px;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(255,255,255,0.92); border: none;
+  font-size: 1.3rem; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.28); z-index: 300;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.credits-btn:hover { transform: scale(1.12); box-shadow: 0 6px 28px rgba(0,0,0,0.35); }
+
+/* ── Credits overlay ── */
+.credits-overlay {
+  position: fixed; inset: 0;
+  background: rgba(10,5,30,0.75);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  z-index: 400;
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.28s;
+}
+.credits-overlay.open { opacity: 1; pointer-events: all; }
+.credits-modal {
+  background: #fff; border-radius: 28px;
+  width: 100%; max-width: 520px;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 32px 90px rgba(0,0,0,0.55);
+  transform: scale(0.88) translateY(20px);
+  transition: transform 0.3s cubic-bezier(.34,1.4,.64,1);
+  display: flex; flex-direction: column;
+}
+.credits-overlay.open .credits-modal { transform: scale(1) translateY(0); }
+
+.credits-header {
+  padding: 16px 22px;
+  background: linear-gradient(135deg,#5c35c9,#1a5fe8);
+  border-radius: 28px 28px 0 0;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0;
+}
+.credits-header-title {
+  font-size: 1.2rem; font-weight: 900; color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+.credits-close {
+  background: rgba(255,255,255,0.25); border: none; border-radius: 50%;
+  width: 38px; height: 38px; font-size: 1.1rem; font-weight: 900;
+  color: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, transform 0.12s;
+}
+.credits-close:hover { background: rgba(255,255,255,0.42); transform: scale(1.1); }
+
+.credits-body { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+
+.credit-section {
+  background: #f6f7ff; border: 1.5px solid #e0e4ff;
+  border-radius: 14px; padding: 16px;
+  transition: border-color 0.2s;
+}
+.credit-section:hover { border-color: #a0aee8; }
+.credit-title {
+  font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 1.5px; color: #2d3a8c;
+  padding-bottom: 8px; border-bottom: 2px solid #c5d0ff;
+  margin-bottom: 12px;
+}
+.credit-person {
+  padding: 12px; background: #fff;
+  border-radius: 10px; border-left: 4px solid #6c22bd;
+}
+.credit-name { font-size: 1.05rem; font-weight: 900; color: #1a1a2e; margin-bottom: 4px; }
+.credit-role { font-size: 0.82rem; color: #6c22bd; font-weight: 700; margin-bottom: 6px; }
+.credit-desc { font-size: 0.82rem; color: #555; line-height: 1.5; }
+.credit-tech {
+  padding: 12px; background: #fff;
+  border-radius: 10px; border-left: 4px solid #6c22bd;
+  font-size: 0.85rem; color: #555; line-height: 1.75;
+}
+.credit-footer {
+  text-align: center; padding: 16px 8px 4px;
+  border-top: 1.5px solid #eef; margin-top: 4px;
+}
+.credit-footer .cf-title { font-size: 0.9rem; font-weight: 900; color: #1a1a2e; margin-bottom: 4px; }
+.credit-footer .cf-ver   { font-size: 0.78rem; color: #888; margin-bottom: 4px; }
+.credit-footer .cf-lic   { font-size: 0.75rem; color: #aaa; margin-bottom: 4px; }
+.credit-footer .cf-heart { font-size: 0.75rem; color: #bbb; }
+
+/* ── Mute button ── */
+.mute-btn {
+  position: fixed; bottom: 22px; left: 22px;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(255,255,255,0.92); border: none;
+  font-size: 1.4rem; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.28); z-index: 300;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.mute-btn:hover { transform: scale(1.12); box-shadow: 0 6px 28px rgba(0,0,0,0.35); }
+
+/* ── Numbers toggle ── */
+.nums-toggle-row { width: 100%; display: flex; justify-content: center; margin: -4px 0; }
+.nums-toggle-btn {
+  background: rgba(0,0,0,0.06);
+  border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: 20px; padding: 5px 14px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.78rem; font-weight: 800;
+  color: #999; cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.nums-toggle-btn.nums-off {
+  background: rgba(0,0,0,0.1);
+  border-color: var(--mode-active);
+  color: var(--mode-active);
+}
+
+/* ── Tablet clock size ── */
+@media (min-width: 769px) {
+  .clock-wrapper { width: 300px; height: 300px; }
+  #clock-svg     { width: 300px; height: 300px; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .howto-body { flex-direction: column; overflow-y: auto; }
+  .howto-clock-panel {
+    width: 100%; flex-direction: row; gap: 14px;
+    padding: 14px 16px; border-right: none; border-bottom: 1.5px solid #eef;
+    justify-content: center;
+  }
+  #ht-clock-svg { width: 140px; height: 140px; }
+  .ht-drag-hint { display: none; }
+  .howto-content-panel { padding: 14px; }
+  .ht-time-display { font-size: 0.95rem; padding: 7px 12px; }
+  .ht-big-emoji { font-size: 3rem; }
+  .ht-hand-cards { flex-direction: column; }
+}
+@media (max-width: 420px) {
+  h1 { font-size: 1.5rem; }
+  .game-card { padding: 20px 16px 18px; gap: 14px; }
+  .prompt-text { font-size: 1.45rem; }
+  .clock-wrapper, #clock-svg { width: 190px; height: 190px; }
+  .answer-btn { font-size: 0.88rem; padding: 12px 6px; }
+  .mode-btn { padding: 8px 13px; font-size: 0.82rem; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<header>
+  <h1>⏰ What's the Time?</h1>
+  <div class="score-box" id="score-display">0 / 0</div>
+</header>
+
+<div class="mode-selector">
+  <button class="mode-btn active" data-mode="mix">🎲 Mix</button>
+  <button class="mode-btn"        data-mode="set">🕐 Set Clock</button>
+  <button class="mode-btn"        data-mode="name">💬 Name it</button>
+</div>
+
+<button class="howto-btn" onclick="openHowTo()">📖 How to play</button>
+
+<!-- ══ Game card ══ -->
+<div class="game-card" id="game-card">
+  <div class="round-badge" id="round-badge"></div>
+  <div class="prompt-text" id="prompt-text"></div>
+
+  <div class="nums-toggle-row">
+    <button id="btn-nums" class="nums-toggle-btn" onclick="toggleNums()" title="Hide/show clock numbers">🔢 Numbers: ON</button>
+  </div>
+
+  <div class="clock-wrapper">
+    <svg id="clock-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle id="clock-face" cx="100" cy="100" r="95" stroke-width="2.5"/>
+      <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="1"/>
+      <g id="ticks"></g>
+      <g id="numbers"></g>
+      <line id="hour-hand"   x1="100" y1="100" x2="100" y2="57" stroke-width="7"   stroke-linecap="round"/>
+      <line id="minute-hand" x1="100" y1="100" x2="100" y2="34" stroke-width="4.5" stroke-linecap="round"/>
+      <circle id="clock-center" cx="100" cy="100" r="7"/>
+    </svg>
+  </div>
+
+  <div class="answers-grid" id="answers-grid"></div>
+
+  <div class="btn-row" id="btn-row">
+    <button id="btn-check" onclick="checkClock()">✓ Check Answer</button>
+    <button id="btn-skip"  onclick="skipRound()">Skip →</button>
+  </div>
+
+  <div class="feedback-overlay" id="feedback-overlay"></div>
+</div>
+
+<!-- ══ Credits button ══ -->
+<button class="credits-btn" id="credits-btn" onclick="openCredits()" title="Credits">📜</button>
+
+<!-- ══ Mute button ══ -->
+<button class="mute-btn" id="mute-btn" onclick="toggleMute()" title="Toggle sound">🔊</button>
+
+<!-- ══ Credits overlay ══ -->
+<div class="credits-overlay" id="credits-overlay">
+  <div class="credits-modal">
+
+    <div class="credits-header">
+      <span class="credits-header-title">📜 Credits</span>
+      <button class="credits-close" onclick="closeCredits()">✕</button>
+    </div>
+
+    <div class="credits-body">
+
+      <div class="credit-section">
+        <div class="credit-title">💻 Design &amp; Development</div>
+        <div class="credit-person">
+          <div class="credit-name">Robert Potau Nuñez</div>
+          <div class="credit-role">Technology &amp; Digitalisation Teacher · Designer &amp; Developer</div>
+          <div class="credit-desc">Design, development and maintenance of the application. Game modes, clock interaction system, skins, and UX/UI. Created as a classroom tool for ESO English students.</div>
+        </div>
+      </div>
+
+      <div class="credit-section">
+        <div class="credit-title">🤖 Artificial Intelligence</div>
+        <div class="credit-person">
+          <div class="credit-name">Claude Code (Anthropic)</div>
+          <div class="credit-role">AI Coding Assistant</div>
+          <div class="credit-desc">Code generation, optimisation, UX/UI design, accessibility improvements, bug fixing and technical documentation.</div>
+        </div>
+      </div>
+
+      <div class="credit-section">
+        <div class="credit-title">⚙️ Technology</div>
+        <div class="credit-tech">
+          <div><strong>HTML5</strong> — Semantic structure &amp; SVG clock</div>
+          <div><strong>CSS3</strong> — Responsive design with CSS custom properties</div>
+          <div><strong>JavaScript ES6+</strong> — Single-file app, Web Audio API</div>
+        </div>
+      </div>
+
+      <div class="credit-footer">
+        <div class="cf-title">⏰ What's the Time?</div>
+        <div class="cf-ver"><strong>v1.1</strong> — May 2026</div>
+        <div class="cf-lic">📜 Creative Commons BY-NC-SA 4.0</div>
+        <div class="cf-heart">Made with ❤️ for ESO English students</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ Skin button & panel ══ -->
+<button class="skin-btn" id="skin-btn" onclick="toggleSkinPanel()" title="Change theme">🌌</button>
+<div class="skin-panel" id="skin-panel">
+  <div class="skin-panel-title">Theme</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HOW TO OVERLAY
+     ══════════════════════════════════════════ -->
+<div class="howto-overlay" id="howto-overlay">
+  <div class="howto-modal">
+
+    <div class="howto-header" id="ht-header">
+      <span class="howto-htitle" id="ht-htitle">📖 How to play</span>
+      <button class="howto-close" onclick="closeHowTo()">✕</button>
+    </div>
+
+    <div class="howto-body">
+
+      <!-- Clock panel -->
+      <div class="howto-clock-panel">
+        <svg id="ht-clock-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle id="ht-face" cx="100" cy="100" r="95" stroke-width="2.5"/>
+          <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="1"/>
+          <g id="ht-ticks"></g>
+          <g id="ht-numbers"></g>
+          <g id="ht-hour-g">
+            <line id="ht-hour-hand" x1="100" y1="100" x2="100" y2="57"
+                  stroke-width="7" stroke-linecap="round"/>
+          </g>
+          <g id="ht-minute-g">
+            <line id="ht-minute-hand" x1="100" y1="100" x2="100" y2="34"
+                  stroke-width="4.5" stroke-linecap="round"/>
+          </g>
+          <circle id="ht-center" cx="100" cy="100" r="7"/>
+        </svg>
+        <div class="ht-drag-hint">👆 Drag to explore!</div>
+        <div class="ht-time-display" id="ht-time-display">twelve o'clock</div>
+      </div>
+
+      <!-- Content panel -->
+      <div class="howto-content-panel">
+        <div id="ht-content"></div>
+      </div>
+
+    </div><!-- .howto-body -->
+
+    <div class="howto-nav">
+      <button class="ht-nav-btn" id="ht-prev" onclick="prevSlide()">← Prev</button>
+      <div class="ht-dots" id="ht-dots"></div>
+      <button class="ht-nav-btn" id="ht-next" onclick="nextSlide()">Next →</button>
+    </div>
+
+  </div><!-- .howto-modal -->
+</div><!-- .howto-overlay -->
+
+<script>
+// ═══════════════════════════════════════════════
+//  SKINS
+// ═══════════════════════════════════════════════
+
+const SKINS = [
+  { name:'Cosmic', emoji:'🌌', swatch:'linear-gradient(135deg,#4a0e8f,#0bbde8)',
+    vars:{ '--bg':'linear-gradient(145deg,#4a0e8f 0%,#1a4fd6 55%,#0bbde8 100%)',
+      '--card-bg':'#ffffff','--card-border':'#dde','--badge-grad':'linear-gradient(135deg,#6c22bd,#1a5fe8)',
+      '--hour-hand':'#1a1a2e','--min-hand':'#6c22bd','--center-dot':'#1a1a2e',
+      '--tick-12':'#e53935','--tick-quarter':'#1a5fe8','--tick-hour':'#999',
+      '--answer-bg':'linear-gradient(135deg,#f0f4ff,#e6ecff)','--answer-border':'#c5d0ff','--answer-text':'#2d3a8c',
+      '--answer-hover':'linear-gradient(135deg,#6c22bd,#1a5fe8)','--clock-shadow':'rgba(108,34,189,0.28)','--mode-active':'#2d3a8c' }},
+  { name:'Sunset', emoji:'🌅', swatch:'linear-gradient(135deg,#7b0f3a,#f5c842)',
+    vars:{ '--bg':'linear-gradient(145deg,#7b0f3a 0%,#e8612a 55%,#f5c842 100%)',
+      '--card-bg':'#fff9f0','--card-border':'#ffe0b2','--badge-grad':'linear-gradient(135deg,#e8612a,#f5c842)',
+      '--hour-hand':'#3d1200','--min-hand':'#e8612a','--center-dot':'#3d1200',
+      '--tick-12':'#e8612a','--tick-quarter':'#d4a000','--tick-hour':'#bf8040',
+      '--answer-bg':'linear-gradient(135deg,#fff3e0,#ffecb3)','--answer-border':'#ffcc80','--answer-text':'#5d2000',
+      '--answer-hover':'linear-gradient(135deg,#e8612a,#f5c842)','--clock-shadow':'rgba(232,97,42,0.28)','--mode-active':'#5d2000' }},
+  { name:'Forest', emoji:'🌿', swatch:'linear-gradient(135deg,#0a3d1f,#4caf7c)',
+    vars:{ '--bg':'linear-gradient(145deg,#0a3d1f 0%,#1b7a45 55%,#4caf7c 100%)',
+      '--card-bg':'#f0fff4','--card-border':'#c8e6c9','--badge-grad':'linear-gradient(135deg,#1b7a45,#4caf7c)',
+      '--hour-hand':'#0a3d1f','--min-hand':'#1b7a45','--center-dot':'#0a3d1f',
+      '--tick-12':'#e53935','--tick-quarter':'#1b7a45','--tick-hour':'#5a8f6a',
+      '--answer-bg':'linear-gradient(135deg,#e8f5e9,#c8e6c9)','--answer-border':'#81c784','--answer-text':'#1b5e20',
+      '--answer-hover':'linear-gradient(135deg,#1b7a45,#4caf7c)','--clock-shadow':'rgba(27,122,69,0.28)','--mode-active':'#1b5e20' }},
+  { name:'Ocean', emoji:'🌊', swatch:'linear-gradient(135deg,#01337d,#00b4d8)',
+    vars:{ '--bg':'linear-gradient(145deg,#01337d 0%,#0077b6 55%,#00b4d8 100%)',
+      '--card-bg':'#f0f8ff','--card-border':'#b3e5fc','--badge-grad':'linear-gradient(135deg,#0077b6,#00b4d8)',
+      '--hour-hand':'#012a5e','--min-hand':'#0077b6','--center-dot':'#012a5e',
+      '--tick-12':'#f72585','--tick-quarter':'#0077b6','--tick-hour':'#4a90c4',
+      '--answer-bg':'linear-gradient(135deg,#e0f7fa,#b2ebf2)','--answer-border':'#80deea','--answer-text':'#01337d',
+      '--answer-hover':'linear-gradient(135deg,#0077b6,#00b4d8)','--clock-shadow':'rgba(0,119,182,0.28)','--mode-active':'#01337d' }},
+  { name:'Candy', emoji:'🍭', swatch:'linear-gradient(135deg,#c9174a,#ff80ab)',
+    vars:{ '--bg':'linear-gradient(145deg,#c9174a 0%,#e040fb 55%,#ff80ab 100%)',
+      '--card-bg':'#fff0f5','--card-border':'#f8bbd0','--badge-grad':'linear-gradient(135deg,#e040fb,#ff80ab)',
+      '--hour-hand':'#6a0044','--min-hand':'#e040fb','--center-dot':'#6a0044',
+      '--tick-12':'#ff1744','--tick-quarter':'#e040fb','--tick-hour':'#ad1457',
+      '--answer-bg':'linear-gradient(135deg,#fce4ec,#f8bbd0)','--answer-border':'#f48fb1','--answer-text':'#880e4f',
+      '--answer-hover':'linear-gradient(135deg,#e040fb,#ff80ab)','--clock-shadow':'rgba(224,64,251,0.28)','--mode-active':'#880e4f' }},
+  { name:'Dark', emoji:'🌙', swatch:'linear-gradient(135deg,#0d0d2a,#00ffcc)',
+    vars:{ '--bg':'linear-gradient(145deg,#0a0a1a 0%,#12082a 55%,#0d0d23 100%)',
+      '--card-bg':'#12122a','--card-border':'#2a2a5a','--badge-grad':'linear-gradient(135deg,#7b2fff,#00ffcc)',
+      '--hour-hand':'#d0d0ff','--min-hand':'#00ffcc','--center-dot':'#00ffcc',
+      '--tick-12':'#ff4081','--tick-quarter':'#00ffcc','--tick-hour':'#4444aa',
+      '--answer-bg':'linear-gradient(135deg,#1a1a3a,#1e1e3e)','--answer-border':'#3a3a7a','--answer-text':'#c0c0ff',
+      '--answer-hover':'linear-gradient(135deg,#7b2fff,#00ffcc)','--clock-shadow':'rgba(0,255,204,0.3)','--mode-active':'#c0c0ff',
+      '--prompt-color':'#e0e0ff','--num-special-color':'#e0e0ff','--num-normal-color':'#9090cc','--tick-minor-color':'#333366' }},
+];
+
+let currentSkin = 0;
+
+function applySkin(idx) {
+  currentSkin = idx;
+  const skin = SKINS[idx];
+  const allKeys = new Set(SKINS.flatMap(s => Object.keys(s.vars)));
+  allKeys.forEach(k => document.documentElement.style.removeProperty(k));
+  Object.entries(skin.vars).forEach(([k,v]) => document.documentElement.style.setProperty(k,v));
+  document.getElementById('skin-btn').textContent = skin.emoji;
+  document.querySelectorAll('.swatch-row').forEach((el,i) => el.classList.toggle('active', i===idx));
+}
+
+function buildSkinPanel() {
+  const panel = document.getElementById('skin-panel');
+  SKINS.forEach((skin,idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'swatch-row' + (idx===0?' active':'');
+    const dot = document.createElement('div');
+    dot.className = 'swatch-dot'; dot.style.background = skin.swatch;
+    btn.appendChild(dot);
+    btn.appendChild(document.createTextNode(skin.emoji+' '+skin.name));
+    btn.onclick = () => { applySkin(idx); closeSkinPanel(); };
+    panel.appendChild(btn);
+  });
+}
+
+let skinPanelOpen = false;
+function toggleSkinPanel() { skinPanelOpen=!skinPanelOpen; document.getElementById('skin-panel').classList.toggle('open',skinPanelOpen); }
+function closeSkinPanel()  { skinPanelOpen=false; document.getElementById('skin-panel').classList.remove('open'); }
+document.addEventListener('click', e => {
+  if (skinPanelOpen && !e.target.closest('#skin-panel') && !e.target.closest('#skin-btn')) closeSkinPanel();
+});
+
+// ═══════════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════════
+
+const H_NAMES = ['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'];
+const M_WORDS = { 5:'five',10:'ten',20:'twenty',25:'twenty-five',35:'twenty-five',40:'twenty',50:'ten',55:'five' };
+
+function timeToPhrase(h, m) {
+  const hName = H_NAMES[h-1], next = H_NAMES[h%12];
+  if (m===0)  return `${hName} o'clock`;
+  if (m===15) return `a quarter past ${hName}`;
+  if (m===30) return `half past ${hName}`;
+  if (m===45) return `a quarter to ${next}`;
+  if (m<30)   return `${M_WORDS[m]} past ${hName}`;
+  return `${M_WORDS[m]} to ${next}`;
+}
+
+const ALL_TIMES = [];
+for (let h=1;h<=12;h++) for (let m of [0,5,10,15,20,25,30,35,40,45,50,55]) ALL_TIMES.push([h,m]);
+function randomTime() { return ALL_TIMES[Math.floor(Math.random()*ALL_TIMES.length)]; }
+
+function generateDistractors(th,tm,count) {
+  const pool = ALL_TIMES.filter(([h,m])=>!(h===th&&m===tm));
+  pool.sort(([h1,m1],[h2,m2])=>{
+    const d1=Math.min(Math.abs(h1-th),12-Math.abs(h1-th))*60+Math.abs(m1-tm);
+    const d2=Math.min(Math.abs(h2-th),12-Math.abs(h2-th))*60+Math.abs(m2-tm);
+    return d1-d2;
+  });
+  const cands=pool.slice(0,Math.min(30,pool.length)), chosen=[], used=new Set([timeToPhrase(th,tm)]);
+  while(chosen.length<count&&cands.length>0){
+    const idx=Math.floor(Math.random()*Math.min(cands.length,15));
+    const t=cands.splice(idx,1)[0], phrase=timeToPhrase(t[0],t[1]);
+    if(!used.has(phrase)){used.add(phrase);chosen.push(t);}
+  }
+  // Safety fallback: if pool exhausted, pad from full list
+  if (chosen.length < count) {
+    const extra = ALL_TIMES.filter(([h,m])=>!(h===th&&m===tm)&&!chosen.some(([a,b])=>a===h&&b===m));
+    while (chosen.length < count && extra.length > 0) chosen.push(extra.splice(Math.floor(Math.random()*extra.length),1)[0]);
+  }
+  return chosen;
+}
+
+// ═══════════════════════════════════════════════
+//  CLOCK FACE BUILDER (shared)
+// ═══════════════════════════════════════════════
+
+function buildClockFaceInto(ticksId, numsId) {
+  const tickG = document.getElementById(ticksId);
+  const numG  = document.getElementById(numsId);
+  for (let i=0;i<60;i++){
+    const a=(i/60)*2*Math.PI, maj=(i%5===0);
+    const r1=86, r2=maj?74:82;
+    const x1=100+Math.sin(a)*r1, y1=100-Math.cos(a)*r1;
+    const x2=100+Math.sin(a)*r2, y2=100-Math.cos(a)*r2;
+    const ln=document.createElementNS('http://www.w3.org/2000/svg','line');
+    ln.setAttribute('x1',x1);ln.setAttribute('y1',y1);ln.setAttribute('x2',x2);ln.setAttribute('y2',y2);
+    if (!maj) { ln.classList.add('tick-minor'); }
+    else { const hr=i/5; ln.classList.add(hr===0?'tick-12':(hr===3||hr===6||hr===9?'tick-quarter':'tick-hour')); }
+    tickG.appendChild(ln);
+  }
+  for (let n=1;n<=12;n++){
+    const a=(n/12)*2*Math.PI, r=62;
+    const x=100+Math.sin(a)*r, y=100-Math.cos(a)*r;
+    const sp=(n===12||n===3||n===6||n===9);
+    const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
+    txt.setAttribute('x',x);txt.setAttribute('y',y);
+    txt.setAttribute('text-anchor','middle');txt.setAttribute('dominant-baseline','central');
+    txt.classList.add(sp?'num-special':'num-normal');
+    txt.textContent=n; numG.appendChild(txt);
+  }
+}
+
+// ═══════════════════════════════════════════════
+//  GAME CLOCK HANDS
+// ═══════════════════════════════════════════════
+
+function setHands(h,m){
+  const mA=(m/60)*360, hA=((h%12)/12)*360+(m/60)*30;
+  function tip(d,l){const r=d*Math.PI/180;return[100+Math.sin(r)*l,100-Math.cos(r)*l];}
+  const[hx,hy]=tip(hA,46),[mx,my]=tip(mA,67);
+  document.getElementById('hour-hand').setAttribute('x2',hx); document.getElementById('hour-hand').setAttribute('y2',hy);
+  document.getElementById('minute-hand').setAttribute('x2',mx); document.getElementById('minute-hand').setAttribute('y2',my);
+}
+
+// ═══════════════════════════════════════════════
+//  GAME DRAGGING
+// ═══════════════════════════════════════════════
+
+const svgEl = document.getElementById('clock-svg');
+
+function getClient(e){return e.touches?[e.touches[0].clientX,e.touches[0].clientY]:[e.clientX,e.clientY];}
+
+function angleFrom(el,cx,cy){
+  const r=el.getBoundingClientRect(),ox=r.left+r.width/2,oy=r.top+r.height/2;
+  let a=Math.atan2(cx-ox,-(cy-oy))*180/Math.PI; if(a<0)a+=360; return a;
+}
+
+function nearestHand(el,cx,cy,h,m,mLen,hLen){
+  const r=el.getBoundingClientRect(),sx=(cx-r.left)/r.width*200,sy=(cy-r.top)/r.height*200;
+  const mA=(m/60)*360*Math.PI/180,hA=(((h%12)/12)*360+(m/60)*30)*Math.PI/180;
+  const mtx=100+Math.sin(mA)*mLen,mty=100-Math.cos(mA)*mLen;
+  const htx=100+Math.sin(hA)*hLen,hty=100-Math.cos(hA)*hLen;
+  return Math.hypot(sx-mtx,sy-mty)<Math.hypot(sx-htx,sy-hty)?'minute':'hour';
+}
+
+let dragging=null;
+svgEl.addEventListener('mousedown',e=>{if(currentMode!=='set'||answered)return;dragging=nearestHand(svgEl,e.clientX,e.clientY,clockH,clockM,67,46);e.preventDefault();});
+svgEl.addEventListener('touchstart',e=>{if(currentMode!=='set'||answered)return;const[cx,cy]=getClient(e);dragging=nearestHand(svgEl,cx,cy,clockH,clockM,67,46);e.preventDefault();},{passive:false});
+document.addEventListener('mousemove',e=>{if(!dragging)return;applyDrag(angleFrom(svgEl,e.clientX,e.clientY));});
+document.addEventListener('touchmove',e=>{if(!dragging)return;const[cx,cy]=getClient(e);applyDrag(angleFrom(svgEl,cx,cy));e.preventDefault();},{passive:false});
+document.addEventListener('mouseup',()=>{dragging=null;});
+document.addEventListener('touchend',()=>{dragging=null;});
+
+function applyDrag(a){
+  if(dragging==='minute'){clockM=Math.round((a/360)*60/5)*5%60;}
+  else{let s=Math.round((a/360)*12)%12;clockH=s===0?12:s;}
+  setHands(clockH,clockM);
+}
+
+// ═══════════════════════════════════════════════
+//  GAME STATE & LOGIC
+// ═══════════════════════════════════════════════
+
+let score=0,total=0,targetH=3,targetM=0,clockH=12,clockM=0;
+let gameMode='mix', currentMode='set', answered=false, roundTimer=null;
+
+function newRound(){
+  if(roundTimer){clearTimeout(roundTimer);roundTimer=null;}
+  answered=false; dragging=null;
+  const[h,m]=randomTime(); targetH=h; targetM=m;
+  currentMode=(gameMode==='mix')?( Math.random()<0.5?'set':'name'):gameMode;
+
+  document.getElementById('game-card').classList.remove('shake');
+  const fb=document.getElementById('feedback-overlay');
+  fb.className='feedback-overlay'; fb.textContent='';
+
+  const badge=document.getElementById('round-badge'),pt=document.getElementById('prompt-text'),
+        ag=document.getElementById('answers-grid'),bc=document.getElementById('btn-check'),bs=document.getElementById('btn-skip');
+
+  if(currentMode==='set'){
+    badge.textContent='🕐 Set the Clock';
+    pt.textContent=timeToPhrase(targetH,targetM);
+    pt.classList.add('pop-in'); setTimeout(()=>pt.classList.remove('pop-in'),400);
+    let rh,rm; do{[rh,rm]=randomTime();}while(rh===targetH&&rm===targetM);
+    clockH=rh; clockM=rm; setHands(clockH,clockM);
+    svgEl.classList.remove('no-drag'); ag.style.display='none'; ag.innerHTML='';
+    bc.style.display=''; bs.style.display='';
+  } else {
+    badge.textContent='💬 Name the Time'; pt.textContent='';
+    clockH=targetH; clockM=targetM; setHands(clockH,clockM); svgEl.classList.add('no-drag');
+    const choices=[[targetH,targetM],...generateDistractors(targetH,targetM,3)];
+    for(let i=choices.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[choices[i],choices[j]]=[choices[j],choices[i]];}
+    ag.innerHTML='';
+    choices.forEach(([ch,cm])=>{const btn=document.createElement('button');btn.className='answer-btn';btn.textContent=timeToPhrase(ch,cm);btn.onclick=()=>selectAnswer(ch,cm,btn);ag.appendChild(btn);});
+    ag.style.display='grid'; bc.style.display='none'; bs.style.display='';
+  }
+  updateScore();
+}
+
+function selectAnswer(h,m,btn){
+  if(answered)return; answered=true; total++;
+  document.querySelectorAll('.answer-btn').forEach(b=>b.disabled=true);
+  if(h===targetH&&m===targetM){
+    score++; btn.classList.add('correct'); showFeedback(true); roundTimer=setTimeout(newRound,1200);
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('.answer-btn').forEach(b=>{if(b.textContent===timeToPhrase(targetH,targetM))b.classList.add('correct');});
+    showFeedback(false); roundTimer=setTimeout(newRound,1700);
+  }
+  updateScore();
+}
+
+function checkClock(){
+  if(answered||currentMode!=='set')return; answered=true; total++;
+  if(clockH===targetH&&clockM===targetM){score++;showFeedback(true);roundTimer=setTimeout(newRound,1200);}
+  else{
+    showFeedback(false);
+    setTimeout(()=>{document.getElementById('prompt-text').innerHTML=`<span style="color:#e53935;font-size:1.1rem">Answer: <em>${timeToPhrase(targetH,targetM)}</em></span>`;},200);
+    roundTimer=setTimeout(newRound,2000);
+  }
+  updateScore();
+}
+
+function skipRound(){
+  if(answered)return; answered=true; total++;
+  showFeedback(false); roundTimer=setTimeout(newRound,900); updateScore();
+}
+
+function updateScore(){ document.getElementById('score-display').textContent=`${score} / ${total}`; }
+
+let muted = false;
+function toggleMute() {
+  muted = !muted;
+  document.getElementById('mute-btn').textContent = muted ? '🔇' : '🔊';
+}
+
+function showFeedback(ok){
+  const el=document.getElementById('feedback-overlay');
+  if(ok){
+    el.textContent='✅'; el.className='feedback-overlay ok show';
+    launchConfetti();
+    if(!muted) playSuccess();
+    if(navigator.vibrate) navigator.vibrate(50);
+  } else {
+    el.textContent='❌'; el.className='feedback-overlay bad show';
+    document.getElementById('game-card').classList.add('shake');
+    if(!muted) playWrong();
+    if(navigator.vibrate) navigator.vibrate([50,30,50]);
+  }
+}
+
+let numsHidden = false;
+function toggleNums() {
+  numsHidden = !numsHidden;
+  document.getElementById('numbers').style.display = numsHidden ? 'none' : '';
+  const btn = document.getElementById('btn-nums');
+  btn.textContent = `🔢 Numbers: ${numsHidden ? 'OFF' : 'ON'}`;
+  btn.classList.toggle('nums-off', numsHidden);
+}
+
+document.querySelectorAll('.mode-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    gameMode=btn.dataset.mode;
+    document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+    if(roundTimer)clearTimeout(roundTimer); answered=true; newRound();
+  });
+});
+
+// ═══════════════════════════════════════════════
+//  CONFETTI
+// ═══════════════════════════════════════════════
+
+const confCanvas=document.getElementById('confetti-canvas'), confCtx=confCanvas.getContext('2d');
+let particles=[],confAnim=null;
+function resizeConf(){confCanvas.width=window.innerWidth;confCanvas.height=window.innerHeight;}
+window.addEventListener('resize',resizeConf); resizeConf();
+
+function launchConfetti(){
+  const card=document.getElementById('game-card').getBoundingClientRect();
+  const cx=card.left+card.width/2, cy=card.top+card.height*0.35;
+  const COLS=['#FF6B6B','#FFE66D','#4ECDC4','#45B7D1','#96CEB4','#DDA0DD','#FF9F40','#A8E6CF','#FFAAA5','#B5EAD7'];
+  particles=[];
+  for(let i=0;i<130;i++){const a=Math.random()*Math.PI*2,spd=4+Math.random()*8;
+    particles.push({x:cx,y:cy,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd-5,color:COLS[Math.floor(Math.random()*COLS.length)],w:7+Math.random()*9,h:4+Math.random()*5,rot:Math.random()*360,rotSpd:(Math.random()-0.5)*12,life:1,decay:0.011+Math.random()*0.009});}
+  if(confAnim)cancelAnimationFrame(confAnim); animConf();
+}
+function animConf(){
+  confCtx.clearRect(0,0,confCanvas.width,confCanvas.height);
+  particles=particles.filter(p=>p.life>0.01);
+  particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=0.28;p.vx*=0.99;p.rot+=p.rotSpd;p.life-=p.decay;
+    confCtx.save();confCtx.globalAlpha=Math.max(0,p.life);confCtx.translate(p.x,p.y);confCtx.rotate(p.rot*Math.PI/180);
+    confCtx.fillStyle=p.color;confCtx.beginPath();
+    if(confCtx.roundRect){confCtx.roundRect(-p.w/2,-p.h/2,p.w,p.h,2);}else{confCtx.rect(-p.w/2,-p.h/2,p.w,p.h);}
+    confCtx.fill();confCtx.restore();});
+  if(particles.length>0)confAnim=requestAnimationFrame(animConf);else confCtx.clearRect(0,0,confCanvas.width,confCanvas.height);
+}
+
+// ═══════════════════════════════════════════════
+//  SOUND
+// ═══════════════════════════════════════════════
+
+let audioCtx=null;
+function getAC(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();return audioCtx;}
+function playTone(f,t0,dur,type='sine',vol=0.28){
+  try{const ac=getAC(),osc=ac.createOscillator(),g=ac.createGain();osc.connect(g);g.connect(ac.destination);
+    osc.type=type;osc.frequency.value=f;g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(vol,t0+0.015);
+    g.gain.exponentialRampToValueAtTime(0.001,t0+dur);osc.start(t0);osc.stop(t0+dur+0.01);}catch(e){}
+}
+function playSuccess(){const t=getAC().currentTime;[[523.25,0],[659.25,.11],[783.99,.22],[1046.5,.33]].forEach(([f,d])=>playTone(f,t+d,0.38));}
+function playWrong(){const t=getAC().currentTime;playTone(220,t,0.18,'sawtooth',0.2);playTone(180,t+0.1,0.22,'sawtooth',0.15);}
+
+// ═══════════════════════════════════════════════
+//  BUBBLES
+// ═══════════════════════════════════════════════
+
+(function(){for(let i=0;i<14;i++){const b=document.createElement('div');b.className='bubble';
+  const sz=20+Math.random()*80,dur=12+Math.random()*20,del=Math.random()*-20;
+  b.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;animation-duration:${dur}s;animation-delay:${del}s;`;
+  document.body.appendChild(b);}})();
+
+// ═══════════════════════════════════════════════
+//  HOW-TO SLIDES DATA
+// ═══════════════════════════════════════════════
+
+const SLIDES = [
+  {
+    title: '🕐 Meet the Clock!',
+    color: 'linear-gradient(135deg,#5c35c9,#1a5fe8)',
+    h: 12, m: 0,
+    content: `
+      <div class="ht-slide">
+        <div class="ht-big-emoji">⏰</div>
+        <div class="ht-hand-cards">
+          <div class="ht-hand-card" style="border-color:#e53935">
+            <span class="hc-emoji">🦁</span>
+            <span class="hc-desc"><strong>SHORT</strong> &amp; <strong>FAT</strong></span>
+            <span class="hc-name" style="color:#e53935">HOUR hand</span>
+          </div>
+          <div class="ht-hand-card" style="border-color:#6c22bd">
+            <span class="hc-emoji">🦒</span>
+            <span class="hc-desc"><strong>LONG</strong> &amp; <strong>THIN</strong></span>
+            <span class="hc-name" style="color:#6c22bd">MINUTE hand</span>
+          </div>
+        </div>
+        <div class="ht-rule">
+          🔢 The numbers go from <strong>1</strong> to <strong>12</strong>!<br>
+          👉 Drag the hands on the clock — try it now!
+        </div>
+        <div class="ht-note">💡 <em>Teacher:</em> point to each hand and ask students: "Which one is longer?"</div>
+      </div>`
+  },
+  {
+    title: "🔔 O'clock!",
+    color: 'linear-gradient(135deg,#e8612a,#f5c842)',
+    h: 3, m: 0,
+    content: `
+      <div class="ht-slide">
+        <div class="ht-big-emoji">⬆️</div>
+        <div class="ht-rule">
+          When the <strong>long hand</strong> points <strong>UP ⬆️ to 12</strong>...<br>
+          ...we say <strong style="font-size:1.3em;color:#e8612a">O'CLOCK! 🔔</strong>
+        </div>
+        <div class="ht-example">
+          <div class="ht-ex-emoji">🐱</div>
+          <div class="ht-ex-body">
+            <div class="ht-ex-phrase">It's THREE o'clock!</div>
+            The cat wants to eat a fish! 🐟
+          </div>
+        </div>
+        <div class="ht-rule" style="background:#fff8e1;border-color:#f5c842">
+          👉 Drag the <strong>short hand</strong> to any number!<br>
+          Keep the <strong>long hand</strong> pointing at <strong>12</strong>.
+        </div>
+        <div class="ht-note">💡 <em>Teacher:</em> "What time is it when the big hand is at 12?" — point &amp; ask!</div>
+      </div>`
+  },
+  {
+    title: '🌙 Half past!',
+    color: 'linear-gradient(135deg,#01337d,#00b4d8)',
+    h: 4, m: 30,
+    content: `
+      <div class="ht-slide">
+        <div class="ht-big-emoji">⬇️</div>
+        <div class="ht-rule">
+          When the <strong>long hand</strong> points <strong>DOWN ⬇️ to 6</strong>...<br>
+          ...we say <strong style="font-size:1.3em;color:#0077b6">HALF PAST! ✂️</strong>
+        </div>
+        <div class="ht-rule" style="background:#e3f2fd;border-color:#0077b6">
+          ✂️ <em>Why HALF?</em> We cut the clock into <strong>TWO equal pieces</strong>!<br>
+          30 minutes gone = half the hour done!
+        </div>
+        <div class="ht-example">
+          <div class="ht-ex-emoji">🐶</div>
+          <div class="ht-ex-body">
+            <div class="ht-ex-phrase">It's HALF PAST FOUR!</div>
+            The dog wants to go for a run! 🏃
+          </div>
+        </div>
+        <div class="ht-note">💡 <em>Teacher:</em> draw a line across the clock face to show the "half" visually.</div>
+      </div>`
+  },
+  {
+    title: '🍕 A quarter past!',
+    color: 'linear-gradient(135deg,#1b7a45,#4caf7c)',
+    h: 2, m: 15,
+    content: `
+      <div class="ht-slide">
+        <div class="ht-big-emoji">➡️</div>
+        <div class="ht-rule">
+          When the <strong>long hand</strong> points <strong>RIGHT ➡️ to 3</strong>...<br>
+          ...we say <strong style="font-size:1.3em;color:#1b7a45">A QUARTER PAST! 🍕</strong>
+        </div>
+        <div class="ht-rule" style="background:#e8f5e9;border-color:#1b7a45">
+          🍕 A <em>quarter</em> = 1 slice from 4 equal slices of pizza!<br>
+          That is <strong>15 minutes</strong> out of 60.
+        </div>
+        <div class="ht-example">
+          <div class="ht-ex-emoji">🐸</div>
+          <div class="ht-ex-body">
+            <div class="ht-ex-phrase">A quarter past TWO!</div>
+            The frog jumps super high! 💨
+          </div>
+        </div>
+        <div class="ht-note">💡 <em>Teacher:</em> ask students to show a quarter with their hands (arms making an L shape).</div>
+      </div>`
+  },
+  {
+    title: '⏰ A quarter to!',
+    color: 'linear-gradient(135deg,#880e4f,#e040fb)',
+    h: 4, m: 45,
+    content: `
+      <div class="ht-slide">
+        <div class="ht-big-emoji">⬅️</div>
+        <div class="ht-rule">
+          When the <strong>long hand</strong> points <strong>LEFT ⬅️ to 9</strong>...<br>
+          ...we say <strong style="font-size:1.3em;color:#880e4f">A QUARTER TO! ⏰</strong>
+        </div>
+        <div class="ht-rule" style="background:#fce4ec;border-color:#e040fb">
+          🍕 Only <strong>1 slice left</strong> before the next hour!<br>
+          Just <strong>15 more minutes</strong> to go... almost there!
+        </div>
+        <div class="ht-example">
+          <div class="ht-ex-emoji">🦊</div>
+          <div class="ht-ex-body">
+            <div class="ht-ex-phrase">A quarter to FIVE!</div>
+            The fox is almost home! 🏠
+          </div>
+        </div>
+        <div class="ht-note">💡 <em>Teacher:</em> "QUARTER TO means the NEXT hour — we look ahead!" Stress the next hour name.</div>
+      </div>`
+  },
+  {
+    title: '📈 Past — count UP!',
+    color: 'linear-gradient(135deg,#5c6bc0,#26c6da)',
+    h: 5, m: 10,
+    content: `
+      <div class="ht-slide">
+        <div class="ht-rule">
+          When the long hand is in the <strong>TOP half ⬆️</strong>...<br>
+          We say <strong style="color:#3949ab">PAST</strong> and count the minutes from 12! 📈
+        </div>
+        <div class="ht-mini-grid">
+          <div class="ht-pill ht-pill-past">🖐️ &nbsp;<strong>5 min</strong> → FIVE PAST</div>
+          <div class="ht-pill ht-pill-past">✋✋ <strong>10 min</strong> → TEN PAST</div>
+          <div class="ht-pill ht-pill-past">✌️✌️ <strong>20 min</strong> → TWENTY PAST</div>
+          <div class="ht-pill ht-pill-past">🤚  <strong>25 min</strong> → TWENTY-FIVE PAST</div>
+        </div>
+        <div class="ht-example">
+          <div class="ht-ex-emoji">🐘</div>
+          <div class="ht-ex-body">
+            <div class="ht-ex-phrase">TEN past FIVE!</div>
+            The elephant is taking a big bath! 🛁
+          </div>
+        </div>
+        <div class="ht-note">💡 <em>Teacher:</em> trace the long hand from 12 → 1 → 2 (counting 5, 10) to show the minutes.</div>
+      </div>`
+  },
+  {
+    title: '📉 To — count DOWN!',
+    color: 'linear-gradient(135deg,#c9174a,#ff6f00)',
+    h: 5, m: 50,
+    content: `
+      <div class="ht-slide">
+        <div class="ht-rule">
+          When the long hand is in the <strong>BOTTOM half ⬇️</strong>...<br>
+          We say <strong style="color:#c9174a">TO</strong> and count the minutes <strong>left</strong> to the next hour! 📉
+        </div>
+        <div class="ht-mini-grid">
+          <div class="ht-pill ht-pill-to">35 min → TWENTY-FIVE TO 🤚</div>
+          <div class="ht-pill ht-pill-to">40 min → TWENTY TO ✌️✌️</div>
+          <div class="ht-pill ht-pill-to">50 min → TEN TO ✋✋</div>
+          <div class="ht-pill ht-pill-to">55 min → FIVE TO 🖐️</div>
+        </div>
+        <div class="ht-example">
+          <div class="ht-ex-emoji">🦁</div>
+          <div class="ht-ex-body">
+            <div class="ht-ex-phrase">TEN to SIX!</div>
+            The lion is going to sleep! 😴
+          </div>
+        </div>
+        <div class="ht-note">💡 <em>Teacher:</em> "Count backwards from 12! How many minutes until the long hand reaches 12 again?"</div>
+      </div>`
+  },
+];
+
+// ═══════════════════════════════════════════════
+//  HOW-TO STATE & CLOCK
+// ═══════════════════════════════════════════════
+
+let htClockH=12, htClockM=0, htDragging=null;
+let currentSlide=0;
+
+const htSvg = document.getElementById('ht-clock-svg');
+
+function setHtHands(h, m) {
+  const mA=(m/60)*360, hA=((h%12)/12)*360+(m/60)*30;
+  document.getElementById('ht-hour-g').style.transform=`rotate(${hA}deg)`;
+  document.getElementById('ht-minute-g').style.transform=`rotate(${mA}deg)`;
+}
+
+function updateHtDisplay() {
+  document.getElementById('ht-time-display').textContent = timeToPhrase(htClockH, htClockM);
+}
+
+// How-to dragging — disable CSS transition while dragging, restore on release
+function htDisableTransition() {
+  document.getElementById('ht-hour-g').style.transition='none';
+  document.getElementById('ht-minute-g').style.transition='none';
+}
+function htRestoreTransition() {
+  document.getElementById('ht-hour-g').style.transition='';
+  document.getElementById('ht-minute-g').style.transition='';
+}
+
+htSvg.addEventListener('mousedown', e=>{
+  htDisableTransition();
+  htDragging=nearestHand(htSvg,e.clientX,e.clientY,htClockH,htClockM,67,46); e.preventDefault();
+});
+htSvg.addEventListener('touchstart', e=>{
+  htDisableTransition();
+  const[cx,cy]=getClient(e); htDragging=nearestHand(htSvg,cx,cy,htClockH,htClockM,67,46); e.preventDefault();
+},{passive:false});
+document.addEventListener('mousemove', e=>{
+  if(!htDragging)return; applyHtDrag(angleFrom(htSvg,e.clientX,e.clientY));
+});
+document.addEventListener('touchmove', e=>{
+  if(!htDragging)return; const[cx,cy]=getClient(e); applyHtDrag(angleFrom(htSvg,cx,cy)); e.preventDefault();
+},{passive:false});
+document.addEventListener('mouseup', ()=>{ if(htDragging) htRestoreTransition(); htDragging=null; });
+document.addEventListener('touchend',()=>{ if(htDragging) htRestoreTransition(); htDragging=null; });
+
+function applyHtDrag(a){
+  if(htDragging==='minute'){htClockM=Math.round((a/360)*60/5)*5%60;}
+  else{let s=Math.round((a/360)*12)%12;htClockH=s===0?12:s;}
+  setHtHands(htClockH,htClockM); updateHtDisplay();
+}
+
+// ─── Slide navigation ───────────────────────────────────────────────────────
+
+function goToSlide(idx) {
+  currentSlide = idx;
+  const slide = SLIDES[idx];
+  document.getElementById('ht-content').innerHTML = slide.content;
+  document.getElementById('ht-header').style.background = slide.color;
+  document.getElementById('ht-htitle').textContent = slide.title;
+  htClockH = slide.h; htClockM = slide.m;
+  setHtHands(htClockH, htClockM);
+  updateHtDisplay();
+  // Nav buttons
+  document.getElementById('ht-prev').disabled = (idx === 0);
+  document.getElementById('ht-next').disabled = (idx === SLIDES.length-1);
+  // Dots
+  document.querySelectorAll('.ht-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  // Scroll content back to top
+  const cp = document.querySelector('.howto-content-panel');
+  if(cp) cp.scrollTop=0;
+}
+
+function buildHtDots() {
+  const c=document.getElementById('ht-dots'); c.innerHTML='';
+  SLIDES.forEach((_,i)=>{
+    const d=document.createElement('button'); d.className='ht-dot'+(i===0?' active':'');
+    d.setAttribute('aria-label','Slide '+(i+1));
+    d.onclick=()=>goToSlide(i); c.appendChild(d);
+  });
+}
+
+function prevSlide(){ if(currentSlide>0) goToSlide(currentSlide-1); }
+function nextSlide(){ if(currentSlide<SLIDES.length-1) goToSlide(currentSlide+1); }
+
+// ─── Credits open / close ────────────────────────────────────────────────────
+
+function openCredits() {
+  document.getElementById('credits-overlay').classList.add('open');
+}
+function closeCredits() {
+  document.getElementById('credits-overlay').classList.remove('open');
+}
+document.getElementById('credits-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('credits-overlay')) closeCredits();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('credits-overlay').classList.contains('open')) closeCredits();
+});
+
+// ─── Open / close ────────────────────────────────────────────────────────────
+
+function openHowTo() {
+  if(roundTimer){clearTimeout(roundTimer);roundTimer=null;}
+  document.getElementById('howto-overlay').classList.add('open');
+  goToSlide(0);
+}
+function closeHowTo() {
+  document.getElementById('howto-overlay').classList.remove('open');
+  newRound();
+}
+
+// Close on backdrop click
+document.getElementById('howto-overlay').addEventListener('click', e=>{
+  if(e.target===document.getElementById('howto-overlay')) closeHowTo();
+});
+
+// ─── Keyboard navigation ──────────────────────────────────────────────────────
+document.addEventListener('keydown', e=>{
+  if(!document.getElementById('howto-overlay').classList.contains('open')) return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') nextSlide();
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')   prevSlide();
+  if(e.key==='Escape') closeHowTo();
+});
+
+// ═══════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════
+
+buildClockFaceInto('ticks','numbers');
+buildClockFaceInto('ht-ticks','ht-numbers');
+buildSkinPanel();
+buildHtDots();
+newRound();
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Head -->
+  <circle cx="50" cy="26" r="18" fill="#f5cba7" stroke="#c0835a" stroke-width="2"/>
+  <!-- Hair -->
+  <path d="M32 22 Q32 8 50 8 Q68 8 68 22 Q60 14 50 14 Q40 14 32 22 Z" fill="#4b3621"/>
+  <!-- Eyes -->
+  <circle cx="43" cy="24" r="2.5" fill="#333"/>
+  <circle cx="57" cy="24" r="2.5" fill="#333"/>
+  <!-- Mouth (smile) -->
+  <path d="M43 32 Q50 37 57 32" fill="none" stroke="#c0835a" stroke-width="2" stroke-linecap="round"/>
+  <!-- Body / shirt -->
+  <path d="M28 44 Q20 44 16 54 L12 90 L88 90 L84 54 Q80 44 72 44 Z" fill="#3b82f6" stroke="#2563eb" stroke-width="2"/>
+  <!-- Neck -->
+  <rect x="42" y="42" width="16" height="8" rx="2" fill="#f5cba7"/>
+  <!-- Collar -->
+  <path d="M42 44 L36 52 L50 48 L64 52 L58 44 Z" fill="white" stroke="#2563eb" stroke-width="1"/>
+  <!-- Tie -->
+  <path d="M50 48 L47 60 L50 76 L53 60 Z" fill="#ef4444" stroke="#b91c1c" stroke-width="1"/>
+  <!-- Label -->
+  <text x="50" y="98" font-family="Arial,sans-serif" font-size="8.5" fill="#1d4ed8" font-weight="700" text-anchor="middle">PARE</text>
+</svg>

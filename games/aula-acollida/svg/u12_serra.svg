@@ -1,0 +1,33 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mànec de fusta (dreta) -->
+  <rect x="62" y="30" width="26" height="38" rx="8" fill="#92400e"/>
+  <rect x="64" y="32" width="22" height="34" rx="7" fill="#a35c1b"/>
+  <!-- Veta fusta mànec -->
+  <line x1="66" y1="36" x2="84" y2="38" stroke="#78350f" stroke-width="0.8" opacity="0.5"/>
+  <line x1="66" y1="44" x2="84" y2="46" stroke="#78350f" stroke-width="0.8" opacity="0.5"/>
+  <line x1="66" y1="52" x2="84" y2="54" stroke="#78350f" stroke-width="0.8" opacity="0.5"/>
+  <!-- Forat del mànec -->
+  <ellipse cx="75" cy="48" rx="7" ry="5" fill="#78350f"/>
+  <!-- Fulla metàl·lica de la serra (rectangle gran) -->
+  <rect x="8" y="35" width="58" height="20" rx="2" fill="#94a3b8"/>
+  <!-- Reflex metàl·lic fulla -->
+  <rect x="10" y="37" width="54" height="4" rx="1" fill="#cbd5e1" opacity="0.6"/>
+  <!-- Dents de la serra (triangles a la part inferior) -->
+  <polygon points="8,55 12,55 10,63" fill="#374151"/>
+  <polygon points="12,55 16,55 14,63" fill="#374151"/>
+  <polygon points="16,55 20,55 18,63" fill="#374151"/>
+  <polygon points="20,55 24,55 22,63" fill="#374151"/>
+  <polygon points="24,55 28,55 26,63" fill="#374151"/>
+  <polygon points="28,55 32,55 30,63" fill="#374151"/>
+  <polygon points="32,55 36,55 34,63" fill="#374151"/>
+  <polygon points="36,55 40,55 38,63" fill="#374151"/>
+  <polygon points="40,55 44,55 42,63" fill="#374151"/>
+  <polygon points="44,55 48,55 46,63" fill="#374151"/>
+  <polygon points="48,55 52,55 50,63" fill="#374151"/>
+  <polygon points="52,55 56,55 54,63" fill="#374151"/>
+  <polygon points="56,55 60,55 58,63" fill="#374151"/>
+  <!-- Unió fulla-mànec -->
+  <rect x="58" y="33" width="8" height="22" rx="1" fill="#6b7280"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">SERRA</text>
+</svg>

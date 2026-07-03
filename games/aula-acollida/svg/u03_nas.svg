@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Nose bridge and tip -->
+  <path d="M45 20 Q43 38 36 52 Q33 58 36 62 Q40 66 50 66 Q60 66 64 62 Q67 58 64 52 Q57 38 55 20" fill="#ffd68a" stroke="#c8a050" stroke-width="2.5"/>
+  <!-- Nostrils -->
+  <ellipse cx="40" cy="62" rx="5" ry="4" fill="#c8a050"/>
+  <ellipse cx="60" cy="62" rx="5" ry="4" fill="#c8a050"/>
+  <!-- Nostril highlights -->
+  <ellipse cx="40" cy="62" rx="3" ry="2.5" fill="#a07030"/>
+  <ellipse cx="60" cy="62" rx="3" ry="2.5" fill="#a07030"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">NAS</text>
+</svg>

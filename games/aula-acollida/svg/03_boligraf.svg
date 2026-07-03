@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 45">
+  <!-- cos (blau fosc) -->
+  <rect x="8" y="16" width="88" height="14" rx="5" fill="#1e40af"/>
+  <!-- zona d'agarre (gris) -->
+  <rect x="74" y="14" width="16" height="18" rx="3" fill="#d1d5db"/>
+  <!-- clip lateral -->
+  <rect x="64" y="10" width="5" height="26" rx="2" fill="#93c5fd"/>
+  <circle cx="66" cy="10" r="3" fill="#93c5fd"/>
+  <!-- punta cònica -->
+  <polygon points="96,16 96,30 118,23" fill="#1e3a8a"/>
+  <!-- boleta de tinta -->
+  <circle cx="118" cy="23" r="2.5" fill="#374151"/>
+  <!-- tapa del darrere -->
+  <rect x="5" y="15" width="6" height="16" rx="3" fill="#1e3a8a"/>
+</svg>

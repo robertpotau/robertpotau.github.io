@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Llana cos: cercles superposats simulant llana -->
+  <circle cx="38" cy="64" r="14" fill="#f0f0f0"/>
+  <circle cx="52" cy="60" r="15" fill="#f0f0f0"/>
+  <circle cx="66" cy="64" r="13" fill="#f0f0f0"/>
+  <circle cx="44" cy="72" r="12" fill="#f0f0f0"/>
+  <circle cx="58" cy="72" r="12" fill="#f0f0f0"/>
+  <circle cx="50" cy="62" r="13" fill="#f0f0f0"/>
+  <!-- Contorn general cos per unificar -->
+  <ellipse cx="50" cy="66" rx="24" ry="17" fill="none" stroke="#d8d8d8" stroke-width="1"/>
+  <!-- Cap petit -->
+  <circle cx="50" cy="40" r="12" fill="#f5cba7"/>
+  <!-- Orella esquerra lateral -->
+  <ellipse cx="38" cy="42" rx="5" ry="8" fill="#f5cba7" transform="rotate(-20 38 42)"/>
+  <!-- Orella dreta lateral -->
+  <ellipse cx="62" cy="42" rx="5" ry="8" fill="#f5cba7" transform="rotate(20 62 42)"/>
+  <!-- Ull esquerre -->
+  <circle cx="44" cy="38" r="2.5" fill="#1a1a1a"/>
+  <circle cx="43" cy="37" r="0.8" fill="#fff"/>
+  <!-- Ull dret -->
+  <circle cx="56" cy="38" r="2.5" fill="#1a1a1a"/>
+  <circle cx="55" cy="37" r="0.8" fill="#fff"/>
+  <!-- Nas petit -->
+  <ellipse cx="50" cy="44" rx="2.5" ry="1.8" fill="#cc8870"/>
+  <!-- Boca -->
+  <path d="M47 46 Q50 49 53 46" stroke="#aa6650" stroke-width="1" fill="none"/>
+  <!-- Potes primes i negres -->
+  <rect x="31" y="79" width="6" height="13" rx="3" fill="#333"/>
+  <rect x="42" y="80" width="6" height="12" rx="3" fill="#333"/>
+  <rect x="52" y="80" width="6" height="12" rx="3" fill="#333"/>
+  <rect x="63" y="79" width="6" height="13" rx="3" fill="#333"/>
+  <!-- Peülles -->
+  <rect x="31" y="89" width="6" height="4" rx="2" fill="#1a1a1a"/>
+  <rect x="42" y="89" width="6" height="4" rx="2" fill="#1a1a1a"/>
+  <rect x="52" y="89" width="6" height="4" rx="2" fill="#1a1a1a"/>
+  <rect x="63" y="89" width="6" height="4" rx="2" fill="#1a1a1a"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">XAI</text>
+</svg>

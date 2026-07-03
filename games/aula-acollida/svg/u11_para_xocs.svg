@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Car front view -->
+  <!-- Hood -->
+  <path d="M12 52 Q12 40 20 38 L80 38 Q88 40 88 52 L88 68 L12 68 Z" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+  <!-- Windshield -->
+  <path d="M22 38 Q22 28 30 24 L70 24 Q78 28 78 38 Z" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1.5"/>
+  <!-- Bumper (highlighted) -->
+  <path d="M6 68 Q6 76 12 78 L88 78 Q94 76 94 68 L88 68 L12 68 Z" fill="#f97316" stroke="#c2410c" stroke-width="2.5"/>
+  <!-- Bumper bolts -->
+  <circle cx="20" cy="73" r="3" fill="#9a3412" stroke="#c2410c" stroke-width="1"/>
+  <circle cx="50" cy="73" r="3" fill="#9a3412" stroke="#c2410c" stroke-width="1"/>
+  <circle cx="80" cy="73" r="3" fill="#9a3412" stroke="#c2410c" stroke-width="1"/>
+  <!-- Headlights (pair) -->
+  <ellipse cx="24" cy="44" rx="10" ry="7" fill="#fef08a" stroke="#d97706" stroke-width="1.5"/>
+  <ellipse cx="76" cy="44" rx="10" ry="7" fill="#fef08a" stroke="#d97706" stroke-width="1.5"/>
+  <!-- Grille -->
+  <rect x="36" y="58" width="28" height="8" rx="3" fill="#9ca3af" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="44" y1="58" x2="44" y2="66" stroke="#6b7280" stroke-width="1"/>
+  <line x1="50" y1="58" x2="50" y2="66" stroke="#6b7280" stroke-width="1"/>
+  <line x1="56" y1="58" x2="56" y2="66" stroke="#6b7280" stroke-width="1"/>
+  <!-- Label -->
+  <text x="50" y="92" font-family="Arial,sans-serif" font-size="7" fill="#c2410c" font-weight="700" text-anchor="middle">para-xocs</text>
+</svg>

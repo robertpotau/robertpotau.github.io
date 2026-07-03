@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Main garlic bulb -->
+  <ellipse cx="50" cy="62" rx="24" ry="20" fill="#f5f5f5" stroke="#d1d5db" stroke-width="1"/>
+  <!-- Individual cloves visible -->
+  <!-- Left clove -->
+  <path d="M26 62 Q28 50 38 48 Q46 50 46 62 Q42 72 34 73 Q26 72 26 62Z" fill="#f5f5f5" stroke="#d1d5db" stroke-width="1"/>
+  <!-- Right clove -->
+  <path d="M74 62 Q72 50 62 48 Q54 50 54 62 Q58 72 66 73 Q74 72 74 62Z" fill="#f5f5f5" stroke="#d1d5db" stroke-width="1"/>
+  <!-- Center clove -->
+  <path d="M38 62 Q38 48 50 45 Q62 48 62 62 Q58 76 50 78 Q42 76 38 62Z" fill="#fafafa" stroke="#d1d5db" stroke-width="1"/>
+  <!-- Clove lines/detail -->
+  <line x1="32" y1="56" x2="30" y2="70" stroke="#d1d5db" stroke-width="0.8"/>
+  <line x1="50" y1="45" x2="50" y2="78" stroke="#d1d5db" stroke-width="0.8"/>
+  <line x1="68" y1="56" x2="70" y2="70" stroke="#d1d5db" stroke-width="0.8"/>
+  <!-- Base wrapper -->
+  <path d="M26 66 Q50 80 74 66 Q72 75 50 80 Q28 75 26 66Z" fill="#e5e7eb" stroke="#d1d5db" stroke-width="0.5"/>
+  <!-- Root fibers -->
+  <line x1="42" y1="79" x2="40" y2="85" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="46" y1="80" x2="45" y2="87" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="50" y1="80" x2="50" y2="87" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="54" y1="80" x2="55" y2="87" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="58" y1="79" x2="60" y2="85" stroke="#d1d5db" stroke-width="1"/>
+  <!-- Green stem -->
+  <path d="M50 44 Q50 32 49 22" stroke="#4ade80" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- Stem tip slight bend -->
+  <path d="M49 22 Q48 18 46 16" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ALL</text>
+</svg>

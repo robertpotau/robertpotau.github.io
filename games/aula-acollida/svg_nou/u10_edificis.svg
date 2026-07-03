@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="edi_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#edi_bg)"/>
+  <ellipse cx="50" cy="90" rx="38" ry="3.5" fill="#0f172a" opacity=".1"/>
+  <rect x="10" y="34" width="24" height="54" fill="#f97316"/>
+  <g fill="#bfdbfe" stroke="#1e40af" stroke-width=".9">
+    <rect x="14" y="38" width="6" height="7"/><rect x="24" y="38" width="6" height="7"/>
+    <rect x="14" y="50" width="6" height="7"/><rect x="24" y="50" width="6" height="7"/>
+    <rect x="14" y="62" width="6" height="7"/><rect x="24" y="62" width="6" height="7"/>
+  </g>
+  <rect x="17" y="76" width="9" height="12" fill="#7c2d12"/>
+  <rect x="38" y="16" width="26" height="72" fill="#0ea5e9"/>
+  <g fill="#e0f2fe" stroke="#0369a1" stroke-width=".9">
+    <rect x="42" y="22" width="7" height="8"/><rect x="53" y="22" width="7" height="8"/>
+    <rect x="42" y="36" width="7" height="8"/><rect x="53" y="36" width="7" height="8"/>
+    <rect x="42" y="50" width="7" height="8"/><rect x="53" y="50" width="7" height="8"/>
+    <rect x="42" y="64" width="7" height="8"/><rect x="53" y="64" width="7" height="8"/>
+  </g>
+  <rect x="46" y="78" width="10" height="10" fill="#0c4a6e"/>
+  <rect x="68" y="42" width="22" height="46" fill="#fbbf24"/>
+  <g fill="#bfdbfe" stroke="#92400e" stroke-width=".9">
+    <rect x="72" y="48" width="6" height="6"/><rect x="81" y="48" width="6" height="6"/>
+    <rect x="72" y="60" width="6" height="6"/><rect x="81" y="60" width="6" height="6"/>
+    <rect x="72" y="72" width="6" height="6"/><rect x="81" y="72" width="6" height="6"/>
+  </g>
+  <rect x="48" y="10" width="6" height="6" fill="#0284c7"/>
+</svg>

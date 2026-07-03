@@ -1,0 +1,52 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cua -->
+  <path d="M80 64 Q90 60 88 72" stroke="#f5f5f5" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <ellipse cx="88" cy="73" rx="4" ry="3" fill="#1a1a1a"/>
+  <!-- Cos -->
+  <ellipse cx="50" cy="65" rx="30" ry="18" fill="#f5f5f5"/>
+  <!-- Ratlles cos negres -->
+  <line x1="30" y1="48" x2="26" y2="82" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+  <line x1="40" y1="47" x2="38" y2="83" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+  <line x1="50" y1="47" x2="50" y2="83" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+  <line x1="60" y1="47" x2="62" y2="83" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+  <line x1="70" y1="48" x2="74" y2="82" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+  <!-- Potes -->
+  <rect x="24" y="78" width="7" height="13" rx="3" fill="#f5f5f5"/>
+  <line x1="24" y1="80" x2="24" y2="91" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="27" y1="80" x2="27" y2="91" stroke="#1a1a1a" stroke-width="1.5"/>
+  <rect x="34" y="78" width="7" height="13" rx="3" fill="#f5f5f5"/>
+  <line x1="34" y1="80" x2="34" y2="91" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="37" y1="80" x2="37" y2="91" stroke="#1a1a1a" stroke-width="1.5"/>
+  <rect x="59" y="78" width="7" height="13" rx="3" fill="#f5f5f5"/>
+  <line x1="59" y1="80" x2="59" y2="91" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="62" y1="80" x2="62" y2="91" stroke="#1a1a1a" stroke-width="1.5"/>
+  <rect x="69" y="78" width="7" height="13" rx="3" fill="#f5f5f5"/>
+  <line x1="69" y1="80" x2="69" y2="91" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="72" y1="80" x2="72" y2="91" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- Coll -->
+  <rect x="28" y="42" width="14" height="26" rx="5" fill="#f5f5f5"/>
+  <line x1="32" y1="42" x2="30" y2="68" stroke="#1a1a1a" stroke-width="2.5"/>
+  <line x1="37" y1="42" x2="37" y2="68" stroke="#1a1a1a" stroke-width="2.5"/>
+  <!-- Crinera -->
+  <rect x="30" y="30" width="6" height="22" rx="2" fill="#1a1a1a"/>
+  <!-- Cap -->
+  <ellipse cx="30" cy="36" rx="11" ry="12" fill="#f5f5f5"/>
+  <!-- Ratlles cap -->
+  <line x1="23" y1="28" x2="20" y2="44" stroke="#1a1a1a" stroke-width="2"/>
+  <line x1="29" y1="25" x2="28" y2="42" stroke="#1a1a1a" stroke-width="2"/>
+  <line x1="35" y1="27" x2="38" y2="43" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Morros -->
+  <ellipse cx="28" cy="44" rx="7" ry="5" fill="#f5f5f5"/>
+  <line x1="23" y1="40" x2="22" y2="49" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="26" y1="40" x2="26" y2="49" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- Nas -->
+  <ellipse cx="26" cy="42" rx="2" ry="1.5" fill="#1a1a1a"/>
+  <!-- Ulls -->
+  <circle cx="24" cy="33" r="2.5" fill="#1a1a1a"/>
+  <circle cx="23" cy="32" r="0.7" fill="white"/>
+  <!-- Orella -->
+  <ellipse cx="38" cy="30" rx="4" ry="5" fill="#f5f5f5"/>
+  <ellipse cx="38" cy="30" rx="2" ry="3" fill="#fda4af"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ZEBRA</text>
+</svg>

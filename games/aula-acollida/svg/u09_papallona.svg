@@ -1,0 +1,26 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Ales superiors -->
+  <ellipse cx="30" cy="42" rx="22" ry="18" fill="#f97316" transform="rotate(-20 30 42)"/>
+  <ellipse cx="70" cy="42" rx="22" ry="18" fill="#f97316" transform="rotate(20 70 42)"/>
+  <!-- Ales inferiors -->
+  <ellipse cx="33" cy="62" rx="14" ry="12" fill="#f97316" transform="rotate(20 33 62)"/>
+  <ellipse cx="67" cy="62" rx="14" ry="12" fill="#f97316" transform="rotate(-20 67 62)"/>
+  <!-- Patrons cercles a les ales superiors -->
+  <circle cx="28" cy="40" r="5" fill="#1a1a1a" opacity="0.6"/>
+  <circle cx="72" cy="40" r="5" fill="#1a1a1a" opacity="0.6"/>
+  <!-- Vores negres ales -->
+  <ellipse cx="30" cy="42" rx="22" ry="18" fill="none" stroke="#1a1a1a" stroke-width="2" transform="rotate(-20 30 42)"/>
+  <ellipse cx="70" cy="42" rx="22" ry="18" fill="none" stroke="#1a1a1a" stroke-width="2" transform="rotate(20 70 42)"/>
+  <ellipse cx="33" cy="62" rx="14" ry="12" fill="none" stroke="#1a1a1a" stroke-width="2" transform="rotate(20 33 62)"/>
+  <ellipse cx="67" cy="62" rx="14" ry="12" fill="none" stroke="#1a1a1a" stroke-width="2" transform="rotate(-20 67 62)"/>
+  <!-- Cos allargat central -->
+  <ellipse cx="50" cy="52" rx="4" ry="22" fill="#4b3621"/>
+  <!-- Cap -->
+  <circle cx="50" cy="28" r="5" fill="#4b3621"/>
+  <!-- Antenes -->
+  <line x1="50" y1="24" x2="40" y2="12" stroke="#4b3621" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="40" cy="12" r="2" fill="#4b3621"/>
+  <line x1="50" y1="24" x2="60" y2="12" stroke="#4b3621" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="60" cy="12" r="2" fill="#4b3621"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PAPALLONA</text>
+</svg>

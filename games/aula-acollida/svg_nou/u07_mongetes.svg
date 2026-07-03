@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="mng_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0fdf4"/><stop offset="1" stop-color="#dcfce7"/></linearGradient>
+  <linearGradient id="mng_beina" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22c55e"/><stop offset="1" stop-color="#15803d"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#mng_bg)"/>
+  <ellipse cx="50" cy="82" rx="32" ry="4" fill="#0f172a" opacity=".08"/>
+  <g transform="rotate(-18 50 50)">
+    <path d="M16 44 q4 -8 12 -8 l46 2 q10 1 10 9 q0 8 -10 9 l-46 2 q-8 0 -12 -8 q-2 -3 0 -6" fill="url(#mng_beina)"/>
+    <path d="M18 44 q4 -6 11 -6 l44 2 q8 1 8 7 q-32 4 -63 -3" fill="#4ade80" opacity=".7"/>
+    <ellipse cx="32" cy="48" rx="6" ry="7" fill="#dcfce7" opacity=".5"/>
+    <ellipse cx="48" cy="48" rx="6" ry="7" fill="#dcfce7" opacity=".4"/>
+    <ellipse cx="64" cy="48" rx="5.5" ry="6.5" fill="#dcfce7" opacity=".5"/>
+    <path d="M16 42 q-4 -4 -3 -9 q4 1 6 5" fill="#16a34a"/>
+  </g>
+  <g transform="rotate(10 56 66)">
+    <path d="M24 64 q3 -6 9 -6 l36 1.5 q8 1 8 7 q0 6 -8 7 l-36 1.5 q-6 0 -9 -6 q-1.5 -2.5 0 -5" fill="#65a30d"/>
+    <ellipse cx="40" cy="67" rx="5" ry="5.5" fill="#ecfccb" opacity=".45"/>
+    <ellipse cx="56" cy="67" rx="5" ry="5.5" fill="#ecfccb" opacity=".45"/>
+  </g>
+</svg>

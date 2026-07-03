@@ -1,0 +1,33 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cua -->
+  <path d="M78 62 Q86 60 84 72" stroke="#94a3b8" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Cos gran -->
+  <ellipse cx="50" cy="62" rx="30" ry="22" fill="#94a3b8"/>
+  <!-- Orella esquerra -->
+  <ellipse cx="20" cy="50" rx="12" ry="16" fill="#94a3b8"/>
+  <ellipse cx="22" cy="50" rx="8" ry="11" fill="#b0c0d4"/>
+  <!-- Orella dreta -->
+  <ellipse cx="80" cy="50" rx="12" ry="16" fill="#94a3b8"/>
+  <ellipse cx="78" cy="50" rx="8" ry="11" fill="#b0c0d4"/>
+  <!-- Potes -->
+  <rect x="24" y="78" width="10" height="14" rx="4" fill="#94a3b8"/>
+  <rect x="36" y="80" width="10" height="12" rx="4" fill="#94a3b8"/>
+  <rect x="54" y="80" width="10" height="12" rx="4" fill="#94a3b8"/>
+  <rect x="66" y="78" width="10" height="14" rx="4" fill="#94a3b8"/>
+  <!-- Cap -->
+  <ellipse cx="50" cy="48" rx="20" ry="19" fill="#94a3b8"/>
+  <!-- Trompa -->
+  <path d="M40 62 Q30 72 35 82 Q38 88 43 84" stroke="#94a3b8" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <!-- Ullals -->
+  <path d="M42 66 Q38 74 40 78" stroke="#fffbeb" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M58 66 Q62 74 60 78" stroke="#fffbeb" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Ulls -->
+  <ellipse cx="43" cy="42" rx="4" ry="4" fill="#e2e8f0"/>
+  <circle cx="43" cy="42" r="2.5" fill="#1a1a1a"/>
+  <circle cx="42" cy="41" r="0.8" fill="white"/>
+  <ellipse cx="57" cy="42" rx="4" ry="4" fill="#e2e8f0"/>
+  <circle cx="57" cy="42" r="2.5" fill="#1a1a1a"/>
+  <circle cx="56" cy="41" r="0.8" fill="white"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ELEFANT</text>
+</svg>

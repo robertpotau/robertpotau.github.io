@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="rtv_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient>
+  <linearGradient id="rtv_cos" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#475569"/><stop offset="1" stop-color="#1e293b"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#rtv_bg)"/>
+  <ellipse cx="50" cy="86" rx="30" ry="4" fill="#0f172a" opacity=".08"/>
+  <path d="M76 36 v44 q0 6 6 6 h6 V30 q0 -8 -8 -8 h-30 q6 4 10 10 q8 -2 14 2 q2 1 2 2" fill="url(#rtv_cos)"/>
+  <path d="M78 26 q-20 -2 -28 -4 q8 6 12 12 q8 -2 14 2 l2 2 v-8 q0 -3 0 -4" fill="#334155" opacity="0"/>
+  <path d="M18 34 q0 -8 8 -8 h28 q8 0 8 8 v18 q0 8 -8 8 H26 q-8 0 -8 -8 z" fill="url(#rtv_cos)"/>
+  <rect x="22" y="30" width="36" height="26" rx="5" fill="#7dd3fc"/>
+  <rect x="22" y="30" width="36" height="26" rx="5" fill="none" stroke="#0369a1" stroke-width="1.4"/>
+  <path d="M24 32 l14 0 l-14 14 z" fill="#bae6fd" opacity=".8"/>
+  <path d="M30 50 q5 -6 10 0 q-2 4 -5 4 q-3 0 -5 -4" fill="#dc2626"/>
+  <path d="M44 48 h10" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
+  <path d="M62 46 h14" stroke="#334155" stroke-width="6"/>
+  <path d="M12 64 q4 -3 8 0 M10 24 q4 -3 8 0" stroke="#f8fafc" stroke-width="2.2" stroke-linecap="round" fill="none" opacity=".8"/>
+</svg>

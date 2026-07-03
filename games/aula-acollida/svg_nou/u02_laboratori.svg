@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="lab_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#faf5ff"/><stop offset="1" stop-color="#f3e8ff"/></linearGradient>
+  <linearGradient id="lab_liq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4ade80"/><stop offset="1" stop-color="#16a34a"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#lab_bg)"/>
+  <ellipse cx="50" cy="86" rx="34" ry="4" fill="#0f172a" opacity=".08"/>
+  <path d="M40 16 h8 v24 l14 32 a6 6 0 0 1 -5 9 H31 a6 6 0 0 1 -5 -9 l14 -32 z" fill="#e0f2fe" opacity=".85"/>
+  <path d="M36 52 l-10 23 a4 4 0 0 0 4 6 h24 a4 4 0 0 0 4 -6 l-10 -23 z" fill="url(#lab_liq)"/>
+  <circle cx="40" cy="68" r="3" fill="#bbf7d0" opacity=".8"/>
+  <circle cx="50" cy="74" r="2.2" fill="#bbf7d0" opacity=".6"/>
+  <circle cx="45" cy="60" r="1.8" fill="#dcfce7"/>
+  <rect x="38" y="13" width="12" height="5" rx="2.5" fill="#94a3b8"/>
+  <path d="M44 40 q-2 -8 4 -12" fill="none" stroke="#bae6fd" stroke-width="2" opacity=".7"/>
+  <rect x="64" y="40" width="5" height="26" fill="#e0f2fe" opacity=".9"/>
+  <path d="M64 58 h5 v8 h-5 z" fill="#f472b6"/>
+  <ellipse cx="66.5" cy="66" rx="6.5" ry="5" fill="#ec4899"/>
+  <ellipse cx="66.5" cy="40" rx="4" ry="2" fill="#bae6fd"/>
+  <circle cx="66" cy="30" r="2" fill="#f9a8d4" opacity=".8"/>
+  <circle cx="69" cy="23" r="1.4" fill="#f9a8d4" opacity=".6"/>
+</svg>

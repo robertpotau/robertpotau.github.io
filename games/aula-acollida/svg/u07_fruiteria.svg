@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Building facade -->
+  <rect x="10" y="30" width="80" height="55" rx="2" fill="#fef9c3"/>
+  <!-- Awning -->
+  <polygon points="5,30 95,30 88,45 12,45" fill="#15803d"/>
+  <line x1="5" y1="30" x2="12" y2="45" stroke="#166534" stroke-width="1"/>
+  <line x1="25" y1="30" x2="26" y2="45" stroke="#166534" stroke-width="1"/>
+  <line x1="45" y1="30" x2="45" y2="45" stroke="#166534" stroke-width="1"/>
+  <line x1="65" y1="30" x2="64" y2="45" stroke="#166534" stroke-width="1"/>
+  <line x1="85" y1="30" x2="83" y2="45" stroke="#166534" stroke-width="1"/>
+  <!-- Sign -->
+  <rect x="20" y="18" width="60" height="14" rx="3" fill="#15803d"/>
+  <text x="50" y="28" font-family="Arial,sans-serif" font-size="7.5" fill="white" font-weight="700" text-anchor="middle">FRUITERIA</text>
+  <!-- Door -->
+  <rect x="38" y="60" width="24" height="25" rx="2" fill="#92400e"/>
+  <circle cx="57" cy="73" r="1.5" fill="#fbbf24"/>
+  <!-- Display shelf -->
+  <rect x="8" y="52" width="84" height="8" rx="2" fill="#a16207"/>
+  <!-- Apples -->
+  <circle cx="22" cy="50" r="6" fill="#ef4444"/>
+  <path d="M22 44 Q24 41 26 43" stroke="#15803d" stroke-width="1.5" fill="none"/>
+  <circle cx="38" cy="50" r="6" fill="#ef4444"/>
+  <path d="M38 44 Q40 41 42 43" stroke="#15803d" stroke-width="1.5" fill="none"/>
+  <!-- Bananas -->
+  <path d="M50 54 Q55 46 62 48 Q60 54 55 56 Q52 56 50 54Z" fill="#fde047"/>
+  <path d="M50 54 Q55 47 62 48" stroke="#a16207" stroke-width="0.8" fill="none"/>
+  <!-- Oranges -->
+  <circle cx="72" cy="50" r="5.5" fill="#f97316"/>
+  <path d="M72 44.5 Q73.5 42 75 43.5" stroke="#15803d" stroke-width="1.5" fill="none"/>
+  <circle cx="83" cy="50" r="5.5" fill="#f97316"/>
+  <path d="M83 44.5 Q84.5 42 86 43.5" stroke="#15803d" stroke-width="1.5" fill="none"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">FRUITERIA</text>
+</svg>

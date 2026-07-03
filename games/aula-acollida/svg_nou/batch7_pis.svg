@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="pis_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient>
+  <linearGradient id="pis_mur" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#pis_bg)"/>
+  <ellipse cx="50" cy="89" rx="32" ry="4" fill="#0f172a" opacity=".1"/>
+  <rect x="26" y="12" width="48" height="76" rx="3" fill="url(#pis_mur)"/>
+  <rect x="26" y="12" width="48" height="6" rx="3" fill="#92400e"/>
+  <g fill="#bfdbfe" stroke="#1e40af" stroke-width="1.3">
+    <rect x="32" y="22" width="12" height="10" rx="1.5"/>
+    <rect x="56" y="22" width="12" height="10" rx="1.5"/>
+    <rect x="32" y="38" width="12" height="10" rx="1.5"/>
+    <rect x="56" y="38" width="12" height="10" rx="1.5"/>
+    <rect x="32" y="54" width="12" height="10" rx="1.5"/>
+    <rect x="56" y="54" width="12" height="10" rx="1.5"/>
+  </g>
+  <path d="M33 23 l5 0 l-5 5 z" fill="#fff" opacity=".5"/>
+  <path d="M57 39 l5 0 l-5 5 z" fill="#fff" opacity=".5"/>
+  <rect x="44" y="70" width="12" height="18" rx="1.5" fill="#78350f"/>
+  <circle cx="53" cy="79" r="1.2" fill="#fbbf24"/>
+  <rect x="30" y="70" width="9" height="8" rx="1" fill="#bfdbfe" stroke="#1e40af" stroke-width="1.2"/>
+  <rect x="61" y="70" width="9" height="8" rx="1" fill="#bfdbfe" stroke="#1e40af" stroke-width="1.2"/>
+</svg>

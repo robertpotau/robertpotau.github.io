@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="hip_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient>
+  <radialGradient id="hip_cos" cx=".45" cy=".35" r="1"><stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#7c3aed"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#hip_bg)"/>
+  <path d="M0 76 q25 -6 50 0 t50 0 v8 q0 16 -16 16 H16 Q0 100 0 84 z" fill="#7dd3fc" opacity=".6"/>
+  <ellipse cx="30" cy="26" rx="7" ry="8" fill="#7c3aed"/>
+  <ellipse cx="30" cy="28" rx="3.6" ry="4.5" fill="#ddd6fe"/>
+  <ellipse cx="70" cy="26" rx="7" ry="8" fill="#6d28d9"/>
+  <ellipse cx="70" cy="28" rx="3.6" ry="4.5" fill="#ddd6fe"/>
+  <path d="M22 46 q0 -22 28 -22 q28 0 28 22 q0 10 -6 14 q4 22 -22 22 q-26 0 -22 -22 q-6 -4 -6 -14" fill="url(#hip_cos)"/>
+  <circle cx="40" cy="38" r="3" fill="#1e293b"/>
+  <circle cx="60" cy="38" r="3" fill="#1e293b"/>
+  <circle cx="39" cy="37" r="1" fill="#fff"/>
+  <circle cx="59" cy="37" r="1" fill="#fff"/>
+  <ellipse cx="50" cy="62" rx="22" ry="16" fill="#a78bfa"/>
+  <ellipse cx="40" cy="56" rx="3" ry="4.5" fill="#4c1d95"/>
+  <ellipse cx="60" cy="56" rx="3" ry="4.5" fill="#4c1d95"/>
+  <rect x="42" y="68" width="5" height="7" rx="2" fill="#f8fafc"/>
+  <rect x="53" y="68" width="5" height="7" rx="2" fill="#f8fafc"/>
+  <path d="M36 66 q14 6 28 0" stroke="#6d28d9" stroke-width="1.8" fill="none" opacity=".6"/>
+</svg>

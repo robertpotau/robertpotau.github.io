@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Manta doblegada -->
+  <!-- Capa inferior -->
+  <rect x="10" y="55" width="80" height="26" rx="4" fill="#e57373"/>
+  <!-- Patró de quadres -->
+  <line x1="10" y1="64" x2="90" y2="64" stroke="#ef9a9a" stroke-width="1.5"/>
+  <line x1="10" y1="73" x2="90" y2="73" stroke="#ef9a9a" stroke-width="1.5"/>
+  <line x1="30" y1="55" x2="30" y2="81" stroke="#ef9a9a" stroke-width="1.5"/>
+  <line x1="50" y1="55" x2="50" y2="81" stroke="#ef9a9a" stroke-width="1.5"/>
+  <line x1="70" y1="55" x2="70" y2="81" stroke="#ef9a9a" stroke-width="1.5"/>
+  <!-- Capa superior doblegada -->
+  <rect x="10" y="32" width="80" height="26" rx="4" fill="#ef5350"/>
+  <line x1="10" y1="41" x2="90" y2="41" stroke="#e57373" stroke-width="1.5"/>
+  <line x1="10" y1="50" x2="90" y2="50" stroke="#e57373" stroke-width="1.5"/>
+  <line x1="30" y1="32" x2="30" y2="58" stroke="#e57373" stroke-width="1.5"/>
+  <line x1="50" y1="32" x2="50" y2="58" stroke="#e57373" stroke-width="1.5"/>
+  <line x1="70" y1="32" x2="70" y2="58" stroke="#e57373" stroke-width="1.5"/>
+  <!-- Doblegament - franja blanca -->
+  <rect x="10" y="55" width="80" height="4" rx="2" fill="#ffcdd2"/>
+  <!-- Contorns -->
+  <rect x="10" y="32" width="80" height="49" rx="4" fill="none" stroke="#c62828" stroke-width="2"/>
+</svg>

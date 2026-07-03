@@ -1,0 +1,14 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cos TV -->
+  <rect x="8" y="18" width="84" height="55" rx="5" fill="#1f2937"/>
+  <!-- Pantalla -->
+  <rect x="12" y="22" width="76" height="46" rx="3" fill="#374151"/>
+  <!-- Imatge interior (colors) -->
+  <rect x="14" y="24" width="25" height="42" rx="2" fill="#ef4444" opacity="0.7"/>
+  <rect x="39" y="24" width="25" height="42" rx="2" fill="#3b82f6" opacity="0.7"/>
+  <rect x="64" y="24" width="26" height="42" rx="2" fill="#fde047" opacity="0.7"/>
+  <!-- Peu/suport -->
+  <rect x="40" y="73" width="20" height="8" rx="2" fill="#374151"/>
+  <rect x="30" y="80" width="40" height="5" rx="2" fill="#374151"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TELEVISOR</text>
+</svg>

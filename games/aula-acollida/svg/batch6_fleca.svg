@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect x="8" y="30" width="84" height="65" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="8" y="15" width="84" height="18" rx="4" fill="#f59e0b"/>
+  <text x="50" y="28" font-family="Arial,sans-serif" font-size="11" font-weight="800" fill="white" text-anchor="middle">FLECA</text>
+  <rect x="12" y="50" width="32" height="38" rx="3" fill="#fde68a" stroke="#f59e0b" stroke-width="1.5"/>
+  <ellipse cx="28" cy="65" rx="10" ry="6" fill="#d97706"/>
+  <ellipse cx="28" cy="58" rx="8" ry="5" fill="#d97706"/>
+  <ellipse cx="28" cy="72" rx="9" ry="5" fill="#b45309"/>
+  <rect x="54" y="50" width="34" height="38" rx="3" fill="#fde68a" stroke="#f59e0b" stroke-width="1.5"/>
+  <path d="M56 75 Q71 60 86 75" fill="none" stroke="#d97706" stroke-width="4" stroke-linecap="round"/>
+  <path d="M56 68 Q71 54 86 68" fill="none" stroke="#b45309" stroke-width="4" stroke-linecap="round"/>
+</svg>

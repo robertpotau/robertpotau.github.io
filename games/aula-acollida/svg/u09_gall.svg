@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Cos robust -->
+  <ellipse cx="48" cy="65" rx="27" ry="22" fill="#b45309"/>
+  <!-- Pit més clar -->
+  <ellipse cx="60" cy="68" rx="14" ry="16" fill="#f59e0b"/>
+  <!-- Ala esbossada -->
+  <ellipse cx="42" cy="62" rx="20" ry="13" fill="#92400e"/>
+  <ellipse cx="48" cy="65" rx="27" ry="22" fill="none" stroke="#92400e" stroke-width="1"/>
+  <!-- Cua vistosa de colors -->
+  <path d="M21 56 Q8 44 10 38 Q15 35 20 42 Q22 50 23 57Z" fill="#16a34a"/>
+  <path d="M21 62 Q7 55 8 48 Q13 44 18 50 Q20 57 22 63Z" fill="#2563eb"/>
+  <path d="M21 68 Q8 65 9 58 Q14 55 19 60 Q21 65 22 69Z" fill="#ef4444"/>
+  <!-- Coll -->
+  <rect x="60" y="40" width="12" height="18" rx="6" fill="#b45309"/>
+  <!-- Cap -->
+  <circle cx="67" cy="33" r="11" fill="#b45309"/>
+  <!-- Cresta gran i allargada -->
+  <path d="M61 22 Q58 14 63 17 Q61 10 67 14 Q66 7 72 12 Q71 6 77 11 Q76 5 81 10 Q78 18 74 22 Q70 25 67 24Z" fill="#ef4444"/>
+  <!-- Barbeta vermella gran -->
+  <ellipse cx="65" cy="43" rx="5" ry="6" fill="#ef4444"/>
+  <!-- Bec groc triangular -->
+  <polygon points="75,32 84,34 75,38" fill="#f59e0b"/>
+  <!-- Ull -->
+  <circle cx="68" cy="30" r="3.5" fill="#fff"/>
+  <circle cx="68" cy="30" r="2" fill="#f59e0b"/>
+  <circle cx="68" cy="30" r="1" fill="#1a1a1a"/>
+  <circle cx="67" cy="29" r="0.5" fill="#fff"/>
+  <!-- Potes grogues robusts -->
+  <line x1="42" y1="85" x2="38" y2="93" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="36" y1="93" x2="31" y2="95" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="36" y1="93" x2="36" y2="96" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="36" y1="93" x2="42" y2="96" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="58" y1="85" x2="62" y2="93" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="64" y1="93" x2="59" y2="95" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="64" y1="93" x2="64" y2="96" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="64" y1="93" x2="70" y2="96" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GALL</text>
+</svg>

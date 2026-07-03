@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Gift box -->
+  <rect x="30" y="52" width="36" height="28" rx="3" fill="#ef4444" stroke="#dc2626" stroke-width="2"/>
+  <rect x="28" y="46" width="40" height="10" rx="2" fill="#f87171" stroke="#dc2626" stroke-width="1.5"/>
+  <!-- Ribbon vertical -->
+  <rect x="46" y="46" width="6" height="34" rx="1" fill="#fbbf24"/>
+  <!-- Ribbon horizontal -->
+  <rect x="28" y="56" width="40" height="6" rx="1" fill="#fbbf24"/>
+  <!-- Bow -->
+  <path d="M52 46 Q60 38 58 32 Q55 28 52 34 Q52 40 52 46" fill="#fde047" stroke="#d97706" stroke-width="1"/>
+  <path d="M46 46 Q38 38 40 32 Q43 28 46 34 Q46 40 46 46" fill="#fde047" stroke="#d97706" stroke-width="1"/>
+  <!-- Giving figure -->
+  <circle cx="50" cy="22" r="10" fill="#ffd68a" stroke="#d97706" stroke-width="1.5"/>
+  <!-- Happy face -->
+  <circle cx="46" cy="21" r="1.5" fill="#374151"/>
+  <circle cx="54" cy="21" r="1.5" fill="#374151"/>
+  <path d="M45 26 Q50 30 55 26" stroke="#c2850a" stroke-width="1.5" fill="none"/>
+  <!-- Arms offering gift -->
+  <line x1="44" y1="32" x2="36" y2="46" stroke="#ffd68a" stroke-width="4" stroke-linecap="round"/>
+  <line x1="56" y1="32" x2="64" y2="46" stroke="#ffd68a" stroke-width="4" stroke-linecap="round"/>
+  <!-- Heart above -->
+  <text x="78" y="28" font-family="Arial,sans-serif" font-size="14" fill="#ef4444">♥</text>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GENERÓS</text>
+</svg>

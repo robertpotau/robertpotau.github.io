@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Cos petit i rodó -->
+  <circle cx="50" cy="62" r="20" fill="#fde047"/>
+  <!-- Cap rodó -->
+  <circle cx="50" cy="38" r="14" fill="#fde047"/>
+  <!-- Aletes petites als costats -->
+  <ellipse cx="30" cy="62" rx="8" ry="5" fill="#fbbf24" transform="rotate(-20 30 62)"/>
+  <ellipse cx="70" cy="62" rx="8" ry="5" fill="#fbbf24" transform="rotate(20 70 62)"/>
+  <!-- Bec petit groc-taronja -->
+  <polygon points="57,38 65,36 57,42" fill="#f59e0b"/>
+  <!-- Ull esquerre -->
+  <circle cx="44" cy="35" r="3" fill="#fff"/>
+  <circle cx="44" cy="35" r="2" fill="#1a1a1a"/>
+  <circle cx="43" cy="34" r="0.7" fill="#fff"/>
+  <!-- Ull dret -->
+  <circle cx="56" cy="35" r="3" fill="#fff"/>
+  <circle cx="56" cy="35" r="2" fill="#1a1a1a"/>
+  <circle cx="55" cy="34" r="0.7" fill="#fff"/>
+  <!-- Potes petites grogues -->
+  <line x1="43" y1="80" x2="39" y2="89" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="37" y1="89" x2="33" y2="91" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <line x1="37" y1="89" x2="37" y2="93" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <line x1="37" y1="89" x2="42" y2="92" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <line x1="57" y1="80" x2="61" y2="89" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="63" y1="89" x2="59" y2="91" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <line x1="63" y1="89" x2="63" y2="93" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <line x1="63" y1="89" x2="68" y2="92" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">POLLET</text>
+</svg>

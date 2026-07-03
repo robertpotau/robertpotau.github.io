@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Potato irregular shape -->
+  <path d="M20 55 Q18 38 28 30 Q40 22 55 25 Q70 26 78 36 Q86 48 82 62 Q78 76 65 80 Q50 85 36 80 Q22 74 20 55Z" fill="#d97706"/>
+  <!-- Potato skin texture lines -->
+  <path d="M25 42 Q30 38 38 40" stroke="#b45309" stroke-width="1" fill="none" opacity="0.6"/>
+  <path d="M70 35 Q75 40 76 48" stroke="#b45309" stroke-width="1" fill="none" opacity="0.6"/>
+  <path d="M24 62 Q26 70 32 74" stroke="#b45309" stroke-width="1" fill="none" opacity="0.6"/>
+  <path d="M75 62 Q74 70 68 76" stroke="#b45309" stroke-width="1" fill="none" opacity="0.6"/>
+  <!-- Eyes (sprouts/buds) -->
+  <!-- Eye 1 -->
+  <circle cx="38" cy="38" r="3" fill="#92400e"/>
+  <path d="M38 35 Q36 30 35 27" stroke="#4ade80" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Eye 2 -->
+  <circle cx="62" cy="34" r="3" fill="#92400e"/>
+  <path d="M62 31 Q63 26 64 23" stroke="#4ade80" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Eye 3 -->
+  <circle cx="72" cy="55" r="3" fill="#92400e"/>
+  <path d="M75 54 Q80 51 82 49" stroke="#4ade80" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Eye 4 small -->
+  <circle cx="35" cy="65" r="2.5" fill="#92400e"/>
+  <!-- Highlight -->
+  <ellipse cx="32" cy="40" rx="8" ry="10" fill="#fbbf24" opacity="0.3"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PATATA</text>
+</svg>

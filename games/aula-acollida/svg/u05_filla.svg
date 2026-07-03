@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Head (smaller = child) -->
+  <circle cx="50" cy="30" r="20" fill="#f5cba7" stroke="#c0835a" stroke-width="2"/>
+  <!-- Hair with pigtails -->
+  <path d="M30 26 Q30 10 50 10 Q70 10 70 26 Q62 14 50 14 Q38 14 30 26 Z" fill="#8b4513"/>
+  <!-- Pigtail left -->
+  <path d="M30 22 Q22 18 20 26 Q18 34 26 36" fill="none" stroke="#8b4513" stroke-width="5" stroke-linecap="round"/>
+  <!-- Pigtail right -->
+  <path d="M70 22 Q78 18 80 26 Q82 34 74 36" fill="none" stroke="#8b4513" stroke-width="5" stroke-linecap="round"/>
+  <!-- Bows -->
+  <circle cx="25" cy="22" r="4" fill="#fbbf24"/>
+  <circle cx="75" cy="22" r="4" fill="#fbbf24"/>
+  <!-- Eyes -->
+  <circle cx="43" cy="29" r="3" fill="#333"/>
+  <circle cx="57" cy="29" r="3" fill="#333"/>
+  <circle cx="44" cy="28" r="1" fill="white"/>
+  <circle cx="58" cy="28" r="1" fill="white"/>
+  <!-- Smile -->
+  <path d="M43 38 Q50 44 57 38" fill="none" stroke="#c0835a" stroke-width="2" stroke-linecap="round"/>
+  <!-- Body (dress, shorter) -->
+  <path d="M32 50 L22 86 L78 86 L68 50 Z" fill="#f9a8d4" stroke="#be185d" stroke-width="2"/>
+  <rect x="32" y="48" width="36" height="8" rx="3" fill="#ec4899" stroke="#be185d" stroke-width="1.5"/>
+  <!-- Neck -->
+  <rect x="43" y="46" width="14" height="6" rx="2" fill="#f5cba7"/>
+  <!-- Label -->
+  <text x="50" y="96" font-family="Arial,sans-serif" font-size="8.5" fill="#be185d" font-weight="700" text-anchor="middle">FILLA</text>
+</svg>

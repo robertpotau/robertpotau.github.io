@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 110">
+  <!-- marc de la porta -->
+  <rect x="4" y="4" width="72" height="102" rx="4" fill="#78350f"/>
+  <!-- fulla de la porta -->
+  <rect x="9" y="9" width="62" height="92" rx="3" fill="#92400e"/>
+  <!-- panell superior -->
+  <rect x="15" y="15" width="50" height="32" rx="3" fill="#a16207" opacity="0.4"/>
+  <!-- panell inferior -->
+  <rect x="15" y="53" width="50" height="42" rx="3" fill="#a16207" opacity="0.4"/>
+  <!-- pom -->
+  <circle cx="60" cy="57" r="6" fill="#d97706"/>
+  <circle cx="60" cy="57" r="2.5" fill="#a16207"/>
+</svg>

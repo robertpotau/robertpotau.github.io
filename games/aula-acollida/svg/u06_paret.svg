@@ -1,0 +1,37 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fons paret -->
+  <rect x="8" y="15" width="84" height="68" fill="#c2410c"/>
+  <!-- Files de maons desplaçades -->
+  <!-- Fila 1 -->
+  <rect x="8" y="15" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="36" y="15" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="64" y="15" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <!-- Fila 2 (desplaçada) -->
+  <rect x="8" y="25" width="14" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="22" y="25" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="50" y="25" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="78" y="25" width="14" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <!-- Fila 3 -->
+  <rect x="8" y="35" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="36" y="35" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="64" y="35" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <!-- Fila 4 (desplaçada) -->
+  <rect x="8" y="45" width="14" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="22" y="45" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="50" y="45" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="78" y="45" width="14" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <!-- Fila 5 -->
+  <rect x="8" y="55" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="36" y="55" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="64" y="55" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <!-- Fila 6 (desplaçada) -->
+  <rect x="8" y="65" width="14" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="22" y="65" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="50" y="65" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="78" y="65" width="14" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <!-- Fila 7 -->
+  <rect x="8" y="73" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="36" y="73" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <rect x="64" y="73" width="28" height="10" fill="none" stroke="#f5f5f5" stroke-width="1.5"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PARET</text>
+</svg>

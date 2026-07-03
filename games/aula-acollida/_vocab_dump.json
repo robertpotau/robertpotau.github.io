@@ -1,0 +1,2084 @@
+{
+  "unitat01": {
+    "titol": "La classe",
+    "icona": "🏫",
+    "items": [
+      {
+        "p": "el llapis",
+        "n": "LLAPIS",
+        "e": ""
+      },
+      {
+        "p": "la goma",
+        "n": "GOMA",
+        "e": ""
+      },
+      {
+        "p": "el bolígraf",
+        "n": "BOLÍGRAF",
+        "e": ""
+      },
+      {
+        "p": "el retolador",
+        "n": "RETOLADOR",
+        "e": ""
+      },
+      {
+        "p": "la llibreta",
+        "n": "LLIBRETA",
+        "e": ""
+      },
+      {
+        "p": "el llibre",
+        "n": "LLIBRE",
+        "e": ""
+      },
+      {
+        "p": "l'estoig",
+        "n": "ESTOIG",
+        "e": ""
+      },
+      {
+        "p": "la maquineta",
+        "n": "MAQUINETA",
+        "e": ""
+      },
+      {
+        "p": "el regle",
+        "n": "REGLE",
+        "e": ""
+      },
+      {
+        "p": "la motxilla",
+        "n": "MOTXILLA",
+        "e": ""
+      },
+      {
+        "p": "les tisores",
+        "n": "TISORES",
+        "e": ""
+      },
+      {
+        "p": "la pissarra",
+        "n": "PISSARRA",
+        "e": ""
+      },
+      {
+        "p": "l'esborrador",
+        "n": "ESBORRADOR",
+        "e": ""
+      },
+      {
+        "p": "el guix",
+        "n": "GUIX",
+        "e": ""
+      },
+      {
+        "p": "la paperera",
+        "n": "PAPERERA",
+        "e": ""
+      },
+      {
+        "p": "l'ordinador",
+        "n": "ORDINADOR",
+        "e": ""
+      },
+      {
+        "p": "la taula",
+        "n": "TAULA",
+        "e": ""
+      },
+      {
+        "p": "la cadira",
+        "n": "CADIRA",
+        "e": ""
+      },
+      {
+        "p": "la porta",
+        "n": "PORTA",
+        "e": ""
+      },
+      {
+        "p": "la finestra",
+        "n": "FINESTRA",
+        "e": ""
+      },
+      {
+        "p": "la carpeta",
+        "n": "CARPETA",
+        "e": ""
+      }
+    ]
+  },
+  "unitat02": {
+    "titol": "L'escola i l'institut",
+    "icona": "🎓",
+    "items": [
+      {
+        "p": "l'aula",
+        "n": "AULA",
+        "e": "🧑‍🏫"
+      },
+      {
+        "p": "la biblioteca",
+        "n": "BIBLIOTECA",
+        "e": "📚"
+      },
+      {
+        "p": "la sala d'audiovisuals",
+        "n": "AUDIOVISUALS",
+        "e": "📽️"
+      },
+      {
+        "p": "l'aula de tecnologia",
+        "n": "TECNOLOGIA",
+        "e": "🔧"
+      },
+      {
+        "p": "el laboratori",
+        "n": "LABORATORI",
+        "e": "🧪"
+      },
+      {
+        "p": "l'aula d'informàtica",
+        "n": "INFORMÀTICA",
+        "e": "💻"
+      },
+      {
+        "p": "el passadís",
+        "n": "PASSADÍS",
+        "e": "🚶"
+      },
+      {
+        "p": "el lavabo",
+        "n": "LAVABO",
+        "e": "🚽"
+      },
+      {
+        "p": "el menjador",
+        "n": "MENJADOR",
+        "e": "🍽️"
+      },
+      {
+        "p": "el gimnàs",
+        "n": "GIMNÀS",
+        "e": "🏋️"
+      },
+      {
+        "p": "l'institut",
+        "n": "INSTITUT",
+        "e": "🏫"
+      },
+      {
+        "p": "el professor",
+        "n": "PROFESSOR",
+        "e": "👨‍🏫"
+      },
+      {
+        "p": "la professora",
+        "n": "PROFESSORA",
+        "e": "👩‍🏫"
+      },
+      {
+        "p": "el director",
+        "n": "DIRECTOR",
+        "e": "🏫"
+      },
+      {
+        "p": "el conserge",
+        "n": "CONSERGE",
+        "e": "🔑"
+      },
+      {
+        "p": "l'alumne",
+        "n": "ALUMNE",
+        "e": "🎒"
+      },
+      {
+        "p": "el noi",
+        "n": "NOI",
+        "e": "👦"
+      },
+      {
+        "p": "la noia",
+        "n": "NOIA",
+        "e": "👧"
+      },
+      {
+        "p": "el pati",
+        "n": "PATI",
+        "e": "🌳"
+      },
+      {
+        "p": "el dilluns",
+        "n": "DILLUNS",
+        "e": "📅"
+      },
+      {
+        "p": "el dimarts",
+        "n": "DIMARTS",
+        "e": "📅"
+      },
+      {
+        "p": "el dimecres",
+        "n": "DIMECRES",
+        "e": "📅"
+      },
+      {
+        "p": "el dijous",
+        "n": "DIJOUS",
+        "e": "📅"
+      },
+      {
+        "p": "el divendres",
+        "n": "DIVENDRES",
+        "e": "📅"
+      },
+      {
+        "p": "el dissabte",
+        "n": "DISSABTE",
+        "e": "🎉"
+      },
+      {
+        "p": "el diumenge",
+        "n": "DIUMENGE",
+        "e": "🎉"
+      },
+      {
+        "p": "sobre",
+        "n": "SOBRE",
+        "e": "⬆️"
+      },
+      {
+        "p": "sota",
+        "n": "SOTA",
+        "e": "⬇️"
+      },
+      {
+        "p": "dins",
+        "n": "DINS",
+        "e": "📦"
+      },
+      {
+        "p": "fora",
+        "n": "FORA",
+        "e": "🚪"
+      },
+      {
+        "p": "davant",
+        "n": "DAVANT",
+        "e": "➡️"
+      },
+      {
+        "p": "darrere",
+        "n": "DARRERE",
+        "e": "⬅️"
+      },
+      {
+        "p": "llarg",
+        "n": "LLARG",
+        "e": "📏"
+      },
+      {
+        "p": "curt",
+        "n": "CURT",
+        "e": "📏"
+      },
+      {
+        "p": "ample",
+        "n": "AMPLE",
+        "e": "↔️"
+      },
+      {
+        "p": "estret",
+        "n": "ESTRET",
+        "e": "↔️"
+      },
+      {
+        "p": "escoltar",
+        "n": "ESCOLTAR",
+        "e": "👂"
+      },
+      {
+        "p": "cantar",
+        "n": "CANTAR",
+        "e": "🎤"
+      },
+      {
+        "p": "entrar",
+        "n": "ENTRAR",
+        "e": "🚪"
+      },
+      {
+        "p": "sortir",
+        "n": "SORTIR",
+        "e": "🚶"
+      },
+      {
+        "p": "escriure",
+        "n": "ESCRIURE",
+        "e": "✏️"
+      },
+      {
+        "p": "llegir",
+        "n": "LLEGIR",
+        "e": "📖"
+      }
+    ]
+  },
+  "unitat05": {
+    "titol": "La família",
+    "icona": "👨‍👩‍👧",
+    "items": [
+      {
+        "p": "el pare",
+        "n": "PARE",
+        "e": "👨"
+      },
+      {
+        "p": "la mare",
+        "n": "MARE",
+        "e": "👩"
+      },
+      {
+        "p": "el fill",
+        "n": "FILL",
+        "e": "👦"
+      },
+      {
+        "p": "la filla",
+        "n": "FILLA",
+        "e": "👧"
+      },
+      {
+        "p": "el germà",
+        "n": "GERMÀ",
+        "e": "🧑"
+      },
+      {
+        "p": "la germana",
+        "n": "GERMANA",
+        "e": "🧒"
+      },
+      {
+        "p": "l'avi",
+        "n": "AVI",
+        "e": "👴"
+      },
+      {
+        "p": "l'àvia",
+        "n": "ÀVIA",
+        "e": "👵"
+      },
+      {
+        "p": "l'oncle",
+        "n": "ONCLE",
+        "e": "🧔"
+      },
+      {
+        "p": "la tia",
+        "n": "TIA",
+        "e": "👩‍🦱"
+      },
+      {
+        "p": "el cosí",
+        "n": "COSÍ",
+        "e": "👦"
+      },
+      {
+        "p": "la cosina",
+        "n": "COSINA",
+        "e": "👧"
+      },
+      {
+        "p": "el marit",
+        "n": "MARIT",
+        "e": "👨"
+      },
+      {
+        "p": "la muller",
+        "n": "MULLER",
+        "e": "👩"
+      },
+      {
+        "p": "el papa",
+        "n": "PAPA",
+        "e": "👨"
+      },
+      {
+        "p": "la mama",
+        "n": "MAMA",
+        "e": "👩"
+      },
+      {
+        "p": "l'hàmster",
+        "n": "HÀMSTER",
+        "e": "🐹"
+      },
+      {
+        "p": "el peix",
+        "n": "PEIX",
+        "e": "🐟"
+      },
+      {
+        "p": "el canari",
+        "n": "CANARI",
+        "e": "🐦"
+      }
+    ]
+  },
+  "unitat09": {
+    "titol": "Els animals",
+    "icona": "🐾",
+    "items": [
+      {
+        "p": "el gos",
+        "n": "GOS",
+        "e": "🐕"
+      },
+      {
+        "p": "el gat",
+        "n": "GAT",
+        "e": "🐈"
+      },
+      {
+        "p": "el conill",
+        "n": "CONILL",
+        "e": "🐇"
+      },
+      {
+        "p": "el cavall",
+        "n": "CAVALL",
+        "e": "🐴"
+      },
+      {
+        "p": "la vaca",
+        "n": "VACA",
+        "e": "🐄"
+      },
+      {
+        "p": "la serp",
+        "n": "SERP",
+        "e": "🐍"
+      },
+      {
+        "p": "la tortuga",
+        "n": "TORTUGA",
+        "e": "🐢"
+      },
+      {
+        "p": "el lleó",
+        "n": "LLEÓ",
+        "e": "🦁"
+      },
+      {
+        "p": "el tigre",
+        "n": "TIGRE",
+        "e": "🐯"
+      },
+      {
+        "p": "la zebra",
+        "n": "ZEBRA",
+        "e": "🦓"
+      },
+      {
+        "p": "l'elefant",
+        "n": "ELEFANT",
+        "e": "🐘"
+      },
+      {
+        "p": "la gallina",
+        "n": "GALLINA",
+        "e": "🐔"
+      },
+      {
+        "p": "el pingüí",
+        "n": "PINGÜÍ",
+        "e": "🐧"
+      },
+      {
+        "p": "la papallona",
+        "n": "PAPALLONA",
+        "e": "🦋"
+      },
+      {
+        "p": "l'abella",
+        "n": "ABELLA",
+        "e": "🐝"
+      },
+      {
+        "p": "l'àliga",
+        "n": "ÀLIGA",
+        "e": "🦅"
+      },
+      {
+        "p": "el gall",
+        "n": "GALL",
+        "e": "🐓"
+      },
+      {
+        "p": "el pollet",
+        "n": "POLLET",
+        "e": "🐣"
+      },
+      {
+        "p": "l'oreneta",
+        "n": "ORENETA",
+        "e": "🕊️"
+      },
+      {
+        "p": "la cigonya",
+        "n": "CIGONYA",
+        "e": "🦢"
+      },
+      {
+        "p": "el mussol",
+        "n": "MUSSOL",
+        "e": "🦉"
+      },
+      {
+        "p": "l'estruç",
+        "n": "ESTRUÇ",
+        "e": "🦤"
+      },
+      {
+        "p": "la mosca",
+        "n": "MOSCA",
+        "e": "🪰"
+      },
+      {
+        "p": "la formiga",
+        "n": "FORMIGA",
+        "e": "🐜"
+      },
+      {
+        "p": "l'escarabat",
+        "n": "ESCARABAT",
+        "e": "🪲"
+      },
+      {
+        "p": "el mosquit",
+        "n": "MOSQUIT",
+        "e": "🦟"
+      },
+      {
+        "p": "la sardina",
+        "n": "SARDINA",
+        "e": "🐟"
+      },
+      {
+        "p": "el tauró",
+        "n": "TAURÓ",
+        "e": "🦈"
+      },
+      {
+        "p": "la tonyina",
+        "n": "TONYINA",
+        "e": "🐠"
+      },
+      {
+        "p": "la truita",
+        "n": "TRUITA",
+        "e": "🐡"
+      },
+      {
+        "p": "la sargantana",
+        "n": "SARGANTANA",
+        "e": "🦎"
+      },
+      {
+        "p": "el cocodril",
+        "n": "COCODRIL",
+        "e": "🐊"
+      },
+      {
+        "p": "el porc",
+        "n": "PORC",
+        "e": "🐷"
+      },
+      {
+        "p": "la rata",
+        "n": "RATA",
+        "e": "🐀"
+      },
+      {
+        "p": "el xai",
+        "n": "XAI",
+        "e": "🐑"
+      },
+      {
+        "p": "l'hipopòtam",
+        "n": "HIPOPÒTAM",
+        "e": "🦛"
+      },
+      {
+        "p": "el goril·la",
+        "n": "GORIL·LA",
+        "e": "🦍"
+      },
+      {
+        "p": "l'ós",
+        "n": "ÓS",
+        "e": "🐻"
+      },
+      {
+        "p": "el camell",
+        "n": "CAMELL",
+        "e": "🐪"
+      },
+      {
+        "p": "el bosc",
+        "n": "BOSC",
+        "e": "🌲"
+      },
+      {
+        "p": "la selva",
+        "n": "SELVA",
+        "e": "🌴"
+      },
+      {
+        "p": "el mar",
+        "n": "MAR",
+        "e": "🌊"
+      },
+      {
+        "p": "la granja",
+        "n": "GRANJA",
+        "e": "🏡"
+      }
+    ]
+  },
+  "unitat11": {
+    "titol": "Els vehicles",
+    "icona": "🚗",
+    "items": [
+      {
+        "p": "l'avió",
+        "n": "AVIÓ",
+        "e": "✈️"
+      },
+      {
+        "p": "l'helicòpter",
+        "n": "HELICÒPTER",
+        "e": "🚁"
+      },
+      {
+        "p": "el cotxe",
+        "n": "COTXE",
+        "e": "🚗"
+      },
+      {
+        "p": "el camió",
+        "n": "CAMIÓ",
+        "e": "🚚"
+      },
+      {
+        "p": "la moto",
+        "n": "MOTO",
+        "e": "🏍️"
+      },
+      {
+        "p": "l'autobús",
+        "n": "AUTOBÚS",
+        "e": "🚌"
+      },
+      {
+        "p": "el tren",
+        "n": "TREN",
+        "e": "🚂"
+      },
+      {
+        "p": "la bicicleta",
+        "n": "BICICLETA",
+        "e": "🚲"
+      },
+      {
+        "p": "el vaixell",
+        "n": "VAIXELL",
+        "e": "🚢"
+      },
+      {
+        "p": "la barca",
+        "n": "BARCA",
+        "e": "⛵"
+      },
+      {
+        "p": "el taxi",
+        "n": "TAXI",
+        "e": "🚕"
+      },
+      {
+        "p": "l'estació",
+        "n": "ESTACIÓ",
+        "e": "🚉"
+      },
+      {
+        "p": "l'aeroport",
+        "n": "AEROPORT",
+        "e": "✈️"
+      },
+      {
+        "p": "el port",
+        "n": "PORT",
+        "e": "⚓"
+      },
+      {
+        "p": "la gasolinera",
+        "n": "GASOLINERA",
+        "e": "⛽"
+      },
+      {
+        "p": "l'autopista",
+        "n": "AUTOPISTA",
+        "e": "🛣️"
+      },
+      {
+        "p": "el volant",
+        "n": "VOLANT",
+        "e": "🎡"
+      },
+      {
+        "p": "la matrícula",
+        "n": "MATRÍCULA",
+        "e": "🔢"
+      },
+      {
+        "p": "el far",
+        "n": "FAR",
+        "e": "💡"
+      },
+      {
+        "p": "l'intermitent",
+        "n": "INTERMITENT",
+        "e": "🔦"
+      },
+      {
+        "p": "el capó",
+        "n": "CAPÓ",
+        "e": "🔧"
+      },
+      {
+        "p": "el retrovisor",
+        "n": "RETROVISOR",
+        "e": "🔍"
+      },
+      {
+        "p": "el para-xocs",
+        "n": "PARA-XOCS",
+        "e": "🚗"
+      },
+      {
+        "p": "el fre",
+        "n": "FRE",
+        "e": "🛑"
+      },
+      {
+        "p": "el pedal",
+        "n": "PEDAL",
+        "e": "🦶"
+      },
+      {
+        "p": "la roda",
+        "n": "RODA",
+        "e": "⭕"
+      },
+      {
+        "p": "el seient",
+        "n": "SEIENT",
+        "e": "💺"
+      },
+      {
+        "p": "el manillar",
+        "n": "MANILLAR",
+        "e": "🚲"
+      },
+      {
+        "p": "la cadena",
+        "n": "CADENA",
+        "e": "⛓️"
+      },
+      {
+        "p": "el casc",
+        "n": "CASC",
+        "e": "🪖"
+      },
+      {
+        "p": "el cinturó de seguretat",
+        "n": "CINTURÓ DE SEGURETAT",
+        "e": "🔒"
+      },
+      {
+        "p": "conduir",
+        "n": "CONDUIR",
+        "e": "🚗"
+      },
+      {
+        "p": "frenar",
+        "n": "FRENAR",
+        "e": "🛑"
+      }
+    ]
+  },
+  "unitat03": {
+    "titol": "El cos",
+    "icona": "🫀",
+    "items": [
+      {
+        "p": "el cap",
+        "n": "CAP",
+        "e": "🗣️"
+      },
+      {
+        "p": "la cara",
+        "n": "CARA",
+        "e": "😊"
+      },
+      {
+        "p": "la boca",
+        "n": "BOCA",
+        "e": "👄"
+      },
+      {
+        "p": "el nas",
+        "n": "NAS",
+        "e": "👃"
+      },
+      {
+        "p": "l'ull",
+        "n": "ULL",
+        "e": "👁️"
+      },
+      {
+        "p": "l'orella",
+        "n": "ORELLA",
+        "e": "👂"
+      },
+      {
+        "p": "els cabells",
+        "n": "CABELLS",
+        "e": "💇"
+      },
+      {
+        "p": "les dents",
+        "n": "DENTS",
+        "e": "🦷"
+      },
+      {
+        "p": "el front",
+        "n": "FRONT",
+        "e": "🤔"
+      },
+      {
+        "p": "les celles",
+        "n": "CELLES",
+        "e": "🤨"
+      },
+      {
+        "p": "el llavi",
+        "n": "LLAVI",
+        "e": "💋"
+      },
+      {
+        "p": "el braç",
+        "n": "BRAÇ",
+        "e": "💪"
+      },
+      {
+        "p": "l'espatlla",
+        "n": "ESPATLLA",
+        "e": "🏊"
+      },
+      {
+        "p": "el colze",
+        "n": "COLZE",
+        "e": "💪"
+      },
+      {
+        "p": "la mà",
+        "n": "MÀ",
+        "e": "🖐️"
+      },
+      {
+        "p": "els dits",
+        "n": "DITS",
+        "e": "🤙"
+      },
+      {
+        "p": "la panxa",
+        "n": "PANXA",
+        "e": "🫃"
+      },
+      {
+        "p": "el coll",
+        "n": "COLL",
+        "e": "🧣"
+      },
+      {
+        "p": "l'esquena",
+        "n": "ESQUENA",
+        "e": "🔙"
+      },
+      {
+        "p": "la cama",
+        "n": "CAMA",
+        "e": "🦵"
+      },
+      {
+        "p": "el genoll",
+        "n": "GENOLL",
+        "e": "🦵"
+      },
+      {
+        "p": "el turmell",
+        "n": "TURMELL",
+        "e": "🦶"
+      },
+      {
+        "p": "el peu",
+        "n": "PEU",
+        "e": "🦶"
+      },
+      {
+        "p": "el bigoti",
+        "n": "BIGOTI",
+        "e": "🧔"
+      },
+      {
+        "p": "la barba",
+        "n": "BARBA",
+        "e": "🧔"
+      },
+      {
+        "p": "les ulleres",
+        "n": "ULLERES",
+        "e": "👓"
+      },
+      {
+        "p": "cabells llargs",
+        "n": "LLARGS",
+        "e": "💇‍♀️"
+      },
+      {
+        "p": "cabells curts",
+        "n": "CURTS",
+        "e": "💇"
+      },
+      {
+        "p": "cabells arrissats",
+        "n": "ARRISSATS",
+        "e": "🌀"
+      },
+      {
+        "p": "cabells llisos",
+        "n": "LLISOS",
+        "e": "➡️"
+      },
+      {
+        "p": "cabells ondulats",
+        "n": "ONDULATS",
+        "e": "〰️"
+      },
+      {
+        "p": "cabells rapats",
+        "n": "RAPATS",
+        "e": "🪒"
+      },
+      {
+        "p": "cabells pèl-roigs",
+        "n": "PÈL-ROIGS",
+        "e": "🦰"
+      },
+      {
+        "p": "cabells negres",
+        "n": "NEGRES",
+        "e": "🖤"
+      },
+      {
+        "p": "cabells castanys",
+        "n": "CASTANYS",
+        "e": "🟫"
+      },
+      {
+        "p": "cabells rossos",
+        "n": "ROSSOS",
+        "e": "👱"
+      },
+      {
+        "p": "ulls blaus",
+        "n": "BLAUS",
+        "e": "🔵"
+      },
+      {
+        "p": "ulls verds",
+        "n": "VERDS",
+        "e": "🟢"
+      },
+      {
+        "p": "ulls marrons",
+        "n": "MARRONS",
+        "e": "🟤"
+      },
+      {
+        "p": "ulls grossos",
+        "n": "GROSSOS",
+        "e": "👀"
+      },
+      {
+        "p": "ulls petits",
+        "n": "PETITS",
+        "e": "👁️"
+      },
+      {
+        "p": "jove",
+        "n": "JOVE",
+        "e": "🧒"
+      },
+      {
+        "p": "vell",
+        "n": "VELL",
+        "e": "👴"
+      },
+      {
+        "p": "alt",
+        "n": "ALT",
+        "e": "🧍"
+      },
+      {
+        "p": "baix",
+        "n": "BAIX",
+        "e": "🧍‍♀️"
+      },
+      {
+        "p": "gras",
+        "n": "GRAS",
+        "e": "🍕"
+      },
+      {
+        "p": "prim",
+        "n": "PRIM",
+        "e": "🥗"
+      },
+      {
+        "p": "la llengua",
+        "n": "LLENGUA",
+        "e": "👅"
+      },
+      {
+        "p": "aplaudir",
+        "n": "APLAUDIR",
+        "e": "👏"
+      },
+      {
+        "p": "mirar",
+        "n": "MIRAR",
+        "e": "👀"
+      },
+      {
+        "p": "afectuós",
+        "n": "AFECTUÓS",
+        "e": "🤗"
+      },
+      {
+        "p": "simpàtic",
+        "n": "SIMPÀTIC",
+        "e": "😊"
+      },
+      {
+        "p": "egoista",
+        "n": "EGOISTA",
+        "e": "😤"
+      },
+      {
+        "p": "generós",
+        "n": "GENERÓS",
+        "e": "🎁"
+      },
+      {
+        "p": "tranquil",
+        "n": "TRANQUIL",
+        "e": "😌"
+      },
+      {
+        "p": "agressiu",
+        "n": "AGRESSIU",
+        "e": "😠"
+      },
+      {
+        "p": "poruc",
+        "n": "PORUC",
+        "e": "😱"
+      },
+      {
+        "p": "carinyós",
+        "n": "CARINYÓS",
+        "e": "💕"
+      }
+    ]
+  },
+  "unitat04": {
+    "titol": "Els vestits",
+    "icona": "👗",
+    "items": [
+      {
+        "p": "l'anorac",
+        "n": "ANORAC",
+        "e": "🧥"
+      },
+      {
+        "p": "les botes",
+        "n": "BOTES",
+        "e": "👢"
+      },
+      {
+        "p": "la gorra",
+        "n": "GORRA",
+        "e": "🧢"
+      },
+      {
+        "p": "els texans",
+        "n": "TEXANS",
+        "e": "👖"
+      },
+      {
+        "p": "la bufanda",
+        "n": "BUFANDA",
+        "e": "🧣"
+      },
+      {
+        "p": "el jersei",
+        "n": "JERSEI",
+        "e": "🧶"
+      },
+      {
+        "p": "els guants",
+        "n": "GUANTS",
+        "e": "🧤"
+      },
+      {
+        "p": "les sabates",
+        "n": "SABATES",
+        "e": "👟"
+      },
+      {
+        "p": "la camisa",
+        "n": "CAMISA",
+        "e": "👕"
+      },
+      {
+        "p": "la faldilla",
+        "n": "FALDILLA",
+        "e": "👗"
+      },
+      {
+        "p": "la samarreta",
+        "n": "SAMARRETA",
+        "e": "👕"
+      },
+      {
+        "p": "els mitjons",
+        "n": "MITJONS",
+        "e": "🧦"
+      },
+      {
+        "p": "el xandall",
+        "n": "XANDALL",
+        "e": "🩱"
+      },
+      {
+        "p": "el barret",
+        "n": "BARRET",
+        "e": "🎩"
+      },
+      {
+        "p": "la corbata",
+        "n": "CORBATA",
+        "e": "👔"
+      },
+      {
+        "p": "el cinturó",
+        "n": "CINTURÓ",
+        "e": "🔗"
+      },
+      {
+        "p": "l'americana",
+        "n": "AMERICANA",
+        "e": "🥼"
+      },
+      {
+        "p": "l'abric",
+        "n": "ABRIC",
+        "e": "🧥"
+      },
+      {
+        "p": "la brusa",
+        "n": "BRUSA",
+        "e": "👚"
+      },
+      {
+        "p": "la jaqueta",
+        "n": "JAQUETA",
+        "e": "🧥"
+      },
+      {
+        "p": "les sandàlies",
+        "n": "SANDÀLIES",
+        "e": "🩴"
+      },
+      {
+        "p": "el vestit",
+        "n": "VESTIT",
+        "e": "👗"
+      },
+      {
+        "p": "el banyador",
+        "n": "BANYADOR",
+        "e": "🩱"
+      },
+      {
+        "p": "el pijama",
+        "n": "PIJAMA",
+        "e": "😴"
+      },
+      {
+        "p": "nou",
+        "n": "NOU",
+        "e": "✨"
+      },
+      {
+        "p": "vell",
+        "n": "VELL",
+        "e": "🕰️"
+      },
+      {
+        "p": "net",
+        "n": "NET",
+        "e": "🧼"
+      },
+      {
+        "p": "brut",
+        "n": "BRUT",
+        "e": "🦨"
+      }
+    ]
+  },
+  "unitat06": {
+    "titol": "La casa",
+    "icona": "🏠",
+    "items": [
+      {
+        "p": "la teulada",
+        "n": "TEULADA",
+        "e": "🏠"
+      },
+      {
+        "p": "la xemeneia",
+        "n": "XEMENEIA",
+        "e": "🏭"
+      },
+      {
+        "p": "el balcó",
+        "n": "BALCÓ",
+        "e": "🌿"
+      },
+      {
+        "p": "la paret",
+        "n": "PARET",
+        "e": "🧱"
+      },
+      {
+        "p": "la porta",
+        "n": "PORTA",
+        "e": "🚪"
+      },
+      {
+        "p": "el pany",
+        "n": "PANY",
+        "e": "🔑"
+      },
+      {
+        "p": "la finestra",
+        "n": "FINESTRA",
+        "e": "🪟"
+      },
+      {
+        "p": "la persiana",
+        "n": "PERSIANA",
+        "e": "🪟"
+      },
+      {
+        "p": "l'escala",
+        "n": "ESCALA",
+        "e": "🪜"
+      },
+      {
+        "p": "el jardí",
+        "n": "JARDÍ",
+        "e": "🌳"
+      },
+      {
+        "p": "el garatge",
+        "n": "GARATGE",
+        "e": "🚗"
+      },
+      {
+        "p": "la cortina",
+        "n": "CORTINA",
+        "e": "🪟"
+      },
+      {
+        "p": "el dormitori",
+        "n": "DORMITORI",
+        "e": "🛏️"
+      },
+      {
+        "p": "la cuina",
+        "n": "CUINA",
+        "e": "🍳"
+      },
+      {
+        "p": "la sala d'estar",
+        "n": "SALA D'ESTAR",
+        "e": "🛋️"
+      },
+      {
+        "p": "el bany",
+        "n": "BANY",
+        "e": "🚿"
+      },
+      {
+        "p": "el rebedor",
+        "n": "REBEDOR",
+        "e": "🚪"
+      },
+      {
+        "p": "la terrassa",
+        "n": "TERRASSA",
+        "e": "☀️"
+      },
+      {
+        "p": "el pis",
+        "n": "PIS",
+        "e": "🏢"
+      },
+      {
+        "p": "el llit",
+        "n": "LLIT",
+        "e": "🛏️"
+      },
+      {
+        "p": "el coixí",
+        "n": "COIXÍ",
+        "e": "🛏️"
+      },
+      {
+        "p": "la manta",
+        "n": "MANTA",
+        "e": "🛏️"
+      },
+      {
+        "p": "el despertador",
+        "n": "DESPERTADOR",
+        "e": "⏰"
+      },
+      {
+        "p": "l'armari",
+        "n": "ARMARI",
+        "e": "🪞"
+      },
+      {
+        "p": "la nevera",
+        "n": "NEVERA",
+        "e": "🧊"
+      },
+      {
+        "p": "el forn",
+        "n": "FORN",
+        "e": "🔥"
+      },
+      {
+        "p": "l'aigüera",
+        "n": "AIGÜERA",
+        "e": "🚰"
+      },
+      {
+        "p": "l'aixeta",
+        "n": "AIXETA",
+        "e": "🚿"
+      },
+      {
+        "p": "el sofà",
+        "n": "SOFÀ",
+        "e": "🛋️"
+      },
+      {
+        "p": "el televisor",
+        "n": "TELEVISOR",
+        "e": "📺"
+      },
+      {
+        "p": "el prestatge",
+        "n": "PRESTATGE",
+        "e": "📚"
+      },
+      {
+        "p": "la catifa",
+        "n": "CATIFA",
+        "e": "🟫"
+      },
+      {
+        "p": "la butaca",
+        "n": "BUTACA",
+        "e": "🪑"
+      },
+      {
+        "p": "el rellotge",
+        "n": "RELLOTGE",
+        "e": "🕐"
+      },
+      {
+        "p": "el vàter",
+        "n": "VÀTER",
+        "e": "🚽"
+      },
+      {
+        "p": "la dutxa",
+        "n": "DUTXA",
+        "e": "🚿"
+      },
+      {
+        "p": "la banyera",
+        "n": "BANYERA",
+        "e": "🛁"
+      },
+      {
+        "p": "la tovallola",
+        "n": "TOVALLOLA",
+        "e": "🏖️"
+      },
+      {
+        "p": "el sabó",
+        "n": "SABÓ",
+        "e": "🧼"
+      },
+      {
+        "p": "el mirall",
+        "n": "MIRALL",
+        "e": "🪞"
+      },
+      {
+        "p": "el penja-robes",
+        "n": "PENJA-ROBES",
+        "e": "🧥"
+      },
+      {
+        "p": "el paraigua",
+        "n": "PARAIGUA",
+        "e": "☂️"
+      }
+    ]
+  },
+  "unitat07": {
+    "titol": "Les botigues",
+    "icona": "🛒",
+    "items": [
+      {
+        "p": "la fruiteria",
+        "n": "FRUITERIA",
+        "e": "🍎"
+      },
+      {
+        "p": "la verduleria",
+        "n": "VERDULERIA",
+        "e": "🥦"
+      },
+      {
+        "p": "la peixateria",
+        "n": "PEIXATERIA",
+        "e": "🐟"
+      },
+      {
+        "p": "la carnisseria",
+        "n": "CARNISSERIA",
+        "e": "🥩"
+      },
+      {
+        "p": "la fleca",
+        "n": "FLECA",
+        "e": "🥖"
+      },
+      {
+        "p": "la farmàcia",
+        "n": "FARMÀCIA",
+        "e": "💊"
+      },
+      {
+        "p": "la poma",
+        "n": "POMA",
+        "e": "🍎"
+      },
+      {
+        "p": "la pera",
+        "n": "PERA",
+        "e": "🍐"
+      },
+      {
+        "p": "el plàtan",
+        "n": "PLÀTAN",
+        "e": "🍌"
+      },
+      {
+        "p": "la taronja",
+        "n": "TARONJA",
+        "e": "🍊"
+      },
+      {
+        "p": "la maduixa",
+        "n": "MADUIXA",
+        "e": "🍓"
+      },
+      {
+        "p": "el meló",
+        "n": "MELÓ",
+        "e": "🍈"
+      },
+      {
+        "p": "la cirera",
+        "n": "CIRERA",
+        "e": "🍒"
+      },
+      {
+        "p": "el préssec",
+        "n": "PRÉSSEC",
+        "e": "🍑"
+      },
+      {
+        "p": "la ceba",
+        "n": "CEBA",
+        "e": "🧅"
+      },
+      {
+        "p": "l'enciam",
+        "n": "ENCIAM",
+        "e": "🥬"
+      },
+      {
+        "p": "la pastanaga",
+        "n": "PASTANAGA",
+        "e": "🥕"
+      },
+      {
+        "p": "l'all",
+        "n": "ALL",
+        "e": "🧄"
+      },
+      {
+        "p": "la patata",
+        "n": "PATATA",
+        "e": "🥔"
+      },
+      {
+        "p": "el pebrot",
+        "n": "PEBROT",
+        "e": "🫑"
+      },
+      {
+        "p": "el tomàquet",
+        "n": "TOMÀQUET",
+        "e": "🍅"
+      },
+      {
+        "p": "els pèsols",
+        "n": "PÈSOLS",
+        "e": "🫛"
+      },
+      {
+        "p": "les mongetes",
+        "n": "MONGETES",
+        "e": "🫘"
+      },
+      {
+        "p": "la sardina",
+        "n": "SARDINA",
+        "e": "🐟"
+      },
+      {
+        "p": "el lluç",
+        "n": "LLUÇ",
+        "e": "🐠"
+      },
+      {
+        "p": "la tonyina",
+        "n": "TONYINA",
+        "e": "🐡"
+      },
+      {
+        "p": "el calamar",
+        "n": "CALAMAR",
+        "e": "🦑"
+      },
+      {
+        "p": "la gamba",
+        "n": "GAMBA",
+        "e": "🦐"
+      },
+      {
+        "p": "el pollastre",
+        "n": "POLLASTRE",
+        "e": "🍗"
+      },
+      {
+        "p": "el bistec",
+        "n": "BISTEC",
+        "e": "🥩"
+      },
+      {
+        "p": "la botifarra",
+        "n": "BOTIFARRA",
+        "e": "🌭"
+      },
+      {
+        "p": "l'hamburguesa",
+        "n": "HAMBURGUESA",
+        "e": "🍔"
+      },
+      {
+        "p": "la barra de pa",
+        "n": "BARRA DE PA",
+        "e": "🥖"
+      },
+      {
+        "p": "el croissant",
+        "n": "CROISSANT",
+        "e": "🥐"
+      },
+      {
+        "p": "la galeta",
+        "n": "GALETA",
+        "e": "🍪"
+      },
+      {
+        "p": "la tireta",
+        "n": "TIRETA",
+        "e": "🩹"
+      },
+      {
+        "p": "el termòmetre",
+        "n": "TERMÒMETRE",
+        "e": "🌡️"
+      },
+      {
+        "p": "les pastilles",
+        "n": "PASTILLES",
+        "e": "💊"
+      },
+      {
+        "p": "el xarop",
+        "n": "XAROP",
+        "e": "🍶"
+      },
+      {
+        "p": "el mercat",
+        "n": "MERCAT",
+        "e": "🏪"
+      },
+      {
+        "p": "el supermercat",
+        "n": "SUPERMERCAT",
+        "e": "🛒"
+      }
+    ]
+  },
+  "unitat08": {
+    "titol": "El menjar",
+    "icona": "🍽️",
+    "items": [
+      {
+        "p": "la tassa",
+        "n": "TASSA",
+        "e": "☕"
+      },
+      {
+        "p": "l'ampolla",
+        "n": "AMPOLLA",
+        "e": "🍶"
+      },
+      {
+        "p": "el got",
+        "n": "GOT",
+        "e": "🥛"
+      },
+      {
+        "p": "la forquilla",
+        "n": "FORQUILLA",
+        "e": "🍴"
+      },
+      {
+        "p": "el ganivet",
+        "n": "GANIVET",
+        "e": "🔪"
+      },
+      {
+        "p": "la cullera",
+        "n": "CULLERA",
+        "e": "🥄"
+      },
+      {
+        "p": "el plat",
+        "n": "PLAT",
+        "e": "🍽️"
+      },
+      {
+        "p": "la paella",
+        "n": "PAELLA",
+        "e": "🍳"
+      },
+      {
+        "p": "el pa",
+        "n": "PA",
+        "e": "🍞"
+      },
+      {
+        "p": "la llet",
+        "n": "LLET",
+        "e": "🥛"
+      },
+      {
+        "p": "l'ou",
+        "n": "OU",
+        "e": "🥚"
+      },
+      {
+        "p": "el pastís",
+        "n": "PASTÍS",
+        "e": "🎂"
+      },
+      {
+        "p": "el suc",
+        "n": "SUC",
+        "e": "🧃"
+      },
+      {
+        "p": "el cafè",
+        "n": "CAFÈ",
+        "e": "☕"
+      },
+      {
+        "p": "el te",
+        "n": "TE",
+        "e": "🍵"
+      },
+      {
+        "p": "l'aigua",
+        "n": "AIGUA",
+        "e": "💧"
+      },
+      {
+        "p": "la taronjada",
+        "n": "TARONJADA",
+        "e": "🍊"
+      },
+      {
+        "p": "la copa",
+        "n": "COPA",
+        "e": "🍷"
+      },
+      {
+        "p": "el tovalló",
+        "n": "TOVALLÓ",
+        "e": "🧻"
+      },
+      {
+        "p": "l'esmorzar",
+        "n": "ESMORZAR",
+        "e": "🌅"
+      },
+      {
+        "p": "el dinar",
+        "n": "DINAR",
+        "e": "🍽️"
+      },
+      {
+        "p": "el berenar",
+        "n": "BERENAR",
+        "e": "🍎"
+      },
+      {
+        "p": "el sopar",
+        "n": "SOPAR",
+        "e": "🌙"
+      },
+      {
+        "p": "l'entrepà",
+        "n": "ENTREPÀ",
+        "e": "🥪"
+      },
+      {
+        "p": "la verdura",
+        "n": "VERDURA",
+        "e": "🥦"
+      },
+      {
+        "p": "l'arròs",
+        "n": "ARRÒS",
+        "e": "🍚"
+      },
+      {
+        "p": "la pizza",
+        "n": "PIZZA",
+        "e": "🍕"
+      },
+      {
+        "p": "el iogurt",
+        "n": "IOGURT",
+        "e": "🥛"
+      },
+      {
+        "p": "el gelat",
+        "n": "GELAT",
+        "e": "🍦"
+      }
+    ]
+  },
+  "unitat10": {
+    "titol": "La ciutat",
+    "icona": "🏙️",
+    "items": [
+      {
+        "p": "el carrer",
+        "n": "CARRER",
+        "e": "🛣️"
+      },
+      {
+        "p": "el semàfor",
+        "n": "SEMÀFOR",
+        "e": "🚦"
+      },
+      {
+        "p": "la vorera",
+        "n": "VORERA",
+        "e": "🚶"
+      },
+      {
+        "p": "el fanal",
+        "n": "FANAL",
+        "e": "💡"
+      },
+      {
+        "p": "els edificis",
+        "n": "EDIFICIS",
+        "e": "🏢"
+      },
+      {
+        "p": "el parc",
+        "n": "PARC",
+        "e": "🌳"
+      },
+      {
+        "p": "el guàrdia",
+        "n": "GUÀRDIA",
+        "e": "👮"
+      },
+      {
+        "p": "la bústia",
+        "n": "BÚSTIA",
+        "e": "📬"
+      },
+      {
+        "p": "la plaça",
+        "n": "PLAÇA",
+        "e": "🏛️"
+      },
+      {
+        "p": "el banc",
+        "n": "BANC",
+        "e": "🪑"
+      },
+      {
+        "p": "l'arbre",
+        "n": "ARBRE",
+        "e": "🌳"
+      },
+      {
+        "p": "la font",
+        "n": "FONT",
+        "e": "⛲"
+      },
+      {
+        "p": "l'ambulància",
+        "n": "AMBULÀNCIA",
+        "e": "🚑"
+      },
+      {
+        "p": "el pas de vianants",
+        "n": "PAS DE VIANANTS",
+        "e": "🦓"
+      },
+      {
+        "p": "el contenidor",
+        "n": "CONTENIDOR",
+        "e": "🗑️"
+      },
+      {
+        "p": "l'escombriaire",
+        "n": "ESCOMBRIAIRE",
+        "e": "🧹"
+      },
+      {
+        "p": "el mercat",
+        "n": "MERCAT",
+        "e": "🏪"
+      },
+      {
+        "p": "la bicicleta",
+        "n": "BICICLETA",
+        "e": "🚲"
+      },
+      {
+        "p": "els patins",
+        "n": "PATINS",
+        "e": "🛼"
+      },
+      {
+        "p": "el monopatí",
+        "n": "MONOPATÍ",
+        "e": "🛹"
+      },
+      {
+        "p": "l'escola",
+        "n": "ESCOLA",
+        "e": "🏫"
+      },
+      {
+        "p": "l'estació",
+        "n": "ESTACIÓ",
+        "e": "🚉"
+      },
+      {
+        "p": "el poliesportiu",
+        "n": "POLIESPORTIU",
+        "e": "🏟️"
+      }
+    ]
+  },
+  "unitat12": {
+    "titol": "Els oficis",
+    "icona": "👷",
+    "items": [
+      {
+        "p": "el bomber",
+        "n": "BOMBER",
+        "e": "🧑‍🚒"
+      },
+      {
+        "p": "el cuiner",
+        "n": "CUINER",
+        "e": "👨‍🍳"
+      },
+      {
+        "p": "el jardiner",
+        "n": "JARDINER",
+        "e": "🧑‍🌾"
+      },
+      {
+        "p": "el dependent",
+        "n": "DEPENDENT",
+        "e": "🛍️"
+      },
+      {
+        "p": "el mecànic",
+        "n": "MECÀNIC",
+        "e": "🔩"
+      },
+      {
+        "p": "el cambrer",
+        "n": "CAMBRER",
+        "e": "🍽️"
+      },
+      {
+        "p": "el metge",
+        "n": "METGE",
+        "e": "🩺"
+      },
+      {
+        "p": "el pintor",
+        "n": "PINTOR",
+        "e": "🎨"
+      },
+      {
+        "p": "el carter",
+        "n": "CARTER",
+        "e": "📮"
+      },
+      {
+        "p": "el mestre",
+        "n": "MESTRE",
+        "e": "👩‍🏫"
+      },
+      {
+        "p": "l'infermer",
+        "n": "INFERMER",
+        "e": "🏥"
+      },
+      {
+        "p": "el taxista",
+        "n": "TAXISTA",
+        "e": "🚕"
+      },
+      {
+        "p": "el fuster",
+        "n": "FUSTER",
+        "e": "🪚"
+      },
+      {
+        "p": "el pescador",
+        "n": "PESCADOR",
+        "e": "🎣"
+      },
+      {
+        "p": "el pagès",
+        "n": "PAGÈS",
+        "e": "🌾"
+      },
+      {
+        "p": "el lampista",
+        "n": "LAMPISTA",
+        "e": "🔧"
+      },
+      {
+        "p": "el paleta",
+        "n": "PALETA",
+        "e": "🧱"
+      },
+      {
+        "p": "el perruquer",
+        "n": "PERRUQUER",
+        "e": "✂️"
+      },
+      {
+        "p": "el carnisser",
+        "n": "CARNISSER",
+        "e": "🥩"
+      },
+      {
+        "p": "el martell",
+        "n": "MARTELL",
+        "e": "🔨"
+      },
+      {
+        "p": "la serra",
+        "n": "SERRA",
+        "e": "🪚"
+      },
+      {
+        "p": "el pinzell",
+        "n": "PINZELL",
+        "e": "🖌️"
+      },
+      {
+        "p": "el termòmetre",
+        "n": "TERMÒMETRE",
+        "e": "🌡️"
+      }
+    ]
+  }
+}

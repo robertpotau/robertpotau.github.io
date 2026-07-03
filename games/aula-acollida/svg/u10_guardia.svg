@@ -1,0 +1,28 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cames -->
+  <rect x="40" y="68" width="9" height="20" rx="3" fill="#1e3a5f"/>
+  <rect x="51" y="68" width="9" height="20" rx="3" fill="#1e3a5f"/>
+  <!-- Cos uniforme -->
+  <rect x="33" y="38" width="34" height="32" rx="5" fill="#1e3a5f"/>
+  <!-- Franja reflectant al pit -->
+  <rect x="33" y="52" width="34" height="4" fill="#fbbf24" opacity="0.6"/>
+  <!-- Braç esquerre (amunt - dirigint trànsit) -->
+  <rect x="20" y="25" width="13" height="7" rx="3" fill="#1e3a5f"/>
+  <!-- Braç dret (horitzontal) -->
+  <rect x="67" y="42" width="13" height="7" rx="3" fill="#1e3a5f"/>
+  <!-- Mà esquerra -->
+  <circle cx="18" cy="28" r="4" fill="#f5d0a9"/>
+  <!-- Mà dreta -->
+  <circle cx="82" cy="45" r="4" fill="#f5d0a9"/>
+  <!-- Cap -->
+  <circle cx="50" cy="25" r="12" fill="#f5d0a9"/>
+  <!-- Gorra -->
+  <rect x="35" y="12" width="30" height="12" rx="3" fill="#1e40af"/>
+  <!-- Visera gorra -->
+  <rect x="32" y="22" width="36" height="4" rx="2" fill="#1e40af"/>
+  <!-- Insígnia gorra -->
+  <circle cx="50" cy="17" r="4" fill="#fbbf24"/>
+  <circle cx="50" cy="17" r="2" fill="#1e40af"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GUÀRDIA</text>
+</svg>

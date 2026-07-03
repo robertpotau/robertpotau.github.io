@@ -1,0 +1,35 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cap -->
+  <circle cx="50" cy="22" r="10" fill="#f5cba7" stroke="#c0835a" stroke-width="1.2"/>
+  <!-- Gorra verda de visera -->
+  <ellipse cx="50" cy="17" rx="11" ry="5" fill="#15803d"/>
+  <rect x="39" y="14" width="22" height="6" rx="2" fill="#15803d"/>
+  <!-- Visera -->
+  <ellipse cx="50" cy="20" rx="14" ry="3" fill="#166534"/>
+  <!-- Cuell -->
+  <rect x="46" y="30" width="8" height="5" fill="#f5cba7"/>
+  <!-- Uniforme verd -->
+  <rect x="38" y="34" width="24" height="22" rx="3" fill="#4ade80"/>
+  <!-- Braç esquerre -->
+  <rect x="26" y="35" width="12" height="8" rx="3" fill="#4ade80"/>
+  <!-- Braç dret amb regadora -->
+  <rect x="62" y="35" width="12" height="8" rx="3" fill="#4ade80"/>
+  <!-- Regadora: cos trapezoidal -->
+  <polygon points="74,30 86,33 84,44 72,41" fill="#92400e"/>
+  <!-- Ansa de la regadora -->
+  <path d="M74,31 Q70,26 74,22" stroke="#92400e" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Broc de la regadora -->
+  <line x1="86" y1="36" x2="93" y2="34" stroke="#92400e" stroke-width="2" stroke-linecap="round"/>
+  <!-- Gotes d'aigua -->
+  <circle cx="95" cy="32" r="1" fill="#3b82f6"/>
+  <circle cx="97" cy="36" r="1" fill="#3b82f6"/>
+  <circle cx="94" cy="38" r="1" fill="#3b82f6"/>
+  <!-- Cames -->
+  <rect x="38" y="56" width="10" height="18" rx="2" fill="#166534"/>
+  <rect x="52" y="56" width="10" height="18" rx="2" fill="#166534"/>
+  <!-- Botes -->
+  <rect x="37" y="72" width="12" height="5" rx="2" fill="#92400e"/>
+  <rect x="51" y="72" width="12" height="5" rx="2" fill="#92400e"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">JARDINER</text>
+</svg>

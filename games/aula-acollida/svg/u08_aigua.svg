@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Got gran d'aigua -->
+  <!-- Got cilíndric transparent -->
+  <path d="M 25 18 L 28 82 L 72 82 L 75 18 Z" fill="#e0f2fe" opacity="0.5"/>
+  <path d="M 25 18 L 28 82 L 72 82 L 75 18 Z" fill="none" stroke="#7dd3fc" stroke-width="3"/>
+  <!-- Tapa superior -->
+  <ellipse cx="50" cy="18" rx="25" ry="6" fill="#bae6fd" opacity="0.6"/>
+  <!-- Aigua blava -->
+  <path d="M 27 35 L 28 82 L 72 82 L 73 35 Z" fill="#60a5fa" opacity="0.7"/>
+  <!-- Glaçons -->
+  <rect x="32" y="42" width="14" height="16" rx="3" fill="#e0f2fe" opacity="0.85"/>
+  <rect x="54" y="38" width="13" height="18" rx="3" fill="#e0f2fe" opacity="0.85"/>
+  <rect x="40" y="56" width="16" height="14" rx="3" fill="#e0f2fe" opacity="0.85"/>
+  <!-- Brillantor glaçons -->
+  <rect x="34" y="44" width="4" height="8" rx="2" fill="white" opacity="0.6"/>
+  <rect x="56" y="40" width="4" height="8" rx="2" fill="white" opacity="0.6"/>
+  <!-- Bombolles d'aire -->
+  <circle cx="45" cy="70" r="3" fill="white" opacity="0.7"/>
+  <circle cx="62" cy="62" r="2" fill="white" opacity="0.7"/>
+  <circle cx="38" cy="65" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="55" cy="75" r="2.5" fill="white" opacity="0.5"/>
+  <!-- Reflexos del got -->
+  <rect x="27" y="22" width="5" height="55" rx="2" fill="white" opacity="0.35"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">AIGUA</text>
+</svg>

@@ -1,0 +1,40 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cua llarga que s'aprima -->
+  <path d="M70 58 Q85 52 95 44 Q98 38 95 34" stroke="#4ade80" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M70 58 Q85 52 95 44 Q98 38 95 34" stroke="#16a34a" stroke-width="1" fill="none" stroke-linecap="round" stroke-dasharray="4,3"/>
+  <!-- Cos allargat -->
+  <ellipse cx="45" cy="58" rx="28" ry="12" fill="#4ade80"/>
+  <!-- Escates (retícula fina) -->
+  <line x1="20" y1="52" x2="20" y2="64" stroke="#16a34a" stroke-width="0.8"/>
+  <line x1="26" y1="50" x2="26" y2="66" stroke="#16a34a" stroke-width="0.8"/>
+  <line x1="32" y1="48" x2="32" y2="68" stroke="#16a34a" stroke-width="0.8"/>
+  <line x1="38" y1="47" x2="38" y2="69" stroke="#16a34a" stroke-width="0.8"/>
+  <line x1="44" y1="47" x2="44" y2="69" stroke="#16a34a" stroke-width="0.8"/>
+  <line x1="50" y1="47" x2="50" y2="69" stroke="#16a34a" stroke-width="0.8"/>
+  <line x1="56" y1="48" x2="56" y2="68" stroke="#16a34a" stroke-width="0.8"/>
+  <line x1="62" y1="50" x2="62" y2="66" stroke="#16a34a" stroke-width="0.8"/>
+  <line x1="30" y1="53" x2="65" y2="53" stroke="#16a34a" stroke-width="0.8"/>
+  <line x1="25" y1="58" x2="72" y2="58" stroke="#16a34a" stroke-width="0.8"/>
+  <line x1="30" y1="63" x2="65" y2="63" stroke="#16a34a" stroke-width="0.8"/>
+  <!-- Potes petites -->
+  <path d="M28 64 Q22 70 18 74" stroke="#4ade80" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M28 64 Q23 72 24 78" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M36 66 Q32 74 30 78" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M55 66 Q59 74 58 78" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M63 64 Q68 72 70 78" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M63 64 Q70 70 74 74" stroke="#4ade80" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- Cap triangular -->
+  <polygon points="5,55 22,48 22,68" fill="#4ade80"/>
+  <polygon points="5,55 22,48 22,68" fill="none" stroke="#16a34a" stroke-width="0.8"/>
+  <!-- Ull -->
+  <circle cx="14" cy="53" r="3" fill="#fef08a"/>
+  <circle cx="14" cy="53" r="1.8" fill="#1a1a1a"/>
+  <circle cx="13" cy="52" r="0.6" fill="white"/>
+  <!-- Llengua bifurcada -->
+  <path d="M5 55 L0 52 M0 52 L-2 50 M0 52 L1 50" stroke="#ef4444" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M5 55 Q2 53 0 52" stroke="#ef4444" stroke-width="1.5" fill="none"/>
+  <line x1="0" y1="52" x2="-1" y2="50" stroke="#ef4444" stroke-width="1"/>
+  <line x1="0" y1="52" x2="2" y2="50" stroke="#ef4444" stroke-width="1"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">SARGANT.</text>
+</svg>

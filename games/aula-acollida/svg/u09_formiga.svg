@@ -1,0 +1,31 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Abdomen (segment posterior gran) -->
+  <ellipse cx="50" cy="72" rx="14" ry="16" fill="#1f2937"/>
+  <!-- Reflexos abdomen -->
+  <ellipse cx="45" cy="64" rx="4" ry="3" fill="#374151" opacity="0.6"/>
+  <!-- Tòrax (segment central) -->
+  <circle cx="50" cy="52" r="10" fill="#1f2937"/>
+  <!-- Cap (segment davanter) -->
+  <circle cx="50" cy="34" r="11" fill="#1f2937"/>
+  <!-- Ulls -->
+  <circle cx="44" cy="31" r="3" fill="#374151"/>
+  <circle cx="44" cy="31" r="1.5" fill="white"/>
+  <circle cx="56" cy="31" r="3" fill="#374151"/>
+  <circle cx="56" cy="31" r="1.5" fill="white"/>
+  <!-- Mandíbules -->
+  <path d="M44,38 Q40,42 38,40" stroke="#374151" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M56,38 Q60,42 62,40" stroke="#374151" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Antenes -->
+  <path d="M46,24 Q38,14 32,12" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <circle cx="32" cy="12" r="2" fill="#1f2937"/>
+  <path d="M54,24 Q62,14 68,12" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <circle cx="68" cy="12" r="2" fill="#1f2937"/>
+  <!-- 6 potes articulades (3 per costat) -->
+  <path d="M44,50 L32,44 L24,50" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M44,54 L30,52 L22,58" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M44,58 L32,62 L24,68" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M56,50 L68,44 L76,50" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M56,54 L70,52 L78,58" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M56,58 L68,62 L76,68" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">FORMIGA</text>
+</svg>

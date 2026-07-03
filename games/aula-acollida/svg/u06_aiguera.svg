@@ -1,0 +1,19 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cos aigüera (superfície) -->
+  <rect x="8" y="42" width="84" height="8" rx="2" fill="#94a3b8"/>
+  <!-- Pica rectangular -->
+  <rect x="18" y="50" width="64" height="30" rx="3" fill="#94a3b8"/>
+  <rect x="21" y="53" width="58" height="24" rx="2" fill="#d1d5db"/>
+  <!-- Desguàs -->
+  <circle cx="50" cy="75" r="4" fill="#6b7280"/>
+  <circle cx="50" cy="75" r="2" fill="#4b5563"/>
+  <!-- Aixeta -->
+  <rect x="45" y="28" width="10" height="15" rx="3" fill="#6b7280"/>
+  <rect x="38" y="25" width="24" height="5" rx="2.5" fill="#6b7280"/>
+  <!-- Caps de l'aixeta -->
+  <circle cx="38" cy="27" r="4" fill="#94a3b8"/>
+  <circle cx="62" cy="27" r="4" fill="#94a3b8"/>
+  <!-- Raig d'aigua -->
+  <line x1="50" y1="43" x2="50" y2="53" stroke="#bae6fd" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3,2"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">AIGÜERA</text>
+</svg>

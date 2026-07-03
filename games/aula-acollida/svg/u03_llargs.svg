@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Head -->
+  <circle cx="50" cy="22" r="16" fill="#ffd68a" stroke="#d97706" stroke-width="1.5"/>
+  <!-- Long hair flowing down -->
+  <path d="M34 18 Q28 35 26 55 Q24 72 30 82" stroke="#92400e" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M66 18 Q72 35 74 55 Q76 72 70 82" stroke="#92400e" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M34 16 Q50 10 66 16" fill="#92400e"/>
+  <!-- Hair ends spread -->
+  <path d="M26 55 Q22 68 30 82" stroke="#92400e" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M74 55 Q78 68 70 82" stroke="#92400e" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Face features -->
+  <circle cx="44" cy="22" r="2" fill="#374151"/>
+  <circle cx="56" cy="22" r="2" fill="#374151"/>
+  <path d="M44 28 Q50 32 56 28" stroke="#c2850a" stroke-width="1.5" fill="none"/>
+  <!-- Double-headed arrow showing length -->
+  <line x1="18" y1="16" x2="18" y2="82" stroke="#ef4444" stroke-width="2"/>
+  <polygon points="18,14 14,22 22,22" fill="#ef4444"/>
+  <polygon points="18,84 14,76 22,76" fill="#ef4444"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">LLARGS</text>
+</svg>

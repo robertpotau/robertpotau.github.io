@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Jaqueta/americana - curt, amb solapes i botons -->
+  <!-- Cos principal (més curt que abric) -->
+  <path d="M 26,26 L 20,72 L 80,72 L 74,26 Z" fill="#1565c0"/>
+  <!-- Solapes en V pronunciades -->
+  <path d="M 26,26 L 36,46 L 50,30 L 64,46 L 74,26" fill="#0d47a1" stroke="none"/>
+  <!-- Mànigues -->
+  <path d="M 26,26 L 12,62 L 22,66 L 32,30" fill="#1565c0" stroke="#0d47a1" stroke-width="1"/>
+  <path d="M 74,26 L 88,62 L 78,66 L 68,30" fill="#1565c0" stroke="#0d47a1" stroke-width="1"/>
+  <!-- Botons (2, jaqueta clàssica) -->
+  <circle cx="50" cy="52" r="3" fill="#1976d2"/>
+  <circle cx="50" cy="62" r="3" fill="#1976d2"/>
+  <!-- Butxaca superior (pit) -->
+  <rect x="36" y="40" width="10" height="8" rx="1" fill="none" stroke="#42a5f5" stroke-width="1.5"/>
+  <!-- Mocador de pit -->
+  <path d="M 37,40 L 42,38 L 45,40" fill="white" stroke="none"/>
+  <!-- Butxaques inferiors -->
+  <rect x="24" y="56" width="13" height="9" rx="1" fill="none" stroke="#42a5f5" stroke-width="1.5"/>
+  <rect x="63" y="56" width="13" height="9" rx="1" fill="none" stroke="#42a5f5" stroke-width="1.5"/>
+  <!-- Contorn -->
+  <path d="M 26,26 L 20,72 L 80,72 L 74,26 L 64,46 L 50,30 L 36,46 Z" fill="none" stroke="#0d47a1" stroke-width="1.5"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="plt_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fefce8"/><stop offset="1" stop-color="#fef9c3"/></linearGradient>
+  <linearGradient id="plt_cos" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fde047"/><stop offset="1" stop-color="#eab308"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#plt_bg)"/>
+  <ellipse cx="50" cy="82" rx="30" ry="4" fill="#0f172a" opacity=".08"/>
+  <path d="M24 26 q-2 30 18 44 q16 11 36 4 q4 -2 2 -6 l-3 -4 q-2 -3 -6 -2 q-14 3 -24 -6 q-12 -11 -12 -30 q0 -4 -4 -4 h-3 q-4 0 -4 4" fill="url(#plt_cos)"/>
+  <path d="M24 26 q-1 28 17 42 q-14 -16 -14 -42 q0 -2 -1.5 -2 q-1.5 0 -1.5 2" fill="#facc15"/>
+  <path d="M30 24 q2 26 14 38" stroke="#ca8a04" stroke-width="1.6" fill="none" opacity=".7"/>
+  <rect x="25" y="16" width="9" height="9" rx="2.5" fill="#78350f"/>
+  <path d="M74 70 q5 1 6 5" stroke="#92400e" stroke-width="3" stroke-linecap="round" fill="none" opacity="0"/>
+  <ellipse cx="76" cy="72" rx="4" ry="3" fill="#a16207" transform="rotate(28 76 72)"/>
+</svg>

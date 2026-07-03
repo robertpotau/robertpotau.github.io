@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="vst_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fdf2f8"/><stop offset="1" stop-color="#fce7f3"/></linearGradient>
+  <linearGradient id="vst_cos" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f472b6"/><stop offset="1" stop-color="#db2777"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#vst_bg)"/>
+  <ellipse cx="50" cy="90" rx="30" ry="3.5" fill="#0f172a" opacity=".08"/>
+  <path d="M40 12 q10 6 20 0 l2 6 q-2 8 2 14 l-4 10 h-20 l-4 -10 q4 -6 2 -14 z" fill="url(#vst_cos)"/>
+  <path d="M40 42 h20 l10 38 q1 4 -3 5 q-17 5 -34 0 q-4 -1 -3 -5 z" fill="url(#vst_cos)"/>
+  <path d="M40 42 h7 l-9 44 q-5 -1 -7 -3 q-2 -1 -1 -4 z" fill="#f9a8d4" opacity=".6"/>
+  <path d="M48 42 l-6 45 M58 42 l6 45" stroke="#9d174d" stroke-width="1.6" opacity=".5" fill="none"/>
+  <path d="M38 42 q12 6 24 0" stroke="#9d174d" stroke-width="2.5" fill="none"/>
+  <circle cx="50" cy="28" r="3" fill="#fbcfe8" opacity=".8"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Pa rodó amb tall -->
+  <!-- Cos del pa -->
+  <ellipse cx="50" cy="58" rx="36" ry="26" fill="#d97706"/>
+  <ellipse cx="50" cy="55" rx="36" ry="26" fill="#f59e0b"/>
+  <!-- Crosta superior -->
+  <ellipse cx="50" cy="54" rx="34" ry="24" fill="#d97706"/>
+  <ellipse cx="50" cy="52" rx="32" ry="22" fill="#f59e0b"/>
+  <!-- Miga interior visible per les talls -->
+  <ellipse cx="50" cy="50" rx="28" ry="18" fill="#fef3c7"/>
+  <!-- Talls al damunt (decoració de forner) -->
+  <path d="M 30 42 Q 50 35 70 42" fill="none" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 35 50 Q 50 44 65 50" fill="none" stroke="#92400e" stroke-width="2" stroke-linecap="round"/>
+  <!-- Textura de crosta -->
+  <ellipse cx="40" cy="38" rx="5" ry="3" fill="#d97706" opacity="0.6"/>
+  <ellipse cx="60" cy="38" rx="5" ry="3" fill="#d97706" opacity="0.6"/>
+  <ellipse cx="35" cy="54" rx="4" ry="2.5" fill="#d97706" opacity="0.4"/>
+  <ellipse cx="65" cy="54" rx="4" ry="2.5" fill="#d97706" opacity="0.4"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PA</text>
+</svg>

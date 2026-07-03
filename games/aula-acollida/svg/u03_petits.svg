@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Head -->
+  <ellipse cx="50" cy="52" rx="32" ry="34" fill="#ffd68a" stroke="#d97706" stroke-width="2"/>
+  <!-- Hair -->
+  <path d="M18 44 Q20 22 50 20 Q80 22 82 44" fill="#92400e"/>
+  <!-- Small squinting eyes -->
+  <path d="M30 48 Q36 44 42 48" stroke="#374151" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M58 48 Q64 44 70 48" stroke="#374151" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Small pupils visible -->
+  <circle cx="36" cy="47" r="2" fill="#374151"/>
+  <circle cx="64" cy="47" r="2" fill="#374151"/>
+  <!-- Contrast: "PETITS" label with size comparison -->
+  <circle cx="22" cy="68" r="10" fill="none" stroke="#ef4444" stroke-width="2"/>
+  <circle cx="22" cy="68" r="2" fill="#374151"/>
+  <text x="34" y="72" font-family="Arial,sans-serif" font-size="8" fill="#ef4444" font-weight="600">petits</text>
+  <!-- Nose, mouth -->
+  <path d="M46 58 Q50 62 54 58" stroke="#c2850a" stroke-width="1.5" fill="none"/>
+  <path d="M40 68 Q50 74 60 68" stroke="#c2850a" stroke-width="2" fill="none"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PETITS</text>
+</svg>

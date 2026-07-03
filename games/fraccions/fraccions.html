@@ -1,0 +1,4191 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fraccions — Pràctica i reforç</title>
+<style>
+  @font-face {
+    font-family: 'Nunito';
+    src: url('nunito-400.woff2') format('woff2');
+    font-weight: 400 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg-1: #0b1437;
+    --bg-2: #1a1148;
+    --bg-3: #2c1066;
+    --card-bg: rgba(255,255,255,0.08);
+    --card-border: rgba(255,255,255,0.15);
+    --text: #ffffff;
+    --text-dim: rgba(255,255,255,0.65);
+    --accent: #ffd166;
+    --green: #4ade80;
+    --red: #f87171;
+    --blue: #60a5fa;
+    --purple: #a78bfa;
+    --pink: #f472b6;
+    --orange: #fb923c;
+    --cyan: #22d3ee;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%;
+    min-height: 100%;
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  html {
+    background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+    background-attachment: fixed;
+  }
+
+  body {
+    background: transparent;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* ─── ESTRELLES DE FONS ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 20% 30%, white, transparent),
+      radial-gradient(1px 1px at 60% 70%, white, transparent),
+      radial-gradient(1px 1px at 80% 10%, white, transparent),
+      radial-gradient(2px 2px at 35% 80%, white, transparent),
+      radial-gradient(1px 1px at 90% 45%, white, transparent),
+      radial-gradient(1px 1px at 10% 60%, white, transparent),
+      radial-gradient(1px 1px at 50% 20%, rgba(255,255,255,0.6), transparent);
+    background-size: 200px 200px;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+    animation: twinkle 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.7; }
+  }
+
+  /* ─── PANTALLES ─── */
+  .screen {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    padding: 18px 14px 80px;
+    position: relative;
+    z-index: 1;
+  }
+  .screen.active { display: flex; flex-direction: column; align-items: center; }
+
+  /* ─── LOGO ─── */
+  .logo {
+    font-size: clamp(2.2rem, 7vw, 3.6rem);
+    font-weight: 900;
+    text-align: center;
+    margin: 16px 0 8px;
+    background: linear-gradient(135deg, var(--accent), var(--pink), var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+    text-shadow: 0 0 32px rgba(255,209,102,0.3);
+  }
+  .logo-sub {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+
+  /* ─── TARGETES ─── */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 18px;
+    width: 100%;
+    max-width: 520px;
+    backdrop-filter: blur(8px);
+    margin-bottom: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  }
+
+  /* ─── BOTONS ─── */
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    box-shadow: 0 4px 14px rgba(99,102,241,0.35);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(99,102,241,0.5); }
+  .btn:active { transform: translateY(0); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+  .btn-green { background: linear-gradient(135deg, #16a34a, #4ade80); box-shadow: 0 4px 14px rgba(74,222,128,0.35); }
+  .btn-orange { background: linear-gradient(135deg, #ea580c, #fb923c); box-shadow: 0 4px 14px rgba(251,146,60,0.35); }
+  .btn-red { background: linear-gradient(135deg, #dc2626, #f87171); box-shadow: 0 4px 14px rgba(248,113,113,0.35); }
+  .btn-yellow { background: linear-gradient(135deg, #ca8a04, #facc15); color: #1a1148; box-shadow: 0 4px 14px rgba(250,204,21,0.35); }
+  .btn-blue { background: linear-gradient(135deg, #1d4ed8, #60a5fa); box-shadow: 0 4px 14px rgba(96,165,250,0.35); }
+  .btn-pink { background: linear-gradient(135deg, #be185d, #f472b6); box-shadow: 0 4px 14px rgba(244,114,182,0.35); }
+  .btn-cyan { background: linear-gradient(135deg, #0891b2, #22d3ee); box-shadow: 0 4px 14px rgba(34,211,238,0.35); }
+  .btn-purple { background: linear-gradient(135deg, #7c3aed, #a78bfa); box-shadow: 0 4px 14px rgba(167,139,250,0.35); }
+
+  .btn-ghost {
+    background: rgba(255,255,255,0.08);
+    box-shadow: none;
+    border: 1px solid var(--card-border);
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.14); box-shadow: none; }
+
+  .btn-small { padding: 10px 14px; font-size: 0.95rem; margin-bottom: 0; }
+
+  /* ─── INPUT FRACCIÓ ─── */
+  .frac-input {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 10px 16px;
+    margin: 0 4px;
+    border: 2px solid var(--card-border);
+  }
+  .frac-input input {
+    width: 70px;
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    background: rgba(0,0,0,0.25);
+    color: white;
+    font-family: inherit;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    -moz-appearance: textfield;
+  }
+  .frac-input input::-webkit-outer-spin-button,
+  .frac-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .frac-input input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(0,0,0,0.4);
+  }
+  .frac-bar {
+    width: 80px;
+    height: 4px;
+    background: white;
+    border-radius: 2px;
+    margin: 6px 0;
+  }
+
+  /* ─── FRACCIÓ MOSTRADA (lectura) ─── */
+  .frac-display {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.05;
+    font-weight: 800;
+    margin: 0 6px;
+    vertical-align: middle;
+  }
+  .frac-display .num, .frac-display .den {
+    font-size: 2.2rem;
+    padding: 0 10px;
+  }
+  .frac-display .bar {
+    width: 100%;
+    min-width: 50px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin: 4px 0;
+  }
+  .frac-display.small .num, .frac-display.small .den { font-size: 1.5rem; }
+  .frac-display.small .bar { height: 3px; }
+
+  /* ─── PANTALLA DE JOC ─── */
+  .game-header {
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    color: var(--text-dim);
+    font-weight: 700;
+  }
+  .progress-bg {
+    width: 100%;
+    max-width: 520px;
+    height: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--accent));
+    transition: width 0.3s ease;
+    border-radius: 4px;
+  }
+
+  .question-box {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 22px 16px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+
+  .question-prompt {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--text);
+  }
+  .question-prompt-sub {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+
+  /* ─── SVG VISUALITZACIÓ FRACCIONS ─── */
+  .shape-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 10px 0 16px;
+  }
+  .shape-wrap svg {
+    max-width: 100%;
+    height: auto;
+  }
+  .shape-svg {
+    cursor: default;
+  }
+  .shape-svg.clickable .sector,
+  .shape-svg.clickable .piece {
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .shape-svg.clickable .sector:hover,
+  .shape-svg.clickable .piece:hover {
+    opacity: 0.85;
+  }
+  .sector-fill { fill: var(--orange); stroke: white; stroke-width: 2; }
+  .sector-empty { fill: rgba(255,255,255,0.06); stroke: rgba(255,255,255,0.5); stroke-width: 2; }
+  .piece-fill { fill: var(--cyan); stroke: white; stroke-width: 2; }
+  .piece-empty { fill: rgba(255,255,255,0.06); stroke: rgba(255,255,255,0.5); stroke-width: 2; }
+
+  /* opcions múltiples (per equivalents/imatges) */
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+    max-width: 520px;
+    margin-bottom: 14px;
+  }
+  .option-card {
+    background: rgba(255,255,255,0.06);
+    border: 2px solid var(--card-border);
+    border-radius: 14px;
+    padding: 14px;
+    cursor: pointer;
+    transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-family: inherit;
+  }
+  .option-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    background: rgba(255,255,255,0.1);
+  }
+  .option-card.correct {
+    border-color: var(--green);
+    background: rgba(74,222,128,0.15);
+  }
+  .option-card.wrong {
+    border-color: var(--red);
+    background: rgba(248,113,113,0.15);
+  }
+  .options-grid-visual {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .option-shape {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+  }
+  .option-shape svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .compare-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .compare-btn {
+    padding: 22px 10px;
+    border-radius: 14px;
+    border: 2px solid var(--card-border);
+    background: rgba(255,255,255,0.08);
+    color: white;
+    font-family: inherit;
+    font-size: 2rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.12s ease, background 0.12s ease;
+  }
+  .compare-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.16);
+    border-color: var(--accent);
+  }
+
+  /* ─── FEEDBACK ─── */
+  .feedback {
+    width: 100%;
+    max-width: 520px;
+    min-height: 50px;
+    text-align: center;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: opacity 0.2s ease;
+  }
+  .feedback.correct { color: var(--green); }
+  .feedback.wrong { color: var(--red); }
+
+  /* ─── PANTALLA RESULTATS ─── */
+  .result-big {
+    font-size: 3.6rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 12px 0;
+    background: linear-gradient(135deg, var(--accent), var(--pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .result-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    margin-bottom: 18px;
+  }
+  .result-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .result-stat {
+    background: rgba(255,255,255,0.06);
+    padding: 10px 6px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid var(--card-border);
+  }
+  .result-stat .v { font-size: 1.4rem; font-weight: 900; }
+  .result-stat .l { font-size: 0.78rem; color: var(--text-dim); }
+
+  /* ─── ANIMACIONS ─── */
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+  }
+  .shake { animation: shake 0.4s ease; }
+
+  @keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(74,222,128,0.6); }
+    70% { box-shadow: 0 0 0 22px rgba(74,222,128,0); }
+    100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+  }
+  .pulse-green { animation: pulse-green 0.6s ease; }
+
+  @keyframes pop {
+    0% { transform: scale(0.7); opacity: 0; }
+    60% { transform: scale(1.08); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .pop { animation: pop 0.3s ease; }
+
+  /* ─── PARTÍCULES ─── */
+  .particle {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* ─── BARRA SUPERIOR ─── */
+  .topbar {
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .topbar .back {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--card-border);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .topbar .back:hover { background: rgba(255,255,255,0.16); }
+  .topbar .score-mini {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-align: center;
+    margin: 8px 0 10px;
+    color: var(--text);
+  }
+
+  /* ─── HISTORIAL/RÈCORDS ─── */
+  .records-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .record-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    border: 1px solid var(--card-border);
+  }
+  .record-row .name { font-weight: 700; }
+  .record-row .val { color: var(--accent); font-weight: 800; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 480px) {
+    .options-grid { grid-template-columns: 1fr; }
+    .frac-display .num, .frac-display .den { font-size: 1.8rem; }
+    .compare-btn { font-size: 1.6rem; padding: 18px 8px; }
+    .frac-input input { width: 60px; font-size: 1.4rem; }
+  }
+
+  /* ─── TROFEUS ─── */
+  .trophy-grid {
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .trophy-cat-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    padding: 10px 0 6px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .trophy-cat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .trophy-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    transition: 0.2s;
+  }
+  .trophy-card.unlocked {
+    border-color: rgba(255, 209, 102, 0.5);
+    background: rgba(255, 209, 102, 0.08);
+  }
+  .trophy-card.locked { opacity: 0.42; }
+  .trophy-icon {
+    font-size: 2.1rem;
+    margin-bottom: 6px;
+  }
+  .trophy-name {
+    font-size: 0.85rem;
+    font-weight: 800;
+  }
+  .trophy-desc {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-top: 3px;
+    line-height: 1.3;
+  }
+  .trophy-stats {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 520px;
+    margin-bottom: 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px;
+  }
+  .trophy-stat-v {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--accent);
+  }
+  .trophy-stat-l {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+
+  /* ─── CONFETTI ─── */
+  .confetti {
+    position: fixed;
+    font-size: 1.5rem;
+    z-index: 200;
+    pointer-events: none;
+    animation: confetti-fall 2.4s linear forwards;
+  }
+  @keyframes confetti-fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ─── NOTIFICACIÓ TROFEU ─── */
+  .trophy-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #f59e0b, #ffd166);
+    color: #1a1148;
+    border-radius: 16px;
+    padding: 14px 22px;
+    box-shadow: 0 10px 32px rgba(255, 209, 102, 0.5);
+    z-index: 250;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 800;
+    animation: toast-in 0.4s cubic-bezier(0.2,1.3,0.6,1);
+    max-width: 90vw;
+  }
+  .trophy-toast .ic { font-size: 2rem; }
+  .trophy-toast .nm { font-size: 0.95rem; }
+  .trophy-toast .ds { font-size: 0.78rem; opacity: 0.75; }
+  @keyframes toast-in {
+    0% { transform: translate(-50%, 60px); opacity: 0; }
+    100% { transform: translate(-50%, 0); opacity: 1; }
+  }
+  @keyframes toast-out {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, 60px); opacity: 0; }
+  }
+
+  /* ─── CRÈDITS ─── */
+  .credit-section {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 16px;
+    transition: 0.2s;
+  }
+  .credit-section:hover {
+    border-color: rgba(255, 209, 102, 0.3);
+    background: rgba(255, 209, 102, 0.06);
+  }
+  .credit-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(255, 209, 102, 0.3);
+  }
+  .credit-person {
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    border-left: 4px solid var(--accent);
+  }
+  .credit-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .credit-role {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .credit-desc {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .credit-tech {
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    border-left: 4px solid var(--accent);
+  }
+  .credit-tech > div {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .credit-footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--card-border);
+    margin-top: 12px;
+  }
+  .credit-footer .ttl {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .credit-footer .ver {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .credit-footer .lic {
+    font-size: 0.78rem;
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .credit-footer .lic-sub {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 8px;
+  }
+  .credit-footer .heart {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  /* ─── EXPORTAR / IMPORTAR ─── */
+  .export-import-box {
+    background: linear-gradient(135deg, rgba(255,209,102,0.1), rgba(34,211,238,0.1));
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    gap: 10px;
+  }
+  .export-btn, .import-btn {
+    flex: 1;
+    padding: 14px 16px;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: white;
+    cursor: pointer;
+    transition: all 0.12s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .export-btn {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    box-shadow: 0 4px 14px rgba(52,211,153,0.3);
+  }
+  .export-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52,211,153,0.5);
+  }
+  .import-btn {
+    background: linear-gradient(135deg, #0891b2, #22d3ee);
+    box-shadow: 0 4px 14px rgba(34,211,238,0.3);
+  }
+  .import-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34,211,238,0.5);
+  }
+  .export-btn .ic, .import-btn .ic {
+    font-size: 1.6rem;
+  }
+  .export-btn .tx, .import-btn .tx {
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ─── CONFETTI / EMOJI POP ─── */
+  .emoji-pop {
+    position: fixed;
+    font-size: 2rem;
+    pointer-events: none;
+    z-index: 999;
+    animation: emoji-rise 1.2s ease-out forwards;
+  }
+  @keyframes emoji-rise {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    20% { transform: translateY(-20px) scale(1.1); opacity: 1; }
+    100% { transform: translateY(-140px) scale(0.8); opacity: 0; }
+  }
+
+  /* ═══════════════════════════════════════════════
+     TEMES DE COLOR (6 paletes)
+     ═══════════════════════════════════════════════ */
+
+  /* TEMA: Dia (clar) */
+  html[data-theme="dia"] {
+    --bg-1: #f0f4f8;
+    --bg-2: #e8ecf1;
+    --bg-3: #dde5ec;
+    --card-bg: rgba(255,255,255,0.7);
+    --card-border: rgba(0,0,0,0.1);
+    --text: #1a1a2e;
+    --text-dim: rgba(0,0,0,0.55);
+    --accent: #3b82f6;
+  }
+  /* SVG shapes: contrast en mode dia */
+  html[data-theme="dia"] .sector-fill  { stroke: rgba(255,255,255,0.9); }
+  html[data-theme="dia"] .piece-fill   { stroke: rgba(255,255,255,0.9); }
+  html[data-theme="dia"] .sector-empty { fill: rgba(0,0,0,0.06); stroke: rgba(0,0,0,0.2); }
+  html[data-theme="dia"] .piece-empty  { fill: rgba(0,0,0,0.06); stroke: rgba(0,0,0,0.2); }
+
+  /* TEMA: Tropicana (rosa i taronja) */
+  html[data-theme="tropicana"] {
+    --bg-1: #2d1b2e;
+    --bg-2: #3d1f3e;
+    --bg-3: #4d1f52;
+    --card-bg: rgba(236,72,153,0.1);
+    --card-border: rgba(236,72,153,0.2);
+    --accent: #ec4899;
+    --pink: #f472b6;
+  }
+
+  /* TEMA: Boscos (verd i teal) */
+  html[data-theme="boscos"] {
+    --bg-1: #0f2f1f;
+    --bg-2: #1a3d2a;
+    --bg-3: #1f4d33;
+    --card-bg: rgba(16,185,129,0.1);
+    --card-border: rgba(16,185,129,0.2);
+    --accent: #10b981;
+    --cyan: #14b8a6;
+  }
+
+  /* TEMA: Oceà (blau cian) */
+  html[data-theme="ocea"] {
+    --bg-1: #001d2d;
+    --bg-2: #0a2e45;
+    --bg-3: #0f3d57;
+    --card-bg: rgba(6,182,212,0.1);
+    --card-border: rgba(6,182,212,0.2);
+    --accent: #06b6d4;
+    --cyan: #0ea5e9;
+  }
+
+  /* TEMA: Amarg (ambar i rosa) */
+  html[data-theme="amarg"] {
+    --bg-1: #331f0e;
+    --bg-2: #4a2f1a;
+    --bg-3: #5a3d24;
+    --card-bg: rgba(245,158,11,0.1);
+    --card-border: rgba(245,158,11,0.2);
+    --accent: #f59e0b;
+    --pink: #f472b6;
+  }
+
+  /* ─── PANTALLA PORTADA (Splash) ─── */
+  #screen-splash {
+    display: none !important;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+    overflow: hidden;
+  }
+  #screen-splash.active {
+    display: flex !important;
+    flex-direction: column;
+    animation: fadeIn 0.4s ease;
+  }
+  #screen-splash::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 20% 30%, white, transparent),
+      radial-gradient(1px 1px at 60% 70%, white, transparent),
+      radial-gradient(1px 1px at 80% 10%, white, transparent),
+      radial-gradient(2px 2px at 35% 80%, white, transparent),
+      radial-gradient(1px 1px at 90% 45%, white, transparent),
+      radial-gradient(1px 1px at 10% 60%, white, transparent);
+    background-size: 200px 200px;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .splash-logo {
+    font-size: clamp(3rem, 12vw, 5rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--accent), var(--pink), var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+    animation: splash-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  .splash-sub {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+    animation: fadeIn 0.6s ease 0.2s both;
+  }
+  .splash-bar-bg {
+    width: 200px;
+    height: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 99px;
+    margin: 0 auto 28px;
+    overflow: hidden;
+  }
+  .splash-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--cyan));
+    border-radius: 99px;
+    animation: splash-load 1.2s ease-out 0.2s forwards;
+    width: 0%;
+  }
+  @keyframes splash-pop {
+    0% { transform: scale(0.4); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes splash-load {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  #screen-splash.fadeout {
+    animation: fadeOut 0.5s ease forwards;
+  }
+  .splash-phrase {
+    max-width: 280px;
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    font-style: italic;
+    animation: fadeIn 0.8s ease 0.4s both;
+  }
+
+  /* ─── FRACCIONS SVG ANIMADES (portada) ─── */
+  .splash-fractions {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+  .frac-anim {
+    position: absolute;
+    font-size: 3rem;
+    animation: frac-float 4s ease-in-out infinite;
+  }
+
+  @keyframes frac-float {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
+    50% { transform: translateY(-30px) rotate(15deg) scale(1.1); opacity: 0.6; }
+  }
+
+  /* ─── PANTALLA SELECCIÓ PERFIL ─── */
+  #screen-select-profile {
+    display: none;
+  }
+  #screen-select-profile.active {
+    display: flex;
+  }
+  .profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 12px;
+    width: 100%;
+    max-width: 520px;
+    margin-top: 20px;
+  }
+  .profile-slot {
+    background: var(--card-bg);
+    border: 2px dashed var(--card-border);
+    border-radius: 16px;
+    padding: 16px 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-height: 120px;
+    justify-content: center;
+  }
+  .profile-slot:hover {
+    border-style: solid;
+    border-color: var(--accent);
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+  }
+  .profile-slot.filled {
+    border-style: solid;
+    border-color: var(--accent);
+    background: rgba(255,209,102,0.1);
+  }
+  .profile-avatar { font-size: 2.4rem; }
+  .profile-name { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+  .profile-level { font-size: 0.75rem; color: var(--text-dim); margin-top: 2px; }
+  .profile-plus { font-size: 2rem; opacity: 0.4; }
+
+  /* ─── PANTALLA CREACIÓ PERFIL ─── */
+  #screen-create-profile {
+    display: none;
+  }
+  #screen-create-profile.active {
+    display: flex;
+  }
+  .profile-form {
+    width: 100%;
+    max-width: 520px;
+  }
+  .form-group {
+    margin-bottom: 18px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid var(--card-border);
+    border-radius: 12px;
+    background: rgba(0,0,0,0.2);
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus {
+    border-color: var(--accent);
+    background: rgba(0,0,0,0.3);
+  }
+  .gender-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .gender-btn {
+    padding: 12px;
+    border: 2px solid var(--card-border);
+    background: rgba(0,0,0,0.2);
+    color: white;
+    border-radius: 12px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .gender-btn.selected {
+    border-color: var(--accent);
+    background: rgba(255,209,102,0.2);
+    color: var(--accent);
+  }
+  .avatar-preview-wrap {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .avatar-preview {
+    font-size: 4rem;
+    display: inline-block;
+  }
+  .skin-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .skin-btn {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .skin-btn:hover {
+    transform: scale(1.1);
+  }
+  .skin-btn.selected {
+    border-color: white;
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .hair-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .hair-btn {
+    padding: 10px;
+    border: 2px solid var(--card-border);
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .hair-btn:hover {
+    border-color: var(--accent);
+  }
+  .hair-btn.selected {
+    border-color: var(--accent);
+    background: rgba(255,209,102,0.2);
+  }
+
+  /* ─── PANTALLA SELECCIÓ MODE ─── */
+  #screen-select-mode {
+    display: none;
+  }
+  #screen-select-mode.active {
+    display: flex;
+  }
+  .mode-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+    max-width: 520px;
+    margin-top: 16px;
+  }
+  .mode-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: 18px;
+    padding: 18px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 14px;
+    overflow: hidden;
+  }
+  .mode-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 6px;
+    height: 100%;
+    background: var(--mode-color, var(--accent));
+    border-radius: 18px 0 0 18px;
+  }
+  .mode-card::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, var(--mode-color, var(--accent)) 0%, transparent 70%);
+    opacity: 0.15;
+    pointer-events: none;
+    transition: all 0.3s;
+  }
+  .mode-card:hover {
+    transform: translateY(-3px) scale(1.01);
+    border-color: var(--mode-color, var(--accent));
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 1px var(--mode-color, var(--accent));
+  }
+  .mode-card:hover::after {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+  .mode-icon-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    min-width: 80px;
+    padding: 8px;
+  }
+  .mode-icon {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--mode-color, var(--accent)), color-mix(in srgb, var(--mode-color, var(--accent)) 60%, white));
+    border-radius: 14px;
+    color: white;
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--mode-color, var(--accent)) 40%, transparent);
+    transition: transform 0.25s;
+  }
+  .mode-card:hover .mode-icon {
+    transform: rotate(-8deg) scale(1.08);
+  }
+  .mode-icon svg {
+    width: 60%;
+    height: 60%;
+    stroke: currentColor;
+  }
+  .mode-visual {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mode-visual svg {
+    width: 100%;
+    height: auto;
+    max-height: 60px;
+  }
+  .mode-content {
+    flex: 1;
+    min-width: 0;
+  }
+  .mode-name {
+    font-size: 1.1rem;
+    font-weight: 900;
+    margin-bottom: 4px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .mode-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.4; margin-bottom: 8px; }
+  .mode-example {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    padding: 8px 10px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 10px;
+    margin-top: 6px;
+    border-left: 3px solid var(--mode-color, var(--accent));
+  }
+  .mode-example strong { color: var(--mode-color, var(--accent)); }
+  .mode-tag {
+    display: inline-block;
+    background: var(--mode-color, var(--accent));
+    color: #1a1148;
+    font-size: 0.65rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+  }
+
+  /* ─── PANTALLA SELECCIÓ NIVELL ─── */
+  #screen-select-level {
+    display: none;
+  }
+  #screen-select-level.active {
+    display: flex;
+  }
+  .level-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+    max-width: 520px;
+    margin-top: 24px;
+  }
+  .level-card {
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: 14px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .level-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    background: rgba(255,255,255,0.1);
+  }
+  .level-stars {
+    font-size: 2.2rem;
+    min-width: 50px;
+    flex-shrink: 0;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    color: var(--accent);
+  }
+  .level-stars svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+  .level-info { flex: 1; }
+  .level-name { font-size: 1.05rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+  .level-desc { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 8px; line-height: 1.4; }
+  .level-example { font-size: 0.78rem; color: var(--text-dim); font-style: italic; }
+
+  /* ─── PANTALLA PREFERÈNCIES ─── */
+  #screen-preferences {
+    display: none;
+  }
+  #screen-preferences.active {
+    display: flex;
+  }
+  .theme-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+    max-width: 520px;
+    margin-top: 16px;
+  }
+  .theme-btn {
+    padding: 18px;
+    border: 2px solid var(--card-border);
+    background: var(--card-bg);
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .theme-btn:hover {
+    border-color: var(--accent);
+  }
+  .theme-btn.selected {
+    border-color: var(--accent);
+    background: rgba(255,209,102,0.15);
+  }
+  .theme-icon {
+    font-size: 2.2rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+  }
+  .theme-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+  }
+  .theme-name { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+
+  /* ─── BACK BUTTON ─── */
+  .back-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--card-border);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: all 0.2s;
+  }
+  .back-btn:hover {
+    background: rgba(255,255,255,0.14);
+    border-color: var(--accent);
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     PANTALLA PORTADA (SPLASH)
+     ═══════════════════════════════════════════════ -->
+<div id="screen-splash" class="screen active">
+  <div class="splash-fractions" id="splash-fractions-container"></div>
+  <div class="splash-logo">🧮 Fraccions</div>
+  <div class="splash-sub">Pràctica i reforç</div>
+  <div class="splash-bar-bg">
+    <div class="splash-bar-fill"></div>
+  </div>
+  <div class="splash-phrase" id="splash-phrase"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PANTALLA SELECCIÓ DE PERFIL
+     ═══════════════════════════════════════════════ -->
+<div id="screen-select-profile" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-splash')">← Enrere</button>
+  <div class="logo">👥 Tria el teu perfil</div>
+  <div class="logo-sub">Tria un perfil existent o crea un de nou</div>
+  <div class="profile-grid" id="profile-grid"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PANTALLA CREACIÓ DE PERFIL
+     ═══════════════════════════════════════════════ -->
+<div id="screen-create-profile" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-select-profile')">← Enrere</button>
+  <div class="logo">👤 Crea el teu perfil</div>
+  <div class="card profile-form">
+    <div class="form-group">
+      <label>El teu nom</label>
+      <input type="text" id="profile-name" placeholder="Escriu el teu nom..." maxlength="20">
+    </div>
+
+    <div class="form-group">
+      <label>Com vols que et digui?</label>
+      <div class="gender-buttons" id="gender-buttons"></div>
+    </div>
+
+    <div class="form-group">
+      <div class="avatar-preview-wrap">
+        <div class="avatar-preview" id="avatar-preview">👦</div>
+      </div>
+    </div>
+
+    <div class="form-group" id="create-skin-group">
+      <label>Color de pell</label>
+      <div class="skin-grid" id="skin-grid"></div>
+    </div>
+
+    <div class="form-group">
+      <label>Tria el teu avatar</label>
+      <div id="create-avatar-grid" style="display:grid; grid-template-columns:repeat(6,1fr); gap:8px;"></div>
+    </div>
+
+    <button class="btn btn-yellow" onclick="saveNewProfile()">Endavant! ⚡</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PANTALLA SELECCIÓ DE MODE
+     ═══════════════════════════════════════════════ -->
+<div id="screen-select-mode" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-menu')">← Enrere</button>
+  <div class="logo">📚 Tria el mode</div>
+  <div class="mode-grid" id="mode-grid"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PANTALLA SELECCIÓ DE NIVELL
+     ═══════════════════════════════════════════════ -->
+<div id="screen-select-level" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-select-mode')">← Enrere</button>
+  <div class="logo" id="level-mode-name">Mode</div>
+  <div class="logo-sub">Tria la dificultat</div>
+  <div class="level-grid" id="level-grid"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PANTALLA PREFERÈNCIES / TEMES
+     ═══════════════════════════════════════════════ -->
+<div id="screen-preferences" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-menu')">← Enrere</button>
+  <div class="logo">⚙️ Preferències</div>
+  <div class="section-title">Tria el tema de color</div>
+  <div class="theme-grid" id="theme-grid"></div>
+</div>
+
+<!-- ─── PANTALLA MENÚ PRINCIPAL ─── -->
+<div id="screen-menu" class="screen">
+  <div class="logo">🧮 Fraccions</div>
+  <div class="logo-sub">Pràctica i reforç</div>
+
+  <!-- Barra de perfil -->
+  <div class="card" style="background: linear-gradient(135deg, rgba(167,139,250,0.15), rgba(34,211,238,0.1));">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div style="font-size:2.2rem;" id="menu-avatar">👦</div>
+      <div style="flex:1;">
+        <div style="font-weight:800; font-size:1.1rem; color:var(--text);" id="menu-name">Jugador</div>
+        <div style="font-size:0.85rem; color:var(--text-dim); margin-top:2px;" id="menu-rang">🌱 Aprenent/a</div>
+      </div>
+    </div>
+    <button class="btn btn-small btn-ghost" onclick="showScreen('screen-select-profile'); renderProfiles();" style="width:100%;">👥 Canviar perfil</button>
+  </div>
+
+  <!-- Botó gran per jugar -->
+  <button class="btn btn-yellow" style="font-size:1.15rem; padding:18px; max-width:520px;" onclick="showScreen('screen-select-mode'); renderModes();">🎮 Jugar una partida</button>
+
+  <!-- Stats i trofeus -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:520px; margin-top:12px;">
+    <button class="btn btn-blue" onclick="showScreen('screen-stats'); renderStats();">📊 Estadístiques</button>
+    <button class="btn btn-pink" onclick="showScreen('screen-trophies'); renderTrophies();">🏆 Trofeus</button>
+  </div>
+
+  <!-- Preferències i crèdits -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:520px; margin-top:10px;">
+    <button class="btn btn-cyan" onclick="showScreen('screen-preferences'); renderThemes();">⚙️ Preferències</button>
+    <button class="btn btn-ghost" onclick="showScreen('screen-credits'); unlockCurios();">👨‍💻 Crèdits</button>
+  </div>
+
+  <div style="text-align:center; color:var(--text-dim); font-size:0.8rem; margin-top:16px;">
+    Versió 2.0 · Domina les fraccions un pas a la vegada
+  </div>
+</div>
+
+<!-- ─── PANTALLA ESTADÍSTIQUES ─── -->
+<div id="screen-stats" class="screen">
+  <div class="topbar">
+    <button class="back" onclick="showScreen('screen-menu')">← Tornar</button>
+    <div></div>
+  </div>
+
+  <div class="logo" style="font-size:2rem; margin-top:6px;">📊 Estadístiques</div>
+  <div class="logo-sub">El teu progrés en cada mode i dificultat</div>
+
+  <div style="width:100%; max-width:520px; display:flex; flex-direction:column; gap:12px;">
+    <div style="background:rgba(255,255,255,0.06); border:1px solid var(--card-border); border-radius:12px; padding:14px; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <div style="font-size:1.5rem; font-weight:900; color:var(--accent);" id="st-rang-icon">🌱</div>
+        <div style="font-size:0.85rem; color:var(--text-dim);">Rang actual</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:1.1rem; font-weight:800; color:var(--text);" id="st-rang-nom">Aprenent/a</div>
+        <div style="font-size:0.8rem; color:var(--text-dim);" id="st-xp">0 XP</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.06); border:1px solid var(--card-border); border-radius:12px; padding:14px; text-align:center;">
+      <div style="font-size:1.4rem; font-weight:900; color:var(--accent); margin-bottom:4px;" id="st-partides">0</div>
+      <div style="font-size:0.85rem; color:var(--text-dim);">Partides jugades</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.06); border:1px solid var(--card-border); border-radius:12px; padding:14px; text-align:center;">
+      <div style="font-size:1.4rem; font-weight:900; color:var(--green); margin-bottom:4px;" id="st-perfectes">0</div>
+      <div style="font-size:0.85rem; color:var(--text-dim);">Partides perfectes (10/10)</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.06); border:1px solid var(--card-border); border-radius:12px; padding:14px; text-align:center;">
+      <div style="font-size:1.4rem; font-weight:900; color:var(--orange); margin-bottom:4px;" id="st-ratxa">0</div>
+      <div style="font-size:0.85rem; color:var(--text-dim);">Màxima ratxa</div>
+    </div>
+  </div>
+
+  <div style="width:100%; max-width:520px; margin-top:20px;">
+    <div style="font-weight:800; font-size:1.1rem; color:var(--text); margin-bottom:12px;">📈 Millors puntuacions per mode i dificultat</div>
+    <div id="stats-records" style="display:flex; flex-direction:column; gap:8px;"></div>
+  </div>
+
+  <div style="width:100%; max-width:520px; margin-top:20px;">
+    <div class="export-import-box">
+      <button class="export-btn" onclick="exportarDades()" title="Descarrega les teves dades en format JSON">
+        <div class="ic">⬇️</div>
+        <div class="tx">Exportar</div>
+      </button>
+      <button class="import-btn" onclick="document.getElementById('import-file-input').click()" title="Carrega dades des d'un fitxer JSON">
+        <div class="ic">⬆️</div>
+        <div class="tx">Importar</div>
+      </button>
+      <input type="file" id="import-file-input" accept=".json" style="display:none" onchange="importarDades(event)">
+    </div>
+  </div>
+
+  <button class="btn btn-purple" onclick="showScreen('screen-profile'); loadProfileEditor();" style="max-width:520px; margin-top:12px; width:100%;">✏️ Editar perfil</button>
+</div>
+
+<!-- ─── PANTALLA EDITAR PERFIL ─── -->
+<div id="screen-profile" class="screen">
+  <div class="topbar">
+    <button class="back" onclick="showScreen('screen-stats')">← Tornar</button>
+    <div style="font-size:2rem;" id="profile-avatar-display">👤</div>
+  </div>
+
+  <div class="logo" style="font-size:2rem; margin-top:6px;">✏️ Editar perfil</div>
+  <div class="logo-sub">Personalitza el teu jugador</div>
+
+  <div style="width:100%; max-width:520px; margin-top:20px;">
+    <div class="card">
+      <!-- Nom -->
+      <div style="margin-bottom:18px;">
+        <label style="display:block; font-size:0.9rem; color:var(--text-dim); margin-bottom:6px;">Nom:</label>
+        <input type="text" id="profile-nom" placeholder="Escriu el teu nom..." style="
+          width:100%; padding:10px 12px; border:1px solid var(--card-border); border-radius:8px;
+          background:rgba(255,255,255,0.04); color:var(--text); font-size:1rem;
+          font-family:inherit; box-sizing:border-box;
+        " maxlength="30">
+      </div>
+
+      <!-- Genere -->
+      <div style="margin-bottom:18px;">
+        <label style="display:block; font-size:0.9rem; color:var(--text-dim); margin-bottom:8px;">Genere:</label>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+          <button class="btn btn-small btn-orange" id="gen-M" onclick="selectGender('M'); updateProfilePreview();">♂️ Noi</button>
+          <button class="btn btn-small btn-ghost" id="gen-F" onclick="selectGender('F'); updateProfilePreview();">♀️ Noia</button>
+          <button class="btn btn-small btn-ghost" id="gen-N" onclick="selectGender('N'); updateProfilePreview();">✨ Neutre</button>
+        </div>
+      </div>
+
+      <!-- Color de pell (només per a humanoides) -->
+      <div style="margin-bottom:18px;" id="skin-selector">
+        <label style="display:block; font-size:0.9rem; color:var(--text-dim); margin-bottom:8px;">Color de pell:</label>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="profile-skin-btn selected" onclick="selectSkin(0); updateProfilePreview();" style="background:#ffdbac; width:40px; height:40px; border-radius:8px; border:2px solid rgba(255,255,255,0.3);"></button>
+          <button class="profile-skin-btn" onclick="selectSkin(1); updateProfilePreview();" style="background:#fdbcb4; width:40px; height:40px; border-radius:8px; border:2px solid rgba(255,255,255,0.1);"></button>
+          <button class="profile-skin-btn" onclick="selectSkin(2); updateProfilePreview();" style="background:#f9a825; width:40px; height:40px; border-radius:8px; border:2px solid rgba(255,255,255,0.1);"></button>
+          <button class="profile-skin-btn" onclick="selectSkin(3); updateProfilePreview();" style="background:#d08950; width:40px; height:40px; border-radius:8px; border:2px solid rgba(255,255,255,0.1);"></button>
+          <button class="profile-skin-btn" onclick="selectSkin(4); updateProfilePreview();" style="background:#aa6c39; width:40px; height:40px; border-radius:8px; border:2px solid rgba(255,255,255,0.1);"></button>
+          <button class="profile-skin-btn" onclick="selectSkin(5); updateProfilePreview();" style="background:#6a4423; width:40px; height:40px; border-radius:8px; border:2px solid rgba(255,255,255,0.1);"></button>
+        </div>
+      </div>
+
+      <!-- Avatar selector -->
+      <div style="margin-bottom:18px;">
+        <label style="display:block; font-size:0.9rem; color:var(--text-dim); margin-bottom:8px;">Cara:</label>
+        <div id="avatar-grid" style="display:grid; grid-template-columns:repeat(6,1fr); gap:8px;">
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div style="display:flex; gap:10px; margin-top:20px;">
+        <button class="btn btn-green" onclick="saveProfile()" style="flex:1;">💾 Guardar</button>
+        <button class="btn btn-ghost" onclick="showScreen('screen-stats')" style="flex:1;">Cancel·lar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.profile-skin-btn { cursor: pointer; transition: border 0.2s; }
+.profile-skin-btn:hover { border: 2px solid rgba(255,255,255,0.5) !important; }
+.profile-skin-btn.selected { border: 2px solid rgba(255,255,255,0.8) !important; box-shadow: 0 0 8px rgba(255,255,255,0.4); }
+.avatar-option { padding:8px; border:2px solid transparent; border-radius:8px; background:rgba(255,255,255,0.04); cursor:pointer; font-size:2rem; transition:all 0.2s; }
+.avatar-option:hover { background:rgba(255,255,255,0.08); border:2px solid var(--card-border); }
+.avatar-option.selected { border:2px solid var(--accent); background:rgba(255,209,102,0.15); box-shadow: 0 0 12px rgba(255,209,102,0.3); }
+</style>
+
+<!-- ─── PANTALLA TROFEUS ─── -->
+<div id="screen-trophies" class="screen">
+  <div class="topbar">
+    <button class="back" onclick="showScreen('screen-menu')">← Tornar</button>
+    <div></div>
+  </div>
+
+  <div class="logo" style="font-size:2rem; margin-top:6px;">🏆 Trofeus</div>
+  <div class="logo-sub">El teu progrés com a expert en fraccions</div>
+
+  <div class="trophy-stats">
+    <div style="text-align:center;">
+      <div class="trophy-stat-v" id="ts-trofeus">0/0</div>
+      <div class="trophy-stat-l">Trofeus</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="trophy-stat-v" id="ts-partides">0</div>
+      <div class="trophy-stat-l">Partides</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="trophy-stat-v" id="ts-perfectes">0</div>
+      <div class="trophy-stat-l">Perfectes</div>
+    </div>
+  </div>
+
+  <div class="trophy-grid" id="trophy-grid"></div>
+</div>
+
+<!-- ─── PANTALLA CRÈDITS ─── -->
+<div id="screen-credits" class="screen">
+  <div class="topbar">
+    <button class="back" onclick="showScreen('screen-menu')">← Tornar</button>
+    <div></div>
+  </div>
+
+  <div class="logo" style="font-size:2rem; margin-top:6px;">👨‍💻 Crèdits</div>
+  <div class="logo-sub">Gràcies a tots els que han fet possible aquest joc</div>
+
+  <div style="width:100%; max-width:520px; display:flex; flex-direction:column; gap:16px;">
+
+    <div class="credit-section">
+      <div class="credit-title">💻 Desenvolupament</div>
+      <div class="credit-person">
+        <div class="credit-name">Robert Potau Nuñez</div>
+        <div class="credit-role">Professor de Tecnologia i Digitalització i Programador</div>
+        <div class="credit-desc">Disseny, desenvolupament i manteniment de l'aplicació. Sistema de modes, gameplay i UX/UI.</div>
+      </div>
+    </div>
+
+    <div class="credit-section">
+      <div class="credit-title">🎓 Contingut pedagògic</div>
+      <div class="credit-person">
+        <div class="credit-name">Nil Bellmunt Vilalta</div>
+        <div class="credit-role">Professor de Matemàtiques</div>
+        <div class="credit-desc">Disseny del currículum de fraccions, exercicis educatius i validació de contingut matemàtic per a pràctica i reforç.</div>
+      </div>
+    </div>
+
+    <div class="credit-section">
+      <div class="credit-title">🤖 Intel·ligència Artificial</div>
+      <div class="credit-person">
+        <div class="credit-name">Claude Code (Anthropic)</div>
+        <div class="credit-role">Assistent IA</div>
+        <div class="credit-desc">Generació de codi, optimització, UX/UI design, testing i documentació tècnica.</div>
+      </div>
+    </div>
+
+    <div class="credit-section">
+      <div class="credit-title">⚙️ Tecnologia</div>
+      <div class="credit-tech">
+        <div><strong>HTML5</strong> — Estructura semàntica</div>
+        <div><strong>CSS3</strong> — Responsive design amb variables CSS</div>
+        <div><strong>JavaScript ES6+</strong> — Single-page application</div>
+        <div><strong>SVG</strong> — Visualització de fraccions (cercles, rectangles, barres)</div>
+        <div><strong>localStorage</strong> — Persistència de rècords</div>
+      </div>
+    </div>
+
+    <div class="credit-footer">
+      <div class="ttl">🍕 Fraccions — Pràctica i reforç</div>
+      <div class="ver"><strong>v1.0</strong> — Abril 2026</div>
+      <div class="lic">📜 Llicència <strong>Creative Commons BY-NC-SA 4.0</strong></div>
+      <div class="lic-sub">Compartir — Reconeixement — Mateix tipus de llicència</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PANTALLA DE JOC ─── -->
+<div id="screen-game" class="screen">
+  <div class="topbar">
+    <button class="back" onclick="confirmExit()">← Sortir</button>
+    <div class="score-mini"><span id="game-score">0</span> / <span id="game-total">10</span></div>
+  </div>
+  <div class="progress-bg">
+    <div id="progress-fill" class="progress-fill" style="width:0%;"></div>
+  </div>
+
+  <div id="question-box" class="question-box">
+    <!-- contingut dinàmic -->
+  </div>
+
+  <div id="feedback" class="feedback"></div>
+
+  <button id="btn-check" class="btn btn-green" onclick="checkAnswer()">Comprova</button>
+  <button id="btn-next" class="btn btn-blue" style="display:none;" onclick="nextQuestion()">Següent →</button>
+</div>
+
+<!-- ─── PANTALLA RESULTATS ─── -->
+<div id="screen-result" class="screen">
+  <div class="logo" id="result-title">Bona feina!</div>
+
+  <div class="card">
+    <div class="result-big" id="result-score">0/10</div>
+    <div class="result-message" id="result-message">Continua practicant!</div>
+    <div class="result-stats">
+      <div class="result-stat"><div class="v" id="rs-correct">0</div><div class="l">Encerts</div></div>
+      <div class="result-stat"><div class="v" id="rs-wrong">0</div><div class="l">Errors</div></div>
+      <div class="result-stat"><div class="v" id="rs-pct">0%</div><div class="l">Encert</div></div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; padding:8px 12px; background:rgba(255,255,255,0.05); border-radius:10px; border:1px solid var(--card-border);">
+      <div style="font-size:0.85rem; color:var(--text-dim);">Rang actual</div>
+      <div style="font-weight:800; color:var(--text);" id="rs-rang">🌱 Aprenent</div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; padding:8px 12px; background:rgba(255,255,255,0.05); border-radius:10px; border:1px solid var(--card-border);">
+      <div style="font-size:0.85rem; color:var(--text-dim);">XP guanyat</div>
+      <div style="font-weight:900; color:#4ade80;" id="rs-xp">+0 XP</div>
+    </div>
+    <button class="btn btn-green" onclick="playAgain()">🔄 Tornar a jugar</button>
+    <button class="btn btn-ghost" onclick="goMenu()">🏠 Menú principal</button>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ═══════════════════════════════════════════════
+   CONFIGURACIÓ I ESTAT GLOBAL
+   ═══════════════════════════════════════════════ */
+
+const TOTAL_QS = 10;
+
+const DIFF_DESC = {
+  1: 'Denominadors petits (2–6). Visuals senzills.',
+  2: 'Denominadors mitjans (2–10). Equivalents bàsics.',
+  3: 'Denominadors grans (2–12). Simplificació i comparació exigents.'
+};
+
+const DIFF_RANGE = {
+  1: { dMin: 2, dMax: 6 },
+  2: { dMin: 2, dMax: 12 },
+  3: { dMin: 2, dMax: 20 },
+  4: { dMin: 2, dMax: 30 }
+};
+
+const MODE_LABELS = {
+  identifica: '🔢 Identifica la fracció',
+  acoloreix: '🎨 Acoloreix la fracció',
+  imatge: '🧩 Tria la imatge correcta',
+  equivalents: '🟰 Fraccions equivalents',
+  simplifica: '✂️ Simplifica',
+  compara: '⚖️ Compara fraccions',
+  barreja: '🌟 Barreja',
+  chrono: '⏱️ Contrarellotge',
+  suma_frac: '➕ Suma de fraccions',
+  resta_frac: '➖ Resta de fraccions',
+  multi_frac: '✖️ Multiplicació',
+  div_frac: '➗ Divisió'
+};
+
+const SHAPES = ['circle', 'rectangle', 'bar'];
+
+const FRASES_CORRECTE = [
+  '🎉 Genial!', '✨ Molt bé!', '⭐ Perfecte!', '🚀 Endavant!',
+  '👏 Excel·lent!', '💯 Ho has clavat!', '🌟 Ets un crack!', '🔥 Increïble!'
+];
+const FRASES_ERROR = [
+  '😅 Quasi! La pròxima encertaràs.', '💪 No passa res, segueix endavant!',
+  '📚 Mira com es fa i aprèn!', '🎯 La pròxima serà teva!', '🌟 Cada error és una lliçó!',
+  '✨ Vas bé, força!', '🚀 No et rendeixes, vas!', '💡 Fixa-t\'hi i aprèn!',
+  '🌈 Cada intent et fa més fort!', '⚡ Segon intent serà millor!'
+];
+
+let state = {
+  diff: 1,
+  mode: 'identifica',
+  q: 0,
+  correct: 0,
+  wrong: 0,
+  current: null,       // pregunta actual
+  answered: false,     // bloqueja "Comprova" un cop respost
+  chrono_time: 0,      // temps restant en mode contrarellotge
+  chrono_interval: null, // ID del setInterval
+  _needsSimplify: false  // resposta correcta però no simplificada
+};
+
+/* ═══════════════════════════════════════════════
+   UTILITATS MATEMÀTIQUES
+   ═══════════════════════════════════════════════ */
+
+function ri(a, b) { return Math.floor(Math.random()*(b-a+1)) + a; }
+function pick(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function gcd(a, b) {
+  a = Math.abs(a); b = Math.abs(b);
+  while (b) { [a, b] = [b, a % b]; }
+  return a;
+}
+
+function simplify(n, d) {
+  const g = gcd(n, d);
+  return [n/g, d/g];
+}
+
+function isReduced(n, d) { return gcd(n, d) === 1; }
+
+/* ═══════════════════════════════════════════════
+   VISUALITZACIONS SVG
+   ═══════════════════════════════════════════════ */
+
+function svgCircle(num, den, size=180, opts={}) {
+  const cx = size/2, cy = size/2, r = size/2 - 6;
+  const filled = opts.filled !== undefined ? opts.filled : num;
+  const clickable = opts.clickable ? 'clickable' : '';
+  const onClick = opts.onClick || null;
+
+  let sectors = '';
+  if (den === 1) {
+    sectors = `<circle cx="${cx}" cy="${cy}" r="${r}" class="${filled >= 1 ? 'sector-fill' : 'sector-empty'}" />`;
+  } else {
+    for (let i = 0; i < den; i++) {
+      const a1 = (i / den) * 2 * Math.PI - Math.PI/2;
+      const a2 = ((i+1) / den) * 2 * Math.PI - Math.PI/2;
+      const x1 = cx + r * Math.cos(a1);
+      const y1 = cy + r * Math.sin(a1);
+      const x2 = cx + r * Math.cos(a2);
+      const y2 = cy + r * Math.sin(a2);
+      const large = (a2 - a1) > Math.PI ? 1 : 0;
+      const cls = i < filled ? 'sector-fill' : 'sector-empty';
+      const click = onClick ? ` data-idx="${i}" onclick="${onClick}(${i})"` : '';
+      sectors += `<path class="sector ${cls}" d="M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z"${click} />`;
+    }
+  }
+  return `<svg class="shape-svg ${clickable}" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${sectors}</svg>`;
+}
+
+function svgRectangle(num, den, w=240, h=120, opts={}) {
+  const filled = opts.filled !== undefined ? opts.filled : num;
+  const clickable = opts.clickable ? 'clickable' : '';
+  const onClick = opts.onClick || null;
+
+  let cols = den, rows = 1;
+  if (den >= 6 && den % 2 === 0 && den <= 12) { cols = den/2; rows = 2; }
+  if (den === 9) { cols = 3; rows = 3; }
+  if (den === 10) { cols = 5; rows = 2; }
+  if (den === 12) { cols = 4; rows = 3; }
+  if (den === 8) { cols = 4; rows = 2; }
+  if (den === 6) { cols = 3; rows = 2; }
+
+  const cw = w / cols;
+  const rh = h / rows;
+  let pieces = '';
+  for (let i = 0; i < den; i++) {
+    const r = Math.floor(i / cols);
+    const c = i % cols;
+    const cls = i < filled ? 'piece-fill' : 'piece-empty';
+    const click = onClick ? ` data-idx="${i}" onclick="${onClick}(${i})"` : '';
+    pieces += `<rect class="piece ${cls}" x="${c*cw}" y="${r*rh}" width="${cw}" height="${rh}"${click} />`;
+  }
+  return `<svg class="shape-svg ${clickable}" width="${w}" height="${rows*rh}" viewBox="0 0 ${w} ${rows*rh}">${pieces}</svg>`;
+}
+
+function svgBar(num, den, w=320, h=50, opts={}) {
+  const filled = opts.filled !== undefined ? opts.filled : num;
+  const clickable = opts.clickable ? 'clickable' : '';
+  const onClick = opts.onClick || null;
+  const cw = w / den;
+  let pieces = '';
+  for (let i = 0; i < den; i++) {
+    const cls = i < filled ? 'piece-fill' : 'piece-empty';
+    const click = onClick ? ` data-idx="${i}" onclick="${onClick}(${i})"` : '';
+    pieces += `<rect class="piece ${cls}" x="${i*cw}" y="0" width="${cw}" height="${h}"${click} />`;
+  }
+  return `<svg class="shape-svg ${clickable}" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${pieces}</svg>`;
+}
+
+function drawShape(shape, num, den, opts={}) {
+  // Escalar mides per a opcions (més petites)
+  const isSmall = opts.small || false;
+  const sizeMultiplier = isSmall ? 0.65 : 1;
+
+  if (shape === 'circle') return svgCircle(num, den, Math.round(180 * sizeMultiplier), opts);
+  if (shape === 'rectangle') return svgRectangle(num, den, Math.round(240 * sizeMultiplier), Math.round(120 * sizeMultiplier), opts);
+  if (shape === 'bar') return svgBar(num, den, Math.round(320 * sizeMultiplier), Math.round(50 * sizeMultiplier), opts);
+  return svgCircle(num, den, Math.round(180 * sizeMultiplier), opts);
+}
+
+/* ═══════════════════════════════════════════════
+   GENERACIÓ DE PREGUNTES
+   ═══════════════════════════════════════════════ */
+
+function genFrac(diff) {
+  const r = DIFF_RANGE[diff];
+  const d = ri(r.dMin, r.dMax);
+  const n = ri(1, d - 1);  // fracció pròpia per visualització clara
+  return [n, d];
+}
+
+function genIdentifica(diff) {
+  const [n, d] = genFrac(diff);
+  const shape = pick(SHAPES);
+  return {
+    type: 'identifica',
+    n, d, shape,
+    answer: { n, d }
+  };
+}
+
+function genAcoloreix(diff) {
+  const [n, d] = genFrac(diff);
+  const shape = pick(['circle', 'rectangle', 'bar']);
+
+  // Al nivell avançat (3), afegir fraccions equivalents
+  // Ex: pregunta "Acoloreix 1/2" pero la forma té 4 parts (2/4)
+  let displayN = n, displayD = d;
+  let filledAnswer = n;
+
+  if (diff === 3 && Math.random() < 0.5) {
+    const k = ri(2, 3); // multiplicador
+    displayN = n * k;
+    displayD = d * k;
+    // La resposta és el nombre de peces a pintar en la forma equivalent
+    filledAnswer = n * k;
+  }
+
+  return {
+    type: 'acoloreix',
+    n: displayN, d: displayD, shape,
+    filled: 0,
+    answer: { filled: filledAnswer }
+  };
+}
+
+function genImatge(diff) {
+  const [n, d] = genFrac(diff);
+  const shape = pick(SHAPES);
+  // 4 opcions: una correcta + 3 distractors no equivalents (a/b ≠ n/d)
+  const correctOpt = { n, d, shape: shape };
+  const distractors = new Set();
+  let attempts = 0;
+  while (distractors.size < 3 && attempts < 80) {
+    attempts++;
+    const dd = ri(DIFF_RANGE[diff].dMin, DIFF_RANGE[diff].dMax);
+    const nn = ri(1, dd - 1);
+    if (nn * d === dd * n) continue; // equivalent → exclou
+    // Assignar forma aleatòria a cada distractor
+    const distShape = pick(SHAPES);
+    distractors.add(`${nn}/${dd}|${distShape}`);
+  }
+  const opts = [correctOpt, ...Array.from(distractors).map(s => {
+    const [frac, distShape] = s.split('|');
+    const [nn, dd] = frac.split('/').map(Number);
+    return { n: nn, d: dd, shape: distShape };
+  })];
+  return {
+    type: 'imatge',
+    n, d, shape,
+    options: shuffle(opts),
+    answer: { n, d }
+  };
+}
+
+function genEquivalents(diff) {
+  // generem una fracció reduïda i la multipliquem per un k
+  const r = DIFF_RANGE[diff];
+  let n, d;
+  do {
+    d = ri(2, Math.min(r.dMax, 6));
+    n = ri(1, d - 1);
+  } while (gcd(n, d) !== 1);
+
+  const k = diff === 1 ? ri(2, 3) : ri(2, 4);
+  const eqN = n * k, eqD = d * k;
+
+  // 4 opcions: la correcta + 3 distractors no equivalents
+  const opts = new Set([`${eqN}/${eqD}`]);
+  let attempts = 0;
+  while (opts.size < 4 && attempts < 50) {
+    attempts++;
+    const dk = ri(2, 4);
+    // distractors: fraccions semblants però no iguals
+    const candN = ri(1, n*dk + 2);
+    const candD = ri(2, Math.max(eqD, d*dk + 2));
+    if (candD === 0) continue;
+    if (candN >= candD) continue;
+    if (candN * d === candD * n) continue; // és equivalent → exclou
+    opts.add(`${candN}/${candD}`);
+  }
+
+  const optList = Array.from(opts).map(s => {
+    const [nn, dd] = s.split('/').map(Number);
+    return { n: nn, d: dd };
+  });
+
+  return {
+    type: 'equivalents',
+    n, d,
+    options: shuffle(optList),
+    answer: { n: eqN, d: eqD, baseN: n, baseD: d }
+  };
+}
+
+function genSimplifica(diff) {
+  // generem una fracció reduïda i la multipliquem
+  const r = DIFF_RANGE[diff];
+  let n, d;
+  do {
+    d = ri(2, diff === 1 ? 5 : (diff === 2 ? 7 : 9));
+    n = ri(1, d - 1);
+  } while (gcd(n, d) !== 1);
+
+  const k = diff === 1 ? ri(2, 3) : (diff === 2 ? ri(2, 4) : ri(2, 5));
+  return {
+    type: 'simplifica',
+    n: n*k, d: d*k,
+    answer: { n, d }
+  };
+}
+
+function genCompara(diff) {
+  // generem dues fraccions; preferim variar denominadors
+  const r = DIFF_RANGE[diff];
+  const d1 = ri(r.dMin, r.dMax);
+  const n1 = ri(1, d1 - 1);
+  let d2 = ri(r.dMin, r.dMax);
+  let n2 = ri(1, d2 - 1);
+
+  // 30% probabilitat de generar fraccions iguals (per al cas =)
+  if (Math.random() < 0.3) {
+    const k = ri(2, 4);
+    n2 = n1 * k;
+    d2 = d1 * k;
+    if (d2 > r.dMax * 2) { n2 = n1; d2 = d1; } // safety
+  }
+
+  const v1 = n1 / d1;
+  const v2 = n2 / d2;
+  let cmp;
+  if (Math.abs(v1 - v2) < 1e-9) cmp = '=';
+  else if (v1 > v2) cmp = '>';
+  else cmp = '<';
+
+  return {
+    type: 'compara',
+    n1, d1, n2, d2,
+    answer: { cmp }
+  };
+}
+
+function genBarreja(diff) {
+  const modes = ['identifica', 'acoloreix', 'imatge', 'equivalents', 'simplifica', 'compara'];
+  const m = pick(modes);
+  return generators[m](diff);
+}
+
+function genChrono(diff) {
+  // Igual que barreja: preguntes aleatòries sense límit
+  const modes = ['identifica', 'acoloreix', 'imatge', 'equivalents', 'simplifica', 'compara'];
+  const m = pick(modes);
+  return generators[m](diff);
+}
+
+// ─── Operacions amb fraccions ───
+function genSumaFrac(diff) {
+  let [n1, d1] = genFrac(diff);
+  let [n2, d2] = genFrac(diff);
+
+  // Sense MCM: si denominadors iguals, deixar-ho. Si no, multiplicar denominador de n2
+  let resultN, resultD;
+  if (d1 === d2) {
+    resultN = n1 + n2;
+    resultD = d1;
+  } else {
+    // Suma simple: (n1*d2 + n2*d1) / (d1*d2)
+    resultN = n1*d2 + n2*d1;
+    resultD = d1*d2;
+  }
+
+  // Simplificar
+  const g = gcd(resultN, resultD);
+  resultN = resultN / g;
+  resultD = resultD / g;
+
+  return {
+    type: 'suma_frac',
+    n1, d1, n2, d2,
+    answer: { n: resultN, d: resultD }
+  };
+}
+
+function genRestaFrac(diff) {
+  let [n1, d1] = genFrac(diff);
+  let [n2, d2] = genFrac(diff);
+
+  // Assegurar que n1/d1 >= n2/d2 per tenir resultat positiu
+  if (n1*d2 < n2*d1) {
+    [n1, n2] = [n2, n1];
+    [d1, d2] = [d2, d1];
+  }
+
+  let resultN, resultD;
+  if (d1 === d2) {
+    resultN = n1 - n2;
+    resultD = d1;
+  } else {
+    resultN = n1*d2 - n2*d1;
+    resultD = d1*d2;
+  }
+
+  const g = gcd(resultN, resultD);
+  resultN = resultN / g;
+  resultD = resultD / g;
+
+  return {
+    type: 'resta_frac',
+    n1, d1, n2, d2,
+    answer: { n: resultN, d: resultD }
+  };
+}
+
+function genMultiFrac(diff) {
+  const [n1, d1] = genFrac(diff);
+  const [n2, d2] = genFrac(diff);
+
+  let resultN = n1 * n2;
+  let resultD = d1 * d2;
+
+  const g = gcd(resultN, resultD);
+  resultN = resultN / g;
+  resultD = resultD / g;
+
+  return {
+    type: 'multi_frac',
+    n1, d1, n2, d2,
+    answer: { n: resultN, d: resultD }
+  };
+}
+
+function genDivFrac(diff) {
+  const [n1, d1] = genFrac(diff);
+  let [n2, d2] = genFrac(diff);
+
+  // Assegurar que n2 no és 0 (divisió per zero)
+  if (n2 === 0) n2 = 1;
+
+  // División: (n1/d1) / (n2/d2) = (n1/d1) * (d2/n2) = (n1*d2) / (d1*n2)
+  let resultN = n1 * d2;
+  let resultD = d1 * n2;
+
+  const g = gcd(resultN, resultD);
+  resultN = resultN / g;
+  resultD = resultD / g;
+
+  return {
+    type: 'div_frac',
+    n1, d1, n2, d2,
+    answer: { n: resultN, d: resultD }
+  };
+}
+
+// ─── MODES OPERACIONS BARREJADES ───
+function genOperacionsIguals(diff) {
+  const operacions = ['suma', 'resta', 'multi', 'div'];
+  let op = pick(operacions);
+
+  let n1, d1, n2, d2, n3, d3, resultN, resultD;
+  let attempts = 0;
+
+  do {
+    attempts++;
+    if (attempts > 80) op = pick(['suma', 'multi']);
+    [n1, d1] = genFrac(diff);
+    [n2, d2] = genFrac(diff);
+    [n3, d3] = genFrac(diff);
+
+    if (op === 'suma') {
+      const temp1N = n1*d2 + n2*d1;
+      const temp1D = d1*d2;
+      resultN = temp1N*d3 + n3*temp1D;
+      resultD = temp1D*d3;
+    } else if (op === 'resta') {
+      const fracs = [[n1,d1],[n2,d2],[n3,d3]].sort((a,b) => b[0]/b[1] - a[0]/a[1]);
+      [[n1,d1],[n2,d2],[n3,d3]] = fracs;
+      resultN = n1*d2*d3 - n2*d1*d3 - n3*d1*d2;
+      resultD = d1*d2*d3;
+    } else if (op === 'multi') {
+      resultN = n1 * n2 * n3;
+      resultD = d1 * d2 * d3;
+    } else {
+      resultN = n1 * d2 * d3;
+      resultD = d1 * n2 * n3;
+    }
+  } while ((resultN <= 0 || resultD <= 0) && attempts < 120);
+
+  if (resultD < 0) { resultN = -resultN; resultD = -resultD; }
+
+  const g = gcd(Math.abs(resultN), Math.abs(resultD));
+  resultN = resultN / g;
+  resultD = resultD / g;
+
+  const opSymbol = { suma: '+', resta: '-', multi: '×', div: '÷' }[op];
+
+  return {
+    type: 'op_iguals',
+    n1, d1, n2, d2, n3, d3,
+    op, opSymbol,
+    answer: { n: resultN, d: resultD }
+  };
+}
+
+function applyOp(aN, aD, bN, bD, op) {
+  let rN, rD;
+  if (op === 'suma') { rN = aN*bD + bN*aD; rD = aD*bD; }
+  else if (op === 'resta') { rN = aN*bD - bN*aD; rD = aD*bD; }
+  else if (op === 'multi') { rN = aN*bN; rD = aD*bD; }
+  else { rN = aN*bD; rD = aD*bN; }
+  return [rN, rD];
+}
+
+function isHighPrecedence(op) { return op === 'multi' || op === 'div'; }
+
+function genOperacionsMixtes(diff) {
+  const operacions = ['suma', 'resta', 'multi', 'div'];
+  let resultN, resultD, n1, d1, n2, d2, n3, d3, op1, op2;
+  let attempts = 0;
+
+  do {
+    attempts++;
+    [n1, d1] = genFrac(diff);
+    [n2, d2] = genFrac(diff);
+    [n3, d3] = genFrac(diff);
+    op1 = pick(operacions);
+    op2 = pick(operacions);
+    if (attempts > 80) {
+      op1 = pick(['suma', 'multi']);
+      op2 = pick(['suma', 'multi']);
+    }
+
+    if (!isHighPrecedence(op1) && isHighPrecedence(op2)) {
+      const [tempN, tempD] = applyOp(n2, d2, n3, d3, op2);
+      [resultN, resultD] = applyOp(n1, d1, tempN, tempD, op1);
+    } else if (isHighPrecedence(op1) && !isHighPrecedence(op2)) {
+      const [tempN, tempD] = applyOp(n1, d1, n2, d2, op1);
+      [resultN, resultD] = applyOp(tempN, tempD, n3, d3, op2);
+    } else {
+      const [tempN, tempD] = applyOp(n1, d1, n2, d2, op1);
+      [resultN, resultD] = applyOp(tempN, tempD, n3, d3, op2);
+    }
+  } while ((resultN <= 0 || resultD <= 0) && attempts < 120);
+
+  if (resultD < 0) { resultN = -resultN; resultD = -resultD; }
+
+  const g = gcd(Math.abs(resultN), Math.abs(resultD));
+  resultN = resultN / g;
+  resultD = resultD / g;
+
+  const opSymbol1 = { suma: '+', resta: '-', multi: '×', div: '÷' }[op1];
+  const opSymbol2 = { suma: '+', resta: '-', multi: '×', div: '÷' }[op2];
+
+  return {
+    type: 'op_mixtes',
+    n1, d1, n2, d2, n3, d3,
+    op1, op2, opSymbol1, opSymbol2,
+    answer: { n: resultN, d: resultD }
+  };
+}
+
+const generators = {
+  identifica: genIdentifica,
+  acoloreix: genAcoloreix,
+  imatge: genImatge,
+  equivalents: genEquivalents,
+  simplifica: genSimplifica,
+  compara: genCompara,
+  barreja: genBarreja,
+  chrono: genChrono,
+  suma_frac: genSumaFrac,
+  resta_frac: genRestaFrac,
+  multi_frac: genMultiFrac,
+  div_frac: genDivFrac,
+  op_iguals: genOperacionsIguals,
+  op_mixtes: genOperacionsMixtes
+};
+
+/* ═══════════════════════════════════════════════
+   TROFEUS
+   ═══════════════════════════════════════════════ */
+
+const TROFEUS = [
+  // Progressió
+  { id:'primer_pas', nom:'Primer pas', icon:'🕊️', desc:'Primera partida completada', cat:'prog' },
+  { id:'estudiant', nom:'Estudiant', icon:'🎓', desc:'25 partides completades', cat:'prog' },
+  { id:'constant', nom:'Constant', icon:'📅', desc:'50 partides completades', cat:'prog' },
+  { id:'verita', nom:'Veterà', icon:'🏅', desc:'100 partides completades', cat:'prog' },
+  { id:'rang_llegenda', nom:'Llegenda', icon:'⚡', desc:'Assoleix el rang Llegenda (18.000 XP)', cat:'prog' },
+
+  // Habilitat
+  { id:'sense_errors', nom:'Sense errors', icon:'⭐', desc:'10/10 en una partida', cat:'hab' },
+  { id:'ratxa_foc', nom:'Ratxa de foc', icon:'🔥', desc:'10 encerts seguits', cat:'hab' },
+  { id:'ratxa_llegenda', nom:'Ratxa llegenda', icon:'⚡', desc:'20 encerts seguits', cat:'hab' },
+  { id:'perfeccionista', nom:'Perfeccionista', icon:'💎', desc:'5 partides perfectes (10/10)', cat:'hab' },
+  { id:'maratonista', nom:'Maratonista', icon:'🏃', desc:'10 partides perfectes (10/10)', cat:'hab' },
+  { id:'velocista', nom:'Velocista', icon:'⏱️', desc:'10 encerts al mode Contrarellotge', cat:'hab' },
+
+  // Modes bàsics
+  { id:'identificador', nom:'Identificador', icon:'🔢', desc:'10/10 al mode Identifica', cat:'mode' },
+  { id:'pintor', nom:'Pintor', icon:'🎨', desc:'10/10 al mode Acoloreix', cat:'mode' },
+  { id:'observador', nom:'Observador', icon:'🧩', desc:'10/10 al mode Tria la imatge', cat:'mode' },
+  { id:'equivalent', nom:'Equivalent', icon:'🟰', desc:'10/10 al mode Equivalents', cat:'mode' },
+  { id:'simplificador', nom:'Simplificador', icon:'✂️', desc:'10/10 al mode Simplifica', cat:'mode' },
+  { id:'comparador', nom:'Comparador', icon:'⚖️', desc:'10/10 al mode Compara', cat:'mode' },
+  { id:'polivalent', nom:'Polivalent', icon:'🌟', desc:'10/10 als 6 modes bàsics', cat:'mode' },
+
+  // Modes operació
+  { id:'sumador', nom:'Sumador', icon:'➕', desc:'10/10 al mode Suma', cat:'mode' },
+  { id:'restador', nom:'Restador', icon:'➖', desc:'10/10 al mode Resta', cat:'mode' },
+  { id:'multiplicador', nom:'Multiplicador', icon:'✖️', desc:'10/10 al mode Multiplicació', cat:'mode' },
+  { id:'divisor', nom:'Divisor', icon:'➗', desc:'10/10 al mode Divisió', cat:'mode' },
+  { id:'op_encadenades', nom:'Op. Encadenades', icon:'🔗', desc:'10/10 al mode Op. Iguals', cat:'mode' },
+  { id:'op_mestre', nom:'Mestre d\'Op.', icon:'🧮', desc:'10/10 al mode Op. Mixtes', cat:'mode' },
+  { id:'calculista', nom:'Calculista', icon:'🔭', desc:'10/10 als 4 modes d\'operació', cat:'mode' },
+  { id:'matematico', nom:'Matemàtic', icon:'👨‍🏫', desc:'10/10 a TOTS els modes (12 modes!)', cat:'mode' },
+
+  // Dificultat
+  { id:'iniciat', nom:'Iniciat', icon:'🟢', desc:'10/10 a Fàcil', cat:'diff' },
+  { id:'avancant', nom:'Avançant', icon:'🟡', desc:'10/10 a Normal', cat:'diff' },
+  { id:'mestre_frac', nom:'Mestre Fraccionari', icon:'🔴', desc:'10/10 a Difícil', cat:'diff' },
+  { id:'expert_frac', nom:'Expert Fraccionari', icon:'💜', desc:'10/10 a Expert', cat:'diff' },
+
+  // Secret
+  { id:'curios', nom:'Curiós', icon:'🕵️', desc:'Has llegit els crèdits', cat:'secret' },
+  { id:'barreja_total', nom:'Mestre Total', icon:'👑', desc:'10/10 al mode Barreja', cat:'secret' },
+  { id:'frikis_robotica', nom:'Frikis de Robòtica', icon:'🤖', desc:'Dos amics robòtics comparteixen el joc', cat:'secret' }
+];
+
+const AVATARS_MASC  = ["👦","🧒","👱","🧔","👨","🧑","🧓","🤴","👳","🦸","🥷","🧙"];
+const AVATARS_FEM   = ["👧","👩","👱‍♀️","🧕","👳‍♀️","👸","👰","🧙‍♀️","💃","🦸‍♀️","🧚‍♀️","🧜‍♀️"];
+const AVATARS_NEUT  = ["🦊","🐱","🐼","🤖","👾","🦄","🐸","🐧","🦋","🦁","🐯","🐺","🦅","🦖","🐉","🎭","🧸","🤡"];
+
+const TROPHY_CATS = [
+  { id:'prog', nom:'📈 Progressió', color:'#4ade80' },
+  { id:'hab', nom:'⭐ Habilitat', color:'#f7c948' },
+  { id:'mode', nom:'🎯 Modes de joc', color:'#a78bfa' },
+  { id:'diff', nom:'🏔️ Dificultat', color:'#fb923c' },
+  { id:'secret', nom:'🔒 Secret', color:'#94a3b8' }
+];
+
+/* ═══════════════════════════════════════════════
+   SISTEMA DE RANGS
+   ═══════════════════════════════════════════════ */
+
+const RANGS = [
+  { xp:0,     icon:'🌱', noms:{ M:'Aprenent',  F:'Aprenenta',  N:'Aprenent/a'  } },
+  { xp:200,   icon:'🗺️', noms:{ M:'Explorador', F:'Exploradora', N:'Explorador/a' } },
+  { xp:500,   icon:'⚔️', noms:{ M:'Escuder',    F:'Escudera',   N:'Escuder/a'   } },
+  { xp:900,   icon:'🏹', noms:{ M:'Aventurer',  F:'Aventurera', N:'Aventurer/a' } },
+  { xp:1500,  icon:'🛡️', noms:{ M:'Guerrer',    F:'Guerrera',   N:'Guerrer/a'   } },
+  { xp:2500,  icon:'🌟', noms:{ M:'Campió',     F:'Campiona',   N:'Campió/ona'  } },
+  { xp:4000,  icon:'🔱', noms:{ M:'Guardià',    F:'Guardiana',  N:'Guardià/ana' } },
+  { xp:6500,  icon:'👑', noms:{ M:'Mestre',     F:'Mestra',     N:'Mestre/a'    } },
+  { xp:11000, icon:'✨', noms:{ M:'Arcà',       F:'Arcana',     N:'Arcà/ana'    } },
+  { xp:18000, icon:'⚡', noms:{ M:'Llegenda',   F:'Llegenda',   N:'Llegenda'    } },
+];
+
+function getRang(xp) {
+  let rang = RANGS[0];
+  for (const r of RANGS) {
+    if ((xp || 0) >= r.xp) rang = r;
+    else break;
+  }
+  return rang;
+}
+
+function getNomRang(rang, genere) {
+  return rang.noms[genere] || rang.noms.M;
+}
+
+function getGenere() {
+  return (player && (player.genere || player.gender)) || 'M';
+}
+
+/* ═══════════════════════════════════════════════
+   AVATAR SYSTEM
+   ═══════════════════════════════════════════════ */
+
+function applySkintone(base, mod) {
+  if (!mod || mod === 0) return base;
+  const SKIN_TONES = ['', '\u{1F3FB}', '\u{1F3FC}', '\u{1F3FD}', '\u{1F3FE}', '\u{1F3FF}'];
+  const skin = SKIN_TONES[mod] || '';
+  const zwjIdx = base.indexOf('‍');
+  if (zwjIdx !== -1) {
+    return base.slice(0, zwjIdx) + skin + base.slice(zwjIdx);
+  }
+  return base + skin;
+}
+
+function getPlayerAvatar(p) {
+  if (!p) return '👤';
+  const genere = p.genere || p.gender || 'M';
+  // Perfils antics guarden l'emoji base com a string (sense to de pell)
+  if (typeof p.avatar === 'string') {
+    return genere === 'N' ? p.avatar : applySkintone(p.avatar, p.skin);
+  }
+  // Perfils nous guarden un índex dins la llista del seu gènere
+  const avatarList = genere === 'F' ? AVATARS_FEM : genere === 'N' ? AVATARS_NEUT : AVATARS_MASC;
+  const av = avatarList[(p.avatar || 0) % avatarList.length];
+  return genere === 'N' ? av : applySkintone(av, p.skin);
+}
+
+/* ═══════════════════════════════════════════════
+   JUGADOR (PERSISTÈNCIA)
+   ═══════════════════════════════════════════════ */
+
+const PLAYER_KEY = 'fraccions_player_v1';
+
+function defaultPlayer() {
+  return {
+    nom: 'Jugador',
+    genere: 'M',            // M: male, F: female, N: neutral
+    skin: 0,                // 0-5: skin tone
+    avatar: 0,              // index of avatar
+    trofeus: [],
+    partides: 0,
+    perfectes: 0,
+    ratxa_actual: 0,
+    ratxa_max: 0,
+    perfect_per_mode: {},
+    perfect_per_diff: {},
+    xp: 0
+  };
+}
+
+let player = null;
+
+function loadPlayer() {
+  try {
+    const raw = localStorage.getItem(PLAYER_KEY);
+    if (raw) {
+      const p = JSON.parse(raw);
+      const def = defaultPlayer();
+      // migració: assegura que totes les claus existeixen
+      for (const k of Object.keys(def)) {
+        if (p[k] === undefined) p[k] = def[k];
+      }
+      player = p;
+      return;
+    }
+  } catch {}
+  player = defaultPlayer();
+}
+
+function savePlayer() {
+  localStorage.setItem(PLAYER_KEY, JSON.stringify(player));
+  if (allProfiles[currentProfileIdx]) {
+    allProfiles[currentProfileIdx] = JSON.parse(JSON.stringify(player));
+    saveAllProfiles();
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   PERSISTÈNCIA (RÈCORDS)
+   ═══════════════════════════════════════════════ */
+
+const STORE_KEY = 'fraccions_records_v1';
+
+function getRecords() {
+  try {
+    return JSON.parse(localStorage.getItem(STORE_KEY)) || {};
+  } catch { return {}; }
+}
+
+function saveRecord(mode, diff, score) {
+  const recs = getRecords();
+  const key = `${mode}_${diff}`;
+  if (!recs[key] || score > recs[key]) recs[key] = score;
+  localStorage.setItem(STORE_KEY, JSON.stringify(recs));
+}
+
+function renderRecords() {
+  const recs = getRecords();
+  const list = document.getElementById('records-list');
+  const modes = ['identifica', 'acoloreix', 'imatge', 'equivalents', 'simplifica', 'compara', 'barreja'];
+  const diffName = { 1: 'Bàsic', 2: 'Mitjà', 3: 'Avançat' };
+  const rows = [];
+  modes.forEach(m => {
+    [1, 2, 3].forEach(d => {
+      const key = `${m}_${d}`;
+      if (recs[key]) {
+        rows.push(`<div class="record-row"><span class="name">${MODE_LABELS[m]} · ${diffName[d]}</span><span class="val">${recs[key]}/${TOTAL_QS}</span></div>`);
+      }
+    });
+  });
+  if (rows.length === 0) {
+    list.innerHTML = '<div style="text-align:center; color:var(--text-dim); padding:10px;">Encara no hi ha rècords. Juga la primera partida!</div>';
+  } else {
+    list.innerHTML = rows.join('');
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   FLUX DEL JOC
+   ═══════════════════════════════════════════════ */
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function setDiff(d) {
+  state.diff = d;
+  document.getElementById('diff-1').className = 'btn btn-small ' + (d === 1 ? 'btn-green' : 'btn-ghost');
+  document.getElementById('diff-2').className = 'btn btn-small ' + (d === 2 ? 'btn-yellow' : 'btn-ghost');
+  document.getElementById('diff-3').className = 'btn btn-small ' + (d === 3 ? 'btn-red' : 'btn-ghost');
+  document.getElementById('diff-desc').textContent = DIFF_DESC[d];
+}
+
+function startMode(mode) {
+  state.mode = mode;
+  state.q = 0;
+  state.correct = 0;
+  state.wrong = 0;
+  state.answered = false;
+  state._needsSimplify = false;
+  document.getElementById('game-total').textContent = TOTAL_QS;
+  showScreen('screen-game');
+  nextQuestion();
+
+  // Si és contrarellotge, iniciar el timer
+  if (mode === 'chrono') {
+    state.chrono_time = 60;
+    startChronoTimer();
+  }
+}
+
+function confirmExit() {
+  if (state.q > 0 && state.q < TOTAL_QS) {
+    if (!confirm('Vols sortir? Es perdrà el progrés de la partida.')) return;
+  }
+  goMenu();
+}
+
+function goMenu() {
+  showScreen('screen-menu');
+  renderMenuBar();
+  renderRecords();
+  // Aturar contrarellotge si estava actiu
+  if (state.chrono_interval) {
+    clearInterval(state.chrono_interval);
+    state.chrono_interval = null;
+  }
+}
+
+function renderMenuBar() {
+  if (!player || !player.nom) return;
+  const avatarEl = document.getElementById('menu-avatar');
+  const nameEl = document.getElementById('menu-name');
+  const rangEl = document.getElementById('menu-rang');
+  if (avatarEl) avatarEl.textContent = getPlayerAvatar(player);
+  if (nameEl) nameEl.textContent = player.nom;
+  if (rangEl) {
+    const rang = getRang(player.xp || 0);
+    rangEl.textContent = rang.icon + ' ' + getNomRang(rang, getGenere());
+  }
+}
+
+function startChronoTimer() {
+  state.chrono_interval = setInterval(() => {
+    state.chrono_time--;
+    updateChronoUI();
+    if (state.chrono_time <= 0) {
+      stopChronoTimer();
+    }
+  }, 1000);
+}
+
+function stopChronoTimer() {
+  if (state.chrono_interval) {
+    clearInterval(state.chrono_interval);
+    state.chrono_interval = null;
+  }
+  // Finalitzar la partida
+  showResults();
+}
+
+function updateChronoUI() {
+  const display = document.getElementById('game-total');
+  if (display) {
+    display.textContent = state.chrono_time + 's';
+  }
+}
+
+function nextQuestion() {
+  // Mode contrarellotge: sense límit de preguntes, fins que s'acaba el temps
+  if (state.mode !== 'chrono' && state.q >= TOTAL_QS) {
+    showResults();
+    return;
+  }
+  state.q++;
+  state.answered = false;
+
+  const gen = generators[state.mode];
+  state.current = gen(state.diff);
+
+  document.getElementById('game-score').textContent = state.correct;
+  if (state.mode === 'chrono') {
+    // En contrarellotge, mostrar preguntes en comptes de la barra de progrés
+    document.getElementById('progress-fill').style.width = '0%';
+  } else {
+    document.getElementById('progress-fill').style.width = ((state.q - 1) / TOTAL_QS * 100) + '%';
+  }
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('btn-check').style.display = 'block';
+  document.getElementById('btn-next').style.display = 'none';
+
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = state.current;
+  const box = document.getElementById('question-box');
+
+  switch (q.type) {
+    case 'identifica':
+      box.innerHTML = `
+        <div class="question-prompt">Quina fracció representa el dibuix?</div>
+        <div class="shape-wrap">${drawShape(q.shape, q.n, q.d)}</div>
+        <div style="display:flex; align-items:center; justify-content:center; margin-top:10px;">
+          <div class="frac-input">
+            <input type="number" id="ans-num" min="0" placeholder="?" inputmode="numeric">
+            <div class="frac-bar"></div>
+            <input type="number" id="ans-den" min="1" placeholder="?" inputmode="numeric">
+          </div>
+        </div>
+        <div class="question-prompt-sub" style="margin-top:10px;">Escriu numerador i denominador</div>
+      `;
+      setTimeout(() => document.getElementById('ans-num').focus(), 50);
+      attachEnterToCheck(['ans-num', 'ans-den']);
+      break;
+
+    case 'acoloreix':
+      box.innerHTML = `
+        <div class="question-prompt">Acoloreix <span class="frac-display small"><span class="num">${q.n}</span><span class="bar"></span><span class="den">${q.d}</span></span></div>
+        <div class="question-prompt-sub">Clica les peces per pintar-les</div>
+        <div class="shape-wrap" id="acoloreix-wrap">${drawShape(q.shape, 0, q.d, { clickable: true, onClick: 'toggleSector' })}</div>
+      `;
+      break;
+
+    case 'imatge':
+      box.innerHTML = `
+        <div class="question-prompt">Quin dibuix representa <span class="frac-display small"><span class="num">${q.n}</span><span class="bar"></span><span class="den">${q.d}</span></span>?</div>
+        <div class="options-grid">
+          ${q.options.map((o, i) => `
+            <button class="option-card" data-idx="${i}" onclick="pickOption(${i})">
+              ${drawShape(o.shape || q.shape, o.n, o.d, { small: true })}
+            </button>
+          `).join('')}
+        </div>
+      `;
+      // amaguem el botó "Comprova" en modes d'opció múltiple
+      document.getElementById('btn-check').style.display = 'none';
+      break;
+
+    case 'equivalents':
+      box.innerHTML = `
+        <div class="question-prompt">Quina fracció és <strong>equivalent</strong> a <span class="frac-display small"><span class="num">${q.n}</span><span class="bar"></span><span class="den">${q.d}</span></span>?</div>
+        <div class="shape-wrap">${drawShape('bar', q.n, q.d)}</div>
+        <div class="options-grid${state.diff === 1 ? ' options-grid-visual' : ''}">
+          ${q.options.map((o, i) => `
+            <button class="option-card" data-idx="${i}" onclick="pickOption(${i})">
+              ${state.diff === 1 ? `<div class="option-shape">${drawShape('circle', o.n, o.d, { small: true })}</div>` : ''}
+              <div class="frac-display"><span class="num">${o.n}</span><span class="bar"></span><span class="den">${o.d}</span></div>
+            </button>
+          `).join('')}
+        </div>
+      `;
+      document.getElementById('btn-check').style.display = 'none';
+      break;
+
+    case 'simplifica':
+      box.innerHTML = `
+        <div class="question-prompt">Simplifica aquesta fracció:</div>
+        <div style="margin:14px 0; display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap;">
+          <span class="frac-display"><span class="num">${q.n}</span><span class="bar"></span><span class="den">${q.d}</span></span>
+          <span style="font-size:1.6rem; font-weight:bold; color:var(--text-dim);">=</span>
+          <div class="frac-input">
+            <input type="number" id="ans-num" min="0" placeholder="?" inputmode="numeric">
+            <div class="frac-bar"></div>
+            <input type="number" id="ans-den" min="1" placeholder="?" inputmode="numeric">
+          </div>
+        </div>
+        <div class="question-prompt-sub">La fracció ha d'estar <strong>totalment simplificada</strong></div>
+      `;
+      setTimeout(() => document.getElementById('ans-num').focus(), 50);
+      attachEnterToCheck(['ans-num', 'ans-den']);
+      break;
+
+    case 'compara':
+      box.innerHTML = `
+        <div class="question-prompt">Compara les dues fraccions</div>
+        <div class="compare-options">
+          <button class="compare-btn" onclick="pickCmp('&lt;')">&lt;</button>
+          <button class="compare-btn" onclick="pickCmp('=')">=</button>
+          <button class="compare-btn" onclick="pickCmp('&gt;')">&gt;</button>
+        </div>
+        <div id="cmp-visual" style="display:none;">
+          <div class="shape-wrap">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+              ${drawShape('bar', q.n1, q.d1, {})}
+              <div class="frac-display small"><span class="num">${q.n1}</span><span class="bar"></span><span class="den">${q.d1}</span></div>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+              ${drawShape('bar', q.n2, q.d2, {})}
+              <div class="frac-display small"><span class="num">${q.n2}</span><span class="bar"></span><span class="den">${q.d2}</span></div>
+            </div>
+          </div>
+          <div style="text-align:center; color:var(--text-dim); font-size:0.9rem; font-style:italic; margin-top:12px;">
+            Visualització de la comparació
+          </div>
+        </div>
+        <div class="question-prompt-sub" id="cmp-hint">${q.n1}/${q.d1} <strong>?</strong> ${q.n2}/${q.d2}</div>
+      `;
+      document.getElementById('btn-check').style.display = 'none';
+      break;
+
+    case 'suma_frac':
+      box.innerHTML = `
+        <div class="question-prompt">Calcula:</div>
+        <div style="margin:14px 0; text-align:center; font-size:1.3rem;">
+          <span class="frac-display"><span class="num">${q.n1}</span><span class="bar"></span><span class="den">${q.d1}</span></span>
+          <span style="margin:0 12px;">+</span>
+          <span class="frac-display"><span class="num">${q.n2}</span><span class="bar"></span><span class="den">${q.d2}</span></span>
+          <span style="margin:0 12px;">=</span>
+          <div class="frac-input" style="display:inline-flex;">
+            <input type="number" id="ans-num" min="0" placeholder="?" inputmode="numeric">
+            <div class="frac-bar"></div>
+            <input type="number" id="ans-den" min="1" placeholder="?" inputmode="numeric">
+          </div>
+        </div>
+      `;
+      setTimeout(() => document.getElementById('ans-num').focus(), 50);
+      attachEnterToCheck(['ans-num', 'ans-den']);
+      break;
+
+    case 'resta_frac':
+      box.innerHTML = `
+        <div class="question-prompt">Calcula:</div>
+        <div style="margin:14px 0; text-align:center; font-size:1.3rem;">
+          <span class="frac-display"><span class="num">${q.n1}</span><span class="bar"></span><span class="den">${q.d1}</span></span>
+          <span style="margin:0 12px;">−</span>
+          <span class="frac-display"><span class="num">${q.n2}</span><span class="bar"></span><span class="den">${q.d2}</span></span>
+          <span style="margin:0 12px;">=</span>
+          <div class="frac-input" style="display:inline-flex;">
+            <input type="number" id="ans-num" min="0" placeholder="?" inputmode="numeric">
+            <div class="frac-bar"></div>
+            <input type="number" id="ans-den" min="1" placeholder="?" inputmode="numeric">
+          </div>
+        </div>
+      `;
+      setTimeout(() => document.getElementById('ans-num').focus(), 50);
+      attachEnterToCheck(['ans-num', 'ans-den']);
+      break;
+
+    case 'multi_frac':
+      box.innerHTML = `
+        <div class="question-prompt">Calcula:</div>
+        <div style="margin:14px 0; text-align:center; font-size:1.3rem;">
+          <span class="frac-display"><span class="num">${q.n1}</span><span class="bar"></span><span class="den">${q.d1}</span></span>
+          <span style="margin:0 12px;">×</span>
+          <span class="frac-display"><span class="num">${q.n2}</span><span class="bar"></span><span class="den">${q.d2}</span></span>
+          <span style="margin:0 12px;">=</span>
+          <div class="frac-input" style="display:inline-flex;">
+            <input type="number" id="ans-num" min="0" placeholder="?" inputmode="numeric">
+            <div class="frac-bar"></div>
+            <input type="number" id="ans-den" min="1" placeholder="?" inputmode="numeric">
+          </div>
+        </div>
+      `;
+      setTimeout(() => document.getElementById('ans-num').focus(), 50);
+      attachEnterToCheck(['ans-num', 'ans-den']);
+      break;
+
+    case 'div_frac':
+      box.innerHTML = `
+        <div class="question-prompt">Calcula:</div>
+        <div style="margin:14px 0; text-align:center; font-size:1.3rem;">
+          <span class="frac-display"><span class="num">${q.n1}</span><span class="bar"></span><span class="den">${q.d1}</span></span>
+          <span style="margin:0 12px;">÷</span>
+          <span class="frac-display"><span class="num">${q.n2}</span><span class="bar"></span><span class="den">${q.d2}</span></span>
+          <span style="margin:0 12px;">=</span>
+          <div class="frac-input" style="display:inline-flex;">
+            <input type="number" id="ans-num" min="0" placeholder="?" inputmode="numeric">
+            <div class="frac-bar"></div>
+            <input type="number" id="ans-den" min="1" placeholder="?" inputmode="numeric">
+          </div>
+        </div>
+      `;
+      setTimeout(() => document.getElementById('ans-num').focus(), 50);
+      attachEnterToCheck(['ans-num', 'ans-den']);
+      break;
+
+    case 'op_iguals':
+      box.innerHTML = `
+        <div class="question-prompt">Calcula:</div>
+        <div style="margin:14px 0; text-align:center; font-size:1.2rem;">
+          <span class="frac-display"><span class="num">${q.n1}</span><span class="bar"></span><span class="den">${q.d1}</span></span>
+          <span style="margin:0 10px;">${q.opSymbol}</span>
+          <span class="frac-display"><span class="num">${q.n2}</span><span class="bar"></span><span class="den">${q.d2}</span></span>
+          <span style="margin:0 10px;">${q.opSymbol}</span>
+          <span class="frac-display"><span class="num">${q.n3}</span><span class="bar"></span><span class="den">${q.d3}</span></span>
+          <span style="margin:0 10px;">=</span>
+          <div class="frac-input" style="display:inline-flex;">
+            <input type="number" id="ans-num" min="0" placeholder="?" inputmode="numeric">
+            <div class="frac-bar"></div>
+            <input type="number" id="ans-den" min="1" placeholder="?" inputmode="numeric">
+          </div>
+        </div>
+      `;
+      setTimeout(() => document.getElementById('ans-num').focus(), 50);
+      attachEnterToCheck(['ans-num', 'ans-den']);
+      break;
+
+    case 'op_mixtes':
+      box.innerHTML = `
+        <div class="question-prompt">Calcula (respecta l'ordre d'operacions):</div>
+        <div style="margin:14px 0; text-align:center; font-size:1.2rem;">
+          <span class="frac-display"><span class="num">${q.n1}</span><span class="bar"></span><span class="den">${q.d1}</span></span>
+          <span style="margin:0 10px;">${q.opSymbol1}</span>
+          <span class="frac-display"><span class="num">${q.n2}</span><span class="bar"></span><span class="den">${q.d2}</span></span>
+          <span style="margin:0 10px;">${q.opSymbol2}</span>
+          <span class="frac-display"><span class="num">${q.n3}</span><span class="bar"></span><span class="den">${q.d3}</span></span>
+          <span style="margin:0 10px;">=</span>
+          <div class="frac-input" style="display:inline-flex;">
+            <input type="number" id="ans-num" min="0" placeholder="?" inputmode="numeric">
+            <div class="frac-bar"></div>
+            <input type="number" id="ans-den" min="1" placeholder="?" inputmode="numeric">
+          </div>
+        </div>
+      `;
+      setTimeout(() => document.getElementById('ans-num').focus(), 50);
+      attachEnterToCheck(['ans-num', 'ans-den']);
+      break;
+  }
+}
+
+/* ─── handlers d'input ─── */
+
+function attachEnterToCheck(ids) {
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (!state.answered) checkAnswer();
+        else nextQuestion();
+      }
+    });
+  });
+}
+
+window.toggleSector = function(idx) {
+  if (state.answered) return;
+  const q = state.current;
+  // togglar: si idx < filled, reduïm a idx; si idx >= filled, expandim a idx+1
+  if (idx < q.filled) {
+    q.filled = idx;
+  } else {
+    q.filled = idx + 1;
+  }
+  // redibuixem
+  const wrap = document.getElementById('acoloreix-wrap');
+  wrap.innerHTML = drawShape(q.shape, 0, q.d, { clickable: true, onClick: 'toggleSector', filled: q.filled });
+  const acCount = document.getElementById('ac-count');
+  if (acCount) acCount.textContent = q.filled;
+};
+
+window.pickOption = function(idx) {
+  if (state.answered) return;
+  const q = state.current;
+  const chosen = q.options[idx];
+  let isCorrect;
+  if (q.type === 'imatge') {
+    isCorrect = (chosen.n === q.answer.n && chosen.d === q.answer.d);
+  } else if (q.type === 'equivalents') {
+    // equivalent si chosen.n / chosen.d == baseN / baseD
+    isCorrect = (chosen.n * q.answer.baseD === chosen.d * q.answer.baseN) && !(chosen.n === q.answer.baseN && chosen.d === q.answer.baseD);
+  }
+  finishAnswer(isCorrect, idx);
+};
+
+window.pickCmp = function(cmp) {
+  if (state.answered) return;
+  const q = state.current;
+  const isCorrect = (cmp === q.answer.cmp);
+  // Mostrar les gràfiques com a feedback visual
+  const cmpVisual = document.getElementById('cmp-visual');
+  if (cmpVisual) cmpVisual.style.display = 'block';
+  finishAnswer(isCorrect, cmp);
+};
+
+function checkAnswer() {
+  if (state.answered) return;
+  const q = state.current;
+  let isCorrect = false;
+
+  if (q.type === 'identifica') {
+    const n = parseInt(document.getElementById('ans-num').value);
+    const d = parseInt(document.getElementById('ans-den').value);
+    if (isNaN(n) || isNaN(d) || d === 0) {
+      flashFeedback('Escriu numerador i denominador', false, true);
+      return;
+    }
+    // ha d'escriure exactament el que veu (compta peces pintades / total)
+    isCorrect = (n === q.answer.n && d === q.answer.d);
+  } else if (q.type === 'acoloreix') {
+    isCorrect = (q.filled === q.answer.filled);
+  } else if (q.type === 'simplifica') {
+    const n = parseInt(document.getElementById('ans-num').value);
+    const d = parseInt(document.getElementById('ans-den').value);
+    if (isNaN(n) || isNaN(d) || d === 0) {
+      flashFeedback('Escriu numerador i denominador', false, true);
+      return;
+    }
+    isCorrect = (n === q.answer.n && d === q.answer.d);
+  } else if (['suma_frac', 'resta_frac', 'multi_frac', 'div_frac', 'op_iguals', 'op_mixtes'].includes(q.type)) {
+    const n = parseInt(document.getElementById('ans-num').value);
+    const d = parseInt(document.getElementById('ans-den').value);
+    if (isNaN(n) || isNaN(d) || d === 0) {
+      flashFeedback('Escriu numerador i denominador', false, true);
+      return;
+    }
+    if (n === q.answer.n && d === q.answer.d) {
+      isCorrect = true;
+    } else if (n * q.answer.d === q.answer.n * d && d > 0) {
+      isCorrect = true;
+      state._needsSimplify = true;
+    }
+  }
+
+  finishAnswer(isCorrect);
+}
+
+function finishAnswer(isCorrect, optInfo) {
+  state.answered = true;
+  const q = state.current;
+  const fb = document.getElementById('feedback');
+  const btnCheck = document.getElementById('btn-check');
+  const btnNext = document.getElementById('btn-next');
+
+  if (isCorrect) {
+    state.correct++;
+    player.ratxa_actual++;
+    if (player.ratxa_actual > player.ratxa_max) player.ratxa_max = player.ratxa_actual;
+    if (state._needsSimplify) {
+      fb.innerHTML = `${pick(FRASES_CORRECTE)} <span style="font-size:0.9rem; opacity:0.8;">Recorda simplificar: <strong>${q.answer.n}/${q.answer.d}</strong></span>`;
+      state._needsSimplify = false;
+    } else {
+      fb.textContent = pick(FRASES_CORRECTE);
+    }
+    fb.className = 'feedback correct pulse-green';
+    showParticles();
+    // Comprovació de ratxa durant el joc
+    if ((player.ratxa_max || 0) >= 10) unlockTrophy('ratxa_foc');
+    if ((player.ratxa_max || 0) >= 20) unlockTrophy('ratxa_llegenda');
+  } else {
+    state.wrong++;
+    player.ratxa_actual = 0;
+    fb.innerHTML = `${pick(FRASES_ERROR)} ${buildCorrectionText(q)}`;
+    fb.className = 'feedback wrong shake';
+  }
+  savePlayer();
+
+  // marca opció escollida si aplica
+  if (q.type === 'imatge' || q.type === 'equivalents') {
+    const cards = document.querySelectorAll('.option-card');
+    cards.forEach((c, i) => {
+      const opt = q.options[i];
+      let optIsCorrect;
+      if (q.type === 'imatge') {
+        optIsCorrect = (opt.n === q.answer.n && opt.d === q.answer.d);
+      } else {
+        optIsCorrect = (opt.n * q.answer.baseD === opt.d * q.answer.baseN) && !(opt.n === q.answer.baseN && opt.d === q.answer.baseD);
+      }
+      if (optIsCorrect) c.classList.add('correct');
+      if (i === optInfo && !optIsCorrect) c.classList.add('wrong');
+      c.style.pointerEvents = 'none';
+    });
+  }
+  if (q.type === 'compara') {
+    document.querySelectorAll('.compare-btn').forEach(b => b.disabled = true);
+  }
+
+  // Simplifica: mostra visualitzacions de comparació
+  if (q.type === 'simplifica') {
+    showSimplificaComparison(q);
+  }
+
+  document.getElementById('game-score').textContent = state.correct;
+  if (state.mode !== 'chrono') {
+    document.getElementById('progress-fill').style.width = (state.q / TOTAL_QS * 100) + '%';
+  }
+
+  btnCheck.style.display = 'none';
+  btnNext.style.display = 'block';
+  btnNext.textContent = state.q >= TOTAL_QS ? 'Veure resultats →' : 'Següent →';
+}
+
+function buildCorrectionText(q) {
+  switch (q.type) {
+    case 'identifica':
+    case 'imatge':
+      return `Era <strong>${q.answer.n}/${q.answer.d}</strong>`;
+    case 'acoloreix':
+      return `Calia pintar <strong>${q.answer.filled}</strong> peces`;
+    case 'equivalents':
+      return `Era <strong>${q.answer.n}/${q.answer.d}</strong>`;
+    case 'simplifica':
+      return `Era <strong>${q.answer.n}/${q.answer.d}</strong>`;
+    case 'compara':
+      return `Era <strong>${q.answer.cmp}</strong>`;
+    case 'suma_frac':
+    case 'resta_frac':
+    case 'multi_frac':
+    case 'div_frac':
+    case 'op_iguals':
+    case 'op_mixtes':
+      return `Era <strong>${q.answer.n}/${q.answer.d}</strong>`;
+    default: return '';
+  }
+}
+
+function flashFeedback(text, isOk, transient=false) {
+  const fb = document.getElementById('feedback');
+  fb.textContent = text;
+  fb.className = 'feedback ' + (isOk ? 'correct' : 'wrong');
+  if (transient) setTimeout(() => { if (!state.answered) { fb.textContent = ''; fb.className = 'feedback'; } }, 1500);
+}
+
+/* ─── simplifica: comparació visual ─── */
+function showSimplificaComparison(q) {
+  const box = document.getElementById('question-box');
+  const shape = pick(['circle', 'rectangle', 'bar']);
+  const [simN, simD] = simplify(q.n, q.d);
+
+  // Per a rectangles (quadrícules), mostrar una damunt de l'altra
+  const isRectangle = shape === 'rectangle';
+  const containerDir = isRectangle ? 'column' : 'row';
+  const eqVertAlign = isRectangle ? 'center' : 'center';
+
+  const html = `
+    <div style="margin-top:18px; padding-top:14px; border-top:1px solid var(--card-border);">
+      <div style="font-weight:700; color:var(--text); font-size:0.95rem; margin-bottom:12px; text-align:center;">Visualització de la simplificació:</div>
+      <div style="display:flex; flex-direction:${containerDir}; gap:20px; justify-content:center; align-items:center; margin-bottom:14px;">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          ${drawShape(shape, q.n, q.d, {})}
+          <span class="frac-display small"><span class="num">${q.n}</span><span class="bar"></span><span class="den">${q.d}</span></span>
+        </div>
+        <div style="display:flex; align-items:${eqVertAlign}; font-size:1.6rem; font-weight:900; color:var(--accent); opacity:0.8; min-height:30px;">${isRectangle ? '↓' : '='}</div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          ${drawShape(shape, simN, simD, {})}
+          <span class="frac-display small"><span class="num">${simN}</span><span class="bar"></span><span class="den">${simD}</span></span>
+        </div>
+      </div>
+      <div style="text-align:center; color:var(--text-dim); font-size:0.9rem; font-style:italic;">
+        Ambdues representen la mateixa quantitat
+      </div>
+    </div>
+  `;
+  box.innerHTML += html;
+}
+
+/* ─── partícules d'encert ─── */
+function showParticles() {
+  const colors = ['#4ade80', '#ffd166', '#22d3ee', '#f472b6', '#a78bfa'];
+  const emojis = ['⭐', '✨', '🎉', '💫'];
+  const box = document.getElementById('question-box').getBoundingClientRect();
+  const cx = box.left + box.width/2;
+  const cy = box.top + box.height/2;
+
+  for (let i = 0; i < 12; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.background = pick(colors);
+    p.style.left = cx + 'px';
+    p.style.top = cy + 'px';
+    document.body.appendChild(p);
+    const ang = Math.random() * 2 * Math.PI;
+    const dist = 60 + Math.random()*100;
+    const tx = Math.cos(ang) * dist;
+    const ty = Math.sin(ang) * dist;
+    p.animate([
+      { transform: 'translate(0,0) scale(1)', opacity: 1 },
+      { transform: `translate(${tx}px, ${ty}px) scale(0)`, opacity: 0 }
+    ], { duration: 700, easing: 'cubic-bezier(0.2,0.9,0.3,1)' });
+    setTimeout(() => p.remove(), 720);
+  }
+
+  // emoji que puja
+  const e = document.createElement('div');
+  e.className = 'emoji-pop';
+  e.textContent = pick(emojis);
+  e.style.left = (cx - 20) + 'px';
+  e.style.top = (cy - 20) + 'px';
+  document.body.appendChild(e);
+  setTimeout(() => e.remove(), 1300);
+}
+
+/* ─── pantalla resultats ─── */
+function showResults() {
+  saveRecord(state.mode, state.diff, state.correct);
+
+  // actualitza stats jugador
+  player.partides = (player.partides || 0) + 1;
+  const isChrono = state.mode === 'chrono';
+  if (!isChrono && state.correct === TOTAL_QS) {
+    player.perfectes = (player.perfectes || 0) + 1;
+    if (state.mode !== 'barreja') {
+      player.perfect_per_mode[state.mode] = true;
+    }
+    player.perfect_per_diff[state.diff] = true;
+  }
+
+  // XP: encerts × dificultat × 0.5, arrodonit
+  const xpGuanyat = Math.round(state.correct * state.diff * 0.5);
+  const rangAbans = getRang(player.xp || 0);
+  player.xp = (player.xp || 0) + xpGuanyat;
+  const rangDesprés = getRang(player.xp);
+
+  savePlayer();
+  checkTrophies();
+
+  // mostrar rang up si ha pujat
+  if (rangDesprés.xp > rangAbans.xp) {
+    const gen = getGenere();
+    showRangUpToast(rangDesprés, gen);
+    showConfetti();
+  }
+
+  document.getElementById('result-score').textContent = `${state.correct}/${TOTAL_QS}`;
+  document.getElementById('rs-correct').textContent = state.correct;
+  document.getElementById('rs-wrong').textContent = state.wrong;
+  const pct = Math.round(state.correct / TOTAL_QS * 100);
+  document.getElementById('rs-pct').textContent = pct + '%';
+  document.getElementById('rs-xp').textContent = '+' + xpGuanyat + ' XP';
+  const gen = getGenere();
+  const rangActual = getRang(player.xp);
+  document.getElementById('rs-rang').textContent = rangActual.icon + ' ' + getNomRang(rangActual, gen);
+
+  let title, msg;
+  if (pct === 100) { title = '🏆 PERFECTE!'; msg = 'Has clavat totes les preguntes!'; }
+  else if (pct >= 80) { title = '🌟 Excel·lent!'; msg = 'Domines aquest tema!'; }
+  else if (pct >= 60) { title = '👍 Bona feina!'; msg = 'Vas pel bon camí, segueix practicant.'; }
+  else if (pct >= 40) { title = '💪 Continua!'; msg = 'Una mica més de pràctica i ho clavaràs.'; }
+  else { title = '📚 A repassar'; msg = 'Demana ajuda al profe i torna-ho a provar!'; }
+
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-message').textContent = msg;
+  showScreen('screen-result');
+}
+
+function playAgain() {
+  startMode(state.mode);
+}
+
+/* ═══════════════════════════════════════════════
+   COMPROVACIÓ I VISUALITZACIÓ DE TROFEUS
+   ═══════════════════════════════════════════════ */
+
+function unlockTrophy(id) {
+  if (!player || player.trofeus.includes(id)) return false;
+  player.trofeus.push(id);
+  savePlayer();
+  showTrophyToast(id);
+  showConfetti();
+  return true;
+}
+
+function checkTrophies() {
+  if (!player) return;
+
+  // ─── Progressió (es comproven sempre) ───
+  if (player.partides >= 1)   unlockTrophy('primer_pas');
+  if (player.partides >= 25)  unlockTrophy('estudiant');
+  if (player.partides >= 50)  unlockTrophy('constant');
+  if (player.partides >= 100) unlockTrophy('verita');
+  if ((player.xp || 0) >= 18000) unlockTrophy('rang_llegenda');
+
+  // ─── Habilitat ───
+  if ((player.perfectes || 0) >= 5)  unlockTrophy('perfeccionista');
+  if ((player.perfectes || 0) >= 10) unlockTrophy('maratonista');
+  // ratxa_foc (10) i ratxa_llegenda (20): comprovades durant el joc
+  // velocista: comprovada en mode chrono (veure sota)
+
+  // ─── Mode Contrarellotge: velocista (≥10 encerts en una sola sessió) ───
+  if (state.mode === 'chrono' && state.correct >= 10) unlockTrophy('velocista');
+
+  // Trofeus "10/10" NOMÉS si la partida és perfecta, completa i NO és contrarellotge
+  if (state.mode === 'chrono' || state.q !== TOTAL_QS || state.correct !== TOTAL_QS) return;
+
+  unlockTrophy('sense_errors');
+
+  // ─── Mapa mode → trofeu ───
+  const modeMap = {
+    identifica:  'identificador',
+    acoloreix:   'pintor',
+    imatge:      'observador',
+    equivalents: 'equivalent',
+    simplifica:  'simplificador',
+    compara:     'comparador',
+    suma_frac:   'sumador',
+    resta_frac:  'restador',
+    multi_frac:  'multiplicador',
+    div_frac:    'divisor',
+    op_iguals:   'op_encadenades',
+    op_mixtes:   'op_mestre'
+  };
+  for (const [m, tid] of Object.entries(modeMap)) {
+    if (player.perfect_per_mode[m]) unlockTrophy(tid);
+  }
+
+  // ─── Dificultat ───
+  if (player.perfect_per_diff[1]) unlockTrophy('iniciat');
+  if (player.perfect_per_diff[2]) unlockTrophy('avancant');
+  if (player.perfect_per_diff[3]) unlockTrophy('mestre_frac');
+  if (player.perfect_per_diff[4]) unlockTrophy('expert_frac');
+
+  // ─── Polivalent: 10/10 als 6 modes bàsics ───
+  const basic6 = ['identifica','acoloreix','imatge','equivalents','simplifica','compara'];
+  if (basic6.every(m => player.perfect_per_mode[m])) unlockTrophy('polivalent');
+
+  // ─── Calculista: 10/10 als 4 modes d'operació ───
+  const ops4 = ['suma_frac','resta_frac','multi_frac','div_frac'];
+  if (ops4.every(m => player.perfect_per_mode[m])) unlockTrophy('calculista');
+
+  // ─── Matemàtic: 10/10 a TOTS els modes ───
+  const allModes = Object.keys(modeMap);
+  if (allModes.every(m => player.perfect_per_mode[m])) unlockTrophy('matematico');
+
+  // ─── Secret: barreja 10/10 ───
+  if (state.mode === 'barreja') unlockTrophy('barreja_total');
+}
+
+function showTrophyToast(id) {
+  const t = TROFEUS.find(x => x.id === id);
+  if (!t) return;
+  const toast = document.createElement('div');
+  toast.className = 'trophy-toast';
+  toast.innerHTML = `
+    <div class="ic">${t.icon}</div>
+    <div>
+      <div style="font-size:0.7rem; opacity:0.7; text-transform:uppercase; letter-spacing:1px;">Trofeu nou!</div>
+      <div class="nm">${t.nom}</div>
+      <div class="ds">${t.desc}</div>
+    </div>
+  `;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.style.animation = 'toast-out 0.3s forwards';
+    setTimeout(() => toast.remove(), 320);
+  }, 3000);
+}
+
+function showRangUpToast(rang, genere) {
+  const toast = document.createElement('div');
+  toast.className = 'trophy-toast';
+  toast.style.background = 'linear-gradient(135deg, #6366f1, #a78bfa)';
+  toast.style.color = '#fff';
+  toast.innerHTML = `
+    <div class="ic">${rang.icon}</div>
+    <div>
+      <div style="font-size:0.7rem; opacity:0.8; text-transform:uppercase; letter-spacing:1px;">Nou rang!</div>
+      <div class="nm">${getNomRang(rang, genere)}</div>
+      <div class="ds">${rang.xp.toLocaleString()} XP assolits</div>
+    </div>
+  `;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.style.animation = 'toast-out 0.3s forwards';
+    setTimeout(() => toast.remove(), 320);
+  }, 3500);
+}
+
+function showConfetti() {
+  const emojis = ['🎉', '✨', '🌟', '⭐', '🎊', '💫', '🏆'];
+  for (let i = 0; i < 24; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.textContent = pick(emojis);
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.top = '-30px';
+    c.style.animationDuration = (1.8 + Math.random()*1.2) + 's';
+    c.style.animationDelay = (Math.random()*0.4) + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 3500);
+  }
+}
+
+function renderStats() {
+  if (!player) loadPlayer();
+
+  const rang = getRang(player.xp || 0);
+  const gen = getGenere();
+  const idx = RANGS.indexOf(rang);
+  const seguent = RANGS[idx + 1];
+  const xpText = seguent
+    ? `${player.xp || 0} / ${seguent.xp} XP`
+    : `${player.xp || 0} XP · Rang màxim`;
+  document.getElementById('st-rang-icon').textContent = rang.icon;
+  document.getElementById('st-rang-nom').textContent = getNomRang(rang, gen);
+  document.getElementById('st-xp').textContent = xpText;
+
+  document.getElementById('st-partides').textContent = player.partides || 0;
+  document.getElementById('st-perfectes').textContent = player.perfectes || 0;
+  document.getElementById('st-ratxa').textContent = player.ratxa_max || 0;
+
+  const recs = getRecords();
+  const modes = ['identifica', 'acoloreix', 'imatge', 'equivalents', 'simplifica', 'compara', 'barreja'];
+  const diffName = { 1: 'Bàsic', 2: 'Mitjà', 3: 'Avançat' };
+  const modeEmoji = {
+    identifica: '🔢', acoloreix: '🎨', imatge: '🧩',
+    equivalents: '🟰', simplifica: '✂️', compara: '⚖️', barreja: '🌟'
+  };
+
+  const recordsContainer = document.getElementById('stats-records');
+  const rows = [];
+  modes.forEach(m => {
+    [1, 2, 3].forEach(d => {
+      const key = `${m}_${d}`;
+      if (recs[key]) {
+        rows.push(`
+          <div style="background:rgba(255,255,255,0.05); border:1px solid var(--card-border); border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div style="font-weight:700; color:var(--text);">${modeEmoji[m]} ${MODE_LABELS[m]} · ${diffName[d]}</div>
+              <div style="font-size:0.8rem; color:var(--text-dim); margin-top:2px;">Millor puntuació</div>
+            </div>
+            <div style="font-weight:900; color:var(--accent); font-size:1.2rem;">${recs[key]}/${TOTAL_QS}</div>
+          </div>
+        `);
+      }
+    });
+  });
+
+  if (rows.length === 0) {
+    recordsContainer.innerHTML = '<div style="text-align:center; color:var(--text-dim); padding:20px;">Juga la primera partida per veure els rècords!</div>';
+  } else {
+    recordsContainer.innerHTML = rows.join('');
+  }
+}
+
+function renderTrophies() {
+  if (!player) loadPlayer();
+  checkFrikisRobotica();
+  const grid = document.getElementById('trophy-grid');
+  grid.innerHTML = '';
+
+  document.getElementById('ts-trofeus').textContent = `${player.trofeus.length}/${TROFEUS.length}`;
+  document.getElementById('ts-partides').textContent = player.partides || 0;
+  document.getElementById('ts-perfectes').textContent = player.perfectes || 0;
+
+  TROPHY_CATS.forEach(cat => {
+    const trofeusCat = TROFEUS.filter(t => t.cat === cat.id);
+    if (!trofeusCat.length) return;
+
+    const title = document.createElement('div');
+    title.className = 'trophy-cat-title';
+    title.style.color = cat.color;
+    title.textContent = cat.nom;
+    grid.appendChild(title);
+
+    const catGrid = document.createElement('div');
+    catGrid.className = 'trophy-cat-grid';
+    trofeusCat.forEach(t => {
+      const unlocked = player.trofeus.includes(t.id);
+      const div = document.createElement('div');
+      div.className = 'trophy-card ' + (unlocked ? 'unlocked' : 'locked');
+      if (unlocked) div.style.borderColor = cat.color + '99';
+      const isSecret = cat.id === 'secret';
+      div.innerHTML = `
+        <div class="trophy-icon">${unlocked ? t.icon : (isSecret ? '🔒' : '❓')}</div>
+        <div class="trophy-name">${unlocked ? t.nom : (isSecret ? '???' : t.nom)}</div>
+        <div class="trophy-desc">${unlocked ? t.desc : (isSecret ? 'Trofeu secret...' : t.desc)}</div>
+      `;
+      catGrid.appendChild(div);
+    });
+    grid.appendChild(catGrid);
+  });
+}
+
+function unlockCurios() {
+  if (!player) loadPlayer();
+  if (!player.trofeus.includes('curios')) unlockTrophy('curios');
+}
+
+function checkFrikisRobotica() {
+  if (!player) loadPlayer();
+  const noms = allProfiles.map(p => p.nom.trim().toLowerCase());
+  if (noms.includes('nil') && noms.includes('lluc')) {
+    unlockTrophy('frikis_robotica');
+  }
+}
+
+function loadProfileEditor() {
+  if (!player) loadPlayer();
+  document.getElementById('profile-nom').value = player.nom || 'Jugador';
+
+  // Migra perfils antics que guardaven l'emoji com a string a índex numèric
+  if (typeof player.avatar === 'string') {
+    const genere = player.genere || player.gender || 'M';
+    const list = genere === 'F' ? AVATARS_FEM : genere === 'N' ? AVATARS_NEUT : AVATARS_MASC;
+    const idx = list.indexOf(player.avatar);
+    player.avatar = idx >= 0 ? idx : 0;
+    player.genere = genere;
+  }
+
+  // Set gender
+  selectGender(player.genere || 'M');
+
+  // Set skin
+  selectSkin(player.skin || 0);
+
+  // Render avatars
+  renderProfileAvatars();
+
+  // Update preview
+  updateProfilePreview();
+  document.getElementById('profile-nom').focus();
+}
+
+function selectGender(g) {
+  if (!player) player = defaultPlayer();
+  player.genere = g;
+  document.querySelectorAll('[id^="gen-"]').forEach(btn => {
+    btn.classList.toggle('btn-orange', btn.id === 'gen-' + g);
+    btn.classList.toggle('btn-ghost', btn.id !== 'gen-' + g);
+  });
+  renderProfileAvatars();
+  document.getElementById('skin-selector').style.display = g === 'N' ? 'none' : 'block';
+}
+
+function selectSkin(s) {
+  if (!player) player = defaultPlayer();
+  player.skin = s;
+  document.querySelectorAll('.profile-skin-btn').forEach((btn, idx) => {
+    btn.classList.toggle('selected', idx === s);
+  });
+  renderProfileAvatars();
+}
+
+function renderProfileAvatars() {
+  if (!player) player = defaultPlayer();
+  const avatarList = player.genere === 'F' ? AVATARS_FEM : player.genere === 'N' ? AVATARS_NEUT : AVATARS_MASC;
+  const grid = document.getElementById('avatar-grid');
+  grid.innerHTML = '';
+
+  avatarList.forEach((av, idx) => {
+    const combined = player.genere === 'N' ? av : applySkintone(av, player.skin);
+    const div = document.createElement('div');
+    div.className = 'avatar-option' + (idx === player.avatar ? ' selected' : '');
+    div.textContent = combined;
+    div.onclick = () => {
+      player.avatar = idx;
+      renderProfileAvatars();
+      updateProfilePreview();
+    };
+    grid.appendChild(div);
+  });
+}
+
+function updateProfilePreview() {
+  if (!player) player = defaultPlayer();
+  document.getElementById('profile-avatar-display').textContent = getPlayerAvatar(player);
+}
+
+function saveProfile() {
+  if (!player) loadPlayer();
+  const nom = document.getElementById('profile-nom').value.trim();
+  if (!nom) {
+    showToast('⚠️ El nom no pot estar buit!');
+    return;
+  }
+  player.nom = nom;
+  savePlayer();
+  showToast('✅ Perfil guardat correctament!');
+  setTimeout(() => showScreen('screen-stats'), 500);
+}
+
+/* ═══════════════════════════════════════════════
+   EXPORTAR / IMPORTAR DADES
+   ═══════════════════════════════════════════════ */
+
+function exportarDades() {
+  if (!player) return;
+  const dataToExport = {
+    player: player,
+    records: getRecords()
+  };
+  const json = JSON.stringify(dataToExport, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `fraccions_${(player.nom || 'dades').replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importarDades(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!data.player) { alert('Fitxer no vàlid.'); return; }
+      if (!confirm('Vols carregar aquestes dades? Se sobreescriuran les dades actuals.')) return;
+
+      player = data.player;
+      if (data.records) {
+        localStorage.setItem(STORE_KEY, JSON.stringify(data.records));
+      }
+      savePlayer();
+      renderStats();
+      alert('✅ Dades carregades correctament!');
+    } catch (err) {
+      alert('❌ Error llegint el fitxer. Comprova que sigui un JSON vàlid.');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+/* ═══════════════════════════════════════════════
+   SISTEMA DE PERFILS MÚLTIPLES
+   ═══════════════════════════════════════════════ */
+
+const MAX_PROFILES = 5;
+let allProfiles = JSON.parse(localStorage.getItem('fraccions_profiles') || '[]');
+let currentProfileIdx = parseInt(localStorage.getItem('fraccions_active_profile') || '0');
+
+function saveAllProfiles() {
+  localStorage.setItem('fraccions_profiles', JSON.stringify(allProfiles));
+}
+
+function renderProfiles() {
+  const grid = document.getElementById('profile-grid');
+  grid.innerHTML = '';
+
+  for (let i = 0; i < MAX_PROFILES; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'profile-slot' + (allProfiles[i] ? ' filled' : '');
+
+    if (allProfiles[i]) {
+      const p = allProfiles[i];
+      const avatar = getPlayerAvatar(p);
+      slot.innerHTML = `
+        <div class="profile-avatar">${avatar}</div>
+        <div class="profile-name">${p.nom}</div>
+        <div class="profile-level">${(r => r.icon + ' ' + getNomRang(r, p.genere || p.gender || 'M'))(getRang(p.xp || 0))}</div>
+      `;
+      slot.onclick = () => selectProfile(i);
+    } else {
+      slot.innerHTML = `<div class="profile-plus">+</div>`;
+      slot.onclick = () => startCreateProfile(i);
+    }
+    grid.appendChild(slot);
+  }
+}
+
+function selectProfile(idx) {
+  currentProfileIdx = idx;
+  player = JSON.parse(JSON.stringify(allProfiles[idx]));
+  const def = defaultPlayer();
+  for (const k of Object.keys(def)) {
+    if (player[k] === undefined) player[k] = def[k];
+  }
+  localStorage.setItem('fraccions_active_profile', idx);
+  showScreen('screen-menu');
+  renderProfileBar();
+}
+
+function startCreateProfile(slotIdx) {
+  window.creatingProfileSlot = slotIdx;
+  window.tempProfileData = {
+    nom: '',
+    genere: 'M',
+    skin: 0,
+    avatar: 0
+  };
+  renderGenderButtons();
+  renderSkinGrid();
+  renderCreateAvatarGrid();
+  updateAvatarPreview();
+  showScreen('screen-create-profile');
+}
+
+function getAvatarList(genere) {
+  return genere === 'F' ? AVATARS_FEM : genere === 'N' ? AVATARS_NEUT : AVATARS_MASC;
+}
+
+function renderGenderButtons() {
+  const container = document.getElementById('gender-buttons');
+  container.innerHTML = '';
+  const genders = [
+    { id: 'M', name: '♂️ Noi' },
+    { id: 'F', name: '♀️ Noia' },
+    { id: 'N', name: '✨ Neutre' }
+  ];
+
+  genders.forEach(g => {
+    const btn = document.createElement('button');
+    btn.className = 'gender-btn' + (window.tempProfileData.genere === g.id ? ' selected' : '');
+    btn.textContent = g.name;
+    btn.onclick = () => {
+      window.tempProfileData.genere = g.id;
+      window.tempProfileData.avatar = 0;
+      renderGenderButtons();
+      renderCreateAvatarGrid();
+      updateAvatarPreview();
+      // Els avatars neutres (animals/fantasia) no admeten to de pell
+      document.getElementById('create-skin-group').style.display = g.id === 'N' ? 'none' : 'block';
+    };
+    container.appendChild(btn);
+  });
+}
+
+function renderSkinGrid() {
+  const container = document.getElementById('skin-grid');
+  container.innerHTML = '';
+  const skins = ['#F5C518', '#FDDBB4', '#E8B88A', '#C78B5C', '#8D5524', '#4A2912'];
+  const names = ['Per defecte', 'Clar', 'Clar-mig', 'Mig', 'Fosc-mig', 'Fosc'];
+
+  skins.forEach((color, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'skin-btn' + (window.tempProfileData.skin === idx ? ' selected' : '');
+    btn.style.background = color;
+    btn.title = names[idx];
+    btn.onclick = () => {
+      window.tempProfileData.skin = idx;
+      renderSkinGrid();
+      renderCreateAvatarGrid();
+      updateAvatarPreview();
+    };
+    container.appendChild(btn);
+  });
+}
+
+function renderCreateAvatarGrid() {
+  const container = document.getElementById('create-avatar-grid');
+  container.innerHTML = '';
+  const t = window.tempProfileData;
+  getAvatarList(t.genere).forEach((av, idx) => {
+    const div = document.createElement('div');
+    div.className = 'avatar-option' + (idx === t.avatar ? ' selected' : '');
+    div.textContent = t.genere === 'N' ? av : applySkintone(av, t.skin);
+    div.onclick = () => {
+      t.avatar = idx;
+      renderCreateAvatarGrid();
+      updateAvatarPreview();
+    };
+    container.appendChild(div);
+  });
+}
+
+function updateAvatarPreview() {
+  const preview = document.getElementById('avatar-preview');
+  const t = window.tempProfileData;
+  const av = getAvatarList(t.genere)[t.avatar] || '👤';
+  preview.textContent = t.genere === 'N' ? av : applySkintone(av, t.skin);
+}
+
+function saveNewProfile() {
+  const nom = document.getElementById('profile-name').value.trim();
+  if (!nom) {
+    alert('⚠️ El nom no pot estar buit!');
+    return;
+  }
+
+  const profile = {
+    nom: nom,
+    genere: window.tempProfileData.genere,
+    skin: window.tempProfileData.skin,
+    avatar: window.tempProfileData.avatar,
+    xp: 0,
+    partides: 0,
+    perfectes: 0,
+    ratxa_actual: 0,
+    ratxa_max: 0,
+    trofeus: [],
+    perfect_per_mode: {},
+    perfect_per_diff: {}
+  };
+
+  allProfiles[window.creatingProfileSlot] = profile;
+  saveAllProfiles();
+  currentProfileIdx = window.creatingProfileSlot;
+  player = JSON.parse(JSON.stringify(profile));
+  localStorage.setItem('fraccions_active_profile', currentProfileIdx);
+  showScreen('screen-select-profile');
+  setTimeout(() => renderProfiles(), 100);
+}
+
+function renderProfileBar() {
+  if (!player || !player.nom) return;
+  const bar = document.getElementById('profile-bar-menu');
+  if (!bar) return;
+  bar.innerHTML = `
+    <div style="flex:1;">
+      <div style="font-weight:700; color:var(--text);">${getPlayerAvatar(player)} ${player.nom}</div>
+      <div style="font-size:0.85rem; color:var(--text-dim); margin-top:2px;">${(r => r.icon + ' ' + getNomRang(r, getGenere()))(getRang(player.xp || 0))}</div>
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════════
+   PORTADA (SPLASH SCREEN)
+   ═══════════════════════════════════════════════ */
+
+function initSplash() {
+  const phrases = [
+    'Domina les fraccions un pas a la vegada!',
+    'Les fraccions no són tan difícils com semblen...',
+    'Ja gairebé ho domines!',
+    'Vols convertir-te en un mestre de les fraccions?',
+    'Prepara\'t per a un desafiament fraccional! ⚡',
+    'Cada fracció és un nou triomf! 🎯'
+  ];
+
+  document.getElementById('splash-phrase').textContent = pick(phrases);
+
+  // Afegir fraccions animades al fons
+  const container = document.getElementById('splash-fractions-container');
+  const fracs = ['1/2', '1/3', '1/4', '2/3', '3/4', '1/5'];
+  const positions = [
+    { top: '10%', left: '10%', delay: '0s' },
+    { top: '20%', right: '15%', delay: '0.5s' },
+    { bottom: '25%', left: '20%', delay: '1s' },
+    { top: '15%', right: '25%', delay: '1.5s' },
+    { bottom: '20%', right: '10%', delay: '0.8s' },
+    { top: '40%', left: '5%', delay: '1.2s' }
+  ];
+
+  fracs.forEach((frac, i) => {
+    const div = document.createElement('div');
+    div.className = 'frac-anim';
+    div.textContent = frac;
+    div.style.top = positions[i].top || 'auto';
+    div.style.bottom = positions[i].bottom || 'auto';
+    div.style.left = positions[i].left || 'auto';
+    div.style.right = positions[i].right || 'auto';
+    div.style.animationDelay = positions[i].delay;
+    container.appendChild(div);
+  });
+
+  // Auto-transició a pantalla de perfils amb fadeOut animation
+  setTimeout(() => {
+    const splashScreen = document.getElementById('screen-splash');
+    splashScreen.classList.add('fadeout');
+    setTimeout(() => {
+      splashScreen.classList.remove('active');
+      splashScreen.classList.remove('fadeout');
+      showScreen('screen-select-profile');
+      renderProfiles();
+    }, 500);
+  }, 1800);
+}
+
+/* ═══════════════════════════════════════════════
+   SELECCIÓ DE MODE I NIVELL
+   ═══════════════════════════════════════════════ */
+
+function getSvgIcon(iconName) {
+  const icons = {
+    identifica: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>',
+    acoloreix: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8m3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5m-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11m3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"></path></svg>',
+    imatge: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5" fill="white"></circle><polygon points="21 15 16 10 5 21" fill="white"></polygon></svg>',
+    equivalents: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 11h7V4H4v7zm10 0h7V4h-7v7zM4 20h7v-7H4v7zm10 0h7v-7h-7v7z"></path></svg>',
+    simplifica: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.64 7.64c.39.39.39 1.02 0 1.41l-4.88 4.88h16.24c.55 0 1 .45 1 1s-.45 1-1 1H4.76l4.88 4.88c.39.39.39 1.02 0 1.41-.39.39-1.02.39-1.41 0l-6.36-6.36c-.39-.39-.39-1.02 0-1.41l6.36-6.36c.39-.39 1.02-.39 1.41 0z"></path></svg>',
+    compara: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 6h20v2H2V6zm2 5h16v2H4v-2zm3 5h10v2H7v-2z"></path></svg>',
+    suma_frac: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg>',
+    resta_frac: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13H5v-2h14v2z"></path></svg>',
+    multi_frac: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>',
+    div_frac: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6.5" cy="12" r="1.5" fill="currentColor"></circle><circle cx="17.5" cy="12" r="1.5" fill="currentColor"></circle><path d="M5 10h14v4H5z"></path></svg>',
+    op_iguals: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 7l2.5 3L7 13M17 7l-2.5 3 2.5 3M12 2v20"></path></svg>',
+    op_mixtes: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 12a9 9 0 110 18 9 9 0 010-18z" stroke="currentColor" stroke-width="1.5" fill="none"></path><path d="M12 7v10M7 12h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>',
+    night: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>',
+    day: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>',
+    tropical: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"></path></svg>',
+    forest: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>',
+    ocean: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-5.33 4.55-8 8.48-8 12 0 4.42 3.58 8 8 8s8-3.58 8-8c0-3.52-2.67-7.45-8-12zm0 18c-3.35 0-6-2.57-6-6 0-2.6 1.35-5.11 6-9.32 4.65 4.21 6 6.72 6 9.32 0 3.43-2.65 6-6 6z"></path></svg>',
+    amber: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>',
+    star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>',
+    play: '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>',
+    profile: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>',
+    stats: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"></path></svg>',
+    trophy: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.5c2.64 0 5.25-.84 7.5-2.5v-5c0-1.1-.9-2-2-2h-1V5c0-1.1-.9-2-2-2h-5c-1.1 0-2 .9-2 2v1H6.5c-1.1 0-2 .9-2 2v5c2.25 1.66 4.86 2.5 7.5 2.5zM9 5h6v1H9V5zm9.5 8h-17v-2h1v-3c0-2.2 1.8-4 4-4h1V2h2v2h1c2.2 0 4 1.8 4 4v3h1v2z"></path></svg>',
+    settings: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.62l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.48.1.62l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.62l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.62l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"></path></svg>',
+    credits: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 7h2v2h-2V7zm0 4h2v6h-2v-6zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg>'
+  };
+  return icons[iconName] || icons.identifica;
+}
+
+const MODES_INFO = {
+  identifica: {
+    icon: 'identifica',
+    name: 'Identifica',
+    color: '#fb923c',
+    tag: 'Visual',
+    desc: 'Visualitza un dibuix dividit en parts i identifica la fracció que representa.',
+    practice: 'Practica lectura de fraccions visuals',
+    example: 'Mira el cercle: ¾ pintat → escriu 3/4'
+  },
+  acoloreix: {
+    icon: 'acoloreix',
+    name: 'Acoloreix',
+    color: '#22d3ee',
+    tag: 'Visual',
+    desc: 'Se te dona una fracció i tu has de pintar les parts correctes del dibuix.',
+    practice: 'Practica comprensió del significat de fraccions',
+    example: 'Fracció 2/5 → pinta 2 de les 5 parts'
+  },
+  imatge: {
+    icon: 'imatge',
+    name: 'Imatge',
+    color: '#a78bfa',
+    tag: 'Visual',
+    desc: 'Se te mostra una fracció i has de seleccionar el dibuix que la representa.',
+    practice: 'Practica reconeixement visual de fraccions',
+    example: 'Tens 1/2 → tria entre 4 imatges'
+  },
+  equivalents: {
+    icon: 'equivalents',
+    name: 'Equivalents',
+    color: '#10b981',
+    tag: 'Concepte',
+    desc: 'Se te dona una fracció i has de triar qual és una fracció equivalent (igual valor).',
+    practice: 'Practica conversió de fraccions i equivalència',
+    example: '1/2 = ? → escull 2/4 entre les opcions'
+  },
+  simplifica: {
+    icon: 'simplifica',
+    name: 'Simplifica',
+    color: '#f472b6',
+    tag: 'Concepte',
+    desc: 'Redueix una fracció a la seva forma més simple (dividint numerador i denominador pel mateix nombre).',
+    practice: 'Practica simplificació i trobar el màxim comú divisor',
+    example: '6/9 → simplifica a 2/3'
+  },
+  compara: {
+    icon: 'compara',
+    name: 'Compara',
+    color: '#facc15',
+    tag: 'Concepte',
+    desc: 'Compara dues fraccions i indica si és més gran (>), més petita (<) o igual (=).',
+    practice: 'Practica comparació de fraccions',
+    example: '3/8 i 1/2 → 3/8 < 1/2'
+  },
+  suma_frac: {
+    icon: 'suma_frac',
+    name: 'Suma',
+    color: '#4ade80',
+    tag: 'Operació',
+    desc: 'Suma dues fraccions trobant el resultat en forma simplificada.',
+    practice: 'Sumes amb denominadors iguals i diferents',
+    example: '1/5 + 2/5 = 3/5'
+  },
+  resta_frac: {
+    icon: 'resta_frac',
+    name: 'Resta',
+    color: '#f87171',
+    tag: 'Operació',
+    desc: 'Resta dues fraccions trobant el resultat en forma simplificada.',
+    practice: 'Restes amb denominadors iguals i diferents',
+    example: '4/7 − 1/7 = 3/7'
+  },
+  multi_frac: {
+    icon: 'multi_frac',
+    name: 'Multiplicació',
+    color: '#60a5fa',
+    tag: 'Operació',
+    desc: 'Multiplica dues fraccions multiplicant numeradors i denominadors.',
+    practice: 'Multiplicació i simplificació de fraccions',
+    example: '1/2 × 1/3 = 1/6'
+  },
+  div_frac: {
+    icon: 'div_frac',
+    name: 'Divisió',
+    color: '#fb7185',
+    tag: 'Operació',
+    desc: 'Divideix dues fraccions invertint la segona i multiplicant.',
+    practice: 'Divisió de fraccions',
+    example: '1/2 ÷ 1/3 = 3/2'
+  },
+  op_iguals: {
+    icon: 'op_iguals',
+    name: 'Op. Iguals',
+    color: '#ffd166',
+    tag: 'Repte',
+    desc: '3 fraccions encadenades amb el mateix operador (totes sumes, multiplicacions...).',
+    practice: 'Seqüències d\'operacions amb el mateix operador',
+    example: '1/2 + 1/3 + 1/4 = ?'
+  },
+  op_mixtes: {
+    icon: 'op_mixtes',
+    name: 'Op. Mixtes',
+    color: '#c084fc',
+    tag: 'Repte',
+    desc: '3 fraccions amb operadors DIFERENTS respectant l\'ordre matemàtic (× i ÷ abans que + i −).',
+    practice: 'Operacions combinades respectant prioritat',
+    example: '1/2 + 1/3 × 1/4 = ?'
+  }
+};
+
+function getModeVisual(modeId, color) {
+  const c = color || '#ffd166';
+  const empty = 'rgba(255,255,255,0.12)';
+  const stroke = 'rgba(255,255,255,0.6)';
+
+  function pieCircle(num, den, size=60) {
+    const cx = size/2, cy = size/2, r = size/2 - 3;
+    let parts = '';
+    if (den === 1) {
+      parts = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${num >= 1 ? c : empty}" stroke="${stroke}" stroke-width="1.5"/>`;
+    } else {
+      for (let i = 0; i < den; i++) {
+        const a1 = (i/den) * 2 * Math.PI - Math.PI/2;
+        const a2 = ((i+1)/den) * 2 * Math.PI - Math.PI/2;
+        const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+        const x2 = cx + r * Math.cos(a2), y2 = cy + r * Math.sin(a2);
+        const large = (a2 - a1) > Math.PI ? 1 : 0;
+        const fill = i < num ? c : empty;
+        parts += `<path d="M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>`;
+      }
+    }
+    return `<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">${parts}</svg>`;
+  }
+
+  function rectFrac(num, den, w=60, h=40) {
+    const cw = w / den;
+    let parts = '';
+    for (let i = 0; i < den; i++) {
+      const fill = i < num ? c : empty;
+      parts += `<rect x="${i*cw}" y="0" width="${cw}" height="${h}" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>`;
+    }
+    return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">${parts}</svg>`;
+  }
+
+  function fracText(n, d, size=14) {
+    return `<div style="display:flex;flex-direction:column;align-items:center;font-weight:900;color:${c};font-size:${size}px;line-height:1;">
+      <div>${n}</div>
+      <div style="border-top:2px solid ${c};padding-top:2px;margin-top:2px;">${d}</div>
+    </div>`;
+  }
+
+  switch (modeId) {
+    case 'identifica':
+      return `<div style="display:flex;align-items:center;justify-content:center;">${pieCircle(3, 4, 56)}</div>`;
+    case 'acoloreix':
+      return `<div style="display:flex;align-items:center;justify-content:center;">${rectFrac(2, 5, 60, 36)}</div>`;
+    case 'imatge':
+      return `<div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">${pieCircle(1,2,28)}${rectFrac(1,2,28,18)}${pieCircle(2,4,28)}${rectFrac(3,6,28,18)}</div>`;
+    case 'equivalents':
+      return `<div style="display:flex;align-items:center;gap:4px;">${pieCircle(1,2,32)}<span style="color:${c};font-weight:900;font-size:14px;">=</span>${pieCircle(2,4,32)}</div>`;
+    case 'simplifica':
+      return `<div style="display:flex;align-items:center;gap:4px;">${fracText(6,9,12)}<span style="color:${c};font-weight:900;font-size:14px;">→</span>${fracText(2,3,14)}</div>`;
+    case 'compara':
+      return `<div style="display:flex;align-items:center;gap:4px;">${fracText(3,8,12)}<span style="color:${c};font-weight:900;font-size:18px;">&lt;</span>${fracText(1,2,12)}</div>`;
+    case 'suma_frac':
+      // 1/5 + 2/5 = 3/5 (mateix denominador, sense simplificar)
+      return `<div style="display:flex;align-items:center;gap:3px;">${fracText(1,5,12)}<span style="color:${c};font-weight:900;">+</span>${fracText(2,5,12)}<span style="color:${c};font-weight:900;">=</span>${fracText(3,5,12)}</div>`;
+    case 'resta_frac':
+      // 4/7 - 1/7 = 3/7 (mateix denominador, sense simplificar)
+      return `<div style="display:flex;align-items:center;gap:3px;">${fracText(4,7,12)}<span style="color:${c};font-weight:900;">−</span>${fracText(1,7,12)}<span style="color:${c};font-weight:900;">=</span>${fracText(3,7,12)}</div>`;
+    case 'multi_frac':
+      // 1/2 × 1/3 = 1/6 (1×1=1, 2×3=6, sense simplificar)
+      return `<div style="display:flex;align-items:center;gap:3px;">${fracText(1,2,12)}<span style="color:${c};font-weight:900;">×</span>${fracText(1,3,12)}<span style="color:${c};font-weight:900;">=</span>${fracText(1,6,12)}</div>`;
+    case 'div_frac':
+      return `<div style="display:flex;align-items:center;gap:3px;">${fracText(1,2,12)}<span style="color:${c};font-weight:900;">÷</span>${fracText(1,3,12)}<span style="color:${c};font-weight:900;">=</span>${fracText(3,2,12)}</div>`;
+    case 'op_iguals':
+      return `<div style="display:flex;align-items:center;gap:2px;font-size:11px;">${fracText(1,2,10)}<span style="color:${c};font-weight:900;">+</span>${fracText(1,3,10)}<span style="color:${c};font-weight:900;">+</span>${fracText(1,4,10)}</div>`;
+    case 'op_mixtes':
+      return `<div style="display:flex;align-items:center;gap:2px;font-size:11px;">${fracText(1,2,10)}<span style="color:${c};font-weight:900;">+</span>${fracText(1,3,10)}<span style="color:${c};font-weight:900;">×</span>${fracText(1,4,10)}</div>`;
+    default:
+      return pieCircle(1, 2, 56);
+  }
+}
+
+function renderModes() {
+  const grid = document.getElementById('mode-grid');
+  grid.innerHTML = '';
+
+  Object.entries(MODES_INFO).forEach(([modeId, info]) => {
+    const card = document.createElement('div');
+    card.className = 'mode-card';
+    card.style.setProperty('--mode-color', info.color || 'var(--accent)');
+    card.innerHTML = `
+      <div class="mode-icon-wrap">
+        <div class="mode-icon">${getSvgIcon(info.icon)}</div>
+        <div class="mode-visual">${getModeVisual(modeId, info.color)}</div>
+      </div>
+      <div class="mode-content">
+        <div class="mode-tag">${info.tag || 'Joc'}</div>
+        <div class="mode-name">${info.name}</div>
+        <div class="mode-desc">${info.desc}</div>
+        <div class="mode-example"><strong>Exemple:</strong> ${info.example}</div>
+      </div>
+    `;
+    card.onclick = () => selectMode(modeId);
+    grid.appendChild(card);
+  });
+}
+
+function selectMode(modeId) {
+  window.selectedMode = modeId;
+  const info = MODES_INFO[modeId];
+  const modeNameEl = document.getElementById('level-mode-name');
+  modeNameEl.innerHTML = `<span style="display:inline-flex; align-items:center; gap:8px;"><span style="width:24px; height:24px; display:inline-flex;">${getSvgIcon(info.icon)}</span> <span>${info.name}</span></span>`;
+  renderLevels();
+  showScreen('screen-select-level');
+}
+
+const LEVELS_INFO = [
+  {
+    stars: 1,
+    name: 'Fàcil',
+    desc: 'Denominadors petits i senzills (2, 3, 4, 5, 6). Les fraccions són bàsiques i fàcils de visualitzar.',
+    example: 'Exemple: 1/2, 2/3, 3/4, 1/5',
+    diff: 1
+  },
+  {
+    stars: 2,
+    name: 'Normal',
+    desc: 'Denominadors fins a 12. Les operacions són més complexes però manejables.',
+    example: 'Exemple: 5/8, 7/12, 3/10, 5/9',
+    diff: 2
+  },
+  {
+    stars: 3,
+    name: 'Difícil',
+    desc: 'Denominadors fins a 20. Fraccions més complexes que requeixen més concentració.',
+    example: 'Exemple: 11/15, 13/18, 7/16, 9/20',
+    diff: 3
+  },
+  {
+    stars: 4,
+    name: 'Expert',
+    desc: 'Denominadors fins a 30. Els problemes més desafiants per a qui domina les fraccions.',
+    example: 'Exemple: 17/24, 19/28, 23/30, 15/26',
+    diff: 4
+  }
+];
+
+function renderLevels() {
+  const grid = document.getElementById('level-grid');
+  grid.innerHTML = '';
+
+  LEVELS_INFO.forEach((lvl, idx) => {
+    const card = document.createElement('div');
+    card.className = 'level-card';
+    const starsHtml = Array.from({length: lvl.stars}, () => getSvgIcon('star')).join('');
+    card.innerHTML = `
+      <div class="level-stars">${starsHtml}</div>
+      <div class="level-info">
+        <div class="level-name">${lvl.name}</div>
+        <div class="level-desc">${lvl.desc}</div>
+        <div class="level-example">${lvl.example}</div>
+      </div>
+    `;
+    card.onclick = () => startGame(window.selectedMode, lvl.diff);
+    grid.appendChild(card);
+  });
+}
+
+function startGame(modeId, levelDiff) {
+  state.mode = modeId;
+  state.diff = levelDiff;
+  startMode(modeId);
+}
+
+/* ═══════════════════════════════════════════════
+   SISTEMA DE TEMES
+   ═══════════════════════════════════════════════ */
+
+const THEMES = [
+  { id: 'nit', name: 'Nit (Defecte)', icon: 'night' },
+  { id: 'dia', name: 'Dia', icon: 'day' },
+  { id: 'tropicana', name: 'Tropicana', icon: 'tropical' },
+  { id: 'boscos', name: 'Boscos', icon: 'forest' },
+  { id: 'ocea', name: 'Oceà', icon: 'ocean' },
+  { id: 'amarg', name: 'Amarg', icon: 'amber' }
+];
+
+function renderThemes() {
+  const grid = document.getElementById('theme-grid');
+  grid.innerHTML = '';
+  const current = localStorage.getItem('fraccions_theme') || 'nit';
+
+  THEMES.forEach(theme => {
+    const btn = document.createElement('button');
+    btn.className = 'theme-btn' + (current === theme.id ? ' selected' : '');
+    btn.innerHTML = `
+      <div class="theme-icon">${getSvgIcon(theme.icon)}</div>
+      <div class="theme-name">${theme.name}</div>
+    `;
+    btn.onclick = () => setTheme(theme.id);
+    grid.appendChild(btn);
+  });
+}
+
+function setTheme(themeId) {
+  if (themeId === 'nit') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', themeId);
+  }
+  localStorage.setItem('fraccions_theme', themeId);
+  renderThemes();
+}
+
+function initTheme() {
+  const saved = localStorage.getItem('fraccions_theme') || 'nit';
+  if (saved !== 'nit') {
+    document.documentElement.setAttribute('data-theme', saved);
+  }
+}
+
+/* ─── inicialització ─── */
+window.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initSplash();
+});
+
+</script>
+</body>
+</html>

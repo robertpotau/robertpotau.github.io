@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vistes: Planta, Alçat i Perfil</title>
+<style>
+  :root{
+    --peca:#e8b46e; --peca-edge:#7a4e1d;
+    --accent:#2f6fb0; --accent2:#39a06a; --warn:#d9534f;
+    --ink:#1f2a36; --paper:#ffffff; --soft:#eef3f8;
+    --cell:#cfe0f0; --cell-on:#2f6fb0; --line:#9bb3c9;
+  }
+  *{box-sizing:border-box}
+  html{height:100%;
+    background:linear-gradient(160deg,#dff0ff 0%,#eaf6ee 45%,#fff7e6 100%);
+    background-attachment:fixed;}
+  body{margin:0;min-height:100%;font-family:"Segoe UI",system-ui,Arial,sans-serif;color:var(--ink);}
+  h1,h2,h3{margin:0}
+  button{font-family:inherit;cursor:pointer}
+  .wrap{max-width:1040px;margin:0 auto;padding:14px 16px 60px}
+
+  header.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    background:rgba(255,255,255,.75);backdrop-filter:blur(4px);border:1px solid #d4e2ef;
+    border-radius:16px;padding:10px 16px;margin-bottom:16px;box-shadow:0 4px 16px rgba(40,80,120,.08)}
+  .title{display:flex;align-items:center;gap:10px}
+  .logo{width:38px;height:38px;border-radius:10px;background:var(--accent);display:grid;place-items:center;
+    color:#fff;font-weight:800;font-size:20px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.15)}
+  .title h1{font-size:1.15rem;letter-spacing:.2px}
+  .title small{display:block;font-weight:600;color:#5a6b7c;font-size:.72rem}
+  .hud{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .pill{background:#fff;border:1px solid #d4e2ef;border-radius:999px;padding:5px 12px;font-weight:700;font-size:.85rem;
+    display:flex;align-items:center;gap:6px}
+  .pill b{color:var(--accent)}
+  .av{font-size:1.15rem}
+
+  .card{background:var(--paper);border:1px solid #e2ebf4;border-radius:18px;padding:18px;
+    box-shadow:0 6px 22px rgba(40,80,120,.08)}
+
+  /* HOME */
+  .hero{text-align:center;margin-bottom:18px}
+  .hero h2{font-size:1.7rem;margin-bottom:6px}
+  .hero p{color:#5a6b7c;margin:0 auto;max-width:560px}
+  .name-row{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin:16px 0 6px}
+  .name-row input{padding:10px 14px;border:2px solid #cdddec;border-radius:12px;font-size:1rem;min-width:200px}
+  .avatars{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;max-width:420px;margin:0 auto}
+  .avatars button{font-size:1.4rem;width:44px;height:44px;border-radius:12px;border:2px solid transparent;background:#f1f6fb}
+  .avatars button.sel{border-color:var(--accent);background:#dcebfb}
+  .modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+  .mode{display:flex;flex-direction:column;gap:8px;text-align:left;border:2px solid #e2ebf4;border-radius:16px;
+    padding:16px;background:#fff;transition:.15s;align-items:flex-start}
+  .mode:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 10px 22px rgba(40,80,120,.13)}
+  .mode .ic{font-size:1.8rem}
+  .mode h3{font-size:1.05rem}
+  .mode p{margin:0;font-size:.85rem;color:#5a6b7c}
+  .lvl-row{display:flex;gap:8px;justify-content:center;margin-top:6px;flex-wrap:wrap}
+  .lvl-row .seg{display:flex;background:#eef3f8;border-radius:12px;padding:4px;gap:4px}
+  .lvl-row .seg button{border:none;background:transparent;padding:8px 14px;border-radius:9px;font-weight:700;color:#5a6b7c}
+  .lvl-row .seg button.on{background:var(--accent);color:#fff}
+
+  /* GAME LAYOUT */
+  .game-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .btn{border:none;border-radius:12px;padding:10px 16px;font-weight:700;font-size:.95rem;color:#fff;background:var(--accent)}
+  .btn.ghost{background:#fff;color:var(--accent);border:2px solid #cdddec}
+  .btn.green{background:var(--accent2)}
+  .btn.gray{background:#7d8ea0}
+  .btn.small{padding:7px 12px;font-size:.85rem}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+
+  .stage{display:grid;grid-template-columns:minmax(300px,1fr) minmax(280px,1.05fr);gap:18px}
+  @media(max-width:820px){.stage{grid-template-columns:1fr}}
+  .panel{background:#fff;border:1px solid #e2ebf4;border-radius:16px;padding:14px}
+  .panel h3{font-size:.95rem;color:#5a6b7c;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;font-size:.78rem}
+
+  .viewer{display:flex;flex-direction:column;align-items:center;gap:10px}
+  #scene{width:100%;max-width:360px;aspect-ratio:1/1;background:radial-gradient(circle at 50% 38%,#ffffff,#eef4fa);
+    border-radius:14px;border:1px solid #e2ebf4;touch-action:none;cursor:grab}
+  #scene:active{cursor:grabbing}
+  .snaps{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+  .snaps button{border:1px solid #cdddec;background:#fff;color:var(--accent);border-radius:9px;padding:6px 10px;font-weight:700;font-size:.82rem}
+  .snaps button:hover{background:#eef4fa}
+
+  /* VIEW GRIDS (european layout) */
+  .euro{display:grid;grid-template-columns:auto auto;grid-template-rows:auto auto;gap:14px;justify-content:center;align-items:start}
+  .vbox{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .vbox .lab{font-weight:800;font-size:.8rem;color:var(--accent);text-transform:uppercase;letter-spacing:.5px}
+  .grid{display:grid;gap:2px;background:var(--line);padding:2px;border-radius:6px}
+  .grid .c{background:#fff;width:26px;height:26px;border-radius:3px;display:grid;place-items:center}
+  .grid.click .c{cursor:pointer}
+  .grid .c.on{background:var(--cell-on)}
+  .grid .c.ok{box-shadow:inset 0 0 0 3px var(--accent2)}
+  .grid .c.bad{box-shadow:inset 0 0 0 3px var(--warn)}
+  .grid.mini .c{width:16px;height:16px}
+  .grid.tiny .c{width:13px;height:13px}
+  .grid.big .c{width:42px;height:42px;border-radius:5px}
+  @media(max-width:520px){.grid.big .c{width:34px;height:34px}}
+
+  .help{font-size:.82rem;color:#5a6b7c;line-height:1.45}
+  .feedback{min-height:26px;font-weight:800;text-align:center;margin-top:8px}
+  .feedback.good{color:var(--accent2)}
+  .feedback.bad{color:var(--warn)}
+
+  /* test options */
+  .opts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .opt{border:2px solid #e2ebf4;border-radius:14px;padding:12px;display:grid;place-items:center;background:#fff;cursor:pointer}
+  .opt:hover{border-color:var(--accent)}
+  .opt.sel{border-color:var(--accent);background:#eef4fa}
+  .opt.right{border-color:var(--accent2);background:#e9f7ef}
+  .opt.wrong{border-color:var(--warn);background:#fdecea}
+
+  /* editor */
+  .editor{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .hgrid{display:grid;gap:3px;background:var(--line);padding:3px;border-radius:8px}
+  .hgrid .hc{width:40px;height:40px;border-radius:5px;background:#fff;display:grid;place-items:center;
+    font-weight:800;font-size:1rem;color:var(--accent);cursor:pointer;user-select:none;position:relative}
+  .hgrid .hc .bar{position:absolute;left:0;bottom:0;width:100%;background:#cfe6d6;border-radius:5px;z-index:0}
+  .hgrid .hc span{position:relative;z-index:1}
+  .ed-hint{font-size:.8rem;color:#5a6b7c;text-align:center}
+
+  .modal-bg{position:fixed;inset:0;background:rgba(20,30,45,.5);display:none;place-items:center;z-index:50;padding:16px}
+  .modal-bg.show{display:grid}
+  .modal{background:#fff;border-radius:18px;padding:22px;max-width:520px;width:100%;max-height:90vh;overflow:auto}
+  .modal h2{margin-bottom:10px}
+  .modal p{color:#43525f;line-height:1.5;font-size:.92rem}
+  .modal .x{float:right;border:none;background:#eef3f8;border-radius:10px;width:34px;height:34px;font-size:1.1rem;font-weight:800;color:#5a6b7c}
+  .credits{text-align:center;color:#8aa;font-size:.78rem;margin-top:22px}
+  .hidden{display:none!important}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.78rem;color:#5a6b7c;justify-content:center;margin-top:4px}
+  .legend span{display:flex;align-items:center;gap:5px}
+  .sw{width:14px;height:14px;border-radius:4px;display:inline-block}
+  .ctrls{display:flex;flex-direction:column;gap:8px;align-items:center;margin-top:4px;width:100%}
+  .ctrl-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
+  .ctrl-lab{font-weight:700;font-size:.82rem;color:#5a6b7c}
+  .seg2{display:flex;background:#eef3f8;border-radius:10px;padding:3px;gap:3px}
+  .seg2 button{border:none;background:transparent;padding:6px 12px;border-radius:8px;font-weight:700;font-size:.82rem;color:#5a6b7c;cursor:pointer}
+  .seg2 button.on{background:var(--accent);color:#fff}
+  .toggle{border:2px solid #cdddec;background:#fff;color:var(--accent);border-radius:10px;padding:5px 11px;font-weight:700;font-size:.82rem;cursor:pointer}
+  .toggle.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .swatches{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+  .swatches button{width:26px;height:26px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #cdddec;cursor:pointer;padding:0}
+  .swatches button.sel{box-shadow:0 0 0 3px var(--accent)}
+  .vlegend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:.8rem;font-weight:700}
+  .vlegend span{display:flex;align-items:center;gap:6px;color:#43525f}
+  .vlegend i{width:14px;height:14px;border-radius:4px;display:inline-block}
+  .zoom{display:flex;align-items:center;gap:8px}
+  .zoom input[type=range]{width:130px;accent-color:var(--accent)}
+  .zoom .zbtn{border:2px solid #cdddec;background:#fff;color:var(--accent);border-radius:9px;width:30px;height:30px;font-weight:800;font-size:1.05rem;line-height:1;cursor:pointer}
+  .zoom .zbtn:hover{background:#eef4fa}
+  .zoom .zval{font-weight:800;color:var(--accent);min-width:48px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="topbar">
+    <div class="title">
+      <div class="logo">◳</div>
+      <div>
+        <h1>Vistes · Planta, Alçat i Perfil</h1>
+        <small>Sistema dièdric · Dibuix tècnic</small>
+      </div>
+    </div>
+    <div class="hud" id="hud">
+      <span class="pill"><span class="av" id="hudAv">🦊</span><span id="hudName">Convidat/da</span></span>
+      <span class="pill">⭐ <b id="hudScore">0</b></span>
+      <span class="pill">🔥 <b id="hudStreak">0</b></span>
+      <button class="btn ghost small" id="homeBtn">Inici</button>
+      <button class="btn ghost small" id="helpBtn">?</button>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <section id="home" class="card">
+    <div class="hero">
+      <h2>Aprèn a dibuixar les <span style="color:var(--accent)">vistes</span> d'una peça</h2>
+      <p>Mira la peça en 3D i representa la seva <b>planta</b>, <b>alçat</b> i <b>perfil</b>. Tot autocorregit.</p>
+    </div>
+    <div class="name-row">
+      <input id="nameInput" placeholder="El teu nom (opcional)" maxlength="18">
+    </div>
+    <div class="avatars" id="avPick"></div>
+
+    <div class="lvl-row">
+      <div class="seg" id="lvlSeg">
+        <button data-lvl="1">Nivell 1 · 2×2×2</button>
+        <button data-lvl="2" class="on">Nivell 2 · 3×3×3</button>
+        <button data-lvl="3">Nivell 3 · 4×4×4</button>
+      </div>
+    </div>
+
+    <div class="modes">
+      <button class="mode" data-mode="mark">
+        <span class="ic">🎯</span>
+        <h3>Marca les vistes</h3>
+        <p>Veus la peça 3D i pintes les tres vistes a les graelles. Comprovació immediata.</p>
+      </button>
+      <button class="mode" data-mode="build">
+        <span class="ic">🧱</span>
+        <h3>Construeix la peça</h3>
+        <p>Et donem les tres vistes i has d'aixecar la peça fins que coincideixin.</p>
+      </button>
+      <button class="mode" data-mode="test">
+        <span class="ic">✅</span>
+        <h3>Tria la vista</h3>
+        <p>Mira la peça i tria quina de les 4 opcions és la vista demanada.</p>
+      </button>
+      <button class="mode" data-mode="gen">
+        <span class="ic">🛠️</span>
+        <h3>Generador</h3>
+        <p>Dissenya la teva peça posant cubs i mira en directe les seves vistes.</p>
+      </button>
+    </div>
+  </section>
+
+  <!-- GAME -->
+  <section id="game" class="hidden">
+    <div class="game-top">
+      <button class="btn ghost small" id="backBtn">‹ Modes</button>
+      <h2 id="gameTitle" style="font-size:1.15rem"></h2>
+      <div style="display:flex;gap:8px">
+        <span class="pill" id="roundPill">Repte 1</span>
+      </div>
+    </div>
+    <div class="stage">
+      <!-- LEFT: 3D viewer -->
+      <div class="panel viewer" id="leftPanel">
+        <h3 id="leftTitle">La peça en 3D</h3>
+        <canvas id="scene" width="360" height="360"></canvas>
+        <div class="snaps">
+          <button data-snap="persp">Perspectiva</button>
+          <button data-snap="front">Alçat ▣</button>
+          <button data-snap="side">Perfil ▣</button>
+          <button data-snap="top">Planta ▣</button>
+        </div>
+        <div class="ctrls">
+          <div class="ctrl-row">
+            <span class="ctrl-lab">Color:</span>
+            <div class="seg2" id="colorModeSeg">
+              <button data-cm="uniform" class="on">Un color</button>
+              <button data-cm="views">Per vistes</button>
+            </div>
+            <button class="toggle on" id="gridToggle" title="Mostra/amaga la graella (terra i parets)">Graella ✓</button>
+            <button class="toggle on" id="arrowToggle" title="Mostra/amaga les fletxes de les vistes">Fletxes ✓</button>
+          </div>
+          <div class="ctrl-row zoom">
+            <span class="ctrl-lab">Zoom:</span>
+            <button class="zbtn" id="zoomOut" title="Allunya">−</button>
+            <input type="range" id="zoomSlider" min="0.5" max="2" step="0.1" value="1">
+            <button class="zbtn" id="zoomIn" title="Apropa">+</button>
+            <span class="zval" id="zoomVal">x1,00</span>
+          </div>
+          <div class="swatches" id="swatches"></div>
+          <div class="vlegend" id="vlegend" hidden></div>
+        </div>
+        <div class="legend"><span>Arrossega (ratolí o dit) per girar la peça</span></div>
+      </div>
+      <!-- RIGHT: dynamic -->
+      <div class="panel" id="rightPanel"></div>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:6px;flex-wrap:wrap" id="actionBar"></div>
+  </section>
+
+  <p class="credits" id="credits">Vistes v1.3.1 · 17/06/2026 · Joc educatiu per a l'aula</p>
+</div>
+
+<!-- HELP MODAL -->
+<div class="modal-bg" id="helpModal">
+  <div class="modal">
+    <button class="x" id="helpX">×</button>
+    <h2>Com es juga?</h2>
+    <p><b>Les tres vistes</b> són les projeccions ortogonals d'una peça:</p>
+    <p>• <b>Alçat</b>: com es veu la peça de <b>davant</b>.<br>
+       • <b>Planta</b>: com es veu de <b>dalt</b> (es dibuixa <b>sota</b> l'alçat).<br>
+       • <b>Perfil</b>: com es veu de <b>costat</b> (a la <b>dreta</b> de l'alçat, sistema europeu).</p>
+    <p><b>🎯 Marca les vistes:</b> pinta les caselles de cada vista mirant la peça 3D i prem <i>Comprova</i>.</p>
+    <p><b>🧱 Construeix la peça:</b> et donem les vistes; fes clic a la graella per pujar columnes de cubs fins que les vistes coincideixin.</p>
+    <p><b>✅ Tria la vista:</b> tria entre 4 opcions la vista correcta.</p>
+    <p><b>🛠️ Generador:</b> dissenya lliurement i mira les vistes en directe.</p>
+    <p><b>🎨 Color:</b> tria <i>Un color</i> (amb la paleta) o <i>Per vistes</i>, on cada cara es pinta segons la vista on apareix: blau = alçat, verd = planta, taronja = perfil.</p>
+    <p><b>🧭 Fletxes i parets:</b> les <b>fletxes</b> indiquen des d'on s'ha de mirar per veure cada vista. La <b>graella</b> forma el racó del dièdre: el terra (planta), la paret del darrere (alçat) i la paret del costat (perfil). Pots amagar les fletxes o la graella amb els botons.</p>
+    <p style="color:#8aa;font-size:.82rem;margin-top:10px">Aquesta versió treballa amb peces fetes de columnes de cubs (sense forats interiors ni voladissos). Gira la peça amb el ratolí o el dit.</p>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ============================================================
+   VISTES · Planta, Alçat i Perfil   —  v1.3.1 (17/06/2026)
+   Motor 3D voxel propi (sense llibreries) + autocorrecció
+   ============================================================ */
+
+/* ---------- estat global ---------- */
+const STATE = {
+  level: 2,
+  avatar: "🦊",
+  name: "",
+  score: 0,
+  streak: 0,
+  mode: null,
+  round: 0,
+};
+const AVATARS = ["🦊","🐼","🐯","🐸","🦁","🐙","🦉","🐳","🦖","🤖","👾","🐝","🦄","🐧"];
+const PALETTE=[
+  {n:'Marró', rgb:[232,180,110]},
+  {n:'Blau', rgb:[110,165,225]},
+  {n:'Verd', rgb:[120,200,145]},
+  {n:'Vermell', rgb:[230,130,120]},
+  {n:'Lila', rgb:[180,150,230]},
+  {n:'Taronja', rgb:[242,170,92]},
+  {n:'Turquesa', rgb:[110,200,205]},
+  {n:'Gris', rgb:[185,193,203]},
+  {n:'Rosa', rgb:[240,150,190]},
+];
+
+// dimensions per nivell: [sx, sz, sy]
+function dims(){
+  return {1:[2,2,2], 2:[3,3,3], 3:[4,4,4]}[STATE.level];
+}
+
+/* ---------- utilitats peça (heightmap) ----------
+   H[x][z] = alçada de la columna (0..sy)
+*/
+function emptyH(sx,sz){ return Array.from({length:sx},()=>Array(sz).fill(0)); }
+
+function randomPiece(){
+  const [sx,sz,sy]=dims();
+  let H, tries=0;
+  do{
+    H=emptyH(sx,sz);
+    for(let x=0;x<sx;x++) for(let z=0;z<sz;z++){
+      H[x][z] = Math.random()<0.74 ? (1+Math.floor(Math.random()*sy)) : 0;
+    }
+    tries++;
+  } while(!validPiece(H,sx,sz,sy) && tries<200);
+  if(!validPiece(H,sx,sz,sy)){ // garantia
+    H=emptyH(sx,sz); H[0][0]=sy; H[sx-1][sz-1]=1; if(sx>1)H[1][0]=Math.ceil(sy/2);
+  }
+  return H;
+}
+function validPiece(H,sx,sz,sy){
+  let cells=0,max=0,hasZero=false;
+  for(let x=0;x<sx;x++)for(let z=0;z<sz;z++){
+    const h=H[x][z];
+    if(h>0)cells++; else hasZero=true;
+    if(h>max)max=h;
+  }
+  // ha de tenir prou cubs, arribar a l'alçada màx, i tenir alguna columna buida (excepte nivell 1)
+  if(cells<2) return false;
+  if(max<sy) return false;
+  if(STATE.level>1 && !hasZero) return false;
+  return true;
+}
+
+/* càlcul de vistes a partir de H -> matriu booleana grid[row][col] */
+function plantaGrid(H){ // top view: rows=z, cols=x
+  const [sx,sz]=dims();
+  const g=[];
+  for(let z=0;z<sz;z++){ const row=[]; for(let x=0;x<sx;x++) row.push(H[x][z]>0); g.push(row); }
+  return {g, rows:sz, cols:sx};
+}
+function alcatGrid(H){ // front view: rows=y (top->bottom), cols=x ; occupied if maxZ height > level
+  const [sx,sz,sy]=dims();
+  const maxZ=[]; for(let x=0;x<sx;x++){ let m=0; for(let z=0;z<sz;z++) m=Math.max(m,H[x][z]); maxZ.push(m); }
+  const g=[];
+  for(let r=0;r<sy;r++){ const lvl=sy-r; const row=[]; for(let x=0;x<sx;x++) row.push(maxZ[x]>=lvl); g.push(row); }
+  return {g, rows:sy, cols:sx};
+}
+function perfilGrid(H){ // vista de perfil: rows=y, cols=z ; ocupat si maxX > nivell
+  // columnes en ordre z descendent perquè coincideixi amb la peça 3D vista des del costat
+  // (snap "Perfil", fletxa i paret del perfil → observador a la dreta)
+  const [sx,sz,sy]=dims();
+  const maxX=[]; for(let z=0;z<sz;z++){ let m=0; for(let x=0;x<sx;x++) m=Math.max(m,H[x][z]); maxX.push(m); }
+  const g=[];
+  for(let r=0;r<sy;r++){ const lvl=sy-r; const row=[]; for(let z=sz-1;z>=0;z--) row.push(maxX[z]>=lvl); g.push(row); }
+  return {g, rows:sy, cols:sz};
+}
+function gridsEqual(a,b){
+  if(a.rows!==b.rows||a.cols!==b.cols) return false;
+  for(let r=0;r<a.rows;r++)for(let c=0;c<a.cols;c++) if(a.g[r][c]!==b.g[r][c]) return false;
+  return true;
+}
+function cloneGrid(a){ return {rows:a.rows,cols:a.cols,g:a.g.map(r=>r.slice())}; }
+
+/* ============================================================
+   MOTOR 3D  (projecció ortogonal + painter's algorithm)
+   ============================================================ */
+const Scene = (function(){
+  const cv=document.getElementById('scene');
+  const ctx=cv.getContext('2d');
+  let H=null, rotX=0.61548, rotY=-0.785398; // isomètric: arestes X, Y, Z igual de llargues → caselles iguals al terra i a les parets
+  let dragging=false, lastX=0,lastY=0;
+  let colorMode='uniform';            // 'uniform' | 'views'
+  let uniformColor=[232,180,110];     // marró per defecte
+  let showGrid=true;
+  let showArrows=true;
+  let zoom=1;
+  const VIEWCOL={ z:[86,150,214], y:[104,196,140], x:[240,168,96] }; // alçat / planta / perfil
+
+  function setPiece(h){ H=h; draw(); }
+  function setRot(rx,ry){ rotX=rx; rotY=ry; draw(); }
+  function setColorMode(m){ colorMode=m; draw(); }
+  function setUniformColor(rgb){ uniformColor=rgb.slice(); colorMode='uniform'; draw(); }
+  function setShowGrid(b){ showGrid=b; draw(); }
+  function setShowArrows(b){ showArrows=b; draw(); }
+  function setZoom(z){ zoom=z; draw(); }
+
+  const faceDirs=[
+    {n:[1,0,0],  axis:'x', v:[[1,0,0],[1,1,0],[1,1,1],[1,0,1]]},
+    {n:[-1,0,0], axis:'x', v:[[0,0,0],[0,0,1],[0,1,1],[0,1,0]]},
+    {n:[0,1,0],  axis:'y', v:[[0,1,0],[0,1,1],[1,1,1],[1,1,0]]},
+    {n:[0,-1,0], axis:'y', v:[[0,0,0],[1,0,0],[1,0,1],[0,0,1]]},
+    {n:[0,0,1],  axis:'z', v:[[0,0,1],[1,0,1],[1,1,1],[0,1,1]]},
+    {n:[0,0,-1], axis:'z', v:[[0,0,0],[0,1,0],[1,1,0],[1,0,0]]},
+  ];
+  function solid(x,y,z){
+    const [sx,sz]=dims();
+    if(x<0||x>=sx||z<0||z>=sz||y<0) return false;
+    return y < H[x][z];
+  }
+  function rot(p){
+    const cy=Math.cos(rotY),sy=Math.sin(rotY);
+    let x=p[0]*cy + p[2]*sy;
+    let z=-p[0]*sy + p[2]*cy;
+    let y=p[1];
+    const cx=Math.cos(rotX),sx=Math.sin(rotX);
+    let y2=y*cx - z*sx;
+    let z2=y*sx + z*cx;
+    return [x,y2,z2];
+  }
+  function draw(){
+    const W=cv.width,Hc=cv.height;
+    ctx.clearRect(0,0,W,Hc);
+    if(!H) return;
+    const [sx,sz,sy]=dims();
+    const cx=sx/2, cy=sy/2, cz=sz/2;
+    const scale = W/ (4*1.95) * zoom;   // mateixa escala per a tots els nivells, ajustada pel zoom
+    const ox=W/2, oy=Hc/2 + 8;
+
+    // graella: terra + parets de l'alçat i el perfil (racó del dièdre)
+    if(showGrid) drawFloor(ctx, sx, sz, sy, cx, cy, cz, scale, ox, oy);
+
+    // recull cares exteriors
+    const faces=[];
+    const light=normalize([-0.35,0.62,0.7]);
+    for(let x=0;x<sx;x++)for(let z=0;z<sz;z++){
+      const h=H[x][z];
+      for(let y=0;y<h;y++){
+        for(const f of faceDirs){
+          const nx=x+f.n[0], ny=y+f.n[1], nz=z+f.n[2];
+          if(solid(nx,ny,nz)) continue; // cara interior
+          const pts=f.v.map(c=>rot([x+c[0]-cx, y+c[1]-cy, z+c[2]-cz]));
+          const proj=pts.map(p=>[ox+p[0]*scale, oy - p[1]*scale]);
+          const depth=(pts[0][2]+pts[1][2]+pts[2][2]+pts[3][2])/4;
+          const nr=rot(f.n);
+          const sh=0.32 + 0.68*Math.max(0, nr[0]*light[0]+nr[1]*light[1]+nr[2]*light[2]);
+          const base = colorMode==='views' ? VIEWCOL[f.axis] : uniformColor;
+          faces.push({proj,depth,sh,base});
+        }
+      }
+    }
+    faces.sort((a,b)=>a.depth-b.depth); // llunyanes primer
+    for(const fc of faces){
+      const r=Math.round(fc.base[0]*fc.sh), g=Math.round(fc.base[1]*fc.sh), b=Math.round(fc.base[2]*fc.sh);
+      ctx.beginPath();
+      ctx.moveTo(fc.proj[0][0],fc.proj[0][1]);
+      for(let i=1;i<4;i++) ctx.lineTo(fc.proj[i][0],fc.proj[i][1]);
+      ctx.closePath();
+      ctx.fillStyle=`rgb(${r},${g},${b})`;
+      ctx.fill();
+      ctx.lineWidth=1.4; ctx.strokeStyle='rgba(90,55,20,.9)'; ctx.lineJoin='round'; ctx.stroke();
+    }
+
+    if(showArrows) drawArrows(ctx, sx, sz, sy, cx, cy, cz, scale, ox, oy);
+  }
+  function P3(vx,vy,vz, cx,cy,cz, scale, ox, oy){ const p=rot([vx-cx, vy-cy, vz-cz]); return [ox+p[0]*scale, oy-p[1]*scale]; }
+  function drawFloor(ctx, sx, sz, sy, cx, cy, cz, scale, ox, oy){
+    const P=(x,y,z)=>P3(x,y,z, cx,cy,cz, scale, ox, oy);
+    const seg=(a,b)=>{ ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke(); };
+    ctx.lineCap='butt';
+    // Els tres plans ocupen EXACTAMENT la capsa de la peça i es troben al cantó (0,0,0), sense marge.
+    // terra (pla horitzontal · planta) y=0 → x∈[0,sx], z∈[0,sz]
+    ctx.lineWidth=1; ctx.strokeStyle='rgba(110,135,160,.40)';
+    for(let gx=0; gx<=sx; gx++) seg(P(gx,0,0), P(gx,0,sz));
+    for(let gz=0; gz<=sz; gz++) seg(P(0,0,gz), P(sx,0,gz));
+    // paret de l'alçat (pla vertical · darrere) z=0 → x∈[0,sx], y∈[0,sy]
+    ctx.strokeStyle='rgba(86,150,214,.42)';
+    for(let gx=0; gx<=sx; gx++) seg(P(gx,0,0), P(gx,sy,0));
+    for(let gy=0; gy<=sy; gy++) seg(P(0,gy,0), P(sx,gy,0));
+    // paret del perfil (pla vertical · costat) x=0 → z∈[0,sz], y∈[0,sy]
+    ctx.strokeStyle='rgba(240,168,96,.46)';
+    for(let gz=0; gz<=sz; gz++) seg(P(0,0,gz), P(0,sy,gz));
+    for(let gy=0; gy<=sy; gy++) seg(P(0,gy,0), P(0,gy,sz));
+    // contorn de la base
+    ctx.lineWidth=1.8; ctx.strokeStyle='rgba(70,100,130,.6)';
+    const c=[P(0,0,0),P(sx,0,0),P(sx,0,sz),P(0,0,sz)];
+    ctx.beginPath(); ctx.moveTo(c[0][0],c[0][1]); for(let i=1;i<4;i++)ctx.lineTo(c[i][0],c[i][1]); ctx.closePath(); ctx.stroke();
+  }
+  function drawArrows(ctx, sx, sz, sy, cx, cy, cz, scale, ox, oy){
+    const P=(x,y,z)=>P3(x,y,z, cx,cy,cz, scale, ox, oy);
+    const xm=sx/2, ym=sy/2, zm=sz/2;
+    arrow(ctx, P(xm, sy+1.7, zm), P(xm, sy+0.35, zm), 'rgb(40,150,90)',  'Planta'); // mira des de dalt
+    arrow(ctx, P(xm, ym, sz+1.7), P(xm, ym, sz+0.35), 'rgb(40,110,190)', 'Alçat');  // mira des de davant
+    arrow(ctx, P(sx+1.7, ym, zm), P(sx+0.35, ym, zm), 'rgb(220,130,40)', 'Perfil'); // mira des del costat
+  }
+  function arrow(ctx, a, b, color, label){
+    ctx.strokeStyle=color; ctx.fillStyle=color; ctx.lineWidth=3.2; ctx.lineCap='round'; ctx.lineJoin='round';
+    ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke();
+    const ang=Math.atan2(b[1]-a[1], b[0]-a[0]), hl=11, hw=0.45;
+    ctx.beginPath(); ctx.moveTo(b[0],b[1]);
+    ctx.lineTo(b[0]-hl*Math.cos(ang-hw), b[1]-hl*Math.sin(ang-hw));
+    ctx.lineTo(b[0]-hl*Math.cos(ang+hw), b[1]-hl*Math.sin(ang+hw));
+    ctx.closePath(); ctx.fill();
+    ctx.font='bold 13px "Segoe UI",sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.lineWidth=3.5; ctx.strokeStyle='rgba(255,255,255,.92)';
+    ctx.strokeText(label, a[0], a[1]-9); ctx.fillStyle=color; ctx.fillText(label, a[0], a[1]-9);
+  }
+  function normalize(v){ const m=Math.hypot(v[0],v[1],v[2])||1; return [v[0]/m,v[1]/m,v[2]/m]; }
+
+  // arrossegar
+  function down(e){ dragging=true; const p=pt(e); lastX=p.x; lastY=p.y; }
+  function move(e){ if(!dragging)return; const p=pt(e);
+    rotY += (p.x-lastX)*0.012; rotX += (p.y-lastY)*0.012;
+    rotX=Math.max(-1.45,Math.min(1.45,rotX));
+    lastX=p.x; lastY=p.y; draw(); e.preventDefault(); }
+  function up(){ dragging=false; }
+  function pt(e){ const r=cv.getBoundingClientRect();
+    const t=e.touches?e.touches[0]:e; return {x:t.clientX-r.left, y:t.clientY-r.top}; }
+  cv.addEventListener('mousedown',down); window.addEventListener('mousemove',move); window.addEventListener('mouseup',up);
+  cv.addEventListener('touchstart',down,{passive:false}); cv.addEventListener('touchmove',move,{passive:false}); cv.addEventListener('touchend',up);
+
+  return {setPiece,setRot,draw,setColorMode,setUniformColor,setShowGrid,setShowArrows,setZoom};
+})();
+
+const SNAPS={
+  persp:[0.61548,-0.785398],
+  front:[0.0, 0.0],
+  side:[0.0, -1.5708],
+  top:[1.45, 0.0],
+};
+document.querySelectorAll('.snaps button').forEach(b=>{
+  b.onclick=()=>{ const s=SNAPS[b.dataset.snap]; Scene.setRot(s[0],s[1]); };
+});
+
+/* ============================================================
+   RENDER de graelles (vistes)
+   ============================================================ */
+function buildGrid(grid, opts={}){
+  const wrap=document.createElement('div');
+  wrap.className='grid'+(opts.click?' click':'')+(opts.size?(' '+opts.size):'');
+  wrap.style.gridTemplateColumns=`repeat(${grid.cols},auto)`;
+  const cells=[];
+  for(let r=0;r<grid.rows;r++){ cells.push([]);
+    for(let c=0;c<grid.cols;c++){
+      const cell=document.createElement('div');
+      cell.className='c'+(grid.g[r][c]?' on':'');
+      if(opts.click){
+        cell.onclick=()=>{ grid.g[r][c]=!grid.g[r][c]; cell.classList.toggle('on'); if(opts.onChange)opts.onChange(); };
+      }
+      wrap.appendChild(cell); cells[r].push(cell);
+    }
+  }
+  return {el:wrap, cells, grid};
+}
+function emptyEditableGrid(rows,cols){ return {rows,cols,g:Array.from({length:rows},()=>Array(cols).fill(false))}; }
+
+/* ============================================================
+   MODE 1: MARCA LES VISTES
+   ============================================================ */
+function startMark(){
+  STATE.round++;
+  const H=randomPiece();
+  Scene.setPiece(H); Scene.setRot(...SNAPS.persp);
+  document.getElementById('leftTitle').textContent='La peça en 3D';
+  const right=document.getElementById('rightPanel');
+  const [sx,sz,sy]=dims();
+
+  const al=emptyEditableGrid(sy,sx);
+  const pl=emptyEditableGrid(sz,sx);
+  const pf=emptyEditableGrid(sy,sz);
+  const gAl=buildGrid(al,{click:true,size:'big'}), gPl=buildGrid(pl,{click:true,size:'big'}), gPf=buildGrid(pf,{click:true,size:'big'});
+
+  right.innerHTML='<h3>Pinta les tres vistes</h3>';
+  const euro=document.createElement('div'); euro.className='euro';
+  euro.appendChild(vbox('Alçat (davant)',gAl.el));
+  euro.appendChild(vbox('Perfil (costat)',gPf.el));
+  euro.appendChild(vbox('Planta (dalt)',gPl.el));
+  euro.appendChild(document.createElement('div'));
+  right.appendChild(euro);
+  const hint=document.createElement('p'); hint.className='help';
+  hint.style.marginTop='10px';
+  hint.innerHTML='Recorda: la <b>planta</b> va sota l\'alçat i el <b>perfil</b> a la dreta. Clica per pintar.';
+  right.appendChild(hint);
+
+  setActions([
+    actBtn('Comprova','green',()=>{
+      const cAl=alcatGrid(H), cPl=plantaGrid(H), cPf=perfilGrid(H);
+      const r1=markCheck(gAl,cAl), r2=markCheck(gPl,cPl), r3=markCheck(gPf,cPf);
+      const allok=r1&&r2&&r3;
+      if(allok){ win('Molt bé! Les tres vistes són correctes 🎉'); }
+      else { lose('Encara hi ha caselles per ajustar. Mira els marcs vermells.'); }
+    }),
+    actBtn('Mostra solució','gray',()=>{
+      reveal(gAl,alcatGrid(H)); reveal(gPl,plantaGrid(H)); reveal(gPf,perfilGrid(H));
+      feedback('Aquesta és la solució. Prova el següent repte!','bad');
+      STATE.streak=0; updateHud();
+    }),
+    actBtn('Següent ›','',()=>startMark()),
+  ]);
+  feedback('',''); setRound();
+}
+function markCheck(gObj,correct){
+  let ok=true;
+  for(let r=0;r<correct.rows;r++)for(let c=0;c<correct.cols;c++){
+    const cell=gObj.cells[r][c];
+    cell.classList.remove('ok','bad');
+    const marked=gObj.grid.g[r][c], should=correct.g[r][c];
+    if(marked===should){ if(should) cell.classList.add('ok'); }
+    else { cell.classList.add('bad'); ok=false; }
+  }
+  return ok;
+}
+function reveal(gObj,correct){
+  for(let r=0;r<correct.rows;r++)for(let c=0;c<correct.cols;c++){
+    const cell=gObj.cells[r][c]; cell.classList.remove('ok','bad');
+    cell.classList.toggle('on',correct.g[r][c]); gObj.grid.g[r][c]=correct.g[r][c];
+  }
+}
+
+/* ============================================================
+   MODE 3: TRIA LA VISTA  (test)
+   ============================================================ */
+function startTest(){
+  STATE.round++;
+  const H=randomPiece();
+  Scene.setPiece(H); Scene.setRot(...SNAPS.persp);
+  document.getElementById('leftTitle').textContent='La peça en 3D';
+  const right=document.getElementById('rightPanel');
+  const types=[['Alçat',alcatGrid],['Planta',plantaGrid],['Perfil',perfilGrid]];
+  const [tname,tfn]=types[Math.floor(Math.random()*3)];
+  const correct=tfn(H);
+  const options=makeOptions(correct);
+  const correctIdx=options.findIndex(o=>o.correct);
+
+  right.innerHTML=`<h3>Quina és la ${tname.toLowerCase()}?</h3>`;
+  const sub=document.createElement('p'); sub.className='help'; sub.style.marginBottom='12px';
+  sub.innerHTML=`Mira la peça i tria la <b>${tname.toLowerCase()}</b> correcta (la vista de ${tname==='Alçat'?'davant':tname==='Planta'?'dalt':'costat'}).`;
+  right.appendChild(sub);
+  const grid=document.createElement('div'); grid.className='opts';
+  let answered=false;
+  options.forEach((o,i)=>{
+    const opt=document.createElement('div'); opt.className='opt';
+    opt.appendChild(buildGrid(o.grid,{size:'mini'}).el);
+    opt.onclick=()=>{
+      if(answered) return; answered=true;
+      if(o.correct){ opt.classList.add('right'); win(`Correcte! Aquesta és la ${tname.toLowerCase()}. 🎉`); }
+      else{
+        opt.classList.add('wrong');
+        grid.children[correctIdx].classList.add('right');
+        lose(`No hi és. La correcta està marcada en verd.`);
+      }
+      setActions([actBtn('Següent ›','',()=>startTest())]);
+    };
+    grid.appendChild(opt);
+  });
+  right.appendChild(grid);
+  setActions([]); feedback('',''); setRound();
+}
+function makeOptions(correct){
+  const opts=[{grid:cloneGrid(correct),correct:true}];
+  const seen=new Set([gridKey(correct)]);
+  let guard=0;
+  while(opts.length<4 && guard<100){
+    guard++;
+    const m=mutateGrid(correct);
+    const k=gridKey(m);
+    if(seen.has(k)) continue;
+    seen.add(k); opts.push({grid:m,correct:false});
+  }
+  while(opts.length<4){ const m=mutateGrid(correct); opts.push({grid:m,correct:false}); } // fallback
+  // barreja
+  for(let i=opts.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [opts[i],opts[j]]=[opts[j],opts[i]]; }
+  return opts;
+}
+function gridKey(g){ return g.g.map(r=>r.map(c=>c?1:0).join('')).join('|'); }
+function mutateGrid(src){
+  const m=cloneGrid(src);
+  const kind=Math.floor(Math.random()*3);
+  if(kind===0){ // gira caselles
+    const n=1+Math.floor(Math.random()*2);
+    for(let i=0;i<n;i++){ const r=Math.floor(Math.random()*m.rows),c=Math.floor(Math.random()*m.cols); m.g[r][c]=!m.g[r][c]; }
+  } else if(kind===1){ // mirall horitzontal
+    for(let r=0;r<m.rows;r++) m.g[r].reverse();
+  } else { // mirall vertical
+    m.g.reverse();
+  }
+  // assegura que no quedi tot buit
+  let any=false; for(const r of m.g)for(const c of r) if(c)any=true;
+  if(!any){ m.g[0][0]=true; }
+  return m;
+}
+
+/* ============================================================
+   MODE 2 + 4: EDITOR DE COLUMNES  (build / gen)
+   ============================================================ */
+function makeHeightEditor(onChange){
+  const [sx,sz,sy]=dims();
+  const H=emptyH(sx,sz);
+  const wrap=document.createElement('div'); wrap.className='editor';
+  const hint=document.createElement('div'); hint.className='ed-hint';
+  hint.innerHTML='Vist de <b>dalt</b> (planta). Clic = puja columna · clic dret / Maj+clic = baixa.';
+  const grid=document.createElement('div'); grid.className='hgrid';
+  grid.style.gridTemplateColumns=`repeat(${sx},auto)`;
+  const cellEls=[];
+  // mostrem files = z (de davant a darrere), columnes = x
+  for(let z=0;z<sz;z++){ cellEls.push([]);
+    for(let x=0;x<sx;x++){
+      const c=document.createElement('div'); c.className='hc';
+      const bar=document.createElement('div'); bar.className='bar';
+      const sp=document.createElement('span'); sp.textContent='0';
+      c.appendChild(bar); c.appendChild(sp);
+      const upd=()=>{ const h=H[x][z]; sp.textContent=h; bar.style.height=(h/sy*100)+'%'; };
+      c.onclick=(e)=>{ if(e.shiftKey){ H[x][z]=Math.max(0,H[x][z]-1);} else { H[x][z]=(H[x][z]+1)%(sy+1);} upd(); fire(); };
+      c.oncontextmenu=(e)=>{ e.preventDefault(); H[x][z]=Math.max(0,H[x][z]-1); upd(); fire(); };
+      grid.appendChild(c); cellEls[z].push({upd}); upd();
+    }
+  }
+  function fire(){ Scene.setPiece(H); if(onChange)onChange(H); }
+  function setH(newH){ for(let x=0;x<sx;x++)for(let z=0;z<sz;z++){H[x][z]=newH[x][z];} cellEls.forEach((row,z)=>row.forEach((o,x)=>o.upd())); fire(); }
+  wrap.appendChild(grid); wrap.appendChild(hint);
+  return {el:wrap, H, setH, getH:()=>H};
+}
+
+function startBuild(){
+  STATE.round++;
+  const target=randomPiece();
+  const tAl=alcatGrid(target), tPl=plantaGrid(target), tPf=perfilGrid(target);
+  document.getElementById('leftTitle').textContent='La teva peça (en 3D)';
+  Scene.setPiece(emptyH(...dims())); Scene.setRot(...SNAPS.persp);
+
+  const right=document.getElementById('rightPanel');
+  right.innerHTML='<h3>Objectiu · aquestes són les vistes</h3>';
+  const euro=document.createElement('div'); euro.className='euro';
+  euro.appendChild(vbox('Alçat',buildGrid(tAl,{size:'mini'}).el));
+  euro.appendChild(vbox('Perfil',buildGrid(tPf,{size:'mini'}).el));
+  euro.appendChild(vbox('Planta',buildGrid(tPl,{size:'mini'}).el));
+  euro.appendChild(document.createElement('div'));
+  right.appendChild(euro);
+  const sep=document.createElement('h3'); sep.textContent='Construeix-la aquí'; sep.style.marginTop='14px'; right.appendChild(sep);
+  const ed=makeHeightEditor(()=>{ feedback('',''); });
+  right.appendChild(ed.el);
+
+  setActions([
+    actBtn('Comprova','green',()=>{
+      const H=ed.getH();
+      const ok = gridsEqual(alcatGrid(H),tAl) && gridsEqual(plantaGrid(H),tPl) && gridsEqual(perfilGrid(H),tPf);
+      if(ok) win('Perfecte! La teva peça dóna exactament les mateixes vistes 🎉');
+      else lose('Encara no coincideix. Compara amb les vistes objectiu.');
+    }),
+    actBtn('Mostra solució','gray',()=>{
+      ed.setH(target); feedback('Una solució possible (pot haver-n\'hi d\'altres).','bad'); STATE.streak=0; updateHud();
+    }),
+    actBtn('Següent ›','',()=>startBuild()),
+  ]);
+  feedback('',''); setRound();
+}
+
+function startGen(){
+  document.getElementById('leftTitle').textContent='La teva peça (en 3D)';
+  Scene.setPiece(emptyH(...dims())); Scene.setRot(...SNAPS.persp);
+  const right=document.getElementById('rightPanel');
+  right.innerHTML='<h3>Generador · dissenya la peça</h3>';
+  const vistesBox=document.createElement('div'); vistesBox.className='euro'; vistesBox.style.marginBottom='12px';
+  right.appendChild(vistesBox);
+  const ed=makeHeightEditor((H)=>refreshViews(H));
+  right.appendChild(ed.el);
+
+  function refreshViews(H){
+    vistesBox.innerHTML='';
+    vistesBox.appendChild(vbox('Alçat',buildGrid(alcatGrid(H),{size:'tiny'}).el));
+    vistesBox.appendChild(vbox('Perfil',buildGrid(perfilGrid(H),{size:'tiny'}).el));
+    vistesBox.appendChild(vbox('Planta',buildGrid(plantaGrid(H),{size:'tiny'}).el));
+    vistesBox.appendChild(document.createElement('div'));
+  }
+  refreshViews(ed.getH());
+
+  setActions([
+    actBtn('Aleatori','',()=>{ ed.setH(randomPiece()); }),
+    actBtn('Esborra','gray',()=>{ ed.setH(emptyH(...dims())); }),
+    actBtn('Desa imatge','green',()=>{ saveImage(); }),
+  ]);
+  feedback('Mou els cubs i mira com canvien les vistes en directe.','');
+  document.getElementById('roundPill').textContent='Mode lliure';
+}
+function saveImage(){
+  const link=document.createElement('a');
+  link.download='peca-vistes.png';
+  link.href=document.getElementById('scene').toDataURL('image/png');
+  link.click();
+  feedback('Imatge de la peça desada ✔','good');
+}
+
+/* ============================================================
+   helpers d'interfície
+   ============================================================ */
+function vbox(label,el){
+  const v=document.createElement('div'); v.className='vbox';
+  const l=document.createElement('div'); l.className='lab'; l.textContent=label;
+  v.appendChild(l); v.appendChild(el); return v;
+}
+function setActions(btns){
+  const bar=document.getElementById('actionBar'); bar.innerHTML='';
+  btns.forEach(b=>bar.appendChild(b));
+}
+function actBtn(label,cls,fn){
+  const b=document.createElement('button'); b.className='btn'+(cls?(' '+cls):''); b.textContent=label; b.onclick=fn; return b;
+}
+function feedback(msg,kind){
+  const f=document.getElementById('feedback'); f.textContent=msg; f.className='feedback'+(kind?(' '+kind):'');
+}
+function win(msg){
+  STATE.score+= 10 + STATE.streak*2; STATE.streak++; updateHud();
+  feedback(msg+'  (+'+(10+(STATE.streak-1)*2)+' punts)','good');
+}
+function lose(msg){ STATE.streak=0; updateHud(); feedback(msg,'bad'); }
+function updateHud(){
+  document.getElementById('hudScore').textContent=STATE.score;
+  document.getElementById('hudStreak').textContent=STATE.streak;
+  document.getElementById('hudAv').textContent=STATE.avatar;
+  document.getElementById('hudName').textContent=STATE.name||'Convidat/da';
+}
+function setRound(){ document.getElementById('roundPill').textContent='Repte '+STATE.round; }
+
+/* ============================================================
+   navegació
+   ============================================================ */
+const MODES={
+  mark:{title:'🎯 Marca les vistes', start:startMark},
+  build:{title:'🧱 Construeix la peça', start:startBuild},
+  test:{title:'✅ Tria la vista', start:startTest},
+  gen:{title:'🛠️ Generador', start:startGen},
+};
+function openMode(mode){
+  STATE.mode=mode; STATE.round=0;
+  document.getElementById('home').classList.add('hidden');
+  document.getElementById('game').classList.remove('hidden');
+  document.getElementById('gameTitle').textContent=MODES[mode].title;
+  // resize canvas to displayed size for crispness
+  MODES[mode].start();
+}
+function goHome(){
+  document.getElementById('game').classList.add('hidden');
+  document.getElementById('home').classList.remove('hidden');
+}
+
+/* ---------- init ---------- */
+function initHome(){
+  // avatars
+  const ap=document.getElementById('avPick');
+  AVATARS.forEach(a=>{
+    const b=document.createElement('button'); b.textContent=a;
+    if(a===STATE.avatar)b.classList.add('sel');
+    b.onclick=()=>{ STATE.avatar=a; ap.querySelectorAll('button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); updateHud(); };
+    ap.appendChild(b);
+  });
+  document.getElementById('nameInput').oninput=e=>{ STATE.name=e.target.value.trim(); updateHud(); };
+  // nivell
+  document.querySelectorAll('#lvlSeg button').forEach(b=>{
+    b.onclick=()=>{ document.querySelectorAll('#lvlSeg button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); STATE.level=+b.dataset.lvl; };
+  });
+  // modes
+  document.querySelectorAll('.mode').forEach(m=>{ m.onclick=()=>openMode(m.dataset.mode); });
+  document.getElementById('backBtn').onclick=goHome;
+  document.getElementById('homeBtn').onclick=goHome;
+  document.getElementById('helpBtn').onclick=()=>document.getElementById('helpModal').classList.add('show');
+  document.getElementById('helpX').onclick=()=>document.getElementById('helpModal').classList.remove('show');
+  document.getElementById('helpModal').onclick=e=>{ if(e.target.id==='helpModal') e.currentTarget.classList.remove('show'); };
+  initViewerControls();
+  updateHud();
+}
+function initViewerControls(){
+  // paleta de colors (mode "un color")
+  const sw=document.getElementById('swatches');
+  PALETTE.forEach((p,i)=>{
+    const b=document.createElement('button');
+    b.style.background=`rgb(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]})`;
+    b.title=p.n; if(i===0)b.classList.add('sel');
+    b.onclick=()=>{ sw.querySelectorAll('button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); Scene.setUniformColor(p.rgb); };
+    sw.appendChild(b);
+  });
+  // llegenda del mode "per vistes"
+  document.getElementById('vlegend').innerHTML=
+    `<span><i style="background:rgb(86,150,214)"></i>Alçat (davant)</span>`+
+    `<span><i style="background:rgb(104,196,140)"></i>Planta (dalt)</span>`+
+    `<span><i style="background:rgb(240,168,96)"></i>Perfil (costat)</span>`;
+  // commutador de mode de color
+  document.querySelectorAll('#colorModeSeg button').forEach(b=>{
+    b.onclick=()=>{
+      document.querySelectorAll('#colorModeSeg button').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+      const mode=b.dataset.cm; Scene.setColorMode(mode);
+      document.getElementById('swatches').hidden = (mode==='views');
+      document.getElementById('vlegend').hidden = (mode!=='views');
+    };
+  });
+  // graella de terra on/off
+  const gt=document.getElementById('gridToggle');
+  gt.onclick=()=>{ const on=gt.classList.toggle('on'); gt.textContent= on?'Graella ✓':'Graella'; Scene.setShowGrid(on); };
+  const at=document.getElementById('arrowToggle');
+  at.onclick=()=>{ const on=at.classList.toggle('on'); at.textContent= on?'Fletxes ✓':'Fletxes'; Scene.setShowArrows(on); };
+  // zoom x0,50 → x2,00
+  const zs=document.getElementById('zoomSlider'), zv=document.getElementById('zoomVal');
+  function applyZoom(v){ v=Math.min(2,Math.max(0.5, Math.round(v*100)/100));
+    zs.value=v; zv.textContent='x'+v.toFixed(2).replace('.',','); Scene.setZoom(v); }
+  zs.oninput=()=>applyZoom(parseFloat(zs.value));
+  document.getElementById('zoomOut').onclick=()=>applyZoom(parseFloat(zs.value)-0.25);
+  document.getElementById('zoomIn').onclick=()=>applyZoom(parseFloat(zs.value)+0.25);
+}
+initHome();
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="tmq_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fef2f2"/><stop offset="1" stop-color="#fee2e2"/></linearGradient>
+  <radialGradient id="tmq_cos" cx=".35" cy=".3" r="1"><stop offset="0" stop-color="#f87171"/><stop offset="1" stop-color="#b91c1c"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#tmq_bg)"/>
+  <ellipse cx="50" cy="84" rx="28" ry="4" fill="#0f172a" opacity=".08"/>
+  <ellipse cx="50" cy="56" rx="30" ry="26" fill="url(#tmq_cos)"/>
+  <ellipse cx="37" cy="46" rx="7" ry="9" fill="#fca5a5" opacity=".65" transform="rotate(-18 37 46)"/>
+  <path d="M50 30 l-12 -6 q6 -1 9 1 l-4 -7 q5 2 7 7 q2 -5 7 -7 l-4 7 q3 -2 9 -1 z" fill="#16a34a"/>
+  <path d="M50 30 q-8 2 -12 7 M50 30 q8 2 12 7 M50 30 v8" stroke="#15803d" stroke-width="2" stroke-linecap="round" fill="none"/>
+</svg>

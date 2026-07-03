@@ -1,0 +1,32 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cap -->
+  <circle cx="50" cy="22" r="9" fill="#f5cba7" stroke="#c0835a" stroke-width="1.2"/>
+  <!-- Barret de palla ample marró -->
+  <ellipse cx="50" cy="16" rx="18" ry="7" fill="#d97706" stroke="#b45309" stroke-width="1"/>
+  <ellipse cx="50" cy="17" rx="11" ry="5" fill="#b45309"/>
+  <!-- Textura barret palla -->
+  <line x1="34" y1="14" x2="66" y2="14" stroke="#92400e" stroke-width="0.5" opacity="0.5"/>
+  <line x1="32" y1="17" x2="68" y2="17" stroke="#92400e" stroke-width="0.5" opacity="0.5"/>
+  <!-- Cuell -->
+  <rect x="46" y="29" width="8" height="5" fill="#f5cba7"/>
+  <!-- Roba pagès marró/verda -->
+  <rect x="36" y="33" width="28" height="22" rx="3" fill="#92400e"/>
+  <!-- Davantal verd -->
+  <rect x="40" y="38" width="20" height="17" rx="2" fill="#4b7c2a"/>
+  <!-- Braç esquerre -->
+  <rect x="24" y="34" width="12" height="8" rx="3" fill="#92400e"/>
+  <!-- Braç dret amb aixada -->
+  <rect x="64" y="34" width="12" height="8" rx="3" fill="#92400e"/>
+  <!-- Aixada: pal llarg -->
+  <rect x="74" y="15" width="3" height="35" rx="1" fill="#4b3621"/>
+  <!-- Capçal de l'aixada (rectangle transversal) -->
+  <rect x="68" y="13" width="15" height="5" rx="1" fill="#374151"/>
+  <!-- Cames -->
+  <rect x="36" y="55" width="12" height="18" rx="2" fill="#78350f"/>
+  <rect x="52" y="55" width="12" height="18" rx="2" fill="#78350f"/>
+  <!-- Botes -->
+  <rect x="35" y="71" width="14" height="5" rx="2" fill="#1f2937"/>
+  <rect x="51" y="71" width="14" height="5" rx="2" fill="#1f2937"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PAGÈS</text>
+</svg>

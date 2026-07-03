@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Seient de fons (context) -->
+  <rect x="12" y="15" width="22" height="65" rx="4" fill="#d1d5db" stroke="#9ca3af" stroke-width="1.5"/>
+  <rect x="12" y="55" width="40" height="20" rx="4" fill="#d1d5db" stroke="#9ca3af" stroke-width="1.5"/>
+  <!-- Corretja diagonal (de l'espatlla a la cintura) -->
+  <line x1="22" y1="20" x2="55" y2="68" stroke="#1d4ed8" stroke-width="7" stroke-linecap="round"/>
+  <!-- Corretja horitzontal (de cintura a cadera) -->
+  <line x1="14" y1="68" x2="55" y2="72" stroke="#1d4ed8" stroke-width="7" stroke-linecap="round"/>
+  <!-- Sivella rectangular -->
+  <rect x="48" y="62" width="14" height="14" rx="2" fill="#94a3b8" stroke="#6b7280" stroke-width="2"/>
+  <line x1="55" y1="62" x2="55" y2="76" stroke="#6b7280" stroke-width="2"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CINTURÓ</text>
+</svg>

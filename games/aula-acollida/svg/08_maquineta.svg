@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 75">
+  <!-- cos de la maquineta (indigo) -->
+  <rect x="28" y="5" width="66" height="65" rx="8" fill="#6366f1"/>
+  <!-- cara frontal (més fosc) -->
+  <rect x="34" y="12" width="54" height="51" rx="5" fill="#4f46e5"/>
+  <!-- forat circular on entra el llapis -->
+  <circle cx="61" cy="37" r="13" fill="#312e81"/>
+  <circle cx="61" cy="37" r="7" fill="#1e1b4b"/>
+  <!-- llapis entrant per l'esquerra -->
+  <rect x="0" y="33" width="38" height="9" rx="2" fill="#fbbf24"/>
+  <!-- punta del llapis -->
+  <polygon points="38,33 38,42 50,37" fill="#f59e0b"/>
+  <!-- cargol decoratiu -->
+  <circle cx="84" cy="20" r="4" fill="#4338ca"/>
+  <line x1="82" y1="20" x2="86" y2="20" stroke="#312e81" stroke-width="1.5"/>
+  <line x1="84" y1="18" x2="84" y2="22" stroke="#312e81" stroke-width="1.5"/>
+</svg>

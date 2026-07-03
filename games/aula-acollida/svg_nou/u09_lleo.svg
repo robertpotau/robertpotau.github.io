@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="lleo_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fefce8"/><stop offset="1" stop-color="#fef3c7"/></linearGradient>
+  <radialGradient id="lleo_crinera" cx=".5" cy=".5" r=".6"><stop offset="0" stop-color="#d97706"/><stop offset="1" stop-color="#92400e"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#lleo_bg)"/>
+  <ellipse cx="50" cy="88" rx="28" ry="4" fill="#0f172a" opacity=".08"/>
+  <g fill="url(#lleo_crinera)">
+    <circle cx="50" cy="50" r="34"/>
+  </g>
+  <g fill="#b45309">
+    <circle cx="28" cy="30" r="7"/><circle cx="50" cy="22" r="7"/><circle cx="72" cy="30" r="7"/>
+    <circle cx="20" cy="50" r="7"/><circle cx="80" cy="50" r="7"/>
+    <circle cx="28" cy="70" r="7"/><circle cx="72" cy="70" r="7"/><circle cx="50" cy="78" r="7"/>
+  </g>
+  <circle cx="50" cy="52" r="22" fill="#fbbf24"/>
+  <circle cx="42" cy="46" r="2.8" fill="#1e293b"/>
+  <circle cx="58" cy="46" r="2.8" fill="#1e293b"/>
+  <ellipse cx="50" cy="58" rx="4.5" ry="3.4" fill="#78350f"/>
+  <path d="M50 61 v4 M50 65 q-4 4 -8 1 M50 65 q4 4 8 1" stroke="#92400e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  <ellipse cx="40" cy="60" rx="5" ry="4" fill="#fde68a" opacity=".7"/>
+  <ellipse cx="60" cy="60" rx="5" ry="4" fill="#fde68a" opacity=".7"/>
+</svg>

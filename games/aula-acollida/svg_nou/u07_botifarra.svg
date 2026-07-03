@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="btf_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fef2f2"/><stop offset="1" stop-color="#fee2e2"/></linearGradient>
+  <linearGradient id="btf_cos" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b91c1c"/><stop offset="1" stop-color="#7f1d1d"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#btf_bg)"/>
+  <ellipse cx="50" cy="78" rx="32" ry="5" fill="#0f172a" opacity=".08"/>
+  <g transform="rotate(-18 50 50)">
+    <path d="M20 50 q0 -12 12 -12 h36 q12 0 12 12 q0 12 -12 12 H32 q-12 0 -12 -12" fill="url(#btf_cos)"/>
+    <path d="M22 46 q2 -7 10 -7 h36 q8 0 9 6 q-28 -6 -55 1" fill="#dc2626" opacity=".7"/>
+    <path d="M16 50 q-6 -2 -6 -6 q4 -2 7 1 q-2 -4 1 -7 q4 2 4 8 z" fill="#a16207"/>
+    <path d="M84 50 q6 -2 6 -6 q-4 -2 -7 1 q2 -4 -1 -7 q-4 2 -4 8 z" fill="#a16207"/>
+    <path d="M30 44 l3 3 M42 42 l3 3 M56 42 l3 3 M68 44 l3 3 M36 52 l3 3 M50 52 l3 3 M63 52 l3 3" stroke="#fecaca" stroke-width="1.6" stroke-linecap="round" opacity=".6"/>
+  </g>
+</svg>

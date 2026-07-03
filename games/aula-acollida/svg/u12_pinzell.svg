@@ -1,0 +1,28 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pinzell en diagonal (mànec de fusta llarg) -->
+  <!-- Mànec cilíndric de fusta -->
+  <rect x="10" y="8" width="10" height="58" rx="4" transform="rotate(-35 50 50)" fill="#92400e"/>
+  <!-- Veta de la fusta -->
+  <line x1="18" y1="12" x2="14" y2="60" stroke="#78350f" stroke-width="0.8" opacity="0.5" transform="rotate(-35 50 50)"/>
+  <!-- Ferrule metàl·lica (anell) -->
+  <rect x="9" y="60" width="12" height="8" rx="1" transform="rotate(-35 50 50)" fill="#6b7280"/>
+  <rect x="9" y="60" width="12" height="3" rx="1" transform="rotate(-35 50 50)" fill="#9ca3af"/>
+  <!-- Floc de pèls (base fosca) -->
+  <ellipse cx="15" cy="72" rx="6" ry="4" transform="rotate(-35 50 50)" fill="#1f2937"/>
+  <!-- Pèls del pinzell -->
+  <line x1="10" y1="74" x2="8" y2="82" stroke="#374151" stroke-width="1.5" transform="rotate(-35 50 50)" stroke-linecap="round"/>
+  <line x1="13" y1="75" x2="12" y2="84" stroke="#374151" stroke-width="1.5" transform="rotate(-35 50 50)" stroke-linecap="round"/>
+  <line x1="16" y1="75" x2="16" y2="85" stroke="#374151" stroke-width="1.5" transform="rotate(-35 50 50)" stroke-linecap="round"/>
+  <line x1="19" y1="74" x2="20" y2="83" stroke="#374151" stroke-width="1.5" transform="rotate(-35 50 50)" stroke-linecap="round"/>
+  <!-- Pintura vermella a la punta -->
+  <ellipse cx="15" cy="84" rx="5" ry="3" transform="rotate(-35 50 50)" fill="#ef4444" opacity="0.9"/>
+  <!-- Gota de pintura vermella caent -->
+  <ellipse cx="12" cy="88" rx="2" ry="3" transform="rotate(-35 50 50)" fill="#ef4444" opacity="0.7"/>
+  <!-- Taques de pintura al voltant -->
+  <circle cx="75" cy="75" r="4" fill="#ef4444" opacity="0.6"/>
+  <circle cx="82" cy="68" r="2.5" fill="#3b82f6" opacity="0.6"/>
+  <circle cx="70" cy="65" r="2" fill="#fde047" opacity="0.7"/>
+  <circle cx="80" cy="80" r="3" fill="#ef4444" opacity="0.4"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PINZELL</text>
+</svg>

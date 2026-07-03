@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Upper arm going down-right -->
+  <path d="M25 8 Q22 30 38 52" stroke="#f5cba7" stroke-width="18" stroke-linecap="round" fill="none"/>
+  <path d="M25 8 Q22 30 38 52" stroke="#c0835a" stroke-width="21" stroke-linecap="round" fill="none" opacity="0.3"/>
+  <!-- Forearm going down-left -->
+  <path d="M38 52 Q58 72 68 88" stroke="#f5cba7" stroke-width="18" stroke-linecap="round" fill="none"/>
+  <path d="M38 52 Q58 72 68 88" stroke="#c0835a" stroke-width="21" stroke-linecap="round" fill="none" opacity="0.3"/>
+  <!-- Elbow highlight circle -->
+  <circle cx="38" cy="52" r="13" fill="#ef4444" opacity="0.85"/>
+  <circle cx="38" cy="52" r="9" fill="#fca5a5"/>
+  <!-- Label -->
+  <text x="56" y="46" font-family="Arial,sans-serif" font-size="9" fill="#991b1b" font-weight="700">colze</text>
+  <line x1="51" y1="50" x2="43" y2="53" stroke="#991b1b" stroke-width="1.5"/>
+</svg>

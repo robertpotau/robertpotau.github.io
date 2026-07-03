@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Pyjama top -->
+  <!-- Body -->
+  <path d="M28 18 L22 48 L78 48 L72 18 Z" fill="#bae6fd"/>
+  <!-- Left sleeve -->
+  <path d="M28 18 L16 14 L12 36 L24 40 Z" fill="#bae6fd"/>
+  <!-- Right sleeve -->
+  <path d="M72 18 L84 14 L88 36 L76 40 Z" fill="#bae6fd"/>
+  <!-- V-neck -->
+  <path d="M40 18 L50 30 L60 18 L56 18 L50 27 L44 18 Z" fill="#e0f2fe"/>
+  <!-- Button placket -->
+  <line x1="50" y1="30" x2="50" y2="48" stroke="#7dd3fc" stroke-width="1"/>
+  <!-- Buttons -->
+  <circle cx="50" cy="33" r="1.5" fill="#1d4ed8"/>
+  <circle cx="50" cy="39" r="1.5" fill="#1d4ed8"/>
+  <circle cx="50" cy="45" r="1.5" fill="#1d4ed8"/>
+  <!-- Moon/star pattern on top -->
+  <text x="30" y="38" font-size="8" font-family="Arial">🌙</text>
+  <text x="62" y="38" font-size="7" font-family="Arial">⭐</text>
+  <!-- Sleeve cuffs -->
+  <rect x="12" y="34" width="12" height="5" rx="1" fill="#7dd3fc"/>
+  <rect x="76" y="34" width="12" height="5" rx="1" fill="#7dd3fc"/>
+
+  <!-- Pyjama trousers -->
+  <!-- Waistband -->
+  <rect x="22" y="48" width="56" height="5" rx="1" fill="#7dd3fc"/>
+  <!-- Left leg -->
+  <path d="M22 53 L20 82 L44 82 L46 53 Z" fill="#bae6fd"/>
+  <!-- Right leg -->
+  <path d="M54 53 L56 82 L80 82 L78 53 Z" fill="#bae6fd"/>
+  <!-- Trouser divider -->
+  <line x1="50" y1="53" x2="50" y2="82" stroke="#7dd3fc" stroke-width="1.5"/>
+  <!-- Moon patterns on trousers -->
+  <text x="24" y="72" font-size="8" font-family="Arial">🌙</text>
+  <text x="55" y="72" font-size="8" font-family="Arial">🌙</text>
+  <!-- Stripe at trouser bottom -->
+  <rect x="20" y="80" width="24" height="3" rx="1" fill="#7dd3fc"/>
+  <rect x="56" y="80" width="24" height="3" rx="1" fill="#7dd3fc"/>
+  <!-- Elastic waist draw string -->
+  <circle cx="50" cy="50" r="2" fill="#1d4ed8"/>
+
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PIJAMA</text>
+</svg>

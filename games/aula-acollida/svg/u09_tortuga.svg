@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Pell base (cos sota la closca) -->
+  <ellipse cx="50" cy="56" rx="22" ry="15" fill="#4ade80"/>
+  <!-- Cap -->
+  <ellipse cx="73" cy="50" rx="8" ry="7" fill="#4ade80"/>
+  <!-- Ull -->
+  <circle cx="76" cy="47" r="2.2" fill="#1e1b4b"/>
+  <circle cx="76.8" cy="46.3" r="0.6" fill="white"/>
+  <!-- Nas -->
+  <circle cx="79" cy="49" r="0.9" fill="#166534"/>
+  <!-- Potes (4) -->
+  <ellipse cx="34" cy="46" rx="7" ry="4" fill="#4ade80" transform="rotate(-25,34,46)"/>
+  <ellipse cx="34" cy="64" rx="7" ry="4" fill="#4ade80" transform="rotate(25,34,64)"/>
+  <ellipse cx="60" cy="44" rx="7" ry="3.5" fill="#4ade80" transform="rotate(-10,60,44)"/>
+  <ellipse cx="60" cy="67" rx="7" ry="3.5" fill="#4ade80" transform="rotate(10,60,67)"/>
+  <!-- Cua petita -->
+  <ellipse cx="28" cy="56" rx="5" ry="2.5" fill="#4ade80"/>
+  <!-- Closca rodona (per sobre) -->
+  <ellipse cx="50" cy="54" rx="21" ry="15" fill="#166534"/>
+  <!-- Retícula hexagonal -->
+  <polygon points="50,43 57.5,47.5 57.5,56.5 50,61 42.5,56.5 42.5,47.5" fill="none" stroke="#15803d" stroke-width="1.2"/>
+  <polygon points="50,35 57.5,39.5 57.5,47.5 50,43 42.5,47.5 42.5,39.5" fill="none" stroke="#15803d" stroke-width="0.9"/>
+  <polygon points="57.5,47.5 65,43 65,52 57.5,56.5" fill="none" stroke="#15803d" stroke-width="0.9"/>
+  <polygon points="57.5,56.5 65,52 65,61 57.5,65 50,61" fill="none" stroke="#15803d" stroke-width="0.9"/>
+  <polygon points="42.5,56.5 50,61 42.5,65 35,61 35,52" fill="none" stroke="#15803d" stroke-width="0.9"/>
+  <polygon points="35,47.5 42.5,43 42.5,47.5 42.5,56.5 35,52" fill="none" stroke="#15803d" stroke-width="0.9"/>
+  <!-- Brillantor -->
+  <ellipse cx="46" cy="47" rx="6" ry="3" fill="#22c55e" opacity="0.3"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TORTUGA</text>
+</svg>

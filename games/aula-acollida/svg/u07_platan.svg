@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2020/svg" viewBox="0 0 100 100">
+  <!-- Banana curved shape -->
+  <path d="M20 65 Q18 40 35 28 Q55 18 78 30 Q82 35 80 40 Q77 38 74 36 Q55 26 38 36 Q24 46 28 65Z" fill="#fde047"/>
+  <!-- Dark tips -->
+  <ellipse cx="25" cy="64" rx="5" ry="4" fill="#92400e" transform="rotate(-10,25,64)"/>
+  <ellipse cx="78.5" cy="37" rx="4" ry="3" fill="#92400e" transform="rotate(30,78.5,37)"/>
+  <!-- Rib lines -->
+  <path d="M32 35 Q30 50 32 63" stroke="#a16207" stroke-width="1.2" fill="none"/>
+  <path d="M42 29 Q40 44 42 59" stroke="#a16207" stroke-width="1.2" fill="none"/>
+  <path d="M52 25 Q52 40 54 56" stroke="#a16207" stroke-width="1.2" fill="none"/>
+  <!-- Highlight -->
+  <path d="M38 36 Q52 25 70 31 Q55 22 37 33Z" fill="#fef9c3" opacity="0.5"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PLÀTAN</text>
+</svg>

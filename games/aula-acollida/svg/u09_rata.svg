@@ -1,0 +1,47 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cua llarga i prima -->
+  <path d="M72 65 Q85 60 92 50 Q96 42 90 36" stroke="#fda4af" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Cos allargat -->
+  <ellipse cx="48" cy="65" rx="25" ry="14" fill="#6b7280"/>
+  <!-- Ventre -->
+  <ellipse cx="48" cy="68" rx="16" ry="9" fill="#9ca3af"/>
+  <!-- Potes darreres -->
+  <path d="M62 74 Q66 80 64 86" stroke="#6b7280" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <line x1="64" y1="86" x2="60" y2="89" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <line x1="64" y1="86" x2="64" y2="90" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <line x1="64" y1="86" x2="68" y2="89" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <path d="M70 72 Q74 78 72 84" stroke="#6b7280" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <line x1="72" y1="84" x2="68" y2="87" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <line x1="72" y1="84" x2="72" y2="88" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <line x1="72" y1="84" x2="76" y2="87" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <!-- Potes davanteres -->
+  <path d="M30 70 Q26 76 24 82" stroke="#6b7280" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <line x1="24" y1="82" x2="21" y2="85" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <line x1="24" y1="82" x2="24" y2="86" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <path d="M38 72 Q36 78 34 84" stroke="#6b7280" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <line x1="34" y1="84" x2="31" y2="87" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <line x1="34" y1="84" x2="34" y2="88" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <!-- Cap petit -->
+  <ellipse cx="28" cy="60" rx="13" ry="11" fill="#6b7280"/>
+  <!-- Musell punxegut -->
+  <ellipse cx="18" cy="63" rx="7" ry="5" fill="#6b7280"/>
+  <!-- Nas rosa -->
+  <ellipse cx="13" cy="63" rx="3" ry="2.5" fill="#fda4af"/>
+  <!-- Ulls negres -->
+  <circle cx="26" cy="55" r="3.5" fill="#1a1a1a"/>
+  <circle cx="25" cy="54" r="1" fill="white"/>
+  <!-- Orelles grans rodones -->
+  <circle cx="28" cy="48" r="8" fill="#6b7280"/>
+  <circle cx="28" cy="48" r="5.5" fill="#fda4af"/>
+  <circle cx="38" cy="46" r="7" fill="#6b7280"/>
+  <circle cx="38" cy="46" r="4.5" fill="#fda4af"/>
+  <!-- Bigotis -->
+  <line x1="13" y1="61" x2="4" y2="58" stroke="#e5e7eb" stroke-width="0.8"/>
+  <line x1="13" y1="63" x2="3" y2="63" stroke="#e5e7eb" stroke-width="0.8"/>
+  <line x1="13" y1="65" x2="4" y2="68" stroke="#e5e7eb" stroke-width="0.8"/>
+  <line x1="13" y1="61" x2="20" y2="58" stroke="#e5e7eb" stroke-width="0.8"/>
+  <line x1="13" y1="63" x2="21" y2="63" stroke="#e5e7eb" stroke-width="0.8"/>
+  <line x1="13" y1="65" x2="20" y2="68" stroke="#e5e7eb" stroke-width="0.8"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">RATA</text>
+</svg>

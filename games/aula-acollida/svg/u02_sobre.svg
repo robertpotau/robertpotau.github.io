@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Bottom box (reference) -->
+  <rect x="25" y="55" width="50" height="22" rx="4" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+  <!-- Top box (the one that is "sobre/above") -->
+  <rect x="30" y="25" width="40" height="22" rx="4" fill="#60a5fa" stroke="#2563eb" stroke-width="2"/>
+  <!-- Arrow pointing up -->
+  <line x1="50" y1="49" x2="50" y2="53" stroke="#374151" stroke-width="2.5" stroke-dasharray="3,2"/>
+  <polygon points="50,22 46,30 54,30" fill="#374151"/>
+  <!-- Label inside boxes -->
+  <text x="50" y="40" font-family="Arial,sans-serif" font-size="9" fill="white" font-weight="700" text-anchor="middle">SOBRE</text>
+  <text x="50" y="70" font-family="Arial,sans-serif" font-size="8" fill="#92400e" font-weight="600" text-anchor="middle">sota</text>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">SOBRE</text>
+</svg>

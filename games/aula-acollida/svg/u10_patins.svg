@@ -1,0 +1,27 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bota patí (forma de sabata lateral) -->
+  <!-- Cos principal bota -->
+  <path d="M15,30 L15,65 Q15,72 25,72 L75,72 Q82,72 85,68 L85,55 Q85,48 78,45 L55,40 L55,30 Z" fill="#3b82f6"/>
+  <!-- Reforç davanter -->
+  <path d="M75,45 L85,55 L85,68 Q82,72 75,72 L65,72 L65,45 Z" fill="#2563eb"/>
+  <!-- Cordons (línies blanques) -->
+  <line x1="25" y1="35" x2="55" y2="35" stroke="#f5f5f5" stroke-width="2"/>
+  <line x1="22" y1="42" x2="55" y2="42" stroke="#f5f5f5" stroke-width="2"/>
+  <line x1="20" y1="49" x2="55" y2="49" stroke="#f5f5f5" stroke-width="2"/>
+  <line x1="18" y1="56" x2="55" y2="56" stroke="#f5f5f5" stroke-width="2"/>
+  <!-- Sola bota -->
+  <rect x="15" y="68" width="70" height="7" rx="3" fill="#1d4ed8"/>
+  <!-- Marc dels patins (sota la sola) -->
+  <rect x="18" y="74" width="64" height="5" rx="2" fill="#374151"/>
+  <!-- Rodes en línia (4 rodes) -->
+  <circle cx="30" cy="82" r="6" fill="#1f2937"/>
+  <circle cx="30" cy="82" r="3" fill="#6b7280"/>
+  <circle cx="46" cy="82" r="6" fill="#1f2937"/>
+  <circle cx="46" cy="82" r="3" fill="#6b7280"/>
+  <circle cx="62" cy="82" r="6" fill="#1f2937"/>
+  <circle cx="62" cy="82" r="3" fill="#6b7280"/>
+  <circle cx="76" cy="82" r="6" fill="#1f2937"/>
+  <circle cx="76" cy="82" r="3" fill="#6b7280"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PATINS</text>
+</svg>

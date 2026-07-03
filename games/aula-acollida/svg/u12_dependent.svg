@@ -1,0 +1,41 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cap -->
+  <circle cx="38" cy="20" r="9" fill="#f5cba7" stroke="#c0835a" stroke-width="1.2"/>
+  <!-- Cuell -->
+  <rect x="34" y="27" width="8" height="5" fill="#f5cba7"/>
+  <!-- Camisa blanca -->
+  <rect x="26" y="31" width="24" height="22" rx="3" fill="#f5f5f5"/>
+  <!-- Armilla blava -->
+  <polygon points="32,31 44,31 44,53 32,53" fill="#3b82f6" opacity="0.85"/>
+  <polygon points="38,31 50,31 50,53 38,53" fill="#3b82f6" opacity="0.85"/>
+  <!-- Botons camisa -->
+  <circle cx="38" cy="36" r="1" fill="#d1d5db"/>
+  <circle cx="38" cy="41" r="1" fill="#d1d5db"/>
+  <circle cx="38" cy="46" r="1" fill="#d1d5db"/>
+  <!-- Braç esquerre obert mostrant -->
+  <rect x="14" y="32" width="12" height="7" rx="3" fill="#f5f5f5"/>
+  <rect x="10" y="37" width="7" height="5" rx="2" fill="#f5cba7"/>
+  <!-- Braç dret obert mostrant -->
+  <rect x="50" y="32" width="12" height="7" rx="3" fill="#f5f5f5"/>
+  <rect x="59" y="37" width="7" height="5" rx="2" fill="#f5cba7"/>
+  <!-- Cames -->
+  <rect x="27" y="53" width="9" height="18" rx="2" fill="#1d4ed8"/>
+  <rect x="40" y="53" width="9" height="18" rx="2" fill="#1d4ed8"/>
+  <!-- Sabates -->
+  <rect x="26" y="69" width="11" height="4" rx="2" fill="#1f2937"/>
+  <rect x="39" y="69" width="11" height="4" rx="2" fill="#1f2937"/>
+  <!-- Prestatgeria al costat dret -->
+  <rect x="68" y="15" width="3" height="55" rx="1" fill="#92400e"/>
+  <rect x="68" y="15" width="22" height="3" rx="1" fill="#92400e"/>
+  <rect x="68" y="30" width="22" height="3" rx="1" fill="#92400e"/>
+  <rect x="68" y="45" width="22" height="3" rx="1" fill="#92400e"/>
+  <rect x="87" y="15" width="3" height="55" rx="1" fill="#92400e"/>
+  <!-- Productes a la prestatgeria -->
+  <rect x="71" y="17" width="5" height="10" rx="1" fill="#ef4444"/>
+  <rect x="78" y="17" width="5" height="10" rx="1" fill="#3b82f6"/>
+  <rect x="71" y="32" width="5" height="11" rx="1" fill="#fde047"/>
+  <rect x="78" y="32" width="5" height="11" rx="1" fill="#4ade80"/>
+  <rect x="71" y="47" width="5" height="10" rx="1" fill="#f97316"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">DEPENDENT</text>
+</svg>

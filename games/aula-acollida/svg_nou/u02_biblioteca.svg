@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="bib_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#bib_bg)"/>
+  <ellipse cx="50" cy="88" rx="36" ry="4" fill="#0f172a" opacity=".08"/>
+  <rect x="14" y="12" width="72" height="74" rx="4" fill="#92400e"/>
+  <rect x="18" y="16" width="64" height="66" rx="2" fill="#b45309"/>
+  <rect x="20" y="18" width="60" height="18" fill="#78350f"/>
+  <rect x="22" y="20" width="7" height="16" rx="1" fill="#ef4444"/>
+  <rect x="31" y="22" width="7" height="14" rx="1" fill="#3b82f6"/>
+  <rect x="40" y="20" width="7" height="16" rx="1" fill="#16a34a"/>
+  <rect x="49" y="23" width="7" height="13" rx="1" fill="#fbbf24"/>
+  <rect x="58" y="20" width="7" height="16" rx="1" fill="#9333ea"/>
+  <rect x="67" y="22" width="10" height="14" rx="1" fill="#0ea5e9" transform="rotate(8 72 29)"/>
+  <rect x="20" y="42" width="60" height="18" fill="#78350f"/>
+  <rect x="22" y="44" width="7" height="16" rx="1" fill="#14b8a6"/>
+  <rect x="31" y="46" width="7" height="14" rx="1" fill="#f97316"/>
+  <rect x="40" y="44" width="7" height="16" rx="1" fill="#e11d48"/>
+  <rect x="49" y="46" width="7" height="14" rx="1" fill="#84cc16"/>
+  <rect x="58" y="44" width="7" height="16" rx="1" fill="#6366f1"/>
+  <rect x="67" y="46" width="7" height="14" rx="1" fill="#f59e0b"/>
+  <rect x="20" y="66" width="60" height="16" fill="#78350f"/>
+  <rect x="24" y="70" width="22" height="10" rx="1.5" fill="#f8fafc"/>
+  <rect x="26" y="72" width="18" height="1.6" fill="#cbd5e1"/>
+  <rect x="26" y="75" width="14" height="1.6" fill="#e2e8f0"/>
+  <rect x="52" y="68" width="7" height="14" rx="1" fill="#0891b2"/>
+  <rect x="61" y="70" width="7" height="12" rx="1" fill="#be185d"/>
+</svg>

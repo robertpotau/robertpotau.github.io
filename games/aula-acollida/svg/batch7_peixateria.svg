@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect x="8" y="30" width="84" height="65" rx="4" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <rect x="8" y="15" width="84" height="18" rx="4" fill="#1d4ed8"/>
+  <text x="50" y="27" font-family="Arial,sans-serif" font-size="9" font-weight="800" fill="white" text-anchor="middle">PEIXATERIA</text>
+  <rect x="14" y="48" width="30" height="38" rx="3" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <ellipse cx="29" cy="62" rx="11" ry="6" fill="#60a5fa"/>
+  <path d="M38 62 Q42 56 42 62 Q42 68 38 62Z" fill="#3b82f6"/>
+  <circle cx="22" cy="58" r="2" fill="#1e3a8a"/>
+  <rect x="54" y="48" width="34" height="38" rx="3" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <ellipse cx="65" cy="55" rx="9" ry="5" fill="#6ee7b7"/>
+  <path d="M74 55 Q78 50 78 55 Q78 60 74 55Z" fill="#34d399"/>
+  <ellipse cx="68" cy="70" rx="10" ry="5" fill="#fdba74"/>
+  <path d="M78 70 Q82 65 82 70 Q82 75 78 70Z" fill="#fb923c"/>
+</svg>

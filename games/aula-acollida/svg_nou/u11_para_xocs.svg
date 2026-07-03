@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="pxc_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient>
+  <linearGradient id="pxc_metall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2e8f0"/><stop offset="1" stop-color="#64748b"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#pxc_bg)"/>
+  <ellipse cx="50" cy="86" rx="34" ry="4" fill="#0f172a" opacity=".1"/>
+  <path d="M20 28 q0 -6 6 -6 h48 q6 0 6 6 v18 H20 z" fill="#3b82f6"/>
+  <path d="M28 30 q1 -3 5 -3 h12 v14 h-19 z" fill="#bfdbfe" opacity="0"/>
+  <rect x="30" y="34" width="40" height="6" rx="3" fill="#1e40af"/>
+  <path d="M12 54 q0 -8 8 -8 h60 q8 0 8 8 v14 q0 6 -6 6 H18 q-6 0 -6 -6 z" fill="url(#pxc_metall)"/>
+  <path d="M12 58 h76 M12 66 h76" stroke="#94a3b8" stroke-width="1.6" opacity=".7"/>
+  <rect x="14" y="56" width="12" height="8" rx="4" fill="#fde047"/>
+  <rect x="74" y="56" width="12" height="8" rx="4" fill="#fde047"/>
+  <rect x="40" y="58" width="20" height="9" rx="2" fill="#f8fafc" stroke="#475569" stroke-width="1.2"/>
+  <ellipse cx="50" cy="78" rx="34" ry="5" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="6 4"/>
+</svg>

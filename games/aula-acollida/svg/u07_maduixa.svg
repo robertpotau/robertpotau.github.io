@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Strawberry body (inverted heart / cone shape) -->
+  <path d="M50 82 Q28 70 25 50 Q24 36 35 32 Q44 30 50 38 Q56 30 65 32 Q76 36 75 50 Q72 70 50 82Z" fill="#ef4444"/>
+  <!-- Seeds (yellow dots) -->
+  <circle cx="38" cy="48" r="2" fill="#fde047"/>
+  <circle cx="50" cy="43" r="2" fill="#fde047"/>
+  <circle cx="62" cy="48" r="2" fill="#fde047"/>
+  <circle cx="35" cy="58" r="2" fill="#fde047"/>
+  <circle cx="47" cy="60" r="2" fill="#fde047"/>
+  <circle cx="59" cy="58" r="2" fill="#fde047"/>
+  <circle cx="43" cy="70" r="2" fill="#fde047"/>
+  <circle cx="57" cy="70" r="2" fill="#fde047"/>
+  <!-- Highlight -->
+  <path d="M34 42 Q36 35 42 36 Q38 40 36 48Z" fill="#f87171" opacity="0.5"/>
+  <!-- Green leaves/calyx at top -->
+  <path d="M50 35 Q42 28 38 32 Q44 34 50 38Z" fill="#15803d"/>
+  <path d="M50 35 Q50 24 50 20 Q48 28 50 38Z" fill="#15803d"/>
+  <path d="M50 35 Q58 28 62 32 Q56 34 50 38Z" fill="#15803d"/>
+  <path d="M50 35 Q44 26 40 27 Q46 30 50 38Z" fill="#16a34a"/>
+  <path d="M50 35 Q56 26 60 27 Q54 30 50 38Z" fill="#16a34a"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MADUIXA</text>
+</svg>

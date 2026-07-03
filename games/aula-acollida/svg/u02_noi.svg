@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Body -->
+  <rect x="34" y="52" width="20" height="22" rx="3" fill="#3b82f6"/>
+  <!-- Shorts -->
+  <rect x="32" y="70" width="10" height="12" rx="2" fill="#1e40af"/>
+  <rect x="42" y="70" width="10" height="12" rx="2" fill="#1e40af"/>
+  <!-- Head -->
+  <circle cx="44" cy="38" r="13" fill="#fcd34d"/>
+  <!-- Short hair -->
+  <path d="M31 33 Q31 23 44 23 Q57 23 57 33 L57 30 Q55 22 44 22 Q33 22 31 30 Z" fill="#92400e"/>
+  <!-- Eyes -->
+  <circle cx="39" cy="38" r="2.5" fill="#374151"/>
+  <circle cx="49" cy="38" r="2.5" fill="#374151"/>
+  <!-- Smile -->
+  <path d="M38 44 Q44 48 50 44" stroke="#92400e" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Ears -->
+  <ellipse cx="31" cy="38" rx="3" ry="4" fill="#fcd34d" stroke="#e5a000" stroke-width="1"/>
+  <ellipse cx="57" cy="38" rx="3" ry="4" fill="#fcd34d" stroke="#e5a000" stroke-width="1"/>
+  <!-- Arms -->
+  <line x1="34" y1="58" x2="22" y2="70" stroke="#3b82f6" stroke-width="5" stroke-linecap="round"/>
+  <line x1="54" y1="58" x2="66" y2="70" stroke="#3b82f6" stroke-width="5" stroke-linecap="round"/>
+  <!-- Shoes -->
+  <ellipse cx="37" cy="84" rx="6" ry="3" fill="#374151"/>
+  <ellipse cx="51" cy="84" rx="6" ry="3" fill="#374151"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">NOI</text>
+</svg>

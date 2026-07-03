@@ -1,0 +1,25 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cos ovalat -->
+  <ellipse cx="50" cy="65" rx="18" ry="24" fill="#92400e"/>
+  <!-- Cap rodó gran -->
+  <circle cx="50" cy="38" r="20" fill="#92400e"/>
+  <!-- Banyes (plomes triangulars) -->
+  <polygon points="38,20 34,8 42,18" fill="#6b3a1f"/>
+  <polygon points="62,20 66,8 58,18" fill="#6b3a1f"/>
+  <!-- Cara clara -->
+  <ellipse cx="50" cy="40" rx="14" ry="13" fill="#d4a96a"/>
+  <!-- Ull esquerre -->
+  <circle cx="43" cy="38" r="7" fill="#fbbf24"/>
+  <circle cx="43" cy="38" r="4" fill="#1a1a1a"/>
+  <circle cx="41" cy="36" r="1.2" fill="white"/>
+  <!-- Ull dret -->
+  <circle cx="57" cy="38" r="7" fill="#fbbf24"/>
+  <circle cx="57" cy="38" r="4" fill="#1a1a1a"/>
+  <circle cx="55" cy="36" r="1.2" fill="white"/>
+  <!-- Bec triangular petit -->
+  <polygon points="50,44 46,50 54,50" fill="#f59e0b"/>
+  <!-- Potes petites -->
+  <line x1="44" y1="86" x2="40" y2="92" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <line x1="56" y1="86" x2="60" y2="92" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MUSSOL</text>
+</svg>

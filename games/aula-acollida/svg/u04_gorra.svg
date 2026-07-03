@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Cap body (hemisphere) -->
+  <path d="M20 55 Q20 20 50 18 Q80 20 80 55 Z" fill="#1d4ed8"/>
+  <!-- Cap band -->
+  <rect x="20" y="53" width="60" height="6" rx="2" fill="#1e40af"/>
+  <!-- Brim/visera -->
+  <path d="M18 58 Q15 65 20 66 L70 66 Q75 65 72 58 Z" fill="#1e40af"/>
+  <!-- Brim underside highlight -->
+  <path d="M20 62 Q50 64 70 62" stroke="#172554" stroke-width="1" fill="none"/>
+  <!-- Button top -->
+  <circle cx="50" cy="20" r="3" fill="#1e40af" stroke="#172554" stroke-width="0.5"/>
+  <!-- Logo panel lines (6-panel look) -->
+  <path d="M50 20 L50 53" stroke="#1e40af" stroke-width="1" opacity="0.5"/>
+  <path d="M50 20 Q30 30 25 50" stroke="#1e40af" stroke-width="1" opacity="0.5"/>
+  <path d="M50 20 Q70 30 75 50" stroke="#1e40af" stroke-width="1" opacity="0.5"/>
+  <!-- Simple logo patch -->
+  <rect x="42" y="35" width="16" height="11" rx="2" fill="#1e40af" stroke="#93c5fd" stroke-width="1"/>
+  <text x="50" y="44" font-family="Arial,sans-serif" font-size="7" fill="#93c5fd" font-weight="700" text-anchor="middle">AC</text>
+
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GORRA</text>
+</svg>

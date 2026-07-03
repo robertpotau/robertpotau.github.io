@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="zeb_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#zeb_bg)"/>
+  <ellipse cx="50" cy="88" rx="26" ry="4" fill="#0f172a" opacity=".08"/>
+  <polygon points="32,28 28,12 44,22" fill="#1e293b"/>
+  <polygon points="34,26 32,17 41,22" fill="#f8fafc"/>
+  <polygon points="68,28 72,12 56,22" fill="#1e293b"/>
+  <polygon points="66,26 68,17 59,22" fill="#f8fafc"/>
+  <path d="M50 16 q-5 -4 -10 0 q-5 4 -2 8 q4 -6 12 -8" fill="#1e293b" opacity="0"/>
+  <path d="M32 38 q0 -20 18 -20 q18 0 18 20 l-1 14 q-7 -6 -17 -6 q-10 0 -17 6 z" fill="#f8fafc"/>
+  <g fill="#1e293b">
+    <path d="M40 20 q-3 4 -2 9 l5 -1 q-1 -5 1 -9 q-2 0 -4 1"/>
+    <path d="M52 18 q-1 5 0 10 l5 0 q0 -5 1 -9 q-3 -1 -6 -1"/>
+    <path d="M64 24 q2 4 2 9 l-5 2 q0 -6 -1 -10 q2 -1 4 -1"/>
+    <path d="M34 36 q-1 5 0 9 l5 1 q-1 -6 0 -10 z"/>
+  </g>
+  <path d="M34 64 q0 -16 16 -16 q16 0 16 16 q0 14 -16 14 q-16 0 -16 -14" fill="#e2e8f0"/>
+  <path d="M38 56 q12 -6 24 0 l-1 -4 q-11 -5 -22 0 z" fill="#1e293b" opacity="0"/>
+  <circle cx="40" cy="44" r="2.8" fill="#1e293b"/>
+  <circle cx="60" cy="44" r="2.8" fill="#1e293b"/>
+  <ellipse cx="43" cy="66" rx="2.6" ry="3.6" fill="#475569"/>
+  <ellipse cx="57" cy="66" rx="2.6" ry="3.6" fill="#475569"/>
+  <path d="M40 58 h20 M38 64 h-4 M62 64 h4" stroke="#1e293b" stroke-width="0"/>
+</svg>

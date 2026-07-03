@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Peach body -->
+  <circle cx="50" cy="55" r="30" fill="#fb923c"/>
+  <!-- Pink blush left side -->
+  <ellipse cx="34" cy="48" rx="14" ry="18" fill="#f9a8d4" opacity="0.5"/>
+  <!-- Center crease (characteristic groove) -->
+  <path d="M50 25 Q46 40 46 55 Q46 70 50 83" stroke="#c2410c" stroke-width="2" fill="none" opacity="0.6"/>
+  <!-- Stem -->
+  <rect x="48.5" y="22" width="3" height="7" rx="1.5" fill="#92400e"/>
+  <!-- Leaves -->
+  <ellipse cx="57" cy="26" rx="9" ry="4" fill="#4ade80" transform="rotate(-25,57,26)"/>
+  <line x1="51" y1="26" x2="62" y2="22" stroke="#16a34a" stroke-width="0.8"/>
+  <ellipse cx="43" cy="24" rx="8" ry="3.5" fill="#4ade80" transform="rotate(20,43,24)"/>
+  <line x1="49" y1="24" x2="38" y2="21" stroke="#16a34a" stroke-width="0.8"/>
+  <!-- Highlight -->
+  <ellipse cx="38" cy="42" rx="8" ry="10" fill="#fed7aa" opacity="0.5"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PRÉSSEC</text>
+</svg>

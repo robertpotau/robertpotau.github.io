@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Torso -->
+  <path d="M25 45 Q18 50 16 80 L84 80 Q82 50 75 45 Q68 38 50 36 Q32 38 25 45 Z" fill="#3b82f6"/>
+  <!-- Shoulder highlight (right shoulder from viewer's perspective) -->
+  <ellipse cx="75" cy="46" rx="12" ry="10" fill="#fbbf24" opacity="0.8"/>
+  <!-- Neck -->
+  <rect x="42" y="26" width="16" height="14" rx="4" fill="#ffd68a"/>
+  <!-- Head -->
+  <circle cx="50" cy="20" r="14" fill="#ffd68a" stroke="#d97706" stroke-width="1.5"/>
+  <!-- Hair -->
+  <path d="M36 15 Q36 6 50 5 Q64 6 64 15" fill="#92400e"/>
+  <!-- Arrow to shoulder -->
+  <line x1="88" y1="30" x2="80" y2="44" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="78" cy="46" r="4" fill="#ef4444"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ESPATLLA</text>
+</svg>

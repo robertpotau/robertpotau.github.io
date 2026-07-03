@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="for_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient>
+  <linearGradient id="for_metall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e2e8f0"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#cbd5e1"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#for_bg)"/>
+  <ellipse cx="50" cy="86" rx="20" ry="4" fill="#0f172a" opacity=".08"/>
+  <g transform="rotate(18 50 50)">
+    <path d="M38 12 v16 q0 4 2.5 6 v-22 q0 -2 2 -2 q2 0 2 2 v22 h3 v-22 q0 -2 2 -2 q2 0 2 2 v22 h3 v-22 q0 -2 2 -2 q2 0 2 2 v22 q2.5 -2 2.5 -6 V12 q2 -2 3 2 v18 q0 8 -7 11 l1 40 q0 7 -7 7 q-7 0 -7 -7 l1 -40 q-7 -3 -7 -11 V14 q1 -4 3 -2" fill="url(#for_metall)"/>
+    <path d="M48 44 l-1 40 q0 4 2 5 q-4 -1 -4 -5 l1 -40 z" fill="#f1f5f9" opacity=".8"/>
+  </g>
+</svg>

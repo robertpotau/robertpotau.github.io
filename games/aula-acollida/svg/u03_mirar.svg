@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Two big eyes looking forward -->
+  <!-- Left eye -->
+  <ellipse cx="28" cy="45" rx="20" ry="14" fill="white" stroke="#374151" stroke-width="2.5"/>
+  <circle cx="28" cy="45" r="9" fill="#374151"/>
+  <circle cx="28" cy="45" r="7" fill="#1a1a1a"/>
+  <circle cx="24" cy="41" r="3" fill="white" opacity="0.8"/>
+  <!-- Eyelashes left -->
+  <line x1="14" y1="38" x2="10" y2="32" stroke="#374151" stroke-width="2"/>
+  <line x1="20" y1="34" x2="18" y2="26" stroke="#374151" stroke-width="2"/>
+  <line x1="28" y1="32" x2="28" y2="24" stroke="#374151" stroke-width="2"/>
+  <line x1="36" y1="34" x2="38" y2="26" stroke="#374151" stroke-width="2"/>
+  <line x1="42" y1="38" x2="46" y2="32" stroke="#374151" stroke-width="2"/>
+  <!-- Right eye -->
+  <ellipse cx="72" cy="45" rx="20" ry="14" fill="white" stroke="#374151" stroke-width="2.5"/>
+  <circle cx="72" cy="45" r="9" fill="#374151"/>
+  <circle cx="72" cy="45" r="7" fill="#1a1a1a"/>
+  <circle cx="68" cy="41" r="3" fill="white" opacity="0.8"/>
+  <!-- Eyelashes right -->
+  <line x1="58" y1="38" x2="54" y2="32" stroke="#374151" stroke-width="2"/>
+  <line x1="64" y1="34" x2="62" y2="26" stroke="#374151" stroke-width="2"/>
+  <line x1="72" y1="32" x2="72" y2="24" stroke="#374151" stroke-width="2"/>
+  <line x1="80" y1="34" x2="82" y2="26" stroke="#374151" stroke-width="2"/>
+  <line x1="86" y1="38" x2="90" y2="32" stroke="#374151" stroke-width="2"/>
+  <!-- Sight lines -->
+  <line x1="28" y1="59" x2="22" y2="75" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="72" y1="59" x2="78" y2="75" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MIRAR</text>
+</svg>

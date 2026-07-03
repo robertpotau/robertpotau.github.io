@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Bowl of food / meal -->
+  <!-- Sun (midday indicator) -->
+  <circle cx="75" cy="18" r="10" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+  <line x1="75" y1="4" x2="75" y2="8" stroke="#d97706" stroke-width="2" stroke-linecap="round"/>
+  <line x1="85" y1="8" x2="82" y2="11" stroke="#d97706" stroke-width="2" stroke-linecap="round"/>
+  <line x1="89" y1="18" x2="85" y2="18" stroke="#d97706" stroke-width="2" stroke-linecap="round"/>
+  <line x1="85" y1="28" x2="82" y2="25" stroke="#d97706" stroke-width="2" stroke-linecap="round"/>
+  <!-- Plate with food -->
+  <ellipse cx="46" cy="68" rx="38" ry="8" fill="#d1d5db" stroke="#9ca3af" stroke-width="1.5"/>
+  <ellipse cx="46" cy="64" rx="38" ry="8" fill="white" stroke="#9ca3af" stroke-width="2"/>
+  <!-- Pasta/food on plate -->
+  <ellipse cx="46" cy="62" rx="28" ry="5" fill="#fde68a" stroke="#d97706" stroke-width="1"/>
+  <path d="M34 60 Q38 56 42 60 Q46 64 50 60 Q54 56 58 60" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round"/>
+  <!-- Sauce -->
+  <circle cx="40" cy="61" r="4" fill="#fca5a5" stroke="#ef4444" stroke-width="1"/>
+  <circle cx="52" cy="61" r="3" fill="#fca5a5" stroke="#ef4444" stroke-width="1"/>
+  <!-- Fork -->
+  <line x1="16" y1="38" x2="16" y2="80" stroke="#6b7280" stroke-width="3" stroke-linecap="round"/>
+  <line x1="12" y1="38" x2="12" y2="52" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <line x1="16" y1="38" x2="16" y2="52" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+  <line x1="20" y1="38" x2="20" y2="52" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+</svg>

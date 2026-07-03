@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Cabells LLISOS (rectes) - persona amb cabells llargs i completament rectes -->
+
+  <!-- Cabells llisos: franges verticals rectes que cauen des del cap -->
+  <!-- S'han de dibuixar ABANS del cap perquè quedin per darrera -->
+  <path d="M30 25 L22 95" stroke="#4b3621" stroke-width="6" stroke-linecap="round"/>
+  <path d="M35 24 L28 92" stroke="#5c4433" stroke-width="5" stroke-linecap="round"/>
+  <path d="M40 23 L35 90" stroke="#4b3621" stroke-width="5" stroke-linecap="round"/>
+  <path d="M70 25 L78 95" stroke="#4b3621" stroke-width="6" stroke-linecap="round"/>
+  <path d="M65 24 L72 92" stroke="#5c4433" stroke-width="5" stroke-linecap="round"/>
+  <path d="M60 23 L65 90" stroke="#4b3621" stroke-width="5" stroke-linecap="round"/>
+
+  <!--Part superior dels cabells (tapant la part de dalt del cap) -->
+  <path d="M28 30 Q28 12 50 10 Q72 12 72 30" fill="#4b3621"/>
+
+  <!-- Cap -->
+  <circle cx="50" cy="32" r="20" fill="#f5cba7" stroke="#c0835a" stroke-width="2"/>
+
+  <!-- Ulls -->
+  <circle cx="43" cy="30" r="3" fill="#333"/>
+  <circle cx="57" cy="30" r="3" fill="#333"/>
+  <circle cx="44" cy="29" r="1" fill="white"/>
+  <circle cx="58" cy="29" r="1" fill="white"/>
+
+  <!-- Nas -->
+  <path d="M48 35 Q50 38 52 35" fill="none" stroke="#c0835a" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Boca -->
+  <path d="M44 40 Q50 44 56 40" fill="none" stroke="#c0835a" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Cos (bust) -->
+  <path d="M32 52 Q32 48 50 48 Q68 48 68 52 L70 70 L30 70 Z" fill="#6366f1"/>
+
+  <!-- Ratlla que indica "llisos" (fletxa recta avall) -->
+  <line x1="85" y1="20" x2="85" y2="80" stroke="#6366f1" stroke-width="2" stroke-dasharray="3,2"/>
+  <polygon points="85,82 82,75 88,75" fill="#6366f1"/>
+</svg>

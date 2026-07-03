@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="smp_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fefce8"/><stop offset="1" stop-color="#fef3c7"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#smp_bg)"/>
+  <ellipse cx="50" cy="86" rx="26" ry="4" fill="#0f172a" opacity=".08"/>
+  <circle cx="50" cy="48" r="30" fill="#fcd9b8"/>
+  <path d="M20 43 q0 -26 30 -26 q30 0 30 26 q-12 -12 -30 -12 q-18 0 -30 12" fill="#57534e"/>
+  <path d="M36 46 q3 -3.5 7 0 M57 46 q3 -3.5 7 0" stroke="#1e293b" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+  <path d="M36 60 q14 12 28 0" fill="none" stroke="#92400e" stroke-width="3" stroke-linecap="round"/>
+  <path d="M38 62 q12 9 24 0 q-5 8 -12 8 q-7 0 -12 -8" fill="#7f1d1d"/>
+  <circle cx="30" cy="56" r="4.5" fill="#f9a8d4" opacity=".6"/>
+  <circle cx="70" cy="56" r="4.5" fill="#f9a8d4" opacity=".6"/>
+  <path d="M82 24 l-3 5 l5 1 l-3 5" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

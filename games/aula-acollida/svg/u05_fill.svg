@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Head (smaller = child) -->
+  <circle cx="50" cy="30" r="20" fill="#f5cba7" stroke="#c0835a" stroke-width="2"/>
+  <!-- Hair -->
+  <path d="M30 26 Q30 10 50 10 Q70 10 70 26 Q62 16 50 16 Q38 16 30 26 Z" fill="#6b3a2a"/>
+  <!-- Eyes -->
+  <circle cx="43" cy="29" r="3" fill="#333"/>
+  <circle cx="57" cy="29" r="3" fill="#333"/>
+  <!-- Light in eyes -->
+  <circle cx="44" cy="28" r="1" fill="white"/>
+  <circle cx="58" cy="28" r="1" fill="white"/>
+  <!-- Smile -->
+  <path d="M43 38 Q50 44 57 38" fill="none" stroke="#c0835a" stroke-width="2" stroke-linecap="round"/>
+  <!-- Body (t-shirt, shorter) -->
+  <path d="M32 50 Q22 50 18 60 L16 86 L84 86 L82 60 Q78 50 68 50 Z" fill="#22c55e" stroke="#15803d" stroke-width="2"/>
+  <!-- Neck -->
+  <rect x="43" y="48" width="14" height="6" rx="2" fill="#f5cba7"/>
+  <!-- Small parent figures beside (family context) -->
+  <circle cx="14" cy="55" r="5" fill="#f5cba7" stroke="#c0835a" stroke-width="1.5"/>
+  <circle cx="86" cy="55" r="5" fill="#f5cba7" stroke="#c0835a" stroke-width="1.5"/>
+  <!-- Label -->
+  <text x="50" y="96" font-family="Arial,sans-serif" font-size="8.5" fill="#15803d" font-weight="700" text-anchor="middle">FILL</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect x="25" y="5" width="50" height="15" rx="4" fill="#374151"/>
+  <rect x="35" y="18" width="30" height="50" rx="4" fill="#6b7280"/>
+  <rect x="30" y="65" width="40" height="25" rx="6" fill="#94a3b8" stroke="#6b7280" stroke-width="2"/>
+  <circle cx="50" cy="78" r="10" fill="#f5cba7" stroke="#c0835a" stroke-width="2"/>
+  <circle cx="50" cy="78" r="5" fill="#f0a080"/>
+  <path d="M20 55 L35 70" stroke="#374151" stroke-width="6" stroke-linecap="round"/>
+  <path d="M80 55 L65 70" stroke="#374151" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="18,50 25,40 32,50" fill="#ef4444"/>
+  <text x="50" y="12" font-family="Arial,sans-serif" font-size="7" font-weight="700" fill="white" text-anchor="middle">FRENADA</text>
+</svg>
