@@ -53,6 +53,10 @@ C:\Users\PC\Documents\MEGA\Claude code\claude-projects\landing-page\sync-game.ps
 3. Run `sync-game.ps1 -Slug <newslug>` to copy its files in and publish.
 4. If the game doesn't yet have its own private GitHub repo, create one first (`gh repo create robertpotau/<slug> --private --source=. --remote=origin`, push).
 
+## Known limitation: progress doesn't sync across devices
+
+All 6 games with save state (calcuherois, fraccions, geometria, aula-acollida, ortografia — via `localStorage`) keep progress only in the student's current browser. No backend exists yet. A future-upgrade proposal (Supabase/Firebase sync layer, class-code based identification, no fix needed now) is written up in `claude-projects/IDEAS.md` under "Cross-device progress sync for student games" — read that before starting any related work.
+
 ## Git identity note
 
 Use `Robert Potau` / `robertpotau@gmail.com` for all git commits in these repos (work identity). Never use the `salemlayonn@gmail.com` address — that's Robert's private email.
