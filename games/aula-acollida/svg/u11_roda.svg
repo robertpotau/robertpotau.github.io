@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Pneumàtic exterior -->
+  <circle cx="50" cy="50" r="42" fill="#1f2937"/>
+  <circle cx="50" cy="50" r="34" fill="#94a3b8"/>
+  <!-- Llanta -->
+  <circle cx="50" cy="50" r="30" fill="#cbd5e1"/>
+  <!-- 5 radis -->
+  <line x1="50" y1="20" x2="50" y2="80" stroke="#6b7280" stroke-width="4" stroke-linecap="round"/>
+  <line x1="20" y1="50" x2="80" y2="50" stroke="#6b7280" stroke-width="4" stroke-linecap="round"/>
+  <line x1="29" y1="29" x2="71" y2="71" stroke="#6b7280" stroke-width="4" stroke-linecap="round"/>
+  <line x1="71" y1="29" x2="29" y2="71" stroke="#6b7280" stroke-width="4" stroke-linecap="round"/>
+  <line x1="22" y1="38" x2="78" y2="62" stroke="#6b7280" stroke-width="3" stroke-linecap="round"/>
+  <!-- Eix central -->
+  <circle cx="50" cy="50" r="8" fill="#374151" stroke="#1f2937" stroke-width="2"/>
+  <circle cx="50" cy="50" r="4" fill="#94a3b8"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">RODA</text>
+</svg>

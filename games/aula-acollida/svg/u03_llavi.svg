@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Upper lip -->
+  <path d="M20 42 Q30 36 40 40 Q50 34 60 40 Q70 36 80 42 Q70 50 50 50 Q30 50 20 42 Z" fill="#f43f5e"/>
+  <!-- Cupid's bow highlight -->
+  <path d="M35 39 Q50 33 65 39" stroke="#fb7185" stroke-width="2" fill="none"/>
+  <!-- Lower lip -->
+  <path d="M20 42 Q30 52 50 58 Q70 52 80 42 Q70 50 50 50 Q30 50 20 42 Z" fill="#e11d48"/>
+  <!-- Lip highlight -->
+  <ellipse cx="50" cy="51" rx="15" ry="4" fill="#fb7185" opacity="0.5"/>
+  <!-- Teeth gap line -->
+  <line x1="20" y1="43" x2="80" y2="43" stroke="#fda4af" stroke-width="1"/>
+  <!-- Arrow -->
+  <line x1="50" y1="70" x2="50" y2="62" stroke="#374151" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="50,58 46,66 54,66" fill="#374151"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">LLAVI</text>
+</svg>

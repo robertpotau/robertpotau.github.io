@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 90">
+  <!-- part posterior de la carpeta -->
+  <rect x="5" y="22" width="100" height="64" rx="6" fill="#b45309"/>
+  <!-- pestanya (tab) -->
+  <rect x="5" y="12" width="40" height="16" rx="5" fill="#b45309"/>
+  <!-- part davantera (més clara) -->
+  <rect x="5" y="28" width="100" height="58" rx="6" fill="#f59e0b"/>
+  <!-- papers interiors visibles -->
+  <rect x="12" y="35" width="86" height="5" rx="1" fill="white" opacity="0.6"/>
+  <rect x="12" y="48" width="86" height="5" rx="1" fill="white" opacity="0.4"/>
+  <rect x="12" y="61" width="86" height="5" rx="1" fill="white" opacity="0.3"/>
+</svg>

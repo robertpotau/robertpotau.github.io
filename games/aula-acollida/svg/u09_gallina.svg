@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Cos ovalat blanc -->
+  <ellipse cx="50" cy="65" rx="26" ry="20" fill="#f5f5f5"/>
+  <!-- Ala esbossada -->
+  <ellipse cx="50" cy="62" rx="20" ry="14" fill="#e0e0e0"/>
+  <ellipse cx="50" cy="65" rx="26" ry="20" fill="#f5f5f5"/>
+  <!-- Cua posterior -->
+  <path d="M24 58 Q14 50 12 56 Q14 62 22 62Z" fill="#e0e0e0"/>
+  <path d="M24 63 Q12 60 11 67 Q13 72 22 68Z" fill="#d8d8d8"/>
+  <!-- Coll i cap petit -->
+  <rect x="60" y="42" width="10" height="16" rx="5" fill="#f5f5f5"/>
+  <circle cx="65" cy="36" r="10" fill="#f5f5f5"/>
+  <!-- Cresta vermella -->
+  <path d="M61 27 Q59 22 63 24 Q62 19 66 22 Q65 17 70 21 Q69 16 73 20 Q70 26 68 28Z" fill="#ef4444"/>
+  <!-- Barbeta vermella -->
+  <ellipse cx="64" cy="43" rx="4" ry="5" fill="#ef4444"/>
+  <!-- Bec groc triangular -->
+  <polygon points="72,35 80,37 72,40" fill="#f59e0b"/>
+  <!-- Ull -->
+  <circle cx="66" cy="33" r="3" fill="#fff"/>
+  <circle cx="66" cy="33" r="2" fill="#f59e0b"/>
+  <circle cx="66" cy="33" r="1" fill="#1a1a1a"/>
+  <circle cx="65" cy="32" r="0.5" fill="#fff"/>
+  <!-- Potes grogues -->
+  <line x1="42" y1="83" x2="38" y2="92" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="36" y1="92" x2="32" y2="94" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="36" y1="92" x2="36" y2="95" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="36" y1="92" x2="41" y2="95" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="58" y1="83" x2="62" y2="92" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="64" y1="92" x2="60" y2="94" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="64" y1="92" x2="64" y2="95" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="64" y1="92" x2="68" y2="95" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GALLINA</text>
+</svg>

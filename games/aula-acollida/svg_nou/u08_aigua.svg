@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="aigua_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0f9ff"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient>
+  <radialGradient id="aigua_gota" cx=".4" cy=".35" r="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0369a1"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#aigua_bg)"/>
+  <ellipse cx="50" cy="86" rx="26" ry="4" fill="#0f172a" opacity=".08"/>
+  <path d="M50 12 q26 30 26 48 a26 26 0 0 1 -52 0 q0 -18 26 -48" fill="url(#aigua_gota)"/>
+  <path d="M38 56 q-2 14 8 20 q-14 -2 -16 -16 q0 -6 8 -4" fill="#bae6fd" opacity=".7"/>
+  <circle cx="60" cy="44" r="3" fill="#e0f2fe" opacity=".8"/>
+  <path d="M40 36 q4 -8 10 -14" stroke="#bae6fd" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".8"/>
+</svg>

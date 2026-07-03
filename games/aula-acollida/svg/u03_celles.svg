@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Head -->
+  <ellipse cx="50" cy="55" rx="32" ry="36" fill="#ffd68a" stroke="#d97706" stroke-width="2"/>
+  <!-- Hair -->
+  <path d="M18 45 Q20 22 50 20 Q80 22 82 45" fill="#92400e"/>
+  <!-- Eyebrows highlighted -->
+  <path d="M26 40 Q36 35 44 38" stroke="#5c3a1e" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M56 38 Q64 35 74 40" stroke="#5c3a1e" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Highlight glow around eyebrows -->
+  <path d="M26 40 Q36 35 44 38" stroke="#fbbf24" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M56 38 Q64 35 74 40" stroke="#fbbf24" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- Eyes -->
+  <ellipse cx="35" cy="52" rx="6" ry="4" fill="white" stroke="#374151" stroke-width="1.5"/>
+  <ellipse cx="65" cy="52" rx="6" ry="4" fill="white" stroke="#374151" stroke-width="1.5"/>
+  <circle cx="35" cy="52" r="2.5" fill="#374151"/>
+  <circle cx="65" cy="52" r="2.5" fill="#374151"/>
+  <!-- Nose, mouth -->
+  <path d="M46 63 Q50 68 54 63" stroke="#c2850a" stroke-width="1.5" fill="none"/>
+  <path d="M38 73 Q50 79 62 73" stroke="#c2850a" stroke-width="2" fill="none"/>
+  <!-- Arrow -->
+  <line x1="82" y1="22" x2="72" y2="37" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="70" cy="38" r="3" fill="#ef4444"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CELLES</text>
+</svg>

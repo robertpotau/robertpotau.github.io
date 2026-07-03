@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Body with cane -->
+  <rect x="32" y="54" width="22" height="22" rx="4" fill="#6b7280"/>
+  <!-- Head -->
+  <circle cx="43" cy="40" r="16" fill="#ffd68a" stroke="#d97706" stroke-width="1.5"/>
+  <!-- Grey/white hair -->
+  <path d="M27 36 Q27 22 43 20 Q59 22 59 36" fill="#d1d5db"/>
+  <!-- Bald spot (elderly) -->
+  <ellipse cx="43" cy="26" rx="8" ry="5" fill="#ffd68a" opacity="0.7"/>
+  <!-- Wrinkles on face -->
+  <path d="M30 40 Q33 37 36 40" stroke="#c2850a" stroke-width="1" fill="none"/>
+  <path d="M50 40 Q53 37 56 40" stroke="#c2850a" stroke-width="1" fill="none"/>
+  <!-- Wrinkle under eyes -->
+  <path d="M30 44 Q33 42 35 44" stroke="#c2850a" stroke-width="0.8" fill="none"/>
+  <path d="M51 44 Q54 42 56 44" stroke="#c2850a" stroke-width="0.8" fill="none"/>
+  <!-- Eyes (smaller, tired) -->
+  <ellipse cx="35" cy="41" rx="5" ry="4" fill="white" stroke="#374151" stroke-width="1.5"/>
+  <ellipse cx="51" cy="41" rx="5" ry="4" fill="white" stroke="#374151" stroke-width="1.5"/>
+  <circle cx="35" cy="41" r="2.5" fill="#374151"/>
+  <circle cx="51" cy="41" r="2.5" fill="#374151"/>
+  <!-- Smile with wrinkles -->
+  <path d="M33 50 Q43 55 53 50" stroke="#c2850a" stroke-width="1.5" fill="none"/>
+  <!-- Beard/moustache grey -->
+  <path d="M32 52 Q43 56 54 52" stroke="#9ca3af" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Cane -->
+  <line x1="60" y1="55" x2="66" y2="85" stroke="#92400e" stroke-width="3" stroke-linecap="round"/>
+  <path d="M60 55 Q56 52 62 50" stroke="#92400e" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Arms -->
+  <line x1="32" y1="60" x2="20" y2="72" stroke="#6b7280" stroke-width="4" stroke-linecap="round"/>
+  <line x1="54" y1="60" x2="64" y2="68" stroke="#6b7280" stroke-width="4" stroke-linecap="round"/>
+  <!-- Legs -->
+  <rect x="32" y="76" width="8" height="8" rx="2" fill="#4b5563"/>
+  <rect x="44" y="76" width="8" height="8" rx="2" fill="#4b5563"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">VELL</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Cos taronja arrodonit -->
+  <rect x="15" y="28" width="70" height="44" rx="12" ry="12" fill="#f97316" stroke="#ea580c" stroke-width="2"/>
+  <!-- Fletxa interior indicant direcció dreta -->
+  <polygon points="38,50 58,36 58,44 75,44 75,56 58,56 58,64" fill="#1f2937"/>
+  <!-- Brillantor -->
+  <ellipse cx="25" cy="38" rx="5" ry="3" fill="#fed7aa" opacity="0.6"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">INTERMITENT</text>
+</svg>

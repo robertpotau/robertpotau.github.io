@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="cro_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/></linearGradient>
+  <radialGradient id="cro_cos" cx=".45" cy=".35" r="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#b45309"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#cro_bg)"/>
+  <ellipse cx="50" cy="80" rx="32" ry="5" fill="#0f172a" opacity=".08"/>
+  <path d="M50 32 q12 0 18 10 q8 -4 14 4 q6 9 -2 22 q-4 7 -10 4 q-3 6 -8 4 q-6 8 -12 0 q-5 2 -8 -4 q-6 3 -10 -4 q-8 -13 -2 -22 q6 -8 14 -4 q6 -10 18 -10" fill="url(#cro_cos)" transform="translate(-12 0) scale(1.05)"/>
+  <path d="M28 44 q-6 10 0 24 M44 38 q-6 16 0 34 M60 38 q6 16 0 34 M74 46 q6 10 0 22" stroke="#92400e" stroke-width="2.4" fill="none" stroke-linecap="round" transform="translate(-3 -2)"/>
+  <path d="M36 40 q6 -6 14 -6" stroke="#fde68a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+</svg>

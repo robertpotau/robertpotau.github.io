@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="bos_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#bos_bg)"/>
+  <path d="M0 76 q25 -8 50 0 t50 0 v8 q0 16 -16 16 H16 Q0 100 0 84 z" fill="#4ade80"/>
+  <g>
+    <rect x="22" y="58" width="7" height="22" fill="#92400e"/>
+    <polygon points="25.5,10 42,42 9,42" fill="#15803d"/>
+    <polygon points="25.5,24 44,58 7,58" fill="#16a34a"/>
+  </g>
+  <g>
+    <rect x="64" y="62" width="8" height="22" fill="#78350f"/>
+    <circle cx="68" cy="40" r="20" fill="#22c55e"/>
+    <circle cx="56" cy="48" r="11" fill="#4ade80"/>
+    <circle cx="80" cy="48" r="11" fill="#16a34a"/>
+    <circle cx="62" cy="32" r="3" fill="#dc2626"/>
+    <circle cx="76" cy="36" r="3" fill="#dc2626"/>
+  </g>
+  <g>
+    <rect x="44" y="66" width="6" height="16" fill="#92400e"/>
+    <polygon points="47,38 58,68 36,68" fill="#15803d"/>
+  </g>
+  <circle cx="14" cy="86" r="2.6" fill="#f472b6"/>
+  <circle cx="88" cy="88" r="2.6" fill="#fde047"/>
+  <path d="M82 16 q4 -3 8 0" stroke="#f8fafc" stroke-width="3" stroke-linecap="round" fill="none" opacity=".8"/>
+</svg>

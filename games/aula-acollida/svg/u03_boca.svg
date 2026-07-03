@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Lips outer -->
+  <path d="M20 45 Q30 35 50 38 Q70 35 80 45 Q70 62 50 65 Q30 62 20 45Z" fill="#e8405a"/>
+  <!-- Upper lip cupid bow -->
+  <path d="M20 45 Q30 35 50 38 Q70 35 80 45" fill="none" stroke="#c0203a" stroke-width="1.5"/>
+  <!-- Mouth opening -->
+  <path d="M25 48 Q50 55 75 48 Q70 62 50 64 Q30 62 25 48Z" fill="#3b1a1a"/>
+  <!-- Teeth -->
+  <path d="M29 49 Q50 56 71 49 Q66 58 50 60 Q34 58 29 49Z" fill="white"/>
+  <!-- Tooth lines -->
+  <line x1="39" y1="49.5" x2="37" y2="59" stroke="#ddd" stroke-width="1"/>
+  <line x1="50" y1="50" x2="50" y2="60" stroke="#ddd" stroke-width="1"/>
+  <line x1="61" y1="49.5" x2="63" y2="59" stroke="#ddd" stroke-width="1"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">BOCA</text>
+</svg>

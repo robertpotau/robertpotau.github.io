@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Barra de la cortina -->
+  <rect x="4" y="10" width="92" height="6" rx="3" fill="#b8860b"/>
+  <!-- Botons de la barra (esquerra) -->
+  <circle cx="10" cy="13" r="4" fill="#d4a017"/>
+  <circle cx="90" cy="13" r="4" fill="#d4a017"/>
+  <!-- Cortina esquerra -->
+  <path d="M8 16 Q18 28 14 50 Q11 68 16 90 L40 90 Q35 68 38 50 Q42 28 50 16 Z" fill="#6c3483"/>
+  <!-- Plecs cortina esquerra -->
+  <line x1="18" y1="18" x2="16" y2="85" stroke="#4a235a" stroke-width="1.5" opacity="0.7"/>
+  <line x1="28" y1="16" x2="26" y2="83" stroke="#4a235a" stroke-width="1.5" opacity="0.7"/>
+  <line x1="38" y1="16" x2="36" y2="80" stroke="#4a235a" stroke-width="1.5" opacity="0.5"/>
+  <!-- Cortina dreta -->
+  <path d="M92 16 Q82 28 86 50 Q89 68 84 90 L60 90 Q65 68 62 50 Q58 28 50 16 Z" fill="#6c3483"/>
+  <!-- Plecs cortina dreta -->
+  <line x1="82" y1="18" x2="84" y2="85" stroke="#4a235a" stroke-width="1.5" opacity="0.7"/>
+  <line x1="72" y1="16" x2="74" y2="83" stroke="#4a235a" stroke-width="1.5" opacity="0.7"/>
+  <line x1="62" y1="16" x2="64" y2="80" stroke="#4a235a" stroke-width="1.5" opacity="0.5"/>
+  <!-- Anells de la barra -->
+  <circle cx="22" cy="13" r="3.5" fill="none" stroke="#b8860b" stroke-width="2"/>
+  <circle cx="36" cy="13" r="3.5" fill="none" stroke="#b8860b" stroke-width="2"/>
+  <circle cx="50" cy="13" r="3.5" fill="none" stroke="#b8860b" stroke-width="2"/>
+  <circle cx="64" cy="13" r="3.5" fill="none" stroke="#b8860b" stroke-width="2"/>
+  <circle cx="78" cy="13" r="3.5" fill="none" stroke="#b8860b" stroke-width="2"/>
+  <!-- Zona de llum al mig -->
+  <rect x="40" y="16" width="20" height="74" fill="#fffde7" opacity="0.15" rx="2"/>
+</svg>

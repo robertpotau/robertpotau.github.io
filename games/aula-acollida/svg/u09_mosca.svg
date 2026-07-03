@@ -1,0 +1,38 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Ales grans transparents -->
+  <ellipse cx="28" cy="44" rx="20" ry="11" fill="#e0f2fe" opacity="0.85" transform="rotate(-15 28 44)"/>
+  <ellipse cx="72" cy="44" rx="20" ry="11" fill="#e0f2fe" opacity="0.85" transform="rotate(15 72 44)"/>
+  <!-- Venes ales -->
+  <ellipse cx="28" cy="44" rx="20" ry="11" fill="none" stroke="#94a3b8" stroke-width="0.8" transform="rotate(-15 28 44)"/>
+  <ellipse cx="72" cy="44" rx="20" ry="11" fill="none" stroke="#94a3b8" stroke-width="0.8" transform="rotate(15 72 44)"/>
+  <!-- Tòrax -->
+  <ellipse cx="50" cy="54" rx="10" ry="12" fill="#374151"/>
+  <!-- Abdomen -->
+  <ellipse cx="50" cy="70" rx="9" ry="12" fill="#4b5563"/>
+  <!-- Línia abdomen -->
+  <line x1="50" y1="58" x2="50" y2="82" stroke="#6b7280" stroke-width="1" stroke-dasharray="2,2"/>
+  <!-- Cap gran -->
+  <circle cx="50" cy="37" r="13" fill="#374151"/>
+  <!-- Ulls compostos grans -->
+  <circle cx="41" cy="35" r="7" fill="#4ade80"/>
+  <circle cx="59" cy="35" r="7" fill="#4ade80"/>
+  <!-- Facetes ulls -->
+  <circle cx="41" cy="35" r="7" fill="none" stroke="#166534" stroke-width="0.8"/>
+  <line x1="34" y1="35" x2="48" y2="35" stroke="#166534" stroke-width="0.5"/>
+  <line x1="41" y1="28" x2="41" y2="42" stroke="#166534" stroke-width="0.5"/>
+  <line x1="36" y1="30" x2="46" y2="40" stroke="#166534" stroke-width="0.5"/>
+  <line x1="46" y1="30" x2="36" y2="40" stroke="#166534" stroke-width="0.5"/>
+  <circle cx="59" cy="35" r="7" fill="none" stroke="#166534" stroke-width="0.8"/>
+  <line x1="52" y1="35" x2="66" y2="35" stroke="#166534" stroke-width="0.5"/>
+  <line x1="59" y1="28" x2="59" y2="42" stroke="#166534" stroke-width="0.5"/>
+  <line x1="54" y1="30" x2="64" y2="40" stroke="#166534" stroke-width="0.5"/>
+  <line x1="64" y1="30" x2="54" y2="40" stroke="#166534" stroke-width="0.5"/>
+  <!-- 6 potes primes -->
+  <line x1="42" y1="56" x2="28" y2="62" stroke="#374151" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="42" y1="60" x2="26" y2="70" stroke="#374151" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="42" y1="64" x2="28" y2="76" stroke="#374151" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="58" y1="56" x2="72" y2="62" stroke="#374151" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="58" y1="60" x2="74" y2="70" stroke="#374151" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="58" y1="64" x2="72" y2="76" stroke="#374151" stroke-width="1.2" stroke-linecap="round"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MOSCA</text>
+</svg>

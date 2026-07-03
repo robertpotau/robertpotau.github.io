@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Cel -->
+  <rect x="0" y="0" width="100" height="62" fill="#e0f2fe"/>
+  <!-- Sol -->
+  <circle cx="83" cy="14" r="8" fill="#fde68a"/>
+  <line x1="83" y1="3" x2="83" y2="1" stroke="#fde68a" stroke-width="1.5"/>
+  <line x1="83" y1="25" x2="83" y2="28" stroke="#fde68a" stroke-width="1.5"/>
+  <line x1="72" y1="14" x2="69" y2="14" stroke="#fde68a" stroke-width="1.5"/>
+  <line x1="94" y1="14" x2="97" y2="14" stroke="#fde68a" stroke-width="1.5"/>
+  <!-- Terra -->
+  <rect x="0" y="62" width="100" height="28" fill="#4ade80"/>
+  <rect x="0" y="62" width="100" height="7" fill="#22c55e"/>
+  <!-- Arbre esquerra - pi -->
+  <rect x="17" y="56" width="6" height="14" fill="#92400e"/>
+  <polygon points="20,20 33,43 7,43" fill="#15803d"/>
+  <polygon points="20,28 34,49 6,49" fill="#166534"/>
+  <polygon points="20,36 35,57 5,57" fill="#15803d"/>
+  <!-- Arbre central - pi gran -->
+  <rect x="47" y="54" width="7" height="16" fill="#92400e"/>
+  <polygon points="50.5,13 65,42 36,42" fill="#15803d"/>
+  <polygon points="50.5,23 66,48 35,48" fill="#166534"/>
+  <polygon points="50.5,32 67,56 34,56" fill="#15803d"/>
+  <!-- Arbre dreta - pi petit -->
+  <rect x="74" y="58" width="5" height="12" fill="#92400e"/>
+  <polygon points="76.5,26 88,49 65,49" fill="#15803d"/>
+  <polygon points="76.5,34 89,54 64,54" fill="#166534"/>
+  <polygon points="76.5,41 89,59 64,59" fill="#15803d"/>
+  <!-- Herba -->
+  <ellipse cx="30" cy="65" rx="8" ry="3" fill="#16a34a" opacity="0.6"/>
+  <ellipse cx="65" cy="67" rx="7" ry="2.5" fill="#16a34a" opacity="0.6"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">BOSC</text>
+</svg>

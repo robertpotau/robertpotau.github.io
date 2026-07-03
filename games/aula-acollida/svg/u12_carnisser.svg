@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Head -->
+  <circle cx="50" cy="20" r="14" fill="#f5cba7" stroke="#c0835a" stroke-width="2"/>
+  <!-- Hair -->
+  <path d="M36 16 Q36 6 50 6 Q64 6 64 16 Q58 10 50 10 Q42 10 36 16 Z" fill="#4b3621"/>
+  <!-- Eyes + small mustache -->
+  <circle cx="45" cy="19" r="2" fill="#333"/>
+  <circle cx="55" cy="19" r="2" fill="#333"/>
+  <path d="M44 25 Q50 28 56 25" fill="#4b3621" stroke="#4b3621" stroke-width="2"/>
+  <!-- White apron body -->
+  <path d="M30 34 Q22 34 18 44 L14 90 L86 90 L82 44 Q78 34 70 34 Z" fill="white" stroke="#d1d5db" stroke-width="2"/>
+  <!-- Red stripes on apron -->
+  <path d="M40 36 L36 90" stroke="#ef4444" stroke-width="3" opacity="0.5"/>
+  <path d="M50 36 L50 90" stroke="#ef4444" stroke-width="3" opacity="0.5"/>
+  <path d="M60 36 L64 90" stroke="#ef4444" stroke-width="3" opacity="0.5"/>
+  <!-- Neck -->
+  <rect x="44" y="32" width="12" height="5" rx="2" fill="#f5cba7"/>
+  <!-- Cleaver in right hand -->
+  <rect x="70" y="48" width="22" height="18" rx="3" fill="#9ca3af" stroke="#6b7280" stroke-width="2"/>
+  <rect x="78" y="62" width="6" height="20" rx="3" fill="#4b3621" stroke="#374151" stroke-width="1.5"/>
+</svg>

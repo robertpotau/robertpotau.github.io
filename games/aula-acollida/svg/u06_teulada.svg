@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Canaleta -->
+  <rect x="14" y="60" width="72" height="5" rx="2" fill="#6b7280"/>
+  <!-- Triangle teulada -->
+  <polygon points="10,62 50,15 90,62" fill="#ef4444"/>
+  <!-- Teules (línies horitzontals simulades) -->
+  <line x1="50" y1="15" x2="17" y2="57" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="50" y1="15" x2="83" y2="57" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="29" y1="38" x2="71" y2="38" stroke="#b91c1c" stroke-width="1.5"/>
+  <line x1="22" y1="49" x2="78" y2="49" stroke="#b91c1c" stroke-width="1.5"/>
+  <line x1="37" y1="27" x2="63" y2="27" stroke="#b91c1c" stroke-width="1.5"/>
+  <!-- Canaleta detall -->
+  <rect x="14" y="60" width="72" height="5" rx="2" fill="none" stroke="#4b5563" stroke-width="1"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TEULADA</text>
+</svg>

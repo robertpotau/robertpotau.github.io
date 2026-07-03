@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="cp_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fefce8"/><stop offset="1" stop-color="#fef9c3"/></linearGradient>
+    <linearGradient id="cp_davant" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#d97706"/></linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="16" fill="url(#cp_bg)"/>
+  <ellipse cx="50" cy="84" rx="34" ry="5" fill="#0f172a" opacity=".08"/>
+  <path d="M16 30 q0 -5 5 -5 h18 l6 7 h34 q5 0 5 5 v6 H16 Z" fill="#b45309"/>
+  <rect x="16" y="38" width="68" height="42" rx="5" fill="#92400e"/>
+  <rect x="22" y="32" width="50" height="36" rx="2" fill="#f8fafc"/>
+  <rect x="26" y="36" width="34" height="3" rx="1.5" fill="#cbd5e1"/>
+  <rect x="26" y="42" width="40" height="3" rx="1.5" fill="#e2e8f0"/>
+  <rect x="28" y="30" width="44" height="34" rx="2" fill="#e0f2fe"/>
+  <rect x="32" y="35" width="30" height="3" rx="1.5" fill="#7dd3fc"/>
+  <path d="M16 46 q0 -6 6 -6 h56 q6 0 6 6 l-2 28 q0 6 -6 6 H24 q-6 0 -6 -6 Z" fill="url(#cp_davant)"/>
+  <path d="M16 46 q0 -6 6 -6 h56 q6 0 6 6 l-0.5 7 H16.5 Z" fill="#fcd34d" opacity=".65"/>
+  <rect x="40" y="56" width="20" height="9" rx="4.5" fill="#fef3c7"/>
+</svg>

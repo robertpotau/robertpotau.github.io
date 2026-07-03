@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 55">
+  <!-- tapa (negre, esquerra) -->
+  <rect x="5" y="12" width="24" height="32" rx="6" fill="#1f2937"/>
+  <!-- cos (vermell) -->
+  <rect x="26" y="12" width="82" height="32" rx="3" fill="#ef4444"/>
+  <!-- punta de feltro -->
+  <rect x="106" y="18" width="22" height="20" rx="5" fill="#7f1d1d"/>
+  <!-- franja blanca (etiqueta) -->
+  <rect x="40" y="18" width="50" height="18" rx="2" fill="white" opacity="0.3"/>
+  <!-- línia de separació tapa/cos -->
+  <line x1="26" y1="12" x2="26" y2="44" stroke="#111827" stroke-width="1.5"/>
+</svg>

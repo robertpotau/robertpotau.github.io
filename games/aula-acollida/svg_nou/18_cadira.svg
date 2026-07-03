@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="ca_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fef2f2"/><stop offset="1" stop-color="#fecaca"/></linearGradient>
+    <linearGradient id="ca_seient" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ef4444"/><stop offset="1" stop-color="#b91c1c"/></linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="16" fill="url(#ca_bg)"/>
+  <ellipse cx="50" cy="89" rx="28" ry="4" fill="#0f172a" opacity=".08"/>
+  <rect x="32" y="14" width="9" height="44" rx="3" fill="#64748b"/>
+  <rect x="32" y="14" width="4" height="44" fill="#94a3b8"/>
+  <rect x="30" y="16" width="40" height="22" rx="7" fill="url(#ca_seient)"/>
+  <rect x="30" y="16" width="40" height="8" rx="4" fill="#f87171" opacity=".7"/>
+  <polygon points="28,54 74,54 78,62 24,62" fill="url(#ca_seient)"/>
+  <polygon points="28,54 74,54 75.5,57 26.5,57" fill="#f87171" opacity=".7"/>
+  <rect x="27" y="62" width="7" height="25" rx="2.5" fill="#64748b"/>
+  <rect x="27" y="62" width="3" height="25" fill="#94a3b8"/>
+  <rect x="67" y="62" width="7" height="25" rx="2.5" fill="#475569"/>
+  <rect x="67" y="62" width="3" height="25" fill="#64748b"/>
+</svg>

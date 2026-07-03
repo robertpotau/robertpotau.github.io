@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Eix circular -->
+  <circle cx="50" cy="50" r="8" fill="#6b7280" stroke="#374151" stroke-width="2"/>
+  <circle cx="50" cy="50" r="4" fill="#374151"/>
+  <!-- Maneta/braç horitzontal -->
+  <rect x="50" y="46" width="30" height="8" rx="3" fill="#6b7280" stroke="#374151" stroke-width="1.5"/>
+  <!-- Plataforma ranurada -->
+  <rect x="72" y="36" width="22" height="28" rx="3" fill="#374151" stroke="#1f2937" stroke-width="1.5"/>
+  <!-- Ranures plataforma -->
+  <line x1="76" y1="40" x2="76" y2="60" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="80" y1="40" x2="80" y2="60" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="84" y1="40" x2="84" y2="60" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="88" y1="40" x2="88" y2="60" stroke="#6b7280" stroke-width="1.5"/>
+  <!-- Maneta esquerra (oposat) -->
+  <rect x="20" y="46" width="30" height="8" rx="3" fill="#6b7280" stroke="#374151" stroke-width="1.5"/>
+  <rect x="6" y="36" width="22" height="28" rx="3" fill="#374151" stroke="#1f2937" stroke-width="1.5"/>
+  <!-- Ranures plataforma esquerra -->
+  <line x1="10" y1="40" x2="10" y2="60" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="14" y1="40" x2="14" y2="60" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="18" y1="40" x2="18" y2="60" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="22" y1="40" x2="22" y2="60" stroke="#6b7280" stroke-width="1.5"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PEDAL</text>
+</svg>

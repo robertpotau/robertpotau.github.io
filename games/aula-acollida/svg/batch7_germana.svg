@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="26" r="18" fill="#f5cba7" stroke="#c0835a" stroke-width="2"/>
+  <path d="M32 18 Q32 7 50 7 Q68 7 68 18" fill="#c2410c"/>
+  <path d="M32 18 Q28 36 28 54" stroke="#c2410c" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M68 18 Q72 36 72 54" stroke="#c2410c" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <circle cx="43" cy="25" r="2.5" fill="#333"/>
+  <circle cx="57" cy="25" r="2.5" fill="#333"/>
+  <path d="M43 33 Q50 37 57 33" fill="none" stroke="#c0835a" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M28 44 Q20 46 18 58 L16 90 L84 90 L82 58 Q80 46 72 44Z" fill="#db2777"/>
+  <rect x="40" y="42" width="20" height="8" rx="3" fill="#f5cba7"/>
+  <text x="50" y="98" font-family="Arial,sans-serif" font-size="7.5" fill="#1a1a1a" font-weight="700" text-anchor="middle">GERMANA</text>
+</svg>

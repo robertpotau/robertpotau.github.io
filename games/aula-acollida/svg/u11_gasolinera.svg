@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Sostre de protecció -->
+  <rect x="5" y="14" width="65" height="6" rx="2" fill="#374151"/>
+  <line x1="15" y1="20" x2="15" y2="28" stroke="#374151" stroke-width="3"/>
+  <line x1="60" y1="20" x2="60" y2="28" stroke="#374151" stroke-width="3"/>
+  <!-- Columna principal -->
+  <rect x="22" y="28" width="32" height="54" rx="3" fill="#1f2937" stroke="#374151" stroke-width="1.5"/>
+  <!-- Pantalla digital -->
+  <rect x="26" y="33" width="24" height="16" rx="2" fill="#4ade80"/>
+  <text x="38" y="44" font-family="Arial,sans-serif" font-size="8" fill="#166534" font-weight="700" text-anchor="middle">1.72€</text>
+  <!-- Indicador tipus combustible -->
+  <rect x="26" y="52" width="24" height="8" rx="2" fill="#374151"/>
+  <text x="38" y="58" font-family="Arial,sans-serif" font-size="6" fill="#9ca3af" text-anchor="middle">GASOIL</text>
+  <!-- Nòmol de l'eix de la mànega -->
+  <circle cx="60" cy="52" r="5" fill="#374151" stroke="#6b7280" stroke-width="1.5"/>
+  <!-- Mànega -->
+  <path d="M60 52 Q72 52 76 44 Q80 36 76 30 L74 30 Q78 36 74 44 Q70 52 60 52" fill="none" stroke="#374151" stroke-width="3" stroke-linecap="round"/>
+  <!-- Pistola -->
+  <rect x="64" y="24" width="14" height="8" rx="2" fill="#374151"/>
+  <rect x="70" y="29" width="5" height="8" rx="1" fill="#4b5563"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GASOLINERA</text>
+</svg>

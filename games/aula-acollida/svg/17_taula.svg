@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 95">
+  <!-- vorera superior del tauler (ombra) -->
+  <rect x="5" y="22" width="110" height="8" rx="2" fill="#b45309"/>
+  <!-- tauler principal -->
+  <rect x="5" y="28" width="110" height="15" rx="4" fill="#92400e"/>
+  <!-- potes esquerra -->
+  <rect x="14" y="43" width="12" height="46" rx="3" fill="#78350f"/>
+  <!-- potes dreta -->
+  <rect x="94" y="43" width="12" height="46" rx="3" fill="#78350f"/>
+  <!-- travesser inferior opcional -->
+  <rect x="14" y="76" width="92" height="5" rx="2" fill="#6b3e2a" opacity="0.5"/>
+</svg>

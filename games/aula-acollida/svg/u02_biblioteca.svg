@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Bookshelf frame -->
+  <rect x="8" y="10" width="84" height="75" rx="3" fill="#8B4513"/>
+  <rect x="12" y="14" width="76" height="67" rx="2" fill="#d4a77a"/>
+  <!-- Shelf boards -->
+  <rect x="8" y="37" width="84" height="5" fill="#8B4513"/>
+  <rect x="8" y="61" width="84" height="5" fill="#8B4513"/>
+  <!-- Top shelf books -->
+  <rect x="14" y="16" width="8" height="19" rx="1" fill="#e74c3c"/>
+  <rect x="23" y="18" width="7" height="17" rx="1" fill="#3498db"/>
+  <rect x="31" y="16" width="9" height="19" rx="1" fill="#27ae60"/>
+  <rect x="41" y="19" width="6" height="16" rx="1" fill="#f39c12"/>
+  <rect x="48" y="16" width="8" height="19" rx="1" fill="#9b59b6"/>
+  <rect x="57" y="18" width="7" height="17" rx="1" fill="#e74c3c"/>
+  <rect x="65" y="16" width="9" height="19" rx="1" fill="#1abc9c"/>
+  <rect x="75" y="18" width="7" height="17" rx="1" fill="#e67e22"/>
+  <!-- Middle shelf books -->
+  <rect x="14" y="43" width="9" height="16" rx="1" fill="#3498db"/>
+  <rect x="24" y="41" width="7" height="18" rx="1" fill="#e74c3c"/>
+  <rect x="32" y="43" width="8" height="16" rx="1" fill="#f39c12"/>
+  <rect x="41" y="41" width="6" height="18" rx="1" fill="#27ae60"/>
+  <rect x="48" y="43" width="9" height="16" rx="1" fill="#e74c3c"/>
+  <rect x="58" y="41" width="7" height="18" rx="1" fill="#9b59b6"/>
+  <rect x="66" y="43" width="8" height="16" rx="1" fill="#f1c40f"/>
+  <rect x="75" y="41" width="7" height="18" rx="1" fill="#1abc9c"/>
+  <!-- Bottom shelf books -->
+  <rect x="14" y="67" width="8" height="10" rx="1" fill="#e67e22"/>
+  <rect x="23" y="66" width="9" height="11" rx="1" fill="#3498db"/>
+  <rect x="33" y="67" width="7" height="10" rx="1" fill="#e74c3c"/>
+  <rect x="41" y="66" width="8" height="11" rx="1" fill="#27ae60"/>
+  <rect x="50" y="67" width="7" height="10" rx="1" fill="#9b59b6"/>
+  <rect x="58" y="66" width="9" height="11" rx="1" fill="#f39c12"/>
+  <rect x="68" y="67" width="7" height="10" rx="1" fill="#e74c3c"/>
+  <rect x="76" y="66" width="6" height="11" rx="1" fill="#1abc9c"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">BIBLIOTECA</text>
+</svg>

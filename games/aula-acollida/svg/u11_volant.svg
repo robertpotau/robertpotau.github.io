@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Outer ring -->
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#1e293b" stroke-width="8"/>
+  <!-- Hub center -->
+  <circle cx="50" cy="50" r="10" fill="#374151" stroke="#1e293b" stroke-width="3"/>
+  <!-- Spokes (3) -->
+  <line x1="50" y1="40" x2="50" y2="12" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/>
+  <line x1="41" y1="56" x2="17" y2="72" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/>
+  <line x1="59" y1="56" x2="83" y2="72" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/>
+  <!-- Horn button -->
+  <circle cx="50" cy="50" r="6" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5"/>
+  <!-- Grip texture on outer ring -->
+  <circle cx="50" cy="10" r="4" fill="#374151"/>
+  <circle cx="50" cy="90" r="4" fill="#374151"/>
+  <circle cx="10" cy="50" r="4" fill="#374151"/>
+  <circle cx="90" cy="50" r="4" fill="#374151"/>
+</svg>

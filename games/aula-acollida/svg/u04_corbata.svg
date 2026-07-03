@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Tie knot (top) -->
+  <path d="M43 18 L50 15 L57 18 L54 28 L46 28 Z" fill="#dc2626"/>
+  <!-- Tie body (trapezoid getting wider) -->
+  <path d="M46 27 L54 27 L65 75 L50 80 L35 75 Z" fill="#ef4444"/>
+  <!-- Diagonal stripes -->
+  <line x1="42" y1="32" x2="58" y2="32" stroke="#b91c1c" stroke-width="2.5"/>
+  <line x1="39" y1="40" x2="61" y2="40" stroke="#b91c1c" stroke-width="2.5"/>
+  <line x1="37" y1="48" x2="63" y2="48" stroke="#b91c1c" stroke-width="2.5"/>
+  <line x1="36" y1="56" x2="64" y2="56" stroke="#b91c1c" stroke-width="2.5"/>
+  <line x1="35" y1="64" x2="65" y2="64" stroke="#b91c1c" stroke-width="2.5"/>
+  <line x1="35" y1="72" x2="65" y2="72" stroke="#b91c1c" stroke-width="2.5"/>
+  <!-- Knot detail line -->
+  <line x1="50" y1="22" x2="50" y2="27" stroke="#b91c1c" stroke-width="1"/>
+  <!-- Tip -->
+  <path d="M35 75 L50 80 L65 75 L50 83 Z" fill="#dc2626"/>
+
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CORBATA</text>
+</svg>

@@ -1,0 +1,22 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cua ventall -->
+  <ellipse cx="50" cy="78" rx="12" ry="7" fill="#92400e"/>
+  <!-- Ales esteses - triangles grans -->
+  <polygon points="50,42 10,30 20,55" fill="#92400e"/>
+  <polygon points="50,42 90,30 80,55" fill="#92400e"/>
+  <!-- Cos -->
+  <ellipse cx="50" cy="58" rx="12" ry="18" fill="#92400e"/>
+  <!-- Cap blanc -->
+  <circle cx="50" cy="35" r="12" fill="#f5f5f5"/>
+  <!-- Ull esquerre -->
+  <circle cx="46" cy="33" r="2.5" fill="#1a1a1a"/>
+  <!-- Ull dret -->
+  <circle cx="54" cy="33" r="2.5" fill="#1a1a1a"/>
+  <!-- Bec corbat groc -->
+  <path d="M50,38 Q56,42 52,46" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <polygon points="50,38 56,40 52,45" fill="#fbbf24"/>
+  <!-- Potes -->
+  <line x1="44" y1="72" x2="38" y2="84" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+  <line x1="56" y1="72" x2="62" y2="84" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ÀLIGA</text>
+</svg>

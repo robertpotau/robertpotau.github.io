@@ -1,0 +1,17 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pal de suport -->
+  <rect x="47" y="60" width="6" height="30" rx="2" fill="#6b7280"/>
+  <!-- Base -->
+  <rect x="38" y="88" width="24" height="5" rx="2" fill="#6b7280"/>
+  <!-- Caixa semàfor -->
+  <rect x="33" y="12" width="34" height="52" rx="5" fill="#1f2937"/>
+  <!-- Llum vermella (encesa) -->
+  <circle cx="50" cy="25" r="10" fill="#ef4444"/>
+  <circle cx="50" cy="25" r="6" fill="#ff6b6b" opacity="0.4"/>
+  <!-- Llum groga (apagada) -->
+  <circle cx="50" cy="40" r="10" fill="#6b7280"/>
+  <!-- Llum verda (apagada) -->
+  <circle cx="50" cy="55" r="10" fill="#6b7280"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">SEMÀFOR</text>
+</svg>

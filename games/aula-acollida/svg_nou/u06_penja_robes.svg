@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="pjr_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#pjr_bg)"/>
+  <ellipse cx="50" cy="90" rx="22" ry="3.5" fill="#0f172a" opacity=".1"/>
+  <rect x="46" y="14" width="7" height="74" rx="3" fill="#92400e"/>
+  <rect x="46" y="14" width="3" height="74" fill="#b45309"/>
+  <path d="M30 86 l19 -10 l20 10" fill="none" stroke="#78350f" stroke-width="5" stroke-linecap="round"/>
+  <path d="M49 16 q-14 2 -16 12" fill="none" stroke="#78350f" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="32" cy="30" r="3" fill="#57534e"/>
+  <path d="M51 16 q14 2 16 12" fill="none" stroke="#78350f" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="68" cy="30" r="3" fill="#57534e"/>
+  <path d="M49 30 q-10 1 -12 9" fill="none" stroke="#78350f" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="36" cy="41" r="2.6" fill="#57534e"/>
+  <path d="M33 32 q-7 4 -6 14 q0 14 5 22 h10 q4 -10 3 -24 q-4 -8 -12 -12" fill="#dc2626"/>
+  <path d="M33 32 q-7 4 -6 14 q0 14 5 22 h4 q-3 -12 -2 -24 q-1 -7 -1 -12" fill="#ef4444"/>
+  <g transform="rotate(14 68 44)">
+    <path d="M68 32 q-2 -4 2 -5 q4 -1 4 3" fill="none" stroke="#475569" stroke-width="2"/>
+    <path d="M58 48 q10 -12 20 0 l-2 16 h-16 z" fill="#2563eb"/>
+    <path d="M58 48 q5 -6 10 -6 l-1 22 h-7 z" fill="#3b82f6"/>
+  </g>
+</svg>

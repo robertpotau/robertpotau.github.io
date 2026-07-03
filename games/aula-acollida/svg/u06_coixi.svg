@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Coixí principal - forma ovalada/rectangular amb vores suaus -->
+  <rect x="12" y="28" width="76" height="44" rx="22" fill="white"/>
+  <rect x="12" y="28" width="76" height="44" rx="22" fill="none" stroke="#c8b898" stroke-width="2.5"/>
+  <!-- Funda - costura decorativa -->
+  <rect x="18" y="34" width="64" height="32" rx="16" fill="none" stroke="#e0d8cc" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- Ressalt central per efecte 3D -->
+  <ellipse cx="50" cy="50" rx="20" ry="10" fill="white" opacity="0.5"/>
+  <!-- Botons als extrems -->
+  <circle cx="20" cy="50" r="3" fill="#ddd"/>
+  <circle cx="80" cy="50" r="3" fill="#ddd"/>
+</svg>

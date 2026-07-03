@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- coberta darrere (blau fosc) -->
+  <rect x="48" y="8" width="44" height="82" rx="4" fill="#1e40af"/>
+  <!-- llom -->
+  <rect x="42" y="8" width="10" height="82" rx="2" fill="#1e3a8a"/>
+  <!-- coberta davant (blau) -->
+  <rect x="8" y="8" width="40" height="82" rx="4" fill="#2563eb"/>
+  <!-- pàgines (interior) -->
+  <rect x="13" y="14" width="30" height="70" fill="white"/>
+  <!-- ratllat visible -->
+  <line x1="17" y1="28" x2="39" y2="28" stroke="#dbeafe" stroke-width="1.5"/>
+  <line x1="17" y1="38" x2="39" y2="38" stroke="#dbeafe" stroke-width="1.5"/>
+  <line x1="17" y1="48" x2="39" y2="48" stroke="#dbeafe" stroke-width="1.5"/>
+  <line x1="17" y1="58" x2="39" y2="58" stroke="#dbeafe" stroke-width="1.5"/>
+  <line x1="17" y1="68" x2="39" y2="68" stroke="#dbeafe" stroke-width="1.5"/>
+  <!-- títol a la coberta -->
+  <rect x="12" y="18" width="32" height="5" rx="1" fill="#93c5fd" opacity="0.5"/>
+</svg>

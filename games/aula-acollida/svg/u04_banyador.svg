@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Swimming shorts / trunks -->
+  <!-- Waistband -->
+  <rect x="14" y="18" width="72" height="10" rx="4" fill="#0369a1" stroke="#075985" stroke-width="2"/>
+  <!-- Drawstring -->
+  <path d="M40 24 Q50 28 60 24" fill="none" stroke="#7dd3fc" stroke-width="2" stroke-linecap="round"/>
+  <line x1="46" y1="28" x2="44" y2="36" stroke="#7dd3fc" stroke-width="2" stroke-linecap="round"/>
+  <line x1="54" y1="28" x2="56" y2="36" stroke="#7dd3fc" stroke-width="2" stroke-linecap="round"/>
+  <!-- Main shorts body -->
+  <path d="M14 26 L14 68 Q14 74 20 76 Q28 78 36 76 L50 56 L64 76 Q72 78 80 76 Q86 74 86 68 L86 26 Z" fill="#0ea5e9" stroke="#075985" stroke-width="2"/>
+  <!-- Center seam -->
+  <line x1="50" y1="26" x2="50" y2="56" stroke="#075985" stroke-width="2" stroke-dasharray="4,2"/>
+  <!-- Wave pattern decoration -->
+  <path d="M20 40 Q26 36 32 40 Q38 44 44 40 Q50 36 56 40 Q62 44 68 40 Q74 36 80 40" fill="none" stroke="#7dd3fc" stroke-width="2" stroke-linecap="round"/>
+  <path d="M20 52 Q26 48 32 52 Q38 56 44 52 Q50 48 56 52 Q62 56 68 52 Q74 48 80 52" fill="none" stroke="#7dd3fc" stroke-width="2" stroke-linecap="round"/>
+</svg>

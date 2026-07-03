@@ -1,0 +1,42 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cap -->
+  <circle cx="50" cy="20" r="10" fill="#f5cba7" stroke="#c0835a" stroke-width="1.2"/>
+  <!-- Cabell -->
+  <ellipse cx="50" cy="13" rx="10" ry="5" fill="#92400e"/>
+  <!-- Cuell -->
+  <rect x="46" y="28" width="8" height="5" fill="#f5cba7"/>
+  <!-- Uniforme base -->
+  <rect x="36" y="32" width="28" height="22" rx="3" fill="#374151"/>
+  <!-- Davantal negre -->
+  <rect x="39" y="32" width="22" height="22" rx="2" fill="#1f2937"/>
+  <!-- Coll davantal -->
+  <rect x="45" y="31" width="10" height="3" rx="1" fill="#1f2937"/>
+  <!-- Braç esquerre amb pentinall -->
+  <rect x="24" y="33" width="12" height="8" rx="3" fill="#374151"/>
+  <!-- Pentinall a la mà esquerra -->
+  <rect x="12" y="29" width="14" height="5" rx="1" fill="#94a3b8"/>
+  <line x1="14" y1="34" x2="14" y2="38" stroke="#94a3b8" stroke-width="1.2"/>
+  <line x1="17" y1="34" x2="17" y2="39" stroke="#94a3b8" stroke-width="1.2"/>
+  <line x1="20" y1="34" x2="20" y2="38" stroke="#94a3b8" stroke-width="1.2"/>
+  <line x1="23" y1="34" x2="23" y2="38" stroke="#94a3b8" stroke-width="1.2"/>
+  <!-- Braç dret amb tisores -->
+  <rect x="64" y="33" width="12" height="8" rx="3" fill="#374151"/>
+  <!-- Tisores a la mà dreta -->
+  <line x1="76" y1="26" x2="86" y2="20" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="76" y1="26" x2="88" y2="28" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="77" cy="27" r="2.5" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <circle cx="83" cy="22" r="2" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <circle cx="85" cy="28" r="2" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <!-- Mirall ovalat al costat -->
+  <ellipse cx="88" cy="48" rx="8" ry="11" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <ellipse cx="88" cy="48" rx="6" ry="9" fill="#e0f2fe" opacity="0.5"/>
+  <rect x="85" y="59" width="6" height="4" rx="1" fill="#94a3b8"/>
+  <!-- Cames -->
+  <rect x="36" y="54" width="12" height="18" rx="2" fill="#1f2937"/>
+  <rect x="52" y="54" width="12" height="18" rx="2" fill="#1f2937"/>
+  <!-- Sabates -->
+  <rect x="35" y="70" width="14" height="4" rx="2" fill="#111827"/>
+  <rect x="51" y="70" width="14" height="4" rx="2" fill="#111827"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PERRUQUER</text>
+</svg>

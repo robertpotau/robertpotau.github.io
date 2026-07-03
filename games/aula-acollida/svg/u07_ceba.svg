@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Onion body layers (outermost) -->
+  <ellipse cx="50" cy="60" rx="28" ry="25" fill="#7e22ce"/>
+  <!-- Layer 2 -->
+  <ellipse cx="50" cy="60" rx="23" ry="20" fill="#9333ea" opacity="0.7"/>
+  <!-- Layer 3 (inner visible) -->
+  <ellipse cx="50" cy="60" rx="17" ry="15" fill="#a855f7" opacity="0.7"/>
+  <!-- Layer lines on outside -->
+  <path d="M28 50 Q26 60 30 72" stroke="#6b21a8" stroke-width="1.5" fill="none"/>
+  <path d="M72 50 Q74 60 70 72" stroke="#6b21a8" stroke-width="1.5" fill="none"/>
+  <path d="M22 60 Q24 68 28 74" stroke="#6b21a8" stroke-width="1" fill="none"/>
+  <path d="M78 60 Q76 68 72 74" stroke="#6b21a8" stroke-width="1" fill="none"/>
+  <!-- Root fibers at bottom -->
+  <line x1="44" y1="83" x2="42" y2="88" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="48" y1="84" x2="47" y2="90" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="50" y1="84" x2="50" y2="90" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="52" y1="84" x2="53" y2="90" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="56" y1="83" x2="58" y2="88" stroke="#d1d5db" stroke-width="1"/>
+  <!-- Green stems at top -->
+  <path d="M44 36 Q43 25 42 18" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M50 35 Q50 24 51 16" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M56 36 Q57 25 58 18" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Neck of onion -->
+  <ellipse cx="50" cy="37" rx="10" ry="5" fill="#6b21a8"/>
+  <!-- Highlight -->
+  <ellipse cx="38" cy="50" rx="7" ry="9" fill="#c084fc" opacity="0.4"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CEBA</text>
+</svg>

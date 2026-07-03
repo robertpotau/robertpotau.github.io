@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" fill="#fff7ed" rx="12"/>
+  <!-- Body curved arc -->
+  <path d="M30 25 Q15 50 25 72 Q35 85 50 85 Q65 85 72 72" fill="#f97316" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Body fill second pass for thickness -->
+  <path d="M36 22 Q20 50 30 74 Q40 88 52 87 Q66 86 74 74 Q66 80 52 80 Q40 80 32 70 Q22 52 36 28 Z" fill="#fb923c" stroke="none"/>
+  <!-- Tail fan -->
+  <ellipse cx="72" cy="70" rx="8" ry="4" fill="#fdba74" stroke="#ea580c" stroke-width="1.5" transform="rotate(-30 72 70)"/>
+  <ellipse cx="76" cy="67" rx="7" ry="3.5" fill="#fb923c" stroke="#ea580c" stroke-width="1.5" transform="rotate(-50 76 67)"/>
+  <ellipse cx="70" cy="74" rx="7" ry="3.5" fill="#fdba74" stroke="#ea580c" stroke-width="1.5" transform="rotate(-10 70 74)"/>
+  <!-- Head -->
+  <circle cx="30" cy="26" r="8" fill="#f97316" stroke="#ea580c" stroke-width="2"/>
+  <!-- Eye -->
+  <circle cx="28" cy="24" r="2.5" fill="black"/>
+  <circle cx="27" cy="23" r="1" fill="white"/>
+  <!-- Antennae -->
+  <path d="M26 20 Q18 12 10 8" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M28 20 Q24 10 22 4" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Legs -->
+  <line x1="38" y1="40" x2="32" y2="50" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="40" y1="50" x2="34" y2="60" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="42" y1="60" x2="36" y2="70" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GAMBA</text>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Thigh -->
+  <path d="M30 5 Q20 8 18 40 Q18 52 28 54 Q38 56 42 54 Q52 52 52 40 Q50 8 42 5 Z" fill="#f5cba7" stroke="#c0835a" stroke-width="2.5"/>
+  <!-- Knee area -->
+  <ellipse cx="35" cy="55" rx="14" ry="10" fill="#f0b887" stroke="#c0835a" stroke-width="2"/>
+  <!-- Calf -->
+  <path d="M21 58 Q18 76 22 92 Q26 98 35 98 Q44 98 48 92 Q52 76 49 58 Z" fill="#f5cba7" stroke="#c0835a" stroke-width="2.5"/>
+  <!-- Highlight -->
+  <path d="M24 12 Q21 30 21 48" stroke="#e8a87c" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <!-- Label -->
+  <text x="62" y="30" font-family="Arial,sans-serif" font-size="9" fill="#92400e" font-weight="700">cama</text>
+  <line x1="53" y1="28" x2="60" y2="28" stroke="#92400e" stroke-width="1.5"/>
+</svg>

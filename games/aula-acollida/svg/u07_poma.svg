@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Ombra -->
+  <ellipse cx="50" cy="93" rx="22" ry="5" fill="#a0aec0" opacity="0.3"/>
+  <!-- Cos de la poma -->
+  <path d="M50 28 C72 26 82 42 80 60 C78 76 66 90 50 90 C34 90 22 76 20 60 C18 42 28 26 50 28 Z" fill="#e53e3e"/>
+  <!-- Reflexos -->
+  <ellipse cx="38" cy="42" rx="9" ry="14" fill="white" opacity="0.25" transform="rotate(-20 38 42)"/>
+  <!-- Divisió baixa (forma poma) -->
+  <path d="M50 90 Q45 82 42 80" fill="none" stroke="#c0392b" stroke-width="1.5" opacity="0.4"/>
+  <path d="M50 90 Q55 82 58 80" fill="none" stroke="#c0392b" stroke-width="1.5" opacity="0.4"/>
+  <!-- Sot superior -->
+  <path d="M44 30 Q50 22 56 30" fill="none" stroke="#c0392b" stroke-width="2"/>
+  <!-- Tija -->
+  <line x1="50" y1="22" x2="53" y2="12" stroke="#7b3f00" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Fulla -->
+  <path d="M53 14 Q68 6 64 22 Q56 17 53 14 Z" fill="#27ae60"/>
+  <line x1="53" y1="14" x2="64" y2="22" stroke="#1e8449" stroke-width="1.2"/>
+</svg>

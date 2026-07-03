@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="gua_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#gua_bg)"/>
+  <ellipse cx="50" cy="90" rx="26" ry="3.5" fill="#0f172a" opacity=".1"/>
+  <circle cx="50" cy="30" r="11" fill="#fcd9b8"/>
+  <path d="M38 26 q1 -9 12 -9 q11 0 12 9 l1 3 h-26 z" fill="#1e40af"/>
+  <rect x="36" y="27" width="28" height="4" rx="2" fill="#1e3a8a"/>
+  <circle cx="50" cy="22" r="2" fill="#fbbf24"/>
+  <circle cx="46" cy="32" r="1.5" fill="#1e293b"/><circle cx="54" cy="32" r="1.5" fill="#1e293b"/>
+  <path d="M47 37 q3 2 6 0" stroke="#92400e" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+  <path d="M36 88 q-2 -30 14 -30 q16 0 14 30 z" fill="#1e40af"/>
+  <path d="M36 88 q-2 -30 14 -30 q5 0 8 3.5 l-8 10 z" fill="#2563eb"/>
+  <path d="M38 64 h24" stroke="#fbbf24" stroke-width="2.5" opacity=".9"/>
+  <rect x="46" y="70" width="8" height="8" rx="1.5" fill="#fbbf24"/>
+  <path d="M62 62 q8 -6 8 -16" stroke="#fcd9b8" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <circle cx="70" cy="40" r="5" fill="#f8fafc"/>
+  <path d="M68 40 l1.6 1.6 l3 -3" stroke="#16a34a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <path d="M38 62 q-8 4 -9 14" stroke="#fcd9b8" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <path d="M26 80 q-5 -2 -4 -8" stroke="#dc2626" stroke-width="0"/>
+  <rect x="22" y="76" width="9" height="12" rx="2" fill="#dc2626"/>
+  <circle cx="26.5" cy="80" r="2" fill="#fef3c7"/>
+</svg>

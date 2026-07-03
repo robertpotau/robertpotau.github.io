@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Far de cotxe (headlight) - vista lleugerament angular -->
+  <!-- Carcassa exterior del far -->
+  <path d="M8 34 Q10 21 38 19 L78 21 Q92 23 92 40 L90 63 Q88 73 58 75 L14 71 Q6 66 6 54 Z"
+        fill="#111827" stroke="#374151" stroke-width="2"/>
+  <!-- Anell de crom al voltant de la lent -->
+  <ellipse cx="58" cy="46" rx="22" ry="17" fill="#9ca3af" stroke="#6b7280" stroke-width="1.5"/>
+  <!-- Lent principal (vidre groc clar) -->
+  <ellipse cx="58" cy="46" rx="18" ry="14" fill="#fef9c3"/>
+  <!-- Font lluminosa central -->
+  <ellipse cx="58" cy="46" rx="10" ry="8" fill="#fef08a"/>
+  <ellipse cx="56" cy="44" rx="5" ry="3.5" fill="white" opacity="0.75"/>
+  <!-- Llum de posició / DRL (franja taronja) -->
+  <path d="M12 28 Q12 22 23 21 L44 22 L43 31 L23 31 Q11 32 12 28 Z" fill="#fb923c" stroke="#ea580c" stroke-width="1"/>
+  <!-- Raigs de llum projecats -->
+  <line x1="91" y1="36" x2="99" y2="29" stroke="#fef08a" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <line x1="91" y1="44" x2="100" y2="42" stroke="#fef08a" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <line x1="91" y1="53" x2="99" y2="58" stroke="#fef08a" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Forquilla vista de front -->
+  <!-- Mànec llarg cilíndric -->
+  <rect x="44" y="45" width="12" height="48" rx="5" fill="#94a3b8"/>
+  <rect x="45" y="46" width="4" height="46" rx="3" fill="#b8c5d1" opacity="0.5"/>
+  <!-- Base pues -->
+  <rect x="40" y="30" width="20" height="18" rx="3" fill="#94a3b8"/>
+  <!-- 4 pues -->
+  <rect x="41" y="10" width="4" height="23" rx="2" fill="#94a3b8"/>
+  <rect x="47" y="8" width="4" height="25" rx="2" fill="#94a3b8"/>
+  <rect x="53" y="8" width="4" height="25" rx="2" fill="#94a3b8"/>
+  <rect x="59" y="10" width="4" height="23" rx="2" fill="#94a3b8"/>
+  <!-- Detalls pues -->
+  <rect x="42" y="10" width="1.5" height="20" rx="1" fill="#b8c5d1" opacity="0.5"/>
+  <rect x="48" y="8" width="1.5" height="22" rx="1" fill="#b8c5d1" opacity="0.5"/>
+  <!-- Separadors entre pues -->
+  <rect x="45" y="32" width="2" height="14" rx="1" fill="#6b7280"/>
+  <rect x="51" y="32" width="2" height="14" rx="1" fill="#6b7280"/>
+  <rect x="57" y="32" width="2" height="14" rx="1" fill="#6b7280"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">FORQUILLA</text>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Blackboard -->
+  <rect x="50" y="15" width="38" height="26" rx="2" fill="#166534" stroke="#14532d" stroke-width="1.5"/>
+  <line x1="54" y1="22" x2="80" y2="22" stroke="white" stroke-width="1.5" opacity="0.8"/>
+  <line x1="54" y1="28" x2="74" y2="28" stroke="white" stroke-width="1.5" opacity="0.8"/>
+  <line x1="54" y1="34" x2="78" y2="34" stroke="white" stroke-width="1.5" opacity="0.8"/>
+  <!-- Body -->
+  <rect x="22" y="50" width="22" height="28" rx="3" fill="#1d4ed8"/>
+  <!-- Head -->
+  <circle cx="33" cy="38" r="12" fill="#fcd34d"/>
+  <!-- Hair -->
+  <path d="M21 34 Q21 24 33 24 Q45 24 45 34" fill="#374151"/>
+  <!-- Glasses -->
+  <circle cx="29" cy="38" r="4" fill="none" stroke="#374151" stroke-width="1.5"/>
+  <circle cx="37" cy="38" r="4" fill="none" stroke="#374151" stroke-width="1.5"/>
+  <line x1="33" y1="38" x2="33" y2="38" stroke="#374151" stroke-width="1.5"/>
+  <line x1="25" y1="38" x2="22" y2="37" stroke="#374151" stroke-width="1.5"/>
+  <line x1="41" y1="38" x2="44" y2="37" stroke="#374151" stroke-width="1.5"/>
+  <!-- Mouth -->
+  <path d="M29 43 Q33 46 37 43" stroke="#92400e" stroke-width="1.5" fill="none"/>
+  <!-- Arm pointing -->
+  <line x1="44" y1="55" x2="62" y2="38" stroke="#1d4ed8" stroke-width="4" stroke-linecap="round"/>
+  <!-- Pointer hand -->
+  <circle cx="64" cy="37" r="3" fill="#fcd34d"/>
+  <!-- Legs -->
+  <rect x="22" y="78" width="9" height="8" rx="2" fill="#1e3a8a"/>
+  <rect x="35" y="78" width="9" height="8" rx="2" fill="#1e3a8a"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="7" fill="#1e1b4b" font-weight="700" text-anchor="middle">PROFESSOR</text>
+</svg>

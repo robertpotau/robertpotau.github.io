@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Sky -->
+  <rect x="0" y="0" width="100" height="100" fill="#dbeafe"/>
+  <!-- Building -->
+  <rect x="3" y="25" width="94" height="60" rx="2" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+  <!-- Roof band -->
+  <rect x="3" y="25" width="94" height="10" rx="2" fill="#1d4ed8"/>
+  <!-- Sign -->
+  <text x="50" y="33" font-family="Arial,sans-serif" font-size="7.5" fill="white" font-weight="700" text-anchor="middle">SUPERMERCAT</text>
+  <!-- Large glass windows -->
+  <rect x="8" y="40" width="25" height="22" rx="1" fill="#bae6fd" stroke="#93c5fd" stroke-width="0.8"/>
+  <line x1="20.5" y1="40" x2="20.5" y2="62" stroke="#93c5fd" stroke-width="0.5"/>
+  <rect x="37" y="40" width="26" height="22" rx="1" fill="#bae6fd" stroke="#93c5fd" stroke-width="0.8"/>
+  <line x1="50" y1="40" x2="50" y2="62" stroke="#93c5fd" stroke-width="0.5"/>
+  <rect x="67" y="40" width="25" height="22" rx="1" fill="#bae6fd" stroke="#93c5fd" stroke-width="0.8"/>
+  <line x1="79.5" y1="40" x2="79.5" y2="62" stroke="#93c5fd" stroke-width="0.5"/>
+  <!-- Main entrance door -->
+  <rect x="37" y="62" width="26" height="23" rx="1" fill="#1d4ed8" opacity="0.7"/>
+  <rect x="37" y="62" width="26" height="23" rx="1" fill="#bae6fd" opacity="0.5"/>
+  <!-- Shopping cart in front -->
+  <!-- Cart body -->
+  <rect x="13" y="70" width="14" height="10" rx="1" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <!-- Cart front grid lines -->
+  <line x1="17" y1="70" x2="17" y2="80" stroke="#94a3b8" stroke-width="0.7"/>
+  <line x1="21" y1="70" x2="21" y2="80" stroke="#94a3b8" stroke-width="0.7"/>
+  <line x1="13" y1="74" x2="27" y2="74" stroke="#94a3b8" stroke-width="0.7"/>
+  <!-- Cart handle -->
+  <line x1="13" y1="71" x2="10" y2="68" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="10" y1="68" x2="10" y2="65" stroke="#94a3b8" stroke-width="1.5"/>
+  <!-- Cart wheels -->
+  <circle cx="16" cy="81" r="2" fill="#64748b"/>
+  <circle cx="24" cy="81" r="2" fill="#64748b"/>
+  <!-- Cart bar connector -->
+  <line x1="27" y1="75" x2="30" y2="75" stroke="#94a3b8" stroke-width="1.5"/>
+  <!-- Pavement -->
+  <rect x="3" y="83" width="94" height="2" fill="#94a3b8"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">SUPERMERCAT</text>
+</svg>

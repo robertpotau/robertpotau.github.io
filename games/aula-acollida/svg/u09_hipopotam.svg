@@ -1,0 +1,37 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cua -->
+  <path d="M80 68 Q90 65 88 75" stroke="#94a3b8" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Cos massís -->
+  <ellipse cx="50" cy="66" rx="33" ry="20" fill="#94a3b8"/>
+  <!-- Potes curtes -->
+  <rect x="22" y="80" width="11" height="11" rx="4" fill="#94a3b8"/>
+  <rect x="35" y="82" width="11" height="10" rx="4" fill="#94a3b8"/>
+  <rect x="54" y="82" width="11" height="10" rx="4" fill="#94a3b8"/>
+  <rect x="67" y="80" width="11" height="11" rx="4" fill="#94a3b8"/>
+  <!-- Cap gran rectangular -->
+  <rect x="14" y="45" width="38" height="28" rx="8" fill="#94a3b8"/>
+  <!-- Boca gran -->
+  <path d="M16 66 Q33 80 50 66" fill="#fda4af"/>
+  <!-- Ullals -->
+  <rect x="22" y="68" width="5" height="10" rx="2" fill="white"/>
+  <rect x="40" y="68" width="5" height="10" rx="2" fill="white"/>
+  <!-- Narius -->
+  <ellipse cx="26" cy="50" rx="4" ry="3" fill="#7b8fa3"/>
+  <ellipse cx="38" cy="50" rx="4" ry="3" fill="#7b8fa3"/>
+  <circle cx="26" cy="50" r="1.5" fill="#1a1a1a"/>
+  <circle cx="38" cy="50" r="1.5" fill="#1a1a1a"/>
+  <!-- Orelles petites -->
+  <ellipse cx="16" cy="44" rx="5" ry="4" fill="#94a3b8"/>
+  <ellipse cx="16" cy="44" rx="3" ry="2.5" fill="#fda4af"/>
+  <ellipse cx="50" cy="44" rx="5" ry="4" fill="#94a3b8"/>
+  <ellipse cx="50" cy="44" rx="3" ry="2.5" fill="#fda4af"/>
+  <!-- Ulls -->
+  <ellipse cx="24" cy="56" rx="4" ry="4" fill="#e2e8f0"/>
+  <circle cx="24" cy="56" r="2.5" fill="#1a1a1a"/>
+  <circle cx="23" cy="55" r="0.8" fill="white"/>
+  <ellipse cx="42" cy="56" rx="4" ry="4" fill="#e2e8f0"/>
+  <circle cx="42" cy="56" r="2.5" fill="#1a1a1a"/>
+  <circle cx="41" cy="55" r="0.8" fill="white"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">HIPOP.</text>
+</svg>

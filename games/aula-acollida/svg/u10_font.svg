@@ -1,0 +1,22 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Base de pedra (exterior) -->
+  <ellipse cx="50" cy="72" rx="38" ry="12" fill="#94a3b8"/>
+  <!-- Aigua a la base -->
+  <ellipse cx="50" cy="70" rx="34" ry="9" fill="#3b82f6"/>
+  <!-- Reflexos d'aigua -->
+  <ellipse cx="44" cy="69" rx="8" ry="3" fill="#93c5fd" opacity="0.6"/>
+  <!-- Columna central -->
+  <rect x="46" y="38" width="8" height="34" rx="3" fill="#94a3b8"/>
+  <!-- Tassa/got central -->
+  <ellipse cx="50" cy="42" rx="14" ry="6" fill="#94a3b8"/>
+  <ellipse cx="50" cy="39" rx="12" ry="4" fill="#60a5fa"/>
+  <!-- Raig d'aigua amunt -->
+  <ellipse cx="50" cy="20" rx="3" ry="18" fill="#93c5fd" opacity="0.8"/>
+  <!-- Gotes laterals del raig -->
+  <ellipse cx="44" cy="28" rx="2" ry="10" fill="#93c5fd" opacity="0.5" transform="rotate(-20 44 28)"/>
+  <ellipse cx="56" cy="28" rx="2" ry="10" fill="#93c5fd" opacity="0.5" transform="rotate(20 56 28)"/>
+  <!-- Punta del raig -->
+  <ellipse cx="50" cy="8" rx="3" ry="5" fill="#bfdbfe"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">FONT</text>
+</svg>

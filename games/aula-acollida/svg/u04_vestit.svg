@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Straps -->
+  <rect x="33" y="6" width="8" height="20" rx="4" fill="#ec4899" stroke="#be185d" stroke-width="1.5"/>
+  <rect x="59" y="6" width="8" height="20" rx="4" fill="#ec4899" stroke="#be185d" stroke-width="1.5"/>
+  <!-- Bodice -->
+  <path d="M26 24 Q26 18 33 16 L33 26 Q26 30 24 38 L22 50 L78 50 L76 38 Q74 30 67 26 L67 16 Q74 18 74 24 Z" fill="#ec4899" stroke="#be185d" stroke-width="2"/>
+  <!-- Waist -->
+  <rect x="22" y="48" width="56" height="8" rx="2" fill="#be185d"/>
+  <!-- Skirt (flared) -->
+  <path d="M22 54 L6 94 Q50 100 94 94 L78 54 Z" fill="#f9a8d4" stroke="#be185d" stroke-width="2"/>
+  <!-- Skirt details (layers) -->
+  <path d="M14 74 Q50 80 86 74" fill="none" stroke="#ec4899" stroke-width="1.5"/>
+  <!-- Hem -->
+  <path d="M6 94 Q50 101 94 94" fill="none" stroke="#be185d" stroke-width="2"/>
+</svg>

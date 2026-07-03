@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Steak shape -->
+  <path d="M18 40 Q14 30 24 22 Q36 14 52 16 Q70 18 78 30 Q86 42 82 58 Q78 72 64 78 Q48 84 34 78 Q18 70 16 56 Q14 46 18 40 Z" fill="#c2410c" stroke="#7c2d12" stroke-width="2.5"/>
+  <!-- Fat marbling -->
+  <path d="M28 36 Q36 30 44 36 Q40 40 32 42 Z" fill="#fde68a" opacity="0.8"/>
+  <path d="M54 26 Q62 22 68 28 Q64 32 56 32 Z" fill="#fde68a" opacity="0.8"/>
+  <path d="M60 50 Q70 46 74 54 Q68 58 62 56 Z" fill="#fde68a" opacity="0.6"/>
+  <!-- Bone -->
+  <path d="M26 60 Q22 70 28 74 Q32 76 34 72 Q36 74 34 78 Q38 80 40 76 Q44 72 40 68 Q46 62 42 56 Z" fill="#fefce8" stroke="#d97706" stroke-width="1.5"/>
+  <!-- Grill marks -->
+  <path d="M38 44 Q50 38 62 44" fill="none" stroke="#7c2d12" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <path d="M36 54 Q48 48 60 54" fill="none" stroke="#7c2d12" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+</svg>

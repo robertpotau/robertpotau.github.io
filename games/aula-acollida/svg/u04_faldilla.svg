@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Waistband -->
+  <rect x="20" y="14" width="60" height="14" rx="4" fill="#7c3aed" stroke="#5b21b6" stroke-width="2"/>
+  <!-- Skirt body (A-line) -->
+  <path d="M20 26 L8 90 Q50 96 92 90 L80 26 Z" fill="#8b5cf6" stroke="#5b21b6" stroke-width="2.5"/>
+  <!-- Belt buckle detail -->
+  <rect x="44" y="17" width="12" height="8" rx="2" fill="#a78bfa" stroke="#5b21b6" stroke-width="1.5"/>
+  <!-- Fold/pleat line -->
+  <line x1="50" y1="28" x2="46" y2="90" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- Hem curve -->
+  <path d="M8 90 Q50 98 92 90" fill="none" stroke="#5b21b6" stroke-width="2"/>
+</svg>

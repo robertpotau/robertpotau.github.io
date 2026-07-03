@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Left boot -->
+  <!-- Shaft/canya -->
+  <rect x="12" y="18" width="20" height="38" rx="3" fill="#92400e"/>
+  <!-- Toe box -->
+  <path d="M10 52 Q10 62 14 64 L38 64 Q42 62 42 56 L32 56 L32 52 Z" fill="#92400e"/>
+  <!-- Sole -->
+  <path d="M9 61 Q9 68 14 68 L38 68 Q43 66 43 62 L10 62 Z" fill="#1f2937"/>
+  <!-- Sole bottom edge -->
+  <rect x="9" y="66" width="34" height="3" rx="1" fill="#1f2937"/>
+  <!-- Zipper line -->
+  <line x1="22" y1="20" x2="22" y2="52" stroke="#78350f" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <!-- Zipper pull -->
+  <rect x="19" y="32" width="6" height="3" rx="1" fill="#d97706"/>
+
+  <!-- Right boot -->
+  <rect x="58" y="18" width="20" height="38" rx="3" fill="#92400e"/>
+  <path d="M56 52 Q56 62 60 64 L84 64 Q88 62 88 56 L78 56 L78 52 Z" fill="#92400e"/>
+  <path d="M55 61 Q55 68 60 68 L84 68 Q89 66 89 62 L56 62 Z" fill="#1f2937"/>
+  <rect x="55" y="66" width="34" height="3" rx="1" fill="#1f2937"/>
+  <line x1="68" y1="20" x2="68" y2="52" stroke="#78350f" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <rect x="65" y="32" width="6" height="3" rx="1" fill="#d97706"/>
+
+  <!-- Top cuff decorations -->
+  <rect x="12" y="18" width="20" height="5" rx="2" fill="#78350f"/>
+  <rect x="58" y="18" width="20" height="5" rx="2" fill="#78350f"/>
+
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">BOTES</text>
+</svg>

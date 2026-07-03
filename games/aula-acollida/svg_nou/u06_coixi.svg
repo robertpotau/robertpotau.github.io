@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="cox_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fdf2f8"/><stop offset="1" stop-color="#fce7f3"/></linearGradient>
+  <linearGradient id="cox_tela" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e0e7ff"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#cox_bg)"/>
+  <ellipse cx="50" cy="80" rx="32" ry="5" fill="#0f172a" opacity=".08"/>
+  <path d="M18 32 q-4 -8 5 -7 q26 -6 54 0 q9 -1 5 7 q5 18 0 36 q4 8 -5 7 q-28 6 -54 0 q-9 1 -5 -7 q-5 -18 0 -36" fill="url(#cox_tela)" stroke="#c7d2fe" stroke-width="1.5"/>
+  <path d="M26 38 q24 -6 48 0 M26 62 q24 6 48 0" stroke="#e0e7ff" stroke-width="2" fill="none"/>
+  <circle cx="50" cy="50" r="3" fill="#c7d2fe"/>
+  <path d="M30 46 q4 -3 8 0 M62 46 q4 -3 8 0 M46 60 q4 3 8 0" stroke="#ddd6fe" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0"/>
+  <path d="M18 32 q6 5 10 12 M82 32 q-6 5 -10 12 M18 68 q6 -5 10 -12 M82 68 q-6 -5 -10 -12" stroke="#e0e7ff" stroke-width="1.6" fill="none"/>
+</svg>

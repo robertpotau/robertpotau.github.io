@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Scarf wrapped around neck area -->
+  <!-- Main loop -->
+  <path d="M20 38 Q16 50 20 62 Q24 74 34 76 Q46 78 54 72 Q64 66 68 54 Q72 42 66 32 Q60 22 50 20 Q38 18 30 26 Q22 32 20 38 Z" fill="#ef4444" stroke="#b91c1c" stroke-width="2.5"/>
+  <!-- Inner hole -->
+  <path d="M30 44 Q28 52 32 60 Q36 66 44 66 Q54 64 58 56 Q62 48 58 40 Q54 32 46 30 Q36 30 30 38 Z" fill="#dc2626"/>
+  <!-- Hanging end left -->
+  <path d="M20 50 Q10 56 8 68 Q8 78 14 82 Q20 84 24 80 Q28 76 26 64 Q24 56 20 50 Z" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+  <!-- Fringe left -->
+  <line x1="10" y1="82" x2="9" y2="92" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/>
+  <line x1="14" y1="83" x2="13" y2="93" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/>
+  <line x1="18" y1="83" x2="18" y2="93" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/>
+  <line x1="22" y1="83" x2="22" y2="93" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/>
+  <!-- Stripe texture -->
+  <path d="M22 40 Q36 36 50 40" fill="none" stroke="#fca5a5" stroke-width="2" stroke-linecap="round"/>
+  <path d="M24 50 Q38 46 52 50" fill="none" stroke="#fca5a5" stroke-width="2" stroke-linecap="round"/>
+  <path d="M22 60 Q36 56 50 60" fill="none" stroke="#fca5a5" stroke-width="2" stroke-linecap="round"/>
+</svg>

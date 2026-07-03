@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Red angry background pulse -->
+  <circle cx="50" cy="45" r="35" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+  <!-- Angry face -->
+  <circle cx="50" cy="45" r="26" fill="#ffd68a" stroke="#d97706" stroke-width="2"/>
+  <!-- Very angry eyebrows (sharp V-shape) -->
+  <line x1="24" y1="32" x2="36" y2="38" stroke="#374151" stroke-width="4" stroke-linecap="round"/>
+  <line x1="64" y1="38" x2="76" y2="32" stroke="#374151" stroke-width="4" stroke-linecap="round"/>
+  <!-- Wide angry eyes -->
+  <ellipse cx="34" cy="42" rx="7" ry="6" fill="white" stroke="#374151" stroke-width="2"/>
+  <ellipse cx="66" cy="42" rx="7" ry="6" fill="white" stroke="#374151" stroke-width="2"/>
+  <circle cx="34" cy="42" r="4" fill="#dc2626"/>
+  <circle cx="66" cy="42" r="4" fill="#dc2626"/>
+  <circle cx="33" cy="41" r="1.5" fill="white"/>
+  <circle cx="65" cy="41" r="1.5" fill="white"/>
+  <!-- Angry mouth (snarl) -->
+  <path d="M30 56 Q50 50 70 56" stroke="#dc2626" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M34 56 L32 60" stroke="#dc2626" stroke-width="2"/>
+  <path d="M50 54 L50 58" stroke="#dc2626" stroke-width="2"/>
+  <path d="M66 56 L68 60" stroke="#dc2626" stroke-width="2"/>
+  <!-- Steam lines -->
+  <line x1="20" y1="25" x2="24" y2="18" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="80" y1="25" x2="76" y2="18" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Fists -->
+  <rect x="10" y="60" width="16" height="14" rx="6" fill="#ffd68a" stroke="#d97706" stroke-width="2"/>
+  <rect x="74" y="60" width="16" height="14" rx="6" fill="#ffd68a" stroke="#d97706" stroke-width="2"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">AGRESSIU</text>
+</svg>

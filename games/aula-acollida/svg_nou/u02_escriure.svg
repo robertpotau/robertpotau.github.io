@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="ecr_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fefce8"/><stop offset="1" stop-color="#fef3c7"/></linearGradient>
+  <linearGradient id="ecr_llapis" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fcd34d"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#ecr_bg)"/>
+  <ellipse cx="50" cy="84" rx="32" ry="5" fill="#0f172a" opacity=".08"/>
+  <g transform="rotate(-6 50 60)">
+    <rect x="20" y="40" width="56" height="40" rx="4" fill="#f8fafc"/>
+    <rect x="20" y="40" width="56" height="40" rx="4" fill="none" stroke="#e2e8f0" stroke-width="1.5"/>
+    <path d="M28 52 h28 M28 60 h36 M28 68 h18" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/>
+  </g>
+  <path d="M50 70 q4 3 8 1" stroke="#475569" stroke-width="2.2" stroke-linecap="round" fill="none" opacity=".7"/>
+  <g transform="rotate(45 62 52)">
+    <rect x="56" y="24" width="13" height="40" rx="2" fill="url(#ecr_llapis)"/>
+    <rect x="56" y="24" width="13" height="5" rx="2" fill="#f9a8d4"/>
+    <polygon points="56,64 69,64 62.5,76" fill="#e7c08a"/>
+    <polygon points="60,71 65,71 62.5,76" fill="#334155"/>
+  </g>
+  <ellipse cx="74" cy="64" rx="9" ry="7" fill="#fcd9b8" transform="rotate(-20 74 64)"/>
+  <path d="M68 58 q-2 -3 1 -4 q3 -1 4 2" fill="#fcd9b8"/>
+</svg>

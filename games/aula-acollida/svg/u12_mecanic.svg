@@ -1,0 +1,32 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cap -->
+  <circle cx="50" cy="20" r="10" fill="#f5cba7" stroke="#c0835a" stroke-width="1.2"/>
+  <!-- Cabell curt -->
+  <ellipse cx="50" cy="13" rx="10" ry="5" fill="#4b3621"/>
+  <!-- Cuell -->
+  <rect x="46" y="28" width="8" height="5" fill="#f5cba7"/>
+  <!-- Granota blava (coverall) - cos -->
+  <rect x="36" y="32" width="28" height="24" rx="3" fill="#1d4ed8"/>
+  <!-- Solapa granota -->
+  <polygon points="46,32 50,38 54,32" fill="#1e40af"/>
+  <!-- Taca de greix -->
+  <ellipse cx="55" cy="48" rx="4" ry="3" fill="#1e3a5f" opacity="0.7"/>
+  <ellipse cx="52" cy="52" rx="2" ry="1.5" fill="#1e3a5f" opacity="0.6"/>
+  <!-- Braç esquerre -->
+  <rect x="24" y="33" width="12" height="8" rx="3" fill="#1d4ed8"/>
+  <!-- Braç dret amb clau anglesa -->
+  <rect x="64" y="33" width="12" height="8" rx="3" fill="#1d4ed8"/>
+  <!-- Clau anglesa -->
+  <rect x="74" y="28" width="4" height="14" rx="1" fill="#6b7280"/>
+  <rect x="72" y="27" width="8" height="4" rx="1" fill="#6b7280"/>
+  <rect x="72" y="38" width="8" height="4" rx="1" fill="#6b7280"/>
+  <rect x="74" y="29" width="2" height="2" fill="#9ca3af"/>
+  <!-- Cames granota -->
+  <rect x="36" y="56" width="12" height="18" rx="2" fill="#1d4ed8"/>
+  <rect x="52" y="56" width="12" height="18" rx="2" fill="#1d4ed8"/>
+  <!-- Botes de treball -->
+  <rect x="35" y="72" width="14" height="5" rx="2" fill="#1f2937"/>
+  <rect x="51" y="72" width="14" height="5" rx="2" fill="#1f2937"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MECÀNIC</text>
+</svg>

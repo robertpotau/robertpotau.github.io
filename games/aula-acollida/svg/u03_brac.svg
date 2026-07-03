@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Shoulder -->
+  <ellipse cx="40" cy="22" rx="18" ry="14" fill="#f5cba7" stroke="#c0835a" stroke-width="2.5"/>
+  <!-- Upper arm -->
+  <path d="M28 28 Q20 42 22 60 Q24 66 34 66 Q44 66 46 60 Q48 42 52 28 Z" fill="#f5cba7" stroke="#c0835a" stroke-width="2.5"/>
+  <!-- Forearm -->
+  <path d="M22 60 Q20 76 26 88 Q30 94 38 93 Q46 92 48 86 Q52 74 46 60 Z" fill="#f5cba7" stroke="#c0835a" stroke-width="2.5"/>
+  <!-- Highlight upper arm -->
+  <path d="M30 32 Q26 44 27 57" stroke="#e8a87c" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <!-- Arrow label -->
+  <text x="72" y="38" font-family="Arial,sans-serif" font-size="9" fill="#92400e" font-weight="700">braç</text>
+  <line x1="53" y1="38" x2="66" y2="38" stroke="#92400e" stroke-width="1.5" marker-end="url(#a)"/>
+</svg>

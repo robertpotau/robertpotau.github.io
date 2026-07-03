@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Dress -->
+  <path d="M34 52 L28 80 L60 80 L54 52 Z" fill="#ec4899"/>
+  <path d="M34 52 L28 80" stroke="#db2777" stroke-width="1"/>
+  <!-- Body top -->
+  <rect x="34" y="50" width="20" height="18" rx="3" fill="#ec4899"/>
+  <!-- Head -->
+  <circle cx="44" cy="36" r="13" fill="#fcd34d"/>
+  <!-- Long hair -->
+  <path d="M31 30 Q27 50 28 72" stroke="#92400e" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M57 30 Q61 50 60 72" stroke="#92400e" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M31 28 Q44 21 57 28" fill="#92400e"/>
+  <!-- Eyes -->
+  <circle cx="39" cy="36" r="2.5" fill="#374151"/>
+  <circle cx="49" cy="36" r="2.5" fill="#374151"/>
+  <!-- Eyelashes -->
+  <line x1="37" y1="33" x2="36" y2="31" stroke="#374151" stroke-width="1"/>
+  <line x1="39" y1="33" x2="39" y2="31" stroke="#374151" stroke-width="1"/>
+  <line x1="41" y1="33" x2="42" y2="31" stroke="#374151" stroke-width="1"/>
+  <!-- Smile -->
+  <path d="M39 42 Q44 46 49 42" stroke="#92400e" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Arms -->
+  <line x1="34" y1="57" x2="22" y2="68" stroke="#ec4899" stroke-width="5" stroke-linecap="round"/>
+  <line x1="54" y1="57" x2="66" y2="68" stroke="#ec4899" stroke-width="5" stroke-linecap="round"/>
+  <!-- Shoes -->
+  <ellipse cx="35" cy="82" rx="5" ry="3" fill="#7c3aed"/>
+  <ellipse cx="53" cy="82" rx="5" ry="3" fill="#7c3aed"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">NOIA</text>
+</svg>

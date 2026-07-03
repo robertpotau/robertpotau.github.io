@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Open mouth -->
+  <path d="M15 38 Q14 28 20 22 Q30 14 50 14 Q70 14 80 22 Q86 28 85 38 Q84 55 50 58 Q16 55 15 38 Z" fill="#ffd68a" stroke="#d97706" stroke-width="2"/>
+  <!-- Inside mouth darkness -->
+  <path d="M22 40 Q50 55 78 40 Q78 50 50 54 Q22 50 22 40 Z" fill="#1f2937"/>
+  <!-- Upper teeth -->
+  <path d="M24 36 L24 42 Q30 46 36 42 L36 36 Z" fill="white" stroke="#e5e7eb" stroke-width="0.5"/>
+  <path d="M36 36 L36 43 Q42 47 48 43 L48 36 Z" fill="white" stroke="#e5e7eb" stroke-width="0.5"/>
+  <path d="M48 36 L48 43 Q54 47 60 43 L60 36 Z" fill="white" stroke="#e5e7eb" stroke-width="0.5"/>
+  <path d="M60 36 L60 42 Q66 46 72 42 L72 36 Z" fill="white" stroke="#e5e7eb" stroke-width="0.5"/>
+  <!-- Tongue sticking out -->
+  <path d="M30 46 Q50 42 70 46 Q72 56 70 64 Q60 76 50 78 Q40 76 30 64 Q28 56 30 46 Z" fill="#f43f5e"/>
+  <!-- Tongue center line -->
+  <line x1="50" y1="48" x2="50" y2="72" stroke="#be123c" stroke-width="2" opacity="0.5"/>
+  <!-- Tongue highlight -->
+  <ellipse cx="50" cy="56" rx="10" ry="5" fill="#fb7185" opacity="0.4"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">LLENGUA</text>
+</svg>

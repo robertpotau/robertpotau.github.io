@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Ou ferrat a la paella -->
+  <!-- Cos de la paella petita -->
+  <ellipse cx="50" cy="70" rx="38" ry="10" fill="#4b5563"/>
+  <rect x="12" y="58" width="76" height="13" rx="4" fill="#6b7280"/>
+  <ellipse cx="50" cy="58" rx="38" ry="10" fill="#9ca3af"/>
+  <!-- Clara de l'ou -->
+  <ellipse cx="50" cy="56" rx="30" ry="8" fill="#f5f5f5"/>
+  <!-- Rovell groc -->
+  <circle cx="50" cy="54" r="10" fill="#fbbf24"/>
+  <circle cx="50" cy="54" r="8" fill="#f59e0b"/>
+  <!-- Brillantor del rovell -->
+  <circle cx="46" cy="50" r="3" fill="#fde68a" opacity="0.7"/>
+  <!-- Nansa de la paella -->
+  <rect x="74" y="54" width="22" height="8" rx="4" fill="#374151"/>
+  <rect x="75" y="55" width="20" height="6" rx="3" fill="#4b5563"/>
+  <!-- Textura de la clara -->
+  <ellipse cx="36" cy="57" rx="6" ry="3" fill="white" opacity="0.5"/>
+  <ellipse cx="64" cy="57" rx="6" ry="3" fill="white" opacity="0.5"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">OU</text>
+</svg>

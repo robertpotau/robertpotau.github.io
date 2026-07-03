@@ -1,0 +1,32 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cos del termòmetre mèdic (allargat, inclinat lleugerament) -->
+  <!-- Fons blanc del termòmetre -->
+  <rect x="30" y="12" width="40" height="16" rx="8" fill="#f5f5f5" stroke="#d1d5db" stroke-width="1.2"/>
+  <!-- Columna de mercuri/temperatura (vermella) -->
+  <rect x="32" y="15" width="28" height="10" rx="6" fill="#ef4444"/>
+  <!-- Graduació termòmetre -->
+  <line x1="44" y1="12" x2="44" y2="16" stroke="#374151" stroke-width="0.8"/>
+  <line x1="50" y1="12" x2="50" y2="15" stroke="#374151" stroke-width="0.8"/>
+  <line x1="56" y1="12" x2="56" y2="16" stroke="#374151" stroke-width="0.8"/>
+  <line x1="62" y1="12" x2="62" y2="15" stroke="#374151" stroke-width="0.8"/>
+  <!-- Bulb del termòmetre -->
+  <circle cx="35" cy="20" r="9" fill="#ef4444"/>
+  <circle cx="35" cy="20" r="6" fill="#f87171"/>
+  <!-- Números indicadors -->
+  <text x="44" y="11" font-family="Arial,sans-serif" font-size="4" fill="#374151" text-anchor="middle">36</text>
+  <text x="50" y="11" font-family="Arial,sans-serif" font-size="4" fill="#374151" text-anchor="middle">37</text>
+  <text x="56" y="11" font-family="Arial,sans-serif" font-size="4" fill="#374151" text-anchor="middle">38</text>
+  <text x="62" y="11" font-family="Arial,sans-serif" font-size="4" fill="#374151" text-anchor="middle">39</text>
+  <!-- Reflex del cos blanc -->
+  <rect x="32" y="13" width="34" height="3" rx="3" fill="white" opacity="0.5"/>
+  <!-- Text "°C" -->
+  <text x="72" y="22" font-family="Arial,sans-serif" font-size="6" fill="#374151">°C</text>
+  <!-- Creu mèdica decorativa -->
+  <rect x="44" y="40" width="12" height="36" rx="3" fill="#ef4444"/>
+  <rect x="36" y="48" width="28" height="12" rx="3" fill="#ef4444"/>
+  <!-- Fons creu -->
+  <rect x="46" y="42" width="8" height="32" rx="2" fill="#fca5a5"/>
+  <rect x="38" y="50" width="24" height="8" rx="2" fill="#fca5a5"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TERMÒMETRE</text>
+</svg>

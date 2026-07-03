@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="pin_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#pin_bg)"/>
+  <ellipse cx="50" cy="88" rx="26" ry="4" fill="#0f172a" opacity=".1"/>
+  <path d="M50 12 q24 0 24 34 q0 26 -10 34 h-28 q-10 -8 -10 -34 q0 -34 24 -34" fill="#1e293b"/>
+  <path d="M50 30 q16 0 16 26 q0 18 -7 24 h-18 q-7 -6 -7 -24 q0 -26 16 -26" fill="#f8fafc"/>
+  <path d="M26 46 q-8 8 -6 20 q6 0 10 -8 z" fill="#1e293b"/>
+  <path d="M74 46 q8 8 6 20 q-6 0 -10 -8 z" fill="#0f172a"/>
+  <circle cx="42" cy="32" r="3" fill="#f8fafc"/>
+  <circle cx="58" cy="32" r="3" fill="#f8fafc"/>
+  <circle cx="42.8" cy="32.5" r="1.6" fill="#0f172a"/>
+  <circle cx="58.8" cy="32.5" r="1.6" fill="#0f172a"/>
+  <polygon points="50,38 45,44 55,44" fill="#f97316"/>
+  <path d="M40 88 q0 -4 5 -4 q5 0 5 4 z M50 88 q0 -4 5 -4 q5 0 5 4 z" fill="#f97316"/>
+</svg>

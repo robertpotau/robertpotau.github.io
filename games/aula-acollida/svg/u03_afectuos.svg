@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Two figures hugging -->
+  <!-- Left figure -->
+  <circle cx="32" cy="22" r="10" fill="#ffd68a" stroke="#d97706" stroke-width="1.5"/>
+  <rect x="26" y="32" width="14" height="20" rx="3" fill="#ec4899"/>
+  <!-- Right figure -->
+  <circle cx="68" cy="22" r="10" fill="#ffd68a" stroke="#d97706" stroke-width="1.5"/>
+  <rect x="60" y="32" width="14" height="20" rx="3" fill="#3b82f6"/>
+  <!-- Hugging arms -->
+  <path d="M40 36 Q50 30 60 36" stroke="#ec4899" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M40 42 Q50 50 60 42" stroke="#3b82f6" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Hearts -->
+  <path d="M46 15 Q46 11 50 11 Q54 11 54 15 Q54 20 50 24 Q46 20 46 15 Z" fill="#ef4444"/>
+  <path d="M44 13 Q44 9 47 9 Q50 9 50 13" fill="#ef4444"/>
+  <path d="M50 13 Q50 9 53 9 Q56 9 56 13 Q56 18 50 22 Z" fill="#ef4444"/>
+  <!-- Small hearts floating -->
+  <text x="22" y="18" font-family="Arial,sans-serif" font-size="12" fill="#f43f5e">♥</text>
+  <text x="66" y="16" font-family="Arial,sans-serif" font-size="10" fill="#f43f5e">♥</text>
+  <!-- Smiling faces -->
+  <path d="M27 22 Q32 26 37 22" stroke="#c2850a" stroke-width="1.5" fill="none"/>
+  <path d="M63 22 Q68 26 73 22" stroke="#c2850a" stroke-width="1.5" fill="none"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="7" fill="#1e1b4b" font-weight="700" text-anchor="middle">AFECTUÓS</text>
+</svg>

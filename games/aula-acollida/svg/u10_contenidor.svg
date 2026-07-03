@@ -1,0 +1,29 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cos contenidor -->
+  <rect x="12" y="32" width="76" height="52" rx="4" fill="#15803d"/>
+  <!-- Tapa (arrodonida) -->
+  <rect x="10" y="22" width="80" height="14" rx="7" fill="#166534"/>
+  <!-- Frontissa tapa -->
+  <rect x="20" y="20" width="60" height="5" rx="2" fill="#14532d"/>
+  <!-- Símbols de reciclatge (fletxes triangulars) -->
+  <g transform="translate(50,58)" fill="#f0fdf4">
+    <!-- Fletxa 1 -->
+    <polygon points="0,-14 8,0 -8,0" transform="rotate(0)"/>
+    <!-- Fletxa 2 -->
+    <polygon points="0,-14 8,0 -8,0" transform="rotate(120)"/>
+    <!-- Fletxa 3 -->
+    <polygon points="0,-14 8,0 -8,0" transform="rotate(240)"/>
+    <!-- Centre -->
+    <circle cx="0" cy="0" r="5" fill="#15803d"/>
+  </g>
+  <!-- Rodes petites -->
+  <circle cx="28" cy="84" r="5" fill="#166534"/>
+  <circle cx="28" cy="84" r="2" fill="#14532d"/>
+  <circle cx="72" cy="84" r="5" fill="#166534"/>
+  <circle cx="72" cy="84" r="2" fill="#14532d"/>
+  <!-- Nanses laterals -->
+  <rect x="6" y="40" width="8" height="20" rx="4" fill="#166534"/>
+  <rect x="86" y="40" width="8" height="20" rx="4" fill="#166534"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CONTENIDOR</text>
+</svg>

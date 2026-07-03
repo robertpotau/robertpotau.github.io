@@ -1,0 +1,37 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cua petita -->
+  <circle cx="80" cy="68" r="4" fill="#78350f"/>
+  <!-- Cos gran i rodó -->
+  <ellipse cx="50" cy="65" rx="30" ry="22" fill="#92400e"/>
+  <!-- Potes darreres -->
+  <rect x="60" y="80" width="10" height="12" rx="4" fill="#92400e"/>
+  <rect x="72" y="80" width="10" height="12" rx="4" fill="#92400e"/>
+  <!-- Potes davanteres -->
+  <rect x="18" y="78" width="10" height="14" rx="4" fill="#92400e"/>
+  <rect x="30" y="78" width="10" height="14" rx="4" fill="#92400e"/>
+  <!-- Peus -->
+  <ellipse cx="23" cy="92" rx="7" ry="4" fill="#78350f"/>
+  <ellipse cx="35" cy="92" rx="7" ry="4" fill="#78350f"/>
+  <ellipse cx="65" cy="92" rx="7" ry="4" fill="#78350f"/>
+  <ellipse cx="77" cy="92" rx="7" ry="4" fill="#78350f"/>
+  <!-- Cap rodó -->
+  <circle cx="34" cy="48" r="18" fill="#92400e"/>
+  <!-- Musell clar -->
+  <ellipse cx="34" cy="56" rx="9" ry="7" fill="#d97706"/>
+  <!-- Nas -->
+  <ellipse cx="34" cy="52" rx="4" ry="2.5" fill="#1a1a1a"/>
+  <!-- Ulls -->
+  <circle cx="27" cy="44" r="3.5" fill="#1a1a1a"/>
+  <circle cx="26" cy="43" r="1" fill="white"/>
+  <circle cx="41" cy="44" r="3.5" fill="#1a1a1a"/>
+  <circle cx="40" cy="43" r="1" fill="white"/>
+  <!-- Boca -->
+  <path d="M29 60 Q34 64 39 60" stroke="#1a1a1a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Orelles rodones -->
+  <circle cx="20" cy="34" r="7" fill="#92400e"/>
+  <circle cx="20" cy="34" r="4" fill="#78350f"/>
+  <circle cx="48" cy="34" r="7" fill="#92400e"/>
+  <circle cx="48" cy="34" r="4" fill="#78350f"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ÓS</text>
+</svg>

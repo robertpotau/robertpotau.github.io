@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Ganivet de taula -->
+  <!-- Mànec de fusta -->
+  <rect x="42" y="52" width="16" height="40" rx="7" fill="#92400e"/>
+  <rect x="44" y="53" width="5" height="38" rx="5" fill="#b45309" opacity="0.5"/>
+  <!-- Reforç entre mànec i fulla -->
+  <rect x="41" y="48" width="18" height="7" rx="2" fill="#78350f"/>
+  <!-- Fulla metàl·lica -->
+  <path d="M 44 8 L 59 22 L 59 50 L 44 50 Z" fill="#d1d5db"/>
+  <path d="M 45 10 L 58 23 L 58 49 L 45 49 Z" fill="#e5e7eb"/>
+  <!-- Tall (vora de la fulla) -->
+  <path d="M 58 22 L 59 22 L 59 50 L 58 50" fill="none" stroke="#9ca3af" stroke-width="1.5"/>
+  <!-- Brillantor de la fulla -->
+  <path d="M 46 12 L 52 25 L 52 45" fill="none" stroke="white" stroke-width="1.5" opacity="0.6"/>
+  <!-- Detalls del mànec -->
+  <circle cx="50" cy="62" r="2" fill="#78350f"/>
+  <circle cx="50" cy="72" r="2" fill="#78350f"/>
+  <circle cx="50" cy="82" r="2" fill="#78350f"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GANIVET</text>
+</svg>

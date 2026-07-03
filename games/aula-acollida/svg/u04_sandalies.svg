@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Left sandal -->
+  <!-- Sole -->
+  <path d="M5 60 Q5 70 10 72 L38 72 Q44 70 44 60 Z" fill="#d97706"/>
+  <!-- Sole bottom -->
+  <path d="M6 68 Q6 75 10 76 L38 76 Q43 74 43 68 Z" fill="#b45309"/>
+  <!-- Toe strap -->
+  <path d="M12 60 Q16 54 22 52 Q28 50 32 54 L34 60" stroke="#92400e" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Ankle strap (diagonal) -->
+  <path d="M8 62 Q18 55 30 58" stroke="#92400e" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- Side strap -->
+  <path d="M36 60 Q40 56 42 62" stroke="#92400e" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Sole texture lines -->
+  <line x1="8" y1="64" x2="42" y2="64" stroke="#b45309" stroke-width="0.8" opacity="0.6"/>
+  <line x1="8" y1="68" x2="42" y2="68" stroke="#b45309" stroke-width="0.8" opacity="0.6"/>
+
+  <!-- Right sandal -->
+  <!-- Sole -->
+  <path d="M56 60 Q56 70 62 72 L90 72 Q95 70 95 60 Z" fill="#d97706"/>
+  <!-- Sole bottom -->
+  <path d="M57 68 Q57 75 62 76 L90 76 Q94 74 94 68 Z" fill="#b45309"/>
+  <!-- Toe strap -->
+  <path d="M64 60 Q68 54 74 52 Q80 50 84 54 L86 60" stroke="#92400e" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Ankle strap -->
+  <path d="M60 62 Q70 55 82 58" stroke="#92400e" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- Side strap -->
+  <path d="M58 62 Q60 56 62 62" stroke="#92400e" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Sole texture lines -->
+  <line x1="58" y1="64" x2="93" y2="64" stroke="#b45309" stroke-width="0.8" opacity="0.6"/>
+  <line x1="58" y1="68" x2="93" y2="68" stroke="#b45309" stroke-width="0.8" opacity="0.6"/>
+
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">SANDÀLIES</text>
+</svg>

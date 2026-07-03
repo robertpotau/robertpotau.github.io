@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Body (slightly flared/flowy) -->
+  <path d="M25 38 L18 72 Q18 76 22 76 L78 76 Q82 76 82 72 L75 38 Z" fill="#f9a8d4"/>
+  <!-- Left sleeve (short) -->
+  <path d="M25 38 L15 32 L12 46 L22 48 Z" fill="#f9a8d4"/>
+  <!-- Right sleeve (short) -->
+  <path d="M75 38 L85 32 L88 46 L78 48 Z" fill="#f9a8d4"/>
+  <!-- V-neck -->
+  <path d="M40 38 L50 52 L60 38" fill="#fce7f3" stroke="#f472b6" stroke-width="1.5"/>
+  <!-- Neck opening fill -->
+  <path d="M40 38 L50 52 L60 38 L55 38 L50 48 L45 38 Z" fill="#fce7f3"/>
+  <!-- Button placket -->
+  <line x1="50" y1="52" x2="50" y2="76" stroke="#f472b6" stroke-width="1"/>
+  <!-- Buttons -->
+  <circle cx="50" cy="56" r="2" fill="#f5f5f5" stroke="#f472b6" stroke-width="0.8"/>
+  <circle cx="50" cy="63" r="2" fill="#f5f5f5" stroke="#f472b6" stroke-width="0.8"/>
+  <circle cx="50" cy="70" r="2" fill="#f5f5f5" stroke="#f472b6" stroke-width="0.8"/>
+  <!-- Sleeve cuffs -->
+  <path d="M12 44 L22 47 L22 50 L12 47 Z" fill="#f472b6"/>
+  <path d="M78 47 L88 44 L88 47 L78 50 Z" fill="#f472b6"/>
+  <!-- Hem curve (flowy) -->
+  <path d="M18 74 Q35 80 50 76 Q65 80 82 74" stroke="#f472b6" stroke-width="1" fill="none"/>
+  <!-- Side seams suggestion -->
+  <line x1="22" y1="48" x2="18" y2="74" stroke="#f472b6" stroke-width="0.8" opacity="0.5"/>
+  <line x1="78" y1="48" x2="82" y2="74" stroke="#f472b6" stroke-width="0.8" opacity="0.5"/>
+
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">BRUSA</text>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Wardrobe body -->
+  <rect x="8" y="8" width="84" height="86" rx="4" fill="#fef3c7" stroke="#92400e" stroke-width="2.5"/>
+  <!-- Top bar -->
+  <rect x="8" y="8" width="84" height="8" rx="4" fill="#d97706" stroke="#92400e" stroke-width="2"/>
+  <!-- Left door -->
+  <rect x="12" y="18" width="36" height="72" rx="3" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+  <!-- Right door -->
+  <rect x="52" y="18" width="36" height="72" rx="3" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+  <!-- Left door handle -->
+  <rect x="44" y="50" width="4" height="12" rx="2" fill="#92400e"/>
+  <!-- Right door handle -->
+  <rect x="52" y="50" width="4" height="12" rx="2" fill="#92400e"/>
+  <!-- Left mirror panel -->
+  <rect x="16" y="22" width="28" height="40" rx="2" fill="#bfdbfe" stroke="#93c5fd" stroke-width="1.5"/>
+  <!-- Reflection in left mirror -->
+  <circle cx="30" cy="34" r="5" fill="#dbeafe" opacity="0.8"/>
+  <!-- Right clothes hint (through frosted panel) -->
+  <rect x="56" y="22" width="28" height="40" rx="2" fill="#fef9f0" stroke="#d97706" stroke-width="1"/>
+  <line x1="64" y1="26" x2="64" y2="60" stroke="#d97706" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <line x1="72" y1="26" x2="72" y2="60" stroke="#d97706" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <line x1="76" y1="24" x2="76" y2="28" stroke="#92400e" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="pll_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/></linearGradient>
+  <radialGradient id="pll_cos" cx=".4" cy=".3" r="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#b45309"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#pll_bg)"/>
+  <ellipse cx="50" cy="82" rx="32" ry="5" fill="#0f172a" opacity=".1"/>
+  <ellipse cx="50" cy="76" rx="34" ry="7" fill="#f8fafc"/>
+  <ellipse cx="50" cy="74" rx="34" ry="7" fill="#e2e8f0"/>
+  <path d="M30 54 q-4 -26 20 -26 q26 0 24 24 q-2 18 -20 20 l-26 2 q-6 -2 2 -20" fill="url(#pll_cos)"/>
+  <path d="M32 50 q0 -18 16 -19 q-10 6 -10 19 q-3 3 -6 0" fill="#fde68a" opacity=".6"/>
+  <path d="M28 64 q-10 -2 -12 -8 q6 -2 10 2 q-2 -6 2 -10 q5 4 4 12 z" fill="#fef3c7"/>
+  <path d="M70 60 q10 -2 12 -8 q-6 -2 -10 2 q2 -6 -2 -10 q-5 4 -4 12 z" fill="#fef3c7" opacity="0"/>
+  <path d="M64 70 q8 0 10 4 q-5 3 -10 0 z" fill="#fef3c7"/>
+  <path d="M40 42 q6 6 14 4" stroke="#92400e" stroke-width="2" stroke-linecap="round" fill="none" opacity=".6"/>
+</svg>

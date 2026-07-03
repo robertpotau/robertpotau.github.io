@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Jacket top -->
+  <path d="M28 10 Q20 10 16 18 L12 44 L38 44 L38 10 Z" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+  <path d="M72 10 Q80 10 84 18 L88 44 L62 44 L62 10 Z" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+  <rect x="38" y="10" width="24" height="34" rx="0" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+  <!-- Collar / zip -->
+  <path d="M38 10 Q38 4 50 4 Q62 4 62 10" fill="#1d4ed8" stroke="#1d4ed8" stroke-width="2"/>
+  <line x1="50" y1="10" x2="50" y2="44" stroke="#93c5fd" stroke-width="2"/>
+  <!-- Stripe left sleeve -->
+  <line x1="16" y1="28" x2="38" y2="28" stroke="white" stroke-width="3" opacity="0.8"/>
+  <!-- Stripe right sleeve -->
+  <line x1="62" y1="28" x2="88" y2="28" stroke="white" stroke-width="3" opacity="0.8"/>
+  <!-- Trousers -->
+  <rect x="12" y="44" width="76" height="8" rx="2" fill="#1d4ed8" stroke="#1e3a8a" stroke-width="1.5"/>
+  <!-- Left leg -->
+  <rect x="14" y="52" width="32" height="44" rx="4" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+  <!-- Right leg -->
+  <rect x="54" y="52" width="32" height="44" rx="4" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+  <!-- Stripe left leg -->
+  <line x1="20" y1="52" x2="20" y2="96" stroke="white" stroke-width="2.5" opacity="0.8"/>
+  <!-- Stripe right leg -->
+  <line x1="80" y1="52" x2="80" y2="96" stroke="white" stroke-width="2.5" opacity="0.8"/>
+</svg>

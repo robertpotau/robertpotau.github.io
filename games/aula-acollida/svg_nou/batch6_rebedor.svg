@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="reb_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#reb_bg)"/>
+  <ellipse cx="50" cy="88" rx="36" ry="4" fill="#0f172a" opacity=".08"/>
+  <rect x="14" y="14" width="28" height="72" rx="3" fill="#92400e"/>
+  <rect x="17" y="17" width="22" height="66" rx="2" fill="#b45309"/>
+  <circle cx="35" cy="50" r="2" fill="#fbbf24"/>
+  <rect x="52" y="22" width="36" height="5" rx="2.5" fill="#78350f"/>
+  <g stroke="#57534e" stroke-width="2.5" stroke-linecap="round">
+    <path d="M58 27 v8"/><path d="M70 27 v8"/><path d="M82 27 v8"/>
+  </g>
+  <path d="M55 35 q4 5 3 12 q-1 5 -6 5 q-4 0 -4 -4 q0 -3 3 -3" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+  <path d="M70 35 q-3 6 -2 12" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  <path d="M68 47 q0 5 5 5 q5 0 5 -5 q0 -4 -3 -5" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  <ellipse cx="70" cy="78" rx="16" ry="5" fill="#0d9488" opacity=".6"/>
+  <ellipse cx="70" cy="77" rx="12" ry="3.4" fill="#14b8a6" opacity=".7"/>
+  <rect x="78" y="52" width="9" height="14" rx="2" fill="#475569"/>
+  <rect x="79.5" y="54" width="6" height="8" rx="1" fill="#7dd3fc"/>
+</svg>

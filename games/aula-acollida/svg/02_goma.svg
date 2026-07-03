@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 55">
+  <!-- cos principal (rosa clar) -->
+  <rect x="5" y="12" width="90" height="36" rx="6" fill="#f9a8d4" stroke="#f472b6" stroke-width="1.5"/>
+  <!-- meitat esquerra (rosa fort) -->
+  <rect x="5" y="12" width="44" height="36" rx="6" fill="#f472b6"/>
+  <!-- línia divisòria -->
+  <rect x="47" y="12" width="2" height="36" fill="#be185d" opacity="0.4"/>
+  <!-- text MILAN -->
+  <text x="10" y="35" font-family="Arial, sans-serif" font-size="10" fill="white" font-weight="bold">MILAN</text>
+</svg>

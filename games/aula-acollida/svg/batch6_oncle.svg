@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="26" r="18" fill="#f5cba7" stroke="#c0835a" stroke-width="2"/>
+  <path d="M32 22 Q32 8 50 8 Q68 8 68 22 Q60 15 50 15 Q40 15 32 22Z" fill="#6b7280"/>
+  <circle cx="43" cy="25" r="2.5" fill="#333"/>
+  <circle cx="57" cy="25" r="2.5" fill="#333"/>
+  <path d="M43 33 Q50 37 57 33" fill="none" stroke="#c0835a" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M30 44 Q22 44 18 56 L14 90 L86 90 L82 56 Q78 44 70 44Z" fill="#6b7280"/>
+  <rect x="42" y="42" width="16" height="8" rx="2" fill="#f5cba7"/>
+  <text x="50" y="98" font-family="Arial,sans-serif" font-size="8" fill="#374151" font-weight="700" text-anchor="middle">ONCLE</text>
+</svg>

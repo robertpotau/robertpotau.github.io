@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="mos_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0fdfa"/><stop offset="1" stop-color="#ccfbf1"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#mos_bg)"/>
+  <ellipse cx="50" cy="82" rx="24" ry="4" fill="#0f172a" opacity=".08"/>
+  <ellipse cx="30" cy="34" rx="17" ry="10" fill="#e0f2fe" stroke="#bae6fd" stroke-width="1.5" transform="rotate(-30 30 34)"/>
+  <ellipse cx="70" cy="34" rx="17" ry="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.5" transform="rotate(30 70 34)"/>
+  <path d="M24 32 l10 6 M22 40 l10 2 M76 32 l-10 6 M78 40 l-10 2" stroke="#7dd3fc" stroke-width="1.2" opacity=".7"/>
+  <ellipse cx="50" cy="58" rx="19" ry="16" fill="#44403c"/>
+  <path d="M38 50 q-2 12 4 20 M50 48 v26 M62 50 q2 12 -4 20" stroke="#292524" stroke-width="2" fill="none"/>
+  <circle cx="50" cy="38" r="12" fill="#57534e"/>
+  <circle cx="44" cy="36" r="5.5" fill="#b91c1c"/>
+  <circle cx="56" cy="36" r="5.5" fill="#b91c1c"/>
+  <circle cx="42.5" cy="34.5" r="2" fill="#fca5a5"/>
+  <circle cx="54.5" cy="34.5" r="2" fill="#fca5a5"/>
+  <path d="M30 70 l-6 6 M40 74 l-3 7 M60 74 l3 7 M70 70 l6 6" stroke="#44403c" stroke-width="2" stroke-linecap="round"/>
+</svg>

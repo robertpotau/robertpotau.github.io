@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robert Potau — Jocs educatius</title>
+<meta name="description" content="Jocs educatius interactius creats per Robert Potau per a l'aula: matemàtiques, llengua, geometria i més.">
+
+<style>
+  @font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400 900;
+    font-display: swap;
+    src: url('fonts/nunito-400.woff2') format('woff2');
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #f97316;
+    --primary-dark: #ea580c;
+    --secondary: #fbbf24;
+    --bg: #fffbeb;
+    --card: #ffffff;
+    --text: #1c1917;
+    --text-muted: #78716c;
+    --border: #fed7aa;
+    --radius: 22px;
+    --radius-sm: 14px;
+    --shadow-card: 0 4px 0 #fde68a, 0 8px 20px rgba(249,115,22,0.10);
+  }
+
+  html, body {
+    min-height: 100%;
+    font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+  }
+
+  /* Hero */
+  header.hero {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    border-radius: var(--radius);
+    padding: 48px 32px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(234,88,12,0.25);
+    margin-bottom: 40px;
+  }
+  .hero .avatar {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    border: 3px solid rgba(255,255,255,0.6);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+    margin: 0 auto 16px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+  .hero p.tagline {
+    font-size: clamp(16px, 2.5vw, 20px);
+    font-weight: 700;
+    opacity: 0.95;
+    margin-bottom: 18px;
+  }
+  .hero p.bio {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 15px;
+    opacity: 0.9;
+  }
+
+  /* Section titles */
+  h2.section-title {
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+  }
+
+  /* Games grid */
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .game-card {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 0 #fde68a, 0 14px 26px rgba(249,115,22,0.16);
+  }
+
+  .game-card .icon {
+    font-size: 40px;
+    line-height: 1;
+  }
+  .game-card h3 {
+    font-size: 19px;
+    font-weight: 900;
+  }
+  .game-card .subject {
+    display: inline-block;
+    background: #fff7ed;
+    color: var(--primary-dark);
+    font-size: 12px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 99px;
+    width: fit-content;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .game-card p.desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    flex-grow: 1;
+  }
+  .game-card .play-btn {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 0 var(--primary-dark);
+    transition: transform 0.1s;
+  }
+  .game-card .play-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 var(--primary-dark);
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 50px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .games-section { margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="avatar">🎓</div>
+    <h1>Robert Potau</h1>
+    <p class="tagline">Docent · Creador de jocs educatius interactius</p>
+    <p class="bio">
+      Sóc docent a la Generalitat de Catalunya i des de fa temps creo jocs i eines
+      interactives per fer les meves classes més dinàmiques i properes als alumnes.
+      Aquí trobaràs una selecció dels jocs que he anat desenvolupant per treballar
+      matemàtiques, llengua, geometria i molt més — pensats per jugar-hi directament
+      des del navegador, sense instal·lar res.
+    </p>
+  </header>
+
+  <section class="games-section">
+    <h2 class="section-title">🎮 Jocs disponibles</h2>
+    <div class="games-grid">
+
+      <div class="game-card">
+        <div class="icon">🧮</div>
+        <span class="subject">Matemàtiques</span>
+        <h3>CalcuHerois</h3>
+        <p class="desc">Càlcul mental gamificat: missions i herois per practicar sumes, restes, multiplicacions i divisions.</p>
+        <a class="play-btn" href="games/calcuherois/CalcuHerois.html">Jugar ▶</a>
+      </div>
+
+      <div class="game-card">
+        <div class="icon">🌍</div>
+        <span class="subject">Acollida · Llengua</span>
+        <h3>Aula d'Acollida</h3>
+        <p class="desc">Vocabulari, lectura i jocs per a alumnat nouvingut, organitzats per unitats temàtiques amb progressió d'experiència.</p>
+        <a class="play-btn" href="games/aula-acollida/index.html">Jugar ▶</a>
+      </div>
+
+      <div class="game-card">
+        <div class="icon">🍕</div>
+        <span class="subject">Matemàtiques</span>
+        <h3>Fraccions</h3>
+        <p class="desc">Set maneres de treballar el concepte de fracció i quatre modes per practicar les operacions.</p>
+        <a class="play-btn" href="games/fraccions/fraccions.html">Jugar ▶</a>
+      </div>
+
+      <div class="game-card">
+        <div class="icon">📖</div>
+        <span class="subject">Llengua</span>
+        <h3>Lletra a lletra</h3>
+        <p class="desc">Joc de lectoescriptura: escoltar, completar, separar en síl·labes, associar i llegir paraules.</p>
+        <a class="play-btn" href="games/lletra-a-lletra/index.html">Jugar ▶</a>
+      </div>
+
+      <div class="game-card">
+        <div class="icon">✍️</div>
+        <span class="subject">Llengua catalana</span>
+        <h3>Ortografia</h3>
+        <p class="desc">Deu blocs temàtics per repassar l'ortografia catalana: la essa i la ce, les comes, i molt més.</p>
+        <a class="play-btn" href="games/ortografia/index.html">Jugar ▶</a>
+      </div>
+
+      <div class="game-card">
+        <div class="icon">📐</div>
+        <span class="subject">Tecnologia · Dibuix</span>
+        <h3>Vistes</h3>
+        <p class="desc">Pràctica de projeccions geomètriques: alçat, planta i perfil de figures en 3D.</p>
+        <a class="play-btn" href="games/vistes/index.html">Jugar ▶</a>
+      </div>
+
+      <div class="game-card">
+        <div class="icon">🔺</div>
+        <span class="subject">Matemàtiques</span>
+        <h3>Geometria</h3>
+        <p class="desc">Repàs interactiu de figures geomètriques i les seves propietats.</p>
+        <a class="play-btn" href="games/geometria/index.html">Jugar ▶</a>
+      </div>
+
+      <div class="game-card">
+        <div class="icon">🕐</div>
+        <span class="subject">Matemàtiques</span>
+        <h3>Quina hora és</h3>
+        <p class="desc">Practica la lectura de l'hora en rellotge analògic amb el sistema tradicional català de quarts.</p>
+        <a class="play-btn" href="games/quina-hora-es/index.html">Jugar ▶</a>
+      </div>
+
+      <div class="game-card">
+        <div class="icon">🕒</div>
+        <span class="subject">Anglès</span>
+        <h3>What time is it</h3>
+        <p class="desc">Practise telling the time in English on an analogue clock.</p>
+        <a class="play-btn" href="games/what-time-is-it/index.html">Jugar ▶</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    Fet amb ❤️ per a l'aula — Robert Potau
+  </footer>
+
+</div>
+</body>
+</html>

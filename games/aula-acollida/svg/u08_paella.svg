@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Paella vista de costat lleugerament inclinada -->
+  <!-- Cos de la paella -->
+  <ellipse cx="50" cy="58" rx="36" ry="10" fill="#4b5563"/>
+  <rect x="14" y="48" width="72" height="12" rx="3" fill="#6b7280"/>
+  <ellipse cx="50" cy="48" rx="36" ry="10" fill="#9ca3af"/>
+  <!-- Interior amb arròs/paella -->
+  <ellipse cx="50" cy="47" rx="30" ry="8" fill="#fbbf24"/>
+  <!-- Granets d'arròs -->
+  <ellipse cx="38" cy="46" rx="2.5" ry="1.5" fill="#fef3c7"/>
+  <ellipse cx="45" cy="44" rx="2.5" ry="1.5" fill="#fef3c7"/>
+  <ellipse cx="52" cy="43" rx="2.5" ry="1.5" fill="#fef3c7"/>
+  <ellipse cx="60" cy="45" rx="2.5" ry="1.5" fill="#fef3c7"/>
+  <ellipse cx="42" cy="49" rx="2.5" ry="1.5" fill="#fef3c7"/>
+  <ellipse cx="57" cy="48" rx="2.5" ry="1.5" fill="#fef3c7"/>
+  <ellipse cx="49" cy="50" rx="2.5" ry="1.5" fill="#fef3c7"/>
+  <!-- Nansa esquerra -->
+  <rect x="0" y="44" width="16" height="8" rx="4" fill="#374151"/>
+  <rect x="0" y="45" width="14" height="6" rx="3" fill="#4b5563"/>
+  <!-- Nansa dreta -->
+  <rect x="84" y="44" width="16" height="8" rx="4" fill="#374151"/>
+  <rect x="86" y="45" width="14" height="6" rx="3" fill="#4b5563"/>
+  <!-- Brillantor -->
+  <ellipse cx="38" cy="45" rx="8" ry="3" fill="white" opacity="0.2"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PAELLA</text>
+</svg>

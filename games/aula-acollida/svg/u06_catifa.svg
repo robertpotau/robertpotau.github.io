@@ -1,0 +1,18 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Catifa base -->
+  <rect x="8" y="22" width="84" height="54" rx="5" fill="#d97706"/>
+  <!-- Vora decorativa -->
+  <rect x="12" y="26" width="76" height="46" rx="3" fill="#92400e"/>
+  <rect x="16" y="30" width="68" height="38" rx="2" fill="#d97706"/>
+  <!-- Patró geomètric (rombs) -->
+  <!-- Romb central -->
+  <polygon points="50,34 60,44 50,54 40,44" fill="#92400e"/>
+  <polygon points="50,37 57,44 50,51 43,44" fill="#fbbf24"/>
+  <!-- Rombs laterals -->
+  <polygon points="25,34 33,44 25,54 17,44" fill="#92400e"/>
+  <polygon points="75,34 83,44 75,54 67,44" fill="#92400e"/>
+  <!-- Franja decorativa vora interior -->
+  <line x1="16" y1="32" x2="84" y2="32" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="16" y1="65" x2="84" y2="65" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CATIFA</text>
+</svg>

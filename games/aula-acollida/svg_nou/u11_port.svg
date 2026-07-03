@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="port_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#bae6fd"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#port_bg)"/>
+  <circle cx="18" cy="16" r="6" fill="#fde047"/>
+  <path d="M0 64 q12 -6 25 0 t25 0 t25 0 t25 0 v20 q0 16 -16 16 H16 Q0 100 0 84 z" fill="#0ea5e9"/>
+  <path d="M52 56 h32 l-5 10 q-2 3 -6 3 H61 q-4 0 -6 -3 z" fill="#dc2626"/>
+  <path d="M68 38 v18" stroke="#92400e" stroke-width="2.5"/>
+  <path d="M70 40 q12 4 13 14 q-8 -2 -13 -8 z" fill="#f8fafc"/>
+  <rect x="8" y="38" width="34" height="44" fill="#e7c08a"/>
+  <path d="M8 38 h34 v6 H8 z" fill="#d6a35c"/>
+  <path d="M14 44 v38 M26 44 v38 M38 44 v38" stroke="#b45309" stroke-width="2" opacity=".5"/>
+  <circle cx="20" cy="60" r="4" fill="#475569"/>
+  <path d="M20 60 q8 6 16 4" stroke="#475569" stroke-width="2" fill="none"/>
+  <g transform="translate(26 22)">
+    <rect x="0" y="0" width="14" height="10" rx="1.5" fill="#f97316"/>
+    <path d="M3 0 v10 M7 0 v10 M11 0 v10" stroke="#c2410c" stroke-width="1.2"/>
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="tor_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0fdfa"/><stop offset="1" stop-color="#ccfbf1"/></linearGradient>
+  <radialGradient id="tor_closca" cx=".45" cy=".35" r="1"><stop offset="0" stop-color="#4d7c0f"/><stop offset="1" stop-color="#365314"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#tor_bg)"/>
+  <ellipse cx="50" cy="82" rx="34" ry="5" fill="#0f172a" opacity=".08"/>
+  <ellipse cx="76" cy="56" rx="11" ry="9" fill="#84cc16"/>
+  <circle cx="78" cy="52" r="2" fill="#1e293b"/>
+  <path d="M80 60 q-2 2 -4 1" stroke="#3f6212" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+  <ellipse cx="28" cy="74" rx="6" ry="5" fill="#84cc16"/>
+  <ellipse cx="58" cy="76" rx="6" ry="5" fill="#84cc16"/>
+  <path d="M14 64 q4 -28 30 -28 q26 0 30 28 q-30 8 -60 0" fill="url(#tor_closca)"/>
+  <path d="M16 60 q5 -22 28 -22 q-8 10 -8 24 q-10 1 -20 -2" fill="#65a30d" opacity=".4"/>
+  <g stroke="#a3e635" stroke-width="2" fill="none" opacity=".7">
+    <path d="M36 38 l-4 24 M50 36 v28 M64 38 l4 24"/>
+    <path d="M22 52 q28 -8 56 0"/>
+  </g>
+  <path d="M12 66 q32 9 76 0 q2 4 -2 6 q-36 8 -72 0 q-4 -2 -2 -6" fill="#84cc16"/>
+</svg>

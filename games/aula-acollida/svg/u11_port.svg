@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Mar de fons -->
+  <rect x="0" y="62" width="100" height="30" fill="#3b82f6"/>
+  <!-- Ones del mar -->
+  <path d="M0 66 Q10 62 20 66 Q30 70 40 66 Q50 62 60 66 Q70 70 80 66 Q90 62 100 66" fill="none" stroke="#60a5fa" stroke-width="1.5"/>
+  <path d="M0 72 Q10 68 20 72 Q30 76 40 72 Q50 68 60 72 Q70 76 80 72 Q90 68 100 72" fill="none" stroke="#93c5fd" stroke-width="1"/>
+  <!-- Moll de fusta horitzontal (principal) -->
+  <rect x="5" y="56" width="90" height="10" rx="2" fill="#92400e" stroke="#78350f" stroke-width="1.5"/>
+  <!-- Taulons del moll -->
+  <line x1="15" y1="56" x2="15" y2="66" stroke="#78350f" stroke-width="1"/>
+  <line x1="25" y1="56" x2="25" y2="66" stroke="#78350f" stroke-width="1"/>
+  <line x1="35" y1="56" x2="35" y2="66" stroke="#78350f" stroke-width="1"/>
+  <line x1="45" y1="56" x2="45" y2="66" stroke="#78350f" stroke-width="1"/>
+  <line x1="55" y1="56" x2="55" y2="66" stroke="#78350f" stroke-width="1"/>
+  <line x1="65" y1="56" x2="65" y2="66" stroke="#78350f" stroke-width="1"/>
+  <line x1="75" y1="56" x2="75" y2="66" stroke="#78350f" stroke-width="1"/>
+  <line x1="85" y1="56" x2="85" y2="66" stroke="#78350f" stroke-width="1"/>
+  <!-- Pilons de subjecció -->
+  <rect x="12" y="52" width="6" height="16" rx="3" fill="#78350f" stroke="#6b3020" stroke-width="1"/>
+  <rect x="30" y="52" width="6" height="16" rx="3" fill="#78350f" stroke="#6b3020" stroke-width="1"/>
+  <rect x="62" y="52" width="6" height="16" rx="3" fill="#78350f" stroke="#6b3020" stroke-width="1"/>
+  <rect x="82" y="52" width="6" height="16" rx="3" fill="#78350f" stroke="#6b3020" stroke-width="1"/>
+  <!-- Barca petita 1 amarrada al moll -->
+  <path d="M18 66 Q20 74 36 76 Q52 74 54 66 Z" fill="#1e40af" stroke="#1e3a8a" stroke-width="1.2"/>
+  <rect x="26" y="60" width="16" height="8" rx="2" fill="#93c5fd" stroke="#60a5fa" stroke-width="0.8"/>
+  <!-- Pal barca 1 -->
+  <line x1="34" y1="60" x2="34" y2="50" stroke="#4b3621" stroke-width="2" stroke-linecap="round"/>
+  <!-- Cordes amarratge barca 1 -->
+  <line x1="18" y1="66" x2="15" y2="60" stroke="#92400e" stroke-width="1" stroke-dasharray="2,2"/>
+  <line x1="54" y1="66" x2="65" y2="60" stroke="#92400e" stroke-width="1" stroke-dasharray="2,2"/>
+  <!-- Barca petita 2 -->
+  <path d="M62 66 Q64 73 76 75 Q88 73 89 66 Z" fill="#1e40af" stroke="#1e3a8a" stroke-width="1.2"/>
+  <rect x="68" y="61" width="12" height="7" rx="2" fill="#93c5fd" stroke="#60a5fa" stroke-width="0.8"/>
+  <!-- Pal barca 2 -->
+  <line x1="74" y1="61" x2="74" y2="52" stroke="#4b3621" stroke-width="2" stroke-linecap="round"/>
+  <!-- Llum del port (far petit) -->
+  <rect x="46" y="30" width="8" height="24" rx="2" fill="#94a3b8" stroke="#64748b" stroke-width="1"/>
+  <polygon points="42,30 58,30 54,22 46,22" fill="#64748b"/>
+  <circle cx="50" cy="26" r="4" fill="#fde047" stroke="#eab308" stroke-width="0.8"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PORT</text>
+</svg>

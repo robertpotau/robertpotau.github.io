@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="gan_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient>
+  <linearGradient id="gan_fulla" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#94a3b8"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#gan_bg)"/>
+  <ellipse cx="50" cy="86" rx="22" ry="4" fill="#0f172a" opacity=".08"/>
+  <g transform="rotate(18 50 50)">
+    <path d="M44 10 q12 0 12 24 v18 h-12 q-2 -22 0 -42" fill="url(#gan_fulla)"/>
+    <path d="M44 12 q-1 20 0 40 h3 q-2 -20 0 -40 z" fill="#f8fafc"/>
+    <path d="M44 52 h12 l-1 32 q0 6 -5 6 q-5 0 -5 -6 z" fill="#78350f"/>
+    <path d="M46 54 l1 30 q0 3 2 4 q-4 0 -4 -4 z" fill="#92400e"/>
+    <circle cx="50" cy="60" r="1.4" fill="#d6d3d1"/>
+    <circle cx="50" cy="78" r="1.4" fill="#d6d3d1"/>
+  </g>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Pea pod (open) -->
+  <!-- Top half of pod -->
+  <path d="M12 40 Q15 28 30 25 Q50 22 70 25 Q85 28 88 40 Q70 36 50 36 Q30 36 12 40Z" fill="#4ade80"/>
+  <!-- Bottom half of pod -->
+  <path d="M12 40 Q15 52 30 55 Q50 58 70 55 Q85 52 88 40 Q70 44 50 44 Q30 44 12 40Z" fill="#4ade80"/>
+  <!-- Pod inner lining -->
+  <path d="M14 40 Q20 38 50 38 Q80 38 86 40 Q80 42 50 42 Q20 42 14 40Z" fill="#86efac" opacity="0.6"/>
+  <!-- Pod stem left -->
+  <path d="M12 40 Q8 36 7 30 Q6 24 9 20" stroke="#16a34a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Curly tendril -->
+  <path d="M9 20 Q12 16 16 18 Q18 22 14 24" stroke="#16a34a" stroke-width="1.5" fill="none"/>
+  <!-- Pod tip right -->
+  <path d="M88 40 Q92 37 93 33" stroke="#16a34a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- 5 peas inside -->
+  <circle cx="22" cy="40" r="7" fill="#86efac" stroke="#4ade80" stroke-width="1"/>
+  <circle cx="35" cy="40" r="7" fill="#86efac" stroke="#4ade80" stroke-width="1"/>
+  <circle cx="48" cy="40" r="7" fill="#86efac" stroke="#4ade80" stroke-width="1"/>
+  <circle cx="61" cy="40" r="7" fill="#86efac" stroke="#4ade80" stroke-width="1"/>
+  <circle cx="74" cy="40" r="7" fill="#86efac" stroke="#4ade80" stroke-width="1"/>
+  <!-- Pea highlights -->
+  <circle cx="19" cy="37" r="2.5" fill="#bbf7d0" opacity="0.7"/>
+  <circle cx="32" cy="37" r="2.5" fill="#bbf7d0" opacity="0.7"/>
+  <circle cx="45" cy="37" r="2.5" fill="#bbf7d0" opacity="0.7"/>
+  <circle cx="58" cy="37" r="2.5" fill="#bbf7d0" opacity="0.7"/>
+  <circle cx="71" cy="37" r="2.5" fill="#bbf7d0" opacity="0.7"/>
+  <!-- Leaf on stem -->
+  <ellipse cx="10" cy="30" rx="8" ry="4" fill="#4ade80" transform="rotate(-40,10,30)"/>
+  <line x1="9" y1="25" x2="14" y2="33" stroke="#16a34a" stroke-width="0.8"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PÈSOLS</text>
+</svg>

@@ -1,0 +1,19 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cortina esquerra -->
+  <rect x="8" y="18" width="16" height="60" rx="3" fill="#f9a8d4"/>
+  <path d="M8,18 Q16,30 8,42 Q16,54 8,66 Q16,78 8,78" fill="none" stroke="#f472b6" stroke-width="1.5"/>
+  <!-- Cortina dreta -->
+  <rect x="76" y="18" width="16" height="60" rx="3" fill="#f9a8d4"/>
+  <path d="M92,18 Q84,30 92,42 Q84,54 92,66 Q84,78 92,78" fill="none" stroke="#f472b6" stroke-width="1.5"/>
+  <!-- Marc exterior -->
+  <rect x="22" y="18" width="56" height="60" rx="3" fill="#92400e"/>
+  <!-- 4 vidres -->
+  <rect x="25" y="21" width="24" height="26" rx="1" fill="#bae6fd"/>
+  <rect x="51" y="21" width="24" height="26" rx="1" fill="#bae6fd"/>
+  <rect x="25" y="49" width="24" height="26" rx="1" fill="#bae6fd"/>
+  <rect x="51" y="49" width="24" height="26" rx="1" fill="#bae6fd"/>
+  <!-- Creu divisòria -->
+  <rect x="22" y="44" width="56" height="4" fill="#92400e"/>
+  <rect x="47" y="18" width="6" height="60" fill="#92400e"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">FINESTRA</text>
+</svg>

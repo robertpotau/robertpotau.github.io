@@ -1,0 +1,46 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cua potent i allargada -->
+  <path d="M80 60 Q90 55 97 48" stroke="#166534" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <!-- Cos allargat -->
+  <ellipse cx="50" cy="62" rx="32" ry="14" fill="#166534"/>
+  <!-- Ventre -->
+  <ellipse cx="50" cy="66" rx="28" ry="9" fill="#4ade80"/>
+  <!-- Potes curtes -->
+  <path d="M30 70 Q25 78 20 82" stroke="#166534" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <line x1="20" y1="82" x2="16" y2="85" stroke="#166534" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="20" y1="82" x2="20" y2="86" stroke="#166534" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="20" y1="82" x2="24" y2="85" stroke="#166534" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M42 72 Q40 80 38 84" stroke="#166534" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M60 72 Q62 80 64 84" stroke="#166534" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M72 70 Q78 78 82 82" stroke="#166534" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <line x1="82" y1="82" x2="79" y2="85" stroke="#166534" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="82" y1="82" x2="82" y2="86" stroke="#166534" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="82" y1="82" x2="85" y2="85" stroke="#166534" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Cap aplanat -->
+  <rect x="5" y="53" width="38" height="16" rx="5" fill="#166534"/>
+  <!-- Mandíbula inferior -->
+  <rect x="5" y="64" width="38" height="8" rx="4" fill="#1e7a3e"/>
+  <!-- Dents superiors -->
+  <rect x="10" y="64" width="3" height="6" rx="1" fill="#f5f5f5"/>
+  <rect x="16" y="64" width="3" height="7" rx="1" fill="#f5f5f5"/>
+  <rect x="22" y="64" width="3" height="6" rx="1" fill="#f5f5f5"/>
+  <rect x="28" y="64" width="3" height="7" rx="1" fill="#f5f5f5"/>
+  <rect x="34" y="64" width="3" height="6" rx="1" fill="#f5f5f5"/>
+  <!-- Dents inferiors -->
+  <rect x="13" y="64" width="2" height="5" rx="1" fill="#f5f5f5"/>
+  <rect x="19" y="64" width="2" height="6" rx="1" fill="#f5f5f5"/>
+  <rect x="25" y="64" width="2" height="5" rx="1" fill="#f5f5f5"/>
+  <rect x="31" y="64" width="2" height="6" rx="1" fill="#f5f5f5"/>
+  <!-- Forats narius -->
+  <ellipse cx="12" cy="57" rx="2" ry="1.5" fill="#0f4c26"/>
+  <ellipse cx="18" cy="57" rx="2" ry="1.5" fill="#0f4c26"/>
+  <!-- Ulls prominents -->
+  <ellipse cx="28" cy="52" rx="5" ry="5" fill="#22c55e"/>
+  <circle cx="28" cy="52" r="3" fill="#1a1a1a"/>
+  <circle cx="27" cy="51" r="1" fill="white"/>
+  <ellipse cx="38" cy="52" rx="5" ry="5" fill="#22c55e"/>
+  <circle cx="38" cy="52" r="3" fill="#1a1a1a"/>
+  <circle cx="37" cy="51" r="1" fill="white"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">COCODRIL</text>
+</svg>

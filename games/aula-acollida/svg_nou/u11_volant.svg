@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="vol_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient>
+  <radialGradient id="vol_cos" cx=".4" cy=".35" r="1"><stop offset="0" stop-color="#475569"/><stop offset="1" stop-color="#1e293b"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#vol_bg)"/>
+  <ellipse cx="50" cy="88" rx="26" ry="3.5" fill="#0f172a" opacity=".08"/>
+  <circle cx="50" cy="50" r="36" fill="none" stroke="url(#vol_cos)" stroke-width="10"/>
+  <circle cx="50" cy="50" r="36" fill="none" stroke="#64748b" stroke-width="2" opacity=".4"/>
+  <path d="M20 44 q30 -10 60 0" stroke="#1e293b" stroke-width="8" fill="none"/>
+  <path d="M50 50 v26 M50 50 L28 64 M50 50 L72 64" stroke="#1e293b" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="50" cy="50" r="12" fill="url(#vol_cos)"/>
+  <circle cx="50" cy="50" r="6" fill="#94a3b8"/>
+  <path d="M24 32 q10 -10 24 -11" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".7"/>
+</svg>

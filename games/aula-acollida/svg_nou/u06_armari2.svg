@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="arm_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/></linearGradient>
+  <linearGradient id="arm_fusta" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b45309"/><stop offset="1" stop-color="#92400e"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#arm_bg)"/>
+  <ellipse cx="50" cy="90" rx="30" ry="3.5" fill="#0f172a" opacity=".08"/>
+  <rect x="22" y="10" width="56" height="76" rx="4" fill="url(#arm_fusta)"/>
+  <rect x="26" y="14" width="22" height="58" rx="2" fill="#d97706"/>
+  <rect x="52" y="14" width="22" height="58" rx="2" fill="#c2410c"/>
+  <path d="M30 20 q7 -3 14 0 M30 30 q7 -3 14 0 M56 20 q7 -3 14 0" stroke="#92400e" stroke-width="1.6" fill="none" opacity=".5"/>
+  <rect x="44" y="38" width="3.5" height="12" rx="1.7" fill="#fbbf24"/>
+  <rect x="52.5" y="38" width="3.5" height="12" rx="1.7" fill="#fbbf24"/>
+  <rect x="26" y="76" width="48" height="6" rx="2" fill="#78350f"/>
+  <rect x="26" y="86" width="6" height="4" fill="#57534e"/>
+  <rect x="68" y="86" width="6" height="4" fill="#57534e"/>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Ground -->
+  <rect x="4" y="72" width="92" height="22" rx="4" fill="#d97706" stroke="#92400e" stroke-width="2"/>
+  <!-- Ground lines (tiles/pavement) -->
+  <line x1="4" y1="83" x2="96" y2="83" stroke="#92400e" stroke-width="1.5" stroke-dasharray="8,4"/>
+  <line x1="36" y1="72" x2="36" y2="94" stroke="#92400e" stroke-width="1" stroke-dasharray="6,4"/>
+  <line x1="64" y1="72" x2="64" y2="94" stroke="#92400e" stroke-width="1" stroke-dasharray="6,4"/>
+  <!-- Slide -->
+  <rect x="68" y="28" width="6" height="44" rx="2" fill="#6b7280" stroke="#4b5563" stroke-width="1.5"/>
+  <path d="M74 44 Q86 56 84 72" fill="none" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/>
+  <!-- Swings -->
+  <line x1="20" y1="8" x2="48" y2="8" stroke="#374151" stroke-width="3"/>
+  <line x1="26" y1="8" x2="26" y2="44" stroke="#6b7280" stroke-width="2" stroke-dasharray="4,2"/>
+  <line x1="42" y1="8" x2="42" y2="44" stroke="#6b7280" stroke-width="2" stroke-dasharray="4,2"/>
+  <rect x="20" y="44" width="12" height="5" rx="2.5" fill="#92400e" stroke="#78350f" stroke-width="1.5"/>
+  <rect x="36" y="44" width="12" height="5" rx="2.5" fill="#92400e" stroke="#78350f" stroke-width="1.5"/>
+  <!-- Label -->
+  <text x="50" y="98" font-family="Arial,sans-serif" font-size="8" fill="#92400e" font-weight="700" text-anchor="middle">PATI</text>
+</svg>

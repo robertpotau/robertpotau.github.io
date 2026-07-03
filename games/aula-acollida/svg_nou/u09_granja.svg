@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="gra_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#gra_bg)"/>
+  <circle cx="84" cy="18" r="7" fill="#fde047"/>
+  <path d="M0 74 q25 -6 50 0 t50 0 v10 q0 16 -16 16 H16 Q0 100 0 84 z" fill="#86efac"/>
+  <path d="M14 74 V44 l22 -16 l22 16 v30 z" fill="#dc2626"/>
+  <path d="M14 44 l22 -16 l22 16 l-5 4 l-17 -13 l-17 13 z" fill="#7f1d1d"/>
+  <rect x="28" y="56" width="16" height="18" rx="1.5" fill="#78350f"/>
+  <rect x="30" y="58" width="12" height="16" rx="1" fill="#92400e"/>
+  <path d="M30 58 l12 16 M42 58 l-12 16" stroke="#fef3c7" stroke-width="2"/>
+  <circle cx="36" cy="46" r="5" fill="#fef3c7"/>
+  <circle cx="36" cy="46" r="5" fill="none" stroke="#7f1d1d" stroke-width="1.4"/>
+  <rect x="66" y="56" width="22" height="18" fill="#b45309"/>
+  <polygon points="66,56 88,56 77,44" fill="#92400e"/>
+  <path d="M70 60 h14 M70 66 h14" stroke="#78350f" stroke-width="2"/>
+  <path d="M60 80 q4 -6 10 -3 q5 -4 9 1 q4 3 1 7 h-19 q-4 -2 -1 -5" fill="#fef9c3"/>
+  <path d="M64 82 q5 -3 11 0" stroke="#fbbf24" stroke-width="1.6" fill="none"/>
+</svg>

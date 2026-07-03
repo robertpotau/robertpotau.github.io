@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Pepper stem -->
+  <rect x="48.5" y="18" width="3" height="8" rx="1.5" fill="#15803d"/>
+  <!-- Calyx (green top) -->
+  <path d="M42 26 Q44 22 50 22 Q56 22 58 26 Q54 28 50 27 Q46 28 42 26Z" fill="#15803d"/>
+  <!-- Small leaves at stem -->
+  <path d="M50 22 Q44 18 40 20 Q44 22 50 26Z" fill="#16a34a"/>
+  <path d="M50 22 Q56 18 60 20 Q56 22 50 26Z" fill="#16a34a"/>
+  <!-- Pepper body - 3 lobes -->
+  <!-- Left lobe -->
+  <path d="M32 38 Q24 44 26 60 Q28 74 36 78 Q44 82 50 78 Q44 74 40 66 Q34 54 38 40Z" fill="#ef4444"/>
+  <!-- Center lobe -->
+  <path d="M50 34 Q44 38 40 52 Q38 66 44 76 Q50 82 56 76 Q62 66 60 52 Q56 38 50 34Z" fill="#ef4444"/>
+  <!-- Right lobe -->
+  <path d="M68 38 Q76 44 74 60 Q72 74 64 78 Q56 82 50 78 Q56 74 60 66 Q66 54 62 40Z" fill="#ef4444"/>
+  <!-- Bottom bump (4th lobe suggestion) -->
+  <ellipse cx="50" cy="78" rx="8" ry="5" fill="#dc2626"/>
+  <!-- Highlight left -->
+  <path d="M34 44 Q32 52 34 62 Q38 58 38 48Z" fill="#f87171" opacity="0.5"/>
+  <!-- Highlight center -->
+  <path d="M46 40 Q44 52 46 64 Q50 60 50 48Z" fill="#f87171" opacity="0.4"/>
+  <!-- Highlight right -->
+  <path d="M66 44 Q68 52 66 62 Q62 58 62 48Z" fill="#f87171" opacity="0.5"/>
+  <!-- Vertical lines suggesting lobes -->
+  <path d="M44 32 Q42 50 44 72" stroke="#dc2626" stroke-width="1" fill="none" opacity="0.5"/>
+  <path d="M56 32 Q58 50 56 72" stroke="#dc2626" stroke-width="1" fill="none" opacity="0.5"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PEBROT</text>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="vor_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#vor_bg)"/>
+  <path d="M0 70 h100 v14 q0 16 -16 16 H16 Q0 100 0 84 z" fill="#334155"/>
+  <path d="M0 42 h100 v22 H0 z" fill="#cbd5e1"/>
+  <path d="M0 64 h100 v6 H0 z" fill="#94a3b8"/>
+  <g stroke="#94a3b8" stroke-width="1.8">
+    <path d="M18 42 v22 M38 42 v22 M58 42 v22 M78 42 v22"/>
+  </g>
+  <path d="M2 53 h96" stroke="#e2e8f0" stroke-width="1.4" opacity=".7"/>
+  <rect x="64" y="14" width="7" height="28" fill="#475569"/>
+  <path d="M67.5 14 q10 0 10 8" stroke="#475569" stroke-width="4" fill="none"/>
+  <ellipse cx="79" cy="24" rx="4.5" ry="3" fill="#fde047"/>
+  <path d="M22 80 h12 M48 80 h12 M74 80 h12" stroke="#fde047" stroke-width="3" stroke-linecap="round"/>
+  <path d="M14 30 q4 -3 8 0 M82 32 q4 -3 8 0" stroke="#f8fafc" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".8"/>
+</svg>

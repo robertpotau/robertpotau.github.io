@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Cistern/tank -->
+  <rect x="26" y="6" width="48" height="28" rx="5" fill="#f1f5f9" stroke="#9ca3af" stroke-width="2.5"/>
+  <!-- Flush button -->
+  <ellipse cx="50" cy="20" rx="8" ry="5" fill="#e5e7eb" stroke="#9ca3af" stroke-width="1.5"/>
+  <!-- Bowl top rim -->
+  <ellipse cx="50" cy="40" rx="38" ry="10" fill="white" stroke="#9ca3af" stroke-width="2.5"/>
+  <!-- Seat -->
+  <path d="M14 42 Q12 68 24 78 Q34 88 50 88 Q66 88 76 78 Q88 68 86 42 Z" fill="#f9fafb" stroke="#9ca3af" stroke-width="2"/>
+  <!-- Bowl inner -->
+  <ellipse cx="50" cy="68" rx="24" ry="16" fill="#e0f2fe" stroke="#7dd3fc" stroke-width="1.5"/>
+  <!-- Water highlight -->
+  <path d="M32 66 Q42 62 58 66" fill="none" stroke="#7dd3fc" stroke-width="2" stroke-linecap="round"/>
+  <!-- Connection pipe -->
+  <rect x="44" y="32" width="12" height="10" rx="2" fill="#d1d5db" stroke="#9ca3af" stroke-width="1.5"/>
+</svg>

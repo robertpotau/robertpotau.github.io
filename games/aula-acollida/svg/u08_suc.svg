@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Got de suc de taronja -->
+  <!-- Got cilíndric -->
+  <path d="M 28 25 L 32 82 L 68 82 L 72 25 Z" fill="#bae6fd" opacity="0.6"/>
+  <path d="M 28 25 L 32 82 L 68 82 L 72 25 Z" fill="none" stroke="#7dd3fc" stroke-width="2.5"/>
+  <!-- Suc de taronja -->
+  <path d="M 29.5 38 L 32 82 L 68 82 L 70.5 38 Z" fill="#fb923c" opacity="0.85"/>
+  <!-- Bombolles -->
+  <circle cx="40" cy="65" r="3" fill="#fed7aa" opacity="0.7"/>
+  <circle cx="55" cy="55" r="2" fill="#fed7aa" opacity="0.7"/>
+  <circle cx="62" cy="70" r="2.5" fill="#fed7aa" opacity="0.7"/>
+  <circle cx="45" cy="75" r="1.5" fill="#fed7aa" opacity="0.7"/>
+  <!-- Reflexos got -->
+  <rect x="30" y="28" width="4" height="50" rx="2" fill="white" opacity="0.3"/>
+  <!-- Tapadora superior (got obert) -->
+  <ellipse cx="50" cy="25" rx="22" ry="5" fill="#e0f2fe" opacity="0.8"/>
+  <!-- Rodanxa de taronja al cantell -->
+  <circle cx="72" cy="30" r="13" fill="#f97316"/>
+  <circle cx="72" cy="30" r="10" fill="#fdba74"/>
+  <!-- Segments de la taronja -->
+  <line x1="72" y1="20" x2="72" y2="40" stroke="#f97316" stroke-width="1.5"/>
+  <line x1="62" y1="30" x2="82" y2="30" stroke="#f97316" stroke-width="1.5"/>
+  <line x1="65" y1="23" x2="79" y2="37" stroke="#f97316" stroke-width="1"/>
+  <line x1="65" y1="37" x2="79" y2="23" stroke="#f97316" stroke-width="1"/>
+  <!-- Tall a cantell del got -->
+  <rect x="69" y="27" width="6" height="4" fill="#fb923c"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">SUC</text>
+</svg>

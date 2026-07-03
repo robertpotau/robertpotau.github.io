@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Head -->
+  <circle cx="50" cy="26" r="18" fill="#f5cba7" stroke="#c0835a" stroke-width="2"/>
+  <!-- Hair (medium-long, slightly wavy, chestnut) -->
+  <path d="M32 22 Q32 8 50 8 Q68 8 68 22 Q62 13 50 13 Q38 13 32 22 Z" fill="#6b3a2a"/>
+  <!-- Side hair (longer) -->
+  <path d="M32 22 Q28 32 30 45 Q34 36 34 28 Z" fill="#6b3a2a"/>
+  <path d="M68 22 Q72 32 70 45 Q66 36 66 28 Z" fill="#6b3a2a"/>
+  <!-- Wavy ends -->
+  <path d="M30 45 Q32 50 30 54 Q34 50 36 54 Q36 48 34 45 Z" fill="#6b3a2a"/>
+  <path d="M70 45 Q68 50 70 54 Q66 50 64 54 Q64 48 66 45 Z" fill="#6b3a2a"/>
+  <!-- Eyes -->
+  <circle cx="43" cy="24" r="2.5" fill="#333"/>
+  <circle cx="57" cy="24" r="2.5" fill="#333"/>
+  <!-- Light in eyes -->
+  <circle cx="44" cy="23" r="1" fill="white"/>
+  <circle cx="58" cy="23" r="1" fill="white"/>
+  <!-- Smile -->
+  <path d="M44 33 Q50 38 56 33" fill="none" stroke="#c0835a" stroke-width="2" stroke-linecap="round"/>
+  <!-- Neck -->
+  <rect x="43" y="42" width="14" height="7" rx="2" fill="#f5cba7"/>
+  <!-- Body (blouse/dress, lilac) -->
+  <path d="M28 49 Q18 49 15 60 L12 90 L88 90 L85 60 Q82 49 72 49 Z" fill="#8b5cf6" stroke="#7c3aed" stroke-width="2"/>
+  <!-- Collar / neckline (V-shape) -->
+  <path d="M43 49 L50 60 L57 49" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Decorative button -->
+  <circle cx="50" cy="64" r="2" fill="#7c3aed"/>
+  <circle cx="50" cy="74" r="2" fill="#7c3aed"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TIA</text>
+</svg>

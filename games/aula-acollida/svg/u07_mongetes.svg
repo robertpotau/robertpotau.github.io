@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" fill="#f0fdf4" rx="12"/>
+  <!-- Bean pod (beina) -->
+  <ellipse cx="50" cy="48" rx="38" ry="16" fill="#ef4444"/>
+  <!-- Pod curve top -->
+  <path d="M12 48 Q20 30 50 28 Q80 30 88 48" fill="none" stroke="#b91c1c" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Seeds inside visible through pod split -->
+  <ellipse cx="28" cy="48" rx="7" ry="9" fill="#fef3c7" stroke="#fde68a" stroke-width="1.5"/>
+  <ellipse cx="43" cy="49" rx="7" ry="9" fill="#fef3c7" stroke="#fde68a" stroke-width="1.5"/>
+  <ellipse cx="58" cy="49" rx="7" ry="9" fill="#fef3c7" stroke="#fde68a" stroke-width="1.5"/>
+  <ellipse cx="73" cy="48" rx="6" ry="8" fill="#fef3c7" stroke="#fde68a" stroke-width="1.5"/>
+  <!-- Pod bottom -->
+  <path d="M12 48 Q20 64 50 66 Q80 64 88 48" fill="#dc2626" stroke="#b91c1c" stroke-width="1.5"/>
+  <!-- Stem -->
+  <path d="M50 32 Q52 24 56 20" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Leaf -->
+  <ellipse cx="58" cy="19" rx="7" ry="4" fill="#4ade80" transform="rotate(-20 58 19)"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MONGETES</text>
+</svg>

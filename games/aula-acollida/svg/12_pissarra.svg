@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 85">
+  <!-- marc exterior (gris fosc) -->
+  <rect x="2" y="2" width="116" height="66" rx="4" fill="#374151"/>
+  <!-- superfície verda -->
+  <rect x="8" y="8" width="104" height="54" fill="#166534"/>
+  <!-- llisadora inferior (on es deixa el guix) -->
+  <rect x="2" y="68" width="116" height="12" rx="3" fill="#6b7280"/>
+  <!-- potes -->
+  <rect x="25" y="79" width="6" height="6" rx="1" fill="#4b5563"/>
+  <rect x="89" y="79" width="6" height="6" rx="1" fill="#4b5563"/>
+  <!-- línia de guix dibuixada a la pissarra -->
+  <line x1="20" y1="28" x2="60" y2="28" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="20" y1="38" x2="45" y2="38" stroke="white" stroke-width="2" opacity="0.4"/>
+</svg>

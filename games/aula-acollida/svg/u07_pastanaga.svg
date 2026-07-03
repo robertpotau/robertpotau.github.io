@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Pastanaga body -->
+  <path d="M50 20 Q62 22 68 45 Q70 60 60 78 Q55 86 50 88 Q45 86 40 78 Q30 60 32 45 Q38 22 50 20 Z" fill="#f97316" stroke="#ea580c" stroke-width="2"/>
+  <!-- Highlight -->
+  <path d="M44 28 Q41 42 42 58" stroke="#fb923c" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <!-- Green top leaves -->
+  <path d="M50 20 Q48 8 40 4 Q46 14 50 20 Z" fill="#16a34a"/>
+  <path d="M50 20 Q52 6 62 2 Q54 13 50 20 Z" fill="#15803d"/>
+  <path d="M50 20 Q44 10 34 8 Q42 16 50 20 Z" fill="#4ade80"/>
+  <path d="M50 20 Q56 8 66 10 Q57 17 50 20 Z" fill="#22c55e"/>
+  <!-- Tip -->
+  <path d="M50 86 Q49 90 50 94 Q51 90 50 86 Z" fill="#ea580c"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PASTANAGA</text>
+</svg>

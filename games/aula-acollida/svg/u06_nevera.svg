@@ -1,0 +1,19 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cos nevera -->
+  <rect x="22" y="10" width="56" height="78" rx="6" fill="#e2e8f0"/>
+  <!-- Separació congelador/nevera -->
+  <line x1="22" y1="38" x2="78" y2="38" stroke="#94a3b8" stroke-width="2"/>
+  <!-- Zona congelador -->
+  <rect x="24" y="12" width="52" height="24" rx="4" fill="#d1d5db"/>
+  <!-- Línies congelador -->
+  <line x1="28" y1="18" x2="72" y2="18" stroke="#bae6fd" stroke-width="2" stroke-linecap="round"/>
+  <line x1="28" y1="24" x2="72" y2="24" stroke="#bae6fd" stroke-width="2" stroke-linecap="round"/>
+  <line x1="28" y1="30" x2="72" y2="30" stroke="#bae6fd" stroke-width="2" stroke-linecap="round"/>
+  <!-- Pom congelador -->
+  <rect x="65" y="21" width="8" height="4" rx="2" fill="#94a3b8"/>
+  <!-- Pom nevera -->
+  <rect x="65" y="55" width="8" height="4" rx="2" fill="#94a3b8"/>
+  <!-- Contorn porta nevera -->
+  <rect x="24" y="40" width="52" height="46" rx="4" fill="#d1d5db" opacity="0.4"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">NEVERA</text>
+</svg>

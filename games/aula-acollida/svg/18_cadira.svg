@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 105">
+  <!-- respatller -->
+  <rect x="12" y="5" width="56" height="42" rx="6" fill="#4f46e5"/>
+  <!-- coixí interior del respatller -->
+  <rect x="18" y="11" width="44" height="30" rx="4" fill="#6366f1"/>
+  <!-- seient -->
+  <rect x="8" y="50" width="64" height="15" rx="6" fill="#4f46e5"/>
+  <!-- potes del davant -->
+  <rect x="14" y="65" width="10" height="34" rx="3" fill="#312e81"/>
+  <rect x="56" y="65" width="10" height="34" rx="3" fill="#312e81"/>
+  <!-- potes del darrere (darrere del respatller) -->
+  <rect x="17" y="40" width="10" height="26" rx="2" fill="#312e81"/>
+  <rect x="53" y="40" width="10" height="26" rx="2" fill="#312e81"/>
+</svg>

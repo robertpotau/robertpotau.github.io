@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Pear body (base) -->
+  <ellipse cx="50" cy="68" rx="22" ry="24" fill="#a3e635"/>
+  <!-- Pear neck -->
+  <ellipse cx="50" cy="44" rx="10" ry="12" fill="#a3e635"/>
+  <!-- Shading highlight -->
+  <ellipse cx="43" cy="60" rx="7" ry="10" fill="#d9f99d" opacity="0.6"/>
+  <!-- Stem -->
+  <rect x="49" y="30" width="2.5" height="10" rx="1" fill="#92400e"/>
+  <!-- Leaf -->
+  <ellipse cx="56" cy="33" rx="8" ry="4" fill="#4ade80" transform="rotate(-30,56,33)"/>
+  <line x1="51" y1="33" x2="60" y2="30" stroke="#16a34a" stroke-width="0.8"/>
+  <!-- Center line (subtle) -->
+  <path d="M50 48 Q52 58 51 82" stroke="#84cc16" stroke-width="1" fill="none" opacity="0.5"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PERA</text>
+</svg>

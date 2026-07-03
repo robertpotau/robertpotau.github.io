@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Cos -->
+  <ellipse cx="50" cy="65" rx="28" ry="20" fill="#c8a06a"/>
+  <!-- Cua enlaire -->
+  <path d="M78 60 Q90 45 85 38 Q82 35 79 38 Q83 44 74 57Z" fill="#c8a06a"/>
+  <!-- Cap -->
+  <circle cx="50" cy="38" r="18" fill="#c8a06a"/>
+  <!-- Morro pronunciat -->
+  <ellipse cx="50" cy="48" rx="10" ry="7" fill="#b08050"/>
+  <!-- Orella esquerra caiguda -->
+  <ellipse cx="34" cy="34" rx="7" ry="11" fill="#a07040" transform="rotate(-15 34 34)"/>
+  <!-- Orella dreta caiguda -->
+  <ellipse cx="66" cy="34" rx="7" ry="11" fill="#a07040" transform="rotate(15 66 34)"/>
+  <!-- Ull esquerre -->
+  <circle cx="43" cy="35" r="3" fill="#1a1a1a"/>
+  <circle cx="44" cy="34" r="1" fill="#fff"/>
+  <!-- Ull dret -->
+  <circle cx="57" cy="35" r="3" fill="#1a1a1a"/>
+  <circle cx="58" cy="34" r="1" fill="#fff"/>
+  <!-- Nas -->
+  <ellipse cx="50" cy="46" rx="4" ry="3" fill="#1a1a1a"/>
+  <!-- Potes davanteres -->
+  <rect x="30" y="78" width="8" height="12" rx="4" fill="#c8a06a"/>
+  <rect x="62" y="78" width="8" height="12" rx="4" fill="#c8a06a"/>
+  <!-- Potes del darrere -->
+  <rect x="22" y="75" width="8" height="12" rx="4" fill="#b08050"/>
+  <rect x="70" y="75" width="8" height="12" rx="4" fill="#b08050"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GOS</text>
+</svg>

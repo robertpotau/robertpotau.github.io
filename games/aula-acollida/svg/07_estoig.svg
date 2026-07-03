@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 56">
+  <!-- cos principal (taronja) -->
+  <rect x="5" y="8" width="110" height="42" rx="14" fill="#f97316"/>
+  <!-- meitat superior (taronja fosc) -->
+  <rect x="5" y="8" width="110" height="20" rx="14" fill="#ea580c"/>
+  <!-- línia de la cremallera -->
+  <line x1="8" y1="28" x2="112" y2="28" stroke="#c2410c" stroke-width="1.5"/>
+  <!-- tirador de la cremallera -->
+  <circle cx="60" cy="8" r="5" fill="#c2410c"/>
+  <rect x="56" y="3" width="8" height="6" rx="2" fill="#9a3412"/>
+</svg>

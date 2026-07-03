@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="gat_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#gat_bg)"/>
+  <ellipse cx="50" cy="86" rx="28" ry="4" fill="#0f172a" opacity=".08"/>
+  <polygon points="24,40 20,14 44,26" fill="#57534e"/>
+  <polygon points="26,36 24,20 38,28" fill="#f9a8d4"/>
+  <polygon points="76,40 80,14 56,26" fill="#44403c"/>
+  <polygon points="74,36 76,20 62,28" fill="#f9a8d4"/>
+  <circle cx="50" cy="54" r="29" fill="#57534e"/>
+  <path d="M28 40 q8 -10 22 -10 q14 0 22 10" fill="#44403c" opacity="0"/>
+  <path d="M38 48 q3 -4 7 -2 q1 4 -2 6 q-4 1 -5 -4" fill="#fde047"/>
+  <circle cx="41" cy="50" r="2.2" fill="#1e293b"/>
+  <path d="M62 48 q-3 -4 -7 -2 q-1 4 2 6 q4 1 5 -4" fill="#fde047"/>
+  <circle cx="59" cy="50" r="2.2" fill="#1e293b"/>
+  <polygon points="50,60 46.5,64.5 53.5,64.5" fill="#f9a8d4"/>
+  <path d="M50 64.5 v3 M50 67.5 q-4 4 -8 1 M50 67.5 q4 4 8 1" stroke="#292524" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  <g stroke="#d6d3d1" stroke-width="1.6" stroke-linecap="round">
+    <path d="M30 58 l-12 -2 M31 63 l-11 2"/>
+    <path d="M70 58 l12 -2 M69 63 l11 2"/>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 65">
+  <!-- part de feltre (gris clar, baix) -->
+  <rect x="5" y="26" width="90" height="30" rx="4" fill="#d1d5db" stroke="#9ca3af" stroke-width="1.5"/>
+  <!-- mànec superior (gris fosc) -->
+  <rect x="5" y="14" width="90" height="16" rx="4" fill="#6b7280"/>
+  <!-- texture del feltre -->
+  <rect x="10" y="30" width="80" height="20" rx="2" fill="#e5e7eb" opacity="0.6"/>
+  <!-- línies del feltre -->
+  <line x1="28" y1="31" x2="28" y2="50" stroke="#9ca3af" stroke-width="1" opacity="0.5"/>
+  <line x1="50" y1="31" x2="50" y2="50" stroke="#9ca3af" stroke-width="1" opacity="0.5"/>
+  <line x1="72" y1="31" x2="72" y2="50" stroke="#9ca3af" stroke-width="1" opacity="0.5"/>
+</svg>

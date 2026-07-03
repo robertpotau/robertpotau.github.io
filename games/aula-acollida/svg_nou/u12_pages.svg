@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="pag_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#pag_bg)"/>
+  <circle cx="84" cy="16" r="7" fill="#fde047"/>
+  <path d="M0 78 q25 -6 50 0 t50 0 v6 q0 16 -16 16 H16 Q0 100 0 84 z" fill="#a16207"/>
+  <path d="M6 82 q10 -3 20 0 M40 84 q10 -3 20 0 M70 82 q10 -3 20 0" stroke="#854d0e" stroke-width="2" fill="none"/>
+  <circle cx="42" cy="30" r="10" fill="#fcd9b8"/>
+  <path d="M28 28 q2 -10 14 -10 q12 0 14 10 l2 2 h-32 z" fill="#d6a35c"/>
+  <ellipse cx="42" cy="30" rx="18" ry="3.4" fill="#b45309"/>
+  <circle cx="39" cy="32" r="1.4" fill="#1e293b"/><circle cx="45.5" cy="32" r="1.4" fill="#1e293b"/>
+  <path d="M40 37 q2.5 1.8 5 0" stroke="#92400e" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+  <path d="M28 80 q-2 -28 14 -28 q16 0 14 28 z" fill="#1e40af"/>
+  <path d="M36 52 q-2 14 0 28 M48 52 q2 14 0 28" stroke="#1e3a8a" stroke-width="3"/>
+  <path d="M54 58 q8 2 9 10" stroke="#fcd9b8" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M64 68 v14" stroke="#92400e" stroke-width="3" stroke-linecap="round"/>
+  <path d="M58 60 q6 -4 12 0 l-2 4 q-4 -2 -8 0 z" fill="#94a3b8" opacity="0"/>
+  <path d="M58 84 q6 -5 12 0 l-1 3 h-10 z" fill="#94a3b8"/>
+  <g transform="translate(74 56)">
+    <path d="M0 8 q4 -8 10 -8 q-1 9 -10 8" fill="#16a34a"/>
+    <path d="M4 8 v10" stroke="#15803d" stroke-width="2"/>
+  </g>
+</svg>

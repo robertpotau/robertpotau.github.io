@@ -1,0 +1,4027 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joc Geometria 1r ESO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+Math&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* ── TEMAS ── */
+    :root {
+      --bg-main: #1a1a2e;
+      --bg-card: #0f3460;
+      --accent: #f7c948;
+      --success: #4ade80;
+      --error: #f87171;
+      --text-main: #fff;
+      --text-sub: rgba(255, 255, 255, 0.5);
+    }
+
+    body.tema-dia {
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      --bg-main: #f5f5f5;
+      --bg-card: #ffffff;
+      --accent: #d97706;
+      --success: #10b981;
+      --error: #ef4444;
+      --text-main: #1a1a1a;
+      --text-sub: rgba(0, 0, 0, 0.5);
+    }
+
+    /* ── LAYOUT PRINCIPAL ── */
+    .container {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .screen {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    .screen.active { display: flex; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* ── LOGO I HEADER ── */
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .logo p {
+      color: var(--text-sub);
+      font-size: 0.95rem;
+    }
+
+    /* ── BOTO BACK ── */
+    .back-btn {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-main);
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      transition: 0.2s;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── PROFILE SLOTS ── */
+    .profile-slot {
+      width: 100%;
+      background: var(--bg-card);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .profile-slot:hover:not(.empty) {
+      border-color: var(--accent);
+      background: rgba(247, 201, 72, 0.05);
+      transform: translateX(4px);
+    }
+
+    .profile-slot.active {
+      border-color: var(--accent);
+      background: rgba(247, 201, 72, 0.1);
+    }
+
+    .profile-slot.empty {
+      opacity: 0.6;
+      border-style: dashed;
+    }
+
+    .profile-slot-avatar {
+      font-size: 3rem;
+      flex-shrink: 0;
+    }
+
+    .profile-slot-info {
+      flex: 1;
+    }
+
+    .profile-slot-nom {
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .profile-slot-rang {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      margin-bottom: 2px;
+    }
+
+    .profile-slot-xp {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .profile-slot-del {
+      background: rgba(248, 113, 113, 0.2);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: #f87171;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+      flex-shrink: 0;
+    }
+
+    .profile-slot-del:hover {
+      background: rgba(248, 113, 113, 0.4);
+    }
+
+    /* ── FORM INPUTS ── */
+    .form-group {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: 0.2s;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(247, 201, 72, 0.05);
+    }
+
+    /* ── BUTTON GROUPS (Gender) ── */
+    .button-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .gender-btn, .avatar-swatch {
+      background: var(--bg-card);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .gender-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .gender-btn.selected {
+      border-color: var(--accent);
+      background: rgba(247, 201, 72, 0.15);
+    }
+
+    /* ── AVATAR SECTIONS ── */
+    .avatar-section {
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .avatar-section.sec-masc {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .avatar-section.sec-fem {
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(236, 72, 153, 0.05));
+      border: 1px solid rgba(236, 72, 153, 0.3);
+    }
+
+    .avatar-section.sec-neut {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05));
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .avatar-section-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+
+    .avatar-picker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .avatar-btn {
+      font-size: 1.8rem;
+      padding: 8px;
+      border-radius: 12px;
+      border: 2.5px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.05);
+      transition: all 0.15s;
+      line-height: 1;
+    }
+
+    .avatar-btn:hover {
+      transform: scale(1.15);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent);
+    }
+
+    .avatar-btn.selected {
+      border-color: var(--accent);
+      background: rgba(247, 201, 72, 0.2);
+      box-shadow: 0 0 0 3px rgba(247, 201, 72, 0.2);
+      transform: scale(1.1);
+    }
+
+    /* ── SKIN SWATCHES IMPROVED ── */
+    .skin-swatches {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .skin-swatch {
+      background: var(--bg-card);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skin-swatch:hover {
+      border-color: var(--accent);
+      background: rgba(247, 201, 72, 0.05);
+    }
+
+    .skin-swatch.selected {
+      border-color: var(--accent);
+      background: rgba(247, 201, 72, 0.15);
+      box-shadow: 0 0 0 3px rgba(247, 201, 72, 0.2);
+    }
+
+    .skin-color {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .skin-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-sub);
+    }
+
+    .skin-swatch.selected .skin-label {
+      color: var(--accent);
+    }
+
+    /* ── CONFETTI ── */
+    .confetti {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.5rem;
+      z-index: 200;
+    }
+
+    @keyframes confetti-fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* ── GAME CARDS ── */
+    .game-card {
+      background: var(--bg-card);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 24px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 160px;
+      justify-content: center;
+    }
+
+    .game-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(247, 201, 72, 0.5);
+      background: rgba(247, 201, 72, 0.08);
+      box-shadow: 0 8px 24px rgba(247, 201, 72, 0.2);
+    }
+
+    .game-icon {
+      font-size: 3rem;
+    }
+
+    .game-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .game-desc {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+    }
+
+    .game-level {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    /* ── AVATAR PREVIEW ── */
+    .avatar-preview {
+      font-size: 4rem;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    /* ── BOTTONS PRINCIPALS ── */
+    .btn-primary, .btn-secondary {
+      padding: 14px 28px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #d97706);
+      color: #1a1a2e;
+      box-shadow: 0 8px 24px rgba(247, 201, 72, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(247, 201, 72, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* ── MENU GRID ── */
+    .menu-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .menu-item {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .menu-item:hover {
+      border-color: var(--accent);
+      background: rgba(247, 201, 72, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .menu-item-icon {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+
+    .menu-item-text {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    /* ── PROFILE BAR ── */
+    .profile-bar {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-bar-avatar {
+      font-size: 2.5rem;
+    }
+
+    .profile-bar-info {
+      flex: 1;
+    }
+
+    .profile-bar-nom {
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .profile-bar-rang {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+    }
+
+    .profile-bar-xp {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.3);
+      margin-top: 2px;
+    }
+
+    /* ── EXERCISE CONTAINER ── */
+    .exercise-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .exercise-question {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .exercise-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .exercise-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .input-group input {
+      flex: 1;
+    }
+
+    .input-group label {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      align-self: center;
+      min-width: 40px;
+    }
+
+    /* ── IDENTIFY OPTIONS ── */
+    .option-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .option-btn {
+      background: var(--bg-card);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+      padding: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+
+    .option-btn:hover {
+      border-color: var(--accent);
+      background: rgba(247, 201, 72, 0.05);
+    }
+
+    .option-btn.selected {
+      border-color: var(--accent);
+      background: rgba(247, 201, 72, 0.15);
+    }
+
+    /* ── SHAPE DISPLAY ── */
+    .shape-display {
+      background: var(--bg-card);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 240px;
+      margin-bottom: 20px;
+    }
+
+    .shape-svg {
+      max-width: 100%;
+      max-height: 220px;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    }
+
+    /* ── FORMULA DISPLAY ── */
+    .formula-box {
+      background: linear-gradient(135deg, rgba(247, 201, 72, 0.12), rgba(74, 222, 128, 0.08));
+      border: 2px solid rgba(247, 201, 72, 0.4);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-family: 'Noto Sans Math', 'Nunito', sans-serif;
+      text-align: center;
+      font-size: 1.1rem;
+      letter-spacing: 0.03em;
+      color: var(--text-main);
+      line-height: 1.8;
+    }
+
+    .formula-box strong {
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    .formula-box .formula-sep {
+      display: inline-block;
+      width: 24px;
+    }
+
+    /* ── FRACTION DISPLAY ── */
+    .fraction {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      margin: 0 2px;
+    }
+
+    .fraction-num {
+      border-bottom: 2px solid currentColor;
+      padding: 0 4px;
+      line-height: 1.2;
+      font-size: 0.9em;
+    }
+
+    .fraction-den {
+      padding: 0 4px;
+      line-height: 1.2;
+      font-size: 0.9em;
+    }
+
+    /* ── STEP-BY-STEP FEEDBACK ── */
+    .steps-box {
+      background: rgba(247, 201, 72, 0.08);
+      border: 1px solid rgba(247, 201, 72, 0.25);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 14px 0;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .steps-box .steps-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .steps-box .step-line {
+      font-family: 'Noto Sans Math', 'Nunito', sans-serif;
+      color: var(--text-main);
+    }
+
+    /* ── PROGRESS BAR PER FORMA ── */
+    .forma-prog-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      padding: 0 4px;
+    }
+    .forma-prog-bar {
+      flex: 1;
+      height: 7px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .forma-prog-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+
+    /* ── INPUT IMPROVEMENTS ── */
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-field label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+    }
+
+    .input-field input {
+      padding: 14px 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: rgba(247, 201, 72, 0.05);
+      border: 2px solid rgba(247, 201, 72, 0.2);
+      border-radius: 10px;
+      color: var(--text-main);
+      transition: 0.2s;
+    }
+
+    .input-field input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(247, 201, 72, 0.1);
+      box-shadow: 0 0 0 3px rgba(247, 201, 72, 0.15);
+    }
+
+    .input-field input::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ── INPUT GRID ── */
+    .inputs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    @media (max-width: 500px) {
+      .inputs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── RESULT ANIMATION ── */
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #result-quadrat,
+    #result-rectangle,
+    #result-triangle {
+      animation: slideUp 0.4s ease-out;
+    }
+
+    /* ── SUCCESS/ERROR STYLING ── */
+    .correct-box {
+      background: linear-gradient(135deg, rgba(74, 222, 128, 0.15), rgba(74, 222, 128, 0.05));
+      border: 2px solid rgba(74, 222, 128, 0.4);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .error-box {
+      background: linear-gradient(135deg, rgba(248, 113, 113, 0.15), rgba(248, 113, 113, 0.05));
+      border: 2px solid rgba(248, 113, 113, 0.4);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* ── CREDITS ── */
+    .credit-section {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 16px;
+      transition: 0.2s;
+    }
+
+    .credit-section:hover {
+      border-color: rgba(247, 201, 72, 0.3);
+      background: rgba(247, 201, 72, 0.05);
+    }
+
+    .credit-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(247, 201, 72, 0.3);
+    }
+
+    .credit-person {
+      padding: 12px;
+      background: var(--bg-main);
+      border-radius: 10px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .credit-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .credit-role {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .credit-desc {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+
+    /* ── TROPHIES ── */
+    .trophy-grid {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .trophy-cat-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      padding: 12px 0 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .trophy-cat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .trophy-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+      transition: 0.2s;
+    }
+
+    .trophy-card.unlocked {
+      border-color: rgba(247, 201, 72, 0.5);
+      background: rgba(247, 201, 72, 0.08);
+    }
+
+    .trophy-card.locked {
+      opacity: 0.4;
+    }
+
+    .trophy-icon {
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+
+    .trophy-name {
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .trophy-desc {
+      font-size: 0.65rem;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 500px) {
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+      .logo h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     PANTALLA: PORTADA (SPLASH SCREEN)
+     ══════════════════════════════════════════════ -->
+<div class="screen active" id="screen-portada">
+  <div class="container" style="justify-content: center; height: 100vh;">
+    <div style="text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 28px;">
+
+      <!-- SVG Figures amb animacions - Fila 1 -->
+      <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; width: 100%; max-width: 450px;">
+        <!-- Quadrat -->
+        <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite;">
+          <rect x="15" y="15" width="70" height="70" fill="rgba(59, 130, 246, 0.3)" stroke="#3b82f6" stroke-width="3" rx="2"/>
+        </svg>
+        <!-- Triangle -->
+        <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 0.1s;">
+          <polygon points="50,10 85,85 15,85" fill="rgba(168, 85, 247, 0.3)" stroke="#a855f7" stroke-width="3"/>
+        </svg>
+        <!-- Rectangle -->
+        <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 0.2s;">
+          <rect x="10" y="30" width="80" height="50" fill="rgba(34, 197, 94, 0.3)" stroke="#22c55e" stroke-width="3" rx="2"/>
+        </svg>
+        <!-- Romboide -->
+        <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 0.3s;">
+          <polygon points="25,35 65,25 75,65 35,75" fill="rgba(236, 72, 153, 0.3)" stroke="#ec4899" stroke-width="3"/>
+        </svg>
+        <!-- Rombo -->
+        <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 0.4s;">
+          <polygon points="50,15 80,50 50,85 20,50" fill="rgba(246, 113, 113, 0.3)" stroke="#f67171" stroke-width="3"/>
+        </svg>
+        <!-- Trapezi -->
+        <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 0.5s;">
+          <polygon points="30,30 70,30 85,80 15,80" fill="rgba(59, 245, 245, 0.3)" stroke="#3bf5f5" stroke-width="3"/>
+        </svg>
+        <!-- Pentàgon -->
+        <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 0.6s;">
+          <polygon points="50,10 88,38 73,82 27,82 12,38" fill="rgba(165, 142, 251, 0.3)" stroke="#a58efb" stroke-width="3"/>
+        </svg>
+        <!-- Hexàgon -->
+        <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 0.7s;">
+          <polygon points="50,10 88,32 88,68 50,90 12,68 12,32" fill="rgba(251, 146, 60, 0.3)" stroke="#fb923c" stroke-width="3"/>
+        </svg>
+        <!-- Octàgon -->
+        <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 0.8s;">
+          <polygon points="35,12 65,12 88,35 88,65 65,88 35,88 12,65 12,35" fill="rgba(132, 204, 22, 0.3)" stroke="#84cc16" stroke-width="3"/>
+        </svg>
+        <!-- Cercle -->
+        <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 0.9s;">
+          <circle cx="50" cy="50" r="35" fill="rgba(244, 63, 94, 0.3)" stroke="#f43f5e" stroke-width="3"/>
+        </svg>
+        <!-- Identificar -->
+        <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 1s;">
+          <circle cx="50" cy="30" r="12" fill="rgba(139, 92, 246, 0.3)" stroke="#8b5cf6" stroke-width="3"/>
+          <path d="M35,55 Q50,65 65,55" fill="none" stroke="#8b5cf6" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="logo">
+        <h1 style="font-size: 2.6rem; line-height: 1.3; font-weight: 900;">Joc de Geometria<br>per 1r d'ESO</h1>
+      </div>
+
+      <div style="color: var(--text-sub); font-size: 0.95rem; max-width: 380px; line-height: 1.6;">
+        Aprèn perímetres i àrees de formes geomètriques jugant. Practica amb quadrats, rectangles, triangles i moltes més formes!
+      </div>
+
+      <button class="btn-primary" onclick="showScreen('screen-profile-select'); renderProfileSlots();" style="margin-top: 20px; min-width: 200px; padding: 16px 40px; font-size: 1.1rem; font-weight: 700;">
+        Juga
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PANTALLA: SELECCIO DE PERFIL
+     ══════════════════════════════════════════════ -->
+<div class="screen" id="screen-profile-select">
+  <div class="container">
+    <div class="logo">
+      <h1>📐 Joc Geometria</h1>
+      <p>1r ESO</p>
+    </div>
+    <div style="width: 100%;" id="profile-slots-list"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PANTALLA: CREAR PERFIL
+     ══════════════════════════════════════════════ -->
+<div class="screen" id="screen-profile">
+  <div class="container">
+    <button class="back-btn" onclick="showScreen('screen-profile-select'); renderProfileSlots();">← Tornar</button>
+
+    <div class="logo">
+      <h1>📐 Crear Perfil</h1>
+    </div>
+
+    <div class="avatar-preview" id="avatar-preview">👤</div>
+
+    <div style="width: 100%;">
+      <div class="form-group">
+        <label class="form-label">Nom</label>
+        <input type="text" id="inp-name" placeholder="El teu nom...">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Gènere</label>
+        <div class="button-group">
+          <button class="gender-btn selected" onclick="selectGender('M')">♂️ Masculi</button>
+          <button class="gender-btn" onclick="selectGender('F')">♀️ Femení</button>
+          <button class="gender-btn" onclick="selectGender('N')">⚪ Neutre</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Tria el teu avatar</label>
+
+        <!-- MASCULÍ -->
+        <div class="avatar-section sec-masc">
+          <div class="avatar-section-title">🦸 Noi</div>
+          <div class="avatar-picker" id="av-masc"></div>
+        </div>
+
+        <!-- FEMENÍ -->
+        <div class="avatar-section sec-fem">
+          <div class="avatar-section-title">💃 Noia</div>
+          <div class="avatar-picker" id="av-fem"></div>
+        </div>
+
+        <!-- NEUTRE -->
+        <div class="avatar-section sec-neut">
+          <div class="avatar-section-title">🌟 Animals i fantasia</div>
+          <div class="avatar-picker" id="av-neut"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">To de pell</label>
+        <div class="skin-swatches" id="skin-wrap">
+          <button class="skin-swatch selected" onclick="selectSkin(0)" data-skin="0" title="Per defecte">
+            <div class="skin-color" style="background: #ffdbac;"></div>
+            <div class="skin-label">Per defecte</div>
+          </button>
+          <button class="skin-swatch" onclick="selectSkin(1)" data-skin="1" title="Molt clar">
+            <div class="skin-color" style="background: #fdbcb4;"></div>
+            <div class="skin-label">Molt clar</div>
+          </button>
+          <button class="skin-swatch" onclick="selectSkin(2)" data-skin="2" title="Clar">
+            <div class="skin-color" style="background: #f9a825;"></div>
+            <div class="skin-label">Clar</div>
+          </button>
+          <button class="skin-swatch" onclick="selectSkin(3)" data-skin="3" title="Mig">
+            <div class="skin-color" style="background: #d08950;"></div>
+            <div class="skin-label">Mig</div>
+          </button>
+          <button class="skin-swatch" onclick="selectSkin(4)" data-skin="4" title="Fosc">
+            <div class="skin-color" style="background: #aa6c39;"></div>
+            <div class="skin-label">Fosc</div>
+          </button>
+          <button class="skin-swatch" onclick="selectSkin(5)" data-skin="5" title="Molt fosc">
+            <div class="skin-color" style="background: #6a4423;"></div>
+            <div class="skin-label">Molt fosc</div>
+          </button>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="finishProfileCreate()">✓ Crear Perfil</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PANTALLA: MENU PRINCIPAL
+     ══════════════════════════════════════════════ -->
+<div class="screen" id="screen-menu">
+  <div class="container">
+    <div class="logo">
+      <h1>📐 Joc Geometria</h1>
+    </div>
+
+    <div class="profile-bar" id="profile-bar-menu"></div>
+
+    <div class="menu-grid">
+      <div class="menu-item" onclick="showScreen('screen-exercise'); setupQuadrat();" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-color: rgba(59, 130, 246, 0.3);">
+        <div class="menu-item-icon" id="icon-quadrat"></div>
+        <div class="menu-item-text">Quadrat</div>
+        <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
+      </div>
+      <div class="menu-item" onclick="showScreen('screen-exercise'); setupTriangle();" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.05)); border-color: rgba(168, 85, 247, 0.3);">
+        <div class="menu-item-icon" id="icon-triangle"></div>
+        <div class="menu-item-text">Triangle</div>
+        <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">6 tipus</div>
+      </div>
+      <div class="menu-item" onclick="showScreen('screen-exercise'); setupRectangle();" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05)); border-color: rgba(34, 197, 94, 0.3);">
+        <div class="menu-item-icon" id="icon-rectangle"></div>
+        <div class="menu-item-text">Rectangle</div>
+        <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
+      </div>
+      <div class="menu-item" onclick="showScreen('screen-exercise'); setupRomboide();" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(236, 72, 153, 0.05)); border-color: rgba(236, 72, 153, 0.3);">
+        <div class="menu-item-icon" id="icon-romboide"></div>
+        <div class="menu-item-text">Romboide</div>
+        <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
+      </div>
+      <div class="menu-item" onclick="showScreen('screen-exercise'); setupRombo();" style="background: linear-gradient(135deg, rgba(246, 113, 113, 0.15), rgba(246, 113, 113, 0.05)); border-color: rgba(246, 113, 113, 0.3);">
+        <div class="menu-item-icon" id="icon-rombo"></div>
+        <div class="menu-item-text">Rombo</div>
+        <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
+      </div>
+      <div class="menu-item" onclick="showScreen('screen-exercise'); setupTrapezi();" style="background: linear-gradient(135deg, rgba(59, 245, 245, 0.15), rgba(59, 245, 245, 0.05)); border-color: rgba(59, 245, 245, 0.3);">
+        <div class="menu-item-icon" id="icon-trapezi"></div>
+        <div class="menu-item-text">Trapezi</div>
+        <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
+      </div>
+      <div class="menu-item" onclick="showScreen('screen-exercise'); setupPentagon();" style="background: linear-gradient(135deg, rgba(165, 142, 251, 0.15), rgba(165, 142, 251, 0.05)); border-color: rgba(165, 142, 251, 0.3);">
+        <div class="menu-item-icon" id="icon-pentagon"></div>
+        <div class="menu-item-text">Pentàgon</div>
+        <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
+      </div>
+      <div class="menu-item" onclick="showScreen('screen-exercise'); setupHexagon();" style="background: linear-gradient(135deg, rgba(251, 146, 60, 0.15), rgba(251, 146, 60, 0.05)); border-color: rgba(251, 146, 60, 0.3);">
+        <div class="menu-item-icon" id="icon-hexagon"></div>
+        <div class="menu-item-text">Hexàgon</div>
+        <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
+      </div>
+      <div class="menu-item" onclick="showScreen('screen-exercise'); setupOctagon();" style="background: linear-gradient(135deg, rgba(132, 204, 22, 0.15), rgba(132, 204, 22, 0.05)); border-color: rgba(132, 204, 22, 0.3);">
+        <div class="menu-item-icon" id="icon-octagon"></div>
+        <div class="menu-item-text">Octàgon</div>
+        <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
+      </div>
+      <div class="menu-item" onclick="showScreen('screen-exercise'); setupCircle();" style="background: linear-gradient(135deg, rgba(244, 63, 94, 0.15), rgba(244, 63, 94, 0.05)); border-color: rgba(244, 63, 94, 0.3);">
+        <div class="menu-item-icon" id="icon-circle"></div>
+        <div class="menu-item-text">Cercle</div>
+        <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
+      </div>
+      <div class="menu-item" onclick="showScreen('screen-identify');" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0.05)); border-color: rgba(139, 92, 246, 0.3);">
+        <div class="menu-item-icon">🔍</div>
+        <div class="menu-item-text">Identifica</div>
+        <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">10 formes</div>
+      </div>
+    </div>
+
+    <!-- Stats & Trophies Section -->
+    <div class="menu-item" onclick="showScreen('screen-stats');" style="width: 100%; background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(14, 165, 233, 0.05)); border-color: rgba(14, 165, 233, 0.3); margin-top: 12px; padding: 14px 20px; min-height: 50px; display: flex; align-items: center; justify-content: space-between;">
+      <div class="menu-item-icon" style="font-size: 2rem;">📊</div>
+      <div style="flex: 1; text-align: left; margin-left: 12px;">
+        <div class="menu-item-text" style="margin: 0;">Estats</div>
+        <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4);">Estadístiques</div>
+      </div>
+    </div>
+    <div class="menu-item" onclick="showScreen('screen-trophies');" style="width: 100%; background: linear-gradient(135deg, rgba(251, 146, 60, 0.15), rgba(251, 146, 60, 0.05)); border-color: rgba(251, 146, 60, 0.3); margin-top: 8px; padding: 14px 20px; min-height: 50px; display: flex; align-items: center; justify-content: space-between;">
+      <div class="menu-item-icon" style="font-size: 2rem;">🏆</div>
+      <div style="flex: 1; text-align: left; margin-left: 12px;">
+        <div class="menu-item-text" style="margin: 0;">Trofeus</div>
+        <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4);">Desbloquejar</div>
+      </div>
+    </div>
+
+    <button class="btn-secondary" onclick="showScreen('screen-profile-select'); renderProfileSlots();" style="margin-top: 20px;">Canviar Perfil</button>
+    <button class="btn-secondary" onclick="showScreen('screen-credits');" style="margin-top: 8px; opacity: 0.7;">👨‍💻 Crèdits</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PANTALLA: EXERCICI
+     ══════════════════════════════════════════════ -->
+<div class="screen" id="screen-exercise">
+  <div class="container">
+    <button class="back-btn" onclick="showScreen('screen-menu')">← Tornar</button>
+
+    <div class="logo">
+      <h1 id="exercise-title">📐 Exercici</h1>
+    </div>
+
+    <div id="forma-progress" style="width:100%;margin-bottom:4px;"></div>
+
+    <div class="exercise-container" id="exercise-content"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PANTALLA: IDENTIFICA FORMES
+     ══════════════════════════════════════════════ -->
+<div class="screen" id="screen-identify">
+  <div class="container">
+    <button class="back-btn" onclick="showScreen('screen-menu')">← Tornar</button>
+
+    <div class="logo">
+      <h1>🔍 Identifica la Forma</h1>
+    </div>
+
+    <div id="identify-content" style="width: 100%;"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PANTALLA: TROFEUS
+     ══════════════════════════════════════════════ -->
+<div class="screen" id="screen-trophies">
+  <div class="container">
+    <button class="back-btn" onclick="showScreen('screen-menu')">← Tornar</button>
+
+    <div class="logo">
+      <h1>🏆 Trofeus</h1>
+    </div>
+
+    <div class="trophy-grid" id="trophy-grid"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PANTALLA: ESTADISTIQUES
+     ══════════════════════════════════════════════ -->
+<div class="screen" id="screen-stats">
+  <div class="container">
+    <button class="back-btn" onclick="showScreen('screen-menu')">← Tornar</button>
+
+    <div class="logo">
+      <h1>📊 Estadístiques</h1>
+      <p style="font-size: 0.85rem; margin-top: 8px;">El teu progrés en cada forma geomètrica</p>
+    </div>
+
+    <!-- AVATAR EDITOR SECTION -->
+    <div id="avatar-editor-section" style="background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 20px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1);">
+      <div style="font-size: 2.5rem; margin-bottom: 12px;" id="stats-avatar-display"></div>
+      <button class="btn-primary" onclick="openAvatarEditor()" style="padding: 10px 20px; font-size: 0.95rem;">✏️ Editar cara</button>
+    </div>
+
+    <div id="stats-container" style="width: 100%; display: flex; flex-direction: column; gap: 12px;">
+      <!-- Stats per forma se'n mostraran aquí -->
+    </div>
+
+    <!-- Export/Import Buttons -->
+    <div style="display: flex; gap: 10px; margin-top: 20px; width: 100%;">
+      <button class="btn-ghost" onclick="exportarPerfil()" style="flex: 1; padding: 12px 20px;">⬇️ Exportar perfil</button>
+      <button class="btn-ghost" onclick="document.getElementById('import-input').click()" style="flex: 1; padding: 12px 20px;">⬆️ Importar perfil</button>
+    </div>
+    <input type="file" id="import-input" accept=".json" style="display:none" onchange="importarPerfil(event)">
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PANTALLA: CRÈDITS
+     ══════════════════════════════════════════════ -->
+<div class="screen" id="screen-credits">
+  <div class="container">
+    <button class="back-btn" onclick="showScreen('screen-menu')">← Tornar</button>
+
+    <div class="logo">
+      <h1>👨‍💻 Crèdits</h1>
+      <p style="font-size: 0.85rem; margin-top: 8px;">Gràcies a tots els que han fet possible aquest joc</p>
+    </div>
+
+    <div style="width: 100%; display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
+      <!-- Desenvolupament -->
+      <div class="credit-section">
+        <div class="credit-title">💻 DESENVOLUPAMENT</div>
+        <div class="credit-person">
+          <div class="credit-name">Robert Potau Nuñez</div>
+          <div class="credit-role">Programador i Arquitecte</div>
+          <div class="credit-desc">Disseny, desenvolupament i manteniment de l'aplicació. Sistema de perfils, gameplay i UX/UI.</div>
+        </div>
+      </div>
+
+      <!-- Educació -->
+      <div class="credit-section">
+        <div class="credit-title">🎓 CONTINGUT PEDAGÒGIC</div>
+        <div class="credit-person">
+          <div class="credit-name">Nil Bellmunt Vilalta</div>
+          <div class="credit-role">Professor de Matemàtiques</div>
+          <div class="credit-desc">Disseny del currículum de geometria, exercicis educatius i validació de contingut matemàtic per a 1r ESO.</div>
+        </div>
+      </div>
+
+      <!-- IA -->
+      <div class="credit-section">
+        <div class="credit-title">🤖 INTEL·LIGÈNCIA ARTIFICIAL</div>
+        <div class="credit-person">
+          <div class="credit-name">Claude Code (Anthropic)</div>
+          <div class="credit-role">Assistant IA</div>
+          <div class="credit-desc">Generació de codi, optimització, UX/UI design, testing i documentació tècnica.</div>
+        </div>
+      </div>
+
+      <!-- Tecnologia -->
+      <div class="credit-section">
+        <div class="credit-title">⚙️ TECNOLOGIA</div>
+        <div style="padding: 12px; background: var(--bg-main); border-radius: 10px; border-left: 4px solid var(--accent);">
+          <div style="font-size: 0.9rem; color: var(--text-sub); line-height: 1.6;">
+            <div><strong>HTML5</strong> — Estructura semàntica</div>
+            <div><strong>CSS3</strong> — Responsive design amb variables CSS</div>
+            <div><strong>JavaScript ES6+</strong> — Single-page application</div>
+            <div><strong>SVG</strong> — Dibuixos de formes geomètriques</div>
+            <div><strong>localStorage</strong> — Persistència de dades</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div style="text-align: center; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 12px;">
+        <div style="font-size: 0.85rem; color: var(--text-sub); line-height: 1.8;">
+          <div style="margin-bottom: 8px;">🎓 Joc Geometria 1r ESO</div>
+          <div style="font-size: 0.75rem; margin-bottom: 8px;">
+            <strong>v1.2</strong> — Abril 2026
+          </div>
+          <div style="font-size: 0.75rem; margin-bottom: 12px; color: rgba(255, 255, 255, 0.5);">
+            📜 Llicència <strong>Creative Commons BY-NC-SA 4.0</strong>
+          </div>
+          <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-bottom: 8px;">
+            Compartir — Reconeixement — Mateix tipus de llicència
+          </div>
+          <div style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.3);">
+            Creat amb ❤️ per a estudiants de primer d'ESO
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODAL: EDITOR DE CARA
+     ══════════════════════════════════════════════ -->
+<div id="avatar-editor-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); z-index: 1000; justify-content: center; align-items: center;">
+  <div style="background: var(--bg-main); border: 2px solid var(--accent); border-radius: 16px; padding: 24px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto;">
+    <h2 style="margin-bottom: 20px; font-size: 1.3rem;">✏️ Editar la teva cara</h2>
+
+    <!-- Avatar Preview -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      <div id="avatar-edit-preview" style="font-size: 3.5rem; margin-bottom: 12px;"></div>
+      <div style="font-size: 0.85rem; color: var(--text-sub);">Vista prèvia del teu personatge</div>
+    </div>
+
+    <!-- Gènere -->
+    <div style="margin-bottom: 20px;">
+      <label style="font-weight: 700; display: block; margin-bottom: 10px; font-size: 0.95rem;">Gènere:</label>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+        <button class="gender-btn" onclick="selectGenderEdit('M')">👦 Masculí</button>
+        <button class="gender-btn" onclick="selectGenderEdit('F')">👧 Femení</button>
+        <button class="gender-btn" onclick="selectGenderEdit('N')">🦊 Neutre</button>
+      </div>
+    </div>
+
+    <!-- Skin tone (only for M/F) -->
+    <div id="skin-wrap-edit" style="margin-bottom: 20px; display: none;">
+      <label style="font-weight: 700; display: block; margin-bottom: 10px; font-size: 0.95rem;">Color de pell:</label>
+      <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+        <button class="avatar-swatch" onclick="selectSkinEdit(0)" style="background: #fdbcb4; width: 40px; height: 40px; border-radius: 8px;"></button>
+        <button class="avatar-swatch" onclick="selectSkinEdit(1)" style="background: #f7b8a0; width: 40px; height: 40px; border-radius: 8px;"></button>
+        <button class="avatar-swatch" onclick="selectSkinEdit(2)" style="background: #e6a77d; width: 40px; height: 40px; border-radius: 8px;"></button>
+        <button class="avatar-swatch" onclick="selectSkinEdit(3)" style="background: #c4956f; width: 40px; height: 40px; border-radius: 8px;"></button>
+        <button class="avatar-swatch" onclick="selectSkinEdit(4)" style="background: #a67c52; width: 40px; height: 40px; border-radius: 8px;"></button>
+        <button class="avatar-swatch" onclick="selectSkinEdit(5)" style="background: #513d38; width: 40px; height: 40px; border-radius: 8px;"></button>
+      </div>
+    </div>
+
+    <!-- Avatar selection -->
+    <div style="margin-bottom: 20px;">
+      <label style="font-weight: 700; display: block; margin-bottom: 10px; font-size: 0.95rem;">Triar avatar:</label>
+      <div id="av-edit-container" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-height: 180px; overflow-y: auto; padding: 8px; background: var(--bg-card); border-radius: 8px;"></div>
+    </div>
+
+    <!-- Buttons -->
+    <div style="display: flex; gap: 10px; margin-top: 20px;">
+      <button class="btn-primary" onclick="saveAvatarEdit()" style="flex: 1;">✓ Guardar</button>
+      <button class="btn-secondary" onclick="closeAvatarEditor()" style="flex: 1;">✕ Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+//  CONSTANTS I TROFEUS
+// ═══════════════════════════════════════════
+//  AVATARS PER GÈNERE
+// ═══════════════════════════════════════════
+
+const AVATARS_MASC  = ["👦","🧒","👱","🧔","👨","🧑","🧓","🤴","👳","🦸","🥷","🧙"];
+const AVATARS_FEM   = ["👧","👩","👱\u200d♀️","🧕","👳‍♀️","👸","👰","🧙\u200d♀️","💃","🦸‍♀️","🥷‍♀️","🧜‍♀️"];
+const AVATARS_NEUT  = ["🦊","🐱","🐼","🤖","👾","🦄","🐸","🐧","🦋","🦁","🐯","🐺","🦅","🦖","🐉","🎭","🧸","🤡"];
+
+// ═══════════════════════════════════════════
+
+const TROFEUS = [
+  { id:'primer_vol', nom:'Primer vol', icon:'🕊️', desc:'Primera partida completada', cat:'prog' },
+  { id:'geomeatra', nom:'Geòmetra', icon:'📐', desc:'50 exercicis completats', cat:'prog' },
+  { id:'mestre_geo', nom:'Mestre Geòmetra', icon:'👑', desc:'100 exercicis completats', cat:'prog' },
+  { id:'llegenda_geometria', nom:'Llegenda de la Geometria', icon:'✨', desc:'Assolir el rang màxim (Llegenda)', cat:'rang' },
+  { id:'sense_errors', nom:'Sense errors', icon:'⭐', desc:'10/10 en una forma', cat:'hab' },
+  { id:'ratxa_perfecta', nom:'Ratxa Perfecta', icon:'🔥', desc:'5 encerts consecutius', cat:'hab' },
+  { id:'perfectcionista', nom:'Perfeccionista', icon:'💎', desc:'20 exercicis perfectes', cat:'hab' },
+  { id:'polimata_geometrica', nom:'Polímata Geomètrica', icon:'🎓', desc:'Dominar 9+ formes geomètriques', cat:'hab' },
+  { id:'identifica_expert', nom:'Identificador Expert', icon:'🔍', desc:'10 formes identificades correctament', cat:'id' },
+  { id:'desafiament_completat', nom:'Desafiament Completat', icon:'⚡', desc:'Completar 1 sessió de repte', cat:'desafiament' },
+  { id:'curios', nom:'Curiós', icon:'🕵️', desc:'Has llegit els crèdits', cat:'secret' },
+];
+
+const RANGS = [
+  { xp: 0, noms: { M: 'Debutant', F: 'Debutanta', N: 'Debutant' }, icon: '👶' },
+  { xp: 150, noms: { M: 'Aprenent', F: 'Aprenenta', N: 'Aprenent' }, icon: '📚' },
+  { xp: 350, noms: { M: 'Estudiant', F: 'Estudiant', N: 'Estudiant' }, icon: '🧠' },
+  { xp: 700, noms: { M: 'Explorador', F: 'Exploradora', N: 'Explorador' }, icon: '🗺️' },
+  { xp: 1300, noms: { M: 'Calculista', F: 'Calculista', N: 'Calculista' }, icon: '🧮' },
+  { xp: 2300, noms: { M: 'Matemàtic', F: 'Matemàtica', N: 'Matemàtic' }, icon: '⭐' },
+  { xp: 3800, noms: { M: 'Mestre', F: 'Mestra', N: 'Mestre' }, icon: '👑' },
+  { xp: 6000, noms: { M: 'Guerrer', F: 'Guerrera', N: 'Guerrer' }, icon: '⚔️' },
+  { xp: 9500, noms: { M: 'Campió', F: 'Campiона', N: 'Campió' }, icon: '🥇' },
+  { xp: 15000, noms: { M: 'Mestre Suprem', F: 'Mestra Suprema', N: 'Mestre Suprem' }, icon: '🏆' },
+];
+
+// ═══════════════════════════════════════════
+//  VARIABLES GLOBALS
+// ═══════════════════════════════════════════
+let player = null;
+let selectedGender = 'M';
+let selectedSkin = 0;
+let selectedAvatar = 0;
+let selectedHair = 'default';
+let currentExercise = null;
+
+// ─── helpers ───────────────────────────────
+
+function getNomRang(rang, genere = 'M') {
+  if (!rang || !rang.noms) return '?';
+  const g = genere || 'M';
+  return rang.noms[g] || rang.noms['M'] || '?';
+}
+
+function renderFormaProgress(formaKey) {
+  const el = document.getElementById('forma-progress');
+  if (!el || !player || !formaKey) return;
+  const s = player.stats_forma[formaKey] || { encerts: 0, errors: 0, partides: 0 };
+  const total = s.encerts + s.errors;
+  const pct = total === 0 ? 0 : Math.round((s.encerts / total) * 100);
+  const color = pct >= 80 ? '#4ade80' : pct >= 50 ? '#f7c948' : total === 0 ? '#60a5fa' : '#f87171';
+  el.innerHTML = `<div class="forma-prog-wrap">
+    <span style="color:var(--text-sub);min-width:52px;">✓ ${s.encerts}/${total}</span>
+    <div class="forma-prog-bar"><div class="forma-prog-fill" style="width:${pct}%;background:${color}"></div></div>
+    <span style="color:${color};font-weight:700;min-width:36px;text-align:right;">${pct}%</span>
+  </div>`;
+}
+
+function pasAPas(pText, aText) {
+  return `<div class="steps-box">
+    <div class="steps-title">💡 Com es calcula</div>
+    <div class="step-line">📐 ${pText}</div>
+    <div class="step-line">📏 ${aText}</div>
+  </div>`;
+}
+
+// Enter key → click the "Següent" button when a result is shown
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const btn = document.querySelector('.screen.active .btn-primary[onclick^="setup"]');
+  if (btn) { e.preventDefault(); btn.click(); }
+});
+
+// ═══════════════════════════════════════════
+//  PROFILE MANAGEMENT (localStorage)
+// ═══════════════════════════════════════════
+
+function getProfiles() {
+  try {
+    const raw = localStorage.getItem('joc-geometria_profiles');
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return [null, null, null, null, null];
+}
+
+function saveProfiles(profiles) {
+  localStorage.setItem('joc-geometria_profiles', JSON.stringify(profiles));
+}
+
+function getActiveIdx() {
+  const v = parseInt(localStorage.getItem('joc-geometria_active'));
+  return isNaN(v) ? -1 : v;
+}
+
+function setActiveIdx(idx) {
+  localStorage.setItem('joc-geometria_active', String(idx));
+}
+
+function savePlayer() {
+  const idx = getActiveIdx();
+  if (idx < 0) return;
+  const profiles = getProfiles();
+  profiles[idx] = player;
+  saveProfiles(profiles);
+}
+
+function loadPlayer() {
+  const idx = getActiveIdx();
+  if (idx >= 0) {
+    const profiles = getProfiles();
+    const p = profiles[idx];
+    if (p) {
+      player = migratePlayer(p);
+      return;
+    }
+  }
+  player = null;
+}
+
+function defaultPlayer(nom, genere) {
+  return {
+    nom, genere, skin: 0, avatar: Math.floor(Math.random() * (genere === 'N' ? AVATARS_NEUT.length : genere === 'F' ? AVATARS_FEM.length : AVATARS_MASC.length)), hair: 'default', xp: 0, partides: 0, ratxa: 0,
+    trofeus: [],
+    stats_forma: {
+      quadrat:    { encerts: 0, errors: 0, partides: 0 },
+      triangle:   { encerts: 0, errors: 0, partides: 0 },
+      rectangle:  { encerts: 0, errors: 0, partides: 0 },
+      romboide:   { encerts: 0, errors: 0, partides: 0 },
+      rombo:      { encerts: 0, errors: 0, partides: 0 },
+      trapezi:    { encerts: 0, errors: 0, partides: 0 },
+      pentagon:   { encerts: 0, errors: 0, partides: 0 },
+      hexagon:    { encerts: 0, errors: 0, partides: 0 },
+      octagon:    { encerts: 0, errors: 0, partides: 0 },
+      circle:     { encerts: 0, errors: 0, partides: 0 },
+      identificar:{ encerts: 0, errors: 0, partides: 0 },
+    }
+  };
+}
+
+function migratePlayer(p) {
+  if (!p.stats_forma) p.stats_forma = {};
+  const allFormes = ['quadrat','triangle','rectangle','romboide','rombo','trapezi','pentagon','hexagon','octagon','circle','identificar'];
+  allFormes.forEach(f => {
+    if (!p.stats_forma[f]) p.stats_forma[f] = { encerts: 0, errors: 0, partides: 0 };
+  });
+  if (!p.trofeus) p.trofeus = [];
+  if (typeof p.ratxa !== 'number') p.ratxa = 0;
+  return p;
+}
+
+// ═══════════════════════════════════════════
+//  EXPORT / IMPORT PERFIL
+// ═══════════════════════════════════════════
+
+function exportarPerfil() {
+  if (!player) return;
+  const json = JSON.stringify(player, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `geometria_${player.nom.replace(/\s+/g,'_')}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importarPerfil(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!data.nom) { alert('Fitxer no vàlid.'); return; }
+      if (!confirm(`Vols carregar el perfil de "${data.nom}"? Se sobreescriurà el perfil actual.`)) return;
+      player = migratePlayer(data);
+      savePlayer();
+      renderStats();
+    } catch { alert('Error llegint el fitxer. Comprova que sigui un JSON vàlid.'); }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+// ═══════════════════════════════════════════
+//  SCREEN MANAGEMENT
+// ═══════════════════════════════════════════
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  if (id === 'screen-menu') updateMenuProfile();
+  if (id === 'screen-trophies') renderTrophies();
+  if (id === 'screen-stats') renderStats();
+  if (id === 'screen-identify') setupIdentify();
+  if (id === 'screen-credits') unlockCurios();
+  if (id === 'screen-exercise') setTimeout(() => renderFormaProgress(currentExercise && currentExercise.forma), 30);
+
+  // Render SVG menu icons
+  if (id === 'screen-menu') renderMenuIcons();
+}
+
+// ═══════════════════════════════════════════
+//  RENDER STATS
+// ═══════════════════════════════════════════
+
+function getStatsSVG(key) {
+  const size = 32;
+  const svgs = {
+    quadrat: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="60" height="60" fill="rgba(59, 130, 246, 0.3)" stroke="#3b82f6" stroke-width="2" rx="2"/>
+    </svg>`,
+    rectangle: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="30" width="70" height="40" fill="rgba(34, 197, 94, 0.3)" stroke="#22c55e" stroke-width="2" rx="2"/>
+    </svg>`,
+    triangle: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,20 80,75 20,75" fill="rgba(168, 85, 247, 0.3)" stroke="#a855f7" stroke-width="2"/>
+    </svg>`,
+    romboide: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="30,35 65,25 70,65 35,75" fill="rgba(236, 72, 153, 0.3)" stroke="#ec4899" stroke-width="2"/>
+    </svg>`,
+    rombo: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,20 80,50 50,80 20,50" fill="rgba(246, 113, 113, 0.3)" stroke="#f67171" stroke-width="2"/>
+    </svg>`,
+    trapezi: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="35,30 65,30 80,75 20,75" fill="rgba(59, 245, 245, 0.3)" stroke="#3bf5f5" stroke-width="2"/>
+    </svg>`,
+    pentagon: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,15 80,38 70,75 30,75 20,38" fill="rgba(165, 142, 251, 0.3)" stroke="#a58efb" stroke-width="2"/>
+    </svg>`,
+    hexagon: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,15 80,35 80,65 50,80 20,65 20,35" fill="rgba(251, 146, 60, 0.3)" stroke="#fb923c" stroke-width="2"/>
+    </svg>`,
+    octagon: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="35,15 65,15 80,30 80,70 65,85 35,85 20,70 20,30" fill="rgba(132, 204, 22, 0.3)" stroke="#84cc16" stroke-width="2"/>
+    </svg>`,
+    circle: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="30" fill="rgba(244, 63, 94, 0.3)" stroke="#f43f5e" stroke-width="2"/>
+    </svg>`,
+    identificar: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="35" r="12" fill="rgba(139, 92, 246, 0.3)" stroke="#8b5cf6" stroke-width="2"/>
+      <path d="M35,55 Q50,65 65,55" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"/>
+    </svg>`
+  };
+  return svgs[key] || '';
+}
+
+function renderStats() {
+  if (!player) return;
+  const container = document.getElementById('stats-container');
+  const avatarDisplay = document.getElementById('stats-avatar-display');
+  const stats = player.stats_forma || {};
+
+  // Show avatar
+  avatarDisplay.textContent = getAvatarEmoji(player.genere, player.skin, player.hair, player.avatar);
+
+  const formes = [
+    { key: 'quadrat', nom: 'Quadrat', color: '#3b82f6' },
+    { key: 'rectangle', nom: 'Rectangle', color: '#22c55e' },
+    { key: 'triangle', nom: 'Triangle', color: '#a855f7' },
+    { key: 'romboide', nom: 'Romboide', color: '#ec4899' },
+    { key: 'rombo', nom: 'Rombo', color: '#f67171' },
+    { key: 'trapezi', nom: 'Trapezi', color: '#3bf5f5' },
+    { key: 'pentagon', nom: 'Pentàgon', color: '#a58efb' },
+    { key: 'hexagon', nom: 'Hexàgon', color: '#fb923c' },
+    { key: 'octagon', nom: 'Octàgon', color: '#84cc16' },
+    { key: 'circle', nom: 'Cercle', color: '#f43f5e' },
+    { key: 'identificar', nom: 'Identificar', color: '#8b5cf6' }
+  ];
+
+  container.innerHTML = formes.map(forma => {
+    const s = stats[forma.key] || { encerts: 0, errors: 0, partides: 0 };
+    const total = s.encerts + s.errors;
+    const percentatge = total === 0 ? 0 : Math.round((s.encerts / total) * 100);
+
+    return `
+      <div style="background: var(--bg-card); border-left: 4px solid ${forma.color}; border-radius: 8px; padding: 16px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          ${getStatsSVG(forma.key)}
+          <div>
+            <div style="font-weight: 800; margin-bottom: 8px; font-size: 1.1rem;">${forma.nom}</div>
+            <div style="color: var(--text-sub); font-size: 0.9rem;">
+              <span style="color: var(--success);">✓ ${s.encerts}</span> •
+              <span style="color: var(--error);">✕ ${s.errors}</span> •
+              <span>Partides: ${s.partides}</span>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 1.8rem; font-weight: 900; color: ${forma.color};">${percentatge}%</div>
+          <div style="color: var(--text-sub); font-size: 0.85rem; margin-top: 4px;">Èxit</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════
+//  RENDER MENU ICONS (SVG)
+// ═══════════════════════════════════════════
+
+function renderMenuIcons() {
+  const iconQuadrat = document.getElementById('icon-quadrat');
+  const iconTriangle = document.getElementById('icon-triangle');
+  const iconRectangle = document.getElementById('icon-rectangle');
+  const iconRomboide = document.getElementById('icon-romboide');
+  const iconRombo = document.getElementById('icon-rombo');
+  const iconTrapezi = document.getElementById('icon-trapezi');
+  const iconPentagon = document.getElementById('icon-pentagon');
+  const iconHexagon = document.getElementById('icon-hexagon');
+  const iconOctagon = document.getElementById('icon-octagon');
+  const iconCircle = document.getElementById('icon-circle');
+
+  if (iconQuadrat) {
+    iconQuadrat.innerHTML = `<svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="15" width="70" height="70" fill="rgba(59, 130, 246, 0.3)" stroke="#3b82f6" stroke-width="3" rx="2"/>
+    </svg>`;
+  }
+
+  if (iconRectangle) {
+    iconRectangle.innerHTML = `<svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="25" width="80" height="50" fill="rgba(34, 197, 94, 0.3)" stroke="#22c55e" stroke-width="3" rx="2"/>
+    </svg>`;
+  }
+
+  if (iconRomboide) {
+    iconRomboide.innerHTML = `<svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="25,35 65,25 75,65 35,75" fill="rgba(236, 72, 153, 0.3)" stroke="#ec4899" stroke-width="3"/>
+    </svg>`;
+  }
+
+  if (iconTriangle) {
+    iconTriangle.innerHTML = `<svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,15 85,80 15,80" fill="rgba(168, 85, 247, 0.3)" stroke="#a855f7" stroke-width="3"/>
+    </svg>`;
+  }
+
+  if (iconRombo) {
+    iconRombo.innerHTML = `<svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,20 80,50 50,80 20,50" fill="rgba(246, 113, 113, 0.3)" stroke="#f67171" stroke-width="3"/>
+    </svg>`;
+  }
+
+  if (iconTrapezi) {
+    iconTrapezi.innerHTML = `<svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="30,35 70,35 85,80 15,80" fill="rgba(59, 245, 245, 0.3)" stroke="#3bf5f5" stroke-width="3"/>
+    </svg>`;
+  }
+
+  if (iconPentagon) {
+    iconPentagon.innerHTML = `<svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,15 88,38 73,82 27,82 12,38" fill="rgba(165, 142, 251, 0.3)" stroke="#a58efb" stroke-width="3"/>
+    </svg>`;
+  }
+
+  if (iconHexagon) {
+    iconHexagon.innerHTML = `<svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,15 85,35 85,65 50,85 15,65 15,35" fill="rgba(251, 146, 60, 0.3)" stroke="#fb923c" stroke-width="3"/>
+    </svg>`;
+  }
+
+  if (iconOctagon) {
+    const cx = 50, cy = 50, r = 35;
+    let points = '';
+    for (let i = 0; i < 8; i++) {
+      const angle = (i * 45 - 22.5) * Math.PI / 180;
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      points += `${x},${y} `;
+    }
+    iconOctagon.innerHTML = `<svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="${points}" fill="rgba(132, 204, 22, 0.3)" stroke="#84cc16" stroke-width="3"/>
+    </svg>`;
+  }
+
+  if (iconCircle) {
+    iconCircle.innerHTML = `<svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="35" fill="rgba(244, 63, 94, 0.3)" stroke="#f43f5e" stroke-width="3"/>
+    </svg>`;
+  }
+}
+
+// ═══════════════════════════════════════════
+//  AVATAR EDITOR (per Estadístiques)
+// ═══════════════════════════════════════════
+
+let editingAvatarGender = 'M';
+let editingAvatarSkin = 0;
+let editingSelectedAvatar = null;
+
+function openAvatarEditor() {
+  const modal = document.getElementById('avatar-editor-modal');
+  editingAvatarGender = player.genere || 'M';
+  editingAvatarSkin = player.skin || 0;
+
+  // Obtener la lista de avatares para el género actual
+  const avatarList = editingAvatarGender === 'M' ? AVATARS_MASC : editingAvatarGender === 'F' ? AVATARS_FEM : AVATARS_NEUT;
+
+  // Validar que el índex del avatar sea válido para la lista actual
+  editingSelectedAvatar = (player.avatar !== undefined && player.avatar < avatarList.length) ? player.avatar : 0;
+
+  modal.style.display = 'flex';
+
+  // Mostrar el selector de skin tone si es M o F
+  const skinWrap = document.getElementById('skin-wrap-edit');
+  if (editingAvatarGender === 'M' || editingAvatarGender === 'F') {
+    skinWrap.style.display = 'block';
+    document.querySelectorAll('#skin-wrap-edit .avatar-swatch').forEach((b, i) => {
+      b.classList.toggle('selected', i === editingAvatarSkin);
+    });
+  } else {
+    skinWrap.style.display = 'none';
+  }
+
+  // Renderizar avatars
+  renderAvatarEditGroup(avatarList);
+
+  // Select gender button
+  document.querySelectorAll('#avatar-editor-modal .gender-btn').forEach((b, i) => {
+    b.classList.toggle('selected',
+      (i === 0 && editingAvatarGender === 'M') ||
+      (i === 1 && editingAvatarGender === 'F') ||
+      (i === 2 && editingAvatarGender === 'N')
+    );
+  });
+
+  updateAvatarEditPreview();
+}
+
+function closeAvatarEditor() {
+  document.getElementById('avatar-editor-modal').style.display = 'none';
+}
+
+function selectGenderEdit(g) {
+  editingAvatarGender = g;
+  editingAvatarSkin = 0;
+  editingSelectedAvatar = 0;
+
+  document.querySelectorAll('#avatar-editor-modal .gender-btn').forEach((b, i) => {
+    b.classList.toggle('selected',
+      (i === 0 && g === 'M') ||
+      (i === 1 && g === 'F') ||
+      (i === 2 && g === 'N')
+    );
+  });
+
+  const skinWrap = document.getElementById('skin-wrap-edit');
+  if (g === 'M' || g === 'F') {
+    skinWrap.style.display = 'block';
+    document.querySelectorAll('#skin-wrap-edit .avatar-swatch').forEach((b, i) => {
+      b.classList.toggle('selected', i === 0);
+    });
+  } else {
+    skinWrap.style.display = 'none';
+  }
+
+  const avatarList = g === 'M' ? AVATARS_MASC : g === 'F' ? AVATARS_FEM : AVATARS_NEUT;
+  renderAvatarEditGroup(avatarList);
+  editingSelectedAvatar = avatarList[0];
+  updateAvatarEditPreview();
+}
+
+function selectSkinEdit(s) {
+  editingAvatarSkin = s;
+  document.querySelectorAll('#skin-wrap-edit .avatar-swatch').forEach((b, i) => {
+    b.classList.toggle('selected', i === s);
+  });
+  updateAvatarEditPreview();
+}
+
+function renderAvatarEditGroup(arr) {
+  const container = document.getElementById('av-edit-container');
+  container.innerHTML = '';
+
+  arr.forEach((av, idx) => {
+    const combined = editingAvatarGender === 'N' ? av : applySkintone(av, editingAvatarSkin);
+    const btn = document.createElement('button');
+    btn.className = 'avatar-btn' + (idx === editingSelectedAvatar ? ' selected' : '');
+    btn.textContent = combined;
+    btn.type = 'button';
+    btn.onclick = (e) => {
+      e.preventDefault();
+      editingSelectedAvatar = idx;
+      document.querySelectorAll('#av-edit-container .avatar-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      updateAvatarEditPreview();
+    };
+    container.appendChild(btn);
+  });
+}
+
+function updateAvatarEditPreview() {
+  const avatars = {
+    'M': AVATARS_MASC,
+    'F': AVATARS_FEM,
+    'N': AVATARS_NEUT
+  };
+  const avatarList = avatars[editingAvatarGender] || AVATARS_NEUT;
+  const av = avatarList[editingSelectedAvatar];
+  const combined = editingAvatarGender === 'N' ? av : applySkintone(av, editingAvatarSkin);
+  document.getElementById('avatar-edit-preview').textContent = combined;
+}
+
+function saveAvatarEdit() {
+  if (!player) return;
+
+  player.genere = editingAvatarGender;
+  player.skin = editingAvatarSkin;
+  player.avatar = editingSelectedAvatar;
+
+  updatePlayerSave();
+  closeAvatarEditor();
+  renderStats();
+  updateMenuProfile();
+}
+
+// ═══════════════════════════════════════════
+//  PROFILE SELECT SCREEN
+// ═══════════════════════════════════════════
+
+function renderProfileSlots() {
+  const profiles = getProfiles();
+  const activeIdx = getActiveIdx();
+  const list = document.getElementById('profile-slots-list');
+  list.innerHTML = '';
+
+  for (let i = 0; i < 5; i++) {
+    const p = profiles[i];
+    const div = document.createElement('div');
+
+    if (p) {
+      const rang = getRang(p.xp || 0);
+      div.className = 'profile-slot' + (i === activeIdx ? ' active' : '');
+      div.innerHTML = `
+        <div class="profile-slot-avatar">${getAvatarEmoji(p.genere, p.skin, p.hair, p.avatar)}</div>
+        <div class="profile-slot-info">
+          <div class="profile-slot-nom">${p.nom}</div>
+          <div class="profile-slot-rang">${rang.icon} ${getNomRang(rang, p.genere)}</div>
+          <div class="profile-slot-xp">${p.xp || 0} XP · ${p.partides || 0} partides</div>
+        </div>
+        <button class="profile-slot-del" onclick="event.stopPropagation(); deleteProfile(${i})">✕</button>`;
+      div.onclick = () => selectProfile(i);
+    } else {
+      div.className = 'profile-slot empty';
+      div.innerHTML = `
+        <div class="profile-slot-avatar">➕</div>
+        <div class="profile-slot-info">
+          <div class="profile-slot-nom">Nou jugador</div>
+          <div class="profile-slot-rang" style="color: var(--text-sub);">Slot buit</div>
+        </div>`;
+      div.onclick = () => createNewProfileAt(i);
+    }
+    list.appendChild(div);
+  }
+}
+
+function selectProfile(idx) {
+  setActiveIdx(idx);
+  const profiles = getProfiles();
+  player = migratePlayer(profiles[idx]);
+  showScreen('screen-menu');
+}
+
+function createNewProfileAt(idx) {
+  window._newProfileSlot = idx;
+  document.getElementById('inp-name').value = '';
+  document.querySelectorAll('.gender-btn').forEach((b, i) => b.classList.toggle('selected', i === 0));
+  selectedGender = 'M';
+  selectedSkin = 0;
+  selectedHair = 'default';
+  selectedAvatar = 0;
+  // Renderitzar avatars inicials
+  renderAvatarGroup('av-masc', AVATARS_MASC);
+  renderAvatarGroup('av-fem', AVATARS_FEM);
+  renderAvatarGroup('av-neut', AVATARS_NEUT);
+  updateAvatarPreview();
+  showScreen('screen-profile');
+}
+
+function deleteProfile(idx) {
+  const profiles = getProfiles();
+  const p = profiles[idx];
+  if (!p) return;
+  if (!confirm(`Vols eliminar el perfil de "${p.nom}"? Es perdran totes les dades.`)) return;
+  profiles[idx] = null;
+  saveProfiles(profiles);
+  if (getActiveIdx() === idx) {
+    const newIdx = profiles.findIndex(x => x !== null);
+    if (newIdx >= 0) {
+      setActiveIdx(newIdx);
+      player = migratePlayer(profiles[newIdx]);
+    } else {
+      localStorage.removeItem('joc-geometria_active');
+      player = null;
+      showScreen('screen-profile-select');
+    }
+  }
+  renderProfileSlots();
+}
+
+// ═══════════════════════════════════════════
+//  PROFILE CREATE SCREEN
+// ═══════════════════════════════════════════
+
+function selectGender(g) {
+  selectedGender = g;
+  document.querySelectorAll('.gender-btn').forEach((b, i) => {
+    b.classList.toggle('selected', (i === 0 && g === 'M') || (i === 1 && g === 'F') || (i === 2 && g === 'N'));
+  });
+  // Renderitzar avatars del gènere seleccionat
+  if (g === 'M') {
+    renderAvatarGroup('av-masc', AVATARS_MASC);
+    selectedAvatar = 0;
+  } else if (g === 'F') {
+    renderAvatarGroup('av-fem', AVATARS_FEM);
+    selectedAvatar = 0;
+  } else {
+    renderAvatarGroup('av-neut', AVATARS_NEUT);
+    selectedAvatar = 0;
+  }
+  updateAvatarPreview();
+}
+
+function selectSkin(s) {
+  selectedSkin = s;
+  // Marcar correctament el botó de color seleccionat
+  document.querySelectorAll('#skin-wrap .avatar-swatch').forEach((b, i) => {
+    if (i === s) {
+      b.classList.add('selected');
+    } else {
+      b.classList.remove('selected');
+    }
+  });
+  // Re-renderitzar avatars amb el nou color de pell (NO els neutres)
+  renderAvatarGroup('av-masc', AVATARS_MASC);
+  renderAvatarGroup('av-fem', AVATARS_FEM);
+  // Els avatars neutres es renderitzen sense color de pell
+  renderAvatarGroupNoSkin('av-neut', AVATARS_NEUT);
+  updateAvatarPreview();
+}
+
+function renderAvatarGroupNoSkin(id, arr) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = '';
+  arr.forEach((av, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'avatar-btn' + (idx === selectedAvatar ? ' selected' : '');
+    btn.textContent = av;
+    btn.type = 'button';
+    btn.onclick = (e) => {
+      e.preventDefault();
+      selectedAvatar = idx;
+      document.querySelectorAll('.avatar-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      updateAvatarPreview();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function applySkintone(base, mod) {
+  if (!mod || mod === 0) return base;
+  const SKIN_TONES = ['', '\u{1F3FB}', '\u{1F3FC}', '\u{1F3FD}', '\u{1F3FE}', '\u{1F3FF}'];
+  const skin = SKIN_TONES[mod] || '';
+  const zwjIdx = base.indexOf('\u200D');
+  if (zwjIdx !== -1) {
+    return base.slice(0, zwjIdx) + skin + base.slice(zwjIdx);
+  }
+  return base + skin;
+}
+
+function renderAvatarGroup(id, arr) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = '';
+  arr.forEach((av, idx) => {
+    const combined = applySkintone(av, selectedSkin);
+    const btn = document.createElement('button');
+    btn.className = 'avatar-btn' + (idx === selectedAvatar ? ' selected' : '');
+    btn.textContent = combined;
+    btn.type = 'button';
+    btn.onclick = (e) => {
+      e.preventDefault();
+      selectedAvatar = idx;
+      document.querySelectorAll('.avatar-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      updateAvatarPreview();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function updateAvatarPreview() {
+  const avatars = {
+    'M': AVATARS_MASC,
+    'F': AVATARS_FEM,
+    'N': AVATARS_NEUT
+  };
+  const avatarList = avatars[selectedGender] || AVATARS_NEUT;
+  const av = avatarList[selectedAvatar];
+  const combined = selectedGender === 'N' ? av : applySkintone(av, selectedSkin);
+  document.getElementById('avatar-preview').textContent = combined;
+}
+
+function finishProfileCreate() {
+  const nom = document.getElementById('inp-name').value.trim();
+  if (!nom) {
+    alert('Poseix un nom!');
+    return;
+  }
+  const idx = window._newProfileSlot;
+  const profiles = getProfiles();
+  profiles[idx] = defaultPlayer(nom, selectedGender);
+  profiles[idx].skin = selectedSkin;
+  profiles[idx].avatar = selectedAvatar;
+  saveProfiles(profiles);
+  setActiveIdx(idx);
+  player = migratePlayer(profiles[idx]);
+  showScreen('screen-menu');
+}
+
+// ═══════════════════════════════════════════
+//  AVATAR EMOJI (reutilitzat de CalcuHerois)
+// ═══════════════════════════════════════════
+
+function getAvatarEmoji(genere, skin, hair, avatarIdx) {
+  const avatars = {
+    'M': AVATARS_MASC,
+    'F': AVATARS_FEM,
+    'N': AVATARS_NEUT
+  };
+
+  const avatarList = avatars[genere] || AVATARS_NEUT;
+  let idx = avatarIdx;
+  if (idx === undefined || idx === null || isNaN(idx)) {
+    idx = 0;
+  }
+  return avatarList[Math.min(Math.max(idx, 0), avatarList.length - 1)];
+}
+
+// ═══════════════════════════════════════════
+//  MENU SCREEN
+// ═══════════════════════════════════════════
+
+function updateMenuProfile() {
+  const rang = getRang(player.xp || 0);
+  document.getElementById('profile-bar-menu').innerHTML = `
+    <div class="profile-bar-avatar">${getAvatarEmoji(player.genere, player.skin, player.hair, player.avatar)}</div>
+    <div class="profile-bar-info">
+      <div class="profile-bar-nom">${player.nom}</div>
+      <div class="profile-bar-rang">${rang.icon} ${getNomRang(rang, player.genere)}</div>
+      <div class="profile-bar-xp">${player.xp || 0} XP</div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════
+//  TROPHIES
+// ═══════════════════════════════════════════
+
+function renderTrophies() {
+  const CATS = [
+    { id: 'prog', nom: '📈 Progressió', color: '#4ade80' },
+    { id: 'hab', nom: '⭐ Habilitat', color: '#f7c948' },
+    { id: 'id', nom: '🔍 Identificació', color: '#a78bfa' },
+    { id: 'secret', nom: '🔒 Secret', color: '#94a3b8' },
+  ];
+
+  const grid = document.getElementById('trophy-grid');
+  grid.innerHTML = '';
+
+  CATS.forEach(cat => {
+    const trofeusCat = TROFEUS.filter(t => t.cat === cat.id);
+    if (!trofeusCat.length) return;
+
+    const title = document.createElement('div');
+    title.className = 'trophy-cat-title';
+    title.style.color = cat.color;
+    title.textContent = cat.nom;
+    grid.appendChild(title);
+
+    const catGrid = document.createElement('div');
+    catGrid.className = 'trophy-cat-grid';
+
+    trofeusCat.forEach(t => {
+      const unlocked = player.trofeus.includes(t.id);
+      const div = document.createElement('div');
+      div.className = 'trophy-card ' + (unlocked ? 'unlocked' : 'locked');
+      if (unlocked) div.style.borderColor = cat.color + '66';
+      div.innerHTML = `
+        <div class="trophy-icon">${unlocked ? t.icon : '❓'}</div>
+        <div class="trophy-name">${unlocked ? t.nom : '???'}</div>
+        <div class="trophy-desc">${unlocked ? t.desc : '...'}</div>`;
+      catGrid.appendChild(div);
+    });
+    grid.appendChild(catGrid);
+  });
+}
+
+// ═══════════════════════════════════════════
+//  RANKS
+// ═══════════════════════════════════════════
+
+function getRang(xp) {
+  return RANGS.find(r => xp >= r.xp) || RANGS[RANGS.length - 1];
+}
+
+// ═══════════════════════════════════════════
+//  SVG DRAWING FUNCTIONS
+// ═══════════════════════════════════════════
+
+function drawSquareSVG(costat) {
+  const size = Math.min(150, Math.max(80, costat * 9));
+  const x = (240 - size) / 2;
+  const y = (240 - size) / 2 - 8;
+  const x2 = x + size, y2 = y + size;
+  const mid = x + size / 2;
+  const ra = 10; // right-angle mark size
+
+  return `
+    <svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+      <defs>
+        <marker id="sq-arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+          <path d="M1,1 L7,4 L1,7 Z" fill="#60a5fa"/>
+        </marker>
+        <marker id="sq-arr2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse">
+          <path d="M1,1 L7,4 L1,7 Z" fill="#60a5fa"/>
+        </marker>
+      </defs>
+
+      <!-- Quadrat -->
+      <rect x="${x}" y="${y}" width="${size}" height="${size}"
+            fill="rgba(59,130,246,0.18)" stroke="#3b82f6" stroke-width="3"/>
+
+      <!-- Marques angle recte (4 cantons) -->
+      <path d="M${x+ra},${y} L${x+ra},${y+ra} L${x},${y+ra}" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+      <path d="M${x2-ra},${y} L${x2-ra},${y+ra} L${x2},${y+ra}" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+      <path d="M${x2-ra},${y2} L${x2-ra},${y2-ra} L${x2},${y2-ra}" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+      <path d="M${x+ra},${y2} L${x+ra},${y2-ra} L${x},${y2-ra}" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+
+      <!-- Ticks igualtat (un tick per costat) -->
+      <line x1="${mid-6}" y1="${y-5}" x2="${mid+6}" y2="${y-5}" stroke="#60a5fa" stroke-width="2.5"/>
+      <line x1="${mid-6}" y1="${y2+5}" x2="${mid+6}" y2="${y2+5}" stroke="#60a5fa" stroke-width="2.5"/>
+      <line x1="${x-5}" y1="${mid-6}" x2="${x-5}" y2="${mid+6}" stroke="#60a5fa" stroke-width="2.5"/>
+      <line x1="${x2+5}" y1="${mid-6}" x2="${x2+5}" y2="${mid+6}" stroke="#60a5fa" stroke-width="2.5"/>
+
+      <!-- Línia de cota (baix) + valor -->
+      <line x1="${x}" y1="${y2+18}" x2="${x2}" y2="${y2+18}" stroke="#60a5fa" stroke-width="1.5" marker-start="url(#sq-arr2)" marker-end="url(#sq-arr)"/>
+      <text x="${mid}" y="${y2+34}" text-anchor="middle"
+            font-size="14" font-weight="bold" fill="#60a5fa">a = ${costat} cm</text>
+    </svg>
+  `;
+}
+
+function drawRectangleSVG(base, altura) {
+  const maxW = 155, maxH = 130;
+  const ratio = base / altura;
+  let w, h;
+  if (ratio >= 1) {
+    w = maxW; h = Math.max(50, Math.min(maxH, maxW / ratio));
+  } else {
+    h = maxH; w = Math.max(50, Math.min(maxW, maxH * ratio));
+  }
+  const x = (240 - w) / 2, y = (240 - h) / 2 - 6;
+  const x2 = x + w, y2 = y + h;
+  const ra = 10;
+
+  return `
+    <svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+      <defs>
+        <marker id="rc-arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+          <path d="M1,1 L7,4 L1,7 Z" fill="#86efac"/>
+        </marker>
+        <marker id="rc-arr2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse">
+          <path d="M1,1 L7,4 L1,7 Z" fill="#86efac"/>
+        </marker>
+      </defs>
+
+      <!-- Rectangle -->
+      <rect x="${x}" y="${y}" width="${w}" height="${h}"
+            fill="rgba(34,197,94,0.18)" stroke="#22c55e" stroke-width="3"/>
+
+      <!-- Marques angle recte -->
+      <path d="M${x+ra},${y} L${x+ra},${y+ra} L${x},${y+ra}" fill="none" stroke="#22c55e" stroke-width="1.5"/>
+      <path d="M${x2-ra},${y} L${x2-ra},${y+ra} L${x2},${y+ra}" fill="none" stroke="#22c55e" stroke-width="1.5"/>
+      <path d="M${x2-ra},${y2} L${x2-ra},${y2-ra} L${x2},${y2-ra}" fill="none" stroke="#22c55e" stroke-width="1.5"/>
+      <path d="M${x+ra},${y2} L${x+ra},${y2-ra} L${x},${y2-ra}" fill="none" stroke="#22c55e" stroke-width="1.5"/>
+
+      <!-- Ticks base (1 tick) i altura (2 ticks — diferent) -->
+      <line x1="${x+w/2-6}" y1="${y2+5}" x2="${x+w/2+6}" y2="${y2+5}" stroke="#86efac" stroke-width="2.5"/>
+      <line x1="${x+w/2-6}" y1="${y-5}" x2="${x+w/2+6}" y2="${y-5}" stroke="#86efac" stroke-width="2.5"/>
+      <line x1="${x-5}" y1="${y+h/2-8}" x2="${x-5}" y2="${y+h/2-2}" stroke="#86efac" stroke-width="2.5"/>
+      <line x1="${x-5}" y1="${y+h/2+2}" x2="${x-5}" y2="${y+h/2+8}" stroke="#86efac" stroke-width="2.5"/>
+      <line x1="${x2+5}" y1="${y+h/2-8}" x2="${x2+5}" y2="${y+h/2-2}" stroke="#86efac" stroke-width="2.5"/>
+      <line x1="${x2+5}" y1="${y+h/2+2}" x2="${x2+5}" y2="${y+h/2+8}" stroke="#86efac" stroke-width="2.5"/>
+
+      <!-- Cota base (baix) -->
+      <line x1="${x}" y1="${y2+18}" x2="${x2}" y2="${y2+18}" stroke="#86efac" stroke-width="1.5" marker-start="url(#rc-arr2)" marker-end="url(#rc-arr)"/>
+      <text x="${x+w/2}" y="${y2+33}" text-anchor="middle" font-size="13" font-weight="bold" fill="#86efac">b = ${base} cm</text>
+
+      <!-- Cota altura (esquerra) -->
+      <line x1="${x-22}" y1="${y}" x2="${x-22}" y2="${y2}" stroke="#86efac" stroke-width="1.5" marker-start="url(#rc-arr2)" marker-end="url(#rc-arr)"/>
+      <text x="${x-22}" y="${y+h/2-8}" text-anchor="middle" font-size="13" font-weight="bold" fill="#86efac" transform="rotate(-90,${x-22},${y+h/2})">h = ${altura} cm</text>
+    </svg>
+  `;
+}
+
+function drawTriangleSVG(sideA, sideB, sideC, altura) {
+  const baseW = Math.min(160, sideC * 11);
+  const triH  = Math.min(130, altura * 11);
+  const bx = (240 - baseW) / 2;
+  const by = 185;
+  const x1 = 120, y1 = by - triH;
+  const x2 = bx, y2 = by;
+  const x3 = bx + baseW, y3 = by;
+
+  return `
+    <svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+      <!-- Triangle -->
+      <polygon points="${x1},${y1} ${x2},${y2} ${x3},${y3}"
+               fill="rgba(168,85,247,0.18)" stroke="#a855f7" stroke-width="3"/>
+
+      <!-- Línia d'altura (puntejada) -->
+      <line x1="${x1}" y1="${y1}" x2="${x1}" y2="${y2}"
+            stroke="#c084fc" stroke-width="2" stroke-dasharray="5,4"/>
+      <!-- Marca angle recte de la base amb l'altura -->
+      <path d="M${x1+8},${y2} L${x1+8},${y2-8} L${x1},${y2-8}" fill="none" stroke="#c084fc" stroke-width="1.5"/>
+
+      <!-- Etiqueta costats -->
+      <text x="${(x2+x1)/2 - 14}" y="${(y1+y2)/2 + 5}" text-anchor="middle"
+            font-size="13" font-weight="bold" fill="#e9d5ff">a=${sideA}</text>
+      <text x="${(x3+x1)/2 + 14}" y="${(y1+y3)/2 + 5}" text-anchor="middle"
+            font-size="13" font-weight="bold" fill="#e9d5ff">b=${sideB}</text>
+      <text x="${x1}" y="${y2+20}" text-anchor="middle"
+            font-size="13" font-weight="bold" fill="#e9d5ff">c=${sideC} cm</text>
+
+      <!-- Etiqueta altura -->
+      <text x="${x1+26}" y="${(y1+y2)/2 + 5}" text-anchor="start"
+            font-size="13" font-weight="bold" fill="#c084fc">h=${altura} cm</text>
+    </svg>
+  `;
+}
+
+// ═══════════════════════════════════════════
+//  SVG IDENTIFY MODE (sense dimensions)
+// ═══════════════════════════════════════════
+
+function drawSquareIdentify() {
+  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+    <rect x="50" y="50" width="140" height="140" fill="rgba(59, 130, 246, 0.2)" stroke="#3b82f6" stroke-width="3" rx="2"/>
+  </svg>`;
+}
+
+function drawRectangleIdentify() {
+  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+    <rect x="30" y="70" width="180" height="100" fill="rgba(34, 197, 94, 0.2)" stroke="#22c55e" stroke-width="3" rx="2"/>
+  </svg>`;
+}
+
+function drawTriangleIdentify(tipo = 'equilater') {
+  let points = '';
+
+  switch(tipo) {
+    case 'equilater':
+      points = '120,40 50,180 190,180'; // Equilàter
+      break;
+    case 'isosceles':
+      points = '120,50 60,180 180,180'; // Isòsceles
+      break;
+    case 'escale':
+      points = '120,40 40,180 200,170'; // Escalè
+      break;
+    case 'rectangle':
+      points = '50,50 190,50 50,180'; // Rectangle
+      break;
+    case 'acutangle':
+      points = '120,30 50,170 190,160'; // Acutangle
+      break;
+    case 'obtusangle':
+      points = '120,100 30,180 210,180'; // Obtusangle
+      break;
+    default:
+      points = '120,40 50,180 190,180';
+  }
+
+  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+    <polygon points="${points}" fill="rgba(168, 85, 247, 0.2)" stroke="#a855f7" stroke-width="3"/>
+  </svg>`;
+}
+
+function drawRomboIdentify() {
+  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+    <polygon points="120,30 190,120 120,210 50,120" fill="rgba(236, 72, 153, 0.2)" stroke="#ec4899" stroke-width="3"/>
+  </svg>`;
+}
+
+function drawHexagonIdentify() {
+  const cx = 120, cy = 120, r = 70;
+  let points = '';
+  for (let i = 0; i < 6; i++) {
+    const angle = (i * 60 - 90) * Math.PI / 180;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    points += `${x},${y} `;
+  }
+
+  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+    <polygon points="${points}" fill="rgba(251, 146, 60, 0.2)" stroke="#fb923c" stroke-width="3"/>
+  </svg>`;
+}
+
+function drawCircleIdentify() {
+  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+    <circle cx="120" cy="120" r="80" fill="rgba(14, 165, 233, 0.2)" stroke="#0ea5e9" stroke-width="3"/>
+  </svg>`;
+}
+
+// NOVES FORMES SVGs
+function drawRomboideSVG(base, altura) {
+  const bW = Math.min(130, Math.max(70, base * 9));
+  const bH = Math.min(100, Math.max(40, altura * 8));
+  const off = 30; // obliqüitat
+  const x1 = (240 - bW) / 2, y1 = (240 - bH) / 2;
+  const pts = `${x1+off},${y1+bH} ${x1+off+bW},${y1+bH} ${x1+bW},${y1} ${x1},${y1}`;
+  const midX = x1 + off + bW/2;
+
+  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+    <!-- Romboide -->
+    <polygon points="${pts}" fill="rgba(236,72,153,0.18)" stroke="#ec4899" stroke-width="3"/>
+
+    <!-- Línia d'altura (puntejada) -->
+    <line x1="${x1+off}" y1="${y1+bH}" x2="${x1+off}" y2="${y1}"
+          stroke="#f9a8d4" stroke-width="2" stroke-dasharray="5,4"/>
+    <!-- Marca angle recte -->
+    <path d="M${x1+off+9},${y1+bH} L${x1+off+9},${y1+bH-9} L${x1+off},${y1+bH-9}" fill="none" stroke="#f9a8d4" stroke-width="1.5"/>
+
+    <!-- Etiqueta base -->
+    <text x="${midX}" y="${y1+bH+22}" text-anchor="middle"
+          font-size="14" font-weight="bold" fill="#f9a8d4">b = ${base} cm</text>
+    <!-- Etiqueta altura -->
+    <text x="${x1+off-18}" y="${y1+bH/2+5}" text-anchor="middle"
+          font-size="13" font-weight="bold" fill="#f9a8d4">h=${altura}</text>
+  </svg>`;
+}
+
+function drawRomboSVG(d1, d2) {
+  const d1H = Math.min(170, Math.max(70, d1 * 9));
+  const d2W = Math.min(140, Math.max(60, d2 * 9));
+  const cx = 120, cy = 120;
+  const pts = `${cx},${cy-d1H/2} ${cx+d2W/2},${cy} ${cx},${cy+d1H/2} ${cx-d2W/2},${cy}`;
+
+  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+    <!-- Rombo -->
+    <polygon points="${pts}" fill="rgba(239,68,68,0.18)" stroke="#f87171" stroke-width="3"/>
+
+    <!-- Diagonals (puntejades) -->
+    <line x1="${cx}" y1="${cy-d1H/2}" x2="${cx}" y2="${cy+d1H/2}"
+          stroke="#fca5a5" stroke-width="2" stroke-dasharray="5,4"/>
+    <line x1="${cx-d2W/2}" y1="${cy}" x2="${cx+d2W/2}" y2="${cy}"
+          stroke="#fca5a5" stroke-width="2" stroke-dasharray="5,4"/>
+    <!-- Angle recte al centre -->
+    <path d="M${cx+8},${cy} L${cx+8},${cy-8} L${cx},${cy-8}" fill="none" stroke="#fca5a5" stroke-width="1.5"/>
+
+    <!-- Etiquetes -->
+    <text x="${cx+10}" y="${cy-d1H/4}" text-anchor="start"
+          font-size="13" font-weight="bold" fill="#fca5a5">d₁=${d1} cm</text>
+    <text x="${cx+d2W/4}" y="${cy-8}" text-anchor="middle"
+          font-size="13" font-weight="bold" fill="#fca5a5">d₂=${d2} cm</text>
+  </svg>`;
+}
+
+function drawTrapezSVG(b1, b2, h) {
+  const b1W = Math.min(160, Math.max(80, b1 * 10));
+  const b2W = Math.min(120, Math.max(40, b2 * 10));
+  const tH  = Math.min(110, Math.max(50, h * 9));
+  const cx = 120;
+  const y2 = 175, y1 = y2 - tH;
+  const pts = `${cx-b1W/2},${y2} ${cx+b1W/2},${y2} ${cx+b2W/2},${y1} ${cx-b2W/2},${y1}`;
+
+  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+    <!-- Trapezi -->
+    <polygon points="${pts}" fill="rgba(34,211,238,0.18)" stroke="#06b6d4" stroke-width="3"/>
+
+    <!-- Línia d'altura (puntejada) -->
+    <line x1="${cx}" y1="${y2}" x2="${cx}" y2="${y1}"
+          stroke="#67e8f9" stroke-width="2" stroke-dasharray="5,4"/>
+    <!-- Angle recte -->
+    <path d="M${cx+8},${y2} L${cx+8},${y2-8} L${cx},${y2-8}" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+
+    <!-- Etiquetes bases -->
+    <text x="${cx}" y="${y2+20}" text-anchor="middle"
+          font-size="14" font-weight="bold" fill="#67e8f9">b₂ = ${b1} cm</text>
+    <text x="${cx}" y="${y1-8}" text-anchor="middle"
+          font-size="14" font-weight="bold" fill="#67e8f9">b₁ = ${b2} cm</text>
+    <!-- Etiqueta altura -->
+    <text x="${cx+16}" y="${(y1+y2)/2+5}" text-anchor="start"
+          font-size="13" font-weight="bold" fill="#67e8f9">h=${h}</text>
+  </svg>`;
+}
+
+function _regularPolygonSVG(n, costat, fill, stroke, light, startAngle = -90) {
+  const cx = 120, cy = 118;
+  const r = Math.min(85, Math.max(50, costat * 7));
+  const apotema = r * Math.cos(Math.PI / n);
+  let pts = '';
+  const verts = [];
+  for (let i = 0; i < n; i++) {
+    const ang = (startAngle + i * (360/n)) * Math.PI / 180;
+    const x = cx + r * Math.cos(ang), y = cy + r * Math.sin(ang);
+    pts += `${x},${y} `;
+    verts.push({x, y});
+  }
+  // Midpoint of first side for label
+  const s1x = (verts[0].x + verts[1].x) / 2;
+  const s1y = (verts[0].y + verts[1].y) / 2;
+  // Outward direction from center to s1
+  const dx = s1x - cx, dy = s1y - cy;
+  const dl = Math.sqrt(dx*dx + dy*dy);
+  const lx = s1x + dx/dl * 18, ly = s1y + dy/dl * 18;
+
+  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+    <!-- Polígon -->
+    <polygon points="${pts}" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
+    <!-- Apotema (puntejada) -->
+    <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy - apotema}"
+          stroke="${light}" stroke-width="2" stroke-dasharray="5,4"/>
+    <text x="${cx+8}" y="${cy - apotema/2}" font-size="11" fill="${light}" font-weight="bold">ap</text>
+    <!-- Etiqueta costat -->
+    <text x="${lx}" y="${ly}" text-anchor="middle"
+          font-size="14" font-weight="bold" fill="${light}">a=${costat} cm</text>
+  </svg>`;
+}
+
+function drawPentagonSVG(costat) {
+  return _regularPolygonSVG(5, costat, 'rgba(165,142,251,0.18)', '#a58efb', '#d8b4fe', -90);
+}
+
+function drawHexagonSVG(costat) {
+  return _regularPolygonSVG(6, costat, 'rgba(251,146,60,0.18)', '#fb923c', '#fed7aa', -90);
+}
+
+function drawOctagonSVG(costat) {
+  return _regularPolygonSVG(8, costat, 'rgba(132,204,22,0.18)', '#84cc16', '#d4fc79', -22.5);
+}
+
+function drawCircleSVG(r) {
+  const rad = Math.min(88, Math.max(40, r * 7));
+  const cx = 120, cy = 118;
+
+  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+    <defs>
+      <marker id="ci-arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+        <path d="M1,1 L7,4 L1,7 Z" fill="#fb7185"/>
+      </marker>
+    </defs>
+    <!-- Cercle -->
+    <circle cx="${cx}" cy="${cy}" r="${rad}"
+            fill="rgba(244,63,94,0.18)" stroke="#f43f5e" stroke-width="3"/>
+    <!-- Punt centre -->
+    <circle cx="${cx}" cy="${cy}" r="3" fill="#f43f5e"/>
+    <!-- Radi amb fletxa -->
+    <line x1="${cx}" y1="${cy}" x2="${cx+rad-4}" y2="${cy}"
+          stroke="#fb7185" stroke-width="2.5" marker-end="url(#ci-arr)"/>
+    <!-- Etiqueta -->
+    <text x="${cx + rad/2}" y="${cy - 10}" text-anchor="middle"
+          font-size="14" font-weight="bold" fill="#fecdd3">r = ${r} cm</text>
+  </svg>`;
+}
+
+// ═══════════════════════════════════════════
+//  EXERCICI: QUADRAT (P = 4a, A = a²)
+// ═══════════════════════════════════════════
+
+function setupQuadrat() {
+  document.getElementById('exercise-title').textContent = '⬜ Quadrat';
+  const costat = Math.floor(Math.random() * 15) + 2; // 2-16
+  const perimetre = 4 * costat;
+  const area = costat * costat;
+
+  currentExercise = {
+    forma: 'quadrat',
+    costat,
+    perimetre,
+    area,
+  };
+
+  document.getElementById('exercise-content').innerHTML = `
+    <div class="shape-display">
+      ${drawSquareSVG(costat)}
+    </div>
+
+    <div class="formula-box">
+      <div>📐 <strong>P = 4 × a</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = a²</strong></div>
+    </div>
+
+    <form class="exercise-form" onsubmit="checkQuadrat(event)">
+      <div class="inputs-grid">
+        <div class="input-field">
+          <label>Perímetre (cm)</label>
+          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+        </div>
+        <div class="input-field">
+          <label>Àrea (cm²)</label>
+          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+        </div>
+      </div>
+      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
+    </form>
+
+    <div id="result-quadrat" style="display: none;"></div>
+  `;
+
+  document.getElementById('inp-perimetre').focus();
+}
+
+function checkQuadrat(event) {
+  event.preventDefault();
+  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
+  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const ex = currentExercise;
+
+  const periOk = perimetreUser === ex.perimetre;
+  const areaOk = areaUser === ex.area;
+  const allOk = periOk && areaOk;
+
+  const resultDiv = document.getElementById('result-quadrat');
+  resultDiv.style.display = 'block';
+
+  const boxClass = allOk ? 'correct-box' : 'error-box';
+  const emoji = allOk ? '🎉' : '📚';
+  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
+  const titleColor = allOk ? '#4ade80' : '#f87171';
+
+  let html = `
+    <div style="margin-top: 20px;">
+      <div class="${boxClass}" style="margin-bottom: 20px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
+        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
+        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
+      </div>
+
+      <div class="exercise-question">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${periOk ? '✓' : '✗'} ${perimetreUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.perimetre}</strong> cm
+            </div>
+          </div>
+
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${areaOk ? '✓' : '✗'} ${areaUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.area}</strong> cm²
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+        ${allOk ? '' : pasAPas(`P = 4 × a = 4 × ${ex.costat} = <strong>${ex.perimetre} cm</strong>`, `A = a² = ${ex.costat}² = <strong>${ex.area} cm²</strong>`)}
+        <button class="btn-primary" onclick="setupQuadrat()" style="margin-top: 0;">📝 Següent</button>
+        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
+      </div>
+    </div>
+  `;
+
+  resultDiv.innerHTML = html;
+  updatePlayerStats('quadrat', allOk);
+}
+
+// ═══════════════════════════════════════════
+//  EXERCICI: TRIANGLE (P = a+b+c, A = (base×altura)/2)
+//  Tipus: Equilàter, Isòsceles, Escalè, Rectangle, Acutangle, Obtusangle
+// ═══════════════════════════════════════════
+
+function setupTriangle() {
+  document.getElementById('exercise-title').textContent = '📐 Exercici: Triangle';
+
+  // Generar triangle aleatori (tipus i mides)
+  const tipus = Math.floor(Math.random() * 6);
+  let sideA, sideB, sideC, altura, nom;
+
+  switch(tipus) {
+    case 0: // Equilàter (3 costats iguals)
+      sideA = Math.floor(Math.random() * 8) + 4;  // 4-11
+      sideB = sideA;
+      sideC = sideA;
+      altura = Math.round((sideA * Math.sqrt(3)) / 2 * 10) / 10; // Per info (no es demana)
+      nom = 'Equilàter';
+      break;
+    case 1: // Isòsceles (2 costats iguals)
+      sideA = Math.floor(Math.random() * 8) + 4;
+      sideB = sideA;
+      sideC = Math.floor(Math.random() * 8) + 4;
+      altura = Math.floor(Math.random() * 8) + 3; // Donat per exercici
+      nom = 'Isòsceles';
+      break;
+    case 2: // Escalè (3 costats diferents)
+      sideA = Math.floor(Math.random() * 8) + 4;
+      sideB = Math.floor(Math.random() * 8) + 4;
+      sideC = Math.floor(Math.random() * 8) + 4;
+      altura = Math.floor(Math.random() * 8) + 3;
+      nom = 'Escalè';
+      break;
+    case 3: // Rectangle (90°)
+      sideA = Math.floor(Math.random() * 8) + 3;
+      sideB = Math.floor(Math.random() * 8) + 3;
+      sideC = Math.round(Math.sqrt(sideA*sideA + sideB*sideB) * 10) / 10;
+      altura = sideB; // Un costat es l'altura
+      nom = 'Rectangle';
+      break;
+    case 4: // Acutangle
+      sideA = Math.floor(Math.random() * 6) + 5;
+      sideB = Math.floor(Math.random() * 6) + 5;
+      sideC = Math.floor(Math.random() * 6) + 5;
+      altura = Math.floor(Math.random() * 6) + 3;
+      nom = 'Acutangle';
+      break;
+    case 5: // Obtusangle
+      sideA = Math.floor(Math.random() * 8) + 5;
+      sideB = Math.floor(Math.random() * 8) + 5;
+      sideC = Math.floor(Math.random() * 10) + 8;
+      altura = Math.floor(Math.random() * 6) + 3;
+      nom = 'Obtusangle';
+      break;
+  }
+
+  const perimetre = sideA + sideB + sideC;
+  const area = Math.round((sideC * altura) / 2 * 10) / 10;
+
+  currentExercise = {
+    forma: 'triangle',
+    tipus,
+    nom,
+    sideA,
+    sideB,
+    sideC,
+    altura,
+    perimetre,
+    area,
+  };
+
+  document.getElementById('exercise-content').innerHTML = `
+    <div style="text-align: center; margin-bottom: 16px;">
+      <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 800; margin-bottom: 8px;">🔺 ${nom}</div>
+    </div>
+
+    <div class="shape-display">
+      ${drawTriangleSVG(sideA, sideB, sideC, altura)}
+    </div>
+
+    <div class="formula-box">
+      <div>📐 <strong>P = a + b + c</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = <span class="fraction"><span class="fraction-num">b × h</span><span class="fraction-den">2</span></span></strong></div>
+      <div style="font-size: 0.85rem; color: var(--accent); margin-top: 8px; font-weight: 600;">💡 b = base, h = altura (multiplicar la base per l'altura)</div>
+    </div>
+
+    <form class="exercise-form" onsubmit="checkTriangle(event)">
+      <div class="inputs-grid">
+        <div class="input-field">
+          <label>Perímetre (cm)</label>
+          <input type="number" id="inp-perimetre-tri" placeholder="Escriu el resultat" required>
+        </div>
+        <div class="input-field">
+          <label>Àrea (cm²)</label>
+          <input type="number" id="inp-area-tri" placeholder="Escriu el resultat" step="0.1" required>
+        </div>
+      </div>
+      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
+    </form>
+
+    <div id="result-triangle" style="display: none;"></div>
+  `;
+
+  document.getElementById('inp-perimetre-tri').focus();
+}
+
+function checkTriangle(event) {
+  event.preventDefault();
+  const perimetreUser = parseInt(document.getElementById('inp-perimetre-tri').value);
+  const areaUser = parseFloat(document.getElementById('inp-area-tri').value);
+  const ex = currentExercise;
+
+  const periOk = perimetreUser === ex.perimetre;
+  const areaOk = Math.abs(areaUser - ex.area) < 0.2;
+  const allOk = periOk && areaOk;
+
+  const resultDiv = document.getElementById('result-triangle');
+  resultDiv.style.display = 'block';
+
+  const boxClass = allOk ? 'correct-box' : 'error-box';
+  const emoji = allOk ? '🎉' : '📚';
+  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
+  const titleColor = allOk ? '#4ade80' : '#f87171';
+
+  let html = `
+    <div style="margin-top: 20px;">
+      <div class="${boxClass}" style="margin-bottom: 20px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
+        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
+        <div style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 8px;">Triangle ${ex.nom}</div>
+        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
+      </div>
+
+      <div class="exercise-question">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${periOk ? '✓' : '✗'} ${perimetreUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.perimetre}</strong> cm
+            </div>
+          </div>
+
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${areaOk ? '✓' : '✗'} ${areaUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.area}</strong> cm²
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+        ${allOk ? '' : pasAPas(`P = a+b+c = ${ex.sideA}+${ex.sideB}+${ex.sideC} = <strong>${ex.perimetre} cm</strong>`, `A = (c×h)/2 = (${ex.sideC}×${ex.altura})/2 = <strong>${ex.area} cm²</strong>`)}
+        <button class="btn-primary" onclick="setupTriangle()" style="margin-top: 0;">📝 Següent</button>
+        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
+      </div>
+    </div>
+  `;
+
+  resultDiv.innerHTML = html;
+  updatePlayerStats('triangle', allOk);
+}
+
+// ═══════════════════════════════════════════
+//  EXERCICI: RECTANGLE (P = 2(a+b), A = a×b)
+// ═══════════════════════════════════════════
+
+function setupRectangle() {
+  document.getElementById('exercise-title').textContent = '▭ Rectangle';
+  const base = Math.floor(Math.random() * 12) + 3;    // 3-14
+  const altura = Math.floor(Math.random() * 12) + 3;  // 3-14
+  const perimetre = 2 * (base + altura);
+  const area = base * altura;
+
+  currentExercise = {
+    forma: 'rectangle',
+    base,
+    altura,
+    perimetre,
+    area,
+  };
+
+  document.getElementById('exercise-content').innerHTML = `
+    <div class="shape-display">
+      ${drawRectangleSVG(base, altura)}
+    </div>
+
+    <div class="formula-box">
+      <div>📐 <strong>P = 2(a + b)</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = a × b</strong></div>
+    </div>
+
+    <form class="exercise-form" onsubmit="checkRectangle(event)">
+      <div class="inputs-grid">
+        <div class="input-field">
+          <label>Perímetre (cm)</label>
+          <input type="number" id="inp-perimetre-rect" placeholder="Escriu el resultat" required>
+        </div>
+        <div class="input-field">
+          <label>Àrea (cm²)</label>
+          <input type="number" id="inp-area-rect" placeholder="Escriu el resultat" required>
+        </div>
+      </div>
+      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
+    </form>
+
+    <div id="result-rectangle" style="display: none;"></div>
+  `;
+
+  document.getElementById('inp-perimetre-rect').focus();
+}
+
+function checkRectangle(event) {
+  event.preventDefault();
+  const perimetreUser = parseInt(document.getElementById('inp-perimetre-rect').value);
+  const areaUser = parseInt(document.getElementById('inp-area-rect').value);
+  const ex = currentExercise;
+
+  const periOk = perimetreUser === ex.perimetre;
+  const areaOk = areaUser === ex.area;
+  const allOk = periOk && areaOk;
+
+  const resultDiv = document.getElementById('result-rectangle');
+  resultDiv.style.display = 'block';
+
+  const boxClass = allOk ? 'correct-box' : 'error-box';
+  const emoji = allOk ? '🎉' : '📚';
+  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
+  const titleColor = allOk ? '#4ade80' : '#f87171';
+
+  let html = `
+    <div style="margin-top: 20px;">
+      <div class="${boxClass}" style="margin-bottom: 20px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
+        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
+        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
+      </div>
+
+      <div class="exercise-question">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${periOk ? '✓' : '✗'} ${perimetreUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.perimetre}</strong> cm
+            </div>
+          </div>
+
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${areaOk ? '✓' : '✗'} ${areaUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.area}</strong> cm²
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+        ${allOk ? '' : pasAPas(`P = 2(a+b) = 2×(${ex.base}+${ex.altura}) = 2×${ex.base+ex.altura} = <strong>${ex.perimetre} cm</strong>`, `A = a×b = ${ex.base}×${ex.altura} = <strong>${ex.area} cm²</strong>`)}
+        <button class="btn-primary" onclick="setupRectangle()" style="margin-top: 0;">📝 Següent</button>
+        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
+      </div>
+    </div>
+  `;
+
+  resultDiv.innerHTML = html;
+  updatePlayerStats('rectangle', allOk);
+}
+
+// ═══════════════════════════════════════════
+//  SETUP FUNCIONS PER FUTURES FORMES
+// ═══════════════════════════════════════════
+
+function setupRomboide() {
+  document.getElementById('exercise-title').textContent = '◇ Romboide';
+  const a = Math.floor(Math.random() * 10) + 3;
+  const b = Math.floor(Math.random() * 8) + 3;
+  const h = Math.floor(Math.random() * 8) + 2;
+
+  currentExercise = {
+    forma: 'romboide',
+    a, b, h,
+    perimetre: 2 * (a + b),
+    area: b * h
+  };
+
+  document.getElementById('exercise-content').innerHTML = `
+    <div class="shape-display">
+      ${drawRomboideSVG(b, h)}
+    </div>
+
+    <div class="formula-box">
+      <div>📐 <strong>P = 2(a + b)</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = b × h</strong></div>
+    </div>
+
+    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
+      <strong>Dades:</strong> a = ${a} cm, b = ${b} cm, h = ${h} cm
+    </div>
+
+    <form class="exercise-form" onsubmit="checkRomboide(event)">
+      <div class="inputs-grid">
+        <div class="input-field">
+          <label>Perímetre (cm)</label>
+          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+        </div>
+        <div class="input-field">
+          <label>Àrea (cm²)</label>
+          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+        </div>
+      </div>
+      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
+    </form>
+
+    <div id="result-romboide" style="display: none;"></div>
+  `;
+
+  document.getElementById('inp-perimetre').focus();
+}
+
+function checkRomboide(event) {
+  event.preventDefault();
+  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
+  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const ex = currentExercise;
+
+  const periOk = perimetreUser === ex.perimetre;
+  const areaOk = areaUser === ex.area;
+  const allOk = periOk && areaOk;
+
+  const resultDiv = document.getElementById('result-romboide');
+  resultDiv.style.display = 'block';
+
+  const boxClass = allOk ? 'correct-box' : 'error-box';
+  const emoji = allOk ? '🎉' : '📚';
+  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
+  const titleColor = allOk ? '#4ade80' : '#f87171';
+
+  let html = `
+    <div style="margin-top: 20px;">
+      <div class="${boxClass}" style="margin-bottom: 20px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
+        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
+        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
+      </div>
+
+      <div class="exercise-question">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${periOk ? '✓' : '✗'} ${perimetreUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.perimetre}</strong> cm
+            </div>
+          </div>
+
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${areaOk ? '✓' : '✗'} ${areaUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.area}</strong> cm²
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+        ${allOk ? '' : pasAPas(`P = 2(a+b) = 2×(${ex.a}+${ex.b}) = 2×${ex.a+ex.b} = <strong>${ex.perimetre} cm</strong>`, `A = b×h = ${ex.b}×${ex.h} = <strong>${ex.area} cm²</strong>`)}
+        <button class="btn-primary" onclick="setupRomboide()" style="margin-top: 0;">📝 Següent</button>
+        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
+      </div>
+    </div>
+  `;
+
+  resultDiv.innerHTML = html;
+  updatePlayerStats('romboide', allOk);
+}
+
+function setupRombo() {
+  document.getElementById('exercise-title').textContent = '◆ Rombo';
+  const a = Math.floor(Math.random() * 10) + 3;
+  const d1 = Math.floor(Math.random() * 12) + 4;
+  const d2 = Math.floor(Math.random() * 12) + 4;
+
+  currentExercise = {
+    forma: 'rombo',
+    a, d1, d2,
+    perimetre: 4 * a,
+    area: Math.floor((d1 * d2) / 2)
+  };
+
+  document.getElementById('exercise-content').innerHTML = `
+    <div class="shape-display">
+      ${drawRomboSVG(d1, d2)}
+    </div>
+
+    <div class="formula-box">
+      <div>📐 <strong>P = 4 × a</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = <span class="fraction"><span class="fraction-num">d₁ × d₂</span><span class="fraction-den">2</span></span></strong></div>
+    </div>
+
+    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
+      <strong>Dades:</strong> a = ${a} cm, d₁ = ${d1} cm, d₂ = ${d2} cm
+    </div>
+
+    <form class="exercise-form" onsubmit="checkRombo(event)">
+      <div class="inputs-grid">
+        <div class="input-field">
+          <label>Perímetre (cm)</label>
+          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+        </div>
+        <div class="input-field">
+          <label>Àrea (cm²)</label>
+          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+        </div>
+      </div>
+      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
+    </form>
+
+    <div id="result-rombo" style="display: none;"></div>
+  `;
+
+  document.getElementById('inp-perimetre').focus();
+}
+
+function checkRombo(event) {
+  event.preventDefault();
+  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
+  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const ex = currentExercise;
+
+  const periOk = perimetreUser === ex.perimetre;
+  const areaOk = areaUser === ex.area;
+  const allOk = periOk && areaOk;
+
+  const resultDiv = document.getElementById('result-rombo');
+  resultDiv.style.display = 'block';
+
+  const boxClass = allOk ? 'correct-box' : 'error-box';
+  const emoji = allOk ? '🎉' : '📚';
+  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
+  const titleColor = allOk ? '#4ade80' : '#f87171';
+
+  let html = `
+    <div style="margin-top: 20px;">
+      <div class="${boxClass}" style="margin-bottom: 20px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
+        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
+        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
+      </div>
+
+      <div class="exercise-question">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${periOk ? '✓' : '✗'} ${perimetreUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.perimetre}</strong> cm
+            </div>
+          </div>
+
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${areaOk ? '✓' : '✗'} ${areaUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.area}</strong> cm²
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+        ${allOk ? '' : pasAPas(`P = 4×a = 4×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (d₁×d₂)/2 = (${ex.d1}×${ex.d2})/2 = <strong>${ex.area} cm²</strong>`)}
+        <button class="btn-primary" onclick="setupRombo()" style="margin-top: 0;">📝 Següent</button>
+        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
+      </div>
+    </div>
+  `;
+
+  resultDiv.innerHTML = html;
+  updatePlayerStats('rombo', allOk);
+}
+
+function setupTrapezi() {
+  document.getElementById('exercise-title').textContent = '⊥ Trapezi';
+  const b1 = Math.floor(Math.random() * 8) + 4;
+  const b2 = Math.floor(Math.random() * 8) + 4;
+  const c = Math.floor(Math.random() * 8) + 3;
+  const d = Math.floor(Math.random() * 8) + 3;
+  const h = Math.floor(Math.random() * 6) + 2;
+
+  currentExercise = {
+    forma: 'trapezi',
+    b1, b2, c, d, h,
+    perimetre: b1 + c + d + b2,
+    area: Math.floor(((b1 + b2) * h) / 2)
+  };
+
+  document.getElementById('exercise-content').innerHTML = `
+    <div class="shape-display">
+      ${drawTrapezSVG(b1, b2, h)}
+    </div>
+
+    <div class="formula-box">
+      <div>📐 <strong>P = b₁ + b₂ + c + d</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = <span class="fraction"><span class="fraction-num">(b₁ + b₂) × h</span><span class="fraction-den">2</span></span></strong></div>
+    </div>
+
+    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
+      <strong>Dades:</strong> b₁ = ${b1} cm, b₂ = ${b2} cm, c = ${c} cm, d = ${d} cm, h = ${h} cm
+    </div>
+
+    <form class="exercise-form" onsubmit="checkTrapezi(event)">
+      <div class="inputs-grid">
+        <div class="input-field">
+          <label>Perímetre (cm)</label>
+          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+        </div>
+        <div class="input-field">
+          <label>Àrea (cm²)</label>
+          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+        </div>
+      </div>
+      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
+    </form>
+
+    <div id="result-trapezi" style="display: none;"></div>
+  `;
+
+  document.getElementById('inp-perimetre').focus();
+}
+
+function checkTrapezi(event) {
+  event.preventDefault();
+  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
+  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const ex = currentExercise;
+
+  const periOk = perimetreUser === ex.perimetre;
+  const areaOk = areaUser === ex.area;
+  const allOk = periOk && areaOk;
+
+  const resultDiv = document.getElementById('result-trapezi');
+  resultDiv.style.display = 'block';
+
+  const boxClass = allOk ? 'correct-box' : 'error-box';
+  const emoji = allOk ? '🎉' : '📚';
+  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
+  const titleColor = allOk ? '#4ade80' : '#f87171';
+
+  let html = `
+    <div style="margin-top: 20px;">
+      <div class="${boxClass}" style="margin-bottom: 20px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
+        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
+        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
+      </div>
+
+      <div class="exercise-question">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${periOk ? '✓' : '✗'} ${perimetreUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.perimetre}</strong> cm
+            </div>
+          </div>
+
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${areaOk ? '✓' : '✗'} ${areaUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.area}</strong> cm²
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+        ${allOk ? '' : pasAPas(`P = b₁+b₂+c+d = ${ex.b1}+${ex.b2}+${ex.c}+${ex.d} = <strong>${ex.perimetre} cm</strong>`, `A = ((b₁+b₂)×h)/2 = ((${ex.b1}+${ex.b2})×${ex.h})/2 = <strong>${ex.area} cm²</strong>`)}
+        <button class="btn-primary" onclick="setupTrapezi()" style="margin-top: 0;">📝 Següent</button>
+        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
+      </div>
+    </div>
+  `;
+
+  resultDiv.innerHTML = html;
+  updatePlayerStats('trapezi', allOk);
+}
+
+function setupPentagon() {
+  document.getElementById('exercise-title').textContent = '⬟ Pentàgon';
+  const a = Math.floor(Math.random() * 8) + 3;
+  const apotema = Math.floor(Math.random() * 6) + 2;
+
+  currentExercise = {
+    forma: 'pentagon',
+    a, apotema,
+    perimetre: 5 * a,
+    area: Math.floor((5 * a * apotema) / 2)
+  };
+
+  document.getElementById('exercise-content').innerHTML = `
+    <div class="shape-display">
+      ${drawPentagonSVG(a)}
+    </div>
+
+    <div class="formula-box">
+      <div>📐 <strong>P = 5 × a</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = <span class="fraction"><span class="fraction-num">P × apotema</span><span class="fraction-den">2</span></span></strong></div>
+    </div>
+
+    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
+      <strong>Dades:</strong> a = ${a} cm, apotema = ${apotema} cm
+    </div>
+
+    <form class="exercise-form" onsubmit="checkPentagon(event)">
+      <div class="inputs-grid">
+        <div class="input-field">
+          <label>Perímetre (cm)</label>
+          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+        </div>
+        <div class="input-field">
+          <label>Àrea (cm²)</label>
+          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+        </div>
+      </div>
+      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
+    </form>
+
+    <div id="result-pentagon" style="display: none;"></div>
+  `;
+
+  document.getElementById('inp-perimetre').focus();
+}
+
+function checkPentagon(event) {
+  event.preventDefault();
+  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
+  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const ex = currentExercise;
+
+  const periOk = perimetreUser === ex.perimetre;
+  const areaOk = areaUser === ex.area;
+  const allOk = periOk && areaOk;
+
+  const resultDiv = document.getElementById('result-pentagon');
+  resultDiv.style.display = 'block';
+
+  const boxClass = allOk ? 'correct-box' : 'error-box';
+  const emoji = allOk ? '🎉' : '📚';
+  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
+  const titleColor = allOk ? '#4ade80' : '#f87171';
+
+  let html = `
+    <div style="margin-top: 20px;">
+      <div class="${boxClass}" style="margin-bottom: 20px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
+        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
+        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
+      </div>
+
+      <div class="exercise-question">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${periOk ? '✓' : '✗'} ${perimetreUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.perimetre}</strong> cm
+            </div>
+          </div>
+
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${areaOk ? '✓' : '✗'} ${areaUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.area}</strong> cm²
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+        ${allOk ? '' : pasAPas(`P = 5×a = 5×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (5×a×ap)/2 = (5×${ex.a}×${ex.apotema})/2 = <strong>${ex.area} cm²</strong>`)}
+        <button class="btn-primary" onclick="setupPentagon()" style="margin-top: 0;">📝 Següent</button>
+        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
+      </div>
+    </div>
+  `;
+
+  resultDiv.innerHTML = html;
+  updatePlayerStats('pentagon', allOk);
+}
+
+function setupHexagon() {
+  document.getElementById('exercise-title').textContent = '⬡ Hexàgon';
+  const a = Math.floor(Math.random() * 8) + 3;
+  const apotema = Math.floor(Math.random() * 6) + 2;
+
+  currentExercise = {
+    forma: 'hexagon',
+    a, apotema,
+    perimetre: 6 * a,
+    area: Math.floor((6 * a * apotema) / 2)
+  };
+
+  document.getElementById('exercise-content').innerHTML = `
+    <div class="shape-display">
+      ${drawHexagonSVG(a)}
+    </div>
+
+    <div class="formula-box">
+      <div>📐 <strong>P = 6 × a</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = <span class="fraction"><span class="fraction-num">P × apotema</span><span class="fraction-den">2</span></span></strong></div>
+    </div>
+
+    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
+      <strong>Dades:</strong> a = ${a} cm, apotema = ${apotema} cm
+    </div>
+
+    <form class="exercise-form" onsubmit="checkHexagon(event)">
+      <div class="inputs-grid">
+        <div class="input-field">
+          <label>Perímetre (cm)</label>
+          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+        </div>
+        <div class="input-field">
+          <label>Àrea (cm²)</label>
+          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+        </div>
+      </div>
+      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
+    </form>
+
+    <div id="result-hexagon" style="display: none;"></div>
+  `;
+
+  document.getElementById('inp-perimetre').focus();
+}
+
+function checkHexagon(event) {
+  event.preventDefault();
+  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
+  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const ex = currentExercise;
+
+  const periOk = perimetreUser === ex.perimetre;
+  const areaOk = areaUser === ex.area;
+  const allOk = periOk && areaOk;
+
+  const resultDiv = document.getElementById('result-hexagon');
+  resultDiv.style.display = 'block';
+
+  const boxClass = allOk ? 'correct-box' : 'error-box';
+  const emoji = allOk ? '🎉' : '📚';
+  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
+  const titleColor = allOk ? '#4ade80' : '#f87171';
+
+  let html = `
+    <div style="margin-top: 20px;">
+      <div class="${boxClass}" style="margin-bottom: 20px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
+        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
+        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
+      </div>
+
+      <div class="exercise-question">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${periOk ? '✓' : '✗'} ${perimetreUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.perimetre}</strong> cm
+            </div>
+          </div>
+
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${areaOk ? '✓' : '✗'} ${areaUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.area}</strong> cm²
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+        ${allOk ? '' : pasAPas(`P = 6×a = 6×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (6×a×ap)/2 = (6×${ex.a}×${ex.apotema})/2 = <strong>${ex.area} cm²</strong>`)}
+        <button class="btn-primary" onclick="setupHexagon()" style="margin-top: 0;">📝 Següent</button>
+        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
+      </div>
+    </div>
+  `;
+
+  resultDiv.innerHTML = html;
+  updatePlayerStats('hexagon', allOk);
+}
+
+function setupOctagon() {
+  document.getElementById('exercise-title').textContent = '⎔ Octàgon';
+  const a = Math.floor(Math.random() * 6) + 3;
+  const apotema = Math.floor(Math.random() * 5) + 2;
+
+  currentExercise = {
+    forma: 'octagon',
+    a, apotema,
+    perimetre: 8 * a,
+    area: Math.floor((8 * a * apotema) / 2)
+  };
+
+  document.getElementById('exercise-content').innerHTML = `
+    <div class="shape-display">
+      ${drawOctagonSVG(a)}
+    </div>
+
+    <div class="formula-box">
+      <div>📐 <strong>P = 8 × a</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = <span class="fraction"><span class="fraction-num">P × apotema</span><span class="fraction-den">2</span></span></strong></div>
+    </div>
+
+    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
+      <strong>Dades:</strong> a = ${a} cm, apotema = ${apotema} cm
+    </div>
+
+    <form class="exercise-form" onsubmit="checkOctagon(event)">
+      <div class="inputs-grid">
+        <div class="input-field">
+          <label>Perímetre (cm)</label>
+          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+        </div>
+        <div class="input-field">
+          <label>Àrea (cm²)</label>
+          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+        </div>
+      </div>
+      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
+    </form>
+
+    <div id="result-octagon" style="display: none;"></div>
+  `;
+
+  document.getElementById('inp-perimetre').focus();
+}
+
+function checkOctagon(event) {
+  event.preventDefault();
+  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
+  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const ex = currentExercise;
+
+  const periOk = perimetreUser === ex.perimetre;
+  const areaOk = areaUser === ex.area;
+  const allOk = periOk && areaOk;
+
+  const resultDiv = document.getElementById('result-octagon');
+  resultDiv.style.display = 'block';
+
+  const boxClass = allOk ? 'correct-box' : 'error-box';
+  const emoji = allOk ? '🎉' : '📚';
+  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
+  const titleColor = allOk ? '#4ade80' : '#f87171';
+
+  let html = `
+    <div style="margin-top: 20px;">
+      <div class="${boxClass}" style="margin-bottom: 20px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
+        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
+        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
+      </div>
+
+      <div class="exercise-question">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${periOk ? '✓' : '✗'} ${perimetreUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.perimetre}</strong> cm
+            </div>
+          </div>
+
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${areaOk ? '✓' : '✗'} ${areaUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.area}</strong> cm²
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+        ${allOk ? '' : pasAPas(`P = 8×a = 8×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (8×a×ap)/2 = (8×${ex.a}×${ex.apotema})/2 = <strong>${ex.area} cm²</strong>`)}
+        <button class="btn-primary" onclick="setupOctagon()" style="margin-top: 0;">📝 Següent</button>
+        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
+      </div>
+    </div>
+  `;
+
+  resultDiv.innerHTML = html;
+  updatePlayerStats('octagon', allOk);
+}
+
+function setupCircle() {
+  document.getElementById('exercise-title').textContent = '⭕ Cercle';
+  const r = Math.floor(Math.random() * 10) + 2;
+
+  currentExercise = {
+    forma: 'circle',
+    r,
+    perimetre: Math.round(2 * Math.PI * r),
+    area: Math.round(Math.PI * r * r)
+  };
+
+  document.getElementById('exercise-content').innerHTML = `
+    <div class="shape-display">
+      ${drawCircleSVG(r)}
+    </div>
+
+    <div class="formula-box">
+      <div>📐 <strong>P = 2πr</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = πr²</strong></div>
+    </div>
+
+    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
+      <strong>Dades:</strong> r = ${r} cm (π ≈ 3.14)
+    </div>
+
+    <form class="exercise-form" onsubmit="checkCircle(event)">
+      <div class="inputs-grid">
+        <div class="input-field">
+          <label>Perímetre (cm)</label>
+          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+        </div>
+        <div class="input-field">
+          <label>Àrea (cm²)</label>
+          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+        </div>
+      </div>
+      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
+    </form>
+
+    <div id="result-circle" style="display: none;"></div>
+  `;
+
+  document.getElementById('inp-perimetre').focus();
+}
+
+function checkCircle(event) {
+  event.preventDefault();
+  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
+  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const ex = currentExercise;
+
+  const periOk = perimetreUser === ex.perimetre;
+  const areaOk = areaUser === ex.area;
+  const allOk = periOk && areaOk;
+
+  const resultDiv = document.getElementById('result-circle');
+  resultDiv.style.display = 'block';
+
+  const boxClass = allOk ? 'correct-box' : 'error-box';
+  const emoji = allOk ? '🎉' : '📚';
+  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
+  const titleColor = allOk ? '#4ade80' : '#f87171';
+
+  let html = `
+    <div style="margin-top: 20px;">
+      <div class="${boxClass}" style="margin-bottom: 20px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
+        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
+        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
+      </div>
+
+      <div class="exercise-question">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${periOk ? '✓' : '✗'} ${perimetreUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.perimetre}</strong> cm
+            </div>
+          </div>
+
+          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
+              ${areaOk ? '✓' : '✗'} ${areaUser}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-sub);">
+              Correcte: <strong>${ex.area}</strong> cm²
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+        ${allOk ? '' : pasAPas(`P = 2×π×r ≈ 2×3.14×${ex.r} = <strong>${ex.perimetre} cm</strong>`, `A = π×r² ≈ 3.14×${ex.r}² = <strong>${ex.area} cm²</strong>`)}
+        <button class="btn-primary" onclick="setupCircle()" style="margin-top: 0;">📝 Següent</button>
+        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
+      </div>
+    </div>
+  `;
+
+  resultDiv.innerHTML = html;
+  updatePlayerStats('circle', allOk);
+}
+
+// ═══════════════════════════════════════════
+//  UPDATE PLAYER STATS
+// ═══════════════════════════════════════════
+
+function updatePlayerStats(forma, correcte) {
+  if (!player.stats_forma[forma]) {
+    player.stats_forma[forma] = { encerts: 0, errors: 0, partides: 0 };
+  }
+
+  player.stats_forma[forma].partides++;
+  if (correcte) {
+    player.stats_forma[forma].encerts++;
+    player.xp = (player.xp || 0) + 10;
+    player.ratxa = (player.ratxa || 0) + 1;
+  } else {
+    player.stats_forma[forma].errors++;
+    player.ratxa = 0;
+  }
+
+  player.partides = (player.partides || 0) + 1;
+
+  checkTrophies();
+  renderFormaProgress(forma);
+
+  savePlayer();
+}
+
+function checkTrophies() {
+  const newTrofeus = [];
+
+  // Primer vol
+  if (player.partides === 1 && !player.trofeus.includes('primer_vol')) {
+    newTrofeus.push('primer_vol');
+  }
+
+  // Sense errors: 10+ encerts amb 0 errors en qualsevol forma
+  const formaAmbPerfecte = Object.values(player.stats_forma || {}).find(
+    s => s.encerts >= 10 && s.errors === 0
+  );
+  if (formaAmbPerfecte && !player.trofeus.includes('sense_errors')) {
+    newTrofeus.push('sense_errors');
+  }
+
+  // Ratxa perfecta: 5 encerts consecutius
+  if ((player.ratxa || 0) >= 5 && !player.trofeus.includes('ratxa_perfecta')) {
+    newTrofeus.push('ratxa_perfecta');
+  }
+
+  // Perfectcionista: 20 exercicis correctes (xp = 10 per encert)
+  if ((player.xp || 0) >= 200 && !player.trofeus.includes('perfectcionista')) {
+    newTrofeus.push('perfectcionista');
+  }
+
+  // Identificador Expert: 10 formes identificades correctament
+  if (player.stats_forma.identificar && player.stats_forma.identificar.encerts >= 10 &&
+      !player.trofeus.includes('identifica_expert')) {
+    newTrofeus.push('identifica_expert');
+  }
+
+  // Geòmetra (50 partides)
+  if (player.partides >= 50 && !player.trofeus.includes('geomeatra')) {
+    newTrofeus.push('geomeatra');
+  }
+
+  // Mestre Geòmetra (100 partides)
+  if (player.partides >= 100 && !player.trofeus.includes('mestre_geo')) {
+    newTrofeus.push('mestre_geo');
+  }
+
+  // Llegenda de la Geometria (18000 XP = rang màxim)
+  if ((player.xp || 0) >= 18000 && !player.trofeus.includes('llegenda_geometria')) {
+    newTrofeus.push('llegenda_geometria');
+  }
+
+  // Polímata Geomètrica: 10+ encerts en 9+ formes
+  const formesMestredes = Object.values(player.stats_forma || {}).filter(
+    s => s.encerts >= 10
+  ).length;
+  if (formesMestredes >= 9 && !player.trofeus.includes('polimata_geometrica')) {
+    newTrofeus.push('polimata_geometrica');
+  }
+
+  // Desafiament Completat: 50+ XP en una única sessió (aproximat per 5 correctes seguides)
+  if ((player.ratxa || 0) >= 5 && (player.xp || 0) >= 50 && !player.trofeus.includes('desafiament_completat')) {
+    newTrofeus.push('desafiament_completat');
+  }
+
+  newTrofeus.forEach(id => {
+    if (!player.trofeus.includes(id)) {
+      player.trofeus.push(id);
+      showSerpentines();
+    }
+  });
+}
+
+// ═══════════════════════════════════════════
+//  CONFETTI / SERPENTINES
+// ═══════════════════════════════════════════
+
+function showSerpentines() {
+  const emojis = ['🎉', '✨', '🌟', '⭐', '🎊', '💫', '🔥', '🎯', '📐', '🏆'];
+
+  for (let i = 0; i < 30; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    confetti.style.left = Math.random() * 100 + '%';
+    confetti.style.top = '-20px';
+    confetti.style.animation = `confetti-fall ${2 + Math.random() * 1}s linear`;
+    document.body.appendChild(confetti);
+
+    setTimeout(() => confetti.remove(), 3000);
+  }
+}
+
+// ═══════════════════════════════════════════
+//  UNLOCK TROPHY: CURIOS (visit credits)
+// ═══════════════════════════════════════════
+
+function unlockCurios() {
+  if (!player || player.trofeus.includes('curios')) return;
+
+  player.trofeus.push('curios');
+  savePlayer();
+  showSerpentines(); // Serpentines!
+
+  // Show notification
+  const t = TROFEUS.find(t => t.id === 'curios');
+  if (t) {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+      position: fixed; bottom: 20px; right: 20px; z-index: 150;
+      background: linear-gradient(135deg, #f7c948, #f59e0b);
+      color: #1a1a2e; border-radius: 16px; padding: 20px 28px;
+      box-shadow: 0 8px 32px rgba(247, 201, 72, 0.5);
+      animation: slideUp 0.4s ease-out;
+      max-width: 280px;
+    `;
+    overlay.innerHTML = `
+      <div style="text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 8px;">🕵️</div>
+        <div style="font-size: 0.9rem; font-weight: 700; margin-bottom: 4px;">TROFEU DESBLOQUEJAT!</div>
+        <div style="font-size: 1.1rem; font-weight: 800;">Curiós</div>
+        <div style="font-size: 0.75rem; margin-top: 6px; opacity: 0.8;">Has llegit els crèdits</div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    setTimeout(() => overlay.remove(), 3000);
+  }
+}
+
+// ═══════════════════════════════════════════
+//  MODE: IDENTIFICAR FORMES
+// ═══════════════════════════════════════════
+
+const FORMES_IDENTIFICA = [
+  { icon: '⬜', nom: 'Quadrat', sides: 4, angles: 4, tipus: 'Regular' },
+  { icon: '▭', nom: 'Rectangle', sides: 4, angles: 4, tipus: 'Regular' },
+  { icon: '🔺', nom: 'Triangle', sides: 3, angles: 3, tipus: 'Polígon' },
+  { icon: '◇', nom: 'Romboide', sides: 4, angles: 4, tipus: 'Paral·lelogram' },
+  { icon: '◆', nom: 'Rombo', sides: 4, angles: 4, tipus: 'Regular' },
+  { icon: '⊥', nom: 'Trapezi', sides: 4, angles: 4, tipus: 'Trapezi' },
+  { icon: '⬟', nom: 'Pentàgon', sides: 5, angles: 5, tipus: 'Regular' },
+  { icon: '⬡', nom: 'Hexàgon', sides: 6, angles: 6, tipus: 'Regular' },
+  { icon: '⎔', nom: 'Octàgon', sides: 8, angles: 8, tipus: 'Regular' },
+  { icon: '⭕', nom: 'Cercle', sides: 0, angles: 0, tipus: 'Corba' },
+];
+
+function setupIdentify() {
+  const content = document.getElementById('identify-content');
+
+  // Seleccionar forma aleatòria
+  const formaCorrecta = FORMES_IDENTIFICA[Math.floor(Math.random() * FORMES_IDENTIFICA.length)];
+
+  // Generar opcions incorrectes
+  let opcions = [formaCorrecta];
+  while (opcions.length < 4) {
+    const opció = FORMES_IDENTIFICA[Math.floor(Math.random() * FORMES_IDENTIFICA.length)];
+    if (!opcions.find(o => o.nom === opció.nom)) {
+      opcions.push(opció);
+    }
+  }
+  // Barrejar opcions
+  opcions = opcions.sort(() => Math.random() - 0.5);
+
+  currentExercise = {
+    forma: 'identificar',
+    formaCorrecta,
+    fase: 'identify', // 'identify' o 'characteristics'
+  };
+
+  // Generar SVG per a la forma correcta
+  let shapeSVG = '';
+  switch(formaCorrecta.nom) {
+    case 'Quadrat': shapeSVG = drawSquareIdentify(); break;
+    case 'Rectangle': shapeSVG = drawRectangleIdentify(); break;
+    case 'Triangle': shapeSVG = drawTriangleIdentify('equilater'); break;
+    case 'Romboide': shapeSVG = `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+      <polygon points="60,160 100,50 180,50 140,160" fill="rgba(236, 72, 153, 0.2)" stroke="#ec4899" stroke-width="3"/>
+    </svg>`; break;
+    case 'Rombo': shapeSVG = drawRomboIdentify(); break;
+    case 'Trapezi': shapeSVG = `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+      <polygon points="40,160 70,60 170,60 200,160" fill="rgba(59, 245, 245, 0.2)" stroke="#3bf5f5" stroke-width="3"/>
+    </svg>`; break;
+    case 'Pentàgon': shapeSVG = `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+      <polygon points="120,30 190,85 155,165 85,165 50,85" fill="rgba(165, 142, 251, 0.2)" stroke="#a58efb" stroke-width="3"/>
+    </svg>`; break;
+    case 'Hexàgon': shapeSVG = drawHexagonIdentify(); break;
+    case 'Octàgon': shapeSVG = `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+      <polygon points="50,90 90,50 150,50 190,90 190,150 150,190 90,190 50,150" fill="rgba(132, 204, 22, 0.2)" stroke="#84cc16" stroke-width="3"/>
+    </svg>`; break;
+    case 'Cercle': shapeSVG = drawCircleIdentify(); break;
+    default: shapeSVG = drawSquareIdentify();
+  }
+
+  let html = `
+    <div class="shape-display">
+      ${shapeSVG}
+    </div>
+
+    <div class="exercise-question">
+      <div class="exercise-title">Quina forma és aquesta?</div>
+      <div class="option-grid">
+  `;
+
+  opcions.forEach(o => {
+    html += `<button class="option-btn" onclick="selectIdentifyOption('${o.nom}')">${o.nom}</button>`;
+  });
+
+  html += `
+      </div>
+    </div>
+    <div id="identify-result" style="display: none;"></div>
+  `;
+
+  content.innerHTML = html;
+}
+
+function selectIdentifyOption(selectedName) {
+  const correcteName = currentExercise.formaCorrecta.nom;
+  const isCorrect = selectedName === correcteName;
+
+  const resultDiv = document.getElementById('identify-result');
+  resultDiv.style.display = 'block';
+
+  let html = '<div style="margin-top: 12px;">';
+
+  if (isCorrect) {
+    html += `<div class="exercise-question">
+      <div style="background: rgba(74, 222, 128, 0.1); border: 1px solid #4ade80; border-radius: 10px; padding: 16px; text-align: center;">
+        <div style="font-size: 2rem; margin-bottom: 8px;">✓</div>
+        <div style="font-weight: 800; color: #4ade80;">CORRECTE!</div>
+        <div style="font-size: 0.9rem; margin-top: 8px; color: var(--text-sub);">Aquesta forma és un <strong>${correcteName}</strong></div>
+      </div>
+    </div>`;
+    html += `<div class="exercise-question" style="margin-top: 12px;">
+      <div class="exercise-title" style="font-size: 1rem;">Característiques del ${correcteName}:</div>
+      <div style="text-align: left; font-size: 0.9rem; color: var(--text-sub);">
+        <div>📍 <strong>Costats:</strong> ${currentExercise.formaCorrecta.sides}</div>
+        <div>∠ <strong>Angles:</strong> ${currentExercise.formaCorrecta.angles}</div>
+        <div>⚡ <strong>Tipus:</strong> ${currentExercise.formaCorrecta.tipus}</div>
+      </div>
+    </div>`;
+    updatePlayerStats('identificar', true);
+  } else {
+    html += `<div class="exercise-question">
+      <div style="background: rgba(248, 113, 113, 0.1); border: 1px solid #f87171; border-radius: 10px; padding: 16px; text-align: center;">
+        <div style="font-size: 2rem; margin-bottom: 8px;">✗</div>
+        <div style="font-weight: 800; color: #f87171;">INCORRECTE</div>
+        <div style="font-size: 0.9rem; margin-top: 8px; color: var(--text-sub);">Aquesta forma és un <strong>${correcteName}</strong>, no un ${selectedName}</div>
+      </div>
+    </div>`;
+    html += `<div class="exercise-question" style="margin-top: 12px;">
+      <div class="exercise-title" style="font-size: 1rem;">Característiques del ${correcteName}:</div>
+      <div style="text-align: left; font-size: 0.9rem; color: var(--text-sub);">
+        <div>📍 <strong>Costats:</strong> ${currentExercise.formaCorrecta.sides}</div>
+        <div>∠ <strong>Angles:</strong> ${currentExercise.formaCorrecta.angles}</div>
+        <div>⚡ <strong>Tipus:</strong> ${currentExercise.formaCorrecta.tipus}</div>
+      </div>
+    </div>`;
+    updatePlayerStats('identificar', false);
+  }
+
+  html += `
+    <button class="btn-secondary" onclick="setupIdentify()" style="margin-top: 16px;">Següent</button>
+    <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 8px;">Tornar</button>
+  </div>`;
+
+  resultDiv.innerHTML = html;
+}
+
+// ═══════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════
+
+window.addEventListener('DOMContentLoaded', () => {
+  loadPlayer();
+  // Mostrar portada per defecte
+  showScreen('screen-portada');
+});
+</script>
+</head>
+</body>
+</html>

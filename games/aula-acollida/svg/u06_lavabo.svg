@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Sink basin -->
+  <path d="M14 40 Q12 70 20 80 Q28 90 50 90 Q72 90 80 80 Q88 70 86 40 Z" fill="#f1f5f9" stroke="#9ca3af" stroke-width="2.5"/>
+  <!-- Sink rim -->
+  <ellipse cx="50" cy="40" rx="38" ry="10" fill="white" stroke="#9ca3af" stroke-width="2.5"/>
+  <!-- Faucet -->
+  <rect x="42" y="20" width="16" height="8" rx="4" fill="#9ca3af" stroke="#6b7280" stroke-width="2"/>
+  <rect x="36" y="16" width="10" height="6" rx="3" fill="#6b7280" stroke="#4b5563" stroke-width="1.5"/>
+  <rect x="54" y="16" width="10" height="6" rx="3" fill="#6b7280" stroke="#4b5563" stroke-width="1.5"/>
+  <!-- Spout drop -->
+  <path d="M50 28 L50 38" stroke="#9ca3af" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M50 38 Q48 44 50 46 Q52 44 50 38" fill="#3b82f6" opacity="0.7"/>
+  <!-- Drain -->
+  <circle cx="50" cy="78" r="5" fill="#d1d5db" stroke="#6b7280" stroke-width="1.5"/>
+  <circle cx="50" cy="78" r="2" fill="#9ca3af"/>
+  <!-- Pipe -->
+  <rect x="46" y="88" width="8" height="10" rx="2" fill="#9ca3af" stroke="#6b7280" stroke-width="1.5"/>
+  <!-- Mirror above -->
+  <rect x="26" y="2" width="48" height="14" rx="3" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1.5"/>
+</svg>

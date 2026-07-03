@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Mar ondulat -->
+  <path d="M2 72 Q12 68 22 72 Q32 76 42 72 Q52 68 62 72 Q72 76 82 72 Q92 68 98 72 L98 88 L2 88 Z" fill="#3b82f6"/>
+  <path d="M2 76 Q12 72 22 76 Q32 80 42 76 Q52 72 62 76 Q72 80 82 76 Q92 72 98 76 L98 88 L2 88 Z" fill="#60a5fa"/>
+  <!-- Casc barca (mitja lluna) -->
+  <path d="M15 68 Q18 80 50 82 Q82 80 85 68 Z" fill="#92400e" stroke="#78350f" stroke-width="1.5"/>
+  <!-- Interior barca -->
+  <path d="M20 68 Q22 76 50 78 Q78 76 80 68 Z" fill="#a16207"/>
+  <!-- Pal vertical -->
+  <line x1="50" y1="68" x2="50" y2="22" stroke="#4b3621" stroke-width="3" stroke-linecap="round"/>
+  <!-- Vela triangular gran -->
+  <polygon points="50,24 50,68 82,56" fill="#f5f5f5" stroke="#d1d5db" stroke-width="1.2"/>
+  <!-- Vela petita davantera (trinqueta) -->
+  <polygon points="50,28 50,62 24,52" fill="#e2e8f0" stroke="#d1d5db" stroke-width="1"/>
+  <!-- Botavarant horitzontal -->
+  <line x1="50" y1="68" x2="82" y2="60" stroke="#4b3621" stroke-width="2" stroke-linecap="round"/>
+  <!-- Bandereta al pal -->
+  <polygon points="50,22 58,26 50,30" fill="#ef4444"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">BARCA</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="eb_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient>
+    <linearGradient id="eb_fusta" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="16" fill="url(#eb_bg)"/>
+  <ellipse cx="50" cy="76" rx="32" ry="5" fill="#0f172a" opacity=".08"/>
+  <g transform="rotate(-10 50 52)">
+    <polygon points="24,40 76,40 84,48 32,48" fill="#93c5fd"/>
+    <polygon points="76,40 84,48 84,66 76,58" fill="#1d4ed8"/>
+    <rect x="24" y="40" width="52" height="18" rx="3" fill="url(#eb_fusta)"/>
+    <rect x="24" y="40" width="52" height="6" rx="3" fill="#bfdbfe" opacity=".7"/>
+    <rect x="27" y="58" width="49" height="12" rx="2" fill="#cbd5e1"/>
+    <rect x="27" y="58" width="49" height="5" fill="#e2e8f0"/>
+    <path d="M30 64 h8 M42 64 h6" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round"/>
+  </g>
+  <path d="M18 30 q3 -3 6 0 M30 22 q3 -3 6 0 M24 14 q3 -3 6 0" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+</svg>

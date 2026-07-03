@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Head -->
+  <circle cx="50" cy="20" r="14" fill="#f5cba7" stroke="#c0835a" stroke-width="2"/>
+  <!-- Hair -->
+  <path d="M36 16 Q36 6 50 6 Q64 6 64 16 Q58 10 50 10 Q42 10 36 16 Z" fill="#1a1a1a"/>
+  <!-- Eyes -->
+  <circle cx="45" cy="19" r="2" fill="#333"/>
+  <circle cx="55" cy="19" r="2" fill="#333"/>
+  <!-- Body - white shirt/uniform -->
+  <path d="M32 34 Q24 34 20 44 L18 88 L82 88 L80 44 Q76 34 68 34 Z" fill="white" stroke="#d1d5db" stroke-width="2"/>
+  <!-- Black bow tie -->
+  <path d="M44 34 L50 40 L56 34 L50 38 Z" fill="#1f2937"/>
+  <circle cx="50" cy="37" r="2" fill="#374151"/>
+  <!-- Black vest/waistcoat -->
+  <path d="M38 36 L34 88 L46 88 L46 48 L50 44 L54 48 L54 88 L66 88 L62 36 L56 34 L50 40 L44 34 Z" fill="#1f2937" opacity="0.85"/>
+  <!-- Neck -->
+  <rect x="44" y="32" width="12" height="6" rx="2" fill="#f5cba7"/>
+  <!-- Tray in right hand -->
+  <ellipse cx="80" cy="52" rx="16" ry="5" fill="#d1d5db" stroke="#9ca3af" stroke-width="1.5"/>
+  <!-- Items on tray -->
+  <rect x="74" y="44" width="6" height="8" rx="2" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  <ellipse cx="83" cy="46" rx="5" ry="3" fill="white" stroke="#9ca3af" stroke-width="1"/>
+  <!-- Arm holding tray -->
+  <path d="M68 44 Q72 46 80 46" stroke="#f5cba7" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M68 44 Q68 56 68 60" stroke="#f5cba7" stroke-width="8" stroke-linecap="round" fill="none"/>
+</svg>

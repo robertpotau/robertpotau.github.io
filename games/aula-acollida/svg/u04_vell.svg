@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- T-shirt body (faded/worn) -->
+  <path d="M28 30 L22 72 L78 72 L72 30 Z" fill="#94a3b8"/>
+  <!-- Left sleeve -->
+  <path d="M28 30 L16 24 L12 42 L24 46 Z" fill="#94a3b8"/>
+  <!-- Right sleeve -->
+  <path d="M72 30 L84 24 L88 42 L76 46 Z" fill="#94a3b8"/>
+  <!-- Crew neck (worn/stretched) -->
+  <path d="M36 30 Q50 38 64 30 Q60 27 50 26 Q40 27 36 30 Z" fill="#b0bcc8"/>
+  <!-- Faded/discoloured patches -->
+  <ellipse cx="40" cy="50" rx="8" ry="6" fill="#b0bcc8" opacity="0.7"/>
+  <ellipse cx="64" cy="45" rx="5" ry="4" fill="#b0bcc8" opacity="0.6"/>
+  <!-- Holes (small circles/tears) -->
+  <ellipse cx="35" cy="58" rx="3" ry="2" fill="#d1d5db"/>
+  <ellipse cx="60" cy="65" rx="2.5" ry="2" fill="#d1d5db"/>
+  <ellipse cx="50" cy="42" rx="2" ry="1.5" fill="#d1d5db"/>
+  <ellipse cx="70" cy="56" rx="2" ry="1.5" fill="#d1d5db"/>
+  <!-- Patches (worn repairs) -->
+  <!-- Patch 1 -->
+  <rect x="28" y="52" width="10" height="8" rx="1" fill="#d97706" opacity="0.7" stroke="#b45309" stroke-width="0.8"/>
+  <line x1="29" y1="54" x2="37" y2="54" stroke="#b45309" stroke-width="0.5" stroke-dasharray="1,1"/>
+  <line x1="29" y1="57" x2="37" y2="57" stroke="#b45309" stroke-width="0.5" stroke-dasharray="1,1"/>
+  <!-- Patch 2 -->
+  <rect x="62" y="60" width="9" height="7" rx="1" fill="#d97706" opacity="0.7" stroke="#b45309" stroke-width="0.8" transform="rotate(-5 66 63)"/>
+  <!-- Worn stitching lines -->
+  <line x1="22" y1="66" x2="40" y2="66" stroke="#7f8ea0" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <line x1="60" y1="35" x2="75" y2="40" stroke="#7f8ea0" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <!-- Frayed hem -->
+  <path d="M22 72 L24 75 L27 72 L30 75 L33 72 L36 75 L39 72 L42 75 L45 72 L48 75 L51 72 L54 75 L57 72 L60 75 L63 72 L66 75 L69 72 L72 75 L75 72 L78 72" stroke="#7f8ea0" stroke-width="1.5" fill="none"/>
+
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">VELL</text>
+</svg>

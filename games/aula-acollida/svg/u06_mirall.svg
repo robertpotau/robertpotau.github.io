@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Mirror frame -->
+  <ellipse cx="50" cy="46" rx="36" ry="42" fill="#d97706" stroke="#92400e" stroke-width="3"/>
+  <!-- Mirror glass -->
+  <ellipse cx="50" cy="46" rx="28" ry="34" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1.5"/>
+  <!-- Reflection: person silhouette -->
+  <circle cx="50" cy="28" r="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <path d="M40 38 Q38 52 40 60 L60 60 Q62 52 60 38 Q56 34 50 34 Q44 34 40 38 Z" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <!-- Light reflection on mirror -->
+  <ellipse cx="38" cy="26" rx="6" ry="10" fill="white" opacity="0.4" transform="rotate(-20 38 26)"/>
+  <!-- Stand -->
+  <rect x="44" y="86" width="12" height="8" rx="2" fill="#92400e" stroke="#78350f" stroke-width="1.5"/>
+  <rect x="34" y="92" width="32" height="5" rx="2.5" fill="#78350f"/>
+</svg>

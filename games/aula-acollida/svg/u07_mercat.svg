@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Sky background -->
+  <rect x="0" y="0" width="100" height="100" fill="#e0f2fe"/>
+  <!-- Main building -->
+  <rect x="5" y="35" width="90" height="50" fill="#f5f5f5" stroke="#d1d5db" stroke-width="1"/>
+  <!-- Roof / pediment -->
+  <polygon points="2,35 50,10 98,35" fill="#e5e7eb" stroke="#d1d5db" stroke-width="1"/>
+  <!-- Pediment decoration -->
+  <polygon points="20,35 50,18 80,35" fill="#f5f5f5" stroke="#d1d5db" stroke-width="0.5"/>
+  <!-- Sign on pediment -->
+  <text x="50" y="30" font-family="Arial,sans-serif" font-size="8" fill="#1f2937" font-weight="700" text-anchor="middle">MERCAT</text>
+  <!-- Columns -->
+  <rect x="12" y="35" width="6" height="50" rx="3" fill="#e5e7eb" stroke="#d1d5db" stroke-width="0.5"/>
+  <rect x="82" y="35" width="6" height="50" rx="3" fill="#e5e7eb" stroke="#d1d5db" stroke-width="0.5"/>
+  <rect x="30" y="35" width="5" height="50" rx="2.5" fill="#e5e7eb" stroke="#d1d5db" stroke-width="0.5"/>
+  <rect x="65" y="35" width="5" height="50" rx="2.5" fill="#e5e7eb" stroke="#d1d5db" stroke-width="0.5"/>
+  <!-- Main door (arch) -->
+  <rect x="38" y="60" width="24" height="25" fill="#1f2937"/>
+  <ellipse cx="50" cy="60" rx="12" ry="8" fill="#1f2937"/>
+  <ellipse cx="50" cy="60" rx="10" ry="6" fill="#3b82f6" opacity="0.4"/>
+  <!-- Side windows -->
+  <rect x="18" y="50" width="9" height="10" rx="1" fill="#bae6fd" stroke="#93c5fd" stroke-width="0.5"/>
+  <rect x="73" y="50" width="9" height="10" rx="1" fill="#bae6fd" stroke="#93c5fd" stroke-width="0.5"/>
+  <!-- Steps -->
+  <rect x="25" y="83" width="50" height="4" rx="1" fill="#d1d5db"/>
+  <rect x="20" y="87" width="60" height="4" rx="1" fill="#e5e7eb"/>
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MERCAT</text>
+</svg>

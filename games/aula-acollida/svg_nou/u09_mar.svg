@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="mar2_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient>
+  <linearGradient id="mar2_aigua" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#0369a1"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#mar2_bg)"/>
+  <circle cx="22" cy="20" r="8" fill="#fde047"/>
+  <circle cx="22" cy="20" r="11" fill="#fde047" opacity=".3"/>
+  <path d="M72 18 q3 -4 7 -2 q1 -3 5 -2 q4 1 4 5 q3 2 0 4 h-16 q-3 -2 0 -5" fill="#ffffff" opacity=".9"/>
+  <path d="M0 52 q12 -8 25 0 t25 0 t25 0 t25 0 v32 q0 16 -16 16 H16 Q0 100 0 84 z" fill="url(#mar2_aigua)"/>
+  <path d="M0 52 q12 -8 25 0 t25 0 t25 0 t25 0 v6 q-12 8 -25 0 t-25 0 t-25 0 t-25 0 z" fill="#7dd3fc" opacity=".6"/>
+  <path d="M14 70 q6 -4 12 0 M44 76 q6 -4 12 0 M70 68 q6 -4 12 0" stroke="#bae6fd" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M58 38 l10 -6 v12 z" fill="#f8fafc"/>
+  <path d="M56 38 v-14" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+  <path d="M56 26 q-8 -2 -12 4 q6 4 12 2 z" fill="#ef4444"/>
+  <path d="M48 44 q8 -4 16 0 l-2 4 h-12 z" fill="#92400e"/>
+</svg>

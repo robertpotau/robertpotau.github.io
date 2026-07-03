@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Comparació: objecte CURT (dalt) vs LLARG (baix) -->
+
+  <!-- Regle CURT (dalt, lila, clarament curt) -->
+  <rect x="12" y="16" width="30" height="20" rx="4" fill="#6366f1" stroke="#4338ca" stroke-width="1.5"/>
+  <line x1="20" y1="18" x2="20" y2="22" stroke="white" stroke-width="1.5"/>
+  <line x1="27" y1="18" x2="27" y2="22" stroke="white" stroke-width="1.5"/>
+  <line x1="34" y1="18" x2="34" y2="22" stroke="white" stroke-width="1.5"/>
+  <!-- Fletxa de mida sota el regle curt -->
+  <line x1="12" y1="43" x2="42" y2="43" stroke="#6366f1" stroke-width="2"/>
+  <polygon points="12,43 18,40 18,46" fill="#6366f1"/>
+  <polygon points="42,43 36,40 36,46" fill="#6366f1"/>
+
+  <!-- Regle LLARG (baix, gris, clarament llarg) -->
+  <rect x="6" y="60" width="88" height="20" rx="4" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="16" y1="62" x2="16" y2="66" stroke="white" stroke-width="1.5"/>
+  <line x1="25" y1="62" x2="25" y2="66" stroke="white" stroke-width="1.5"/>
+  <line x1="34" y1="62" x2="34" y2="66" stroke="white" stroke-width="1.5"/>
+  <line x1="43" y1="62" x2="43" y2="66" stroke="white" stroke-width="1.5"/>
+  <line x1="52" y1="62" x2="52" y2="66" stroke="white" stroke-width="1.5"/>
+  <line x1="61" y1="62" x2="61" y2="66" stroke="white" stroke-width="1.5"/>
+  <line x1="70" y1="62" x2="70" y2="66" stroke="white" stroke-width="1.5"/>
+  <line x1="79" y1="62" x2="79" y2="66" stroke="white" stroke-width="1.5"/>
+  <line x1="88" y1="62" x2="88" y2="66" stroke="white" stroke-width="1.5"/>
+</svg>

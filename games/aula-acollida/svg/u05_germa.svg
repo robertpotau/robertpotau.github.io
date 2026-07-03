@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Head (teen, slightly larger than fill) -->
+  <circle cx="50" cy="28" r="19" fill="#f5cba7" stroke="#c0835a" stroke-width="2"/>
+  <!-- Hair (short dark) -->
+  <path d="M31 23 Q31 9 50 9 Q69 9 69 23 Q63 15 50 15 Q37 15 31 23 Z" fill="#4b3621"/>
+  <!-- Side hair -->
+  <path d="M31 23 Q29 28 31 33 Q33 26 31 23 Z" fill="#4b3621"/>
+  <path d="M69 23 Q71 28 69 33 Q67 26 69 23 Z" fill="#4b3621"/>
+  <!-- Eyes -->
+  <circle cx="43" cy="26" r="2.5" fill="#333"/>
+  <circle cx="57" cy="26" r="2.5" fill="#333"/>
+  <!-- Light in eyes -->
+  <circle cx="44" cy="25" r="1" fill="white"/>
+  <circle cx="58" cy="25" r="1" fill="white"/>
+  <!-- Smile -->
+  <path d="M44 35 Q50 40 56 35" fill="none" stroke="#c0835a" stroke-width="2" stroke-linecap="round"/>
+  <!-- Neck -->
+  <rect x="43" y="45" width="14" height="7" rx="2" fill="#f5cba7"/>
+  <!-- Body (t-shirt red) -->
+  <path d="M30 52 Q20 52 17 62 L14 90 L86 90 L83 62 Q80 52 70 52 Z" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+  <!-- T-shirt collar -->
+  <path d="M43 52 Q50 58 57 52" fill="none" stroke="#b91c1c" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Jeans line (trousers) -->
+  <line x1="14" y1="76" x2="86" y2="76" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="3,2"/>
+  <!-- Label -->
+  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GERMÀ</text>
+</svg>
