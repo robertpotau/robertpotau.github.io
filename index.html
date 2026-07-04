@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Robert Potau — Jocs educatius a mida per a l'aula</title>
-<meta name="description" content="Jocs educatius interactius creats per Robert Potau: matemàtiques, llengua, geometria i més. Disponible per crear jocs a mida per a centres i editorials.">
+<title>Robert Potau — Un mestre que fa jocs</title>
+<meta name="description" content="Un viatge per l'escola on els jocs neixen: matemàtiques, llengua, geometria i més. Jocs educatius gratuïts creats per Robert Potau, docent.">
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -12,22 +12,18 @@
 
 <!-- Open Graph / social preview -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Robert Potau — Jocs educatius a mida per a l'aula">
-<meta property="og:description" content="Jocs educatius interactius: matemàtiques, llengua, geometria i més. Disponible per crear jocs a mida per a centres i editorials.">
+<meta property="og:title" content="Robert Potau — Un mestre que fa jocs">
+<meta property="og:description" content="Un viatge per l'escola on neixen els jocs: matemàtiques, llengua, geometria i més. Jocs educatius gratuïts per a l'aula.">
 <meta property="og:image" content="https://robertpotau.github.io/og-image.png">
 <meta property="og:url" content="https://robertpotau.github.io/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Robert Potau — Jocs educatius a mida per a l'aula">
-<meta name="twitter:description" content="Jocs educatius interactius: matemàtiques, llengua, geometria i més.">
+<meta name="twitter:title" content="Robert Potau — Un mestre que fa jocs">
+<meta name="twitter:description" content="Jocs educatius gratuïts nascuts a l'aula. Entra a l'escola.">
 <meta name="twitter:image" content="https://robertpotau.github.io/og-image.png">
 
 <!--
-  ANALYTICS (not yet active — needs a one-time manual signup, see landing-page/CLAUDE.md "Analytics" section):
-  Once you create a free account at https://plausible.io (or https://www.goatcounter.com as a fully free
-  alternative) and add robertpotau.github.io as a site, uncomment ONE of the snippets below.
-
+  ANALYTICS (not yet active — needs a one-time manual signup, see CLAUDE.md "Analytics" section):
   <script defer data-domain="robertpotau.github.io" src="https://plausible.io/js/script.js"></script>
-
   <script data-goatcounter="https://ROBERTPOTAU.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 -->
 
@@ -43,662 +39,646 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --primary: #9a32ef;
-    --primary-dark: #7710d1;
-    --primary-press: #6e25aa;
-    --secondary: #b365f2;
-    --secondary-light: #cc92fc;
-    --bg: #f7f1ff;
-    --card: #ffffff;
-    --text: #241433;
-    --text-muted: #7c6a92;
-    --border: #e4c9fb;
+    --ink: #f5edff;
+    --ink-dim: rgba(245,237,255,0.62);
+    --accent: #c792ff;
+    --accent-hot: #9a32ef;
+    --kofi: #29d2ff;
+    --glass: rgba(255,255,255,0.06);
+    --glass-border: rgba(255,255,255,0.14);
     --radius: 22px;
-    --radius-sm: 14px;
-    --shadow-card: 0 4px 0 #dcb8fb, 0 8px 20px rgba(119,16,209,0.12);
   }
 
+  html { scroll-behavior: smooth; }
   html, body {
-    min-height: 100%;
+    background: #14082a;
+    color: var(--ink);
     font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
     line-height: 1.5;
+    overflow-x: hidden;
   }
 
   a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent-hot); color: #fff; }
 
-  .wrap {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 24px 20px 60px;
+  /* 3D canvas behind everything */
+  #scene {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+  }
+  body.no3d #scene { display: none; }
+  body.no3d {
+    background: linear-gradient(180deg, #14082a 0%, #2a0a54 40%, #131c4a 75%, #180a33 100%);
   }
 
-  /* Language switcher */
-  .lang-switch {
+  /* scroll progress */
+  #progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, #29d2ff, #c792ff, #9a32ef);
+    z-index: 50;
+    transition: width 0.1s linear;
+  }
+
+  /* top bar */
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
     display: flex;
-    justify-content: flex-end;
-    gap: 6px;
-    margin-bottom: 12px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    z-index: 40;
+    pointer-events: none;
   }
+  .topbar .logo {
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    padding: 7px 14px;
+    border-radius: 99px;
+    pointer-events: auto;
+  }
+  .lang-switch { display: flex; gap: 6px; pointer-events: auto; }
   .lang-switch button {
-    background: var(--card);
-    border: 2px solid var(--border);
-    color: var(--text-muted);
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    color: var(--ink-dim);
     font-family: inherit;
     font-weight: 800;
-    font-size: 12.5px;
-    padding: 5px 12px;
+    font-size: 12px;
+    padding: 6px 12px;
     border-radius: 99px;
     cursor: pointer;
   }
   .lang-switch button.active {
-    background: var(--primary);
-    border-color: var(--primary);
+    background: var(--accent-hot);
+    border-color: var(--accent-hot);
     color: #fff;
   }
 
-  /* Hero */
-  header.hero {
-    background: linear-gradient(135deg, var(--secondary-light), var(--primary-dark));
-    border-radius: var(--radius);
-    padding: 48px 32px;
-    color: #fff;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(110,37,170,0.30);
-    margin-bottom: 40px;
-  }
-  .hero .avatar {
-    width: 88px; height: 88px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.25);
-    border: 3px solid rgba(255,255,255,0.6);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 40px;
-    margin: 0 auto 16px;
-  }
-  .hero h1 {
-    font-size: clamp(28px, 5vw, 42px);
-    font-weight: 900;
-    margin-bottom: 8px;
-  }
-  .hero p.tagline {
-    font-size: clamp(16px, 2.5vw, 20px);
-    font-weight: 700;
-    opacity: 0.95;
-    margin-bottom: 18px;
-  }
-  .hero p.bio {
-    max-width: 640px;
-    margin: 0 auto;
-    font-size: 15px;
-    opacity: 0.9;
-  }
+  /* narrative beats */
+  main { position: relative; z-index: 10; }
 
-  /* Category sections */
-  .category {
-    margin-top: 36px;
-  }
-  h2.section-title {
-    font-size: 22px;
-    font-weight: 900;
-    margin-bottom: 18px;
-    color: var(--primary-press);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  /* Games grid */
-  .games-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
-  }
-
-  .game-card {
-    background: var(--card);
-    border: 2px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow-card);
+  .beat {
+    min-height: 125vh;
     display: flex;
     flex-direction: column;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-  }
-  .game-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 0 #dcb8fb, 0 14px 26px rgba(119,16,209,0.20);
-  }
-
-  .game-card .thumb {
-    width: 100%;
-    aspect-ratio: 16/10;
-    background: linear-gradient(135deg, var(--secondary-light), var(--primary));
-    display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 44px;
-    object-fit: cover;
-  }
-
-  .game-card .body {
-    padding: 18px 22px 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex-grow: 1;
-  }
-
-  .game-card h3 {
-    font-size: 19px;
-    font-weight: 900;
-  }
-  .game-card .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .game-card .subject, .game-card .grade {
-    display: inline-block;
-    font-size: 11.5px;
-    font-weight: 800;
-    padding: 3px 10px;
-    border-radius: 99px;
-    width: fit-content;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-  .game-card .subject {
-    background: #f3e8ff;
-    color: var(--primary-press);
-  }
-  .game-card .grade {
-    background: #eef2ff;
-    color: #4338ca;
-  }
-  .game-card p.desc {
-    font-size: 14px;
-    color: var(--text-muted);
-    flex-grow: 1;
-  }
-  .game-card .play-btn {
-    background: var(--primary);
-    color: #fff;
-    font-weight: 800;
-    font-size: 14px;
-    text-align: center;
-    padding: 10px;
-    border-radius: var(--radius-sm);
-    box-shadow: 0 4px 0 var(--primary-press);
-    transition: transform 0.1s;
-  }
-  .game-card .play-btn:active {
-    transform: translateY(3px);
-    box-shadow: 0 1px 0 var(--primary-press);
-  }
-
-  .game-card .apk-note {
-    font-size: 12px;
-    color: var(--text-muted);
-    display: flex;
     align-items: center;
-    gap: 4px;
-  }
-
-  /* Process steps */
-  .process {
-    margin-top: 44px;
-  }
-  .process-steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px;
-  }
-  .process-step {
-    background: var(--card);
-    border: 2px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 18px;
     text-align: center;
+    padding: 18vh 22px;
   }
-  .process-step .num {
+  .beat.hero { min-height: 100vh; padding-top: 10vh; }
+
+  .beat .kicker {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .beat h1 {
+    font-size: clamp(44px, 9vw, 108px);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+  .beat h2 {
+    font-size: clamp(30px, 5.6vw, 62px);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    max-width: 900px;
+  }
+  .beat p.lead {
+    font-size: clamp(16px, 2.2vw, 21px);
+    color: var(--ink-dim);
+    max-width: 640px;
+    margin-top: 22px;
+  }
+  .beat .hint {
+    position: absolute;
+    bottom: 5vh;
+    font-size: 13px;
+    color: var(--ink-dim);
+    animation: bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob { 0%,100% { transform: translateY(0);} 50% { transform: translateY(9px);} }
+  .beat.hero { position: relative; }
+
+  /* reveal choreography */
+  .reveal {
+    opacity: 0;
+    transform: translateY(64px) scale(0.97);
+    transition: opacity 1.1s cubic-bezier(0.16,1,0.3,1), transform 1.1s cubic-bezier(0.16,1,0.3,1);
+    will-change: opacity, transform;
+  }
+  .reveal.d1 { transition-delay: 0.12s; }
+  .reveal.d2 { transition-delay: 0.26s; }
+  .reveal.d3 { transition-delay: 0.42s; }
+  .in .reveal { opacity: 1; transform: translateY(0) scale(1); }
+
+  /* classroom door plaque */
+  .plaque {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    background: var(--primary);
-    color: #fff;
-    font-weight: 900;
+    gap: 10px;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    border-radius: 14px;
+    padding: 10px 20px;
+    font-weight: 800;
     font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 26px;
+  }
+
+  /* game cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 285px));
+    justify-content: center;
+    gap: 22px;
+    margin-top: 44px;
+    width: 100%;
+    max-width: 1000px;
+  }
+  .gcard {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-align: left;
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.35s, box-shadow 0.35s;
+  }
+  .gcard:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(199,146,255,0.55);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45), 0 0 40px rgba(154,50,239,0.18);
+  }
+  .gcard img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .gcard .inner { padding: 16px 18px 18px; }
+  .gcard h3 { font-size: 18px; font-weight: 900; margin-bottom: 4px; }
+  .gcard .grade {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(154,50,239,0.16);
+    border-radius: 99px;
+    padding: 3px 10px;
     margin-bottom: 8px;
   }
-  .process-step h4 {
-    font-size: 14.5px;
-    font-weight: 800;
-    margin-bottom: 4px;
-  }
-  .process-step p {
-    font-size: 12.5px;
-    color: var(--text-muted);
-  }
-
-  /* Commercial / support sections */
-  .cta-section {
-    margin-top: 44px;
-    border-radius: var(--radius);
-    padding: 32px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  @media (min-width: 760px) {
-    .cta-section.split { grid-template-columns: 1fr 1fr; }
-  }
-
-  .cta-card {
-    background: var(--card);
-    border: 2px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    box-shadow: var(--shadow-card);
-  }
-  .cta-card h2 {
-    font-size: 22px;
-    font-weight: 900;
-    color: var(--primary-press);
-    margin-bottom: 10px;
-  }
-  .cta-card p {
-    font-size: 14.5px;
-    color: var(--text-muted);
-    margin-bottom: 18px;
-  }
-  .cta-card .btn {
-    display: inline-block;
-    background: var(--primary);
-    color: #fff;
-    font-weight: 800;
-    font-size: 14px;
-    padding: 12px 22px;
-    border-radius: var(--radius-sm);
-    box-shadow: 0 4px 0 var(--primary-press);
-  }
-  .cta-card.kofi .btn {
-    background: #13c3ff;
-    box-shadow: 0 4px 0 #0e9dcf;
-  }
-  .badge-note, .privacy-note {
-    margin-top: 24px;
-    text-align: center;
-    font-size: 13.5px;
-    color: var(--text-muted);
-    background: #f3e8ff;
-    border-radius: var(--radius-sm);
-    padding: 14px 20px;
-  }
-
-  .pdf-link {
+  .gcard p { font-size: 13px; color: var(--ink-dim); margin-bottom: 14px; min-height: 40px; }
+  .gcard .play {
     display: block;
     text-align: center;
-    margin-top: 18px;
+    background: var(--accent-hot);
+    color: #fff;
+    font-weight: 800;
+    font-size: 13.5px;
+    padding: 10px;
+    border-radius: 13px;
+    box-shadow: 0 5px 0 #5d0ba3;
+    transition: transform 0.1s;
+  }
+  .gcard .play:active { transform: translateY(4px); box-shadow: 0 1px 0 #5d0ba3; }
+
+  /* support / kofi */
+  .support-box {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  .btn-big {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    font-size: clamp(16px, 2vw, 20px);
+    padding: 18px 38px;
+    border-radius: 99px;
+    transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s;
+  }
+  .btn-kofi {
+    background: var(--kofi);
+    color: #06222e;
+    box-shadow: 0 8px 0 #0e86ad, 0 18px 50px rgba(41,210,255,0.35);
+  }
+  .btn-kofi:hover { transform: translateY(-3px) scale(1.03); }
+  .btn-mail {
+    background: var(--accent-hot);
+    color: #fff;
+    box-shadow: 0 8px 0 #5d0ba3, 0 18px 50px rgba(154,50,239,0.35);
+  }
+  .btn-mail:hover { transform: translateY(-3px) scale(1.03); }
+  .support-sub { font-size: 14px; color: var(--ink-dim); max-width: 520px; }
+  .support-links { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 8px; }
+  .support-links a {
     font-size: 13.5px;
     font-weight: 800;
-    color: var(--primary-press);
+    color: var(--accent);
+    border-bottom: 1px dashed rgba(199,146,255,0.5);
+    padding-bottom: 2px;
   }
 
+  /* mini process */
+  .steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 30px;
+    max-width: 760px;
+  }
+  .step {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    border-radius: 14px;
+    padding: 12px 18px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink-dim);
+  }
+  .step b { color: var(--ink); }
+
   footer {
+    position: relative;
+    z-index: 10;
     text-align: center;
-    margin-top: 50px;
-    color: var(--text-muted);
+    padding: 40px 20px 60px;
     font-size: 13px;
+    color: var(--ink-dim);
+  }
+  footer .row { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin-bottom: 16px; }
+  footer a { color: var(--accent); font-weight: 700; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { transition: opacity 0.4s ease; transform: none; }
+    .beat .hint { animation: none; }
+  }
+  @media (max-width: 640px) {
+    .beat { min-height: 110vh; padding: 14vh 18px; }
+    .cards { grid-template-columns: 1fr; max-width: 340px; }
   }
 </style>
 </head>
 <body>
-<div class="wrap">
 
+<canvas id="scene"></canvas>
+<div id="progress"></div>
+
+<div class="topbar">
+  <span class="logo">RP · ROBERT POTAU</span>
   <div class="lang-switch">
     <button data-lang="ca" class="active">CA</button>
     <button data-lang="es">ES</button>
     <button data-lang="en">EN</button>
   </div>
-
-  <header class="hero">
-    <div class="avatar">🎓</div>
-    <h1>Robert Potau</h1>
-    <p class="tagline" data-i18n="tagline">Docent · Creador de jocs educatius a mida per a l'aula</p>
-    <p class="bio" data-i18n="bio">
-      Sóc docent a la Generalitat de Catalunya i des de fa temps dissenyo jocs i eines
-      interactives per fer les classes més dinàmiques i properes als alumnes.
-      Aquí trobaràs una selecció dels jocs que he desenvolupat per treballar
-      matemàtiques, llengua, geometria i molt més — pensats per jugar-hi directament
-      des del navegador, sense instal·lar res. Si el teu centre o editorial necessita
-      un joc fet a mida, també puc ajudar-te a crear-lo.
-    </p>
-  </header>
-
-  <section class="category">
-    <h2 class="section-title"><span>🧮</span><span data-i18n="cat_math">Matemàtiques</span></h2>
-    <div class="games-grid">
-
-      <div class="game-card">
-        <img class="thumb" src="screenshots/calcuherois.jpg" alt="CalcuHerois" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'🧮'}))">
-        <div class="body">
-          <div class="tags">
-            <span class="subject" data-i18n="tag_calcuherois">Càlcul mental</span>
-            <span class="grade" data-i18n="grade_calcuherois">Primària 3r-6è</span>
-          </div>
-          <h3 data-i18n="title_calcuherois">CalcuHerois</h3>
-          <p class="desc" data-i18n="desc_calcuherois">Càlcul mental gamificat: missions i herois per practicar sumes, restes, multiplicacions i divisions.</p>
-          <a class="play-btn" href="games/calcuherois/CalcuHerois.html" data-i18n="play">Jugar ▶</a>
-          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
-        </div>
-      </div>
-
-      <div class="game-card">
-        <img class="thumb" src="screenshots/fraccions.jpg" alt="Fraccions" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'🍕'}))">
-        <div class="body">
-          <div class="tags">
-            <span class="subject" data-i18n="tag_fraccions">Fraccions</span>
-            <span class="grade" data-i18n="grade_fraccions">Primària 4t-6è</span>
-          </div>
-          <h3 data-i18n="title_fraccions">Fraccions</h3>
-          <p class="desc" data-i18n="desc_fraccions">Set maneres de treballar el concepte de fracció i quatre modes per practicar les operacions.</p>
-          <a class="play-btn" href="games/fraccions/fraccions.html" data-i18n="play">Jugar ▶</a>
-          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
-        </div>
-      </div>
-
-      <div class="game-card">
-        <img class="thumb" src="screenshots/geometria.jpg" alt="Geometria" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'🔺'}))">
-        <div class="body">
-          <div class="tags">
-            <span class="subject" data-i18n="tag_geometria">Geometria</span>
-            <span class="grade" data-i18n="grade_geometria">Primària 5è - ESO 2n</span>
-          </div>
-          <h3 data-i18n="title_geometria">Geometria</h3>
-          <p class="desc" data-i18n="desc_geometria">Repàs interactiu de figures geomètriques i les seves propietats.</p>
-          <a class="play-btn" href="games/geometria/index.html" data-i18n="play">Jugar ▶</a>
-          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
-        </div>
-      </div>
-
-      <div class="game-card">
-        <img class="thumb" src="screenshots/quina-hora-es.jpg" alt="Quina hora és" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'🕐'}))">
-        <div class="body">
-          <div class="tags">
-            <span class="subject" data-i18n="tag_quinahoraes">Mesura del temps</span>
-            <span class="grade" data-i18n="grade_quinahoraes">Primària 1r-3r</span>
-          </div>
-          <h3 data-i18n="title_quinahoraes">Quina hora és</h3>
-          <p class="desc" data-i18n="desc_quinahoraes">Practica la lectura de l'hora en rellotge analògic amb el sistema tradicional català de quarts.</p>
-          <a class="play-btn" href="games/quina-hora-es/index.html" data-i18n="play">Jugar ▶</a>
-          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="category">
-    <h2 class="section-title"><span>✍️</span><span data-i18n="cat_llengua">Llengua catalana</span></h2>
-    <div class="games-grid">
-
-      <div class="game-card">
-        <img class="thumb" src="screenshots/lletra-a-lletra.jpg" alt="Lletra a lletra" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'📖'}))">
-        <div class="body">
-          <div class="tags">
-            <span class="subject" data-i18n="tag_lletra">Lectoescriptura</span>
-            <span class="grade" data-i18n="grade_lletra">Infantil P5 - Primària 2n</span>
-          </div>
-          <h3 data-i18n="title_lletra">Lletra a lletra</h3>
-          <p class="desc" data-i18n="desc_lletra">Joc de lectoescriptura: escoltar, completar, separar en síl·labes, associar i llegir paraules.</p>
-          <a class="play-btn" href="games/lletra-a-lletra/index.html" data-i18n="play">Jugar ▶</a>
-          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
-        </div>
-      </div>
-
-      <div class="game-card">
-        <img class="thumb" src="screenshots/ortografia.jpg" alt="Ortografia" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'✍️'}))">
-        <div class="body">
-          <div class="tags">
-            <span class="subject" data-i18n="tag_ortografia">Ortografia</span>
-            <span class="grade" data-i18n="grade_ortografia">Primària 3r-6è</span>
-          </div>
-          <h3 data-i18n="title_ortografia">Ortografia</h3>
-          <p class="desc" data-i18n="desc_ortografia">Deu blocs temàtics per repassar l'ortografia catalana: la essa i la ce, les comes, i molt més.</p>
-          <a class="play-btn" href="games/ortografia/index.html" data-i18n="play">Jugar ▶</a>
-          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="category">
-    <h2 class="section-title"><span>🌍</span><span data-i18n="cat_acollida">Acollida</span></h2>
-    <div class="games-grid">
-
-      <div class="game-card">
-        <img class="thumb" src="screenshots/aula-acollida.jpg" alt="Aula d'Acollida" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'🌍'}))">
-        <div class="body">
-          <div class="tags">
-            <span class="subject" data-i18n="tag_acollida">Acollida · Llengua</span>
-            <span class="grade" data-i18n="grade_acollida">Tots els nivells</span>
-          </div>
-          <h3 data-i18n="title_acollida">Aula d'Acollida</h3>
-          <p class="desc" data-i18n="desc_acollida">Vocabulari, lectura i jocs per a alumnat nouvingut, organitzats per unitats temàtiques amb progressió d'experiència.</p>
-          <a class="play-btn" href="games/aula-acollida/index.html" data-i18n="play">Jugar ▶</a>
-          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="category">
-    <h2 class="section-title"><span>📐</span><span data-i18n="cat_tecnologia">Tecnologia i dibuix</span></h2>
-    <div class="games-grid">
-
-      <div class="game-card">
-        <img class="thumb" src="screenshots/vistes.jpg" alt="Vistes" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'📐'}))">
-        <div class="body">
-          <div class="tags">
-            <span class="subject" data-i18n="tag_vistes">Dibuix tècnic</span>
-            <span class="grade" data-i18n="grade_vistes">ESO 3r-4t / Batxillerat</span>
-          </div>
-          <h3 data-i18n="title_vistes">Vistes</h3>
-          <p class="desc" data-i18n="desc_vistes">Pràctica de projeccions geomètriques: alçat, planta i perfil de figures en 3D.</p>
-          <a class="play-btn" href="games/vistes/index.html" data-i18n="play">Jugar ▶</a>
-          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="category">
-    <h2 class="section-title"><span>🌐</span><span data-i18n="cat_angles">Anglès</span></h2>
-    <div class="games-grid">
-
-      <div class="game-card">
-        <img class="thumb" src="screenshots/what-time-is-it.jpg" alt="What time is it" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'🕒'}))">
-        <div class="body">
-          <div class="tags">
-            <span class="subject">English</span>
-            <span class="grade" data-i18n="grade_whattime">Primària 2n-4t</span>
-          </div>
-          <h3 data-i18n="title_whattime">What time is it</h3>
-          <p class="desc" data-i18n="desc_whattime">Practise telling the time in English on an analogue clock.</p>
-          <a class="play-btn" href="games/what-time-is-it/index.html" data-i18n="play">Jugar ▶</a>
-          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="process">
-    <h2 class="section-title"><span>🛠️</span><span data-i18n="process_title">Com funciona un projecte a mida</span></h2>
-    <div class="process-steps">
-      <div class="process-step">
-        <div class="num">1</div>
-        <h4 data-i18n="step1_h">Contacte</h4>
-        <p data-i18n="step1_p">M'expliques la idea, el nivell i l'objectiu didàctic.</p>
-      </div>
-      <div class="process-step">
-        <div class="num">2</div>
-        <h4 data-i18n="step2_h">Definim l'abast</h4>
-        <p data-i18n="step2_p">Acordem mecàniques, continguts i termini.</p>
-      </div>
-      <div class="process-step">
-        <div class="num">3</div>
-        <h4 data-i18n="step3_h">Prototip</h4>
-        <p data-i18n="step3_p">Reps una primera versió jugable per provar i donar feedback.</p>
-      </div>
-      <div class="process-step">
-        <div class="num">4</div>
-        <h4 data-i18n="step4_h">Lliurament</h4>
-        <p data-i18n="step4_p">Versió final llesta per a l'aula, web i/o APK.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="cta-section split">
-    <div class="cta-card">
-      <h2 data-i18n="cta1_h">🏫 Vols un joc a mida per al teu centre?</h2>
-      <p data-i18n="cta1_p">
-        Si ets un centre educatiu, un equip docent o una editorial i necessites un joc
-        interactiu adaptat al teu currículum, idioma o estil visual, puc dissenyar-lo i
-        desenvolupar-lo a mida — des de zero o partint d'algun dels jocs d'aquesta pàgina.
-        Escriu-me i en parlem sense compromís.
-      </p>
-      <a class="btn" href="mailto:robertpotau@gmail.com?subject=Joc%20educatiu%20a%20mida" data-i18n="cta1_btn">✉️ Contacta'm</a>
-      <a class="pdf-link" href="robert-potau-portfolio.pdf" data-i18n="pdf_link" target="_blank">📄 Descarrega el portfolio en PDF</a>
-    </div>
-
-    <div class="cta-card kofi">
-      <h2 data-i18n="cta2_h">☕ Suporta aquest projecte</h2>
-      <p data-i18n="cta2_p">
-        Cada joc neix d'una necessitat real d'aula i està pensat perquè l'alumnat aprengui
-        jugant, sense instal·lar res. Si els jocs t'han estat útils a tu o al teu alumnat,
-        pots convidar-me a un cafè — m'ajuda a seguir-ne creant i mantenint de nous.
-      </p>
-      <a class="btn" href="https://ko-fi.com/robertpotau" target="_blank" rel="noopener" data-i18n="cta2_btn">☕ Ko-fi: robertpotau</a>
-    </div>
-  </section>
-
-  <p class="badge-note" data-i18n="badge_note">
-    📦 Tots els jocs d'aquesta pàgina són versions obertes i gratuïtes. En un futur,
-    algunes versions completes o ampliades podran oferir-se de pagament a centres i
-    editorials — les d'aquí es mantindran sempre com a demos jugables. 📱 La majoria de
-    jocs també tenen versió Android (APK) disponible sota petició — contacta'm si la necessites.
-  </p>
-
-  <p class="privacy-note" data-i18n="privacy_note">
-    🔒 Privacitat: cap joc d'aquesta pàgina envia dades a cap servidor. El progrés (perfils,
-    XP, nivells) es desa només al navegador de l'alumne mitjançant localStorage.
-  </p>
-
-  <footer data-i18n="footer">
-    Fet amb ❤️ per a l'aula — Robert Potau
-  </footer>
-
 </div>
 
+<main>
+
+  <!-- 0 · Hero -->
+  <section class="beat hero" data-beat="0">
+    <p class="kicker reveal" data-i18n="hero_kicker">Arbeca · Les Garrigues</p>
+    <h1 class="reveal d1">Robert Potau</h1>
+    <p class="lead reveal d2" data-i18n="hero_lead">Sóc mestre. I als vespres, faig jocs perquè aprendre faci il·lusió.</p>
+    <p class="hint" data-i18n="hero_hint">▼ Fes scroll per entrar a l'escola</p>
+  </section>
+
+  <!-- 1 · The problem -->
+  <section class="beat" data-beat="1">
+    <h2 class="reveal" data-i18n="b1_h">Cada matí, trenta mirades.</h2>
+    <p class="lead reveal d1" data-i18n="b1_p">Algunes s'encenen de seguida. D'altres s'apaguen entre fitxes i llibretes. Les pantalles ja competeixen per la seva atenció — i sovint guanyen.</p>
+  </section>
+
+  <!-- 2 · The spark -->
+  <section class="beat" data-beat="2">
+    <p class="kicker reveal" data-i18n="b2_kicker">Un dia vaig canviar la pregunta</p>
+    <h2 class="reveal d1" data-i18n="b2_h">I si la classe fos el lloc on tots volen jugar?</h2>
+    <p class="lead reveal d2" data-i18n="b2_p">Vaig començar a crear jocs per als meus alumnes. Un per un. Necessitat per necessitat. Sense instal·lar res, des de qualsevol navegador, gratuïts.</p>
+  </section>
+
+  <!-- 3 · Math classroom -->
+  <section class="beat" data-beat="3">
+    <div class="plaque reveal">🚪 <span data-i18n="room1_plaque">Aula 1 · Matemàtiques</span></div>
+    <h2 class="reveal d1" data-i18n="room1_h">On els números es converteixen en herois.</h2>
+    <div class="cards reveal d2">
+      <div class="gcard">
+        <img src="screenshots/calcuherois.jpg" alt="CalcuHerois" loading="lazy">
+        <div class="inner">
+          <span class="grade" data-i18n="grade_calcuherois">Primària 3r-6è</span>
+          <h3>CalcuHerois</h3>
+          <p data-i18n="desc_calcuherois">Missions i herois per dominar el càlcul mental.</p>
+          <a class="play" href="games/calcuherois/CalcuHerois.html" data-i18n="play">Jugar ▶</a>
+        </div>
+      </div>
+      <div class="gcard">
+        <img src="screenshots/fraccions.jpg" alt="Fraccions" loading="lazy">
+        <div class="inner">
+          <span class="grade" data-i18n="grade_fraccions">Primària 4t-6è</span>
+          <h3>Fraccions</h3>
+          <p data-i18n="desc_fraccions">Set maneres d'entendre les fraccions jugant.</p>
+          <a class="play" href="games/fraccions/fraccions.html" data-i18n="play">Jugar ▶</a>
+        </div>
+      </div>
+      <div class="gcard">
+        <img src="screenshots/geometria.jpg" alt="Geometria" loading="lazy">
+        <div class="inner">
+          <span class="grade" data-i18n="grade_geometria">Primària 5è - ESO 2n</span>
+          <h3>Geometria</h3>
+          <p data-i18n="desc_geometria">Figures i propietats, amb autocorrecció.</p>
+          <a class="play" href="games/geometria/index.html" data-i18n="play">Jugar ▶</a>
+        </div>
+      </div>
+      <div class="gcard">
+        <img src="screenshots/quina-hora-es.jpg" alt="Quina hora és" loading="lazy">
+        <div class="inner">
+          <span class="grade" data-i18n="grade_quinahoraes">Primària 1r-3r</span>
+          <h3 data-i18n="title_quinahoraes">Quina hora és</h3>
+          <p data-i18n="desc_quinahoraes">L'hora en català, quart a quart.</p>
+          <a class="play" href="games/quina-hora-es/index.html" data-i18n="play">Jugar ▶</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Language classroom -->
+  <section class="beat" data-beat="4">
+    <div class="plaque reveal">🚪 <span data-i18n="room2_plaque">Aula 2 · Llengua</span></div>
+    <h2 class="reveal d1" data-i18n="room2_h">Lletres que sonen, síl·labes que encaixen.</h2>
+    <div class="cards reveal d2">
+      <div class="gcard">
+        <img src="screenshots/lletra-a-lletra.jpg" alt="Lletra a lletra" loading="lazy">
+        <div class="inner">
+          <span class="grade" data-i18n="grade_lletra">Infantil P5 - Primària 2n</span>
+          <h3 data-i18n="title_lletra">Lletra a lletra</h3>
+          <p data-i18n="desc_lletra">Escoltar, completar, associar i llegir.</p>
+          <a class="play" href="games/lletra-a-lletra/index.html" data-i18n="play">Jugar ▶</a>
+        </div>
+      </div>
+      <div class="gcard">
+        <img src="screenshots/ortografia.jpg" alt="Ortografia" loading="lazy">
+        <div class="inner">
+          <span class="grade" data-i18n="grade_ortografia">Primària 3r-6è</span>
+          <h3>Ortografia</h3>
+          <p data-i18n="desc_ortografia">Deu blocs per escriure sense por.</p>
+          <a class="play" href="games/ortografia/index.html" data-i18n="play">Jugar ▶</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Acollida -->
+  <section class="beat" data-beat="5">
+    <div class="plaque reveal">🚪 <span data-i18n="room3_plaque">Aula 3 · Acollida</span></div>
+    <h2 class="reveal d1" data-i18n="room3_h">Per a qui acaba d'arribar i ho ha d'aprendre tot: benvingut.</h2>
+    <p class="lead reveal d2" data-i18n="room3_p">Nascut a l'aula d'acollida, per a alumnat nouvingut que aprèn català des de zero.</p>
+    <div class="cards reveal d3">
+      <div class="gcard">
+        <img src="screenshots/aula-acollida.jpg" alt="Aula d'Acollida" loading="lazy">
+        <div class="inner">
+          <span class="grade" data-i18n="grade_acollida">Tots els nivells</span>
+          <h3 data-i18n="title_acollida">Aula d'Acollida</h3>
+          <p data-i18n="desc_acollida">Vocabulari i jocs per unitats temàtiques, amb progressió d'XP.</p>
+          <a class="play" href="games/aula-acollida/index.html" data-i18n="play">Jugar ▶</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Tech workshop -->
+  <section class="beat" data-beat="6">
+    <div class="plaque reveal">🚪 <span data-i18n="room4_plaque">Taller · Tecnologia i dibuix</span></div>
+    <h2 class="reveal d1" data-i18n="room4_h">Mirar una peça i veure-hi tres vistes.</h2>
+    <div class="cards reveal d2">
+      <div class="gcard">
+        <img src="screenshots/vistes.jpg" alt="Vistes" loading="lazy">
+        <div class="inner">
+          <span class="grade" data-i18n="grade_vistes">ESO 3r-4t / Batxillerat</span>
+          <h3 data-i18n="title_vistes">Vistes</h3>
+          <p data-i18n="desc_vistes">Alçat, planta i perfil. Sistema dièdric jugant.</p>
+          <a class="play" href="games/vistes/index.html" data-i18n="play">Jugar ▶</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · English -->
+  <section class="beat" data-beat="7">
+    <div class="plaque reveal">🚪 <span data-i18n="room5_plaque">Aula 4 · English</span></div>
+    <h2 class="reveal d1">What time is it? Time to play.</h2>
+    <div class="cards reveal d2">
+      <div class="gcard">
+        <img src="screenshots/what-time-is-it.jpg" alt="What time is it" loading="lazy">
+        <div class="inner">
+          <span class="grade" data-i18n="grade_whattime">Primària 2n-4t</span>
+          <h3>What time is it</h3>
+          <p data-i18n="desc_whattime">Telling the time on an analogue clock.</p>
+          <a class="play" href="games/what-time-is-it/index.html" data-i18n="play">Jugar ▶</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Support -->
+  <section class="beat" data-beat="8">
+    <p class="kicker reveal" data-i18n="b8_kicker">Després de corregir, quan l'escola calla</p>
+    <h2 class="reveal d1" data-i18n="b8_h">Aquests jocs els faig als vespres. I són gratuïts — i ho seguiran sent.</h2>
+    <p class="lead reveal d2" data-i18n="b8_p">Si un d'aquests jocs ha fet somriure la teva classe, o ha ajudat el teu fill o filla a entendre les fraccions, pots donar-hi suport amb un cafè. Cada cafè és una hora més de jocs nous.</p>
+    <div class="support-box reveal d3">
+      <a class="btn-big btn-kofi" href="https://ko-fi.com/robertpotau" target="_blank" rel="noopener">☕ <span data-i18n="b8_btn">Convida'm a un cafè</span></a>
+      <p class="support-sub" data-i18n="b8_sub">Ko-fi · sense subscripcions, sense compromís. També m'ajuda molt que m'expliquis com els fas servir a classe.</p>
+      <div class="support-links">
+        <a href="mailto:robertpotau@gmail.com?subject=Fem%20servir%20els%20teus%20jocs!" data-i18n="b8_tell">✉️ Explica'm com els uses</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · Custom / contact -->
+  <section class="beat" data-beat="9">
+    <p class="kicker reveal" data-i18n="b9_kicker">Per a centres i editorials</p>
+    <h2 class="reveal d1" data-i18n="b9_h">Vols un joc fet a mida per al teu centre?</h2>
+    <p class="lead reveal d2" data-i18n="b9_p">Dissenyo i desenvolupo jocs adaptats al teu currículum, idioma i estil — des de zero o partint dels d'aquesta escola.</p>
+    <div class="steps reveal d2">
+      <div class="step"><b>1</b> · <span data-i18n="step1">Contacte</span></div>
+      <div class="step"><b>2</b> · <span data-i18n="step2">Definim l'abast</span></div>
+      <div class="step"><b>3</b> · <span data-i18n="step3">Prototip jugable</span></div>
+      <div class="step"><b>4</b> · <span data-i18n="step4">Lliurament (web i/o APK)</span></div>
+    </div>
+    <div class="support-box reveal d3">
+      <a class="btn-big btn-mail" href="mailto:robertpotau@gmail.com?subject=Joc%20educatiu%20a%20mida">✉️ <span data-i18n="b9_btn">Escriu-me</span></a>
+      <div class="support-links">
+        <a href="robert-potau-portfolio.pdf" target="_blank" data-i18n="b9_pdf">📄 Portfolio en PDF</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="row">
+    <a href="classic.html" data-i18n="f_classic">Versió clàssica de la pàgina</a>
+    <a href="https://ko-fi.com/robertpotau" target="_blank" rel="noopener">Ko-fi</a>
+    <a href="mailto:robertpotau@gmail.com">robertpotau@gmail.com</a>
+  </div>
+  <p data-i18n="f_privacy">🔒 Cap joc envia dades a cap servidor: el progrés es desa només al navegador de l'alumne. 📱 Versions APK disponibles sota petició.</p>
+  <p style="margin-top:10px" data-i18n="f_made">Fet amb ❤️ per a l'aula — Robert Potau</p>
+</footer>
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"
+        onerror="document.body.classList.add('no3d')"></script>
 <script>
+/* ============ i18n ============ */
 const translations = {
   ca: {
-    tagline: "Docent · Creador de jocs educatius a mida per a l'aula",
-    bio: "Sóc docent a la Generalitat de Catalunya i des de fa temps dissenyo jocs i eines interactives per fer les classes més dinàmiques i properes als alumnes. Aquí trobaràs una selecció dels jocs que he desenvolupat per treballar matemàtiques, llengua, geometria i molt més — pensats per jugar-hi directament des del navegador, sense instal·lar res. Si el teu centre o editorial necessita un joc fet a mida, també puc ajudar-te a crear-lo.",
-    cat_math: "Matemàtiques", cat_llengua: "Llengua catalana", cat_acollida: "Acollida", cat_tecnologia: "Tecnologia i dibuix", cat_angles: "Anglès",
-    tag_calcuherois: "Càlcul mental", grade_calcuherois: "Primària 3r-6è", title_calcuherois: "CalcuHerois", desc_calcuherois: "Càlcul mental gamificat: missions i herois per practicar sumes, restes, multiplicacions i divisions.",
-    tag_fraccions: "Fraccions", grade_fraccions: "Primària 4t-6è", title_fraccions: "Fraccions", desc_fraccions: "Set maneres de treballar el concepte de fracció i quatre modes per practicar les operacions.",
-    tag_geometria: "Geometria", grade_geometria: "Primària 5è - ESO 2n", title_geometria: "Geometria", desc_geometria: "Repàs interactiu de figures geomètriques i les seves propietats.",
-    tag_quinahoraes: "Mesura del temps", grade_quinahoraes: "Primària 1r-3r", title_quinahoraes: "Quina hora és", desc_quinahoraes: "Practica la lectura de l'hora en rellotge analògic amb el sistema tradicional català de quarts.",
-    tag_lletra: "Lectoescriptura", grade_lletra: "Infantil P5 - Primària 2n", title_lletra: "Lletra a lletra", desc_lletra: "Joc de lectoescriptura: escoltar, completar, separar en síl·labes, associar i llegir paraules.",
-    tag_ortografia: "Ortografia", grade_ortografia: "Primària 3r-6è", title_ortografia: "Ortografia", desc_ortografia: "Deu blocs temàtics per repassar l'ortografia catalana: la essa i la ce, les comes, i molt més.",
-    tag_acollida: "Acollida · Llengua", grade_acollida: "Tots els nivells", title_acollida: "Aula d'Acollida", desc_acollida: "Vocabulari, lectura i jocs per a alumnat nouvingut, organitzats per unitats temàtiques amb progressió d'experiència.",
-    tag_vistes: "Dibuix tècnic", grade_vistes: "ESO 3r-4t / Batxillerat", title_vistes: "Vistes", desc_vistes: "Pràctica de projeccions geomètriques: alçat, planta i perfil de figures en 3D.",
-    grade_whattime: "Primària 2n-4t", title_whattime: "What time is it", desc_whattime: "Practise telling the time in English on an analogue clock.",
-    play: "Jugar ▶", apk_note: "Versió APK disponible sota petició",
-    process_title: "Com funciona un projecte a mida",
-    step1_h: "Contacte", step1_p: "M'expliques la idea, el nivell i l'objectiu didàctic.",
-    step2_h: "Definim l'abast", step2_p: "Acordem mecàniques, continguts i termini.",
-    step3_h: "Prototip", step3_p: "Reps una primera versió jugable per provar i donar feedback.",
-    step4_h: "Lliurament", step4_p: "Versió final llesta per a l'aula, web i/o APK.",
-    cta1_h: "🏫 Vols un joc a mida per al teu centre?",
-    cta1_p: "Si ets un centre educatiu, un equip docent o una editorial i necessites un joc interactiu adaptat al teu currículum, idioma o estil visual, puc dissenyar-lo i desenvolupar-lo a mida — des de zero o partint d'algun dels jocs d'aquesta pàgina. Escriu-me i en parlem sense compromís.",
-    cta1_btn: "✉️ Contacta'm",
-    pdf_link: "📄 Descarrega el portfolio en PDF",
-    cta2_h: "☕ Suporta aquest projecte",
-    cta2_p: "Cada joc neix d'una necessitat real d'aula i està pensat perquè l'alumnat aprengui jugant, sense instal·lar res. Si els jocs t'han estat útils a tu o al teu alumnat, pots convidar-me a un cafè — m'ajuda a seguir-ne creant i mantenint de nous.",
-    cta2_btn: "☕ Ko-fi: robertpotau",
-    badge_note: "📦 Tots els jocs d'aquesta pàgina són versions obertes i gratuïtes. En un futur, algunes versions completes o ampliades podran oferir-se de pagament a centres i editorials — les d'aquí es mantindran sempre com a demos jugables. 📱 La majoria de jocs també tenen versió Android (APK) disponible sota petició — contacta'm si la necessites.",
-    privacy_note: "🔒 Privacitat: cap joc d'aquesta pàgina envia dades a cap servidor. El progrés (perfils, XP, nivells) es desa només al navegador de l'alumne mitjançant localStorage.",
-    footer: "Fet amb ❤️ per a l'aula — Robert Potau"
+    hero_kicker: "Arbeca · Les Garrigues",
+    hero_lead: "Sóc mestre. I als vespres, faig jocs perquè aprendre faci il·lusió.",
+    hero_hint: "▼ Fes scroll per entrar a l'escola",
+    b1_h: "Cada matí, trenta mirades.",
+    b1_p: "Algunes s'encenen de seguida. D'altres s'apaguen entre fitxes i llibretes. Les pantalles ja competeixen per la seva atenció — i sovint guanyen.",
+    b2_kicker: "Un dia vaig canviar la pregunta",
+    b2_h: "I si la classe fos el lloc on tots volen jugar?",
+    b2_p: "Vaig començar a crear jocs per als meus alumnes. Un per un. Necessitat per necessitat. Sense instal·lar res, des de qualsevol navegador, gratuïts.",
+    room1_plaque: "Aula 1 · Matemàtiques", room1_h: "On els números es converteixen en herois.",
+    room2_plaque: "Aula 2 · Llengua", room2_h: "Lletres que sonen, síl·labes que encaixen.",
+    room3_plaque: "Aula 3 · Acollida", room3_h: "Per a qui acaba d'arribar i ho ha d'aprendre tot: benvingut.",
+    room3_p: "Nascut a l'aula d'acollida, per a alumnat nouvingut que aprèn català des de zero.",
+    room4_plaque: "Taller · Tecnologia i dibuix", room4_h: "Mirar una peça i veure-hi tres vistes.",
+    room5_plaque: "Aula 4 · English",
+    grade_calcuherois: "Primària 3r-6è", desc_calcuherois: "Missions i herois per dominar el càlcul mental.",
+    grade_fraccions: "Primària 4t-6è", desc_fraccions: "Set maneres d'entendre les fraccions jugant.",
+    grade_geometria: "Primària 5è - ESO 2n", desc_geometria: "Figures i propietats, amb autocorrecció.",
+    grade_quinahoraes: "Primària 1r-3r", title_quinahoraes: "Quina hora és", desc_quinahoraes: "L'hora en català, quart a quart.",
+    grade_lletra: "Infantil P5 - Primària 2n", title_lletra: "Lletra a lletra", desc_lletra: "Escoltar, completar, associar i llegir.",
+    grade_ortografia: "Primària 3r-6è", desc_ortografia: "Deu blocs per escriure sense por.",
+    grade_acollida: "Tots els nivells", title_acollida: "Aula d'Acollida", desc_acollida: "Vocabulari i jocs per unitats temàtiques, amb progressió d'XP.",
+    grade_vistes: "ESO 3r-4t / Batxillerat", title_vistes: "Vistes", desc_vistes: "Alçat, planta i perfil. Sistema dièdric jugant.",
+    grade_whattime: "Primària 2n-4t", desc_whattime: "Telling the time on an analogue clock.",
+    play: "Jugar ▶",
+    b8_kicker: "Després de corregir, quan l'escola calla",
+    b8_h: "Aquests jocs els faig als vespres. I són gratuïts — i ho seguiran sent.",
+    b8_p: "Si un d'aquests jocs ha fet somriure la teva classe, o ha ajudat el teu fill o filla a entendre les fraccions, pots donar-hi suport amb un cafè. Cada cafè és una hora més de jocs nous.",
+    b8_btn: "Convida'm a un cafè",
+    b8_sub: "Ko-fi · sense subscripcions, sense compromís. També m'ajuda molt que m'expliquis com els fas servir a classe.",
+    b8_tell: "✉️ Explica'm com els uses",
+    b9_kicker: "Per a centres i editorials",
+    b9_h: "Vols un joc fet a mida per al teu centre?",
+    b9_p: "Dissenyo i desenvolupo jocs adaptats al teu currículum, idioma i estil — des de zero o partint dels d'aquesta escola.",
+    step1: "Contacte", step2: "Definim l'abast", step3: "Prototip jugable", step4: "Lliurament (web i/o APK)",
+    b9_btn: "Escriu-me", b9_pdf: "📄 Portfolio en PDF",
+    f_classic: "Versió clàssica de la pàgina",
+    f_privacy: "🔒 Cap joc envia dades a cap servidor: el progrés es desa només al navegador de l'alumne. 📱 Versions APK disponibles sota petició.",
+    f_made: "Fet amb ❤️ per a l'aula — Robert Potau"
   },
   es: {
-    tagline: "Docente · Creador de juegos educativos a medida para el aula",
-    bio: "Soy docente en la Generalitat de Catalunya y desde hace tiempo diseño juegos y herramientas interactivas para hacer las clases más dinámicas y cercanas al alumnado. Aquí encontrarás una selección de los juegos que he desarrollado para trabajar matemáticas, lengua, geometría y mucho más — pensados para jugar directamente desde el navegador, sin instalar nada. Si tu centro o editorial necesita un juego a medida, también puedo ayudarte a crearlo.",
-    cat_math: "Matemáticas", cat_llengua: "Lengua catalana", cat_acollida: "Acogida", cat_tecnologia: "Tecnología y dibujo", cat_angles: "Inglés",
-    tag_calcuherois: "Cálculo mental", grade_calcuherois: "Primaria 3º-6º", title_calcuherois: "CalcuHerois", desc_calcuherois: "Cálculo mental gamificado: misiones y héroes para practicar sumas, restas, multiplicaciones y divisiones.",
-    tag_fraccions: "Fracciones", grade_fraccions: "Primaria 4º-6º", title_fraccions: "Fracciones", desc_fraccions: "Siete formas de trabajar el concepto de fracción y cuatro modos para practicar las operaciones.",
-    tag_geometria: "Geometría", grade_geometria: "Primaria 5º - ESO 2º", title_geometria: "Geometría", desc_geometria: "Repaso interactivo de figuras geométricas y sus propiedades.",
-    tag_quinahoraes: "Medida del tiempo", grade_quinahoraes: "Primaria 1º-3º", title_quinahoraes: "Qué hora es", desc_quinahoraes: "Practica la lectura de la hora en reloj analógico con el sistema tradicional catalán de cuartos.",
-    tag_lletra: "Lectoescritura", grade_lletra: "Infantil 5 años - Primaria 2º", title_lletra: "Letra a letra", desc_lletra: "Juego de lectoescritura: escuchar, completar, separar en sílabas, asociar y leer palabras.",
-    tag_ortografia: "Ortografía", grade_ortografia: "Primaria 3º-6º", title_ortografia: "Ortografía", desc_ortografia: "Diez bloques temáticos para repasar la ortografía catalana: la ese y la ce, las comas, y mucho más.",
-    tag_acollida: "Acogida · Lengua", grade_acollida: "Todos los niveles", title_acollida: "Aula de Acogida", desc_acollida: "Vocabulario, lectura y juegos para alumnado recién llegado, organizados por unidades temáticas con progresión de experiencia.",
-    tag_vistes: "Dibujo técnico", grade_vistes: "ESO 3º-4º / Bachillerato", title_vistes: "Vistas", desc_vistes: "Práctica de proyecciones geométricas: alzado, planta y perfil de figuras en 3D.",
-    grade_whattime: "Primaria 2º-4º", title_whattime: "What time is it", desc_whattime: "Practica cómo decir la hora en inglés con un reloj analógico.",
-    play: "Jugar ▶", apk_note: "Versión APK disponible bajo petición",
-    process_title: "Cómo funciona un proyecto a medida",
-    step1_h: "Contacto", step1_p: "Me explicas la idea, el nivel y el objetivo didáctico.",
-    step2_h: "Definimos el alcance", step2_p: "Acordamos mecánicas, contenidos y plazo.",
-    step3_h: "Prototipo", step3_p: "Recibes una primera versión jugable para probar y dar feedback.",
-    step4_h: "Entrega", step4_p: "Versión final lista para el aula, web y/o APK.",
-    cta1_h: "🏫 ¿Quieres un juego a medida para tu centro?",
-    cta1_p: "Si eres un centro educativo, un equipo docente o una editorial y necesitas un juego interactivo adaptado a tu currículum, idioma o estilo visual, puedo diseñarlo y desarrollarlo a medida — desde cero o partiendo de alguno de los juegos de esta página. Escríbeme y lo hablamos sin compromiso.",
-    cta1_btn: "✉️ Contáctame",
-    pdf_link: "📄 Descarga el portfolio en PDF",
-    cta2_h: "☕ Apoya este proyecto",
-    cta2_p: "Cada juego nace de una necesidad real de aula y está pensado para que el alumnado aprenda jugando, sin instalar nada. Si los juegos te han sido útiles a ti o a tu alumnado, puedes invitarme a un café — me ayuda a seguir creando y manteniendo nuevos juegos.",
-    cta2_btn: "☕ Ko-fi: robertpotau",
-    badge_note: "📦 Todos los juegos de esta página son versiones abiertas y gratuitas. En el futuro, algunas versiones completas o ampliadas podrán ofrecerse de pago a centros y editoriales — las de aquí se mantendrán siempre como demos jugables. 📱 La mayoría de juegos también tienen versión Android (APK) disponible bajo petición — contáctame si la necesitas.",
-    privacy_note: "🔒 Privacidad: ningún juego de esta página envía datos a ningún servidor. El progreso (perfiles, XP, niveles) se guarda solo en el navegador del alumno mediante localStorage.",
-    footer: "Hecho con ❤️ para el aula — Robert Potau"
+    hero_kicker: "Arbeca · Les Garrigues",
+    hero_lead: "Soy maestro. Y por las noches, hago juegos para que aprender haga ilusión.",
+    hero_hint: "▼ Haz scroll para entrar en la escuela",
+    b1_h: "Cada mañana, treinta miradas.",
+    b1_p: "Algunas se encienden enseguida. Otras se apagan entre fichas y libretas. Las pantallas ya compiten por su atención — y a menudo ganan.",
+    b2_kicker: "Un día cambié la pregunta",
+    b2_h: "¿Y si la clase fuera el lugar donde todos quieren jugar?",
+    b2_p: "Empecé a crear juegos para mis alumnos. Uno a uno. Necesidad a necesidad. Sin instalar nada, desde cualquier navegador, gratuitos.",
+    room1_plaque: "Aula 1 · Matemáticas", room1_h: "Donde los números se convierten en héroes.",
+    room2_plaque: "Aula 2 · Lengua", room2_h: "Letras que suenan, sílabas que encajan.",
+    room3_plaque: "Aula 3 · Acogida", room3_h: "Para quien acaba de llegar y debe aprenderlo todo: bienvenido.",
+    room3_p: "Nacido en el aula de acogida, para alumnado recién llegado que aprende catalán desde cero.",
+    room4_plaque: "Taller · Tecnología y dibujo", room4_h: "Mirar una pieza y ver en ella tres vistas.",
+    room5_plaque: "Aula 4 · English",
+    grade_calcuherois: "Primaria 3º-6º", desc_calcuherois: "Misiones y héroes para dominar el cálculo mental.",
+    grade_fraccions: "Primaria 4º-6º", desc_fraccions: "Siete formas de entender las fracciones jugando.",
+    grade_geometria: "Primaria 5º - ESO 2º", desc_geometria: "Figuras y propiedades, con autocorrección.",
+    grade_quinahoraes: "Primaria 1º-3º", title_quinahoraes: "Qué hora es", desc_quinahoraes: "La hora en catalán, cuarto a cuarto.",
+    grade_lletra: "Infantil 5 años - Primaria 2º", title_lletra: "Letra a letra", desc_lletra: "Escuchar, completar, asociar y leer.",
+    grade_ortografia: "Primaria 3º-6º", desc_ortografia: "Diez bloques para escribir sin miedo.",
+    grade_acollida: "Todos los niveles", title_acollida: "Aula de Acogida", desc_acollida: "Vocabulario y juegos por unidades temáticas, con progresión de XP.",
+    grade_vistes: "ESO 3º-4º / Bachillerato", title_vistes: "Vistas", desc_vistes: "Alzado, planta y perfil. Sistema diédrico jugando.",
+    grade_whattime: "Primaria 2º-4º", desc_whattime: "Telling the time on an analogue clock.",
+    play: "Jugar ▶",
+    b8_kicker: "Después de corregir, cuando la escuela calla",
+    b8_h: "Estos juegos los hago por las noches. Y son gratuitos — y lo seguirán siendo.",
+    b8_p: "Si uno de estos juegos ha hecho sonreír a tu clase, o ha ayudado a tu hijo o hija a entender las fracciones, puedes apoyarlo con un café. Cada café es una hora más de juegos nuevos.",
+    b8_btn: "Invítame a un café",
+    b8_sub: "Ko-fi · sin suscripciones, sin compromiso. También me ayuda mucho que me cuentes cómo los usas en clase.",
+    b8_tell: "✉️ Cuéntame cómo los usas",
+    b9_kicker: "Para centros y editoriales",
+    b9_h: "¿Quieres un juego a medida para tu centro?",
+    b9_p: "Diseño y desarrollo juegos adaptados a tu currículum, idioma y estilo — desde cero o partiendo de los de esta escuela.",
+    step1: "Contacto", step2: "Definimos el alcance", step3: "Prototipo jugable", step4: "Entrega (web y/o APK)",
+    b9_btn: "Escríbeme", b9_pdf: "📄 Portfolio en PDF",
+    f_classic: "Versión clásica de la página",
+    f_privacy: "🔒 Ningún juego envía datos a ningún servidor: el progreso se guarda solo en el navegador del alumno. 📱 Versiones APK disponibles bajo petición.",
+    f_made: "Hecho con ❤️ para el aula — Robert Potau"
   },
   en: {
-    tagline: "Teacher · Creator of custom educational games for the classroom",
-    bio: "I'm a teacher with the Catalan government (Generalitat de Catalunya), and for a while now I've been designing interactive games and tools to make my classes more dynamic and closer to my students. Here you'll find a selection of the games I've developed to work on maths, language, geometry and more — designed to be played directly in the browser, no install required. If your school or publisher needs a custom game, I can help you build it too.",
-    cat_math: "Maths", cat_llengua: "Catalan language", cat_acollida: "Newcomer support", cat_tecnologia: "Technology & drawing", cat_angles: "English",
-    tag_calcuherois: "Mental maths", grade_calcuherois: "Primary grades 3-6", title_calcuherois: "CalcuHerois", desc_calcuherois: "Gamified mental maths: quests and heroes for practising addition, subtraction, multiplication and division.",
-    tag_fraccions: "Fractions", grade_fraccions: "Primary grades 4-6", title_fraccions: "Fractions", desc_fraccions: "Seven ways to work on the concept of fractions and four modes to practise operations.",
-    tag_geometria: "Geometry", grade_geometria: "Primary 5 - Secondary 2", title_geometria: "Geometry", desc_geometria: "Interactive review of geometric shapes and their properties.",
-    tag_quinahoraes: "Telling time", grade_quinahoraes: "Primary grades 1-3", title_quinahoraes: "Quina hora és (Catalan clock)", desc_quinahoraes: "Practise reading an analogue clock using the traditional Catalan quarter-hour system.",
-    tag_lletra: "Reading & writing", grade_lletra: "Ages 5 - Primary grade 2", title_lletra: "Lletra a lletra (Letter by letter)", desc_lletra: "A reading/writing game: listen, complete, split into syllables, match and read words.",
-    tag_ortografia: "Spelling", grade_ortografia: "Primary grades 3-6", title_ortografia: "Ortografia (Catalan spelling)", desc_ortografia: "Ten themed sets to review Catalan spelling rules: s/c sounds, commas, and much more.",
-    tag_acollida: "Newcomer support · Language", grade_acollida: "All levels", title_acollida: "Aula d'Acollida (Welcome classroom)", desc_acollida: "Vocabulary, reading and games for newly arrived students, organised into themed units with XP progression.",
-    tag_vistes: "Technical drawing", grade_vistes: "Secondary 3-4 / Baccalaureate", title_vistes: "Vistes (Orthographic views)", desc_vistes: "Practise geometric projections: front, top and side views of 3D shapes.",
-    grade_whattime: "Primary grades 2-4", title_whattime: "What time is it", desc_whattime: "Practise telling the time in English on an analogue clock.",
-    play: "Play ▶", apk_note: "Android (APK) version available on request",
-    process_title: "How a custom project works",
-    step1_h: "Contact", step1_p: "You tell me the idea, the level and the learning goal.",
-    step2_h: "Scope it out", step2_p: "We agree on mechanics, content and timeline.",
-    step3_h: "Prototype", step3_p: "You get a first playable version to try and give feedback on.",
-    step4_h: "Delivery", step4_p: "Final version ready for the classroom, web and/or APK.",
-    cta1_h: "🏫 Need a custom game for your school?",
-    cta1_p: "If you're a school, a teaching team or a publisher and need an interactive game tailored to your curriculum, language or visual style, I can design and build it for you — from scratch or based on one of the games on this page. Get in touch, no strings attached.",
-    cta1_btn: "✉️ Get in touch",
-    pdf_link: "📄 Download the portfolio (PDF)",
-    cta2_h: "☕ Support this project",
-    cta2_p: "Every game starts from a real classroom need and is designed so students learn by playing, no install required. If these games have been useful to you or your students, you can buy me a coffee — it helps me keep building and maintaining new ones.",
-    cta2_btn: "☕ Ko-fi: robertpotau",
-    badge_note: "📦 All games on this page are open, free versions. In the future, some full or extended versions may be offered for a fee to schools and publishers — the ones here will always stay playable demos. 📱 Most games also have an Android (APK) version available on request — get in touch if you need one.",
-    privacy_note: "🔒 Privacy: no game on this page sends data to any server. Progress (profiles, XP, levels) is stored only in the student's own browser via localStorage.",
-    footer: "Made with ❤️ for the classroom — Robert Potau"
+    hero_kicker: "Arbeca · Catalonia",
+    hero_lead: "I'm a teacher. And in the evenings, I build games that make learning feel like play.",
+    hero_hint: "▼ Scroll to step into the school",
+    b1_h: "Every morning, thirty pairs of eyes.",
+    b1_p: "Some light up right away. Others fade between worksheets and notebooks. Screens already compete for their attention — and they often win.",
+    b2_kicker: "One day I changed the question",
+    b2_h: "What if the classroom were the place everyone wants to play?",
+    b2_p: "I started building games for my own students. One by one. Need by need. Nothing to install, any browser, completely free.",
+    room1_plaque: "Room 1 · Maths", room1_h: "Where numbers become heroes.",
+    room2_plaque: "Room 2 · Language", room2_h: "Letters that sound, syllables that click.",
+    room3_plaque: "Room 3 · Newcomers", room3_h: "For those who just arrived and must learn everything: welcome.",
+    room3_p: "Born in the newcomer classroom, for students learning Catalan from zero.",
+    room4_plaque: "Workshop · Technology & drawing", room4_h: "Look at a piece and see three views in it.",
+    room5_plaque: "Room 4 · English",
+    grade_calcuherois: "Primary 3-6", desc_calcuherois: "Quests and heroes to master mental maths.",
+    grade_fraccions: "Primary 4-6", desc_fraccions: "Seven ways to understand fractions by playing.",
+    grade_geometria: "Primary 5 - Secondary 2", desc_geometria: "Shapes and properties, self-correcting.",
+    grade_quinahoraes: "Primary 1-3", title_quinahoraes: "Quina hora és", desc_quinahoraes: "Telling time in Catalan, quarter by quarter.",
+    grade_lletra: "Age 5 - Primary 2", title_lletra: "Lletra a lletra", desc_lletra: "Listen, complete, match and read.",
+    grade_ortografia: "Primary 3-6", desc_ortografia: "Ten sets to write without fear.",
+    grade_acollida: "All levels", title_acollida: "Aula d'Acollida", desc_acollida: "Vocabulary and games in themed units, with XP progression.",
+    grade_vistes: "Secondary 3-4 / Baccalaureate", title_vistes: "Vistes", desc_vistes: "Front, top and side views. Descriptive geometry as a game.",
+    grade_whattime: "Primary 2-4", desc_whattime: "Telling the time on an analogue clock.",
+    play: "Play ▶",
+    b8_kicker: "After the marking is done, when the school goes quiet",
+    b8_h: "I build these games in the evenings. They're free — and they'll stay free.",
+    b8_p: "If one of these games made your class smile, or helped your kid finally get fractions, you can support it with a coffee. Every coffee is one more hour of new games.",
+    b8_btn: "Buy me a coffee",
+    b8_sub: "Ko-fi · no subscriptions, no strings. It also helps a lot to hear how you use them in class.",
+    b8_tell: "✉️ Tell me how you use them",
+    b9_kicker: "For schools and publishers",
+    b9_h: "Need a custom game for your school?",
+    b9_p: "I design and build games tailored to your curriculum, language and style — from scratch or based on the ones in this school.",
+    step1: "Contact", step2: "Scope it out", step3: "Playable prototype", step4: "Delivery (web and/or APK)",
+    b9_btn: "Write to me", b9_pdf: "📄 Portfolio (PDF)",
+    f_classic: "Classic version of this page",
+    f_privacy: "🔒 No game sends data to any server: progress is stored only in the student's own browser. 📱 APK versions available on request.",
+    f_made: "Made with ❤️ for the classroom — Robert Potau"
   }
 };
 
@@ -709,17 +689,346 @@ function applyLang(lang) {
     if (dict[key]) el.textContent = dict[key];
   });
   document.documentElement.lang = lang;
-  document.querySelectorAll('.lang-switch button').forEach(b => {
-    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
-  });
+  document.querySelectorAll('.lang-switch button').forEach(b =>
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang));
   localStorage.setItem('landing_lang', lang);
 }
-
-document.querySelectorAll('.lang-switch button').forEach(btn => {
-  btn.addEventListener('click', () => applyLang(btn.getAttribute('data-lang')));
-});
-
+document.querySelectorAll('.lang-switch button').forEach(btn =>
+  btn.addEventListener('click', () => applyLang(btn.getAttribute('data-lang'))));
 applyLang(localStorage.getItem('landing_lang') || 'ca');
+
+/* ============ reveals ============ */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.25 });
+document.querySelectorAll('.beat').forEach(s => io.observe(s));
+
+/* ============ scroll progress ============ */
+const progressEl = document.getElementById('progress');
+function scrollProgress() {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  return h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
+}
+window.addEventListener('scroll', () => {
+  progressEl.style.width = (scrollProgress() * 100) + '%';
+}, { passive: true });
+
+/* ============ Three.js living school ============ */
+(function () {
+  if (typeof THREE === 'undefined') { document.body.classList.add('no3d'); return; }
+  const canvas = document.getElementById('scene');
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+  } catch (e) { document.body.classList.add('no3d'); return; }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isSmall = window.innerWidth < 700;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(58, 1, 0.1, 260);
+
+  const BEATS = 10;
+  const SPACING = 70;                       // depth per beat
+  const START_Z = 18;
+  const END_Z = -(BEATS - 1) * SPACING + 6; // camera at last beat
+
+  // per-beat atmosphere colors (bg/fog)
+  const zoneColors = [
+    0x14082a, // hero — deep violet night
+    0x0d051d, // problem — darker
+    0x350b63, // spark — bright burst
+    0x1d0b40, // maths
+    0x2c0f45, // language
+    0x14204f, // acollida — blue
+    0x0f2440, // tech — steel blue
+    0x251047, // english
+    0x341457, // support — warm violet
+    0x180a33  // contact
+  ].map(c => new THREE.Color(c));
+
+  const fog = new THREE.Fog(zoneColors[0].clone(), 24, 150);
+  scene.fog = fog;
+
+  /* ---------- helpers ---------- */
+  const floaters = []; // {obj, baseX, baseY, phase, amp, spin}
+
+  function registerFloater(obj, amp = 1.6, spin = 0) {
+    floaters.push({ obj, baseX: obj.position.x, baseY: obj.position.y, phase: Math.random() * Math.PI * 2, amp, spin });
+  }
+
+  function textSprite(text, { size = 128, color = '#ffffff', font = '900 92px Nunito, Arial', glow = 'rgba(154,50,239,0.9)', scale = 6 } = {}) {
+    const cv = document.createElement('canvas');
+    cv.width = cv.height = size;
+    const ctx = cv.getContext('2d');
+    ctx.font = font;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.shadowColor = glow;
+    ctx.shadowBlur = 22;
+    ctx.fillStyle = color;
+    ctx.fillText(text, size / 2, size / 2 + 6);
+    const tex = new THREE.CanvasTexture(cv);
+    tex.anisotropy = 2;
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false });
+    const sp = new THREE.Sprite(mat);
+    sp.scale.set(scale, scale, 1);
+    return sp;
+  }
+
+  function place(obj, beat, x, y, dz = 0) {
+    obj.position.set(x, y, -beat * SPACING + dz);
+    scene.add(obj);
+    return obj;
+  }
+
+  function scatter(items, beat, spreadX = 34, spreadY = 15, spreadZ = 26) {
+    items.forEach(it => {
+      place(it, beat,
+        (Math.random() - 0.5) * spreadX * 2,
+        (Math.random() - 0.5) * spreadY * 2,
+        (Math.random() - 0.5) * spreadZ);
+      registerFloater(it, 1 + Math.random() * 1.6, (Math.random() - 0.5) * 0.35);
+    });
+  }
+
+  /* ---------- ambient chalk dust across the whole school ---------- */
+  const dustCount = isSmall ? 260 : 620;
+  {
+    const pos = new Float32Array(dustCount * 3);
+    for (let i = 0; i < dustCount; i++) {
+      pos[i * 3] = (Math.random() - 0.5) * 110;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 60;
+      pos[i * 3 + 2] = START_Z + 10 - Math.random() * (BEATS * SPACING + 40);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const mat = new THREE.PointsMaterial({ color: 0xd8c6ff, size: 0.34, transparent: true, opacity: 0.65, depthWrite: false });
+    scene.add(new THREE.Points(geo, mat));
+  }
+
+  /* ---------- beat 0-1: sparse night, a few dim books ---------- */
+  scatter(['📓', '✏️', '🕯️'].map(e => textSprite(e, { scale: 4.2 })), 1, 26, 12, 20);
+
+  /* ---------- beat 2: the spark — bright game pieces burst ---------- */
+  scatter(['🎲', '⭐', '🚀', '💡', '🏆', '❓', '🧩'].map(e => textSprite(e, { scale: 5.2 })), 2, 30, 14, 24);
+
+  /* ---------- beat 3: maths room ---------- */
+  {
+    const chars = ['1','2','3','4','5','6','7','8','9','0','+','−','×','÷','='];
+    scatter(chars.map(c => textSprite(c, { color: '#e9d5ff', glow: 'rgba(199,146,255,0.95)', scale: 4.6 })), 3, 36, 16, 26);
+
+    // fraction pizza: 3/4 slice + faint full ring
+    const g = new THREE.Group();
+    const slice = new THREE.Mesh(
+      new THREE.CircleGeometry(4, 40, 0, Math.PI * 1.5),
+      new THREE.MeshBasicMaterial({ color: 0xffb347, transparent: true, opacity: 0.85, side: THREE.DoubleSide })
+    );
+    const ring = new THREE.Mesh(
+      new THREE.RingGeometry(3.9, 4.15, 48),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5, side: THREE.DoubleSide })
+    );
+    g.add(slice, ring);
+    place(g, 3, -20, 7, -8);
+    registerFloater(g, 1.4, 0.25);
+  }
+
+  /* ---------- beat 4: language room ---------- */
+  scatter('ABCDELMNOPRSTU'.split('').map(c =>
+    textSprite(c, { color: '#ffd6f2', glow: 'rgba(255,105,180,0.85)', font: '900 96px Nunito, Arial', scale: 4.4 })), 4, 36, 16, 26);
+  scatter(['📖', '🔤', '💬'].map(e => textSprite(e, { scale: 5 })), 4, 24, 12, 18);
+
+  /* ---------- beat 5: acollida — books & world ---------- */
+  {
+    const bookColors = [0x7ee081, 0xff6b8a, 0x53c7ff, 0xffd166, 0xc792ff];
+    const books = bookColors.map(c => {
+      const m = new THREE.Mesh(
+        new THREE.BoxGeometry(2.6, 3.6, 0.5),
+        new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.9 })
+      );
+      m.rotation.z = (Math.random() - 0.5) * 0.7;
+      return m;
+    });
+    scatter(books, 5, 28, 13, 22);
+    scatter(['🌍', '👋', '💬', '🤝'].map(e => textSprite(e, { scale: 5.4 })), 5, 26, 12, 20);
+  }
+
+  /* ---------- beat 6: tech workshop — wireframe solids (vistes!) ---------- */
+  {
+    const wireMat = new THREE.LineBasicMaterial({ color: 0x6fd3ff, transparent: true, opacity: 0.9 });
+    const solids = [
+      new THREE.BoxGeometry(5, 5, 5),
+      new THREE.ConeGeometry(3.2, 6, 6),
+      new THREE.CylinderGeometry(2.6, 2.6, 6, 10),
+      new THREE.BoxGeometry(7, 3, 4)
+    ].map(geo => new THREE.LineSegments(new THREE.EdgesGeometry(geo), wireMat));
+    solids.forEach((s, i) => {
+      place(s, 6, [-18, 16, -6, 10][i], [6, -5, 9, -8][i], (Math.random() - 0.5) * 16);
+      registerFloater(s, 1.2, 0.4 + Math.random() * 0.4);
+    });
+    scatter(['📐', '⚙️', '🔧'].map(e => textSprite(e, { scale: 4.6 })), 6, 24, 12, 16);
+  }
+
+  /* ---------- beat 7: english room — a big living clock ---------- */
+  const clockGroup = new THREE.Group();
+  {
+    const face = new THREE.Mesh(
+      new THREE.RingGeometry(5.6, 6, 56),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.85, side: THREE.DoubleSide })
+    );
+    clockGroup.add(face);
+    for (let i = 0; i < 12; i++) {
+      const tick = new THREE.Mesh(
+        new THREE.PlaneGeometry(0.22, i % 3 === 0 ? 1.1 : 0.6),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8, side: THREE.DoubleSide })
+      );
+      const a = (i / 12) * Math.PI * 2;
+      tick.position.set(Math.sin(a) * 5.1, Math.cos(a) * 5.1, 0);
+      tick.rotation.z = -a;
+      clockGroup.add(tick);
+    }
+    const hourHand = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.4, 3),
+      new THREE.MeshBasicMaterial({ color: 0xc792ff, side: THREE.DoubleSide })
+    );
+    hourHand.geometry.translate(0, 1.5, 0);
+    const minHand = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.26, 4.4),
+      new THREE.MeshBasicMaterial({ color: 0x29d2ff, side: THREE.DoubleSide })
+    );
+    minHand.geometry.translate(0, 2.2, 0);
+    clockGroup.add(hourHand, minHand);
+    clockGroup.userData = { hourHand, minHand };
+    place(clockGroup, 7, 17, 4, -10);
+    registerFloater(clockGroup, 1.2, 0);
+    scatter(['🕒', '❔', 'a.m.', 'p.m.'].map(t =>
+      t.length > 2 ? textSprite(t, { font: '900 64px Nunito, Arial', color: '#bfe9ff', scale: 4 }) : textSprite(t, { scale: 4.6 })), 7, 26, 12, 18);
+  }
+
+  /* ---------- beat 8: support — hearts & coffee ---------- */
+  scatter(['❤️', '☕', '✨', '❤️', '☕', '🙌'].map(e => textSprite(e, { scale: 5 })), 8, 30, 14, 22);
+
+  /* ---------- beat 9: contact — paper planes & stars ---------- */
+  scatter(['✈️', '✉️', '⭐', '🎨', '🧪'].map(e => textSprite(e, { scale: 4.8 })), 9, 28, 13, 20);
+
+  /* ---------- soft glow orbs sprinkled everywhere ---------- */
+  {
+    const cv = document.createElement('canvas');
+    cv.width = cv.height = 64;
+    const ctx = cv.getContext('2d');
+    const grad = ctx.createRadialGradient(32, 32, 2, 32, 32, 30);
+    grad.addColorStop(0, 'rgba(199,146,255,0.9)');
+    grad.addColorStop(1, 'rgba(199,146,255,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 64, 64);
+    const tex = new THREE.CanvasTexture(cv);
+    for (let i = 0; i < (isSmall ? 14 : 30); i++) {
+      const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false, opacity: 0.75 }));
+      const s = 2 + Math.random() * 5;
+      sp.scale.set(s, s, 1);
+      sp.position.set((Math.random() - 0.5) * 90, (Math.random() - 0.5) * 44,
+        START_Z - Math.random() * (BEATS * SPACING + 30));
+      scene.add(sp);
+      registerFloater(sp, 2.4, 0);
+    }
+  }
+
+  /* ---------- camera + render loop ---------- */
+  let mouseX = 0, mouseY = 0;
+  window.addEventListener('pointermove', e => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+  }, { passive: true });
+
+  // map viewport center to a fractional beat index using real DOM positions,
+  // so the 3D rooms stay in sync with their text even though sections differ in height
+  const beatEls = Array.from(document.querySelectorAll('.beat'));
+  let beatCenters = [];
+  function measureBeats() {
+    beatCenters = beatEls.map(el => el.offsetTop + el.offsetHeight / 2);
+  }
+  function beatProgress() {
+    const y = window.scrollY + window.innerHeight / 2;
+    if (!beatCenters.length || y <= beatCenters[0]) return 0;
+    for (let i = 0; i < beatCenters.length - 1; i++) {
+      if (y < beatCenters[i + 1]) {
+        return i + (y - beatCenters[i]) / (beatCenters[i + 1] - beatCenters[i]);
+      }
+    }
+    return beatCenters.length - 1;
+  }
+
+  function resize() {
+    const w = window.innerWidth, h = window.innerHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    measureBeats();
+  }
+  window.addEventListener('resize', resize);
+  window.addEventListener('load', measureBeats);
+  resize();
+
+  const bgColor = zoneColors[0].clone();
+  camera.position.set(0, 0, START_Z);
+
+  let rafId = null;
+  const clock = new THREE.Clock();
+
+  function step(forceEase) {
+    const t = clock.getElapsedTime();
+    const beatF = beatProgress();
+    const p = beatF / (BEATS - 1);
+
+    // camera travels the hallway, gently swaying like footsteps
+    const targetZ = START_Z - beatF * SPACING;
+    const swayX = Math.sin(p * Math.PI * 5) * 3.2;
+    const targetX = swayX + mouseX * 2.4;
+    const targetY = Math.sin(p * Math.PI * 7) * 0.9 - mouseY * 1.6;
+    const ease = (reduceMotion || forceEase) ? 1 : 0.055;
+    camera.position.z += (targetZ - camera.position.z) * ease;
+    camera.position.x += (targetX - camera.position.x) * ((reduceMotion || forceEase) ? 1 : 0.04);
+    camera.position.y += (targetY - camera.position.y) * ((reduceMotion || forceEase) ? 1 : 0.04);
+    camera.lookAt(camera.position.x * 0.6, camera.position.y * 0.6, camera.position.z - 30);
+
+    // atmosphere color per zone (continuous lerp)
+    const zf = Math.min(BEATS - 1.0001, Math.max(0, beatF));
+    const zi = Math.floor(zf);
+    bgColor.copy(zoneColors[zi]).lerp(zoneColors[zi + 1], zf - zi);
+    fog.color.copy(bgColor);
+    renderer.setClearColor(bgColor);
+
+    // floaters bob & spin
+    if (!reduceMotion) {
+      for (const f of floaters) {
+        f.obj.position.y = f.baseY + Math.sin(t * 0.7 + f.phase) * f.amp;
+        f.obj.position.x = f.baseX + Math.cos(t * 0.5 + f.phase) * f.amp * 0.55;
+        if (f.spin) f.obj.rotation.y += f.spin * 0.016, f.obj.rotation.x += f.spin * 0.009;
+      }
+      // living clock hands
+      const { hourHand, minHand } = clockGroup.userData;
+      minHand.rotation.z = -t * 0.5;
+      hourHand.rotation.z = -t * 0.5 / 12;
+    }
+
+    renderer.render(scene, camera);
+  }
+
+  function animate() {
+    rafId = requestAnimationFrame(animate);
+    step(false);
+  }
+  animate();
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { cancelAnimationFrame(rafId); rafId = null; }
+    else if (!rafId) { clock.getDelta(); animate(); }
+  });
+
+  // debug/testing handle (also useful for future tweaking sessions)
+  window.__rp = { camera, scene, renderer, step };
+})();
 </script>
 </body>
 </html>

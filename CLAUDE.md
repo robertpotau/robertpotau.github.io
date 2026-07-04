@@ -61,7 +61,28 @@ All 6 games with save state (calcuherois, fraccions, geometria, aula-acollida, o
 
 Use `Robert Potau` / `robertpotau@gmail.com` for all git commits in these repos (work identity). Never use the `salemlayonn@gmail.com` address — that's Robert's private email.
 
-## Commercial upgrade (2026-07-04/05)
+## v2: immersive "living school" page (2026-07-05)
+
+`index.html` was rebuilt as a scroll-driven, emotion-first storytelling experience using **Three.js (WebGL)**. The previous commercial page is fully preserved:
+- **`classic.html`** — the v1 page, still live at https://robertpotau.github.io/classic.html and linked from the v2 footer
+- git tag **`v1-classic`** marks the last commit of v1
+- local folder backup at `claude-projects/landing-page-backup-v1-20260705/`
+
+### How v2 works
+
+One HTML file, no build step. Three.js `0.160.0` UMD from unpkg (**pin this version** — r161+ dropped the UMD build so a version bump would silently break the `<script src>` include; there's a harmless deprecation warning in console).
+
+- **Story structure**: 10 `<section class="beat" data-beat="0..9">` narrative beats — hero (who Robert is) → the problem (students switching off) → the spark ("what if class were the place everyone wants to play?") → 5 "classrooms" (Matemàtiques, Llengua, Acollida, Taller/Tecnologia, English), each with its game cards → support beat (Ko-fi, emotional core: "fets als vespres, gratuïts, cada cafè és una hora més") → custom-games/contact beat.
+- **3D scene**: fixed full-screen canvas behind the DOM (z-index 0 vs 10). A camera travels down a long z-axis "hallway" (one zone per beat, 70 units apart, `START_Z` 18). Each zone has themed floating objects: emoji/text sprites via canvas textures (numbers/operators, letters, hearts/coffee), a partial-circle "fraction pizza" mesh, colored book boxes, **wireframe solids** (EdgesGeometry — the vistes nod), and an animated clock with rotating hands. Global chalk-dust `Points` + soft glow sprites span the whole depth. Fog + clear-color lerp between per-zone palette colors.
+- **Scroll sync (important)**: camera position is NOT a linear function of scroll — DOM sections have different heights, so `beatProgress()` maps the viewport center against the real measured centers of each `.beat` element (`measureBeats()`, recomputed on resize/load) and interpolates a fractional beat index. Camera z, sway, and atmosphere color all derive from that. If beats are added/removed, keep `BEATS`, the `zoneColors` array, and the object-placement `place(obj, beat, ...)` calls consistent.
+- **Reveals**: IntersectionObserver adds `.in` to each beat; `.reveal`/`.d1/.d2/.d3` children stagger in with big translate+scale transitions.
+- **i18n**: same `data-i18n` + `translations` object pattern as v1 (CA/ES/EN, saved in `localStorage.landing_lang`). All narrative copy is in all three languages — keep them in sync when editing.
+- **Degradations**: `prefers-reduced-motion` skips bobbing/eases instantly; CDN load failure or WebGL init failure adds `body.no3d` (static gradient background, all content still readable); rAF loop pauses when tab hidden.
+- **Debug handle**: `window.__rp = { camera, scene, renderer, step }` — `step(true)` forces one frame with instant camera easing. Used for headless verification (`scratchpad`-style script in `tools/` not needed; see below) and handy for future tweaking.
+
+**Verification quirk worth remembering**: in a *hidden/backgrounded* automated tab, CSS transitions freeze and `scroll-behavior: smooth` never completes, so the page looks broken in screenshots even though it's fine — verify with headless Playwright (visible-rendering) instead, scrolling each `[data-beat]` into center view and waiting ~2.5s.
+
+## Commercial upgrade — v1, now classic.html (2026-07-04/05)
 
 Robert asked for a more "commercial" turn plus a batch of professional-polish items. What's in place now:
 
