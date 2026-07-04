@@ -3,8 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Robert Potau — Jocs educatius</title>
-<meta name="description" content="Jocs educatius interactius creats per Robert Potau per a l'aula: matemàtiques, llengua, geometria i més.">
+<title>Robert Potau — Jocs educatius a mida per a l'aula</title>
+<meta name="description" content="Jocs educatius interactius creats per Robert Potau: matemàtiques, llengua, geometria i més. Disponible per crear jocs a mida per a centres i editorials.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+
+<!-- Open Graph / social preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Robert Potau — Jocs educatius a mida per a l'aula">
+<meta property="og:description" content="Jocs educatius interactius: matemàtiques, llengua, geometria i més. Disponible per crear jocs a mida per a centres i editorials.">
+<meta property="og:image" content="https://robertpotau.github.io/og-image.png">
+<meta property="og:url" content="https://robertpotau.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Robert Potau — Jocs educatius a mida per a l'aula">
+<meta name="twitter:description" content="Jocs educatius interactius: matemàtiques, llengua, geometria i més.">
+<meta name="twitter:image" content="https://robertpotau.github.io/og-image.png">
+
+<!--
+  ANALYTICS (not yet active — needs a one-time manual signup, see landing-page/CLAUDE.md "Analytics" section):
+  Once you create a free account at https://plausible.io (or https://www.goatcounter.com as a fully free
+  alternative) and add robertpotau.github.io as a site, uncomment ONE of the snippets below.
+
+  <script defer data-domain="robertpotau.github.io" src="https://plausible.io/js/script.js"></script>
+
+  <script data-goatcounter="https://ROBERTPOTAU.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+-->
 
 <style>
   @font-face {
@@ -47,6 +72,30 @@
     max-width: 1080px;
     margin: 0 auto;
     padding: 24px 20px 60px;
+  }
+
+  /* Language switcher */
+  .lang-switch {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .lang-switch button {
+    background: var(--card);
+    border: 2px solid var(--border);
+    color: var(--text-muted);
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 12.5px;
+    padding: 5px 12px;
+    border-radius: 99px;
+    cursor: pointer;
+  }
+  .lang-switch button.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
   }
 
   /* Hero */
@@ -111,11 +160,10 @@
     background: var(--card);
     border: 2px solid var(--border);
     border-radius: var(--radius);
-    padding: 22px;
+    overflow: hidden;
     box-shadow: var(--shadow-card);
     display: flex;
     flex-direction: column;
-    gap: 10px;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .game-card:hover {
@@ -123,25 +171,51 @@
     box-shadow: 0 6px 0 #dcb8fb, 0 14px 26px rgba(119,16,209,0.20);
   }
 
-  .game-card .icon {
-    font-size: 40px;
-    line-height: 1;
+  .game-card .thumb {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: linear-gradient(135deg, var(--secondary-light), var(--primary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    object-fit: cover;
   }
+
+  .game-card .body {
+    padding: 18px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+  }
+
   .game-card h3 {
     font-size: 19px;
     font-weight: 900;
   }
-  .game-card .subject {
+  .game-card .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .game-card .subject, .game-card .grade {
     display: inline-block;
-    background: #f3e8ff;
-    color: var(--primary-press);
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 800;
     padding: 3px 10px;
     border-radius: 99px;
     width: fit-content;
     text-transform: uppercase;
     letter-spacing: 0.03em;
+  }
+  .game-card .subject {
+    background: #f3e8ff;
+    color: var(--primary-press);
+  }
+  .game-card .grade {
+    background: #eef2ff;
+    color: #4338ca;
   }
   .game-card p.desc {
     font-size: 14px;
@@ -164,6 +238,116 @@
     box-shadow: 0 1px 0 var(--primary-press);
   }
 
+  .game-card .apk-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Process steps */
+  .process {
+    margin-top: 44px;
+  }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .process-step {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+    text-align: center;
+  }
+  .process-step .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 900;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .process-step h4 {
+    font-size: 14.5px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .process-step p {
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+
+  /* Commercial / support sections */
+  .cta-section {
+    margin-top: 44px;
+    border-radius: var(--radius);
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  @media (min-width: 760px) {
+    .cta-section.split { grid-template-columns: 1fr 1fr; }
+  }
+
+  .cta-card {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow-card);
+  }
+  .cta-card h2 {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--primary-press);
+    margin-bottom: 10px;
+  }
+  .cta-card p {
+    font-size: 14.5px;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+  }
+  .cta-card .btn {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 12px 22px;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 0 var(--primary-press);
+  }
+  .cta-card.kofi .btn {
+    background: #13c3ff;
+    box-shadow: 0 4px 0 #0e9dcf;
+  }
+  .badge-note, .privacy-note {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    background: #f3e8ff;
+    border-radius: var(--radius-sm);
+    padding: 14px 20px;
+  }
+
+  .pdf-link {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--primary-press);
+  }
+
   footer {
     text-align: center;
     margin-top: 50px;
@@ -175,130 +359,367 @@
 <body>
 <div class="wrap">
 
+  <div class="lang-switch">
+    <button data-lang="ca" class="active">CA</button>
+    <button data-lang="es">ES</button>
+    <button data-lang="en">EN</button>
+  </div>
+
   <header class="hero">
     <div class="avatar">🎓</div>
     <h1>Robert Potau</h1>
-    <p class="tagline">Docent · Creador de jocs educatius interactius</p>
-    <p class="bio">
-      Sóc docent a la Generalitat de Catalunya i des de fa temps creo jocs i eines
-      interactives per fer les meves classes més dinàmiques i properes als alumnes.
-      Aquí trobaràs una selecció dels jocs que he anat desenvolupant per treballar
+    <p class="tagline" data-i18n="tagline">Docent · Creador de jocs educatius a mida per a l'aula</p>
+    <p class="bio" data-i18n="bio">
+      Sóc docent a la Generalitat de Catalunya i des de fa temps dissenyo jocs i eines
+      interactives per fer les classes més dinàmiques i properes als alumnes.
+      Aquí trobaràs una selecció dels jocs que he desenvolupat per treballar
       matemàtiques, llengua, geometria i molt més — pensats per jugar-hi directament
-      des del navegador, sense instal·lar res.
+      des del navegador, sense instal·lar res. Si el teu centre o editorial necessita
+      un joc fet a mida, també puc ajudar-te a crear-lo.
     </p>
   </header>
 
   <section class="category">
-    <h2 class="section-title">🧮 Matemàtiques</h2>
+    <h2 class="section-title"><span>🧮</span><span data-i18n="cat_math">Matemàtiques</span></h2>
     <div class="games-grid">
 
       <div class="game-card">
-        <div class="icon">🧮</div>
-        <span class="subject">Càlcul mental</span>
-        <h3>CalcuHerois</h3>
-        <p class="desc">Càlcul mental gamificat: missions i herois per practicar sumes, restes, multiplicacions i divisions.</p>
-        <a class="play-btn" href="games/calcuherois/CalcuHerois.html">Jugar ▶</a>
+        <img class="thumb" src="screenshots/calcuherois.jpg" alt="CalcuHerois" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'🧮'}))">
+        <div class="body">
+          <div class="tags">
+            <span class="subject" data-i18n="tag_calcuherois">Càlcul mental</span>
+            <span class="grade" data-i18n="grade_calcuherois">Primària 3r-6è</span>
+          </div>
+          <h3 data-i18n="title_calcuherois">CalcuHerois</h3>
+          <p class="desc" data-i18n="desc_calcuherois">Càlcul mental gamificat: missions i herois per practicar sumes, restes, multiplicacions i divisions.</p>
+          <a class="play-btn" href="games/calcuherois/CalcuHerois.html" data-i18n="play">Jugar ▶</a>
+          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
+        </div>
       </div>
 
       <div class="game-card">
-        <div class="icon">🍕</div>
-        <span class="subject">Fraccions</span>
-        <h3>Fraccions</h3>
-        <p class="desc">Set maneres de treballar el concepte de fracció i quatre modes per practicar les operacions.</p>
-        <a class="play-btn" href="games/fraccions/fraccions.html">Jugar ▶</a>
+        <img class="thumb" src="screenshots/fraccions.jpg" alt="Fraccions" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'🍕'}))">
+        <div class="body">
+          <div class="tags">
+            <span class="subject" data-i18n="tag_fraccions">Fraccions</span>
+            <span class="grade" data-i18n="grade_fraccions">Primària 4t-6è</span>
+          </div>
+          <h3 data-i18n="title_fraccions">Fraccions</h3>
+          <p class="desc" data-i18n="desc_fraccions">Set maneres de treballar el concepte de fracció i quatre modes per practicar les operacions.</p>
+          <a class="play-btn" href="games/fraccions/fraccions.html" data-i18n="play">Jugar ▶</a>
+          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
+        </div>
       </div>
 
       <div class="game-card">
-        <div class="icon">🔺</div>
-        <span class="subject">Geometria</span>
-        <h3>Geometria</h3>
-        <p class="desc">Repàs interactiu de figures geomètriques i les seves propietats.</p>
-        <a class="play-btn" href="games/geometria/index.html">Jugar ▶</a>
+        <img class="thumb" src="screenshots/geometria.jpg" alt="Geometria" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'🔺'}))">
+        <div class="body">
+          <div class="tags">
+            <span class="subject" data-i18n="tag_geometria">Geometria</span>
+            <span class="grade" data-i18n="grade_geometria">Primària 5è - ESO 2n</span>
+          </div>
+          <h3 data-i18n="title_geometria">Geometria</h3>
+          <p class="desc" data-i18n="desc_geometria">Repàs interactiu de figures geomètriques i les seves propietats.</p>
+          <a class="play-btn" href="games/geometria/index.html" data-i18n="play">Jugar ▶</a>
+          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
+        </div>
       </div>
 
       <div class="game-card">
-        <div class="icon">🕐</div>
-        <span class="subject">Mesura del temps</span>
-        <h3>Quina hora és</h3>
-        <p class="desc">Practica la lectura de l'hora en rellotge analògic amb el sistema tradicional català de quarts.</p>
-        <a class="play-btn" href="games/quina-hora-es/index.html">Jugar ▶</a>
+        <img class="thumb" src="screenshots/quina-hora-es.jpg" alt="Quina hora és" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'🕐'}))">
+        <div class="body">
+          <div class="tags">
+            <span class="subject" data-i18n="tag_quinahoraes">Mesura del temps</span>
+            <span class="grade" data-i18n="grade_quinahoraes">Primària 1r-3r</span>
+          </div>
+          <h3 data-i18n="title_quinahoraes">Quina hora és</h3>
+          <p class="desc" data-i18n="desc_quinahoraes">Practica la lectura de l'hora en rellotge analògic amb el sistema tradicional català de quarts.</p>
+          <a class="play-btn" href="games/quina-hora-es/index.html" data-i18n="play">Jugar ▶</a>
+          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
+        </div>
       </div>
 
     </div>
   </section>
 
   <section class="category">
-    <h2 class="section-title">✍️ Llengua catalana</h2>
+    <h2 class="section-title"><span>✍️</span><span data-i18n="cat_llengua">Llengua catalana</span></h2>
     <div class="games-grid">
 
       <div class="game-card">
-        <div class="icon">📖</div>
-        <span class="subject">Lectoescriptura</span>
-        <h3>Lletra a lletra</h3>
-        <p class="desc">Joc de lectoescriptura: escoltar, completar, separar en síl·labes, associar i llegir paraules.</p>
-        <a class="play-btn" href="games/lletra-a-lletra/index.html">Jugar ▶</a>
+        <img class="thumb" src="screenshots/lletra-a-lletra.jpg" alt="Lletra a lletra" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'📖'}))">
+        <div class="body">
+          <div class="tags">
+            <span class="subject" data-i18n="tag_lletra">Lectoescriptura</span>
+            <span class="grade" data-i18n="grade_lletra">Infantil P5 - Primària 2n</span>
+          </div>
+          <h3 data-i18n="title_lletra">Lletra a lletra</h3>
+          <p class="desc" data-i18n="desc_lletra">Joc de lectoescriptura: escoltar, completar, separar en síl·labes, associar i llegir paraules.</p>
+          <a class="play-btn" href="games/lletra-a-lletra/index.html" data-i18n="play">Jugar ▶</a>
+          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
+        </div>
       </div>
 
       <div class="game-card">
-        <div class="icon">✍️</div>
-        <span class="subject">Ortografia</span>
-        <h3>Ortografia</h3>
-        <p class="desc">Deu blocs temàtics per repassar l'ortografia catalana: la essa i la ce, les comes, i molt més.</p>
-        <a class="play-btn" href="games/ortografia/index.html">Jugar ▶</a>
+        <img class="thumb" src="screenshots/ortografia.jpg" alt="Ortografia" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'✍️'}))">
+        <div class="body">
+          <div class="tags">
+            <span class="subject" data-i18n="tag_ortografia">Ortografia</span>
+            <span class="grade" data-i18n="grade_ortografia">Primària 3r-6è</span>
+          </div>
+          <h3 data-i18n="title_ortografia">Ortografia</h3>
+          <p class="desc" data-i18n="desc_ortografia">Deu blocs temàtics per repassar l'ortografia catalana: la essa i la ce, les comes, i molt més.</p>
+          <a class="play-btn" href="games/ortografia/index.html" data-i18n="play">Jugar ▶</a>
+          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
+        </div>
       </div>
 
     </div>
   </section>
 
   <section class="category">
-    <h2 class="section-title">🌍 Acollida</h2>
+    <h2 class="section-title"><span>🌍</span><span data-i18n="cat_acollida">Acollida</span></h2>
     <div class="games-grid">
 
       <div class="game-card">
-        <div class="icon">🌍</div>
-        <span class="subject">Acollida · Llengua</span>
-        <h3>Aula d'Acollida</h3>
-        <p class="desc">Vocabulari, lectura i jocs per a alumnat nouvingut, organitzats per unitats temàtiques amb progressió d'experiència.</p>
-        <a class="play-btn" href="games/aula-acollida/index.html">Jugar ▶</a>
+        <img class="thumb" src="screenshots/aula-acollida.jpg" alt="Aula d'Acollida" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'🌍'}))">
+        <div class="body">
+          <div class="tags">
+            <span class="subject" data-i18n="tag_acollida">Acollida · Llengua</span>
+            <span class="grade" data-i18n="grade_acollida">Tots els nivells</span>
+          </div>
+          <h3 data-i18n="title_acollida">Aula d'Acollida</h3>
+          <p class="desc" data-i18n="desc_acollida">Vocabulari, lectura i jocs per a alumnat nouvingut, organitzats per unitats temàtiques amb progressió d'experiència.</p>
+          <a class="play-btn" href="games/aula-acollida/index.html" data-i18n="play">Jugar ▶</a>
+          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
+        </div>
       </div>
 
     </div>
   </section>
 
   <section class="category">
-    <h2 class="section-title">📐 Tecnologia i dibuix</h2>
+    <h2 class="section-title"><span>📐</span><span data-i18n="cat_tecnologia">Tecnologia i dibuix</span></h2>
     <div class="games-grid">
 
       <div class="game-card">
-        <div class="icon">📐</div>
-        <span class="subject">Dibuix tècnic</span>
-        <h3>Vistes</h3>
-        <p class="desc">Pràctica de projeccions geomètriques: alçat, planta i perfil de figures en 3D.</p>
-        <a class="play-btn" href="games/vistes/index.html">Jugar ▶</a>
+        <img class="thumb" src="screenshots/vistes.jpg" alt="Vistes" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'📐'}))">
+        <div class="body">
+          <div class="tags">
+            <span class="subject" data-i18n="tag_vistes">Dibuix tècnic</span>
+            <span class="grade" data-i18n="grade_vistes">ESO 3r-4t / Batxillerat</span>
+          </div>
+          <h3 data-i18n="title_vistes">Vistes</h3>
+          <p class="desc" data-i18n="desc_vistes">Pràctica de projeccions geomètriques: alçat, planta i perfil de figures en 3D.</p>
+          <a class="play-btn" href="games/vistes/index.html" data-i18n="play">Jugar ▶</a>
+          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
+        </div>
       </div>
 
     </div>
   </section>
 
   <section class="category">
-    <h2 class="section-title">🌐 Anglès</h2>
+    <h2 class="section-title"><span>🌐</span><span data-i18n="cat_angles">Anglès</span></h2>
     <div class="games-grid">
 
       <div class="game-card">
-        <div class="icon">🕒</div>
-        <span class="subject">English</span>
-        <h3>What time is it</h3>
-        <p class="desc">Practise telling the time in English on an analogue clock.</p>
-        <a class="play-btn" href="games/what-time-is-it/index.html">Jugar ▶</a>
+        <img class="thumb" src="screenshots/what-time-is-it.jpg" alt="What time is it" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',textContent:'🕒'}))">
+        <div class="body">
+          <div class="tags">
+            <span class="subject">English</span>
+            <span class="grade" data-i18n="grade_whattime">Primària 2n-4t</span>
+          </div>
+          <h3 data-i18n="title_whattime">What time is it</h3>
+          <p class="desc" data-i18n="desc_whattime">Practise telling the time in English on an analogue clock.</p>
+          <a class="play-btn" href="games/what-time-is-it/index.html" data-i18n="play">Jugar ▶</a>
+          <span class="apk-note">📱 <span data-i18n="apk_note">Versió APK disponible sota petició</span></span>
+        </div>
       </div>
 
     </div>
   </section>
 
-  <footer>
+  <section class="process">
+    <h2 class="section-title"><span>🛠️</span><span data-i18n="process_title">Com funciona un projecte a mida</span></h2>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="num">1</div>
+        <h4 data-i18n="step1_h">Contacte</h4>
+        <p data-i18n="step1_p">M'expliques la idea, el nivell i l'objectiu didàctic.</p>
+      </div>
+      <div class="process-step">
+        <div class="num">2</div>
+        <h4 data-i18n="step2_h">Definim l'abast</h4>
+        <p data-i18n="step2_p">Acordem mecàniques, continguts i termini.</p>
+      </div>
+      <div class="process-step">
+        <div class="num">3</div>
+        <h4 data-i18n="step3_h">Prototip</h4>
+        <p data-i18n="step3_p">Reps una primera versió jugable per provar i donar feedback.</p>
+      </div>
+      <div class="process-step">
+        <div class="num">4</div>
+        <h4 data-i18n="step4_h">Lliurament</h4>
+        <p data-i18n="step4_p">Versió final llesta per a l'aula, web i/o APK.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section split">
+    <div class="cta-card">
+      <h2 data-i18n="cta1_h">🏫 Vols un joc a mida per al teu centre?</h2>
+      <p data-i18n="cta1_p">
+        Si ets un centre educatiu, un equip docent o una editorial i necessites un joc
+        interactiu adaptat al teu currículum, idioma o estil visual, puc dissenyar-lo i
+        desenvolupar-lo a mida — des de zero o partint d'algun dels jocs d'aquesta pàgina.
+        Escriu-me i en parlem sense compromís.
+      </p>
+      <a class="btn" href="mailto:robertpotau@gmail.com?subject=Joc%20educatiu%20a%20mida" data-i18n="cta1_btn">✉️ Contacta'm</a>
+      <a class="pdf-link" href="robert-potau-portfolio.pdf" data-i18n="pdf_link" target="_blank">📄 Descarrega el portfolio en PDF</a>
+    </div>
+
+    <div class="cta-card kofi">
+      <h2 data-i18n="cta2_h">☕ Suporta aquest projecte</h2>
+      <p data-i18n="cta2_p">
+        Cada joc neix d'una necessitat real d'aula i està pensat perquè l'alumnat aprengui
+        jugant, sense instal·lar res. Si els jocs t'han estat útils a tu o al teu alumnat,
+        pots convidar-me a un cafè — m'ajuda a seguir-ne creant i mantenint de nous.
+      </p>
+      <a class="btn" href="https://ko-fi.com/robertpotau" target="_blank" rel="noopener" data-i18n="cta2_btn">☕ Ko-fi: robertpotau</a>
+    </div>
+  </section>
+
+  <p class="badge-note" data-i18n="badge_note">
+    📦 Tots els jocs d'aquesta pàgina són versions obertes i gratuïtes. En un futur,
+    algunes versions completes o ampliades podran oferir-se de pagament a centres i
+    editorials — les d'aquí es mantindran sempre com a demos jugables. 📱 La majoria de
+    jocs també tenen versió Android (APK) disponible sota petició — contacta'm si la necessites.
+  </p>
+
+  <p class="privacy-note" data-i18n="privacy_note">
+    🔒 Privacitat: cap joc d'aquesta pàgina envia dades a cap servidor. El progrés (perfils,
+    XP, nivells) es desa només al navegador de l'alumne mitjançant localStorage.
+  </p>
+
+  <footer data-i18n="footer">
     Fet amb ❤️ per a l'aula — Robert Potau
   </footer>
 
 </div>
+
+<script>
+const translations = {
+  ca: {
+    tagline: "Docent · Creador de jocs educatius a mida per a l'aula",
+    bio: "Sóc docent a la Generalitat de Catalunya i des de fa temps dissenyo jocs i eines interactives per fer les classes més dinàmiques i properes als alumnes. Aquí trobaràs una selecció dels jocs que he desenvolupat per treballar matemàtiques, llengua, geometria i molt més — pensats per jugar-hi directament des del navegador, sense instal·lar res. Si el teu centre o editorial necessita un joc fet a mida, també puc ajudar-te a crear-lo.",
+    cat_math: "Matemàtiques", cat_llengua: "Llengua catalana", cat_acollida: "Acollida", cat_tecnologia: "Tecnologia i dibuix", cat_angles: "Anglès",
+    tag_calcuherois: "Càlcul mental", grade_calcuherois: "Primària 3r-6è", title_calcuherois: "CalcuHerois", desc_calcuherois: "Càlcul mental gamificat: missions i herois per practicar sumes, restes, multiplicacions i divisions.",
+    tag_fraccions: "Fraccions", grade_fraccions: "Primària 4t-6è", title_fraccions: "Fraccions", desc_fraccions: "Set maneres de treballar el concepte de fracció i quatre modes per practicar les operacions.",
+    tag_geometria: "Geometria", grade_geometria: "Primària 5è - ESO 2n", title_geometria: "Geometria", desc_geometria: "Repàs interactiu de figures geomètriques i les seves propietats.",
+    tag_quinahoraes: "Mesura del temps", grade_quinahoraes: "Primària 1r-3r", title_quinahoraes: "Quina hora és", desc_quinahoraes: "Practica la lectura de l'hora en rellotge analògic amb el sistema tradicional català de quarts.",
+    tag_lletra: "Lectoescriptura", grade_lletra: "Infantil P5 - Primària 2n", title_lletra: "Lletra a lletra", desc_lletra: "Joc de lectoescriptura: escoltar, completar, separar en síl·labes, associar i llegir paraules.",
+    tag_ortografia: "Ortografia", grade_ortografia: "Primària 3r-6è", title_ortografia: "Ortografia", desc_ortografia: "Deu blocs temàtics per repassar l'ortografia catalana: la essa i la ce, les comes, i molt més.",
+    tag_acollida: "Acollida · Llengua", grade_acollida: "Tots els nivells", title_acollida: "Aula d'Acollida", desc_acollida: "Vocabulari, lectura i jocs per a alumnat nouvingut, organitzats per unitats temàtiques amb progressió d'experiència.",
+    tag_vistes: "Dibuix tècnic", grade_vistes: "ESO 3r-4t / Batxillerat", title_vistes: "Vistes", desc_vistes: "Pràctica de projeccions geomètriques: alçat, planta i perfil de figures en 3D.",
+    grade_whattime: "Primària 2n-4t", title_whattime: "What time is it", desc_whattime: "Practise telling the time in English on an analogue clock.",
+    play: "Jugar ▶", apk_note: "Versió APK disponible sota petició",
+    process_title: "Com funciona un projecte a mida",
+    step1_h: "Contacte", step1_p: "M'expliques la idea, el nivell i l'objectiu didàctic.",
+    step2_h: "Definim l'abast", step2_p: "Acordem mecàniques, continguts i termini.",
+    step3_h: "Prototip", step3_p: "Reps una primera versió jugable per provar i donar feedback.",
+    step4_h: "Lliurament", step4_p: "Versió final llesta per a l'aula, web i/o APK.",
+    cta1_h: "🏫 Vols un joc a mida per al teu centre?",
+    cta1_p: "Si ets un centre educatiu, un equip docent o una editorial i necessites un joc interactiu adaptat al teu currículum, idioma o estil visual, puc dissenyar-lo i desenvolupar-lo a mida — des de zero o partint d'algun dels jocs d'aquesta pàgina. Escriu-me i en parlem sense compromís.",
+    cta1_btn: "✉️ Contacta'm",
+    pdf_link: "📄 Descarrega el portfolio en PDF",
+    cta2_h: "☕ Suporta aquest projecte",
+    cta2_p: "Cada joc neix d'una necessitat real d'aula i està pensat perquè l'alumnat aprengui jugant, sense instal·lar res. Si els jocs t'han estat útils a tu o al teu alumnat, pots convidar-me a un cafè — m'ajuda a seguir-ne creant i mantenint de nous.",
+    cta2_btn: "☕ Ko-fi: robertpotau",
+    badge_note: "📦 Tots els jocs d'aquesta pàgina són versions obertes i gratuïtes. En un futur, algunes versions completes o ampliades podran oferir-se de pagament a centres i editorials — les d'aquí es mantindran sempre com a demos jugables. 📱 La majoria de jocs també tenen versió Android (APK) disponible sota petició — contacta'm si la necessites.",
+    privacy_note: "🔒 Privacitat: cap joc d'aquesta pàgina envia dades a cap servidor. El progrés (perfils, XP, nivells) es desa només al navegador de l'alumne mitjançant localStorage.",
+    footer: "Fet amb ❤️ per a l'aula — Robert Potau"
+  },
+  es: {
+    tagline: "Docente · Creador de juegos educativos a medida para el aula",
+    bio: "Soy docente en la Generalitat de Catalunya y desde hace tiempo diseño juegos y herramientas interactivas para hacer las clases más dinámicas y cercanas al alumnado. Aquí encontrarás una selección de los juegos que he desarrollado para trabajar matemáticas, lengua, geometría y mucho más — pensados para jugar directamente desde el navegador, sin instalar nada. Si tu centro o editorial necesita un juego a medida, también puedo ayudarte a crearlo.",
+    cat_math: "Matemáticas", cat_llengua: "Lengua catalana", cat_acollida: "Acogida", cat_tecnologia: "Tecnología y dibujo", cat_angles: "Inglés",
+    tag_calcuherois: "Cálculo mental", grade_calcuherois: "Primaria 3º-6º", title_calcuherois: "CalcuHerois", desc_calcuherois: "Cálculo mental gamificado: misiones y héroes para practicar sumas, restas, multiplicaciones y divisiones.",
+    tag_fraccions: "Fracciones", grade_fraccions: "Primaria 4º-6º", title_fraccions: "Fracciones", desc_fraccions: "Siete formas de trabajar el concepto de fracción y cuatro modos para practicar las operaciones.",
+    tag_geometria: "Geometría", grade_geometria: "Primaria 5º - ESO 2º", title_geometria: "Geometría", desc_geometria: "Repaso interactivo de figuras geométricas y sus propiedades.",
+    tag_quinahoraes: "Medida del tiempo", grade_quinahoraes: "Primaria 1º-3º", title_quinahoraes: "Qué hora es", desc_quinahoraes: "Practica la lectura de la hora en reloj analógico con el sistema tradicional catalán de cuartos.",
+    tag_lletra: "Lectoescritura", grade_lletra: "Infantil 5 años - Primaria 2º", title_lletra: "Letra a letra", desc_lletra: "Juego de lectoescritura: escuchar, completar, separar en sílabas, asociar y leer palabras.",
+    tag_ortografia: "Ortografía", grade_ortografia: "Primaria 3º-6º", title_ortografia: "Ortografía", desc_ortografia: "Diez bloques temáticos para repasar la ortografía catalana: la ese y la ce, las comas, y mucho más.",
+    tag_acollida: "Acogida · Lengua", grade_acollida: "Todos los niveles", title_acollida: "Aula de Acogida", desc_acollida: "Vocabulario, lectura y juegos para alumnado recién llegado, organizados por unidades temáticas con progresión de experiencia.",
+    tag_vistes: "Dibujo técnico", grade_vistes: "ESO 3º-4º / Bachillerato", title_vistes: "Vistas", desc_vistes: "Práctica de proyecciones geométricas: alzado, planta y perfil de figuras en 3D.",
+    grade_whattime: "Primaria 2º-4º", title_whattime: "What time is it", desc_whattime: "Practica cómo decir la hora en inglés con un reloj analógico.",
+    play: "Jugar ▶", apk_note: "Versión APK disponible bajo petición",
+    process_title: "Cómo funciona un proyecto a medida",
+    step1_h: "Contacto", step1_p: "Me explicas la idea, el nivel y el objetivo didáctico.",
+    step2_h: "Definimos el alcance", step2_p: "Acordamos mecánicas, contenidos y plazo.",
+    step3_h: "Prototipo", step3_p: "Recibes una primera versión jugable para probar y dar feedback.",
+    step4_h: "Entrega", step4_p: "Versión final lista para el aula, web y/o APK.",
+    cta1_h: "🏫 ¿Quieres un juego a medida para tu centro?",
+    cta1_p: "Si eres un centro educativo, un equipo docente o una editorial y necesitas un juego interactivo adaptado a tu currículum, idioma o estilo visual, puedo diseñarlo y desarrollarlo a medida — desde cero o partiendo de alguno de los juegos de esta página. Escríbeme y lo hablamos sin compromiso.",
+    cta1_btn: "✉️ Contáctame",
+    pdf_link: "📄 Descarga el portfolio en PDF",
+    cta2_h: "☕ Apoya este proyecto",
+    cta2_p: "Cada juego nace de una necesidad real de aula y está pensado para que el alumnado aprenda jugando, sin instalar nada. Si los juegos te han sido útiles a ti o a tu alumnado, puedes invitarme a un café — me ayuda a seguir creando y manteniendo nuevos juegos.",
+    cta2_btn: "☕ Ko-fi: robertpotau",
+    badge_note: "📦 Todos los juegos de esta página son versiones abiertas y gratuitas. En el futuro, algunas versiones completas o ampliadas podrán ofrecerse de pago a centros y editoriales — las de aquí se mantendrán siempre como demos jugables. 📱 La mayoría de juegos también tienen versión Android (APK) disponible bajo petición — contáctame si la necesitas.",
+    privacy_note: "🔒 Privacidad: ningún juego de esta página envía datos a ningún servidor. El progreso (perfiles, XP, niveles) se guarda solo en el navegador del alumno mediante localStorage.",
+    footer: "Hecho con ❤️ para el aula — Robert Potau"
+  },
+  en: {
+    tagline: "Teacher · Creator of custom educational games for the classroom",
+    bio: "I'm a teacher with the Catalan government (Generalitat de Catalunya), and for a while now I've been designing interactive games and tools to make my classes more dynamic and closer to my students. Here you'll find a selection of the games I've developed to work on maths, language, geometry and more — designed to be played directly in the browser, no install required. If your school or publisher needs a custom game, I can help you build it too.",
+    cat_math: "Maths", cat_llengua: "Catalan language", cat_acollida: "Newcomer support", cat_tecnologia: "Technology & drawing", cat_angles: "English",
+    tag_calcuherois: "Mental maths", grade_calcuherois: "Primary grades 3-6", title_calcuherois: "CalcuHerois", desc_calcuherois: "Gamified mental maths: quests and heroes for practising addition, subtraction, multiplication and division.",
+    tag_fraccions: "Fractions", grade_fraccions: "Primary grades 4-6", title_fraccions: "Fractions", desc_fraccions: "Seven ways to work on the concept of fractions and four modes to practise operations.",
+    tag_geometria: "Geometry", grade_geometria: "Primary 5 - Secondary 2", title_geometria: "Geometry", desc_geometria: "Interactive review of geometric shapes and their properties.",
+    tag_quinahoraes: "Telling time", grade_quinahoraes: "Primary grades 1-3", title_quinahoraes: "Quina hora és (Catalan clock)", desc_quinahoraes: "Practise reading an analogue clock using the traditional Catalan quarter-hour system.",
+    tag_lletra: "Reading & writing", grade_lletra: "Ages 5 - Primary grade 2", title_lletra: "Lletra a lletra (Letter by letter)", desc_lletra: "A reading/writing game: listen, complete, split into syllables, match and read words.",
+    tag_ortografia: "Spelling", grade_ortografia: "Primary grades 3-6", title_ortografia: "Ortografia (Catalan spelling)", desc_ortografia: "Ten themed sets to review Catalan spelling rules: s/c sounds, commas, and much more.",
+    tag_acollida: "Newcomer support · Language", grade_acollida: "All levels", title_acollida: "Aula d'Acollida (Welcome classroom)", desc_acollida: "Vocabulary, reading and games for newly arrived students, organised into themed units with XP progression.",
+    tag_vistes: "Technical drawing", grade_vistes: "Secondary 3-4 / Baccalaureate", title_vistes: "Vistes (Orthographic views)", desc_vistes: "Practise geometric projections: front, top and side views of 3D shapes.",
+    grade_whattime: "Primary grades 2-4", title_whattime: "What time is it", desc_whattime: "Practise telling the time in English on an analogue clock.",
+    play: "Play ▶", apk_note: "Android (APK) version available on request",
+    process_title: "How a custom project works",
+    step1_h: "Contact", step1_p: "You tell me the idea, the level and the learning goal.",
+    step2_h: "Scope it out", step2_p: "We agree on mechanics, content and timeline.",
+    step3_h: "Prototype", step3_p: "You get a first playable version to try and give feedback on.",
+    step4_h: "Delivery", step4_p: "Final version ready for the classroom, web and/or APK.",
+    cta1_h: "🏫 Need a custom game for your school?",
+    cta1_p: "If you're a school, a teaching team or a publisher and need an interactive game tailored to your curriculum, language or visual style, I can design and build it for you — from scratch or based on one of the games on this page. Get in touch, no strings attached.",
+    cta1_btn: "✉️ Get in touch",
+    pdf_link: "📄 Download the portfolio (PDF)",
+    cta2_h: "☕ Support this project",
+    cta2_p: "Every game starts from a real classroom need and is designed so students learn by playing, no install required. If these games have been useful to you or your students, you can buy me a coffee — it helps me keep building and maintaining new ones.",
+    cta2_btn: "☕ Ko-fi: robertpotau",
+    badge_note: "📦 All games on this page are open, free versions. In the future, some full or extended versions may be offered for a fee to schools and publishers — the ones here will always stay playable demos. 📱 Most games also have an Android (APK) version available on request — get in touch if you need one.",
+    privacy_note: "🔒 Privacy: no game on this page sends data to any server. Progress (profiles, XP, levels) is stored only in the student's own browser via localStorage.",
+    footer: "Made with ❤️ for the classroom — Robert Potau"
+  }
+};
+
+function applyLang(lang) {
+  const dict = translations[lang] || translations.ca;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key]) el.textContent = dict[key];
+  });
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang-switch button').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  localStorage.setItem('landing_lang', lang);
+}
+
+document.querySelectorAll('.lang-switch button').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.getAttribute('data-lang')));
+});
+
+applyLang(localStorage.getItem('landing_lang') || 'ca');
+</script>
 </body>
 </html>
