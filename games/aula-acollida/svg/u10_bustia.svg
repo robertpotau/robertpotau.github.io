@@ -13,5 +13,4 @@
   <circle cx="50" cy="58" r="7" fill="#f5f5f5" opacity="0.8"/>
   <text x="50" y="62" font-family="Arial,sans-serif" font-size="9" fill="#92400e" font-weight="900" text-anchor="middle">✉</text>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">BÚSTIA</text>
 </svg>

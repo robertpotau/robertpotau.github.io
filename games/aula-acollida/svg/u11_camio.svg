@@ -25,5 +25,4 @@
   <!-- Llum davantera -->
   <rect x="85" y="52" width="5" height="4" rx="1" fill="#fde047"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CAMIÓ</text>
 </svg>

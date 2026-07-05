@@ -11,5 +11,4 @@
   <!-- Text matrícula -->
   <text x="56" y="57" font-family="Arial,sans-serif" font-size="14" fill="#1f2937" font-weight="700" text-anchor="middle" letter-spacing="1">1234 ABC</text>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MATRÍCULA</text>
 </svg>

@@ -15,5 +15,4 @@
   <rect x="65" y="55" width="8" height="4" rx="2" fill="#94a3b8"/>
   <!-- Contorn porta nevera -->
   <rect x="24" y="40" width="52" height="46" rx="4" fill="#d1d5db" opacity="0.4"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">NEVERA</text>
 </svg>

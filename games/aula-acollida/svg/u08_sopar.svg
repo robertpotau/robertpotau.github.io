@@ -35,5 +35,4 @@
   <!-- Gotes de cera -->
   <path d="M 47 60 Q 46 64 47 66" stroke="#fef9c3" stroke-width="2" fill="none" stroke-linecap="round"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">SOPAR</text>
 </svg>

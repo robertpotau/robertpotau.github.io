@@ -24,5 +24,4 @@
   <!-- Vertical lines suggesting lobes -->
   <path d="M44 32 Q42 50 44 72" stroke="#dc2626" stroke-width="1" fill="none" opacity="0.5"/>
   <path d="M56 32 Q58 50 56 72" stroke="#dc2626" stroke-width="1" fill="none" opacity="0.5"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PEBROT</text>
 </svg>

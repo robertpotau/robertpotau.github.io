@@ -29,5 +29,4 @@
   <circle cx="57" cy="42" r="2.5" fill="#1a1a1a"/>
   <circle cx="56" cy="41" r="0.8" fill="white"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ELEFANT</text>
 </svg>

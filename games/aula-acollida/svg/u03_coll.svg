@@ -11,5 +11,4 @@
   <path d="M22 54 Q36 50 50 52 Q64 50 78 54" fill="none" stroke="#e8a87c" stroke-width="2" stroke-linecap="round"/>
   <!-- Label area -->
   <rect x="38" y="36" width="24" height="10" rx="3" fill="#ef4444" opacity="0.3"/>
-  <text x="50" y="44" font-family="Arial,sans-serif" font-size="7.5" fill="#991b1b" font-weight="700" text-anchor="middle">coll</text>
 </svg>

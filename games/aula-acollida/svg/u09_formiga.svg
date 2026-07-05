@@ -27,5 +27,4 @@
   <path d="M56,50 L68,44 L76,50" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M56,54 L70,52 L78,58" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M56,58 L68,62 L76,68" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">FORMIGA</text>
 </svg>

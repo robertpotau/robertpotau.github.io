@@ -15,5 +15,4 @@
   <!-- Gota de llet -->
   <path d="M50 68 Q54 60 50 53 Q46 60 50 68 Z" fill="#3b82f6"/>
   <!-- Text LLET -->
-  <text x="50" y="80" text-anchor="middle" font-size="9" font-weight="bold" fill="white" font-family="Arial, sans-serif">LLET</text>
 </svg>

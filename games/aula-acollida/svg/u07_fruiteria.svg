@@ -10,7 +10,6 @@
   <line x1="85" y1="30" x2="83" y2="45" stroke="#166534" stroke-width="1"/>
   <!-- Sign -->
   <rect x="20" y="18" width="60" height="14" rx="3" fill="#15803d"/>
-  <text x="50" y="28" font-family="Arial,sans-serif" font-size="7.5" fill="white" font-weight="700" text-anchor="middle">FRUITERIA</text>
   <!-- Door -->
   <rect x="38" y="60" width="24" height="25" rx="2" fill="#92400e"/>
   <circle cx="57" cy="73" r="1.5" fill="#fbbf24"/>
@@ -29,5 +28,4 @@
   <path d="M72 44.5 Q73.5 42 75 43.5" stroke="#15803d" stroke-width="1.5" fill="none"/>
   <circle cx="83" cy="50" r="5.5" fill="#f97316"/>
   <path d="M83 44.5 Q84.5 42 86 43.5" stroke="#15803d" stroke-width="1.5" fill="none"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">FRUITERIA</text>
 </svg>

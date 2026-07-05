@@ -25,5 +25,4 @@
   <rect x="6" y="40" width="8" height="20" rx="4" fill="#166534"/>
   <rect x="86" y="40" width="8" height="20" rx="4" fill="#166534"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CONTENIDOR</text>
 </svg>

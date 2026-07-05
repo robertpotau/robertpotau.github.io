@@ -18,5 +18,4 @@
   <!-- Punta del raig -->
   <ellipse cx="50" cy="8" rx="3" ry="5" fill="#bfdbfe"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">FONT</text>
 </svg>

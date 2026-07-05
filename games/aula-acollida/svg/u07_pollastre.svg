@@ -17,5 +17,4 @@
   <!-- Sheen -->
   <ellipse cx="40" cy="52" rx="6" ry="3" fill="#fde68a" opacity="0.7" transform="rotate(-15 40 52)"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">POLLASTRE</text>
 </svg>

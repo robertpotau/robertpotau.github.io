@@ -10,7 +10,6 @@
   <line x1="85" y1="30" x2="83" y2="45" stroke="#ea580c" stroke-width="1"/>
   <!-- Sign -->
   <rect x="18" y="18" width="64" height="14" rx="3" fill="#f97316"/>
-  <text x="50" y="28" font-family="Arial,sans-serif" font-size="7" fill="white" font-weight="700" text-anchor="middle">VERDULERIA</text>
   <!-- Door -->
   <rect x="38" y="60" width="24" height="25" rx="2" fill="#92400e"/>
   <circle cx="57" cy="73" r="1.5" fill="#fbbf24"/>
@@ -34,5 +33,4 @@
   <!-- Pepper -->
   <path d="M82 47 Q85 43 88 47 Q88 53 85 54 Q82 53 82 47Z" fill="#ef4444"/>
   <rect x="84.5" y="43" width="1" height="3" fill="#15803d"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">VERDULERIA</text>
 </svg>

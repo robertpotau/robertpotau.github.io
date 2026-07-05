@@ -43,5 +43,4 @@
   <circle cx="63" cy="40" r="2.5" fill="#1f2937"/>
   <circle cx="73" cy="40" r="2.5" fill="#1f2937"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">AUTOPISTA</text>
 </svg>

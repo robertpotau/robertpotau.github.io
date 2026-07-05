@@ -10,5 +10,4 @@
   <path d="M52 25 Q52 40 54 56" stroke="#a16207" stroke-width="1.2" fill="none"/>
   <!-- Highlight -->
   <path d="M38 36 Q52 25 70 31 Q55 22 37 33Z" fill="#fef9c3" opacity="0.5"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PLÀTAN</text>
 </svg>

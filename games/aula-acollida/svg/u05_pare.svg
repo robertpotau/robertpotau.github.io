@@ -17,5 +17,4 @@
   <!-- Tie -->
   <path d="M50 48 L47 60 L50 76 L53 60 Z" fill="#ef4444" stroke="#b91c1c" stroke-width="1"/>
   <!-- Label -->
-  <text x="50" y="98" font-family="Arial,sans-serif" font-size="8.5" fill="#1d4ed8" font-weight="700" text-anchor="middle">PARE</text>
 </svg>

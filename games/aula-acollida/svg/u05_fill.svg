@@ -19,5 +19,4 @@
   <circle cx="14" cy="55" r="5" fill="#f5cba7" stroke="#c0835a" stroke-width="1.5"/>
   <circle cx="86" cy="55" r="5" fill="#f5cba7" stroke="#c0835a" stroke-width="1.5"/>
   <!-- Label -->
-  <text x="50" y="96" font-family="Arial,sans-serif" font-size="8.5" fill="#15803d" font-weight="700" text-anchor="middle">FILL</text>
 </svg>

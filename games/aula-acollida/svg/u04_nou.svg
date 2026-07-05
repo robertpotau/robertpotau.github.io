@@ -29,7 +29,5 @@
   <line x1="59" y1="46" x2="72" y2="46" stroke="#94a3b8" stroke-width="0.8"/>
   <line x1="59" y1="49" x2="68" y2="49" stroke="#94a3b8" stroke-width="0.8"/>
   <!-- NOU text on shirt -->
-  <text x="43" y="58" font-family="Arial,sans-serif" font-size="7" fill="#dbeafe" font-weight="700">NOU!</text>
 
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">NOU</text>
 </svg>

@@ -16,6 +16,4 @@
   <!-- Comparison line -->
   <line x1="14" y1="70" x2="86" y2="70" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4,3"/>
   <!-- ALT label next to tall figure -->
-  <text x="32" y="87" font-family="Arial,sans-serif" font-size="7" fill="#3b82f6" font-weight="700" text-anchor="middle">ALT</text>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ALT</text>
 </svg>

@@ -42,5 +42,4 @@
   <circle cx="38" cy="52" r="3" fill="#1a1a1a"/>
   <circle cx="37" cy="51" r="1" fill="white"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">COCODRIL</text>
 </svg>

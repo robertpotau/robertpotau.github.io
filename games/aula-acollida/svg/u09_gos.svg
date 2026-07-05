@@ -26,5 +26,4 @@
   <rect x="22" y="75" width="8" height="12" rx="4" fill="#b08050"/>
   <rect x="70" y="75" width="8" height="12" rx="4" fill="#b08050"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GOS</text>
 </svg>

@@ -12,5 +12,4 @@
   <!-- Cheeks -->
   <ellipse cx="34" cy="52" rx="5" ry="3" fill="#ffb3a0" opacity="0.6"/>
   <ellipse cx="66" cy="52" rx="5" ry="3" fill="#ffb3a0" opacity="0.6"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CARA</text>
 </svg>

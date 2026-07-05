@@ -28,5 +28,4 @@
   <circle cx="44" cy="76" r="2.5" fill="#ec4899"/>
   <circle cx="56" cy="76" r="2.5" fill="#ec4899"/>
   <!-- Label -->
-  <text x="50" y="98" font-family="Arial,sans-serif" font-size="8.5" fill="#d97706" font-weight="700" text-anchor="middle">ÀVIA</text>
 </svg>

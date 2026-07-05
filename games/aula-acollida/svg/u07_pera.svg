@@ -12,5 +12,4 @@
   <line x1="51" y1="33" x2="60" y2="30" stroke="#16a34a" stroke-width="0.8"/>
   <!-- Center line (subtle) -->
   <path d="M50 48 Q52 58 51 82" stroke="#84cc16" stroke-width="1" fill="none" opacity="0.5"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PERA</text>
 </svg>

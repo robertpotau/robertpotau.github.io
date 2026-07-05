@@ -39,5 +39,4 @@
   <!-- Elastic waist draw string -->
   <circle cx="50" cy="50" r="2" fill="#1d4ed8"/>
 
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PIJAMA</text>
 </svg>

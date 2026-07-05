@@ -18,5 +18,4 @@
   <!-- Potes -->
   <line x1="44" y1="72" x2="38" y2="84" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
   <line x1="56" y1="72" x2="62" y2="84" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ÀLIGA</text>
 </svg>

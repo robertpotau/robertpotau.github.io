@@ -25,5 +25,4 @@
   <circle cx="70" cy="51" r="2.5" fill="#1e1b4b"/>
   <circle cx="70.8" cy="50.2" r="0.7" fill="white"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TAURÓ</text>
 </svg>

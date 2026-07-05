@@ -23,5 +23,4 @@
   <circle cx="76" cy="82" r="6" fill="#1f2937"/>
   <circle cx="76" cy="82" r="3" fill="#6b7280"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PATINS</text>
 </svg>

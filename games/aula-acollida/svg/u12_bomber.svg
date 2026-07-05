@@ -26,5 +26,4 @@
   <circle cx="6" cy="22" r="1" fill="#93c5fd"/>
   <circle cx="2" cy="27" r="1" fill="#93c5fd"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">BOMBER</text>
 </svg>

@@ -18,5 +18,4 @@
   <!-- Crosta inferior -->
   <path d="M 12 80 Q 12 86 50 86 Q 88 86 88 80" fill="none" stroke="#92400e" stroke-width="3"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ENTREPÀ</text>
 </svg>

@@ -22,5 +22,4 @@
   <!-- Projector stand -->
   <rect x="79" y="63" width="2" height="8" fill="#888"/>
   <rect x="75" y="71" width="10" height="2" rx="1" fill="#888"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">AUDIOVISUALS</text>
 </svg>

@@ -7,5 +7,4 @@
   <line x1="70" y1="32" x2="70" y2="50" stroke="#d97706" stroke-width="1"/>
   <!-- Thumb -->
   <path d="M28 55 Q20 52 18 44 Q16 36 22 32 Q28 30 28 38" fill="#ffd68a" stroke="#d97706" stroke-width="2"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MÀ</text>
 </svg>

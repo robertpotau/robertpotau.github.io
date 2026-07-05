@@ -24,5 +24,4 @@
   <!-- Tip of belt (left end pointed) -->
   <path d="M8 42 L4 49 L8 56 Z" fill="#92400e"/>
 
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CINTURÓ</text>
 </svg>

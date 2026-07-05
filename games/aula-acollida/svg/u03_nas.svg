@@ -7,5 +7,4 @@
   <!-- Nostril highlights -->
   <ellipse cx="40" cy="62" rx="3" ry="2.5" fill="#a07030"/>
   <ellipse cx="60" cy="62" rx="3" ry="2.5" fill="#a07030"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">NAS</text>
 </svg>

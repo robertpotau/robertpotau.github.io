@@ -11,5 +11,4 @@
   <line x1="37" y1="27" x2="63" y2="27" stroke="#b91c1c" stroke-width="1.5"/>
   <!-- Canaleta detall -->
   <rect x="14" y="60" width="72" height="5" rx="2" fill="none" stroke="#4b5563" stroke-width="1"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TEULADA</text>
 </svg>

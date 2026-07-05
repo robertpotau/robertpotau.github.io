@@ -24,5 +24,4 @@
   <path d="M50 44 Q50 32 49 22" stroke="#4ade80" stroke-width="3.5" fill="none" stroke-linecap="round"/>
   <!-- Stem tip slight bend -->
   <path d="M49 22 Q48 18 46 16" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ALL</text>
 </svg>

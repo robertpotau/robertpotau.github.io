@@ -14,5 +14,4 @@
   <ellipse cx="18" cy="66" rx="5" ry="4" fill="#b45309" transform="rotate(-30 18 66)"/>
   <ellipse cx="72" cy="68" rx="5" ry="4" fill="#b45309" transform="rotate(20 72 68)"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CROISSANT</text>
 </svg>

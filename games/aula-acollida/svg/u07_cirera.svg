@@ -21,5 +21,4 @@
   <circle cx="68" cy="78" r="12" fill="none" stroke="#b91c1c" stroke-width="0.5"/>
   <!-- Right cherry highlight -->
   <circle cx="63" cy="73" r="4" fill="#ef4444" opacity="0.6"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CIRERA</text>
 </svg>

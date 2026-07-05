@@ -25,5 +25,4 @@
   <!-- Sight lines -->
   <line x1="28" y1="59" x2="22" y2="75" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="3,2"/>
   <line x1="72" y1="59" x2="78" y2="75" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="3,2"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MIRAR</text>
 </svg>

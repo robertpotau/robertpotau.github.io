@@ -21,5 +21,4 @@
   <!-- Línia horitzó -->
   <line x1="0" y1="48" x2="100" y2="48" stroke="#7dd3fc" stroke-width="1.5"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MAR</text>
 </svg>

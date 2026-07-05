@@ -20,5 +20,4 @@
   <line x1="56" y1="32" x2="64" y2="46" stroke="#ffd68a" stroke-width="4" stroke-linecap="round"/>
   <!-- Heart above -->
   <text x="78" y="28" font-family="Arial,sans-serif" font-size="14" fill="#ef4444">♥</text>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GENERÓS</text>
 </svg>

@@ -19,5 +19,4 @@
   <!-- Smiling faces -->
   <path d="M27 22 Q32 26 37 22" stroke="#c2850a" stroke-width="1.5" fill="none"/>
   <path d="M63 22 Q68 26 73 22" stroke="#c2850a" stroke-width="1.5" fill="none"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="7" fill="#1e1b4b" font-weight="700" text-anchor="middle">AFECTUÓS</text>
 </svg>

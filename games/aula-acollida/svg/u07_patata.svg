@@ -20,5 +20,4 @@
   <circle cx="35" cy="65" r="2.5" fill="#92400e"/>
   <!-- Highlight -->
   <ellipse cx="32" cy="40" rx="8" ry="10" fill="#fbbf24" opacity="0.3"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PATATA</text>
 </svg>

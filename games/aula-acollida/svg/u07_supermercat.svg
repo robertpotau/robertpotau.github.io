@@ -6,7 +6,6 @@
   <!-- Roof band -->
   <rect x="3" y="25" width="94" height="10" rx="2" fill="#1d4ed8"/>
   <!-- Sign -->
-  <text x="50" y="33" font-family="Arial,sans-serif" font-size="7.5" fill="white" font-weight="700" text-anchor="middle">SUPERMERCAT</text>
   <!-- Large glass windows -->
   <rect x="8" y="40" width="25" height="22" rx="1" fill="#bae6fd" stroke="#93c5fd" stroke-width="0.8"/>
   <line x1="20.5" y1="40" x2="20.5" y2="62" stroke="#93c5fd" stroke-width="0.5"/>
@@ -34,5 +33,4 @@
   <line x1="27" y1="75" x2="30" y2="75" stroke="#94a3b8" stroke-width="1.5"/>
   <!-- Pavement -->
   <rect x="3" y="83" width="94" height="2" fill="#94a3b8"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">SUPERMERCAT</text>
 </svg>

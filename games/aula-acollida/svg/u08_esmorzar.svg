@@ -25,5 +25,4 @@
   <line x1="50" y1="2" x2="50" y2="0" stroke="#fbbf24" stroke-width="2"/>
   <line x1="50" y1="22" x2="50" y2="24" stroke="#fbbf24" stroke-width="2"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ESMORZAR</text>
 </svg>

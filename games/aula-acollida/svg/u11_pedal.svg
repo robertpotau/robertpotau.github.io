@@ -20,5 +20,4 @@
   <line x1="18" y1="40" x2="18" y2="60" stroke="#6b7280" stroke-width="1.5"/>
   <line x1="22" y1="40" x2="22" y2="60" stroke="#6b7280" stroke-width="1.5"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PEDAL</text>
 </svg>

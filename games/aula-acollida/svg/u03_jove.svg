@@ -23,5 +23,4 @@
   <!-- Legs -->
   <rect x="32" y="78" width="9" height="8" rx="2" fill="#1e40af"/>
   <rect x="47" y="78" width="9" height="8" rx="2" fill="#1e40af"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">JOVE</text>
 </svg>

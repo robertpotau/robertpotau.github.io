@@ -21,5 +21,4 @@
   <rect x="66" y="45" width="12" height="10" rx="2" fill="#d97706"/>
   <line x1="72" y1="45" x2="72" y2="38" stroke="#16a34a" stroke-width="1.5"/>
   <circle cx="72" cy="36" r="4" fill="#ec4899"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">BALCÓ</text>
 </svg>

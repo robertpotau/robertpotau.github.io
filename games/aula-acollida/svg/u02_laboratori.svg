@@ -14,5 +14,4 @@
   <line x1="62" y1="38" x2="70" y2="38" stroke="#16a34a" stroke-width="1"/>
   <!-- Test tube rack -->
   <rect x="58" y="56" width="16" height="6" rx="1" fill="#92400e" stroke="#78350f" stroke-width="1"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">LABORATORI</text>
 </svg>

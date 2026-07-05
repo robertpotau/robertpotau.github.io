@@ -11,5 +11,4 @@
   <!-- Brillantor casc -->
   <ellipse cx="34" cy="30" rx="8" ry="5" fill="#fca5a5" opacity="0.5" transform="rotate(-20 34 30)"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CASC</text>
 </svg>

@@ -14,5 +14,4 @@
   <!-- Lens shine -->
   <circle cx="24" cy="42" r="3" fill="white" opacity="0.7"/>
   <circle cx="64" cy="42" r="3" fill="white" opacity="0.7"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ULLERES</text>
 </svg>

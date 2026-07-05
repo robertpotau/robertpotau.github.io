@@ -16,6 +16,4 @@
   <!-- Comparison line -->
   <line x1="10" y1="65" x2="90" y2="65" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4,3"/>
   <!-- BAIX label -->
-  <text x="70" y="87" font-family="Arial,sans-serif" font-size="7" fill="#f97316" font-weight="700" text-anchor="middle">BAIX</text>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">BAIX</text>
 </svg>

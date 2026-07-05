@@ -15,5 +15,4 @@
   <!-- Creu divisòria -->
   <rect x="22" y="44" width="56" height="4" fill="#92400e"/>
   <rect x="47" y="18" width="6" height="60" fill="#92400e"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">FINESTRA</text>
 </svg>

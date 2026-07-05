@@ -29,5 +29,4 @@
   <!-- Escapament -->
   <path d="M22 70 Q10 72 8 68" fill="none" stroke="#6b7280" stroke-width="2.5" stroke-linecap="round"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MOTO</text>
 </svg>
