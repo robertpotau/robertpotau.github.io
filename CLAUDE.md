@@ -6,6 +6,17 @@ Live at **https://robertpotau.github.io/**, served by GitHub Pages from the `mai
 
 All of Robert's coding projects (this landing page, the 9 game repos, Moodle materials, the finances project) moved from `C:\Users\PC\Documents\MEGA\Claude code\` to **`C:\Users\PC\Documents\claude-code-pcsobretaula\`** — a plain local folder, deliberately **outside** the MEGA-synced tree. Reason: MEGA sync has previously eaten data on Robert's setup (the `claude-Moodle` folder ended up in MEGA's cloud trash bin on 2026-06-27 and had to be restored 2026-07-03), so nothing important should live inside a MEGA-managed folder anymore. If you see any path still referencing `MEGA\Claude code`, it's stale — update it to `claude-code-pcsobretaula` when you find it. As of 2026-07-05 the old MEGA copies still exist too (kept temporarily as a safety net, verified byte-identical) — check with Robert before assuming either copy is the "real" one if both still exist when you're reading this.
 
+## Ko-fi Shop / paid full versions (placeholder added 2026-07-05)
+
+Robert is configuring Stripe on Ko-fi so he can eventually sell **full/paid versions of all 9 games** through a Ko-fi Shop, while the demos on this site stay free forever. As of 2026-07-05 this is still being set up on his end, so the site currently has **placeholder "coming soon" copy and a generic shop link**, not real per-game purchase links:
+
+- Link used everywhere: `https://ko-fi.com/robertpotau/shop` (Ko-fi's standard shop URL pattern — works today, just shows empty/no products until he publishes some).
+- i18n keys: `b8_shop` (index.html, in the support beat) and `cta2_shop` (classic.html, next to the Ko-fi CTA card) — both say "🛒 ... (properament/próximamente/coming soon) — versió completa de cada joc" in CA/ES/EN.
+- Related copy already adjusted: `b8_h`/`b8_p` (index.html) and `badge_note` (classic.html) now say the **demos** stay free forever, rather than the older wording that implied everything would always be free — since paid full versions are now the plan, not a maybe.
+- `data-goatcounter-click="kofi-shop-link"` tracks clicks on this link like everything else (see Analytics section).
+
+**When Robert says the Shop is actually live with real products:** replace the generic `/shop` link with real per-product links if he wants (or keep the generic shop link if one page listing all games is fine), and drop the "(properament/coming soon)" wording from `b8_shop`/`cta2_shop`. Don't do this speculatively — wait for him to confirm it's ready, since guessing at commercial copy/pricing isn't something to do unprompted.
+
 ## Architecture
 
 - `index.html` — the current (v2, immersive Three.js) landing page.
