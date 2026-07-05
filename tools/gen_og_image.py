@@ -55,5 +55,5 @@ for b in badges:
 
 draw.text((90, 560), "robertpotau.github.io", font=load_font(26, False), fill=(255,255,255,220), anchor="lm")
 
-img.save(r"C:\Users\PC\Documents\MEGA\Claude code\claude-projects\landing-page\og-image.png")
+img.save(r"C:\Users\PC\Documents\claude-code-pcsobretaula\claude-projects\landing-page\og-image.png")
 print("saved")
