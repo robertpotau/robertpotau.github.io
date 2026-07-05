@@ -299,6 +299,28 @@
   }
   .btn-mail:hover { transform: translateY(-3px) scale(1.03); }
   .support-sub { font-size: 14px; color: var(--ink-dim); max-width: 520px; }
+  .email-fallback {
+    font-size: 13px;
+    color: var(--ink-dim);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    max-width: 480px;
+  }
+  .email-copy {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: var(--ink);
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 99px;
+    cursor: pointer;
+  }
+  .email-copy:hover { border-color: rgba(199,146,255,0.55); }
   .support-links { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 8px; }
   .support-links a {
     font-size: 13.5px;
@@ -537,6 +559,10 @@
     </div>
     <div class="support-box reveal d3">
       <a class="btn-big btn-mail" href="mailto:robertpotau@gmail.com?subject=Joc%20educatiu%20a%20mida">✉️ <span data-i18n="b9_btn">Escriu-me</span></a>
+      <p class="email-fallback">
+        <span data-i18n="b9_fallback">O si el teu correu no obre l'enllaç, escriu directament a</span>
+        <button type="button" class="email-copy" data-email="robertpotau@gmail.com" onclick="copyEmail(this)">robertpotau@gmail.com <span class="copy-icon">📋</span></button>
+      </p>
       <div class="support-links">
         <a href="robert-potau-portfolio.pdf" target="_blank" data-i18n="b9_pdf">📄 Portfolio en PDF</a>
       </div>
@@ -596,6 +622,7 @@ const translations = {
     b9_p: "Dissenyo i desenvolupo jocs adaptats al teu currículum, idioma i estil — des de zero o partint dels d'aquesta escola.",
     step1: "Contacte", step2: "Definim l'abast", step3: "Prototip jugable", step4: "Lliurament (web i/o APK)",
     b9_btn: "Escriu-me", b9_pdf: "📄 Portfolio en PDF",
+    b9_fallback: "O si el teu correu no obre l'enllaç, escriu directament a", copied: "Copiat! ✅",
     f_classic: "Versió clàssica de la pàgina",
     f_privacy: "🔒 Cap joc envia dades a cap servidor: el progrés es desa només al navegador de l'alumne. 📱 Versions APK disponibles sota petició.",
     f_made: "Fet amb ❤️ per a l'aula — Robert Potau"
@@ -636,6 +663,7 @@ const translations = {
     b9_p: "Diseño y desarrollo juegos adaptados a tu currículum, idioma y estilo — desde cero o partiendo de los de esta escuela.",
     step1: "Contacto", step2: "Definimos el alcance", step3: "Prototipo jugable", step4: "Entrega (web y/o APK)",
     b9_btn: "Escríbeme", b9_pdf: "📄 Portfolio en PDF",
+    b9_fallback: "O si tu correo no abre el enlace, escribe directamente a", copied: "¡Copiado! ✅",
     f_classic: "Versión clásica de la página",
     f_privacy: "🔒 Ningún juego envía datos a ningún servidor: el progreso se guarda solo en el navegador del alumno. 📱 Versiones APK disponibles bajo petición.",
     f_made: "Hecho con ❤️ para el aula — Robert Potau"
@@ -676,13 +704,27 @@ const translations = {
     b9_p: "I design and build games tailored to your curriculum, language and style — from scratch or based on the ones in this school.",
     step1: "Contact", step2: "Scope it out", step3: "Playable prototype", step4: "Delivery (web and/or APK)",
     b9_btn: "Write to me", b9_pdf: "📄 Portfolio (PDF)",
+    b9_fallback: "Or if your mail client doesn't open the link, write directly to", copied: "Copied! ✅",
     f_classic: "Classic version of this page",
     f_privacy: "🔒 No game sends data to any server: progress is stored only in the student's own browser. 📱 APK versions available on request.",
     f_made: "Made with ❤️ for the classroom — Robert Potau"
   }
 };
 
+let currentLang = 'ca';
+
+function copyEmail(btn) {
+  const email = btn.getAttribute('data-email');
+  const restore = btn.innerHTML;
+  const dict = translations[currentLang] || translations.ca;
+  navigator.clipboard.writeText(email).then(() => {
+    btn.textContent = dict.copied || 'Copied! ✅';
+    setTimeout(() => { btn.innerHTML = restore; }, 1800);
+  }).catch(() => {});
+}
+
 function applyLang(lang) {
+  currentLang = lang;
   const dict = translations[lang] || translations.ca;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
@@ -724,6 +766,11 @@ window.addEventListener('scroll', () => {
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isSmall = window.innerWidth < 700;
+  // narrow/portrait viewports have less horizontal frustum width at the same FOV,
+  // so world-space objects read as proportionally larger and crowd the text column —
+  // shrink them and push them further to the sides to keep cards legible.
+  const mobileScale = isSmall ? 0.6 : 1;
+  const mobileSpread = isSmall ? 1.35 : 1;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
 
   const scene = new THREE.Scene();
@@ -773,7 +820,8 @@ window.addEventListener('scroll', () => {
     tex.anisotropy = 2;
     const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false });
     const sp = new THREE.Sprite(mat);
-    sp.scale.set(scale, scale, 1);
+    const s = scale * mobileScale;
+    sp.scale.set(s, s, 1);
     return sp;
   }
 
@@ -786,7 +834,7 @@ window.addEventListener('scroll', () => {
   function scatter(items, beat, spreadX = 34, spreadY = 15, spreadZ = 26) {
     items.forEach(it => {
       place(it, beat,
-        (Math.random() - 0.5) * spreadX * 2,
+        (Math.random() - 0.5) * spreadX * 2 * mobileSpread,
         (Math.random() - 0.5) * spreadY * 2,
         (Math.random() - 0.5) * spreadZ);
       registerFloater(it, 1 + Math.random() * 1.6, (Math.random() - 0.5) * 0.35);
@@ -830,7 +878,8 @@ window.addEventListener('scroll', () => {
       new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5, side: THREE.DoubleSide })
     );
     g.add(slice, ring);
-    place(g, 3, -20, 7, -8);
+    g.scale.setScalar(mobileScale);
+    place(g, 3, -20 * mobileSpread, 7, -8);
     registerFloater(g, 1.4, 0.25);
   }
 
@@ -848,6 +897,7 @@ window.addEventListener('scroll', () => {
         new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.9 })
       );
       m.rotation.z = (Math.random() - 0.5) * 0.7;
+      m.scale.setScalar(mobileScale);
       return m;
     });
     scatter(books, 5, 28, 13, 22);
@@ -864,7 +914,8 @@ window.addEventListener('scroll', () => {
       new THREE.BoxGeometry(7, 3, 4)
     ].map(geo => new THREE.LineSegments(new THREE.EdgesGeometry(geo), wireMat));
     solids.forEach((s, i) => {
-      place(s, 6, [-18, 16, -6, 10][i], [6, -5, 9, -8][i], (Math.random() - 0.5) * 16);
+      s.scale.setScalar(mobileScale);
+      place(s, 6, [-18, 16, -6, 10][i] * mobileSpread, [6, -5, 9, -8][i], (Math.random() - 0.5) * 16);
       registerFloater(s, 1.2, 0.4 + Math.random() * 0.4);
     });
     scatter(['📐', '⚙️', '🔧'].map(e => textSprite(e, { scale: 4.6 })), 6, 24, 12, 16);
@@ -900,7 +951,8 @@ window.addEventListener('scroll', () => {
     minHand.geometry.translate(0, 2.2, 0);
     clockGroup.add(hourHand, minHand);
     clockGroup.userData = { hourHand, minHand };
-    place(clockGroup, 7, 17, 4, -10);
+    clockGroup.scale.setScalar(mobileScale);
+    place(clockGroup, 7, 17 * mobileSpread, 4, -10);
     registerFloater(clockGroup, 1.2, 0);
     scatter(['🕒', '❔', 'a.m.', 'p.m.'].map(t =>
       t.length > 2 ? textSprite(t, { font: '900 64px Nunito, Arial', color: '#bfe9ff', scale: 4 }) : textSprite(t, { scale: 4.6 })), 7, 26, 12, 18);
