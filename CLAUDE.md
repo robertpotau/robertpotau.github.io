@@ -4,7 +4,10 @@ Live at **https://robertpotau.github.io/**, served by GitHub Pages from the `mai
 
 ## Architecture
 
-- `index.html` — the landing page itself (bio + game gallery). Styled after `claude-projects/GAMES-TEMPLATE` (Nunito font, orange palette, chunky rounded cards).
+- `index.html` — the current (v2, immersive Three.js) landing page.
+- `classic.html` — the v1 commercial page, preserved and still live/linked from the footer.
+- `404.html` — branded 404 page (GitHub Pages serves this automatically for any unmatched path).
+- `robots.txt` / `sitemap.xml` — basic SEO, list both `index.html` and `classic.html`.
 - `fonts/` — copy of the Nunito font used by the template/games.
 - `games/<slug>/` — **playable copies** of each featured game's static files (HTML/CSS/JS/assets only — no `.git`, no `apk/` Android wrapper, no `backups/`, no `.py`/`.md` docs, no PDFs).
 
@@ -79,6 +82,8 @@ One HTML file, no build step. Three.js `0.160.0` UMD from unpkg (**pin this vers
 - **i18n**: same `data-i18n` + `translations` object pattern as v1 (CA/ES/EN, saved in `localStorage.landing_lang`). All narrative copy is in all three languages — keep them in sync when editing.
 - **Degradations**: `prefers-reduced-motion` skips bobbing/eases instantly; CDN load failure or WebGL init failure adds `body.no3d` (static gradient background, all content still readable); rAF loop pauses when tab hidden.
 - **Debug handle**: `window.__rp = { camera, scene, renderer, step }` — `step(true)` forces one frame with instant camera easing. Used for headless verification (`scratchpad`-style script in `tools/` not needed; see below) and handy for future tweaking.
+- **Mobile scaling (2026-07-05)**: on narrow/portrait viewports (`isSmall`, `innerWidth < 700`), the perspective camera's frustum is narrower at the same vertical FOV, so world-space floating objects (numbers, letters, the fraction pizza, book boxes, wireframe solids, the clock) read as proportionally larger and crowd the card text. Fixed with two globals, `mobileScale` (0.6× on small screens) applied to every sprite/mesh, and `mobileSpread` (1.35×) applied to their X placement to push them further from the center reading column. If a **new** floating object is added to any beat, apply both — `obj.scale.setScalar(mobileScale)` and multiply its X position by `mobileSpread` — or it'll be the one thing that doesn't shrink on phones.
+- Verified via Playwright with `p.devices['Pixel 7']` emulation: no console/page errors, no horizontal overflow, ~60fps in headless Chromium (real budget-Android-phone perf hasn't been confirmed on physical hardware — headless emulation checks correctness/layout, not real GPU throughput, so treat that as still open if jank reports come in).
 
 **Verification quirk worth remembering**: in a *hidden/backgrounded* automated tab, CSS transitions freeze and `scroll-behavior: smooth` never completes, so the page looks broken in screenshots even though it's fine — verify with headless Playwright (visible-rendering) instead, scrolling each `[data-beat]` into center view and waiting ~2.5s.
 
