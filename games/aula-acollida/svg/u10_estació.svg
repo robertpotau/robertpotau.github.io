@@ -33,5 +33,4 @@
   <circle cx="14" cy="74" r="4" fill="#111827"/>
   <circle cx="36" cy="74" r="4" fill="#111827"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ESTACIÓ</text>
 </svg>

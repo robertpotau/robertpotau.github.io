@@ -21,5 +21,4 @@
   <circle cx="60" cy="54" r="7" fill="#4ade80"/>
   <circle cx="76" cy="53" r="7" fill="#fb923c"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MERCAT</text>
 </svg>

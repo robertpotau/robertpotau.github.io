@@ -29,5 +29,4 @@
   <ellipse cx="30" cy="65" rx="8" ry="3" fill="#16a34a" opacity="0.6"/>
   <ellipse cx="65" cy="67" rx="7" ry="2.5" fill="#16a34a" opacity="0.6"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">BOSC</text>
 </svg>

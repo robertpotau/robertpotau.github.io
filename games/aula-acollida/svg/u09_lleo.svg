@@ -34,5 +34,4 @@
   <circle cx="27" cy="38" r="3" fill="#fda4af"/>
   <circle cx="53" cy="38" r="3" fill="#fda4af"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">LLEÓ</text>
 </svg>

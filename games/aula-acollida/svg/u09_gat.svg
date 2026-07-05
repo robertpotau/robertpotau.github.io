@@ -34,5 +34,4 @@
   <rect x="24" y="74" width="7" height="11" rx="3.5" fill="#909090"/>
   <rect x="69" y="74" width="7" height="11" rx="3.5" fill="#909090"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GAT</text>
 </svg>

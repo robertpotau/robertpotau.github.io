@@ -21,5 +21,4 @@
   <line x1="76" y1="55" x2="88" y2="90" stroke="#92400e" stroke-width="4" stroke-linecap="round"/>
   <path d="M76 55 Q70 50 74 46" fill="none" stroke="#92400e" stroke-width="4" stroke-linecap="round"/>
   <!-- Label -->
-  <text x="50" y="98" font-family="Arial,sans-serif" font-size="8.5" fill="#6b7280" font-weight="700" text-anchor="middle">AVI</text>
 </svg>

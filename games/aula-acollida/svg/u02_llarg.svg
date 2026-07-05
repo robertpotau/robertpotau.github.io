@@ -10,6 +10,4 @@
   <polygon points="8,62 16,57 16,67" fill="#374151"/>
   <polygon points="92,62 84,57 84,67" fill="#374151"/>
   <!-- Dimension text -->
-  <text x="50" y="78" font-family="Arial,sans-serif" font-size="9" fill="#374151" font-weight="600" text-anchor="middle">↔ llarg</text>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">LLARG</text>
 </svg>

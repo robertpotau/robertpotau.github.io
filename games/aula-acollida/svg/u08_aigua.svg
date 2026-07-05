@@ -22,5 +22,4 @@
   <!-- Reflexos del got -->
   <rect x="27" y="22" width="5" height="55" rx="2" fill="white" opacity="0.35"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">AIGUA</text>
 </svg>

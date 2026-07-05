@@ -17,5 +17,4 @@
   <line x1="45" y1="65" x2="43" y2="85" stroke="#d1d5db" stroke-width="1"/>
   <line x1="55" y1="65" x2="57" y2="85" stroke="#d1d5db" stroke-width="1"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TOVALLÓ</text>
 </svg>

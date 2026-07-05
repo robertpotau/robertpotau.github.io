@@ -19,5 +19,4 @@
   <circle cx="64" cy="14" r="1.3" fill="#1e1b4b"/>
   <circle cx="64.7" cy="13.3" r="0.4" fill="white"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">SERP</text>
 </svg>

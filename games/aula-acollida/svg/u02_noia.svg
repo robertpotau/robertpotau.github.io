@@ -25,5 +25,4 @@
   <!-- Shoes -->
   <ellipse cx="35" cy="82" rx="5" ry="3" fill="#7c3aed"/>
   <ellipse cx="53" cy="82" rx="5" ry="3" fill="#7c3aed"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">NOIA</text>
 </svg>

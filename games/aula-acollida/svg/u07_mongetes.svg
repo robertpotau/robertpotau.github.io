@@ -17,5 +17,4 @@
   <!-- Leaf -->
   <ellipse cx="58" cy="19" rx="7" ry="4" fill="#4ade80" transform="rotate(-20 58 19)"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MONGETES</text>
 </svg>

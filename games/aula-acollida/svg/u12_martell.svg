@@ -16,5 +16,4 @@
   <!-- Reflex metàl·lic -->
   <rect x="25" y="22" width="15" height="3" rx="1" fill="#9ca3af" opacity="0.4"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">MARTELL</text>
 </svg>

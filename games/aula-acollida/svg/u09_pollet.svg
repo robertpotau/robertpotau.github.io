@@ -26,5 +26,4 @@
   <line x1="63" y1="89" x2="63" y2="93" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
   <line x1="63" y1="89" x2="68" y2="92" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">POLLET</text>
 </svg>

@@ -39,5 +39,4 @@
   <circle cx="30" cy="40" r="5" fill="#374151"/>
   <circle cx="70" cy="40" r="5" fill="#374151"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GORIL·LA</text>
 </svg>

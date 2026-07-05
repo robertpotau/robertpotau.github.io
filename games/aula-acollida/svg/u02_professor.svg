@@ -25,5 +25,4 @@
   <!-- Legs -->
   <rect x="22" y="78" width="9" height="8" rx="2" fill="#1e3a8a"/>
   <rect x="35" y="78" width="9" height="8" rx="2" fill="#1e3a8a"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="7" fill="#1e1b4b" font-weight="700" text-anchor="middle">PROFESSOR</text>
 </svg>

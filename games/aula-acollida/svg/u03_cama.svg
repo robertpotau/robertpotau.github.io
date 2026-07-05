@@ -8,6 +8,5 @@
   <!-- Highlight -->
   <path d="M24 12 Q21 30 21 48" stroke="#e8a87c" stroke-width="3" stroke-linecap="round" fill="none"/>
   <!-- Label -->
-  <text x="62" y="30" font-family="Arial,sans-serif" font-size="9" fill="#92400e" font-weight="700">cama</text>
   <line x1="53" y1="28" x2="60" y2="28" stroke="#92400e" stroke-width="1.5"/>
 </svg>

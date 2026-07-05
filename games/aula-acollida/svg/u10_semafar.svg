@@ -13,5 +13,4 @@
   <!-- Llum verda (apagada) -->
   <circle cx="50" cy="55" r="10" fill="#6b7280"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">SEMÀFOR</text>
 </svg>

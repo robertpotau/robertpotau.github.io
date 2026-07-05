@@ -35,5 +35,4 @@
   <rect x="52" y="89" width="6" height="4" rx="2" fill="#1a1a1a"/>
   <rect x="63" y="89" width="6" height="4" rx="2" fill="#1a1a1a"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">XAI</text>
 </svg>

@@ -33,5 +33,4 @@
   <!-- Llum davant -->
   <circle cx="92" cy="65" r="3" fill="#fde047"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TREN</text>
 </svg>

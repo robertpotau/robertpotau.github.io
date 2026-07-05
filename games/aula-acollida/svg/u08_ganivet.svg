@@ -17,5 +17,4 @@
   <circle cx="50" cy="72" r="2" fill="#78350f"/>
   <circle cx="50" cy="82" r="2" fill="#78350f"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GANIVET</text>
 </svg>

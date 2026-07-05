@@ -14,5 +14,4 @@
   <!-- Franja decorativa vora interior -->
   <line x1="16" y1="32" x2="84" y2="32" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,3"/>
   <line x1="16" y1="65" x2="84" y2="65" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CATIFA</text>
 </svg>

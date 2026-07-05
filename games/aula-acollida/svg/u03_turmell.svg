@@ -11,5 +11,4 @@
   <circle cx="60" cy="52" r="10" fill="#ef4444" opacity="0.8"/>
   <circle cx="60" cy="52" r="6" fill="#fca5a5"/>
   <!-- Label -->
-  <text x="48" y="90" font-family="Arial,sans-serif" font-size="8" fill="#991b1b" font-weight="700" text-anchor="middle">turmell</text>
 </svg>

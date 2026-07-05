@@ -4,12 +4,10 @@
   <!-- Relleu superfície -->
   <rect x="19" y="39" width="62" height="30" rx="9" fill="#a78bfa" opacity="0.5"/>
   <!-- Text SABÓ a la pastilla -->
-  <text x="50" y="57" font-family="Arial,sans-serif" font-size="9" fill="#f5f5f5" font-weight="700" text-anchor="middle">SABÓ</text>
   <!-- Bombolles -->
   <circle cx="75" cy="30" r="7" fill="#e0f2fe" opacity="0.8"/>
   <circle cx="75" cy="30" r="4" fill="white" opacity="0.5"/>
   <circle cx="82" cy="22" r="5" fill="#e0f2fe" opacity="0.7"/>
   <circle cx="68" cy="22" r="4" fill="#e0f2fe" opacity="0.6"/>
   <circle cx="85" cy="33" r="3" fill="#e0f2fe" opacity="0.7"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">SABÓ</text>
 </svg>

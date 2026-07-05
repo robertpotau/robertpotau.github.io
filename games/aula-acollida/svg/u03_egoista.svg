@@ -24,5 +24,4 @@
   <!-- Legs -->
   <rect x="36" y="70" width="7" height="10" rx="2" fill="#4b5563"/>
   <rect x="47" y="70" width="7" height="10" rx="2" fill="#4b5563"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">EGOISTA</text>
 </svg>

@@ -16,5 +16,4 @@
   <path d="M78 38 Q64 46 50 45" stroke="#15803d" stroke-width="0.8" fill="none" opacity="0.6"/>
   <path d="M30 72 Q40 65 50 65" stroke="#15803d" stroke-width="0.8" fill="none" opacity="0.6"/>
   <path d="M70 72 Q60 65 50 65" stroke="#15803d" stroke-width="0.8" fill="none" opacity="0.6"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ENCIAM</text>
 </svg>

@@ -33,5 +33,4 @@
   <path d="M 38 33 Q 40 27 38 22" fill="none" stroke="#d1d5db" stroke-width="2" stroke-linecap="round"/>
   <path d="M 60 33 Q 62 27 60 22" fill="none" stroke="#d1d5db" stroke-width="2" stroke-linecap="round"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TE</text>
 </svg>

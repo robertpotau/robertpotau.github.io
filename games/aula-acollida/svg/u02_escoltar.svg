@@ -6,5 +6,4 @@
   <!-- Sound waves -->
   <path d="M76 38 Q82 45 76 52" stroke="#3b82f6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
   <path d="M80 32 Q90 45 80 58" stroke="#3b82f6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ESCOLTAR</text>
 </svg>

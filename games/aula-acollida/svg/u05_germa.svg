@@ -23,5 +23,4 @@
   <!-- Jeans line (trousers) -->
   <line x1="14" y1="76" x2="86" y2="76" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="3,2"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GERMÀ</text>
 </svg>

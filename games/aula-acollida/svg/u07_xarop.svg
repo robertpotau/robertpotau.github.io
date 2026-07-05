@@ -22,5 +22,4 @@
   <!-- Glass reflection -->
   <line x1="38" y1="46" x2="38" y2="80" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">XAROP</text>
 </svg>

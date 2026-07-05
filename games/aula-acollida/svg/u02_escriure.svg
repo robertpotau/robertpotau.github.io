@@ -13,5 +13,4 @@
   <polygon points="55,77 59,69 63,77" transform="rotate(-30 59 73)" fill="#f97316"/>
   <polygon points="56,77 62,77 59,82" transform="rotate(-30 59 79)" fill="#374151"/>
   <rect x="55" y="45" width="8" height="5" rx="1" transform="rotate(-30 59 47)" fill="#f87171"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ESCRIURE</text>
 </svg>

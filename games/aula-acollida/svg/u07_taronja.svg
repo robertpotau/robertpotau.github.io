@@ -20,5 +20,4 @@
   <!-- Seeds in slice -->
   <ellipse cx="73" cy="47" rx="1.5" ry="2" fill="white"/>
   <ellipse cx="73" cy="53" rx="1.5" ry="2" fill="white"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TARONJA</text>
 </svg>

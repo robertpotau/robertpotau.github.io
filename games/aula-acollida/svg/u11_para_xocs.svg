@@ -19,5 +19,4 @@
   <line x1="50" y1="58" x2="50" y2="66" stroke="#6b7280" stroke-width="1"/>
   <line x1="56" y1="58" x2="56" y2="66" stroke="#6b7280" stroke-width="1"/>
   <!-- Label -->
-  <text x="50" y="92" font-family="Arial,sans-serif" font-size="7" fill="#c2410c" font-weight="700" text-anchor="middle">para-xocs</text>
 </svg>

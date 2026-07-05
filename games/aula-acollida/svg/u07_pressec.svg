@@ -14,5 +14,4 @@
   <line x1="49" y1="24" x2="38" y2="21" stroke="#16a34a" stroke-width="0.8"/>
   <!-- Highlight -->
   <ellipse cx="38" cy="42" rx="8" ry="10" fill="#fed7aa" opacity="0.5"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PRÉSSEC</text>
 </svg>

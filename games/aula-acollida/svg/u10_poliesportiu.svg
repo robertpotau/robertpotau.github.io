@@ -20,7 +20,5 @@
   <path d="M78,40 Q86,47 94,40" fill="none" stroke="#ea580c" stroke-width="1.5"/>
   <line x1="86" y1="31" x2="86" y2="49" stroke="#ea580c" stroke-width="1.5"/>
   <!-- Text al frontó -->
-  <text x="50" y="37" font-family="Arial,sans-serif" font-size="6" fill="#e0e7ff" font-weight="700" text-anchor="middle">POLIESPORTIU</text>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">POLIESPORTIU</text>
 </svg>

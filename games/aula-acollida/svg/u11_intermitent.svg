@@ -6,5 +6,4 @@
   <!-- Brillantor -->
   <ellipse cx="25" cy="38" rx="5" ry="3" fill="#fed7aa" opacity="0.6"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">INTERMITENT</text>
 </svg>

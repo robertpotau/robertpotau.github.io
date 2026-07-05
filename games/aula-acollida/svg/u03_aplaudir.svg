@@ -20,5 +20,4 @@
   <!-- Sound waves -->
   <path d="M50 68 Q38 72 40 80" stroke="#6b7280" stroke-width="1.5" fill="none"/>
   <path d="M50 68 Q62 72 60 80" stroke="#6b7280" stroke-width="1.5" fill="none"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">APLAUDIR</text>
 </svg>

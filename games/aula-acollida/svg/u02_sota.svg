@@ -8,6 +8,4 @@
   <polygon points="50,58 46,50 54,50" fill="#374151"/>
   <!-- Labels -->
   <text x="50" y="35" font-family="Arial,sans-serif" font-size="8" fill="#92400e" font-weight="600" text-anchor="middle">sobre</text>
-  <text x="50" y="70" font-family="Arial,sans-serif" font-size="9" fill="white" font-weight="700" text-anchor="middle">SOTA</text>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">SOTA</text>
 </svg>

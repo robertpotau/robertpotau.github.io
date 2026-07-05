@@ -15,5 +15,4 @@
   <circle cx="44" cy="38" r="2" fill="#374151"/>
   <circle cx="56" cy="38" r="2" fill="#374151"/>
   <path d="M44 44 Q50 48 56 44" stroke="#c2850a" stroke-width="1.5" fill="none"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ONDULATS</text>
 </svg>

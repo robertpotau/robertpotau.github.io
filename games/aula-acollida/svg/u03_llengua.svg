@@ -14,5 +14,4 @@
   <line x1="50" y1="48" x2="50" y2="72" stroke="#be123c" stroke-width="2" opacity="0.5"/>
   <!-- Tongue highlight -->
   <ellipse cx="50" cy="56" rx="10" ry="5" fill="#fb7185" opacity="0.4"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">LLENGUA</text>
 </svg>

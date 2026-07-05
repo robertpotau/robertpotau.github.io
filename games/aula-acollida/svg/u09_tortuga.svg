@@ -27,5 +27,4 @@
   <!-- Brillantor -->
   <ellipse cx="46" cy="47" rx="6" ry="3" fill="#22c55e" opacity="0.3"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TORTUGA</text>
 </svg>

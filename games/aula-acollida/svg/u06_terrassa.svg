@@ -24,5 +24,4 @@
   <rect x="87.5" y="42" width="2.5" height="13" fill="#6b7280"/>
   <!-- Taula -->
   <ellipse cx="50" cy="56" rx="16" ry="5" fill="#f5f5f5" stroke="#e2e8f0" stroke-width="1"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">TERRASSA</text>
 </svg>

@@ -8,6 +8,5 @@
   <!-- Highlight upper arm -->
   <path d="M30 32 Q26 44 27 57" stroke="#e8a87c" stroke-width="3" stroke-linecap="round" fill="none"/>
   <!-- Arrow label -->
-  <text x="72" y="38" font-family="Arial,sans-serif" font-size="9" fill="#92400e" font-weight="700">braç</text>
   <line x1="53" y1="38" x2="66" y2="38" stroke="#92400e" stroke-width="1.5" marker-end="url(#a)"/>
 </svg>

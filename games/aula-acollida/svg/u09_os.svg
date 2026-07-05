@@ -33,5 +33,4 @@
   <circle cx="48" cy="34" r="7" fill="#92400e"/>
   <circle cx="48" cy="34" r="4" fill="#78350f"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ÓS</text>
 </svg>

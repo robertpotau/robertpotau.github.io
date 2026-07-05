@@ -12,9 +12,7 @@
   <!-- Contrast: "PETITS" label with size comparison -->
   <circle cx="22" cy="68" r="10" fill="none" stroke="#ef4444" stroke-width="2"/>
   <circle cx="22" cy="68" r="2" fill="#374151"/>
-  <text x="34" y="72" font-family="Arial,sans-serif" font-size="8" fill="#ef4444" font-weight="600">petits</text>
   <!-- Nose, mouth -->
   <path d="M46 58 Q50 62 54 58" stroke="#c2850a" stroke-width="1.5" fill="none"/>
   <path d="M40 68 Q50 74 60 68" stroke="#c2850a" stroke-width="2" fill="none"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PETITS</text>
 </svg>

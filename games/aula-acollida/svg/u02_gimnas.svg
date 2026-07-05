@@ -19,5 +19,4 @@
   <path d="M16 65 Q22 70 28 65" stroke="#92400e" stroke-width="1" fill="none"/>
   <path d="M16 71 Q22 66 28 71" stroke="#92400e" stroke-width="1" fill="none"/>
   <line x1="22" y1="61" x2="22" y2="75" stroke="#92400e" stroke-width="1"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">GIMNÀS</text>
 </svg>

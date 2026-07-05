@@ -16,5 +16,4 @@
   <line x1="18" y1="16" x2="18" y2="82" stroke="#ef4444" stroke-width="2"/>
   <polygon points="18,14 14,22 22,22" fill="#ef4444"/>
   <polygon points="18,84 14,76 22,76" fill="#ef4444"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">LLARGS</text>
 </svg>

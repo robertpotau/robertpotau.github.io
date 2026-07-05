@@ -31,5 +31,4 @@
   <!-- Legs -->
   <rect x="32" y="76" width="8" height="8" rx="2" fill="#4b5563"/>
   <rect x="44" y="76" width="8" height="8" rx="2" fill="#4b5563"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">VELL</text>
 </svg>

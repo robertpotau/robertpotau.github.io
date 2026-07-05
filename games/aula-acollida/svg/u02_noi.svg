@@ -22,5 +22,4 @@
   <!-- Shoes -->
   <ellipse cx="37" cy="84" rx="6" ry="3" fill="#374151"/>
   <ellipse cx="51" cy="84" rx="6" ry="3" fill="#374151"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">NOI</text>
 </svg>

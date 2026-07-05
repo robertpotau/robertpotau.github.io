@@ -28,5 +28,4 @@
   <rect x="22" y="77" width="9" height="10" rx="4.5" fill="#ff8fa3"/>
   <rect x="69" y="77" width="9" height="10" rx="4.5" fill="#ff8fa3"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PORC</text>
 </svg>

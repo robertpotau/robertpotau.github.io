@@ -35,5 +35,4 @@
   <rect x="22" y="89" width="9" height="4" rx="2" fill="#2a1a08"/>
   <rect x="34" y="89" width="9" height="4" rx="2" fill="#2a1a08"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">CAVALL</text>
 </svg>

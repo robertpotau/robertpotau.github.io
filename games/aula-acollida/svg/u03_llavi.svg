@@ -12,5 +12,4 @@
   <!-- Arrow -->
   <line x1="50" y1="70" x2="50" y2="62" stroke="#374151" stroke-width="2" stroke-linecap="round"/>
   <polygon points="50,58 46,66 54,66" fill="#374151"/>
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">LLAVI</text>
 </svg>

@@ -25,9 +25,7 @@
   <!-- Finestres planta alta dreta -->
   <rect x="72" y="66" width="14" height="10" rx="2" fill="#bae6fd"/>
   <!-- Text ESCOLA al frontons -->
-  <text x="50" y="32" font-family="Arial,sans-serif" font-size="7" fill="#92400e" font-weight="800" text-anchor="middle">ESCOLA</text>
   <!-- Sòl -->
   <rect x="0" y="87" width="100" height="3" fill="#d1d5db"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">ESCOLA</text>
 </svg>

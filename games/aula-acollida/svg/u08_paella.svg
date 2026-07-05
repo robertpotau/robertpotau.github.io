@@ -23,5 +23,4 @@
   <!-- Brillantor -->
   <ellipse cx="38" cy="45" rx="8" ry="3" fill="white" opacity="0.2"/>
   <!-- Label -->
-  <text x="50" y="97" font-family="Arial,sans-serif" font-size="8" fill="#1e1b4b" font-weight="700" text-anchor="middle">PAELLA</text>
 </svg>
