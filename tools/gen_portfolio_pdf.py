@@ -39,9 +39,9 @@ doc = SimpleDocTemplate(
 
 story = []
 story.append(Paragraph("Robert Potau", title_style))
-story.append(Paragraph("Docent · Creador de jocs educatius a mida per a l'aula", tagline_style))
+story.append(Paragraph("Professor de secundària · Creador de jocs educatius a mida per a l'aula", tagline_style))
 story.append(Paragraph(
-    "Sóc docent a la Generalitat de Catalunya i des de fa temps dissenyo jocs i eines "
+    "Sóc professor de secundària de Tecnologia i Digitalització a la Generalitat de Catalunya i des de fa temps dissenyo jocs i eines "
     "interactives per fer les classes més dinàmiques i properes als alumnes. Aquest "
     "portfolio recull una selecció dels jocs que he desenvolupat per treballar "
     "matemàtiques, llengua, geometria i molt més. Si el teu centre o editorial necessita "
