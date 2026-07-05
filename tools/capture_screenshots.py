@@ -2,8 +2,8 @@ import time
 import os
 from playwright.sync_api import sync_playwright
 
-BASE = r"C:\Users\PC\Documents\MEGA\Claude code\claude-projects\landing-page\games"
-OUT = r"C:\Users\PC\Documents\MEGA\Claude code\claude-projects\landing-page\screenshots"
+BASE = r"C:\Users\PC\Documents\claude-code-pcsobretaula\claude-projects\landing-page\games"
+OUT = r"C:\Users\PC\Documents\claude-code-pcsobretaula\claude-projects\landing-page\screenshots"
 os.makedirs(OUT, exist_ok=True)
 
 # slug -> (entry file relative to games/<slug>/, wait seconds for splash/animations to settle)

@@ -2,6 +2,10 @@
 
 Live at **https://robertpotau.github.io/**, served by GitHub Pages from the `main` branch of the public repo `robertpotau/robertpotau.github.io` (this folder).
 
+## Local storage location (moved 2026-07-05)
+
+All of Robert's coding projects (this landing page, the 9 game repos, Moodle materials, the finances project) moved from `C:\Users\PC\Documents\MEGA\Claude code\` to **`C:\Users\PC\Documents\claude-code-pcsobretaula\`** — a plain local folder, deliberately **outside** the MEGA-synced tree. Reason: MEGA sync has previously eaten data on Robert's setup (the `claude-Moodle` folder ended up in MEGA's cloud trash bin on 2026-06-27 and had to be restored 2026-07-03), so nothing important should live inside a MEGA-managed folder anymore. If you see any path still referencing `MEGA\Claude code`, it's stale — update it to `claude-code-pcsobretaula` when you find it. As of 2026-07-05 the old MEGA copies still exist too (kept temporarily as a safety net, verified byte-identical) — check with Robert before assuming either copy is the "real" one if both still exist when you're reading this.
+
 ## Architecture
 
 - `index.html` — the current (v2, immersive Three.js) landing page.
@@ -38,7 +42,7 @@ Each game also lives in its own **private** repo under `github.com/robertpotau/<
 | quina-hora-es | `index.html` | `robertpotau/quina-hora-es` |
 | what-time-is-it | `index.html` | `robertpotau/what-time-is-it` |
 
-All source repos live at `C:\Users\PC\Documents\MEGA\Claude code\claude-projects\<slug>` locally.
+All source repos live at `C:\Users\PC\Documents\claude-code-pcsobretaula\claude-projects\<slug>` locally (moved out of the MEGA-synced folder on 2026-07-05 — see "Local storage location" section below).
 
 ## When Robert updates one of these games
 
@@ -48,14 +52,14 @@ All source repos live at `C:\Users\PC\Documents\MEGA\Claude code\claude-projects
 1. Commit + push the change in the game's own private repo (`claude-projects/<slug>`) as usual.
 2. Run the sync script for that one game to refresh its copy in the landing page and publish:
    ```powershell
-   C:\Users\PC\Documents\MEGA\Claude code\claude-projects\landing-page\sync-game.ps1 -Slug <slug>
+   C:\Users\PC\Documents\claude-code-pcsobretaula\claude-projects\landing-page\sync-game.ps1 -Slug <slug>
    ```
    This re-copies the game's static files into `landing-page/games/<slug>/`, commits, and pushes `robertpotau/robertpotau.github.io` — which republishes the live site automatically (GitHub Pages rebuilds on push, usually live within ~1 minute).
 3. Tell Robert the live page has been updated, with the URL.
 
 To sync **all** featured games at once (e.g. after a batch of changes), run the script with no `-Slug`:
 ```powershell
-C:\Users\PC\Documents\MEGA\Claude code\claude-projects\landing-page\sync-game.ps1
+C:\Users\PC\Documents\claude-code-pcsobretaula\claude-projects\landing-page\sync-game.ps1
 ```
 
 ## Adding a new game to the landing page

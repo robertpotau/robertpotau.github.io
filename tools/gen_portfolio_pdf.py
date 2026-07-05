@@ -32,7 +32,7 @@ games = [
 ]
 
 doc = SimpleDocTemplate(
-    r"C:\Users\PC\Documents\MEGA\Claude code\claude-projects\landing-page\robert-potau-portfolio.pdf",
+    r"C:\Users\PC\Documents\claude-code-pcsobretaula\claude-projects\landing-page\robert-potau-portfolio.pdf",
     pagesize=A4,
     topMargin=22*mm, bottomMargin=18*mm, leftMargin=20*mm, rightMargin=20*mm,
 )

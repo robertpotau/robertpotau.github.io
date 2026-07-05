@@ -17,7 +17,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$src  = "C:\Users\PC\Documents\MEGA\Claude code\claude-projects"
+$src  = "C:\Users\PC\Documents\claude-code-pcsobretaula\claude-projects"
 $here = $PSScriptRoot
 
 $games = @("calcuherois","aula-acollida","fraccions","lletra-a-lletra","ortografia","vistes","geometria","quina-hora-es","what-time-is-it")
