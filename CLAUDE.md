@@ -13,11 +13,11 @@ Live at **https://robertpotau.github.io/**, served by GitHub Pages from the `mai
 
 ## Analytics (2026-07-05)
 
-Both `index.html` and `classic.html` are wired for **GoatCounter** (free, privacy-friendly, no cookie banner needed) but it's **not active yet** — Robert needs to create the account himself (I can't do it on his behalf). Everything else is already done:
+Both `index.html` and `classic.html` are wired for **GoatCounter** (free, privacy-friendly, no cookie banner needed) and **active as of 2026-07-05** — Robert created the account at `robertpotau.goatcounter.com`. Dashboard: https://robertpotau.goatcounter.com
 
-- Every game's "Jugar/Play" link, the Ko-fi buttons, the contact `mailto:` links, and the PDF portfolio link already carry a `data-goatcounter-click="<event-name>"` attribute. GoatCounter's `count.js` auto-binds click tracking to any element with that attribute — see https://www.goatcounter.com/help/events (verified 2026-07-05, don't assume the syntax without checking, third-party APIs change).
+- Every game's "Jugar/Play" link, the Ko-fi buttons, the contact `mailto:` links, and the PDF portfolio link carry a `data-goatcounter-click="<event-name>"` attribute. GoatCounter's `count.js` auto-binds click tracking to any element with that attribute — see https://www.goatcounter.com/help/events (verified 2026-07-05, don't assume the syntax without checking, third-party APIs change).
 - Event names used (same across both pages): `game-calcuherois`, `game-fraccions`, `game-geometria`, `game-quina-hora-es`, `game-lletra-a-lletra`, `game-ortografia`, `game-aula-acollida`, `game-vistes`, `game-what-time-is-it`, `kofi-support-main`, `kofi-footer` (index.html only), `mail-custom-game`, `mail-tell-usage` (index.html only), `mail-copy-button` (index.html only), `mail-footer` (index.html only), `pdf-portfolio`.
-- **To activate:** Robert signs up at goatcounter.com, picks a site code, then uncomment the `<script data-goatcounter="https://ROBERTPOTAU.goatcounter.com/count" ...>` tag near the top of both HTML files and swap in the real code. That single script also handles ordinary pageview counting — no extra setup needed.
+- **Testing note:** GoatCounter skips `localhost`/private-network requests by default (no `allow_local` set) — verified via https://www.goatcounter.com/help/skip-dev. So testing this locally will show the `count.js` script loading fine (200 response) but **no actual pageview/click hit recorded** — that's expected, not a bug. Only real requests from `robertpotau.github.io` count.
 - If a new game/link is added later, give its interactive element a `data-goatcounter-click="..."` attribute too, or it just won't show up in the click-events dashboard (harmless omission, not a bug, but easy to forget).
 
 ## Why copies instead of linking to the source repos
