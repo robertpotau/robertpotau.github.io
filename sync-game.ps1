@@ -36,7 +36,7 @@ foreach ($g in $targets) {
   New-Item -ItemType Directory -Force -Path $dest | Out-Null
   Write-Output "Syncing $g ..."
   robocopy "$src\$g" "$dest" /E /MIR `
-    /XD .git apk backups `
+    /XD .git apk backups pdf `
     /XF *.py *.md *.bak* server.log *.txt review_svgs.html revisio_icones.html figures_revision.html manifest.json .gitignore `
     /NFL /NDL /NJH | Out-Null
 }
