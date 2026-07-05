@@ -11,6 +11,15 @@ Live at **https://robertpotau.github.io/**, served by GitHub Pages from the `mai
 - `fonts/` — copy of the Nunito font used by the template/games.
 - `games/<slug>/` — **playable copies** of each featured game's static files (HTML/CSS/JS/assets only — no `.git`, no `apk/` Android wrapper, no `backups/`, no `.py`/`.md` docs, no PDFs).
 
+## Analytics (2026-07-05)
+
+Both `index.html` and `classic.html` are wired for **GoatCounter** (free, privacy-friendly, no cookie banner needed) but it's **not active yet** — Robert needs to create the account himself (I can't do it on his behalf). Everything else is already done:
+
+- Every game's "Jugar/Play" link, the Ko-fi buttons, the contact `mailto:` links, and the PDF portfolio link already carry a `data-goatcounter-click="<event-name>"` attribute. GoatCounter's `count.js` auto-binds click tracking to any element with that attribute — see https://www.goatcounter.com/help/events (verified 2026-07-05, don't assume the syntax without checking, third-party APIs change).
+- Event names used (same across both pages): `game-calcuherois`, `game-fraccions`, `game-geometria`, `game-quina-hora-es`, `game-lletra-a-lletra`, `game-ortografia`, `game-aula-acollida`, `game-vistes`, `game-what-time-is-it`, `kofi-support-main`, `kofi-footer` (index.html only), `mail-custom-game`, `mail-tell-usage` (index.html only), `mail-copy-button` (index.html only), `mail-footer` (index.html only), `pdf-portfolio`.
+- **To activate:** Robert signs up at goatcounter.com, picks a site code, then uncomment the `<script data-goatcounter="https://ROBERTPOTAU.goatcounter.com/count" ...>` tag near the top of both HTML files and swap in the real code. That single script also handles ordinary pageview counting — no extra setup needed.
+- If a new game/link is added later, give its interactive element a `data-goatcounter-click="..."` attribute too, or it just won't show up in the click-events dashboard (harmless omission, not a bug, but easy to forget).
+
 ## Why copies instead of linking to the source repos
 
 Each game also lives in its own **private** repo under `github.com/robertpotau/<slug>` (source of truth, full history, backups, dev docs). GitHub Pages needs a **public** repo to serve pages for free, so instead of making the source repos public, static playable copies are duplicated into `games/<slug>/` inside this public repo. The private repos are untouched by this — they keep the real history, backups, and any WIP files that shouldn't be public yet.
