@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Potau — Un professor que fa jocs</title>
-<meta name="description" content="Un viatge per l'escola on els jocs neixen: matemàtiques, llengua, geometria i més. Jocs educatius gratuïts creats per Robert Potau, professor de secundària de Tecnologia i Digitalització.">
+<meta name="description" content="Un viatge per l'institut on neixen els jocs: matemàtiques, llengua, geometria i més. Jocs educatius gratuïts creats per Robert Potau, professor de secundària de Tecnologia i Digitalització.">
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -13,12 +13,12 @@
 <!-- Open Graph / social preview -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Robert Potau — Un professor que fa jocs">
-<meta property="og:description" content="Un viatge per l'escola on neixen els jocs: matemàtiques, llengua, geometria i més. Jocs educatius gratuïts per a l'aula.">
+<meta property="og:description" content="Un viatge per l'institut on neixen els jocs: matemàtiques, llengua, geometria i més. Jocs educatius gratuïts per a l'aula.">
 <meta property="og:image" content="https://robertpotau.github.io/og-image.png">
 <meta property="og:url" content="https://robertpotau.github.io/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Robert Potau — Un professor que fa jocs">
-<meta name="twitter:description" content="Jocs educatius gratuïts nascuts a l'aula. Entra a l'escola.">
+<meta name="twitter:description" content="Jocs educatius gratuïts nascuts a l'aula. Entra a l'institut.">
 <meta name="twitter:image" content="https://robertpotau.github.io/og-image.png">
 
 <!-- ANALYTICS: GoatCounter (free, privacy-friendly, no cookie banner needed). Every "Jugar/Play", Ko-fi, contact and PDF link carries a data-goatcounter-click attribute, tracked automatically as named events. -->
@@ -168,7 +168,10 @@
   .beat .hint {
     position: absolute;
     bottom: 5vh;
-    font-size: 13px;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.25;
+    max-width: 90vw;
     color: var(--ink-dim);
     animation: bob 2.4s ease-in-out infinite;
   }
@@ -391,7 +394,7 @@
     <p class="kicker reveal" data-i18n="hero_kicker">Professor de secundària a Catalunya</p>
     <h1 class="reveal d1">Robert Potau</h1>
     <p class="lead reveal d2" data-i18n="hero_lead">Sóc professor de secundària de Tecnologia i Digitalització. I als vespres, faig jocs perquè aprendre faci il·lusió.</p>
-    <p class="hint" data-i18n="hero_hint">▼ Fes scroll per entrar a l'escola</p>
+    <p class="hint" data-i18n="hero_hint">▼ Fes scroll per entrar a l'institut</p>
   </section>
 
   <!-- 1 · The problem -->
@@ -531,7 +534,7 @@
 
   <!-- 8 · Support -->
   <section class="beat" data-beat="8">
-    <p class="kicker reveal" data-i18n="b8_kicker">Després de corregir, quan l'escola calla</p>
+    <p class="kicker reveal" data-i18n="b8_kicker">Després de corregir, quan l'institut calla</p>
     <h2 class="reveal d1" data-i18n="b8_h">Aquests jocs els faig als vespres. Les demos seran sempre gratuïtes.</h2>
     <p class="lead reveal d2" data-i18n="b8_p">Si un d'aquests jocs ha fet somriure la teva classe, o ha ajudat el teu fill o filla a entendre les fraccions, pots donar-hi suport amb un cafè — o desbloquejar properament la versió completa a la meva botiga. Cada cafè és una hora més de jocs nous.</p>
     <div class="support-box reveal d3">
@@ -548,7 +551,7 @@
   <section class="beat" data-beat="9">
     <p class="kicker reveal" data-i18n="b9_kicker">Per a centres i editorials</p>
     <h2 class="reveal d1" data-i18n="b9_h">Vols un joc fet a mida per al teu centre?</h2>
-    <p class="lead reveal d2" data-i18n="b9_p">Dissenyo i desenvolupo jocs adaptats al teu currículum, idioma i estil — des de zero o partint dels d'aquesta escola.</p>
+    <p class="lead reveal d2" data-i18n="b9_p">Dissenyo i desenvolupo jocs adaptats al teu currículum, idioma i estil — des de zero o partint dels d'aquest institut.</p>
     <div class="steps reveal d2">
       <div class="step"><b>1</b> · <span data-i18n="step1">Contacte</span></div>
       <div class="step"><b>2</b> · <span data-i18n="step2">Definim l'abast</span></div>
@@ -587,7 +590,7 @@ const translations = {
   ca: {
     hero_kicker: "Professor de secundària a Catalunya",
     hero_lead: "Sóc professor de secundària de Tecnologia i Digitalització. I als vespres, faig jocs perquè aprendre faci il·lusió.",
-    hero_hint: "▼ Fes scroll per entrar a l'escola",
+    hero_hint: "▼ Fes scroll per entrar a l'institut",
     b1_h: "Cada matí, trenta mirades.",
     b1_p: "Algunes s'encenen de seguida. D'altres s'apaguen entre fitxes i llibretes. Les pantalles ja competeixen per la seva atenció — i sovint guanyen.",
     b2_kicker: "Un dia vaig canviar la pregunta",
@@ -609,7 +612,7 @@ const translations = {
     grade_vistes: "ESO 3r-4t / Batxillerat", title_vistes: "Vistes", desc_vistes: "Alçat, planta i perfil. Sistema dièdric jugant.",
     grade_whattime: "Primària 2n-4t", desc_whattime: "Telling the time on an analogue clock.",
     play: "Jugar ▶",
-    b8_kicker: "Després de corregir, quan l'escola calla",
+    b8_kicker: "Després de corregir, quan l'institut calla",
     b8_h: "Aquests jocs els faig als vespres. Les demos seran sempre gratuïtes.",
     b8_p: "Si un d'aquests jocs ha fet somriure la teva classe, o ha ajudat el teu fill o filla a entendre les fraccions, pots donar-hi suport amb un cafè — o desbloquejar properament la versió completa a la meva botiga. Cada cafè és una hora més de jocs nous.",
     b8_btn: "Convida'm a un cafè",
@@ -618,7 +621,7 @@ const translations = {
     b8_shop: "🛒 Botiga Ko-fi (properament) — versió completa de cada joc",
     b9_kicker: "Per a centres i editorials",
     b9_h: "Vols un joc fet a mida per al teu centre?",
-    b9_p: "Dissenyo i desenvolupo jocs adaptats al teu currículum, idioma i estil — des de zero o partint dels d'aquesta escola.",
+    b9_p: "Dissenyo i desenvolupo jocs adaptats al teu currículum, idioma i estil — des de zero o partint dels d'aquest institut.",
     step1: "Contacte", step2: "Definim l'abast", step3: "Prototip jugable", step4: "Lliurament (web i/o APK)",
     b9_btn: "Escriu-me", b9_pdf: "📄 Portfolio en PDF",
     b9_fallback: "O si el teu correu no obre l'enllaç, escriu directament a", copied: "Copiat! ✅",
@@ -629,7 +632,7 @@ const translations = {
   es: {
     hero_kicker: "Profesor de secundaria en Cataluña",
     hero_lead: "Soy profesor de secundaria de Tecnología y Digitalización. Y por las noches, hago juegos para que aprender haga ilusión.",
-    hero_hint: "▼ Haz scroll para entrar en la escuela",
+    hero_hint: "▼ Haz scroll para entrar en el instituto",
     b1_h: "Cada mañana, treinta miradas.",
     b1_p: "Algunas se encienden enseguida. Otras se apagan entre fichas y libretas. Las pantallas ya compiten por su atención — y a menudo ganan.",
     b2_kicker: "Un día cambié la pregunta",
@@ -651,7 +654,7 @@ const translations = {
     grade_vistes: "ESO 3º-4º / Bachillerato", title_vistes: "Vistas", desc_vistes: "Alzado, planta y perfil. Sistema diédrico jugando.",
     grade_whattime: "Primaria 2º-4º", desc_whattime: "Telling the time on an analogue clock.",
     play: "Jugar ▶",
-    b8_kicker: "Después de corregir, cuando la escuela calla",
+    b8_kicker: "Después de corregir, cuando el instituto calla",
     b8_h: "Estos juegos los hago por las noches. Las demos siempre serán gratuitas.",
     b8_p: "Si uno de estos juegos ha hecho sonreír a tu clase, o ha ayudado a tu hijo o hija a entender las fracciones, puedes apoyarlo con un café — o desbloquear próximamente la versión completa en mi tienda. Cada café es una hora más de juegos nuevos.",
     b8_btn: "Invítame a un café",
@@ -660,7 +663,7 @@ const translations = {
     b8_shop: "🛒 Tienda Ko-fi (próximamente) — versión completa de cada juego",
     b9_kicker: "Para centros y editoriales",
     b9_h: "¿Quieres un juego a medida para tu centro?",
-    b9_p: "Diseño y desarrollo juegos adaptados a tu currículum, idioma y estilo — desde cero o partiendo de los de esta escuela.",
+    b9_p: "Diseño y desarrollo juegos adaptados a tu currículum, idioma y estilo — desde cero o partiendo de los de este instituto.",
     step1: "Contacto", step2: "Definimos el alcance", step3: "Prototipo jugable", step4: "Entrega (web y/o APK)",
     b9_btn: "Escríbeme", b9_pdf: "📄 Portfolio en PDF",
     b9_fallback: "O si tu correo no abre el enlace, escribe directamente a", copied: "¡Copiado! ✅",
@@ -671,7 +674,7 @@ const translations = {
   en: {
     hero_kicker: "Secondary school teacher in Catalonia",
     hero_lead: "I'm a secondary school teacher of Technology and Digitalization. And in the evenings, I build games that make learning feel like play.",
-    hero_hint: "▼ Scroll to step into the school",
+    hero_hint: "▼ Scroll to step into the high school",
     b1_h: "Every morning, thirty pairs of eyes.",
     b1_p: "Some light up right away. Others fade between worksheets and notebooks. Screens already compete for their attention — and they often win.",
     b2_kicker: "One day I changed the question",
@@ -693,7 +696,7 @@ const translations = {
     grade_vistes: "Secondary 3-4 / Baccalaureate", title_vistes: "Vistes", desc_vistes: "Front, top and side views. Descriptive geometry as a game.",
     grade_whattime: "Primary 2-4", desc_whattime: "Telling the time on an analogue clock.",
     play: "Play ▶",
-    b8_kicker: "After the marking is done, when the school goes quiet",
+    b8_kicker: "After the marking is done, when the high school goes quiet",
     b8_h: "I build these games in the evenings. The demos will always be free.",
     b8_p: "If one of these games made your class smile, or helped your kid finally get fractions, you can support it with a coffee — or unlock the full version soon in my shop. Every coffee is one more hour of new games.",
     b8_btn: "Buy me a coffee",
@@ -702,7 +705,7 @@ const translations = {
     b8_shop: "🛒 Ko-fi Shop (coming soon) — full version of every game",
     b9_kicker: "For schools and publishers",
     b9_h: "Need a custom game for your school?",
-    b9_p: "I design and build games tailored to your curriculum, language and style — from scratch or based on the ones in this school.",
+    b9_p: "I design and build games tailored to your curriculum, language and style — from scratch or based on the ones in this high school.",
     step1: "Contact", step2: "Scope it out", step3: "Playable prototype", step4: "Delivery (web and/or APK)",
     b9_btn: "Write to me", b9_pdf: "📄 Portfolio (PDF)",
     b9_fallback: "Or if your mail client doesn't open the link, write directly to", copied: "Copied! ✅",
@@ -808,7 +811,13 @@ window.addEventListener('scroll', () => {
 
   function textSprite(text, { size = 128, color = '#ffffff', font = '900 92px Nunito, Arial', glow = 'rgba(154,50,239,0.9)', scale = 6 } = {}) {
     const cv = document.createElement('canvas');
-    cv.width = cv.height = size;
+    // wide texts ("a.m.", "L·L") need a wider canvas or they get clipped —
+    // measure first, then widen the sprite by the same ratio so glyphs keep their size
+    const probe = cv.getContext('2d');
+    probe.font = font;
+    const w = Math.max(size, Math.ceil(probe.measureText(text).width) + 48);
+    cv.width = w;
+    cv.height = size;
     const ctx = cv.getContext('2d');
     ctx.font = font;
     ctx.textAlign = 'center';
@@ -816,13 +825,56 @@ window.addEventListener('scroll', () => {
     ctx.shadowColor = glow;
     ctx.shadowBlur = 22;
     ctx.fillStyle = color;
-    ctx.fillText(text, size / 2, size / 2 + 6);
+    ctx.fillText(text, w / 2, size / 2 + 6);
     const tex = new THREE.CanvasTexture(cv);
     tex.anisotropy = 2;
     const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false });
     const sp = new THREE.Sprite(mat);
     const s = scale * mobileScale;
-    sp.scale.set(s, s, 1);
+    sp.scale.set(s * w / size, s, 1);
+    return sp;
+  }
+
+  // flags drawn by hand on canvas — Windows doesn't render flag emojis (they'd show as letters)
+  function starPath(ctx, cx, cy, rOuter, points = 5, inner = 0.4) {
+    ctx.beginPath();
+    for (let i = 0; i < points * 2; i++) {
+      const r = i % 2 === 0 ? rOuter : rOuter * inner;
+      const a = -Math.PI / 2 + (i * Math.PI) / points;
+      if (i === 0) ctx.moveTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r);
+      else ctx.lineTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r);
+    }
+    ctx.closePath();
+  }
+
+  function flagSprite(draw, scale = 3.8) {
+    const W = 168, H = 112, R = 12;
+    const cv = document.createElement('canvas');
+    cv.width = W;
+    cv.height = H;
+    const ctx = cv.getContext('2d');
+    const rounded = () => {
+      ctx.beginPath();
+      ctx.moveTo(R, 0); ctx.lineTo(W - R, 0); ctx.quadraticCurveTo(W, 0, W, R);
+      ctx.lineTo(W, H - R); ctx.quadraticCurveTo(W, H, W - R, H);
+      ctx.lineTo(R, H); ctx.quadraticCurveTo(0, H, 0, H - R);
+      ctx.lineTo(0, R); ctx.quadraticCurveTo(0, 0, R, 0);
+      ctx.closePath();
+    };
+    ctx.save();
+    rounded();
+    ctx.clip();
+    draw(ctx, W, H);
+    ctx.restore();
+    rounded();
+    ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    const tex = new THREE.CanvasTexture(cv);
+    tex.anisotropy = 2;
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false }));
+    const s = scale * mobileScale;
+    sp.scale.set(s * W / H, s, 1);
     return sp;
   }
 
@@ -857,8 +909,14 @@ window.addEventListener('scroll', () => {
     scene.add(new THREE.Points(geo, mat));
   }
 
-  /* ---------- beat 0-1: sparse night, a few dim books ---------- */
-  scatter(['📓', '✏️', '🕯️'].map(e => textSprite(e, { scale: 4.2 })), 1, 26, 12, 20);
+  /* ---------- beat 0: hero — tech & teaching tools around Robert ---------- */
+  scatter([
+    ...['⚙️', '✏️', '🖊️', '📓', '📐'].map(e => textSprite(e, { scale: 4.4 })),
+    textSprite('π', { color: '#ffd166', glow: 'rgba(255,209,102,0.9)', scale: 5 })
+  ], 0, 30, 13, 22);
+
+  /* ---------- beat 1: sparse night, books and the teacher ---------- */
+  scatter(['📓', '✏️', '🧑‍🏫', '👓'].map(e => textSprite(e, { scale: 4.2 })), 1, 26, 12, 20);
 
   /* ---------- beat 2: the spark — bright game pieces burst ---------- */
   scatter(['🎲', '⭐', '🚀', '💡', '🏆', '❓', '🧩'].map(e => textSprite(e, { scale: 5.2 })), 2, 30, 14, 24);
@@ -882,12 +940,61 @@ window.addEventListener('scroll', () => {
     g.scale.setScalar(mobileScale);
     place(g, 3, -20 * mobileSpread, 7, -8);
     registerFloater(g, 1.4, 0.25);
+
+    // second fraction pizza: 1/2, blue
+    const g2 = new THREE.Group();
+    const slice2 = new THREE.Mesh(
+      new THREE.CircleGeometry(3.4, 40, 0, Math.PI),
+      new THREE.MeshBasicMaterial({ color: 0x53c7ff, transparent: true, opacity: 0.85, side: THREE.DoubleSide })
+    );
+    const ring2 = new THREE.Mesh(
+      new THREE.RingGeometry(3.3, 3.55, 48),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5, side: THREE.DoubleSide })
+    );
+    g2.add(slice2, ring2);
+    g2.scale.setScalar(mobileScale);
+    place(g2, 3, 21 * mobileSpread, -6, -12);
+    registerFloater(g2, 1.3, 0.2);
+
+    // floating fractions in different colors
+    const fracs = [['½', '#ffd166'], ['⅓', '#7ee081'], ['¾', '#ff6b8a'], ['⅔', '#53c7ff'], ['¼', '#c792ff']];
+    scatter(fracs.map(([t, c]) => textSprite(t, { color: c, glow: c, scale: 4.8 })), 3, 34, 15, 24);
+
+    // flat colored geometric figures: triangle, square, pentagon, hexagon
+    const polyDefs = [[3, 0xffd166], [4, 0x7ee081], [5, 0xff6b8a], [6, 0x53c7ff]];
+    const polys = polyDefs.map(([n, c]) => {
+      const m = new THREE.Mesh(
+        new THREE.CircleGeometry(2.6, n),
+        new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.8, side: THREE.DoubleSide })
+      );
+      m.scale.setScalar(mobileScale);
+      return m;
+    });
+    scatter(polys, 3, 32, 14, 24);
+
+    // colored wireframe solids (same family as the taller/vistes ones)
+    const wireDefs = [[new THREE.BoxGeometry(4, 4, 4), 0xffd166], [new THREE.ConeGeometry(2.6, 5, 5), 0xff6b8a]];
+    const wires = wireDefs.map(([geo, c]) => {
+      const s = new THREE.LineSegments(
+        new THREE.EdgesGeometry(geo),
+        new THREE.LineBasicMaterial({ color: c, transparent: true, opacity: 0.9 })
+      );
+      s.scale.setScalar(mobileScale);
+      return s;
+    });
+    scatter(wires, 3, 30, 13, 20);
   }
 
   /* ---------- beat 4: language room ---------- */
   scatter('ABCDELMNOPRSTU'.split('').map(c =>
     textSprite(c, { color: '#ffd6f2', glow: 'rgba(255,105,180,0.85)', font: '900 96px Nunito, Arial', scale: 4.4 })), 4, 36, 16, 26);
   scatter(['📖', '🔤', '💬'].map(e => textSprite(e, { scale: 5 })), 4, 24, 12, 18);
+  // the ç trencada and classic Catalan spelling clusters
+  scatter([
+    textSprite('ç', { color: '#ffd6f2', glow: 'rgba(255,105,180,0.95)', font: '900 100px Nunito, Arial', scale: 5.2 }),
+    ...['NV', 'MB', 'L·L'].map(t =>
+      textSprite(t, { color: '#ffd6f2', glow: 'rgba(255,105,180,0.85)', font: '900 72px Nunito, Arial', scale: 4.2 }))
+  ], 4, 30, 14, 22);
 
   /* ---------- beat 5: acollida — books & world ---------- */
   {
@@ -903,6 +1010,57 @@ window.addEventListener('scroll', () => {
     });
     scatter(books, 5, 28, 13, 22);
     scatter(['🌍', '👋', '💬', '🤝'].map(e => textSprite(e, { scale: 5.4 })), 5, 26, 12, 20);
+
+    // flags of the students' home countries (drawn by hand — see flagSprite)
+    const flagPainters = [
+      // Unió Europea
+      (ctx, W, H) => {
+        ctx.fillStyle = '#003399'; ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ffcc00';
+        for (let i = 0; i < 12; i++) {
+          const a = (i / 12) * Math.PI * 2;
+          starPath(ctx, W / 2 + Math.sin(a) * 34, H / 2 - Math.cos(a) * 34, 6);
+          ctx.fill();
+        }
+      },
+      // Catalunya (senyera)
+      (ctx, W, H) => {
+        ctx.fillStyle = '#fcdd09'; ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#da121a';
+        for (let i = 1; i < 9; i += 2) ctx.fillRect(0, (H / 9) * i, W, H / 9);
+      },
+      // Espanya
+      (ctx, W, H) => {
+        ctx.fillStyle = '#aa151b'; ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#f1bf00'; ctx.fillRect(0, H / 4, W, H / 2);
+      },
+      // Marroc
+      (ctx, W, H) => {
+        ctx.fillStyle = '#c1272d'; ctx.fillRect(0, 0, W, H);
+        starPath(ctx, W / 2, H / 2 + 4, 26, 5, 0.5);
+        ctx.strokeStyle = '#006233'; ctx.lineWidth = 5; ctx.stroke();
+      },
+      // Senegal
+      (ctx, W, H) => {
+        ctx.fillStyle = '#00853f'; ctx.fillRect(0, 0, W / 3, H);
+        ctx.fillStyle = '#fdef42'; ctx.fillRect(W / 3, 0, W / 3, H);
+        ctx.fillStyle = '#e31b23'; ctx.fillRect((2 * W) / 3, 0, W / 3, H);
+        starPath(ctx, W / 2, H / 2 + 3, 15);
+        ctx.fillStyle = '#00853f'; ctx.fill();
+      },
+      // Perú
+      (ctx, W, H) => {
+        ctx.fillStyle = '#d91023'; ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ffffff'; ctx.fillRect(W / 3, 0, W / 3, H);
+      },
+      // Colòmbia
+      (ctx, W, H) => {
+        ctx.fillStyle = '#fcd116'; ctx.fillRect(0, 0, W, H / 2);
+        ctx.fillStyle = '#003893'; ctx.fillRect(0, H / 2, W, H / 4);
+        ctx.fillStyle = '#ce1126'; ctx.fillRect(0, (3 * H) / 4, W, H / 4);
+      }
+    ];
+    scatter(flagPainters.map(f => flagSprite(f)), 5, 30, 14, 24);
   }
 
   /* ---------- beat 6: tech workshop — wireframe solids (vistes!) ---------- */
@@ -920,6 +1078,56 @@ window.addEventListener('scroll', () => {
       registerFloater(s, 1.2, 0.4 + Math.random() * 0.4);
     });
     scatter(['📐', '⚙️', '🔧'].map(e => textSprite(e, { scale: 4.6 })), 6, 24, 12, 16);
+
+    // a 3D piece like the ones in the Vistes game: unit cubes forming an L
+    const piece = new THREE.Group();
+    const faceMat = new THREE.MeshBasicMaterial({ color: 0x6fd3ff, transparent: true, opacity: 0.16, side: THREE.DoubleSide });
+    const edgeMat = new THREE.LineBasicMaterial({ color: 0xbfe9ff, transparent: true, opacity: 0.95 });
+    const U = 2.4;
+    [[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1]].forEach(([x, y, z]) => {
+      const geo = new THREE.BoxGeometry(U, U, U);
+      const cell = new THREE.Group();
+      cell.add(new THREE.Mesh(geo, faceMat), new THREE.LineSegments(new THREE.EdgesGeometry(geo), edgeMat));
+      cell.position.set(x * U, y * U, z * U);
+      piece.add(cell);
+    });
+    piece.rotation.set(0.5, -0.7, 0);
+    piece.scale.setScalar(mobileScale);
+    place(piece, 6, -20 * mobileSpread, -7, 4);
+    registerFloater(piece, 1.1, 0.3);
+
+    // technical-drawing card with the piece's three views (alçat / planta / perfil)
+    const vcv = document.createElement('canvas');
+    vcv.width = 240;
+    vcv.height = 100;
+    const vc = vcv.getContext('2d');
+    vc.fillStyle = 'rgba(8,26,48,0.8)';
+    vc.fillRect(0, 0, 240, 100);
+    vc.strokeStyle = 'rgba(111,211,255,0.8)';
+    vc.lineWidth = 2;
+    vc.strokeRect(1, 1, 238, 98);
+    const cellPx = 22;
+    const Lcells = [[0, 1], [0, 0], [1, 0]]; // (x, y from bottom) — the L that this piece projects in all three views
+    ['ALÇAT', 'PLANTA', 'PERFIL'].forEach((lab, i) => {
+      const ox = 20 + i * 76, oy = 14;
+      Lcells.forEach(([x, y]) => {
+        const px = ox + x * cellPx, py = oy + (1 - y) * cellPx;
+        vc.fillStyle = 'rgba(111,211,255,0.3)';
+        vc.fillRect(px, py, cellPx, cellPx);
+        vc.strokeStyle = '#6fd3ff';
+        vc.strokeRect(px, py, cellPx, cellPx);
+      });
+      vc.fillStyle = '#bfe9ff';
+      vc.font = '900 12px Nunito, Arial';
+      vc.textAlign = 'center';
+      vc.fillText(lab, ox + cellPx, oy + 2 * cellPx + 18);
+    });
+    const vtex = new THREE.CanvasTexture(vcv);
+    const vsp = new THREE.Sprite(new THREE.SpriteMaterial({ map: vtex, transparent: true, depthWrite: false }));
+    const vs = 3.4 * mobileScale;
+    vsp.scale.set(vs * 240 / 100, vs, 1);
+    place(vsp, 6, 21 * mobileSpread, 10, -4);
+    registerFloater(vsp, 1, 0);
   }
 
   /* ---------- beat 7: english room — a big living clock ---------- */
@@ -955,12 +1163,27 @@ window.addEventListener('scroll', () => {
     clockGroup.scale.setScalar(mobileScale);
     place(clockGroup, 7, 17 * mobileSpread, 4, -10);
     registerFloater(clockGroup, 1.2, 0);
-    scatter(['🕒', '❔', 'a.m.', 'p.m.'].map(t =>
+    scatter(['🕒', '❔', 'a.m.', 'p.m.', '🫖', '☂️', '👑'].map(t =>
       t.length > 2 ? textSprite(t, { font: '900 64px Nunito, Arial', color: '#bfe9ff', scale: 4 }) : textSprite(t, { scale: 4.6 })), 7, 26, 12, 18);
+
+    // Union Jack (drawn by hand, simplified — flag emojis don't render on Windows)
+    const uk = flagSprite((ctx, W, H) => {
+      ctx.fillStyle = '#012169'; ctx.fillRect(0, 0, W, H);
+      ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 18;
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(W, H); ctx.moveTo(W, 0); ctx.lineTo(0, H); ctx.stroke();
+      ctx.strokeStyle = '#c8102e'; ctx.lineWidth = 7;
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(W, H); ctx.moveTo(W, 0); ctx.lineTo(0, H); ctx.stroke();
+      ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 26;
+      ctx.beginPath(); ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2); ctx.stroke();
+      ctx.strokeStyle = '#c8102e'; ctx.lineWidth = 14;
+      ctx.beginPath(); ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2); ctx.stroke();
+    }, 4.2);
+    place(uk, 7, -18 * mobileSpread, 7, -8);
+    registerFloater(uk, 1.3, 0);
   }
 
   /* ---------- beat 8: support — hearts & coffee ---------- */
-  scatter(['❤️', '☕', '✨', '❤️', '☕', '🙌'].map(e => textSprite(e, { scale: 5 })), 8, 30, 14, 22);
+  scatter(['❤️', '☕', '✨', '😊', '❤️', '☕', '🙂', '🙌'].map(e => textSprite(e, { scale: 5 })), 8, 30, 14, 22);
 
   /* ---------- beat 9: contact — paper planes & stars ---------- */
   scatter(['✈️', '✉️', '⭐', '🎨', '🧪'].map(e => textSprite(e, { scale: 4.8 })), 9, 28, 13, 20);
