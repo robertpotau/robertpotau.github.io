@@ -1397,7 +1397,6 @@
      PANTALLA SELECCIÓ DE PERFIL
      ═══════════════════════════════════════════════ -->
 <div id="screen-select-profile" class="screen">
-  <button class="back-btn" onclick="showScreen('screen-splash')">← Enrere</button>
   <div class="logo">👥 Tria el teu perfil</div>
   <div class="logo-sub">Tria un perfil existent o crea un de nou</div>
   <div class="profile-grid" id="profile-grid"></div>
@@ -1502,7 +1501,7 @@
   </div>
 
   <div style="text-align:center; color:var(--text-dim); font-size:0.8rem; margin-top:16px;">
-    Versió 2.0 · Domina les fraccions un pas a la vegada
+    Versió 2.1 · Domina les fraccions un pas a la vegada
   </div>
 </div>
 
@@ -1679,7 +1678,7 @@
     <div class="credit-section">
       <div class="credit-title">💻 Desenvolupament</div>
       <div class="credit-person">
-        <div class="credit-name">Robert Potau Nuñez</div>
+        <div class="credit-name">Robert Potau</div>
         <div class="credit-role">Professor de Tecnologia i Digitalització i Programador</div>
         <div class="credit-desc">Disseny, desenvolupament i manteniment de l'aplicació. Sistema de modes, gameplay i UX/UI.</div>
       </div>
@@ -1716,7 +1715,7 @@
 
     <div class="credit-footer">
       <div class="ttl">🍕 Fraccions — Pràctica i reforç</div>
-      <div class="ver"><strong>v1.0</strong> — Abril 2026</div>
+      <div class="ver"><strong>v2.1</strong> — Juliol 2026</div>
       <div class="lic">📜 Llicència <strong>Creative Commons BY-NC-SA 4.0</strong></div>
       <div class="lic-sub">Compartir — Reconeixement — Mateix tipus de llicència</div>
     </div>
@@ -1776,12 +1775,6 @@
    ═══════════════════════════════════════════════ */
 
 const TOTAL_QS = 10;
-
-const DIFF_DESC = {
-  1: 'Denominadors petits (2–6). Visuals senzills.',
-  2: 'Denominadors mitjans (2–10). Equivalents bàsics.',
-  3: 'Denominadors grans (2–12). Simplificació i comparació exigents.'
-};
 
 const DIFF_RANGE = {
   1: { dMin: 2, dMax: 6 },
@@ -1944,15 +1937,17 @@ function drawShape(shape, num, den, opts={}) {
    GENERACIÓ DE PREGUNTES
    ═══════════════════════════════════════════════ */
 
-function genFrac(diff) {
+// capD: límit del denominador per a modes visuals (comptar >12 sectors no és llegible)
+function genFrac(diff, capD) {
   const r = DIFF_RANGE[diff];
-  const d = ri(r.dMin, r.dMax);
+  const dMax = capD ? Math.min(r.dMax, capD) : r.dMax;
+  const d = ri(r.dMin, dMax);
   const n = ri(1, d - 1);  // fracció pròpia per visualització clara
   return [n, d];
 }
 
 function genIdentifica(diff) {
-  const [n, d] = genFrac(diff);
+  const [n, d] = genFrac(diff, 12);
   const shape = pick(SHAPES);
   return {
     type: 'identifica',
@@ -1962,32 +1957,33 @@ function genIdentifica(diff) {
 }
 
 function genAcoloreix(diff) {
-  const [n, d] = genFrac(diff);
+  const [n, d] = genFrac(diff, 12);
   const shape = pick(['circle', 'rectangle', 'bar']);
 
-  // Al nivell avançat (3), afegir fraccions equivalents
-  // Ex: pregunta "Acoloreix 1/2" pero la forma té 4 parts (2/4)
-  let displayN = n, displayD = d;
+  // Als nivells alts, de vegades la forma té més parts que el denominador
+  // (fracció equivalent): pregunta "Acoloreix 1/2" amb una forma de 4 parts → cal pintar-ne 2
+  let shapeD = d;
   let filledAnswer = n;
 
-  if (diff === 3 && Math.random() < 0.5) {
+  if (diff >= 3 && Math.random() < 0.5) {
     const k = ri(2, 3); // multiplicador
-    displayN = n * k;
-    displayD = d * k;
-    // La resposta és el nombre de peces a pintar en la forma equivalent
-    filledAnswer = n * k;
+    if (d * k <= 12) {
+      shapeD = d * k;
+      filledAnswer = n * k;
+    }
   }
 
   return {
     type: 'acoloreix',
-    n: displayN, d: displayD, shape,
+    n, d, shape,
+    shapeD,
     filled: 0,
     answer: { filled: filledAnswer }
   };
 }
 
 function genImatge(diff) {
-  const [n, d] = genFrac(diff);
+  const [n, d] = genFrac(diff, 12);
   const shape = pick(SHAPES);
   // 4 opcions: una correcta + 3 distractors no equivalents (a/b ≠ n/d)
   const correctOpt = { n, d, shape: shape };
@@ -1995,7 +1991,7 @@ function genImatge(diff) {
   let attempts = 0;
   while (distractors.size < 3 && attempts < 80) {
     attempts++;
-    const dd = ri(DIFF_RANGE[diff].dMin, DIFF_RANGE[diff].dMax);
+    const dd = ri(DIFF_RANGE[diff].dMin, Math.min(DIFF_RANGE[diff].dMax, 12));
     const nn = ri(1, dd - 1);
     if (nn * d === dd * n) continue; // equivalent → exclou
     // Assignar forma aleatòria a cada distractor
@@ -2020,11 +2016,12 @@ function genEquivalents(diff) {
   const r = DIFF_RANGE[diff];
   let n, d;
   do {
-    d = ri(2, Math.min(r.dMax, 6));
+    // al nivell 1 les opcions es mostren com a cercles: denominadors petits perquè es puguin comptar
+    d = ri(2, Math.min(r.dMax, diff === 1 ? 5 : 6));
     n = ri(1, d - 1);
   } while (gcd(n, d) !== 1);
 
-  const k = diff === 1 ? ri(2, 3) : ri(2, 4);
+  const k = diff === 1 ? 2 : ri(2, 4);
   const eqN = n * k, eqD = d * k;
 
   // 4 opcions: la correcta + 3 distractors no equivalents
@@ -2035,7 +2032,7 @@ function genEquivalents(diff) {
     const dk = ri(2, 4);
     // distractors: fraccions semblants però no iguals
     const candN = ri(1, n*dk + 2);
-    const candD = ri(2, Math.max(eqD, d*dk + 2));
+    const candD = ri(2, diff === 1 ? 12 : Math.max(eqD, d*dk + 2));
     if (candD === 0) continue;
     if (candN >= candD) continue;
     if (candN * d === candD * n) continue; // és equivalent → exclou
@@ -2080,19 +2077,29 @@ function genCompara(diff) {
   let d2 = ri(r.dMin, r.dMax);
   let n2 = ri(1, d2 - 1);
 
-  // 30% probabilitat de generar fraccions iguals (per al cas =)
-  if (Math.random() < 0.3) {
-    const k = ri(2, 4);
-    n2 = n1 * k;
-    d2 = d1 * k;
-    if (d2 > r.dMax * 2) { n2 = n1; d2 = d1; } // safety
+  // evitar el cas trivial de dues fraccions idèntiques per atzar (3/5 vs 3/5)
+  let tries = 0;
+  while (n1 === n2 && d1 === d2 && tries < 20) {
+    d2 = ri(r.dMin, r.dMax);
+    n2 = ri(1, d2 - 1);
+    tries++;
   }
 
-  const v1 = n1 / d1;
-  const v2 = n2 / d2;
+  // 30% probabilitat de generar fraccions iguals (per al cas =)
+  // amb denominadors DIFERENTS perquè el cas = no sigui trivial (mai 3/5 vs 3/5)
+  if (Math.random() < 0.3) {
+    const ks = [2, 3, 4].filter(k => d1 * k <= r.dMax * 2);
+    const k = ks.length ? pick(ks) : 2;
+    n2 = n1 * k;
+    d2 = d1 * k;
+  }
+
+  // comparació entera (sense floats): n1/d1 vs n2/d2 ⟺ n1·d2 vs n2·d1
+  const left = n1 * d2;
+  const right = n2 * d1;
   let cmp;
-  if (Math.abs(v1 - v2) < 1e-9) cmp = '=';
-  else if (v1 > v2) cmp = '>';
+  if (left === right) cmp = '=';
+  else if (left > right) cmp = '>';
   else cmp = '<';
 
   return {
@@ -2532,16 +2539,19 @@ function saveRecord(mode, diff, score) {
 }
 
 function renderRecords() {
-  const recs = getRecords();
+  // l'element records-list no existeix a la pantalla actual; si mai es reintrodueix, tornarà a funcionar
   const list = document.getElementById('records-list');
-  const modes = ['identifica', 'acoloreix', 'imatge', 'equivalents', 'simplifica', 'compara', 'barreja'];
-  const diffName = { 1: 'Bàsic', 2: 'Mitjà', 3: 'Avançat' };
+  if (!list) return;
+  const recs = getRecords();
+  const modes = Object.keys(MODE_LABELS);
+  const diffName = { 1: 'Fàcil', 2: 'Normal', 3: 'Difícil', 4: 'Expert' };
   const rows = [];
   modes.forEach(m => {
-    [1, 2, 3].forEach(d => {
+    [1, 2, 3, 4].forEach(d => {
       const key = `${m}_${d}`;
       if (recs[key]) {
-        rows.push(`<div class="record-row"><span class="name">${MODE_LABELS[m]} · ${diffName[d]}</span><span class="val">${recs[key]}/${TOTAL_QS}</span></div>`);
+        const val = m === 'chrono' ? `${recs[key]} encerts` : `${recs[key]}/${TOTAL_QS}`;
+        rows.push(`<div class="record-row"><span class="name">${MODE_LABELS[m]} · ${diffName[d]}</span><span class="val">${val}</span></div>`);
       }
     });
   });
@@ -2562,14 +2572,6 @@ function showScreen(id) {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
-function setDiff(d) {
-  state.diff = d;
-  document.getElementById('diff-1').className = 'btn btn-small ' + (d === 1 ? 'btn-green' : 'btn-ghost');
-  document.getElementById('diff-2').className = 'btn btn-small ' + (d === 2 ? 'btn-yellow' : 'btn-ghost');
-  document.getElementById('diff-3').className = 'btn btn-small ' + (d === 3 ? 'btn-red' : 'btn-ghost');
-  document.getElementById('diff-desc').textContent = DIFF_DESC[d];
-}
-
 function startMode(mode) {
   state.mode = mode;
   state.q = 0;
@@ -2585,11 +2587,16 @@ function startMode(mode) {
   if (mode === 'chrono') {
     state.chrono_time = 60;
     startChronoTimer();
+    updateChronoUI(); // mostrar "60s" de seguida, no "10" fins al primer tic
   }
 }
 
 function confirmExit() {
-  if (state.q > 0 && state.q < TOTAL_QS) {
+  // partida a mig fer: chrono amb temps restant, o mode normal sense haver acabat la 10a pregunta
+  const midGame = state.mode === 'chrono'
+    ? state.chrono_time > 0
+    : !(state.q >= TOTAL_QS && state.answered);
+  if (state.q > 0 && midGame) {
     if (!confirm('Vols sortir? Es perdrà el progrés de la partida.')) return;
   }
   goMenu();
@@ -2697,8 +2704,8 @@ function renderQuestion() {
     case 'acoloreix':
       box.innerHTML = `
         <div class="question-prompt">Acoloreix <span class="frac-display small"><span class="num">${q.n}</span><span class="bar"></span><span class="den">${q.d}</span></span></div>
-        <div class="question-prompt-sub">Clica les peces per pintar-les</div>
-        <div class="shape-wrap" id="acoloreix-wrap">${drawShape(q.shape, 0, q.d, { clickable: true, onClick: 'toggleSector' })}</div>
+        <div class="question-prompt-sub">${(q.shapeD || q.d) !== q.d ? 'Atenció: el dibuix té més parts que el denominador! Pinta la quantitat equivalent.' : 'Clica les peces per pintar-les'}</div>
+        <div class="shape-wrap" id="acoloreix-wrap">${drawShape(q.shape, 0, q.shapeD || q.d, { clickable: true, onClick: 'toggleSector' })}</div>
       `;
       break;
 
@@ -2926,7 +2933,7 @@ window.toggleSector = function(idx) {
   }
   // redibuixem
   const wrap = document.getElementById('acoloreix-wrap');
-  wrap.innerHTML = drawShape(q.shape, 0, q.d, { clickable: true, onClick: 'toggleSector', filled: q.filled });
+  wrap.innerHTML = drawShape(q.shape, 0, q.shapeD || q.d, { clickable: true, onClick: 'toggleSector', filled: q.filled });
   const acCount = document.getElementById('ac-count');
   if (acCount) acCount.textContent = q.filled;
 };
@@ -2970,6 +2977,10 @@ function checkAnswer() {
     // ha d'escriure exactament el que veu (compta peces pintades / total)
     isCorrect = (n === q.answer.n && d === q.answer.d);
   } else if (q.type === 'acoloreix') {
+    if (q.filled === 0) {
+      flashFeedback('Pinta alguna peça clicant el dibuix', false, true);
+      return;
+    }
     isCorrect = (q.filled === q.answer.filled);
   } else if (q.type === 'simplifica') {
     const n = parseInt(document.getElementById('ans-num').value);
@@ -3059,7 +3070,8 @@ function finishAnswer(isCorrect, optInfo) {
 
   btnCheck.style.display = 'none';
   btnNext.style.display = 'block';
-  btnNext.textContent = state.q >= TOTAL_QS ? 'Veure resultats →' : 'Següent →';
+  // en chrono no hi ha límit de preguntes: el botó sempre és "Següent"
+  btnNext.textContent = (state.mode !== 'chrono' && state.q >= TOTAL_QS) ? 'Veure resultats →' : 'Següent →';
 }
 
 function buildCorrectionText(q) {
@@ -3177,8 +3189,10 @@ function showResults() {
     player.perfect_per_diff[state.diff] = true;
   }
 
-  // XP: encerts × dificultat × 0.5, arrodonit
-  const xpGuanyat = Math.round(state.correct * state.diff * 0.5);
+  // XP: encerts × dificultat × 2, + bonus per partida perfecta.
+  // (abans era ×0.5: pujar de rang costava centenars de partides i desmotivava)
+  const bonusPerfecte = (!isChrono && state.correct === TOTAL_QS) ? state.diff * 10 : 0;
+  const xpGuanyat = Math.round(state.correct * state.diff * 2) + bonusPerfecte;
   const rangAbans = getRang(player.xp || 0);
   player.xp = (player.xp || 0) + xpGuanyat;
   const rangDesprés = getRang(player.xp);
@@ -3193,10 +3207,14 @@ function showResults() {
     showConfetti();
   }
 
-  document.getElementById('result-score').textContent = `${state.correct}/${TOTAL_QS}`;
+  // en chrono el total és el nombre de preguntes respostes, no 10 (evita "17/10" o >100%)
+  const answered = isChrono ? (state.correct + state.wrong) : TOTAL_QS;
+  document.getElementById('result-score').textContent = isChrono
+    ? `${state.correct} ✓`
+    : `${state.correct}/${TOTAL_QS}`;
   document.getElementById('rs-correct').textContent = state.correct;
   document.getElementById('rs-wrong').textContent = state.wrong;
-  const pct = Math.round(state.correct / TOTAL_QS * 100);
+  const pct = answered > 0 ? Math.round(state.correct / answered * 100) : 0;
   document.getElementById('rs-pct').textContent = pct + '%';
   document.getElementById('rs-xp').textContent = '+' + xpGuanyat + ' XP';
   const gen = getGenere();
@@ -3371,26 +3389,25 @@ function renderStats() {
   document.getElementById('st-ratxa').textContent = player.ratxa_max || 0;
 
   const recs = getRecords();
-  const modes = ['identifica', 'acoloreix', 'imatge', 'equivalents', 'simplifica', 'compara', 'barreja'];
-  const diffName = { 1: 'Bàsic', 2: 'Mitjà', 3: 'Avançat' };
-  const modeEmoji = {
-    identifica: '🔢', acoloreix: '🎨', imatge: '🧩',
-    equivalents: '🟰', simplifica: '✂️', compara: '⚖️', barreja: '🌟'
-  };
+  // tots els modes (inclosos operacions i contrarellotge) i les 4 dificultats;
+  // MODE_LABELS ja porta l'emoji, no cal duplicar-lo
+  const modes = Object.keys(MODE_LABELS);
+  const diffName = { 1: 'Fàcil', 2: 'Normal', 3: 'Difícil', 4: 'Expert' };
 
   const recordsContainer = document.getElementById('stats-records');
   const rows = [];
   modes.forEach(m => {
-    [1, 2, 3].forEach(d => {
+    [1, 2, 3, 4].forEach(d => {
       const key = `${m}_${d}`;
       if (recs[key]) {
+        const val = m === 'chrono' ? `${recs[key]} ✓` : `${recs[key]}/${TOTAL_QS}`;
         rows.push(`
           <div style="background:rgba(255,255,255,0.05); border:1px solid var(--card-border); border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
             <div>
-              <div style="font-weight:700; color:var(--text);">${modeEmoji[m]} ${MODE_LABELS[m]} · ${diffName[d]}</div>
-              <div style="font-size:0.8rem; color:var(--text-dim); margin-top:2px;">Millor puntuació</div>
+              <div style="font-weight:700; color:var(--text);">${MODE_LABELS[m]} · ${diffName[d]}</div>
+              <div style="font-size:0.8rem; color:var(--text-dim); margin-top:2px;">${m === 'chrono' ? 'Millor nombre d\'encerts en 60s' : 'Millor puntuació'}</div>
             </div>
-            <div style="font-weight:900; color:var(--accent); font-size:1.2rem;">${recs[key]}/${TOTAL_QS}</div>
+            <div style="font-weight:900; color:var(--accent); font-size:1.2rem;">${val}</div>
           </div>
         `);
       }
@@ -3450,7 +3467,8 @@ function unlockCurios() {
 
 function checkFrikisRobotica() {
   if (!player) loadPlayer();
-  const noms = allProfiles.map(p => p.nom.trim().toLowerCase());
+  // allProfiles pot tenir forats (slots buits creats fora d'ordre) → filtrar abans de llegir .nom
+  const noms = allProfiles.filter(p => p && p.nom).map(p => p.nom.trim().toLowerCase());
   if (noms.includes('nil') && noms.includes('lluc')) {
     unlockTrophy('frikis_robotica');
   }
@@ -3624,6 +3642,7 @@ function renderProfiles() {
 }
 
 function selectProfile(idx) {
+  if (!allProfiles[idx]) return;
   currentProfileIdx = idx;
   player = JSON.parse(JSON.stringify(allProfiles[idx]));
   const def = defaultPlayer();
@@ -3631,8 +3650,9 @@ function selectProfile(idx) {
     if (player[k] === undefined) player[k] = def[k];
   }
   localStorage.setItem('fraccions_active_profile', idx);
+  savePlayer(); // sincronitza PLAYER_KEY amb el perfil escollit
   showScreen('screen-menu');
-  renderProfileBar();
+  renderMenuBar(); // la barra del menú (avatar/nom/rang), no l'antiga renderProfileBar
 }
 
 function startCreateProfile(slotIdx) {
@@ -3754,18 +3774,6 @@ function saveNewProfile() {
   localStorage.setItem('fraccions_active_profile', currentProfileIdx);
   showScreen('screen-select-profile');
   setTimeout(() => renderProfiles(), 100);
-}
-
-function renderProfileBar() {
-  if (!player || !player.nom) return;
-  const bar = document.getElementById('profile-bar-menu');
-  if (!bar) return;
-  bar.innerHTML = `
-    <div style="flex:1;">
-      <div style="font-weight:700; color:var(--text);">${getPlayerAvatar(player)} ${player.nom}</div>
-      <div style="font-size:0.85rem; color:var(--text-dim); margin-top:2px;">${(r => r.icon + ' ' + getNomRang(r, getGenere()))(getRang(player.xp || 0))}</div>
-    </div>
-  `;
 }
 
 /* ═══════════════════════════════════════════════
