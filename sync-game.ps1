@@ -17,7 +17,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$src  = "C:\Users\PC\Documents\claude-code-pcsobretaula\claude-projects"
+$src  = "C:\Users\PC\Documents\Claude-Sync\claude-projects"
 $here = $PSScriptRoot
 
 $games = @("calcuherois","aula-acollida","fraccions","lletra-a-lletra","ortografia","vistes","geometria","quina-hora-es","what-time-is-it")
@@ -42,7 +42,11 @@ foreach ($g in $targets) {
 }
 
 Push-Location $here
-git add -A
+if ($Slug) {
+  git add "games\$Slug"
+} else {
+  foreach ($g in $targets) { git add "games\$g" }
+}
 $msg = if ($Slug) { "Update $Slug game copy" } else { "Update all game copies" }
 $diff = git status --porcelain
 if ($diff) {
