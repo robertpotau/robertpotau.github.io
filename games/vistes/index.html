@@ -10,6 +10,8 @@
     --accent:#2f6fb0; --accent2:#39a06a; --warn:#d9534f;
     --ink:#1f2a36; --paper:#ffffff; --soft:#eef3f8;
     --cell:#cfe0f0; --cell-on:#2f6fb0; --line:#9bb3c9;
+    /* paleta del joc: gradient blau → verd → taronja (colors de les 3 vistes) */
+    --v-blau:#2f6fb0; --v-verd:#39a06a; --v-taronja:#e08a3c;
   }
   *{box-sizing:border-box}
   html{height:100%;
@@ -85,7 +87,7 @@
   .vbox{display:flex;flex-direction:column;align-items:center;gap:6px}
   .vbox .lab{font-weight:800;font-size:.8rem;color:var(--accent);text-transform:uppercase;letter-spacing:.5px}
   .grid{display:grid;gap:2px;background:var(--line);padding:2px;border-radius:6px}
-  .grid .c{background:#fff;width:26px;height:26px;border-radius:3px;display:grid;place-items:center}
+  .grid .c{background:#fff;width:26px;height:26px;border-radius:3px;display:grid;place-items:center;position:relative}
   .grid.click .c{cursor:pointer}
   .grid .c.on{background:var(--cell-on)}
   .grid .c.ok{box-shadow:inset 0 0 0 3px var(--accent2)}
@@ -94,6 +96,22 @@
   .grid.tiny .c{width:13px;height:13px}
   .grid.big .c{width:42px;height:42px;border-radius:5px}
   @media(max-width:520px){.grid.big .c{width:34px;height:34px}}
+
+  /* arestes de les vistes: contorn de la silueta + canvis de nivell/profunditat */
+  .grid .c .edg{position:absolute;background:#22303c;z-index:2;border-radius:2px;pointer-events:none}
+  .grid .c .edg.ev{top:-2px;bottom:-2px;right:-2.5px;width:3px}
+  .grid .c .edg.eh{left:-2px;right:-2px;bottom:-2.5px;height:3px}
+  .grid .c .edg.ev.left{right:auto;left:-2.5px}
+  .grid .c .edg.eh.top{bottom:auto;top:-2.5px}
+  .grid.mini .c .edg.ev,.grid.tiny .c .edg.ev{width:2.5px;right:-2.25px}
+  .grid.mini .c .edg.eh,.grid.tiny .c .edg.eh{height:2.5px;bottom:-2.25px}
+  .grid.mini .c .edg.ev.left,.grid.tiny .c .edg.ev.left{right:auto;left:-2.25px}
+  .grid.mini .c .edg.eh.top,.grid.tiny .c .edg.eh.top{bottom:auto;top:-2.25px}
+
+  /* confetti en encertar */
+  .confetti{position:fixed;top:-20px;display:block;z-index:80;pointer-events:none;animation:confall linear forwards}
+  @keyframes confall{to{transform:translateY(108vh) rotate(680deg)}}
+  button.pill{cursor:pointer}
 
   .help{font-size:.82rem;color:#5a6b7c;line-height:1.45}
   .feedback{min-height:26px;font-weight:800;text-align:center;margin-top:8px}
@@ -137,6 +155,7 @@
   .toggle{border:2px solid #cdddec;background:#fff;color:var(--accent);border-radius:10px;padding:5px 11px;font-weight:700;font-size:.82rem;cursor:pointer}
   .toggle.on{background:var(--accent);color:#fff;border-color:var(--accent)}
   .swatches{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+  .swatches[hidden],.vlegend[hidden]{display:none}
   .swatches button{width:26px;height:26px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #cdddec;cursor:pointer;padding:0}
   .swatches button.sel{box-shadow:0 0 0 3px var(--accent)}
   .vlegend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:.8rem;font-weight:700}
@@ -147,12 +166,123 @@
   .zoom .zbtn{border:2px solid #cdddec;background:#fff;color:var(--accent);border-radius:9px;width:30px;height:30px;font-weight:800;font-size:1.05rem;line-height:1;cursor:pointer}
   .zoom .zbtn:hover{background:#eef4fa}
   .zoom .zval{font-weight:800;color:var(--accent);min-width:48px;text-align:center}
+
+  /* ═══ SISTEMA DE PANTALLES (estil CalcuHerois) ═══ */
+  .screen{display:none}
+  .screen.active{display:block;animation:scrIn .25s ease}
+  @keyframes scrIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .back{margin-bottom:10px}
+  .section-title{font-weight:800;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;
+    color:#5a6b7c;margin:18px 0 8px;text-align:center}
+  .btn.grad{background:linear-gradient(90deg,var(--v-blau),var(--v-verd) 50%,var(--v-taronja));font-size:1.05rem}
+  .btn.blue{background:var(--v-blau)} .btn.greenv{background:var(--v-verd)} .btn.orange{background:var(--v-taronja)}
+  .btn.wide{display:block;width:100%;max-width:420px;margin:8px auto;padding:14px}
+  .btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:420px;margin:0 auto}
+  .center-link{text-align:center;margin-top:16px;font-size:.85rem}
+  .center-link a{color:var(--accent);font-weight:700}
+
+  /* splash */
+  #splash{position:fixed;inset:0;z-index:100;display:grid;place-items:center;
+    background:linear-gradient(160deg,#dff0ff 0%,#eaf6ee 45%,#fff7e6 100%);
+    transition:opacity .5s;text-align:center}
+  #splash.out{opacity:0;pointer-events:none}
+  .splash-logo{font-size:2.4rem;font-weight:800;
+    background:linear-gradient(90deg,var(--v-blau),var(--v-verd),var(--v-taronja));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .splash-sub{color:#5a6b7c;font-weight:700;margin-top:4px}
+  .splash-bar{width:180px;height:8px;background:#fff;border-radius:99px;margin:18px auto 0;overflow:hidden;border:1px solid #d4e2ef}
+  .splash-bar i{display:block;height:100%;width:0;border-radius:99px;
+    background:linear-gradient(90deg,var(--v-blau),var(--v-verd),var(--v-taronja));animation:splashFill .9s ease forwards}
+  @keyframes splashFill{to{width:100%}}
+
+  /* slots de perfil */
+  .slots{max-width:440px;margin:14px auto 0;display:flex;flex-direction:column;gap:10px}
+  .profile-slot{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid #e2ebf4;
+    border-radius:14px;padding:12px 14px;cursor:pointer;transition:.15s;text-align:left}
+  .profile-slot:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 20px rgba(40,80,120,.12)}
+  .profile-slot.on{border-color:var(--accent);background:#eef4fa}
+  .profile-slot.empty{opacity:.6;border-style:dashed}
+  .profile-slot.empty:hover{opacity:1;border-style:solid}
+  .ps-av{font-size:2rem;flex-shrink:0}
+  .ps-info{flex:1;min-width:0}
+  .ps-nom{font-weight:800}
+  .ps-rang{font-size:.78rem;color:var(--accent);font-weight:700}
+  .ps-xp{font-size:.72rem;color:#8aa}
+  .ps-del{border:none;background:transparent;color:#c3cfda;font-weight:800;font-size:1rem;
+    border-radius:8px;width:30px;height:30px;cursor:pointer}
+  .ps-del:hover{color:var(--warn);background:#fdecea}
+  .picker-label{display:block;text-align:center;font-weight:700;font-size:.82rem;color:#5a6b7c;margin:14px 0 8px}
+
+  /* targeta hero del menú/estadístiques */
+  .menu-hero{display:flex;align-items:center;gap:14px;max-width:440px;margin:14px auto;
+    background:linear-gradient(90deg,#eaf2fb,#eaf6ee 50%,#fdf3e6);border:1px solid #d4e2ef;
+    border-radius:16px;padding:14px 16px;text-align:left}
+  .mh-av{font-size:2.6rem}
+  .mh-info{flex:1;min-width:0}
+  .mh-nom{font-weight:800;font-size:1.05rem}
+  .mh-rang{font-size:.8rem;color:var(--accent);font-weight:700;margin:1px 0 6px}
+  .xpbar{height:10px;background:#fff;border:1px solid #d4e2ef;border-radius:99px;overflow:hidden}
+  .xpfill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--v-blau),var(--v-verd),var(--v-taronja));transition:width .4s}
+  .mh-next{font-size:.72rem;color:#8aa;margin-top:4px;font-weight:600}
+
+  /* trofeus */
+  .tcat{font-weight:800;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px;margin:16px 0 8px}
+  .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .tcard{background:#f6f9fc;border:2px solid #e2ebf4;border-radius:14px;padding:12px;text-align:center;opacity:.55}
+  .tcard.un{background:#fff;opacity:1;box-shadow:0 3px 10px rgba(40,80,120,.08)}
+  .tic{font-size:1.7rem}
+  .tnom{font-weight:800;font-size:.85rem;margin-top:4px}
+  .tdesc{font-size:.72rem;color:#5a6b7c;margin-top:2px;line-height:1.35}
+
+  /* estadístiques */
+  .stat4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:520px;margin:0 auto 8px}
+  .stat4.three{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:560px){.stat4{grid-template-columns:repeat(2,1fr)}}
+  .sbox{background:#fff;border:1px solid #e2ebf4;border-radius:12px;padding:10px 6px;text-align:center}
+  .sbox-ic{font-size:1.1rem}
+  .sbox-v{font-weight:800;font-size:1.15rem;color:var(--sc,#1f2a36)}
+  .sbox-l{font-size:.68rem;color:#5a6b7c;font-weight:700;margin-top:2px}
+  .mstat{background:#fff;border:1px solid #e2ebf4;border-radius:12px;padding:10px 14px;max-width:520px;margin:0 auto 8px}
+  .mstat-h{display:flex;justify-content:space-between;font-weight:800;font-size:.9rem}
+  .mbar{height:8px;background:#eef3f8;border-radius:99px;overflow:hidden;margin:6px 0}
+  .mbar i{display:block;height:100%;border-radius:99px}
+  .mstat-n{display:flex;justify-content:space-between;font-size:.75rem;color:#5a6b7c;font-weight:600}
+
+  /* toast (trofeu desbloquejat) */
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(16px);
+    background:#1f2a36;color:#fff;padding:12px 22px;border-radius:14px;font-weight:800;z-index:95;
+    opacity:0;transition:.3s;box-shadow:0 10px 28px rgba(0,0,0,.3);pointer-events:none;max-width:90vw;text-align:center}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* eina d'arestes (mode Marca les vistes) */
+  .tool-seg{margin:0 auto 10px;width:max-content}
+  .grid .c .edg-hit{position:absolute;z-index:4;display:none;border-radius:4px}
+  .grid.edgemode .c .edg-hit{display:block;cursor:pointer;background:rgba(224,138,60,.16)}
+  .grid.edgemode .c .edg-hit:hover{background:rgba(224,138,60,.4)}
+  .grid .c .edg-hit.ev-hit{top:1px;bottom:1px;right:-8px;width:14px}
+  .grid .c .edg-hit.eh-hit{left:1px;right:1px;bottom:-8px;height:14px}
+  .grid .c .edg-hit.ev-hit-l{top:1px;bottom:1px;left:-8px;width:14px}
+  .grid .c .edg-hit.eh-hit-t{left:1px;right:1px;top:-8px;height:14px}
+  .grid.edgemode .c{cursor:default}
+  .grid.click.edgemode{box-shadow:0 0 0 2px var(--v-taronja)}
+  .grid .c .edg.bad{background:var(--warn)}
+  .grid .c .edg.miss{background:var(--warn);opacity:.45}
 </style>
 </head>
 <body>
+
+<!-- ══ SPLASH ══ -->
+<div id="splash">
+  <div>
+    <div class="splash-logo">◳ Vistes</div>
+    <div class="splash-sub">Planta · Alçat · Perfil</div>
+    <div class="splash-bar"><i></i></div>
+  </div>
+</div>
+
 <div class="wrap">
 
-  <header class="topbar">
+  <header class="topbar hidden" id="topbar">
     <div class="title">
       <div class="logo">◳</div>
       <div>
@@ -164,22 +294,61 @@
       <span class="pill"><span class="av" id="hudAv">🦊</span><span id="hudName">Convidat/da</span></span>
       <span class="pill">⭐ <b id="hudScore">0</b></span>
       <span class="pill">🔥 <b id="hudStreak">0</b></span>
-      <button class="btn ghost small" id="homeBtn">Inici</button>
+      <button class="btn ghost small" id="homeBtn">Menú</button>
       <button class="btn ghost small" id="helpBtn">?</button>
     </div>
   </header>
 
-  <!-- HOME -->
-  <section id="home" class="card">
+  <!-- ══ PANTALLA: SELECCIÓ DE PERFIL ══ -->
+  <section id="screen-profiles" class="screen card">
     <div class="hero">
-      <h2>Aprèn a dibuixar les <span style="color:var(--accent)">vistes</span> d'una peça</h2>
-      <p>Mira la peça en 3D i representa la seva <b>planta</b>, <b>alçat</b> i <b>perfil</b>. Tot autocorregit.</p>
+      <h2>◳ <span style="color:var(--accent)">Vistes</span></h2>
+      <p>Tria el teu perfil o crea'n un de nou.</p>
     </div>
-    <div class="name-row">
-      <input id="nameInput" placeholder="El teu nom (opcional)" maxlength="18">
-    </div>
-    <div class="avatars" id="avPick"></div>
+    <div class="slots" id="slotsList"></div>
+  </section>
 
+  <!-- ══ PANTALLA: CREAR PERFIL ══ -->
+  <section id="screen-setup" class="screen card">
+    <button class="btn ghost small back" id="setupBack">‹ Enrere</button>
+    <div class="hero"><h2>👤 Crea el teu perfil</h2></div>
+    <div class="name-row">
+      <input id="nameInput" placeholder="El teu nom" maxlength="18">
+    </div>
+    <span class="picker-label">Tria el teu avatar</span>
+    <div class="avatars" id="avPick"></div>
+    <button class="btn grad wide" id="createBtn" style="margin-top:18px">Endavant! ⚡</button>
+  </section>
+
+  <!-- ══ PANTALLA: MENÚ PRINCIPAL ══ -->
+  <section id="screen-menu" class="screen card">
+    <div class="hero"><h2>◳ <span style="color:var(--accent)">Vistes</span></h2></div>
+    <div class="menu-hero" id="menuHero"></div>
+
+    <div class="section-title">Jugar</div>
+    <button class="btn grad wide" id="goPlay">🎮 Jugar</button>
+
+    <div class="section-title">El teu progrés</div>
+    <div class="btn-grid">
+      <button class="btn blue" id="goTrophies">🏆 Trofeus</button>
+      <button class="btn orange" id="goStats">📊 Estadístiques</button>
+    </div>
+    <button class="btn ghost wide" id="goProfiles" style="margin-top:10px">👥 Canviar perfil</button>
+    <button class="btn ghost wide" id="goHelp2">❓ Com es juga</button>
+    <p class="center-link">
+      <a href="figures_revision.html">📄 Solucionari de figures per imprimir (professorat)</a>
+    </p>
+  </section>
+
+  <!-- ══ PANTALLA: JUGAR (tria de mode) ══ -->
+  <section id="screen-play" class="screen card">
+    <button class="btn ghost small back" id="playBack">‹ Menú</button>
+    <div class="hero">
+      <h2>Tria un <span style="color:var(--accent)">repte</span></h2>
+      <p>Escull el nivell i el mode de joc.</p>
+    </div>
+
+    <div class="section-title">Nivell</div>
     <div class="lvl-row">
       <div class="seg" id="lvlSeg">
         <button data-lvl="1">Nivell 1 · 2×2×2</button>
@@ -188,11 +357,17 @@
       </div>
     </div>
 
+    <div class="section-title">Codi de repte (opcional)</div>
+    <div class="name-row">
+      <input id="codeInput" placeholder="p. ex. TECNO" maxlength="8" style="text-transform:uppercase;min-width:200px" title="Si tota la classe posa el mateix codi, tothom rep les mateixes peces">
+    </div>
+
+    <div class="section-title">Mode de joc</div>
     <div class="modes">
       <button class="mode" data-mode="mark">
         <span class="ic">🎯</span>
         <h3>Marca les vistes</h3>
-        <p>Veus la peça 3D i pintes les tres vistes a les graelles. Comprovació immediata.</p>
+        <p>Veus la peça 3D i pintes les tres vistes (siluetes i arestes). Comprovació immediata.</p>
       </button>
       <button class="mode" data-mode="build">
         <span class="ic">🧱</span>
@@ -204,6 +379,11 @@
         <h3>Tria la vista</h3>
         <p>Mira la peça i tria quina de les 4 opcions és la vista demanada.</p>
       </button>
+      <button class="mode" data-mode="missing">
+        <span class="ic">🔍</span>
+        <h3>La vista que falta</h3>
+        <p>La peça està amagada: dedueix la tercera vista a partir de les altres dues.</p>
+      </button>
       <button class="mode" data-mode="gen">
         <span class="ic">🛠️</span>
         <h3>Generador</h3>
@@ -212,12 +392,34 @@
     </div>
   </section>
 
+  <!-- ══ PANTALLA: TROFEUS ══ -->
+  <section id="screen-trophies" class="screen card">
+    <button class="btn ghost small back" id="trophiesBack">‹ Menú</button>
+    <div class="hero"><h2>🏆 Trofeus</h2></div>
+    <div class="menu-hero" id="trophiesHero"></div>
+    <div id="trophyGrid"></div>
+  </section>
+
+  <!-- ══ PANTALLA: ESTADÍSTIQUES ══ -->
+  <section id="screen-stats" class="screen card">
+    <button class="btn ghost small back" id="statsBack">‹ Menú</button>
+    <div class="hero"><h2>📊 Estadístiques</h2></div>
+    <div id="statsContent"></div>
+    <div class="btn-grid" style="margin-top:14px">
+      <button class="btn ghost" id="exportBtn">⬇️ Exportar perfil</button>
+      <button class="btn ghost" id="importBtn">⬆️ Importar perfil</button>
+    </div>
+    <input type="file" id="importInput" accept=".json" style="display:none">
+    <button class="btn ghost wide" id="resetStatsBtn" style="margin-top:10px;color:var(--warn)">🗑️ Reinicia les estadístiques</button>
+  </section>
+
   <!-- GAME -->
-  <section id="game" class="hidden">
+  <section id="screen-game" class="screen">
     <div class="game-top">
       <button class="btn ghost small" id="backBtn">‹ Modes</button>
       <h2 id="gameTitle" style="font-size:1.15rem"></h2>
       <div style="display:flex;gap:8px">
+        <button class="pill" id="lvlPill" title="Canvia el nivell (comença un repte nou)">Nivell 2</button>
         <span class="pill" id="roundPill">Repte 1</span>
       </div>
     </div>
@@ -245,7 +447,7 @@
           <div class="ctrl-row zoom">
             <span class="ctrl-lab">Zoom:</span>
             <button class="zbtn" id="zoomOut" title="Allunya">−</button>
-            <input type="range" id="zoomSlider" min="0.5" max="2" step="0.1" value="1">
+            <input type="range" id="zoomSlider" min="0.5" max="2" step="0.05" value="1">
             <button class="zbtn" id="zoomIn" title="Apropa">+</button>
             <span class="zval" id="zoomVal">x1,00</span>
           </div>
@@ -261,7 +463,7 @@
     <div style="display:flex;gap:10px;justify-content:center;margin-top:6px;flex-wrap:wrap" id="actionBar"></div>
   </section>
 
-  <p class="credits" id="credits">Vistes v1.3.1 · 17/06/2026 · Joc educatiu per a l'aula</p>
+  <p class="credits" id="credits">Vistes v1.5.0 · 06/07/2026 · Joc educatiu per a l'aula</p>
 </div>
 
 <!-- HELP MODAL -->
@@ -272,13 +474,16 @@
     <p><b>Les tres vistes</b> són les projeccions ortogonals d'una peça:</p>
     <p>• <b>Alçat</b>: com es veu la peça de <b>davant</b>.<br>
        • <b>Planta</b>: com es veu de <b>dalt</b> (es dibuixa <b>sota</b> l'alçat).<br>
-       • <b>Perfil</b>: com es veu de <b>costat</b> (a la <b>dreta</b> de l'alçat, sistema europeu).</p>
-    <p><b>🎯 Marca les vistes:</b> pinta les caselles de cada vista mirant la peça 3D i prem <i>Comprova</i>.</p>
-    <p><b>🧱 Construeix la peça:</b> et donem les vistes; fes clic a la graella per pujar columnes de cubs fins que les vistes coincideixin.</p>
+       • <b>Perfil</b>: com es veu des de <b>l'esquerra</b> (es dibuixa a la <b>dreta</b> de l'alçat, sistema europeu).</p>
+    <p><b>📏 Arestes:</b> tota vista porta el <b>contorn</b> de la silueta com a línia (com el traç exterior d'un dibuix) i, a més, una <b>línia interna</b> allà on dues zones veïnes són a alçades o profunditats diferents. Totes dues es dibuixen igual: una línia fosca.</p>
+    <p><b>🎯 Marca les vistes:</b> pinta les caselles de cada vista (eina <i>Silueta</i>) i marca totes les línies —contorn i internes— amb l'eina <i>Arestes</i>, mirant la peça 3D; prem <i>Comprova</i>. Pots pintar arrossegant.</p>
+    <p><b>🧱 Construeix la peça:</b> et donem les vistes (amb les arestes); fes clic a la graella per pujar columnes de cubs fins que les vistes coincideixin.</p>
     <p><b>✅ Tria la vista:</b> tria entre 4 opcions la vista correcta.</p>
+    <p><b>🔍 La vista que falta:</b> la peça està amagada; dedueix i pinta la tercera vista a partir de les dues donades. S'accepta qualsevol vista que encaixi amb les altres dues.</p>
     <p><b>🛠️ Generador:</b> dissenya lliurement i mira les vistes en directe.</p>
+    <p><b>🎟️ Codi de repte:</b> si tota la classe escriu el mateix codi a la pantalla d'inici, tothom rep <b>les mateixes peces</b> en el mateix ordre — ideal per corregir en grup.</p>
     <p><b>🎨 Color:</b> tria <i>Un color</i> (amb la paleta) o <i>Per vistes</i>, on cada cara es pinta segons la vista on apareix: blau = alçat, verd = planta, taronja = perfil.</p>
-    <p><b>🧭 Fletxes i parets:</b> les <b>fletxes</b> indiquen des d'on s'ha de mirar per veure cada vista. La <b>graella</b> forma el racó del dièdre: el terra (planta), la paret del darrere (alçat) i la paret del costat (perfil). Pots amagar les fletxes o la graella amb els botons.</p>
+    <p><b>🧭 Fletxes i parets:</b> les <b>fletxes</b> indiquen des d'on s'ha de mirar per veure cada vista (el perfil, des de l'esquerra). La <b>graella</b> forma el racó del dièdre: el terra (planta), la paret del darrere (alçat) i la paret de la dreta (perfil). Pots amagar les fletxes o la graella amb els botons.</p>
     <p style="color:#8aa;font-size:.82rem;margin-top:10px">Aquesta versió treballa amb peces fetes de columnes de cubs (sense forats interiors ni voladissos). Gira la peça amb el ratolí o el dit.</p>
   </div>
 </div>
@@ -286,20 +491,133 @@
 <script>
 "use strict";
 /* ============================================================
-   VISTES · Planta, Alçat i Perfil   —  v1.3.1 (17/06/2026)
+   VISTES · Planta, Alçat i Perfil   —  v1.5.0 (06/07/2026)
    Motor 3D voxel propi (sense llibreries) + autocorrecció
+   Sistema europeu: perfil vist des de l'ESQUERRA, dibuixat a
+   la dreta de l'alçat. Arestes internes a les vistes (editables
+   al mode Marca). Perfils múltiples, XP/rangs, trofeus i estadístiques.
    ============================================================ */
 
-/* ---------- estat global ---------- */
+/* ---------- estat de sessió (no persistent) ---------- */
 const STATE = {
   level: 2,
-  avatar: "🦊",
-  name: "",
-  score: 0,
-  streak: 0,
+  code: "",
   mode: null,
   round: 0,
+  streak: 0,   // ratxa de la sessió actual
 };
+const PREFS={ colorMode:'uniform', color:0, grid:true, arrows:true, zoom:1 };
+
+/* ---------- PERFIL actiu i persistència ----------
+   Fins a 5 perfils; cada perfil té XP, estadístiques i trofeus. */
+let player = null;      // perfil actiu (objecte) o null
+const MODE_IDS=['mark','build','test','missing'];  // 'gen' és lliure, no puntua
+function newProfile(nom, avatar){
+  const statsMode={};
+  MODE_IDS.forEach(id=>{ statsMode[id]={jugades:0,resoltes:0,perfectes:0}; });
+  return {
+    nom, avatar,
+    xp:0, streakBest:0,
+    partides:0,           // rondes resoltes en total
+    perfectes:0,          // rondes resoltes a la primera (0 errors)
+    encerts:0, errors:0,  // comprovacions correctes / fallides
+    statsMode,            // per mode: {jugades, resoltes, perfectes}
+    statsLevel:{1:0,2:0,3:0}, // rondes resoltes per nivell
+    trofeus:[],
+    dies:[],              // dates (YYYY-MM-DD) en què s'ha jugat
+  };
+}
+function ensureShape(p){
+  const base=newProfile(p.nom||'Jugador/a', p.avatar||AVATARS[0]);
+  const m=Object.assign(base,p);
+  m.statsMode=m.statsMode||{}; m.statsLevel=m.statsLevel||{1:0,2:0,3:0};
+  m.trofeus=Array.isArray(m.trofeus)?m.trofeus:[]; m.dies=Array.isArray(m.dies)?m.dies:[];
+  MODE_IDS.forEach(id=>{ if(!m.statsMode[id]) m.statsMode[id]={jugades:0,resoltes:0,perfectes:0}; });
+  return m;
+}
+const K_PROFILES='vistes-profiles', K_ACTIVE='vistes-active', K_PREFS='vistes-prefs';
+function getProfiles(){
+  let a=null; try{ a=JSON.parse(localStorage.getItem(K_PROFILES)); }catch(e){}
+  if(!Array.isArray(a)) a=[null,null,null,null,null];
+  while(a.length<5) a.push(null);
+  return a;
+}
+function saveProfiles(a){ try{ localStorage.setItem(K_PROFILES, JSON.stringify(a)); }catch(e){} }
+function getActiveIdx(){ const i=parseInt(localStorage.getItem(K_ACTIVE),10); return Number.isInteger(i)?i:-1; }
+function setActiveIdx(i){ try{ localStorage.setItem(K_ACTIVE, String(i)); }catch(e){} }
+function saveActive(){ // desa el perfil actiu al seu slot
+  if(player==null) return;
+  const idx=getActiveIdx(); if(idx<0) return;
+  const a=getProfiles(); a[idx]=player; saveProfiles(a);
+}
+function savePrefs(){ try{ localStorage.setItem(K_PREFS, JSON.stringify(PREFS)); }catch(e){} saveActive(); }
+function loadSaved(){
+  let d=null; try{ d=JSON.parse(localStorage.getItem(K_PREFS)); }catch(e){}
+  if(d&&typeof d==='object') Object.assign(PREFS,d);
+  // migració des de la v1.4.0 (un sol jugador a 'vistes-v14')
+  try{
+    const old=JSON.parse(localStorage.getItem('vistes-v14'));
+    const profiles=getProfiles();
+    if(old && old.name && !profiles.some(Boolean)){
+      const p=newProfile(old.name, AVATARS.includes(old.avatar)?old.avatar:AVATARS[0]);
+      p.xp=Number.isFinite(old.score)?old.score:0;
+      profiles[0]=p; saveProfiles(profiles); setActiveIdx(0);
+    }
+    if(old&&old.prefs) Object.assign(PREFS,old.prefs);
+  }catch(e){}
+  // carrega el perfil actiu
+  const idx=getActiveIdx();
+  if(idx>=0){ const p=getProfiles()[idx]; if(p) player=ensureShape(p); }
+}
+
+/* ---------- RANGS (per XP) ---------- */
+const RANGS=[
+  { xp:6000, nom:'Mestre/a del dièdre', icon:'👑' },
+  { xp:3500, nom:'Delineant expert/a',  icon:'🌟' },
+  { xp:2000, nom:'Projectista',         icon:'📐' },
+  { xp:1100, nom:'Dibuixant',           icon:'✏️' },
+  { xp:550,  nom:'Aprenent avançat/da', icon:'📏' },
+  { xp:200,  nom:'Aprenent',            icon:'📚' },
+  { xp:0,    nom:'Principiant',         icon:'🌱' },
+];
+function getRang(xp){ return RANGS.find(r=>xp>=r.xp)||RANGS[RANGS.length-1]; }
+function getSeguent(xp){ for(let i=RANGS.length-1;i>=0;i--){ if(xp<RANGS[i].xp) return RANGS[i]; } return null; }
+function getXpPct(xp){ const r=getRang(xp), s=getSeguent(xp); if(!s) return 100; return Math.round((xp-r.xp)/(s.xp-r.xp)*100); }
+
+/* ---------- TROFEUS ---------- */
+const TROFEUS=[
+  // progressió
+  { id:'primer',    nom:'Primera vista',    icon:'🕊️', desc:'Resol el teu primer repte',            cat:'prog' },
+  { id:'deu',       nom:'En marxa',         icon:'🚀', desc:'Resol 10 reptes',                       cat:'prog' },
+  { id:'cinquanta', nom:'Constància',       icon:'📅', desc:'Resol 50 reptes',                       cat:'prog' },
+  { id:'cent',      nom:'Centenari',        icon:'🏅', desc:'Resol 100 reptes',                      cat:'prog' },
+  { id:'rang_max',  nom:'Mestre/a del dièdre', icon:'👑', desc:'Assoleix el rang màxim',            cat:'prog' },
+  { id:'set_dies',  nom:'Setmana completa', icon:'🗓️', desc:'Juga 7 dies diferents',                cat:'prog' },
+  // habilitat
+  { id:'perfecte',  nom:'A la primera',     icon:'⭐', desc:'Resol un repte sense cap error',        cat:'hab'  },
+  { id:'perfecte10',nom:'Precisió',         icon:'🎯', desc:'10 reptes resolts a la primera',        cat:'hab'  },
+  { id:'ratxa5',    nom:'En ratxa',         icon:'🔥', desc:'Ratxa de 5 encerts seguits',            cat:'hab'  },
+  { id:'ratxa10',   nom:'Imparable',        icon:'⚡', desc:'Ratxa de 10 encerts seguits',           cat:'hab'  },
+  { id:'nivell3',   nom:'Repte gran',       icon:'💎', desc:'Resol un repte al nivell 3 (4×4×4)',    cat:'hab'  },
+  // modes
+  { id:'m_mark',    nom:'Marcador/a',       icon:'🎯', desc:'Resol 10 reptes de «Marca les vistes»', cat:'mode' },
+  { id:'m_build',   nom:'Constructor/a',    icon:'🧱', desc:'Resol 10 reptes de «Construeix la peça»',cat:'mode' },
+  { id:'m_test',    nom:'Bon ull',          icon:'✅', desc:'Encerta 10 cops a «Tria la vista»',      cat:'mode' },
+  { id:'m_missing', nom:'Deductor/a',       icon:'🔍', desc:'Resol 10 cops «La vista que falta»',     cat:'mode' },
+  { id:'tots_modes',nom:'Polivalent',       icon:'🎮', desc:'Resol almenys un repte de cada mode',   cat:'mode' },
+  // arestes
+  { id:'arestes1',  nom:'Aresta fina',      icon:'📏', desc:'Encerta totes les arestes d\'un repte', cat:'ares' },
+];
+
+
+/* ---------- aleatorietat amb llavor (codi de repte) ----------
+   Amb codi: mateixa peça per a tothom al mateix mode+nivell+repte. */
+let RAND=Math.random;
+function hashStr(s){ let h=2166136261; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function roundRand(){
+  RAND = STATE.code ? mulberry32(hashStr(STATE.code+'|'+STATE.mode+'|'+STATE.level+'|'+STATE.round)) : Math.random;
+}
 const AVATARS = ["🦊","🐼","🐯","🐸","🦁","🐙","🦉","🐳","🦖","🤖","👾","🐝","🦄","🐧"];
 const PALETTE=[
   {n:'Marró', rgb:[232,180,110]},
@@ -329,7 +647,7 @@ function randomPiece(){
   do{
     H=emptyH(sx,sz);
     for(let x=0;x<sx;x++) for(let z=0;z<sz;z++){
-      H[x][z] = Math.random()<0.74 ? (1+Math.floor(Math.random()*sy)) : 0;
+      H[x][z] = RAND()<0.74 ? (1+Math.floor(RAND()*sy)) : 0;
     }
     tries++;
   } while(!validPiece(H,sx,sz,sy) && tries<200);
@@ -366,13 +684,13 @@ function alcatGrid(H){ // front view: rows=y (top->bottom), cols=x ; occupied if
   for(let r=0;r<sy;r++){ const lvl=sy-r; const row=[]; for(let x=0;x<sx;x++) row.push(maxZ[x]>=lvl); g.push(row); }
   return {g, rows:sy, cols:sx};
 }
-function perfilGrid(H){ // vista de perfil: rows=y, cols=z ; ocupat si maxX > nivell
-  // columnes en ordre z descendent perquè coincideixi amb la peça 3D vista des del costat
-  // (snap "Perfil", fletxa i paret del perfil → observador a la dreta)
+function perfilGrid(H){ // vista de perfil: rows=y, cols=z ; ocupat si maxX >= nivell
+  // SISTEMA EUROPEU: observador a l'ESQUERRA (-X), vista desplegada a la dreta de l'alçat.
+  // Columnes en ordre z ASCENDENT: la vora esquerra del perfil toca l'alçat (z=0, darrere).
   const [sx,sz,sy]=dims();
   const maxX=[]; for(let z=0;z<sz;z++){ let m=0; for(let x=0;x<sx;x++) m=Math.max(m,H[x][z]); maxX.push(m); }
   const g=[];
-  for(let r=0;r<sy;r++){ const lvl=sy-r; const row=[]; for(let z=sz-1;z>=0;z--) row.push(maxX[z]>=lvl); g.push(row); }
+  for(let r=0;r<sy;r++){ const lvl=sy-r; const row=[]; for(let z=0;z<sz;z++) row.push(maxX[z]>=lvl); g.push(row); }
   return {g, rows:sy, cols:sz};
 }
 function gridsEqual(a,b){
@@ -382,13 +700,82 @@ function gridsEqual(a,b){
 }
 function cloneGrid(a){ return {rows:a.rows,cols:a.cols,g:a.g.map(r=>r.slice())}; }
 
+/* ---------- ARESTES de cada vista (contorn + internes) ----------
+   En dibuix tècnic, tota vista porta el CONTORN de la silueta com a
+   aresta (línia contínua), més les arestes INTERNES on dues zones
+   veïnes són a alçades/profunditats diferents.
+   Format: {v,h,vLeft,hTop}
+     v[r][c]   = aresta a la DRETA de la cel·la (r,c)   (c=0..cols-1)
+     h[r][c]   = aresta a SOTA de la cel·la (r,c)       (r=0..rows-1)
+     vLeft[r]  = aresta a l'ESQUERRA de la cel·la (r,0) (contorn esquerre)
+     hTop[c]   = aresta a DALT de la cel·la (0,c)       (contorn superior)
+   Una posició "a fora de la graella" es tracta com a buida (null),
+   així el contorn surt sol allà on una cel·la plena toca el buit. */
+function edgeBetween(a,b){
+  if(a===null&&b===null) return false;
+  if(a===null||b===null) return true;   // contorn: plena tocant buit
+  return a!==b;                         // interna: totes dues plenes, valor diferent
+}
+function buildEdges(rows,cols,valAt){
+  // valAt(r,c) ha de tornar un valor (número) si la cel·la és plena, o null si és buida
+  const v=[],h=[],vLeft=[],hTop=[];
+  const rowsVal=[]; for(let r=0;r<rows;r++){ const row=[]; for(let c=0;c<cols;c++) row.push(valAt(r,c)); rowsVal.push(row); }
+  for(let r=0;r<rows;r++){
+    const row=rowsVal[r];
+    const vr=[]; for(let c=0;c<cols;c++) vr.push(edgeBetween(row[c], c+1<cols?row[c+1]:null));
+    v.push(vr);
+    vLeft.push(row[0]!==null);
+  }
+  for(let c=0;c<cols;c++) hTop.push(rowsVal[0][c]!==null);
+  for(let r=0;r<rows;r++){
+    const row=rowsVal[r], next=r+1<rows?rowsVal[r+1]:null;
+    const hr=[]; for(let c=0;c<cols;c++) hr.push(edgeBetween(row[c], next?next[c]:null));
+    h.push(hr);
+  }
+  return {v,h,vLeft,hTop};
+}
+function plantaEdges(H){
+  const [sx,sz]=dims();
+  return buildEdges(sz,sx,(z,x)=> H[x][z]>0 ? H[x][z] : null);
+}
+function alcatDepth(H,x,lvl){ // profunditat visible des de DAVANT (+Z): la z més gran ocupada
+  const [,sz]=dims(); let d=-1;
+  for(let z=0;z<sz;z++) if(H[x][z]>=lvl) d=z;
+  return d;
+}
+function alcatEdges(H){
+  const [sx,,sy]=dims();
+  return buildEdges(sy,sx,(r,x)=>{ const d=alcatDepth(H,x,sy-r); return d>=0?d:null; });
+}
+function perfilDepth(H,z,lvl){ // profunditat visible des de l'ESQUERRA (-X): la x més petita ocupada
+  const [sx]=dims();
+  for(let x=0;x<sx;x++) if(H[x][z]>=lvl) return x;
+  return -1;
+}
+function perfilEdges(H){ // columnes = z ascendent (com perfilGrid)
+  const [,sz,sy]=dims();
+  return buildEdges(sy,sz,(r,c)=>{ const d=perfilDepth(H,c,sy-r); return d>=0?d:null; });
+}
+function edgesEqual(a,b){ return JSON.stringify(a)===JSON.stringify(b); }
+function addEdges(gObj,edges){
+  gObj.cells.forEach(row=>row.forEach(cell=>cell.querySelectorAll('.edg').forEach(e=>e.remove())));
+  if(!edges) return;
+  const R=gObj.grid.rows, C=gObj.grid.cols;
+  for(let r=0;r<R;r++)for(let c=0;c<C;c++){
+    if(edges.v[r]&&edges.v[r][c]){ const d=document.createElement('i'); d.className='edg ev'; gObj.cells[r][c].appendChild(d); }
+    if(edges.h[r]&&edges.h[r][c]){ const d=document.createElement('i'); d.className='edg eh'; gObj.cells[r][c].appendChild(d); }
+    if(c===0&&edges.vLeft&&edges.vLeft[r]){ const d=document.createElement('i'); d.className='edg ev left'; gObj.cells[r][c].appendChild(d); }
+    if(r===0&&edges.hTop&&edges.hTop[c]){ const d=document.createElement('i'); d.className='edg eh top'; gObj.cells[r][c].appendChild(d); }
+  }
+}
+
 /* ============================================================
    MOTOR 3D  (projecció ortogonal + painter's algorithm)
    ============================================================ */
 const Scene = (function(){
   const cv=document.getElementById('scene');
   const ctx=cv.getContext('2d');
-  let H=null, rotX=0.61548, rotY=-0.785398; // isomètric: arestes X, Y, Z igual de llargues → caselles iguals al terra i a les parets
+  let H=null, rotX=0.61548, rotY=0.785398; // isomètric; rotY positiu → es veu el davant (+Z) i el costat ESQUERRE (-X), com al sistema europeu
   let dragging=false, lastX=0,lastY=0;
   let colorMode='uniform';            // 'uniform' | 'views'
   let uniformColor=[232,180,110];     // marró per defecte
@@ -429,9 +816,20 @@ const Scene = (function(){
     return [x,y2,z2];
   }
   function draw(){
-    const W=cv.width,Hc=cv.height;
+    // canvas nítid en pantalles d'alta densitat (DPR)
+    const dpr=window.devicePixelRatio||1;
+    const cssW=cv.clientWidth||360;
+    const pxW=Math.round(cssW*dpr);
+    if(cv.width!==pxW||cv.height!==pxW){ cv.width=pxW; cv.height=pxW; }
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const W=cssW,Hc=cssW;
     ctx.clearRect(0,0,W,Hc);
-    if(!H) return;
+    if(!H){ // peça amagada (mode "La vista que falta")
+      ctx.fillStyle='#cdd8e4'; ctx.font='bold 90px "Segoe UI",sans-serif';
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText('?',W/2,Hc/2);
+      return;
+    }
     const [sx,sz,sy]=dims();
     const cx=sx/2, cy=sy/2, cz=sz/2;
     const scale = W/ (4*1.95) * zoom;   // mateixa escala per a tots els nivells, ajustada pel zoom
@@ -442,7 +840,7 @@ const Scene = (function(){
 
     // recull cares exteriors
     const faces=[];
-    const light=normalize([-0.35,0.62,0.7]);
+    const light=normalize([0.35,0.62,0.7]); // x positiu: amb la càmera nova, la cara frontal queda il·luminada
     for(let x=0;x<sx;x++)for(let z=0;z<sz;z++){
       const h=H[x][z];
       for(let y=0;y<h;y++){
@@ -487,10 +885,11 @@ const Scene = (function(){
     ctx.strokeStyle='rgba(86,150,214,.42)';
     for(let gx=0; gx<=sx; gx++) seg(P(gx,0,0), P(gx,sy,0));
     for(let gy=0; gy<=sy; gy++) seg(P(0,gy,0), P(sx,gy,0));
-    // paret del perfil (pla vertical · costat) x=0 → z∈[0,sz], y∈[0,sy]
+    // paret del perfil (pla vertical · costat DRET, x=sx): l'observador mira des de l'esquerra
+    // i la vista es projecta a la paret oposada (sistema europeu) → z∈[0,sz], y∈[0,sy]
     ctx.strokeStyle='rgba(240,168,96,.46)';
-    for(let gz=0; gz<=sz; gz++) seg(P(0,0,gz), P(0,sy,gz));
-    for(let gy=0; gy<=sy; gy++) seg(P(0,gy,0), P(0,gy,sz));
+    for(let gz=0; gz<=sz; gz++) seg(P(sx,0,gz), P(sx,sy,gz));
+    for(let gy=0; gy<=sy; gy++) seg(P(sx,gy,0), P(sx,gy,sz));
     // contorn de la base
     ctx.lineWidth=1.8; ctx.strokeStyle='rgba(70,100,130,.6)';
     const c=[P(0,0,0),P(sx,0,0),P(sx,0,sz),P(0,0,sz)];
@@ -501,7 +900,7 @@ const Scene = (function(){
     const xm=sx/2, ym=sy/2, zm=sz/2;
     arrow(ctx, P(xm, sy+1.7, zm), P(xm, sy+0.35, zm), 'rgb(40,150,90)',  'Planta'); // mira des de dalt
     arrow(ctx, P(xm, ym, sz+1.7), P(xm, ym, sz+0.35), 'rgb(40,110,190)', 'Alçat');  // mira des de davant
-    arrow(ctx, P(sx+1.7, ym, zm), P(sx+0.35, ym, zm), 'rgb(220,130,40)', 'Perfil'); // mira des del costat
+    arrow(ctx, P(-1.7, ym, zm), P(-0.35, ym, zm), 'rgb(220,130,40)', 'Perfil'); // mira des de l'ESQUERRA (sistema europeu)
   }
   function arrow(ctx, a, b, color, label){
     ctx.strokeStyle=color; ctx.fillStyle=color; ctx.lineWidth=3.2; ctx.lineCap='round'; ctx.lineJoin='round';
@@ -533,14 +932,16 @@ const Scene = (function(){
 })();
 
 const SNAPS={
-  persp:[0.61548,-0.785398],
+  persp:[0.61548, 0.785398],
   front:[0.0, 0.0],
-  side:[0.0, -1.5708],
+  side:[0.0, 1.5708],   // perfil: vist des de l'esquerra (sistema europeu)
   top:[1.45, 0.0],
 };
 document.querySelectorAll('.snaps button').forEach(b=>{
   b.onclick=()=>{ const s=SNAPS[b.dataset.snap]; Scene.setRot(s[0],s[1]); };
 });
+// redibuixa quan canvia la mida de la finestra (el canvas s'adapta amb DPR)
+let _rzT; window.addEventListener('resize',()=>{ clearTimeout(_rzT); _rzT=setTimeout(()=>Scene.draw(),150); });
 
 /* ============================================================
    RENDER de graelles (vistes)
@@ -554,21 +955,117 @@ function buildGrid(grid, opts={}){
     for(let c=0;c<grid.cols;c++){
       const cell=document.createElement('div');
       cell.className='c'+(grid.g[r][c]?' on':'');
+      cell.dataset.r=r; cell.dataset.c=c;
       if(opts.click){
-        cell.onclick=()=>{ grid.g[r][c]=!grid.g[r][c]; cell.classList.toggle('on'); if(opts.onChange)opts.onChange(); };
+        cell.tabIndex=0; cell.setAttribute('role','button');
+        cell.setAttribute('aria-pressed',grid.g[r][c]?'true':'false');
+        cell.addEventListener('keydown',e=>{
+          if(e.key==='Enter'||e.key===' '){ e.preventDefault(); if(api.locked)return; setCell(r,c,cell); }
+        });
       }
       wrap.appendChild(cell); cells[r].push(cell);
     }
   }
-  return {el:wrap, cells, grid};
+  function setCell(r,c,cell,val){
+    const v=(val===undefined)?!grid.g[r][c]:val;
+    if(grid.g[r][c]===v) return;
+    grid.g[r][c]=v; cell.classList.toggle('on',v);
+    cell.setAttribute('aria-pressed',v?'true':'false');
+    if(opts.onChange)opts.onChange();
+  }
+  const api={el:wrap, cells, grid, locked:false, edgeMode:false};
+  if(opts.click){
+    // pintar clicant O arrossegant (ratolí i tàctil)
+    wrap.style.touchAction='none';
+    let paintVal=null;
+    const cellAt=(x,y)=>{ const el=document.elementFromPoint(x,y); const cc=el&&el.closest('.c'); return (cc&&wrap.contains(cc))?cc:null; };
+    wrap.addEventListener('pointerdown',e=>{
+      if(api.locked||api.edgeMode) return;
+      const cell=e.target.closest('.c'); if(!cell||!wrap.contains(cell)) return;
+      e.preventDefault();
+      paintVal=!grid.g[+cell.dataset.r][+cell.dataset.c];
+      setCell(+cell.dataset.r,+cell.dataset.c,cell,paintVal);
+      try{ wrap.setPointerCapture(e.pointerId); }catch(err){}
+    });
+    wrap.addEventListener('pointermove',e=>{
+      if(paintVal===null||api.locked||api.edgeMode) return;
+      const cell=cellAt(e.clientX,e.clientY);
+      if(cell) setCell(+cell.dataset.r,+cell.dataset.c,cell,paintVal);
+    });
+    const endPaint=()=>{ paintVal=null; };
+    wrap.addEventListener('pointerup',endPaint);
+    wrap.addEventListener('pointercancel',endPaint);
+  }
+  // ── edició d'arestes (mode Marca les vistes): dreta/baix de cada cel·la
+  //    + esquerra de la 1a columna i dalt de la 1a fila (contorn) ──
+  if(opts.editEdges){
+    api.pedges=emptyEdges(grid.rows,grid.cols);
+    function renderEdge(type,r,c){
+      const cell=cells[r][c];
+      const sel = type==='v' ? '.edg.ev:not(.left)' : type==='h' ? '.edg.eh:not(.top)' : type==='vLeft' ? '.edg.ev.left' : '.edg.eh.top';
+      cell.querySelectorAll(sel).forEach(e=>e.remove());
+      const on = type==='vLeft' ? api.pedges.vLeft[r] : type==='hTop' ? api.pedges.hTop[c] : api.pedges[type][r][c];
+      if(on){
+        const d=document.createElement('i');
+        d.className = type==='v' ? 'edg ev' : type==='h' ? 'edg eh' : type==='vLeft' ? 'edg ev left' : 'edg eh top';
+        cell.appendChild(d);
+      }
+    }
+    api.renderEdge=renderEdge;
+    function toggleEdge(type,r,c){
+      if(api.locked) return;
+      if(type==='vLeft') api.pedges.vLeft[r]=!api.pedges.vLeft[r];
+      else if(type==='hTop') api.pedges.hTop[c]=!api.pedges.hTop[c];
+      else api.pedges[type][r][c]=!api.pedges[type][r][c];
+      renderEdge(type,r,c);
+    }
+    for(let r=0;r<grid.rows;r++)for(let c=0;c<grid.cols;c++){
+      const hr=document.createElement('i'); hr.className='edg-hit ev-hit'; hr.onclick=()=>toggleEdge('v',r,c); cells[r][c].appendChild(hr);
+      const hb=document.createElement('i'); hb.className='edg-hit eh-hit'; hb.onclick=()=>toggleEdge('h',r,c); cells[r][c].appendChild(hb);
+      if(c===0){ const hl=document.createElement('i'); hl.className='edg-hit ev-hit-l'; hl.onclick=()=>toggleEdge('vLeft',r,c); cells[r][c].appendChild(hl); }
+      if(r===0){ const ht=document.createElement('i'); ht.className='edg-hit eh-hit-t'; ht.onclick=()=>toggleEdge('hTop',r,c); cells[r][c].appendChild(ht); }
+    }
+    api.setEdgeMode=b=>{ api.edgeMode=b; wrap.classList.toggle('edgemode',b); };
+  }
+  if(opts.edges) addEdges(api,opts.edges);
+  return api;
 }
 function emptyEditableGrid(rows,cols){ return {rows,cols,g:Array.from({length:rows},()=>Array(cols).fill(false))}; }
+function emptyEdges(rows,cols){
+  return {
+    v: Array.from({length:rows},()=>Array(cols).fill(false)),
+    h: Array.from({length:rows},()=>Array(cols).fill(false)),
+    vLeft: Array(rows).fill(false),
+    hTop: Array(cols).fill(false),
+  };
+}
+/* compara les arestes del jugador amb les correctes (contorn + internes), marcant errors visualment.
+   Correctes que hi són = fosques; extra (sobra) = vermell; falta = vermell tènue. */
+function markEdges(gObj,correct){
+  gObj.cells.forEach(row=>row.forEach(cell=>cell.querySelectorAll('.edg').forEach(e=>e.remove())));
+  let ok=true; const R=gObj.grid.rows, C=gObj.grid.cols;
+  for(let r=0;r<R;r++)for(let c=0;c<C;c++){
+    const pv=gObj.pedges.v[r][c], cv=correct.v[r]?correct.v[r][c]:false;
+    if(pv||cv){ const d=document.createElement('i'); d.className='edg ev'+(pv&&cv?'':(pv?' bad':' miss')); gObj.cells[r][c].appendChild(d); if(pv!==cv) ok=false; }
+    const ph=gObj.pedges.h[r][c], ch=correct.h[r]?correct.h[r][c]:false;
+    if(ph||ch){ const d=document.createElement('i'); d.className='edg eh'+(ph&&ch?'':(ph?' bad':' miss')); gObj.cells[r][c].appendChild(d); if(ph!==ch) ok=false; }
+    if(c===0){
+      const pvl=gObj.pedges.vLeft[r], cvl=correct.vLeft?correct.vLeft[r]:false;
+      if(pvl||cvl){ const d=document.createElement('i'); d.className='edg ev left'+(pvl&&cvl?'':(pvl?' bad':' miss')); gObj.cells[r][c].appendChild(d); if(pvl!==cvl) ok=false; }
+    }
+    if(r===0){
+      const pht=gObj.pedges.hTop[c], cht=correct.hTop?correct.hTop[c]:false;
+      if(pht||cht){ const d=document.createElement('i'); d.className='edg eh top'+(pht&&cht?'':(pht?' bad':' miss')); gObj.cells[r][c].appendChild(d); if(pht!==cht) ok=false; }
+    }
+  }
+  return ok;
+}
 
 /* ============================================================
    MODE 1: MARCA LES VISTES
    ============================================================ */
 function startMark(){
-  STATE.round++;
+  STATE.round++; roundRand(); bumpJugades();
   const H=randomPiece();
   Scene.setPiece(H); Scene.setRot(...SNAPS.persp);
   document.getElementById('leftTitle').textContent='La peça en 3D';
@@ -578,37 +1075,67 @@ function startMark(){
   const al=emptyEditableGrid(sy,sx);
   const pl=emptyEditableGrid(sz,sx);
   const pf=emptyEditableGrid(sy,sz);
-  const gAl=buildGrid(al,{click:true,size:'big'}), gPl=buildGrid(pl,{click:true,size:'big'}), gPf=buildGrid(pf,{click:true,size:'big'});
+  const gAl=buildGrid(al,{click:true,size:'big',editEdges:true}),
+        gPl=buildGrid(pl,{click:true,size:'big',editEdges:true}),
+        gPf=buildGrid(pf,{click:true,size:'big',editEdges:true});
+  const grids=[gAl,gPl,gPf];
 
   right.innerHTML='<h3>Pinta les tres vistes</h3>';
+  // eina: pintar silueta / posar arestes
+  const tool=document.createElement('div'); tool.className='seg2 tool-seg';
+  tool.innerHTML='<button data-t="cell" class="on">✏️ Silueta</button><button data-t="edge">📏 Arestes</button>';
+  right.appendChild(tool);
   const euro=document.createElement('div'); euro.className='euro';
   euro.appendChild(vbox('Alçat (davant)',gAl.el));
-  euro.appendChild(vbox('Perfil (costat)',gPf.el));
+  euro.appendChild(vbox('Perfil (esquerra)',gPf.el));
   euro.appendChild(vbox('Planta (dalt)',gPl.el));
   euro.appendChild(document.createElement('div'));
   right.appendChild(euro);
   const hint=document.createElement('p'); hint.className='help';
   hint.style.marginTop='10px';
-  hint.innerHTML='Recorda: la <b>planta</b> va sota l\'alçat i el <b>perfil</b> a la dreta. Clica per pintar.';
+  hint.innerHTML='Pinta les caselles (silueta) i, amb l\'eina <b>Arestes</b>, marca el <b>contorn</b> i les línies internes on canvia l\'alçada o la profunditat. La <b>planta</b> va sota l\'alçat i el <b>perfil</b> (des de l\'esquerra) a la dreta.';
   right.appendChild(hint);
+  tool.querySelectorAll('button').forEach(b=>{
+    b.onclick=()=>{
+      tool.querySelectorAll('button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+      const edge=b.dataset.t==='edge'; grids.forEach(g=>g.setEdgeMode(edge));
+    };
+  });
 
-  setActions([
-    actBtn('Comprova','green',()=>{
-      const cAl=alcatGrid(H), cPl=plantaGrid(H), cPf=perfilGrid(H);
-      const r1=markCheck(gAl,cAl), r2=markCheck(gPl,cPl), r3=markCheck(gPf,cPf);
-      const allok=r1&&r2&&r3;
-      if(allok){ win('Molt bé! Les tres vistes són correctes 🎉'); }
-      else { lose('Encara hi ha caselles per ajustar. Mira els marcs vermells.'); }
-    }),
-    actBtn('Mostra solució','gray',()=>{
-      reveal(gAl,alcatGrid(H)); reveal(gPl,plantaGrid(H)); reveal(gPf,perfilGrid(H));
-      feedback('Aquesta és la solució. Prova el següent repte!','bad');
-      STATE.streak=0; updateHud();
-    }),
-    actBtn('Següent ›','',()=>startMark()),
-  ]);
-  feedback('',''); setRound();
+  const cAl=alcatGrid(H), cPl=plantaGrid(H), cPf=perfilGrid(H);
+  const eAl=alcatEdges(H), ePl=plantaEdges(H), ePf=perfilEdges(H);
+
+  // estat de la ronda: sense punts repetits ni "solució + comprova"
+  let solved=false, revealed=false, fails=0;
+  const lockAll=()=>{ grids.forEach(g=>g.locked=true); bComp.disabled=true; bSol.disabled=true; };
+  const bComp=actBtn('Comprova','green',()=>{
+    if(solved||revealed) return;
+    const s1=markCheck(gAl,cAl), s2=markCheck(gPl,cPl), s3=markCheck(gPf,cPf);
+    const silOk=s1&&s2&&s3;
+    if(!silOk){ fails++; lose('Ajusta les caselles: mira els marcs vermells.'); return; }
+    // silueta correcta → comprovem les arestes
+    const a1=markEdges(gAl,eAl), a2=markEdges(gPl,ePl), a3=markEdges(gPf,ePf);
+    if(a1&&a2&&a3){
+      solved=true; lockAll();
+      win('Molt bé! Vistes i arestes correctes 🎉',fails,{aresta:true});
+    } else {
+      fails++;
+      lose('La silueta és correcta! Ara revisa les arestes: en vermell les que sobren, en vermell tènue les que falten.');
+    }
+  });
+  const bSol=actBtn('Mostra solució','gray',()=>{
+    if(solved||revealed) return;
+    revealed=true; lockAll();
+    reveal(gAl,cAl); reveal(gPl,cPl); reveal(gPf,cPf);
+    gAl.pedges=cloneEdges(eAl); gPl.pedges=cloneEdges(ePl); gPf.pedges=cloneEdges(ePf);
+    addEdges(gAl,eAl); addEdges(gPl,ePl); addEdges(gPf,ePf);
+    feedback('Aquesta és la solució (siluetes i arestes). Prova el següent repte!','bad');
+    STATE.streak=0; updateHud(); saveActive();
+  });
+  setActions([bComp,bSol,actBtn('Següent ›','',()=>startMark())]);
+  feedback('Pas 1: pinta les siluetes. Pas 2: amb l\'eina «Arestes», marca les línies internes.',''); setRound();
 }
+function cloneEdges(e){ return { v:e.v.map(r=>r.slice()), h:e.h.map(r=>r.slice()), vLeft:e.vLeft.slice(), hTop:e.hTop.slice() }; }
 function markCheck(gObj,correct){
   let ok=true;
   for(let r=0;r<correct.rows;r++)for(let c=0;c<correct.cols;c++){
@@ -631,33 +1158,38 @@ function reveal(gObj,correct){
    MODE 3: TRIA LA VISTA  (test)
    ============================================================ */
 function startTest(){
-  STATE.round++;
+  STATE.round++; roundRand(); bumpJugades();
   const H=randomPiece();
   Scene.setPiece(H); Scene.setRot(...SNAPS.persp);
   document.getElementById('leftTitle').textContent='La peça en 3D';
   const right=document.getElementById('rightPanel');
-  const types=[['Alçat',alcatGrid],['Planta',plantaGrid],['Perfil',perfilGrid]];
-  const [tname,tfn]=types[Math.floor(Math.random()*3)];
+  const types=[['Alçat',alcatGrid,alcatEdges],['Planta',plantaGrid,plantaEdges],['Perfil',perfilGrid,perfilEdges]];
+  const [tname,tfn,tefn]=types[Math.floor(RAND()*3)];
   const correct=tfn(H);
+  const correctEdges=tefn(H);
   const options=makeOptions(correct);
   const correctIdx=options.findIndex(o=>o.correct);
+  const optApis=[];
 
   right.innerHTML=`<h3>Quina és la ${tname.toLowerCase()}?</h3>`;
   const sub=document.createElement('p'); sub.className='help'; sub.style.marginBottom='12px';
-  sub.innerHTML=`Mira la peça i tria la <b>${tname.toLowerCase()}</b> correcta (la vista de ${tname==='Alçat'?'davant':tname==='Planta'?'dalt':'costat'}).`;
+  sub.innerHTML=`Mira la peça i tria la <b>${tname.toLowerCase()}</b> correcta (la vista de ${tname==='Alçat'?'davant':tname==='Planta'?'dalt':"l'esquerra"}).`;
   right.appendChild(sub);
   const grid=document.createElement('div'); grid.className='opts';
   let answered=false;
   options.forEach((o,i)=>{
     const opt=document.createElement('div'); opt.className='opt';
-    opt.appendChild(buildGrid(o.grid,{size:'mini'}).el);
+    const api=buildGrid(o.grid,{size:'mini'}); optApis.push(api);
+    opt.appendChild(api.el);
     opt.onclick=()=>{
       if(answered) return; answered=true;
+      // mostra les arestes de l'opció correcta (dibuix tècnic complet)
+      addEdges(optApis[correctIdx],correctEdges);
       if(o.correct){ opt.classList.add('right'); win(`Correcte! Aquesta és la ${tname.toLowerCase()}. 🎉`); }
       else{
         opt.classList.add('wrong');
         grid.children[correctIdx].classList.add('right');
-        lose(`No hi és. La correcta està marcada en verd.`);
+        lose(`No hi és. La correcta està marcada en verd (amb les seves arestes).`);
       }
       setActions([actBtn('Següent ›','',()=>startTest())]);
     };
@@ -677,18 +1209,27 @@ function makeOptions(correct){
     if(seen.has(k)) continue;
     seen.add(k); opts.push({grid:m,correct:false});
   }
-  while(opts.length<4){ const m=mutateGrid(correct); opts.push({grid:m,correct:false}); } // fallback
+  // fallback: força mutacions fins que siguin diferents de totes les vistes ja usades
+  while(opts.length<4){
+    const m=mutateGrid(correct);
+    let g2=0;
+    while(seen.has(gridKey(m)) && g2<60){
+      const r=Math.floor(RAND()*m.rows), c=Math.floor(RAND()*m.cols);
+      m.g[r][c]=!m.g[r][c]; g2++;
+    }
+    seen.add(gridKey(m)); opts.push({grid:m,correct:false});
+  }
   // barreja
-  for(let i=opts.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [opts[i],opts[j]]=[opts[j],opts[i]]; }
+  for(let i=opts.length-1;i>0;i--){ const j=Math.floor(RAND()*(i+1)); [opts[i],opts[j]]=[opts[j],opts[i]]; }
   return opts;
 }
 function gridKey(g){ return g.g.map(r=>r.map(c=>c?1:0).join('')).join('|'); }
 function mutateGrid(src){
   const m=cloneGrid(src);
-  const kind=Math.floor(Math.random()*3);
+  const kind=Math.floor(RAND()*3);
   if(kind===0){ // gira caselles
-    const n=1+Math.floor(Math.random()*2);
-    for(let i=0;i<n;i++){ const r=Math.floor(Math.random()*m.rows),c=Math.floor(Math.random()*m.cols); m.g[r][c]=!m.g[r][c]; }
+    const n=1+Math.floor(RAND()*2);
+    for(let i=0;i<n;i++){ const r=Math.floor(RAND()*m.rows),c=Math.floor(RAND()*m.cols); m.g[r][c]=!m.g[r][c]; }
   } else if(kind===1){ // mirall horitzontal
     for(let r=0;r<m.rows;r++) m.g[r].reverse();
   } else { // mirall vertical
@@ -708,7 +1249,7 @@ function makeHeightEditor(onChange){
   const H=emptyH(sx,sz);
   const wrap=document.createElement('div'); wrap.className='editor';
   const hint=document.createElement('div'); hint.className='ed-hint';
-  hint.innerHTML='Vist de <b>dalt</b> (planta). Clic = puja columna · clic dret / Maj+clic = baixa.';
+  hint.innerHTML='Vist de <b>dalt</b> (planta). Clic o toc = puja columna (després del màxim torna a 0) · clic dret o Maj+clic = baixa.';
   const grid=document.createElement('div'); grid.className='hgrid';
   grid.style.gridTemplateColumns=`repeat(${sx},auto)`;
   const cellEls=[];
@@ -732,40 +1273,53 @@ function makeHeightEditor(onChange){
 }
 
 function startBuild(){
-  STATE.round++;
+  STATE.round++; roundRand(); bumpJugades();
   const target=randomPiece();
   const tAl=alcatGrid(target), tPl=plantaGrid(target), tPf=perfilGrid(target);
+  const eAl=alcatEdges(target), ePl=plantaEdges(target), ePf=perfilEdges(target);
   document.getElementById('leftTitle').textContent='La teva peça (en 3D)';
   Scene.setPiece(emptyH(...dims())); Scene.setRot(...SNAPS.persp);
 
   const right=document.getElementById('rightPanel');
   right.innerHTML='<h3>Objectiu · aquestes són les vistes</h3>';
   const euro=document.createElement('div'); euro.className='euro';
-  euro.appendChild(vbox('Alçat',buildGrid(tAl,{size:'mini'}).el));
-  euro.appendChild(vbox('Perfil',buildGrid(tPf,{size:'mini'}).el));
-  euro.appendChild(vbox('Planta',buildGrid(tPl,{size:'mini'}).el));
+  euro.appendChild(vbox('Alçat',buildGrid(tAl,{size:'mini',edges:eAl}).el));
+  euro.appendChild(vbox('Perfil',buildGrid(tPf,{size:'mini',edges:ePf}).el));
+  euro.appendChild(vbox('Planta',buildGrid(tPl,{size:'mini',edges:ePl}).el));
   euro.appendChild(document.createElement('div'));
   right.appendChild(euro);
   const sep=document.createElement('h3'); sep.textContent='Construeix-la aquí'; sep.style.marginTop='14px'; right.appendChild(sep);
-  const ed=makeHeightEditor(()=>{ feedback('',''); });
+  let solved=false, revealed=false, fails=0;
+  const ed=makeHeightEditor(()=>{ if(!solved&&!revealed) feedback('',''); });
   right.appendChild(ed.el);
 
-  setActions([
-    actBtn('Comprova','green',()=>{
-      const H=ed.getH();
-      const ok = gridsEqual(alcatGrid(H),tAl) && gridsEqual(plantaGrid(H),tPl) && gridsEqual(perfilGrid(H),tPf);
-      if(ok) win('Perfecte! La teva peça dóna exactament les mateixes vistes 🎉');
-      else lose('Encara no coincideix. Compara amb les vistes objectiu.');
-    }),
-    actBtn('Mostra solució','gray',()=>{
-      ed.setH(target); feedback('Una solució possible (pot haver-n\'hi d\'altres).','bad'); STATE.streak=0; updateHud();
-    }),
-    actBtn('Següent ›','',()=>startBuild()),
-  ]);
+  const lock=()=>{ bComp.disabled=true; bSol.disabled=true; };
+  const bComp=actBtn('Comprova','green',()=>{
+    if(solved||revealed) return;
+    const H=ed.getH();
+    const silOk = gridsEqual(alcatGrid(H),tAl) && gridsEqual(plantaGrid(H),tPl) && gridsEqual(perfilGrid(H),tPf);
+    const edgOk = silOk && edgesEqual(alcatEdges(H),eAl) && edgesEqual(plantaEdges(H),ePl) && edgesEqual(perfilEdges(H),ePf);
+    if(silOk&&edgOk){
+      solved=true; lock();
+      win('Perfecte! La teva peça dóna exactament les mateixes vistes 🎉',fails,{aresta:true});
+    } else if(silOk){
+      fails++;
+      lose('Les siluetes coincideixen, però les arestes internes (línies fosques) no: alguna alçada no és ben bé la mateixa.');
+    } else { fails++; lose('Encara no coincideix. Compara amb les vistes objectiu.'); }
+  });
+  const bSol=actBtn('Mostra solució','gray',()=>{
+    if(solved||revealed) return;
+    revealed=true; lock();
+    ed.setH(target);
+    feedback('Una solució possible (pot haver-n\'hi d\'altres).','bad');
+    STATE.streak=0; updateHud(); savePrefs();
+  });
+  setActions([bComp,bSol,actBtn('Següent ›','',()=>startBuild())]);
   feedback('',''); setRound();
 }
 
 function startGen(){
+  roundRand();
   document.getElementById('leftTitle').textContent='La teva peça (en 3D)';
   Scene.setPiece(emptyH(...dims())); Scene.setRot(...SNAPS.persp);
   const right=document.getElementById('rightPanel');
@@ -777,9 +1331,9 @@ function startGen(){
 
   function refreshViews(H){
     vistesBox.innerHTML='';
-    vistesBox.appendChild(vbox('Alçat',buildGrid(alcatGrid(H),{size:'tiny'}).el));
-    vistesBox.appendChild(vbox('Perfil',buildGrid(perfilGrid(H),{size:'tiny'}).el));
-    vistesBox.appendChild(vbox('Planta',buildGrid(plantaGrid(H),{size:'tiny'}).el));
+    vistesBox.appendChild(vbox('Alçat',buildGrid(alcatGrid(H),{size:'tiny',edges:alcatEdges(H)}).el));
+    vistesBox.appendChild(vbox('Perfil',buildGrid(perfilGrid(H),{size:'tiny',edges:perfilEdges(H)}).el));
+    vistesBox.appendChild(vbox('Planta',buildGrid(plantaGrid(H),{size:'tiny',edges:plantaEdges(H)}).el));
     vistesBox.appendChild(document.createElement('div'));
   }
   refreshViews(ed.getH());
@@ -791,13 +1345,102 @@ function startGen(){
   ]);
   feedback('Mou els cubs i mira com canvien les vistes en directe.','');
   document.getElementById('roundPill').textContent='Mode lliure';
+  syncLevelUI();
 }
 function saveImage(){
-  const link=document.createElement('a');
-  link.download='peca-vistes.png';
-  link.href=document.getElementById('scene').toDataURL('image/png');
-  link.click();
-  feedback('Imatge de la peça desada ✔','good');
+  const cv=document.getElementById('scene');
+  cv.toBlob(async blob=>{
+    if(!blob){ feedback('No s\'ha pogut generar la imatge','bad'); return; }
+    // dins l'APK (Capacitor) la descàrrega per enllaç no funciona: fem servir "Compartir"
+    if(window.Capacitor && navigator.canShare){
+      try{
+        const file=new File([blob],'peca-vistes.png',{type:'image/png'});
+        if(navigator.canShare({files:[file]})){
+          await navigator.share({files:[file],title:'Peça · Vistes'});
+          feedback('Imatge compartida ✔','good');
+          return;
+        }
+      }catch(e){ /* cancel·lat o no suportat: provem la descàrrega normal */ }
+    }
+    const link=document.createElement('a');
+    link.download='peca-vistes.png';
+    link.href=URL.createObjectURL(blob);
+    link.click();
+    setTimeout(()=>URL.revokeObjectURL(link.href),4000);
+    feedback('Imatge de la peça desada ✔','good');
+  },'image/png');
+}
+
+/* ============================================================
+   MODE 5: LA VISTA QUE FALTA  (deducció inversa, peça amagada)
+   ============================================================ */
+function missingCandidate(H,miss,answer){
+  // Vistes donades (les reals de H) + la proposta del jugador.
+  // Construïm la peça MÉS ALTA compatible i comprovem que reprodueix
+  // exactament les tres vistes: així s'accepta QUALSEVOL resposta vàlida,
+  // encara que no sigui la vista de H (les dues vistes donades poden
+  // admetre més d'una tercera vista correcta).
+  const vA = miss===0 ? answer : alcatGrid(H);
+  const vP = miss===1 ? answer : perfilGrid(H);
+  const vT = miss===2 ? answer : plantaGrid(H);
+  const [sx,sz,sy]=dims();
+  const mA=[]; for(let x=0;x<sx;x++){ let m=0; for(let r=0;r<sy;r++) if(vA.g[r][x]) m=Math.max(m,sy-r); mA.push(m); }
+  const mP=[]; for(let z=0;z<sz;z++){ let m=0; for(let r=0;r<sy;r++) if(vP.g[r][z]) m=Math.max(m,sy-r); mP.push(m); }
+  const C=emptyH(sx,sz);
+  for(let x=0;x<sx;x++)for(let z=0;z<sz;z++) C[x][z]=vT.g[z][x]?Math.min(mA[x],mP[z]):0;
+  const ok = gridsEqual(alcatGrid(C),vA) && gridsEqual(perfilGrid(C),vP) && gridsEqual(plantaGrid(C),vT);
+  return ok?C:null;
+}
+function startMissing(){
+  STATE.round++; roundRand(); bumpJugades();
+  const H=randomPiece();
+  Scene.setPiece(null); // peça amagada fins a resoldre
+  document.getElementById('leftTitle').textContent='Peça amagada 🔒';
+  const [sx,sz,sy]=dims();
+  const defs=[
+    {n:'Alçat',  g:alcatGrid,  e:alcatEdges,  rows:sy, cols:sx, lab:'Alçat (davant)'},
+    {n:'Perfil', g:perfilGrid, e:perfilEdges, rows:sy, cols:sz, lab:'Perfil (esquerra)'},
+    {n:'Planta', g:plantaGrid, e:plantaEdges, rows:sz, cols:sx, lab:'Planta (dalt)'},
+  ];
+  const miss=Math.floor(RAND()*3);
+  const right=document.getElementById('rightPanel');
+  right.innerHTML=`<h3>Dedueix la vista que falta: ${defs[miss].n}</h3>`;
+  const sub=document.createElement('p'); sub.className='help'; sub.style.marginBottom='10px';
+  sub.innerHTML='La peça 3D està <b>amagada</b>. A partir de les dues vistes donades (amb les arestes), pinta la que falta.';
+  right.appendChild(sub);
+  const euro=document.createElement('div'); euro.className='euro';
+  const answer=emptyEditableGrid(defs[miss].rows,defs[miss].cols);
+  const gPlayer=buildGrid(answer,{click:true,size:'big'});
+  for(let i=0;i<3;i++){
+    if(i===miss) euro.appendChild(vbox(defs[i].lab+' · pinta-la!', gPlayer.el));
+    else euro.appendChild(vbox(defs[i].lab, buildGrid(defs[i].g(H),{size:'big',edges:defs[i].e(H)}).el));
+  }
+  euro.appendChild(document.createElement('div'));
+  right.appendChild(euro);
+
+  let solved=false, revealed=false, fails=0;
+  const lock=()=>{ gPlayer.locked=true; bComp.disabled=true; bSol.disabled=true; };
+  const revealPiece=(P)=>{ Scene.setPiece(P); document.getElementById('leftTitle').textContent='La peça en 3D'; };
+  const bComp=actBtn('Comprova','green',()=>{
+    if(solved||revealed) return;
+    const C=missingCandidate(H,miss,answer);
+    if(C){
+      solved=true; lock(); revealPiece(C);
+      markCheck(gPlayer, defs[miss].g(C));
+      addEdges(gPlayer, defs[miss].e(C));
+      win('Correcte! Vista deduïda 🎉',fails);
+    } else { fails++; lose('Aquesta vista no encaixa amb les dues donades. Torna-ho a provar.'); }
+  });
+  const bSol=actBtn('Mostra solució','gray',()=>{
+    if(solved||revealed) return;
+    revealed=true; lock(); revealPiece(H);
+    reveal(gPlayer, defs[miss].g(H));
+    addEdges(gPlayer, defs[miss].e(H));
+    feedback('Aquesta és la vista de la peça (ara ja la pots veure en 3D).','bad');
+    STATE.streak=0; updateHud(); savePrefs();
+  });
+  setActions([bComp,bSol,actBtn('Següent ›','',()=>startMissing())]);
+  feedback('',''); setRound();
 }
 
 /* ============================================================
@@ -818,18 +1461,93 @@ function actBtn(label,cls,fn){
 function feedback(msg,kind){
   const f=document.getElementById('feedback'); f.textContent=msg; f.className='feedback'+(kind?(' '+kind):'');
 }
-function win(msg){
-  STATE.score+= 10 + STATE.streak*2; STATE.streak++; updateHud();
-  feedback(msg+'  (+'+(10+(STATE.streak-1)*2)+' punts)','good');
+function win(msg,fails=0,ctx={}){
+  // menys punts si hi ha hagut comprovacions fallides (mínim 2) + bonus de ratxa
+  const base=Math.max(10-2*fails,2);
+  const gain=base+STATE.streak*2;
+  STATE.streak++;
+  let nous=[];
+  if(player){
+    player.xp+=gain;
+    player.partides++;
+    player.encerts++;
+    if(fails===0) player.perfectes++;
+    if(STATE.streak>player.streakBest) player.streakBest=STATE.streak;
+    const sm=player.statsMode[STATE.mode];
+    if(sm){ sm.resoltes++; if(fails===0) sm.perfectes++; }
+    player.statsLevel[STATE.level]=(player.statsLevel[STATE.level]||0)+1;
+    markDayPlayed();
+    nous=checkTrophies(ctx);
+    saveActive();
+  }
+  updateHud();
+  feedback(msg+'  (+'+gain+' punts)','good');
+  confetti();
+  if(nous.length) showTrophyToast(nous);
 }
-function lose(msg){ STATE.streak=0; updateHud(); feedback(msg,'bad'); }
+function lose(msg){ STATE.streak=0; if(player){ player.errors++; saveActive(); } updateHud(); feedback(msg,'bad'); }
+function bumpJugades(){ if(player&&player.statsMode[STATE.mode]) player.statsMode[STATE.mode].jugades++; }
+function markDayPlayed(){ const d=new Date().toISOString().slice(0,10); if(player&&!player.dies.includes(d)) player.dies.push(d); }
+function checkTrophies(ctx={}){
+  if(!player) return [];
+  const nous=[], have=new Set(player.trofeus), sm=player.statsMode;
+  const checks={
+    primer:     player.partides>=1,
+    deu:        player.partides>=10,
+    cinquanta:  player.partides>=50,
+    cent:       player.partides>=100,
+    rang_max:   player.xp>=RANGS[0].xp,
+    set_dies:   player.dies.length>=7,
+    perfecte:   player.perfectes>=1,
+    perfecte10: player.perfectes>=10,
+    ratxa5:     player.streakBest>=5,
+    ratxa10:    player.streakBest>=10,
+    nivell3:    (player.statsLevel[3]||0)>=1,
+    m_mark:     sm.mark.resoltes>=10,
+    m_build:    sm.build.resoltes>=10,
+    m_test:     sm.test.resoltes>=10,
+    m_missing:  sm.missing.resoltes>=10,
+    tots_modes: MODE_IDS.every(id=>sm[id].resoltes>=1),
+    arestes1:   !!ctx.aresta,
+  };
+  for(const [id,cond] of Object.entries(checks)){ if(cond && !have.has(id)){ player.trofeus.push(id); nous.push(id); } }
+  return nous;
+}
+function showTrophyToast(ids){
+  const t=document.getElementById('toast');
+  const first=TROFEUS.find(x=>x.id===ids[0]);
+  t.textContent = ids.length>1 ? `🏆 ${ids.length} trofeus nous! Mira'ls a Trofeus` : `🏆 Trofeu nou: ${first.icon} ${first.nom}`;
+  t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),2800);
+}
+function confetti(){
+  const colors=['#2f6fb0','#39a06a','#f2aa5c','#e88278','#b496e6'];
+  for(let i=0;i<26;i++){
+    const s=document.createElement('span'); s.className='confetti';
+    s.style.left=(5+Math.random()*90)+'vw';
+    s.style.width=s.style.height=(6+Math.random()*6)+'px';
+    s.style.background=colors[i%colors.length];
+    s.style.borderRadius=Math.random()<.4?'50%':'2px';
+    s.style.animationDuration=(0.9+Math.random()*0.9)+'s';
+    s.style.animationDelay=(Math.random()*0.15)+'s';
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),2200);
+  }
+}
 function updateHud(){
-  document.getElementById('hudScore').textContent=STATE.score;
+  if(!player) return;
+  document.getElementById('hudScore').textContent=player.xp;
   document.getElementById('hudStreak').textContent=STATE.streak;
-  document.getElementById('hudAv').textContent=STATE.avatar;
-  document.getElementById('hudName').textContent=STATE.name||'Convidat/da';
+  document.getElementById('hudAv').textContent=player.avatar;
+  document.getElementById('hudName').textContent=player.nom;
 }
-function setRound(){ document.getElementById('roundPill').textContent='Repte '+STATE.round; }
+function setRound(){
+  document.getElementById('roundPill').textContent='Repte '+STATE.round+(STATE.code?' · 🎟️'+STATE.code:'');
+  syncLevelUI();
+}
+function syncLevelUI(){
+  document.querySelectorAll('#lvlSeg button').forEach(x=>x.classList.toggle('on',+x.dataset.lvl===STATE.level));
+  document.getElementById('lvlPill').textContent='Nivell '+STATE.level;
+}
 
 /* ============================================================
    navegació
@@ -838,85 +1556,335 @@ const MODES={
   mark:{title:'🎯 Marca les vistes', start:startMark},
   build:{title:'🧱 Construeix la peça', start:startBuild},
   test:{title:'✅ Tria la vista', start:startTest},
+  missing:{title:'🔍 La vista que falta', start:startMissing},
   gen:{title:'🛠️ Generador', start:startGen},
 };
 function openMode(mode){
   STATE.mode=mode; STATE.round=0;
-  document.getElementById('home').classList.add('hidden');
-  document.getElementById('game').classList.remove('hidden');
   document.getElementById('gameTitle').textContent=MODES[mode].title;
-  // resize canvas to displayed size for crispness
+  showScreen('screen-game');
+  syncLevelUI();
   MODES[mode].start();
 }
-function goHome(){
-  document.getElementById('game').classList.add('hidden');
-  document.getElementById('home').classList.remove('hidden');
+
+/* ============================================================
+   SISTEMA DE PANTALLES (estil CalcuHerois)
+   ============================================================ */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const s=document.getElementById(id); if(s) s.classList.add('active');
+  // la capçalera (HUD) només es mostra a partir del menú
+  const noHeader = (id==='screen-profiles'||id==='screen-setup');
+  document.getElementById('topbar').classList.toggle('hidden', noHeader);
+  if(id==='screen-menu')     renderMenu();
+  if(id==='screen-trophies') renderTrophies();
+  if(id==='screen-stats')    renderStats();
+  window.scrollTo(0,0);
+}
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* ---------- perfils: selecció / creació / esborrat ---------- */
+let setupAvatar=AVATARS[0], setupSlot=null;
+function renderSlots(){
+  const list=document.getElementById('slotsList'); list.innerHTML='';
+  const profiles=getProfiles(), active=getActiveIdx();
+  for(let i=0;i<5;i++){
+    const p=profiles[i], div=document.createElement('div');
+    if(p){
+      const rang=getRang(p.xp||0);
+      div.className='profile-slot'+(i===active?' on':'');
+      div.innerHTML=`<div class="ps-av">${p.avatar}</div>
+        <div class="ps-info">
+          <div class="ps-nom">${escapeHtml(p.nom)}${i===active?' <span style="color:var(--accent);font-size:.7rem">✓ ACTIU</span>':''}</div>
+          <div class="ps-rang">${rang.icon} ${rang.nom}</div>
+          <div class="ps-xp">${p.xp||0} XP · ${p.partides||0} reptes · ${(p.trofeus||[]).length} 🏆</div>
+        </div>
+        <button class="ps-del" title="Elimina el perfil">✕</button>`;
+      div.querySelector('.ps-del').onclick=(e)=>{ e.stopPropagation(); deleteProfile(i); };
+      div.onclick=()=>selectProfile(i);
+    } else {
+      div.className='profile-slot empty';
+      div.innerHTML=`<div class="ps-av">➕</div>
+        <div class="ps-info"><div class="ps-nom">Nou jugador/a</div>
+        <div class="ps-rang" style="color:#b9c6d3">Slot buit</div></div>`;
+      div.onclick=()=>openSetup(i);
+    }
+    list.appendChild(div);
+  }
+}
+function openSetup(slot){
+  setupSlot=slot; setupAvatar=AVATARS[0];
+  document.getElementById('nameInput').value='';
+  renderAvatarPicker();
+  showScreen('screen-setup');
+}
+function renderAvatarPicker(){
+  const ap=document.getElementById('avPick'); ap.innerHTML='';
+  AVATARS.forEach(a=>{
+    const b=document.createElement('button'); b.textContent=a;
+    if(a===setupAvatar) b.classList.add('sel');
+    b.onclick=()=>{ setupAvatar=a; ap.querySelectorAll('button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); };
+    ap.appendChild(b);
+  });
+}
+function selectProfile(i){
+  setActiveIdx(i); player=ensureShape(getProfiles()[i]); STATE.streak=0;
+  updateHud(); showScreen('screen-menu');
+}
+function deleteProfile(i){
+  const profiles=getProfiles(); if(!profiles[i]) return;
+  if(!confirm(`Vols eliminar el perfil de "${profiles[i].nom}"? Es perdrà tot el seu progrés.`)) return;
+  profiles[i]=null; saveProfiles(profiles);
+  if(getActiveIdx()===i){
+    const n=profiles.findIndex(Boolean);
+    if(n>=0){ setActiveIdx(n); player=ensureShape(profiles[n]); }
+    else { localStorage.removeItem(K_ACTIVE); player=null; }
+  }
+  renderSlots();
+}
+function createProfile(){
+  const nom=document.getElementById('nameInput').value.trim()||'Jugador/a';
+  const profiles=getProfiles();
+  let slot=setupSlot;
+  if(slot==null){ slot=profiles.findIndex(x=>x===null); if(slot<0) slot=0; }
+  player=newProfile(nom,setupAvatar);
+  profiles[slot]=player; saveProfiles(profiles); setActiveIdx(slot);
+  STATE.streak=0; updateHud(); showScreen('screen-menu');
+}
+
+/* ---------- menú / trofeus / estadístiques ---------- */
+function renderMenu(){
+  if(!player) return;
+  const rang=getRang(player.xp), seg=getSeguent(player.xp), pct=getXpPct(player.xp);
+  document.getElementById('menuHero').innerHTML=`
+    <div class="mh-av">${player.avatar}</div>
+    <div class="mh-info">
+      <div class="mh-nom">${escapeHtml(player.nom)}</div>
+      <div class="mh-rang">${rang.icon} ${rang.nom} · ${player.xp} XP</div>
+      <div class="xpbar"><div class="xpfill" style="width:${pct}%"></div></div>
+      <div class="mh-next">${seg?`${player.xp} / ${seg.xp} XP → ${seg.nom}`:'Rang màxim assolit! 👑'}</div>
+    </div>`;
+}
+function renderTrophies(){
+  if(!player) return;
+  const un=player.trofeus.length, tot=TROFEUS.length;
+  document.getElementById('trophiesHero').innerHTML=`
+    <div class="mh-av">🏆</div>
+    <div class="mh-info">
+      <div class="mh-nom">${escapeHtml(player.nom)}</div>
+      <div class="mh-rang">${un} / ${tot} trofeus desbloquejats</div>
+      <div class="xpbar"><div class="xpfill" style="width:${Math.round(un/tot*100)}%"></div></div>
+    </div>`;
+  const CATS=[
+    {id:'prog',nom:'🏅 Progressió',   color:'var(--v-blau)'},
+    {id:'hab', nom:'⚡ Habilitat',    color:'var(--v-verd)'},
+    {id:'mode',nom:'🎮 Modes de joc', color:'var(--v-taronja)'},
+    {id:'ares',nom:'📏 Arestes',      color:'#7a4e1d'},
+  ];
+  const grid=document.getElementById('trophyGrid'); grid.innerHTML='';
+  CATS.forEach(cat=>{
+    const list=TROFEUS.filter(t=>t.cat===cat.id); if(!list.length) return;
+    const title=document.createElement('div'); title.className='tcat'; title.style.color=cat.color; title.textContent=cat.nom;
+    grid.appendChild(title);
+    const cg=document.createElement('div'); cg.className='tgrid';
+    list.forEach(t=>{
+      const has=player.trofeus.includes(t.id);
+      const d=document.createElement('div'); d.className='tcard'+(has?' un':'');
+      if(has) d.style.borderColor=cat.color;
+      d.innerHTML=`<div class="tic">${has?t.icon:'🔒'}</div><div class="tnom">${has?t.nom:'???'}</div><div class="tdesc">${t.desc}</div>`;
+      cg.appendChild(d);
+    });
+    grid.appendChild(cg);
+  });
+}
+function sbox(ic,val,lab,color){
+  return `<div class="sbox"><div class="sbox-ic">${ic}</div><div class="sbox-v" style="--sc:${color}">${val}</div><div class="sbox-l">${lab}</div></div>`;
+}
+function renderStats(){
+  if(!player) return;
+  const p=player, rang=getRang(p.xp), seg=getSeguent(p.xp), pct=getXpPct(p.xp);
+  const total=p.encerts+p.errors, acc=total?Math.round(p.encerts/total*100):0;
+  let html=`
+    <div class="menu-hero">
+      <div class="mh-av">${p.avatar}</div>
+      <div class="mh-info">
+        <div class="mh-nom">${escapeHtml(p.nom)}</div>
+        <div class="mh-rang">${rang.icon} ${rang.nom} · ${p.trofeus.length}/${TROFEUS.length} 🏆</div>
+        <div class="xpbar"><div class="xpfill" style="width:${pct}%"></div></div>
+        <div class="mh-next">${seg?`${p.xp} / ${seg.xp} XP → ${seg.nom}`:'Rang màxim! 👑'}</div>
+      </div>
+    </div>`;
+  html+=`<div class="section-title">Resum global</div><div class="stat4">`;
+  html+=sbox('⚡',p.xp,'XP total','var(--v-blau)');
+  html+=sbox('🧩',p.partides,'Reptes resolts','var(--v-verd)');
+  html+=sbox('⭐',p.perfectes,'A la primera','var(--v-taronja)');
+  html+=sbox('🔥',p.streakBest,'Millor ratxa','#b496e6');
+  html+=`</div><div class="stat4">`;
+  html+=sbox('✅',p.encerts,'Encerts','var(--v-verd)');
+  html+=sbox('❌',p.errors,'Errors','var(--warn)');
+  html+=sbox('🎯',acc+'%','Precisió','var(--v-blau)');
+  html+=sbox('📅',p.dies.length,'Dies jugats','var(--v-taronja)');
+  html+=`</div>`;
+  html+=`<div class="section-title">Per mode de joc</div>`;
+  const modeInfo=[
+    {id:'mark',   nom:'🎯 Marca les vistes',    color:'var(--v-blau)'},
+    {id:'build',  nom:'🧱 Construeix la peça',  color:'var(--v-verd)'},
+    {id:'test',   nom:'✅ Tria la vista',        color:'var(--v-taronja)'},
+    {id:'missing',nom:'🔍 La vista que falta',  color:'#b496e6'},
+  ];
+  modeInfo.forEach(m=>{
+    const sm=p.statsMode[m.id]||{jugades:0,resoltes:0,perfectes:0};
+    const pctm=sm.jugades?Math.round(sm.resoltes/sm.jugades*100):0;
+    html+=`<div class="mstat">
+      <div class="mstat-h"><span>${m.nom}</span><span style="color:${m.color}">${sm.resoltes} ✓</span></div>
+      <div class="mbar"><i style="width:${pctm}%;background:${m.color}"></i></div>
+      <div class="mstat-n"><span>${sm.jugades} intents</span><span>${sm.perfectes} a la primera</span></div>
+    </div>`;
+  });
+  html+=`<div class="section-title">Reptes resolts per nivell</div><div class="stat4 three">`;
+  html+=sbox('1️⃣',p.statsLevel[1]||0,'Nivell 1','var(--v-blau)');
+  html+=sbox('2️⃣',p.statsLevel[2]||0,'Nivell 2','var(--v-verd)');
+  html+=sbox('3️⃣',p.statsLevel[3]||0,'Nivell 3','var(--v-taronja)');
+  html+=`</div>`;
+  document.getElementById('statsContent').innerHTML=html;
+}
+
+/* ---------- exportar / importar / reiniciar ---------- */
+function exportProfile(){
+  if(!player) return;
+  const blob=new Blob([JSON.stringify(player,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.download=`vistes-${player.nom.replace(/[^\w-]/g,'_')}.json`;
+  a.href=URL.createObjectURL(blob); a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+}
+function importProfile(ev){
+  const f=ev.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const obj=JSON.parse(r.result); if(!obj.nom) throw 0;
+      const prof=getProfiles(); let slot=getActiveIdx();
+      if(slot<0){ slot=prof.findIndex(x=>x===null); if(slot<0) slot=0; }
+      player=ensureShape(obj); prof[slot]=player; saveProfiles(prof); setActiveIdx(slot);
+      updateHud(); renderStats(); alert('Perfil importat correctament!');
+    }catch(e){ alert('El fitxer no és un perfil vàlid.'); }
+    ev.target.value='';
+  };
+  r.readAsText(f);
+}
+function resetStats(){
+  if(!player) return;
+  if(!confirm('Segur que vols reiniciar totes les estadístiques i trofeus d\'aquest perfil? (No es pot desfer)')) return;
+  const nom=player.nom, av=player.avatar, idx=getActiveIdx();
+  player=newProfile(nom,av);
+  const prof=getProfiles(); prof[idx]=player; saveProfiles(prof);
+  STATE.streak=0; updateHud(); renderStats();
 }
 
 /* ---------- init ---------- */
-function initHome(){
-  // avatars
-  const ap=document.getElementById('avPick');
-  AVATARS.forEach(a=>{
-    const b=document.createElement('button'); b.textContent=a;
-    if(a===STATE.avatar)b.classList.add('sel');
-    b.onclick=()=>{ STATE.avatar=a; ap.querySelectorAll('button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); updateHud(); };
-    ap.appendChild(b);
-  });
-  document.getElementById('nameInput').oninput=e=>{ STATE.name=e.target.value.trim(); updateHud(); };
-  // nivell
+function initGameControls(){
+  // nivell (pantalla Jugar) i pastilla de nivell (dins la partida)
   document.querySelectorAll('#lvlSeg button').forEach(b=>{
-    b.onclick=()=>{ document.querySelectorAll('#lvlSeg button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); STATE.level=+b.dataset.lvl; };
+    b.onclick=()=>{ STATE.level=+b.dataset.lvl; syncLevelUI(); };
   });
+  document.getElementById('lvlPill').onclick=()=>{
+    STATE.level=STATE.level%3+1; syncLevelUI();
+    if(STATE.mode) MODES[STATE.mode].start();
+  };
+  // codi de repte
+  const ci=document.getElementById('codeInput');
+  ci.value=STATE.code;
+  ci.oninput=e=>{ STATE.code=e.target.value.trim().toUpperCase(); };
   // modes
   document.querySelectorAll('.mode').forEach(m=>{ m.onclick=()=>openMode(m.dataset.mode); });
-  document.getElementById('backBtn').onclick=goHome;
-  document.getElementById('homeBtn').onclick=goHome;
+  // navegació entre pantalles
+  document.getElementById('goPlay').onclick     =()=>showScreen('screen-play');
+  document.getElementById('goTrophies').onclick =()=>showScreen('screen-trophies');
+  document.getElementById('goStats').onclick    =()=>showScreen('screen-stats');
+  document.getElementById('goProfiles').onclick =()=>{ showScreen('screen-profiles'); renderSlots(); };
+  document.getElementById('goHelp2').onclick     =()=>document.getElementById('helpModal').classList.add('show');
+  document.getElementById('playBack').onclick     =()=>showScreen('screen-menu');
+  document.getElementById('trophiesBack').onclick =()=>showScreen('screen-menu');
+  document.getElementById('statsBack').onclick    =()=>showScreen('screen-menu');
+  document.getElementById('setupBack').onclick    =()=>{ showScreen('screen-profiles'); renderSlots(); };
+  document.getElementById('createBtn').onclick    =createProfile;
+  document.getElementById('backBtn').onclick =()=>showScreen('screen-play');
+  document.getElementById('homeBtn').onclick =()=>showScreen('screen-menu');
+  // estadístiques: exportar / importar / reiniciar
+  document.getElementById('exportBtn').onclick=exportProfile;
+  document.getElementById('importBtn').onclick=()=>document.getElementById('importInput').click();
+  document.getElementById('importInput').onchange=importProfile;
+  document.getElementById('resetStatsBtn').onclick=resetStats;
+  // ajuda
   document.getElementById('helpBtn').onclick=()=>document.getElementById('helpModal').classList.add('show');
   document.getElementById('helpX').onclick=()=>document.getElementById('helpModal').classList.remove('show');
   document.getElementById('helpModal').onclick=e=>{ if(e.target.id==='helpModal') e.currentTarget.classList.remove('show'); };
+  window.addEventListener('keydown',e=>{ if(e.key==='Escape') document.getElementById('helpModal').classList.remove('show'); });
+  syncLevelUI();
   initViewerControls();
-  updateHud();
 }
 function initViewerControls(){
   // paleta de colors (mode "un color")
   const sw=document.getElementById('swatches');
+  if(!Number.isInteger(PREFS.color)||PREFS.color<0||PREFS.color>=PALETTE.length) PREFS.color=0;
   PALETTE.forEach((p,i)=>{
     const b=document.createElement('button');
     b.style.background=`rgb(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]})`;
-    b.title=p.n; if(i===0)b.classList.add('sel');
-    b.onclick=()=>{ sw.querySelectorAll('button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); Scene.setUniformColor(p.rgb); };
+    b.title=p.n; if(i===PREFS.color)b.classList.add('sel');
+    b.onclick=()=>{ sw.querySelectorAll('button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); Scene.setUniformColor(p.rgb); PREFS.color=i; PREFS.colorMode='uniform'; savePrefs(); };
     sw.appendChild(b);
   });
   // llegenda del mode "per vistes"
   document.getElementById('vlegend').innerHTML=
     `<span><i style="background:rgb(86,150,214)"></i>Alçat (davant)</span>`+
     `<span><i style="background:rgb(104,196,140)"></i>Planta (dalt)</span>`+
-    `<span><i style="background:rgb(240,168,96)"></i>Perfil (costat)</span>`;
+    `<span><i style="background:rgb(240,168,96)"></i>Perfil (esquerra)</span>`;
   // commutador de mode de color
+  function setColorModeUI(mode){
+    document.querySelectorAll('#colorModeSeg button').forEach(x=>x.classList.toggle('on',x.dataset.cm===mode));
+    Scene.setColorMode(mode);
+    document.getElementById('swatches').hidden = (mode==='views');
+    document.getElementById('vlegend').hidden = (mode!=='views');
+  }
   document.querySelectorAll('#colorModeSeg button').forEach(b=>{
-    b.onclick=()=>{
-      document.querySelectorAll('#colorModeSeg button').forEach(x=>x.classList.remove('on'));
-      b.classList.add('on');
-      const mode=b.dataset.cm; Scene.setColorMode(mode);
-      document.getElementById('swatches').hidden = (mode==='views');
-      document.getElementById('vlegend').hidden = (mode!=='views');
-    };
+    b.onclick=()=>{ setColorModeUI(b.dataset.cm); PREFS.colorMode=b.dataset.cm; savePrefs(); };
   });
   // graella de terra on/off
   const gt=document.getElementById('gridToggle');
-  gt.onclick=()=>{ const on=gt.classList.toggle('on'); gt.textContent= on?'Graella ✓':'Graella'; Scene.setShowGrid(on); };
+  gt.onclick=()=>{ const on=gt.classList.toggle('on'); gt.textContent= on?'Graella ✓':'Graella'; Scene.setShowGrid(on); PREFS.grid=on; savePrefs(); };
   const at=document.getElementById('arrowToggle');
-  at.onclick=()=>{ const on=at.classList.toggle('on'); at.textContent= on?'Fletxes ✓':'Fletxes'; Scene.setShowArrows(on); };
+  at.onclick=()=>{ const on=at.classList.toggle('on'); at.textContent= on?'Fletxes ✓':'Fletxes'; Scene.setShowArrows(on); PREFS.arrows=on; savePrefs(); };
   // zoom x0,50 → x2,00
   const zs=document.getElementById('zoomSlider'), zv=document.getElementById('zoomVal');
-  function applyZoom(v){ v=Math.min(2,Math.max(0.5, Math.round(v*100)/100));
-    zs.value=v; zv.textContent='x'+v.toFixed(2).replace('.',','); Scene.setZoom(v); }
+  function applyZoom(v,save=true){ v=Math.min(2,Math.max(0.5, Math.round(v*100)/100));
+    zs.value=v; zv.textContent='x'+v.toFixed(2).replace('.',','); Scene.setZoom(v);
+    if(save){ PREFS.zoom=v; savePrefs(); } }
   zs.oninput=()=>applyZoom(parseFloat(zs.value));
   document.getElementById('zoomOut').onclick=()=>applyZoom(parseFloat(zs.value)-0.25);
   document.getElementById('zoomIn').onclick=()=>applyZoom(parseFloat(zs.value)+0.25);
+
+  // aplica les preferències desades
+  Scene.setUniformColor(PALETTE[PREFS.color].rgb);
+  if(PREFS.colorMode==='views') setColorModeUI('views');
+  if(!PREFS.grid){ gt.classList.remove('on'); gt.textContent='Graella'; Scene.setShowGrid(false); }
+  if(!PREFS.arrows){ at.classList.remove('on'); at.textContent='Fletxes'; Scene.setShowArrows(false); }
+  if(Number.isFinite(PREFS.zoom)) applyZoom(PREFS.zoom,false);
 }
-initHome();
+
+/* ---------- arrencada ---------- */
+function startApp(){
+  loadSaved();
+  initGameControls();
+  setTimeout(()=>{
+    document.getElementById('splash').classList.add('out');
+    const profiles=getProfiles();
+    if(player){ updateHud(); showScreen('screen-menu'); }
+    else if(profiles.some(Boolean)){ showScreen('screen-profiles'); renderSlots(); }
+    else { openSetup(0); }  // primer ús: crear el primer perfil
+  },1050);
+}
+startApp();
 </script>
 </body>
 </html>
