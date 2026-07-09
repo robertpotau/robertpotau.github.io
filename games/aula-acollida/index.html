@@ -794,7 +794,42 @@
       <button class="nav-btn" onclick="renderStats();showScreen('s-stats')">📊 Estadístiques</button>
       <button class="nav-btn" onclick="showScreen('s-profile-select');renderProfileSelect()">👤 Perfils</button>
       <button class="nav-btn" onclick="openCredits()">ℹ️ Crèdits</button>
+      <button class="nav-btn" onclick="showScreen('s-cloud');document.getElementById('cloud-feedback').textContent='';renderCloudScreen();">☁️ Classe</button>
     </div>
+  </div>
+
+  <!-- SINCRONITZACIÓ AMB CLASSE -->
+  <div id="s-cloud" class="screen">
+    <button class="back-btn" onclick="showScreen('s-home')">&#8592; Inici</button>
+    <div class="section-title">☁️ Classe</div>
+    <p class="section-sub">Desa el progrés al núvol, per si canvies de dispositiu</p>
+
+    <div id="cloud-linked-card" style="display:none;background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:12px;padding:14px;margin-bottom:14px;">
+      <div style="font-weight:800;margin-bottom:4px;">✅ Connectat a la classe <span id="cloud-linked-class"></span></div>
+      <div style="font-size:0.85rem;color:#475569;">El progrés es desa automàticament mentre juguis.</div>
+    </div>
+
+    <div id="cloud-join-card" style="background:#f8fafc;border-radius:12px;padding:14px;margin-bottom:14px;">
+      <div class="avatar-group">🚪 Uneix-te a una classe (primer cop)</div>
+      <div class="form-group" style="margin-top:8px;">
+        <input type="text" id="cloud-join-code" placeholder="Codi de classe, p.ex. 3ESO-A26" maxlength="20">
+      </div>
+      <button class="btn-primary" onclick="cloudJoinClass()">Uneix-te</button>
+    </div>
+
+    <div id="cloud-claim-card" style="background:#f8fafc;border-radius:12px;padding:14px;margin-bottom:14px;">
+      <div class="avatar-group">🔑 Ja tens un codi de recuperació?</div>
+      <p style="font-size:0.8rem;color:#64748b;margin:4px 0 8px;">Per continuar en un altre dispositiu, o si has esborrat dades del navegador.</p>
+      <div class="form-group">
+        <input type="text" id="cloud-claim-class" placeholder="Codi de classe" maxlength="20">
+      </div>
+      <div class="form-group">
+        <input type="text" id="cloud-claim-code" placeholder="Codi de recuperació" maxlength="20">
+      </div>
+      <button class="btn-primary" onclick="cloudClaim()">Recupera el meu progrés</button>
+    </div>
+
+    <div id="cloud-feedback" style="text-align:center;font-weight:700;"></div>
   </div>
 
   <!-- MODES -->
@@ -1160,6 +1195,8 @@
   <div class="to-desc" id="to-desc">Descripció</div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-sync.js"></script>
 <script>
 
 // ══════════════════════════════════════════════════════════════
@@ -2778,9 +2815,19 @@ function getPlayer() {
   const p = loadProfiles(), idx = getActiveIdx();
   return (idx >= 0 && p[idx]) ? p[idx] : null;
 }
-function savePlayer(player) {
+function savePlayerLocal(player) {
   const p = loadProfiles(), idx = getActiveIdx();
   if (idx >= 0) { p[idx] = player; saveProfiles(p); }
+}
+function savePlayer(player) {
+  savePlayerLocal(player);
+  // aquest joc te molts punts de guardat (5 finishXxx() + recordWord() per paraula),
+  // per aixo el sync es centralitza aqui en lloc de repetir-lo a cada un.
+  // savePlayerLocal() (sense sync) existeix a part per als moments en que cal
+  // desar la vinculacio de núvol ABANS de saber si ja hi ha dades remotes a
+  // pull (veure cloudClaim/pullFromCloudIfLinked) — sino es pot sobreescriure
+  // al nuvol les dades bones just abans de llegir-les.
+  syncToCloudIfLinked(player);
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -2809,6 +2856,7 @@ function defaultPlayer(nom, avatar) {
     },
     modesJugats: {}, historial: [], ratxa: 0,
     paraulesStats: {},   // "unitKey|WORD" → {ok, ko, last} per al Repàs intel·ligent
+    cloud_student_id: null, cloud_class_code: null, cloud_synced_at: 0, // sync opcional amb Supabase
   };
 }
 
@@ -2994,7 +3042,7 @@ function renderProfileSelect() {
         <div class="slot-rank">${rang.icon} ${rangNom(rang, p)}</div>
         <div class="slot-xp">${p.xp} XP</div>
         <button class="slot-delete" data-i="${i}" aria-label="Esborra el perfil ${p.nom}" title="Esborra perfil" style="position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:none;background:rgba(239,68,68,0.12);color:#dc2626;font-size:0.85rem;cursor:pointer;line-height:1;font-weight:800">✕</button>`;
-      slot.onclick = () => { setActiveIdx(i); renderHUD(p); renderHome(); showScreen('s-home'); };
+      slot.onclick = () => { setActiveIdx(i); renderHUD(p); renderHome(); showScreen('s-home'); pullFromCloudIfLinked(p); };
       slot.querySelector('.slot-delete').onclick = (e) => {
         e.stopPropagation();
         if (!confirm(`Esborrar el perfil de "${p.nom}"? Aquesta acció no es pot desfer.`)) return;
@@ -5521,6 +5569,111 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
+
+/* ═══════════════════════════════════════════════
+   SINCRONITZACIÓ AMB EL NÚVOL (Supabase, opcional)
+   ═══════════════════════════════════════════════
+   Additiu: el joc funciona igual sense connexió (localStorage). Si
+   CloudSync no existeix (CDN bloquejat) o la petició falla (sense
+   internet), es continua sense que el joc es trenqui.
+   A diferència d'altres jocs (que tenen un `player` global), aquest
+   joc passa `player` com a paràmetre arreu — les funcions de sync
+   segueixen el mateix patró en lloc de referenciar un global. */
+const CLOUD_GAME_SLUG = 'aula-acollida';
+
+function isCloudLinked(p) { return !!(p && p.cloud_student_id); }
+
+async function syncToCloudIfLinked(p) {
+  if (!isCloudLinked(p) || typeof CloudSync === 'undefined') return;
+  try {
+    await CloudSync.saveProgress(p.cloud_student_id, CLOUD_GAME_SLUG, p);
+    p.cloud_synced_at = Date.now();
+    // no cridem savePlayer(p) altre cop (recursió) — el timestamp es persistirà
+    // al proper savePlayer() natural del joc, que és inofensiu si triga un cicle
+  } catch (e) {
+    console.warn('Sincronització al núvol fallida (potser sense connexió):', e.message || e);
+  }
+}
+
+async function pullFromCloudIfLinked(p) {
+  if (!isCloudLinked(p) || typeof CloudSync === 'undefined') return;
+  try {
+    const remote = await CloudSync.loadProgress(p.cloud_student_id, CLOUD_GAME_SLUG);
+    if (!remote) { savePlayerLocal(p); return; } // encara no hi ha progrés d'aquest joc al núvol; desa nomes la vinculació, sense pujar-hi res
+    const remoteTime = new Date(remote.updated_at).getTime();
+    if (remoteTime > (p.cloud_synced_at || 0)) {
+      const keep = { cloud_student_id: p.cloud_student_id, cloud_class_code: p.cloud_class_code };
+      const merged = { ...defaultPlayer(remote.player_json.nom, remote.player_json.avatar), ...remote.player_json, ...keep, cloud_synced_at: remoteTime };
+      savePlayer(merged); // aixo sincronitza tambe, pero amb les dades ja recuperades del nuvol (idempotent)
+      renderHUD(merged);
+      renderHome();
+    } else {
+      savePlayerLocal(p); // les locals ja son iguals o mes noves — nomes cal desar la vinculació
+    }
+  } catch (e) {
+    console.warn('Lectura del núvol fallida (potser sense connexió):', e.message || e);
+  }
+}
+
+function renderCloudScreen() {
+  // no toca cloud-feedback: es crida DESPRÉS d'un join/claim amb èxit per
+  // actualitzar les targetes visibles, i esborrar el text aquí taparia el
+  // missatge amb el codi de recuperació just quan cal que l'alumne el vegi
+  const p = getPlayer();
+  const linked = isCloudLinked(p);
+  document.getElementById('cloud-linked-card').style.display = linked ? 'block' : 'none';
+  document.getElementById('cloud-join-card').style.display = linked ? 'none' : 'block';
+  document.getElementById('cloud-claim-card').style.display = linked ? 'none' : 'block';
+  if (linked) document.getElementById('cloud-linked-class').textContent = p.cloud_class_code || '';
+}
+
+function cloudFeedback(msg, ok) {
+  const el = document.getElementById('cloud-feedback');
+  el.textContent = msg;
+  el.style.color = ok ? '#16a34a' : '#dc2626';
+}
+
+async function cloudJoinClass() {
+  if (typeof CloudSync === 'undefined') { cloudFeedback('No es pot connectar (sense internet?)', false); return; }
+  const code = document.getElementById('cloud-join-code').value.trim();
+  if (!code) { cloudFeedback('Escriu el codi de classe', false); return; }
+  cloudFeedback('Connectant…', true);
+  try {
+    const p = getPlayer();
+    const result = await CloudSync.joinClass(code, p.nom || 'Jugador');
+    p.cloud_student_id = result.studentId;
+    p.cloud_class_code = result.classCode;
+    p.cloud_synced_at = Date.now();
+    savePlayer(p); // ja sincronitza sol (centralitzat a savePlayer() en aquest joc)
+    cloudFeedback(`Connectat! El teu codi de recuperació és ${result.recoveryCode} — escriu-lo per continuar en un altre dispositiu.`, true);
+    renderCloudScreen();
+  } catch (e) {
+    cloudFeedback(e.message === 'class_not_found' ? 'Codi de classe no trobat' : 'Error de connexió, torna-ho a provar', false);
+  }
+}
+
+async function cloudClaim() {
+  if (typeof CloudSync === 'undefined') { cloudFeedback('No es pot connectar (sense internet?)', false); return; }
+  const classCode = document.getElementById('cloud-claim-class').value.trim();
+  const recoveryCode = document.getElementById('cloud-claim-code').value.trim();
+  if (!classCode || !recoveryCode) { cloudFeedback('Omple els dos camps', false); return; }
+  cloudFeedback('Recuperant…', true);
+  try {
+    const result = await CloudSync.claim(recoveryCode, classCode);
+    const p = getPlayer();
+    p.cloud_student_id = result.studentId;
+    p.cloud_class_code = result.classCode;
+    p.cloud_synced_at = 0;
+    // NO savePlayer(p) aqui: pujaria les dades locals (buides) i taparia les
+    // recuperades abans de poder-les llegir. pullFromCloudIfLinked() ja
+    // s'encarrega de desar la vinculació correctament en tots els casos.
+    await pullFromCloudIfLinked(p);
+    cloudFeedback('Progrés recuperat!', true);
+    renderCloudScreen();
+  } catch (e) {
+    cloudFeedback('Codi no vàlid, torna-ho a comprovar', false);
+  }
+}
 
 // ── PWA: register service worker ──
 if ('serviceWorker' in navigator) {

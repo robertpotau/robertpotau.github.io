@@ -1413,6 +1413,9 @@
     <button class="btn btn-secondary btn-full" onclick="showScreen('profiles')">🔄 Canvia de perfil</button>
     <button class="btn btn-secondary" onclick="openCredits()" style="flex:0 0 auto;padding-left:16px;padding-right:16px;">ℹ️ Crèdits</button>
   </div>
+  <div class="nav-buttons" style="margin-top:8px;">
+    <button class="btn btn-secondary btn-full" onclick="showScreen('cloud-screen');document.getElementById('cloud-feedback').textContent='';renderCloudScreen();">☁️ Classe (desar al núvol)</button>
+  </div>
 
   <div class="card" style="margin-top:12px;">
     <h3 class="mb8">⚙️ Accessibilitat</h3>
@@ -1458,6 +1461,34 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- ===== CLOUD SYNC SCREEN ===== -->
+<div id="cloud-screen" class="screen">
+  <button class="back-btn" onclick="showScreen('home')">← Tornar</button>
+  <h2 class="mb8">☁️ Classe</h2>
+  <p class="mb8" style="color:var(--text-dim,#666);">Desa el progrés al núvol, per si canvies de dispositiu</p>
+
+  <div class="card" id="cloud-linked-card" style="display:none;">
+    <div style="font-weight:800;margin-bottom:6px;">✅ Connectat a la classe <span id="cloud-linked-class"></span></div>
+    <div style="font-size:0.85rem;color:var(--text-dim,#666);">El progrés es desa automàticament en acabar cada partida.</div>
+  </div>
+
+  <div class="card" id="cloud-join-card">
+    <h3 class="mb8">🚪 Uneix-te a una classe (primer cop)</h3>
+    <input type="text" id="cloud-join-code" class="input-field" placeholder="Codi de classe, p.ex. 3ESO-A26" maxlength="20" style="margin-bottom:12px;">
+    <button class="btn btn-primary btn-full" onclick="cloudJoinClass()">Uneix-te</button>
+  </div>
+
+  <div class="card" id="cloud-claim-card">
+    <h3 class="mb8">🔑 Ja tens un codi de recuperació?</h3>
+    <p style="font-size:0.85rem;color:var(--text-dim,#666);margin-bottom:10px;">Per continuar en un altre dispositiu, o si has esborrat dades del navegador.</p>
+    <input type="text" id="cloud-claim-class" class="input-field" placeholder="Codi de classe" maxlength="20" style="margin-bottom:10px;">
+    <input type="text" id="cloud-claim-code" class="input-field" placeholder="Codi de recuperació" maxlength="20" style="margin-bottom:12px;">
+    <button class="btn btn-secondary btn-full" onclick="cloudClaim()">Recupera el meu progrés</button>
+  </div>
+
+  <div id="cloud-feedback" style="text-align:center;font-weight:700;"></div>
 </div>
 
 <!-- ===== TOPIC SCREEN ===== -->
@@ -1815,6 +1846,8 @@
 <!-- ===== CONFETTI ===== -->
 <div class="confetti-container" id="confetti-container"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-sync.js"></script>
 <script>
 'use strict';
 
@@ -2902,6 +2935,9 @@ function getOrInitProfile(p) {
   if (!p.consecutivePerfect) p.consecutivePerfect = 0;
   if (!p.dictPerfectGames) p.dictPerfectGames = 0;
   if (!p.c8PerfectGames) p.c8PerfectGames = 0;
+  if (p.cloud_student_id === undefined) p.cloud_student_id = null;
+  if (p.cloud_class_code === undefined) p.cloud_class_code = null;
+  if (p.cloud_synced_at === undefined) p.cloud_synced_at = 0;
   return p;
 }
 
@@ -3030,6 +3066,7 @@ function selectProfile(idx) {
   const p = state.profiles[idx];
   getOrInitProfile(p);
   showScreen('home');
+  pullFromCloudIfLinked(); // async, no bloqueja
 }
 
 // ===================================================================
@@ -3829,6 +3866,7 @@ function abandonGame() {
 
     // Save profile
     saveState();
+    syncToCloudIfLinked(); // fire-and-forget
 
     // Store abandon results to show on results screen
     state.abandonedXp = abandonXP;
@@ -3969,6 +4007,7 @@ function endGame() {
   g.newTrophies = newTrophies;
 
   saveState();
+  syncToCloudIfLinked(); // fire-and-forget
 
   // Check rank up
   const newRank = getRank(p.xp);
@@ -5061,6 +5100,106 @@ function csvEsc(val) {
 function esc(str) {
   if (!str) return '';
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+/* ═══════════════════════════════════════════════
+   SINCRONITZACIÓ AMB EL NÚVOL (Supabase, opcional)
+   ═══════════════════════════════════════════════
+   Additiu: el joc funciona igual sense connexió (localStorage). Si
+   CloudSync no existeix (CDN bloquejat) o la petició falla (sense
+   internet), es continua sense que el joc es trenqui. */
+const CLOUD_GAME_SLUG = 'ortografia';
+
+function isCloudLinked() { const p = currentProfile(); return !!(p && p.cloud_student_id); }
+
+async function syncToCloudIfLinked() {
+  const p = currentProfile();
+  if (!isCloudLinked() || typeof CloudSync === 'undefined') return;
+  try {
+    await CloudSync.saveProgress(p.cloud_student_id, CLOUD_GAME_SLUG, p);
+    p.cloud_synced_at = Date.now();
+    saveState();
+  } catch (e) {
+    console.warn('Sincronització al núvol fallida (potser sense connexió):', e.message || e);
+  }
+}
+
+async function pullFromCloudIfLinked() {
+  const p = currentProfile();
+  if (!isCloudLinked() || typeof CloudSync === 'undefined') return;
+  try {
+    const remote = await CloudSync.loadProgress(p.cloud_student_id, CLOUD_GAME_SLUG);
+    if (!remote) return; // encara no hi ha progrés d'aquest joc al núvol; la vinculació ja es va desar en unir-se/recuperar
+    const remoteTime = new Date(remote.updated_at).getTime();
+    if (remoteTime > (p.cloud_synced_at || 0)) {
+      const keep = { cloud_student_id: p.cloud_student_id, cloud_class_code: p.cloud_class_code };
+      const merged = getOrInitProfile({ ...remote.player_json, ...keep, cloud_synced_at: remoteTime });
+      state.profiles[state.currentProfileIdx] = merged;
+      saveState();
+      renderHome();
+    }
+  } catch (e) {
+    console.warn('Lectura del núvol fallida (potser sense connexió):', e.message || e);
+  }
+}
+
+function renderCloudScreen() {
+  // no toca cloud-feedback: es crida DESPRÉS d'un join/claim amb èxit per
+  // actualitzar les targetes visibles, i esborrar el text aquí taparia el
+  // missatge amb el codi de recuperació just quan cal que l'alumne el vegi
+  const p = currentProfile();
+  const linked = isCloudLinked();
+  document.getElementById('cloud-linked-card').style.display = linked ? 'block' : 'none';
+  document.getElementById('cloud-join-card').style.display = linked ? 'none' : 'block';
+  document.getElementById('cloud-claim-card').style.display = linked ? 'none' : 'block';
+  if (linked) document.getElementById('cloud-linked-class').textContent = p.cloud_class_code || '';
+}
+
+function cloudFeedback(msg, ok) {
+  const el = document.getElementById('cloud-feedback');
+  el.textContent = msg;
+  el.style.color = ok ? '#16a34a' : '#dc2626';
+}
+
+async function cloudJoinClass() {
+  if (typeof CloudSync === 'undefined') { cloudFeedback('No es pot connectar (sense internet?)', false); return; }
+  const code = document.getElementById('cloud-join-code').value.trim();
+  if (!code) { cloudFeedback('Escriu el codi de classe', false); return; }
+  cloudFeedback('Connectant…', true);
+  try {
+    const p = currentProfile();
+    const result = await CloudSync.joinClass(code, p.nom || 'Jugador');
+    p.cloud_student_id = result.studentId;
+    p.cloud_class_code = result.classCode;
+    p.cloud_synced_at = Date.now();
+    saveState();
+    await syncToCloudIfLinked();
+    cloudFeedback(`Connectat! El teu codi de recuperació és ${result.recoveryCode} — escriu-lo per continuar en un altre dispositiu.`, true);
+    renderCloudScreen();
+  } catch (e) {
+    cloudFeedback(e.message === 'class_not_found' ? 'Codi de classe no trobat' : 'Error de connexió, torna-ho a provar', false);
+  }
+}
+
+async function cloudClaim() {
+  if (typeof CloudSync === 'undefined') { cloudFeedback('No es pot connectar (sense internet?)', false); return; }
+  const classCode = document.getElementById('cloud-claim-class').value.trim();
+  const recoveryCode = document.getElementById('cloud-claim-code').value.trim();
+  if (!classCode || !recoveryCode) { cloudFeedback('Omple els dos camps', false); return; }
+  cloudFeedback('Recuperant…', true);
+  try {
+    const result = await CloudSync.claim(recoveryCode, classCode);
+    const p = currentProfile();
+    p.cloud_student_id = result.studentId;
+    p.cloud_class_code = result.classCode;
+    p.cloud_synced_at = 0;
+    saveState(); // nomes local: aquest joc no centralitza el sync a saveState(), es fa explicit a cada checkpoint
+    await pullFromCloudIfLinked();
+    cloudFeedback('Progrés recuperat!', true);
+    renderCloudScreen();
+  } catch (e) {
+    cloudFeedback('Codi no vàlid, torna-ho a comprovar', false);
+  }
 }
 
 // ===================================================================
