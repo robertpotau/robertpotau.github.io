@@ -20,7 +20,7 @@ $ErrorActionPreference = "Stop"
 $src  = "C:\Users\PC\Documents\Claude-Sync\claude-projects"
 $here = $PSScriptRoot
 
-$games = @("calcuherois","aula-acollida","fraccions","lletra-a-lletra","ortografia","vistes","geometria","quina-hora-es","what-time-is-it")
+$games = @("calcuherois","aula-acollida","fraccions","lletra-a-lletra","ortografia","vistes","geometria","quina-hora-es","what-time-is-it","verbs-english")
 
 if ($Slug) {
   if ($games -notcontains $Slug) {
