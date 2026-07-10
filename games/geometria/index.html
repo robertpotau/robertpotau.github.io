@@ -32,17 +32,6 @@
       --text-sub: rgba(255, 255, 255, 0.5);
     }
 
-    body.tema-dia {
-      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-      --bg-main: #f5f5f5;
-      --bg-card: #ffffff;
-      --accent: #d97706;
-      --success: #10b981;
-      --error: #ef4444;
-      --text-main: #1a1a1a;
-      --text-sub: rgba(0, 0, 0, 0.5);
-    }
-
     /* ── LAYOUT PRINCIPAL ── */
     .container {
       width: 100%;
@@ -71,6 +60,38 @@
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
+    }
+
+    /* ── SPLASH (pantalla de càrrega real, sense botó) ── */
+    #screen-real-splash {
+      position: fixed; inset: 0; z-index: 500;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      text-align: center; overflow: hidden; padding: 20px;
+      transition: opacity 0.5s;
+    }
+    #screen-real-splash.fadeout { opacity: 0; pointer-events: none; }
+    .splash-logo {
+      font-size: clamp(2.2rem, 9vw, 3.4rem); font-weight: 900; letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--accent), #a855f7, #22c55e);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: splash-pop 0.7s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .splash-sub { color: var(--text-sub); font-size: 0.95rem; margin-top: 6px; animation: fadeIn 0.6s 0.2s both; }
+    .splash-bar-bg { width: 210px; height: 6px; background: rgba(255,255,255,0.15); border-radius: 99px; margin: 28px auto 0; overflow: hidden; }
+    .splash-bar-fill { height: 100%; width: 0%; border-radius: 99px;
+      background: linear-gradient(90deg, var(--accent), #a855f7); animation: splash-load 3.4s ease-out 0.2s forwards; }
+    .splash-phrase { max-width: 300px; font-size: 0.95rem; color: var(--text-sub); font-style: italic;
+      margin-top: 26px; animation: fadeIn 0.8s 0.4s both; }
+    @keyframes splash-pop { 0% { transform: scale(0.4); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+    @keyframes splash-load { to { width: 100%; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .splash-shapes { position: absolute; inset: 0; opacity: 0.22; pointer-events: none; }
+    .shape-anim { position: absolute; font-size: clamp(1.4rem, 5vw, 2.4rem); font-weight: 800;
+      animation: shape-float 4.5s ease-in-out infinite; }
+    @keyframes shape-float {
+      0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
+      50% { transform: translateY(-28px) rotate(12deg) scale(1.12); opacity: 0.65; }
     }
 
     /* ── LOGO I HEADER ── */
@@ -928,9 +949,20 @@
 <body>
 
 <!-- ═══════════════════════════════════════════
-     PANTALLA: PORTADA (SPLASH SCREEN)
+     PANTALLA DE CÀRREGA (splash real, decorativa, sense botó)
      ══════════════════════════════════════════════ -->
-<div class="screen active" id="screen-portada">
+<div id="screen-real-splash">
+  <div class="splash-shapes" id="splash-shapes-container"></div>
+  <div class="splash-logo">△ Joc de Geometria</div>
+  <div class="splash-sub">Perímetres i àrees, 1r d'ESO</div>
+  <div class="splash-bar-bg"><div class="splash-bar-fill"></div></div>
+  <div class="splash-phrase" id="splash-phrase"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PANTALLA: PORTADA (menú d'entrada, amb botó Juga)
+     ══════════════════════════════════════════════ -->
+<div class="screen" id="screen-portada">
   <div class="container" style="justify-content: center; height: 100vh;">
     <div style="text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 28px;">
 
@@ -1326,7 +1358,7 @@
         <div style="font-size: 0.85rem; color: var(--text-sub); line-height: 1.8;">
           <div style="margin-bottom: 8px;">🎓 Joc Geometria 1r ESO</div>
           <div style="font-size: 0.75rem; margin-bottom: 8px;">
-            <strong>v1.2</strong> — Abril 2026
+            <strong>v1.3</strong> — Juliol 2026
           </div>
           <div style="font-size: 0.75rem; margin-bottom: 12px; color: rgba(255, 255, 255, 0.5);">
             📜 Llicència <strong>Creative Commons BY-NC-SA 4.0</strong>
@@ -1410,7 +1442,7 @@ const TROFEUS = [
   { id:'primer_vol', nom:'Primer vol', icon:'🕊️', desc:'Primera partida completada', cat:'prog' },
   { id:'geomeatra', nom:'Geòmetra', icon:'📐', desc:'50 exercicis completats', cat:'prog' },
   { id:'mestre_geo', nom:'Mestre Geòmetra', icon:'👑', desc:'100 exercicis completats', cat:'prog' },
-  { id:'llegenda_geometria', nom:'Llegenda de la Geometria', icon:'✨', desc:'Assolir el rang màxim (Llegenda)', cat:'rang' },
+  { id:'llegenda_geometria', nom:'Llegenda de la Geometria', icon:'✨', desc:'Assolir el rang màxim (Mestre Suprem)', cat:'rang' },
   { id:'sense_errors', nom:'Sense errors', icon:'⭐', desc:'10/10 en una forma', cat:'hab' },
   { id:'ratxa_perfecta', nom:'Ratxa Perfecta', icon:'🔥', desc:'5 encerts consecutius', cat:'hab' },
   { id:'perfectcionista', nom:'Perfeccionista', icon:'💎', desc:'20 exercicis perfectes', cat:'hab' },
@@ -1429,7 +1461,7 @@ const RANGS = [
   { xp: 2300, noms: { M: 'Matemàtic', F: 'Matemàtica', N: 'Matemàtic' }, icon: '⭐' },
   { xp: 3800, noms: { M: 'Mestre', F: 'Mestra', N: 'Mestre' }, icon: '👑' },
   { xp: 6000, noms: { M: 'Guerrer', F: 'Guerrera', N: 'Guerrer' }, icon: '⚔️' },
-  { xp: 9500, noms: { M: 'Campió', F: 'Campiона', N: 'Campió' }, icon: '🥇' },
+  { xp: 9500, noms: { M: 'Campió', F: 'Campiona', N: 'Campió' }, icon: '🥇' },
   { xp: 15000, noms: { M: 'Mestre Suprem', F: 'Mestra Suprema', N: 'Mestre Suprem' }, icon: '🏆' },
 ];
 
@@ -1440,7 +1472,6 @@ let player = null;
 let selectedGender = 'M';
 let selectedSkin = 0;
 let selectedAvatar = 0;
-let selectedHair = 'default';
 let currentExercise = null;
 
 // ─── helpers ───────────────────────────────
@@ -1866,7 +1897,6 @@ function selectGenderEdit(g) {
 
   const avatarList = g === 'M' ? AVATARS_MASC : g === 'F' ? AVATARS_FEM : AVATARS_NEUT;
   renderAvatarEditGroup(avatarList);
-  editingSelectedAvatar = avatarList[0];
   updateAvatarEditPreview();
 }
 
@@ -1918,7 +1948,7 @@ function saveAvatarEdit() {
   player.skin = editingAvatarSkin;
   player.avatar = editingSelectedAvatar;
 
-  updatePlayerSave();
+  savePlayer();
   closeAvatarEditor();
   renderStats();
   updateMenuProfile();
@@ -1974,10 +2004,9 @@ function selectProfile(idx) {
 function createNewProfileAt(idx) {
   window._newProfileSlot = idx;
   document.getElementById('inp-name').value = '';
-  document.querySelectorAll('.gender-btn').forEach((b, i) => b.classList.toggle('selected', i === 0));
+  document.querySelectorAll('#screen-profile .gender-btn').forEach((b, i) => b.classList.toggle('selected', i === 0));
   selectedGender = 'M';
   selectedSkin = 0;
-  selectedHair = 'default';
   selectedAvatar = 0;
   // Renderitzar avatars inicials
   renderAvatarGroup('av-masc', AVATARS_MASC);
@@ -2014,7 +2043,7 @@ function deleteProfile(idx) {
 
 function selectGender(g) {
   selectedGender = g;
-  document.querySelectorAll('.gender-btn').forEach((b, i) => {
+  document.querySelectorAll('#screen-profile .gender-btn').forEach((b, i) => {
     b.classList.toggle('selected', (i === 0 && g === 'M') || (i === 1 && g === 'F') || (i === 2 && g === 'N'));
   });
   // Renderitzar avatars del gènere seleccionat
@@ -2060,8 +2089,16 @@ function renderAvatarGroupNoSkin(id, arr) {
     btn.type = 'button';
     btn.onclick = (e) => {
       e.preventDefault();
+      // Si es clica un avatar d'una altra secció, canviar el gènere automàticament
+      const g = id === 'av-masc' ? 'M' : id === 'av-fem' ? 'F' : 'N';
+      if (g !== selectedGender) {
+        selectedGender = g;
+        document.querySelectorAll('#screen-profile .gender-btn').forEach((b, i) => {
+          b.classList.toggle('selected', (i === 0 && g === 'M') || (i === 1 && g === 'F') || (i === 2 && g === 'N'));
+        });
+      }
       selectedAvatar = idx;
-      document.querySelectorAll('.avatar-btn').forEach(b => b.classList.remove('selected'));
+      document.querySelectorAll('#screen-profile .avatar-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       updateAvatarPreview();
     };
@@ -2085,15 +2122,24 @@ function renderAvatarGroup(id, arr) {
   if (!el) return;
   el.innerHTML = '';
   arr.forEach((av, idx) => {
-    const combined = applySkintone(av, selectedSkin);
+    // Els avatars neutres (animals/fantasia) no admeten to de pell
+    const combined = id === 'av-neut' ? av : applySkintone(av, selectedSkin);
     const btn = document.createElement('button');
     btn.className = 'avatar-btn' + (idx === selectedAvatar ? ' selected' : '');
     btn.textContent = combined;
     btn.type = 'button';
     btn.onclick = (e) => {
       e.preventDefault();
+      // Si es clica un avatar d'una altra secció, canviar el gènere automàticament
+      const g = id === 'av-masc' ? 'M' : id === 'av-fem' ? 'F' : 'N';
+      if (g !== selectedGender) {
+        selectedGender = g;
+        document.querySelectorAll('#screen-profile .gender-btn').forEach((b, i) => {
+          b.classList.toggle('selected', (i === 0 && g === 'M') || (i === 1 && g === 'F') || (i === 2 && g === 'N'));
+        });
+      }
       selectedAvatar = idx;
-      document.querySelectorAll('.avatar-btn').forEach(b => b.classList.remove('selected'));
+      document.querySelectorAll('#screen-profile .avatar-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       updateAvatarPreview();
     };
@@ -2116,7 +2162,7 @@ function updateAvatarPreview() {
 function finishProfileCreate() {
   const nom = document.getElementById('inp-name').value.trim();
   if (!nom) {
-    alert('Poseix un nom!');
+    alert('Posa-hi un nom!');
     return;
   }
   const idx = window._newProfileSlot;
@@ -2171,8 +2217,10 @@ function updateMenuProfile() {
 function renderTrophies() {
   const CATS = [
     { id: 'prog', nom: '📈 Progressió', color: '#4ade80' },
+    { id: 'rang', nom: '👑 Rang', color: '#f472b6' },
     { id: 'hab', nom: '⭐ Habilitat', color: '#f7c948' },
     { id: 'id', nom: '🔍 Identificació', color: '#a78bfa' },
+    { id: 'desafiament', nom: '⚡ Desafiament', color: '#38bdf8' },
     { id: 'secret', nom: '🔒 Secret', color: '#94a3b8' },
   ];
 
@@ -2212,7 +2260,10 @@ function renderTrophies() {
 // ═══════════════════════════════════════════
 
 function getRang(xp) {
-  return RANGS.find(r => xp >= r.xp) || RANGS[RANGS.length - 1];
+  for (let i = RANGS.length - 1; i >= 0; i--) {
+    if (xp >= RANGS[i].xp) return RANGS[i];
+  }
+  return RANGS[0];
 }
 
 // ═══════════════════════════════════════════
@@ -2316,13 +2367,18 @@ function drawRectangleSVG(base, altura) {
 }
 
 function drawTriangleSVG(sideA, sideB, sideC, altura) {
-  const baseW = Math.min(160, sideC * 11);
-  const triH  = Math.min(130, altura * 11);
+  // Escala real: mateixa proporció per base i altura → el dibuix és fidel
+  const scale = Math.min(160 / sideC, 120 / altura);
+  const baseW = sideC * scale;
+  const triH  = altura * scale;
   const bx = (240 - baseW) / 2;
   const by = 185;
-  const x1 = 120, y1 = by - triH;
+  // Posició real de l'àpex: p² + h² = a² (si a és vertical, p = 0 → triangle rectangle)
+  const p = Math.sqrt(Math.max(0, sideA * sideA - altura * altura));
+  const x1 = bx + p * scale, y1 = by - triH;
   const x2 = bx, y2 = by;
   const x3 = bx + baseW, y3 = by;
+  const esRectangle = p * scale < 2; // àpex sobre el vèrtex esquerre
 
   return `
     <svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
@@ -2330,9 +2386,9 @@ function drawTriangleSVG(sideA, sideB, sideC, altura) {
       <polygon points="${x1},${y1} ${x2},${y2} ${x3},${y3}"
                fill="rgba(168,85,247,0.18)" stroke="#a855f7" stroke-width="3"/>
 
-      <!-- Línia d'altura (puntejada) -->
-      <line x1="${x1}" y1="${y1}" x2="${x1}" y2="${y2}"
-            stroke="#c084fc" stroke-width="2" stroke-dasharray="5,4"/>
+      <!-- Línia d'altura (puntejada, des de l'àpex fins a la base) -->
+      ${esRectangle ? '' : `<line x1="${x1}" y1="${y1}" x2="${x1}" y2="${y2}"
+            stroke="#c084fc" stroke-width="2" stroke-dasharray="5,4"/>`}
       <!-- Marca angle recte de la base amb l'altura -->
       <path d="M${x1+8},${y2} L${x1+8},${y2-8} L${x1},${y2-8}" fill="none" stroke="#c084fc" stroke-width="1.5"/>
 
@@ -2341,11 +2397,11 @@ function drawTriangleSVG(sideA, sideB, sideC, altura) {
             font-size="13" font-weight="bold" fill="#e9d5ff">a=${sideA}</text>
       <text x="${(x3+x1)/2 + 14}" y="${(y1+y3)/2 + 5}" text-anchor="middle"
             font-size="13" font-weight="bold" fill="#e9d5ff">b=${sideB}</text>
-      <text x="${x1}" y="${y2+20}" text-anchor="middle"
+      <text x="${bx + baseW/2}" y="${y2+20}" text-anchor="middle"
             font-size="13" font-weight="bold" fill="#e9d5ff">c=${sideC} cm</text>
 
       <!-- Etiqueta altura -->
-      <text x="${x1+26}" y="${(y1+y2)/2 + 5}" text-anchor="start"
+      <text x="${x1+12}" y="${(y1+y2)/2 + 5}" text-anchor="start"
             font-size="13" font-weight="bold" fill="#c084fc">h=${altura} cm</text>
     </svg>
   `;
@@ -2497,18 +2553,18 @@ function drawTrapezSVG(b1, b2, h) {
     <!-- Angle recte -->
     <path d="M${cx+8},${y2} L${cx+8},${y2-8} L${cx},${y2-8}" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
 
-    <!-- Etiquetes bases -->
+    <!-- Etiquetes bases (b₁ = base gran a baix, b₂ = base petita a dalt) -->
     <text x="${cx}" y="${y2+20}" text-anchor="middle"
-          font-size="14" font-weight="bold" fill="#67e8f9">b₂ = ${b1} cm</text>
+          font-size="14" font-weight="bold" fill="#67e8f9">b₁ = ${b1} cm</text>
     <text x="${cx}" y="${y1-8}" text-anchor="middle"
-          font-size="14" font-weight="bold" fill="#67e8f9">b₁ = ${b2} cm</text>
+          font-size="14" font-weight="bold" fill="#67e8f9">b₂ = ${b2} cm</text>
     <!-- Etiqueta altura -->
     <text x="${cx+16}" y="${(y1+y2)/2+5}" text-anchor="start"
           font-size="13" font-weight="bold" fill="#67e8f9">h=${h}</text>
   </svg>`;
 }
 
-function _regularPolygonSVG(n, costat, fill, stroke, light, startAngle = -90) {
+function _regularPolygonSVG(n, costat, apValor, fill, stroke, light, startAngle = -90) {
   const cx = 120, cy = 118;
   const r = Math.min(85, Math.max(50, costat * 7));
   const apotema = r * Math.cos(Math.PI / n);
@@ -2534,23 +2590,23 @@ function _regularPolygonSVG(n, costat, fill, stroke, light, startAngle = -90) {
     <!-- Apotema (puntejada) -->
     <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy - apotema}"
           stroke="${light}" stroke-width="2" stroke-dasharray="5,4"/>
-    <text x="${cx+8}" y="${cy - apotema/2}" font-size="11" fill="${light}" font-weight="bold">ap</text>
+    <text x="${cx+8}" y="${cy - apotema/2}" font-size="11" fill="${light}" font-weight="bold">ap${apValor ? `=${apValor}` : ''}</text>
     <!-- Etiqueta costat -->
     <text x="${lx}" y="${ly}" text-anchor="middle"
           font-size="14" font-weight="bold" fill="${light}">a=${costat} cm</text>
   </svg>`;
 }
 
-function drawPentagonSVG(costat) {
-  return _regularPolygonSVG(5, costat, 'rgba(165,142,251,0.18)', '#a58efb', '#d8b4fe', -90);
+function drawPentagonSVG(costat, ap) {
+  return _regularPolygonSVG(5, costat, ap, 'rgba(165,142,251,0.18)', '#a58efb', '#d8b4fe', -90);
 }
 
-function drawHexagonSVG(costat) {
-  return _regularPolygonSVG(6, costat, 'rgba(251,146,60,0.18)', '#fb923c', '#fed7aa', -90);
+function drawHexagonSVG(costat, ap) {
+  return _regularPolygonSVG(6, costat, ap, 'rgba(251,146,60,0.18)', '#fb923c', '#fed7aa', -90);
 }
 
-function drawOctagonSVG(costat) {
-  return _regularPolygonSVG(8, costat, 'rgba(132,204,22,0.18)', '#84cc16', '#d4fc79', -22.5);
+function drawOctagonSVG(costat, ap) {
+  return _regularPolygonSVG(8, costat, ap, 'rgba(132,204,22,0.18)', '#84cc16', '#d4fc79', -22.5);
 }
 
 function drawCircleSVG(r) {
@@ -2693,51 +2749,50 @@ function checkQuadrat(event) {
 function setupTriangle() {
   document.getElementById('exercise-title').textContent = '📐 Exercici: Triangle';
 
-  // Generar triangle aleatori (tipus i mides)
+  // Triangles COHERENTS: compleixen la desigualtat triangular i l'altura és
+  // la real sobre la base c (arrodonida a 1 decimal). [sideA, sideB, sideC(base), altura]
+  const TRIANGLES = {
+    isosceles: [[5,5,8,3],[5,5,6,4],[10,10,16,6],[10,10,12,8],[13,13,10,12]],
+    escale:    [[5,6,7,4.2],[6,7,8,5.1],[7,8,9,6],[4,13,15,3.2]],
+    // Rectangle: ternes pitagòriques → costat vertical = altura, base = altre catet
+    rectangle: [[3,5,4,3],[6,10,8,6],[5,13,12,5],[9,15,12,9],[8,17,15,8]],
+    acutangle: [[6,7,8,5.1],[7,8,9,6],[10,11,12,8.6]],
+    obtusangle:[[3,5,7,1.9],[4,6,9,2.1],[5,6,10,2.3],[6,7,11,3.4]],
+  };
+
   const tipus = Math.floor(Math.random() * 6);
   let sideA, sideB, sideC, altura, nom;
 
+  function triaDe(taula) {
+    return taula[Math.floor(Math.random() * taula.length)];
+  }
+
   switch(tipus) {
-    case 0: // Equilàter (3 costats iguals)
+    case 0: // Equilàter (3 costats iguals, altura real = a·√3/2)
       sideA = Math.floor(Math.random() * 8) + 4;  // 4-11
       sideB = sideA;
       sideC = sideA;
-      altura = Math.round((sideA * Math.sqrt(3)) / 2 * 10) / 10; // Per info (no es demana)
+      altura = Math.round((sideA * Math.sqrt(3)) / 2 * 10) / 10;
       nom = 'Equilàter';
       break;
-    case 1: // Isòsceles (2 costats iguals)
-      sideA = Math.floor(Math.random() * 8) + 4;
-      sideB = sideA;
-      sideC = Math.floor(Math.random() * 8) + 4;
-      altura = Math.floor(Math.random() * 8) + 3; // Donat per exercici
+    case 1: // Isòsceles (a = b ≠ c, altura real = √(a² − (c/2)²))
+      [sideA, sideB, sideC, altura] = triaDe(TRIANGLES.isosceles);
       nom = 'Isòsceles';
       break;
     case 2: // Escalè (3 costats diferents)
-      sideA = Math.floor(Math.random() * 8) + 4;
-      sideB = Math.floor(Math.random() * 8) + 4;
-      sideC = Math.floor(Math.random() * 8) + 4;
-      altura = Math.floor(Math.random() * 8) + 3;
+      [sideA, sideB, sideC, altura] = triaDe(TRIANGLES.escale);
       nom = 'Escalè';
       break;
-    case 3: // Rectangle (90°)
-      sideA = Math.floor(Math.random() * 8) + 3;
-      sideB = Math.floor(Math.random() * 8) + 3;
-      sideC = Math.round(Math.sqrt(sideA*sideA + sideB*sideB) * 10) / 10;
-      altura = sideB; // Un costat es l'altura
+    case 3: // Rectangle (90°) — terna pitagòrica, perímetre sempre enter
+      [sideA, sideB, sideC, altura] = triaDe(TRIANGLES.rectangle);
       nom = 'Rectangle';
       break;
-    case 4: // Acutangle
-      sideA = Math.floor(Math.random() * 6) + 5;
-      sideB = Math.floor(Math.random() * 6) + 5;
-      sideC = Math.floor(Math.random() * 6) + 5;
-      altura = Math.floor(Math.random() * 6) + 3;
+    case 4: // Acutangle (tots els angles < 90°)
+      [sideA, sideB, sideC, altura] = triaDe(TRIANGLES.acutangle);
       nom = 'Acutangle';
       break;
-    case 5: // Obtusangle
-      sideA = Math.floor(Math.random() * 8) + 5;
-      sideB = Math.floor(Math.random() * 8) + 5;
-      sideC = Math.floor(Math.random() * 10) + 8;
-      altura = Math.floor(Math.random() * 6) + 3;
+    case 5: // Obtusangle (un angle > 90°)
+      [sideA, sideB, sideC, altura] = triaDe(TRIANGLES.obtusangle);
       nom = 'Obtusangle';
       break;
   }
@@ -2793,11 +2848,11 @@ function setupTriangle() {
 
 function checkTriangle(event) {
   event.preventDefault();
-  const perimetreUser = parseInt(document.getElementById('inp-perimetre-tri').value);
+  const perimetreUser = parseFloat(document.getElementById('inp-perimetre-tri').value);
   const areaUser = parseFloat(document.getElementById('inp-area-tri').value);
   const ex = currentExercise;
 
-  const periOk = perimetreUser === ex.perimetre;
+  const periOk = Math.abs(perimetreUser - ex.perimetre) < 0.11;
   const areaOk = Math.abs(areaUser - ex.area) < 0.2;
   const allOk = periOk && areaOk;
 
@@ -2970,9 +3025,9 @@ function checkRectangle(event) {
 
 function setupRomboide() {
   document.getElementById('exercise-title').textContent = '◇ Romboide';
-  const a = Math.floor(Math.random() * 10) + 3;
-  const b = Math.floor(Math.random() * 8) + 3;
-  const h = Math.floor(Math.random() * 8) + 2;
+  const h = Math.floor(Math.random() * 5) + 2;      // 2-6
+  const a = h + Math.floor(Math.random() * 4) + 1;  // a > h sempre (el costat oblic no pot ser més curt que l'altura)
+  const b = Math.floor(Math.random() * 8) + 3;      // 3-10
 
   currentExercise = {
     forma: 'romboide',
@@ -3078,15 +3133,16 @@ function checkRomboide(event) {
 
 function setupRombo() {
   document.getElementById('exercise-title').textContent = '◆ Rombo';
-  const a = Math.floor(Math.random() * 10) + 3;
-  const d1 = Math.floor(Math.random() * 12) + 4;
-  const d2 = Math.floor(Math.random() * 12) + 4;
+  // Rombos COHERENTS: a = √((d₁/2)² + (d₂/2)²) via ternes pitagòriques.
+  // [d1, d2, a] — l'àrea (d₁·d₂)/2 sempre és entera (diagonals parelles).
+  const ROMBOS = [[6,8,5],[8,6,5],[12,16,10],[16,12,10],[10,24,13],[24,10,13],[18,24,15],[24,18,15],[16,30,17]];
+  const [d1, d2, a] = ROMBOS[Math.floor(Math.random() * ROMBOS.length)];
 
   currentExercise = {
     forma: 'rombo',
     a, d1, d2,
     perimetre: 4 * a,
-    area: Math.floor((d1 * d2) / 2)
+    area: (d1 * d2) / 2
   };
 
   document.getElementById('exercise-content').innerHTML = `
@@ -3186,17 +3242,17 @@ function checkRombo(event) {
 
 function setupTrapezi() {
   document.getElementById('exercise-title').textContent = '⊥ Trapezi';
-  const b1 = Math.floor(Math.random() * 8) + 4;
-  const b2 = Math.floor(Math.random() * 8) + 4;
-  const c = Math.floor(Math.random() * 8) + 3;
-  const d = Math.floor(Math.random() * 8) + 3;
-  const h = Math.floor(Math.random() * 6) + 2;
+  const b2 = Math.floor(Math.random() * 6) + 3;        // base petita 3-8
+  const b1 = b2 + Math.floor(Math.random() * 5) + 2;   // base gran > base petita
+  const h = (Math.floor(Math.random() * 3) + 1) * 2;   // 2, 4 o 6 (parell → àrea sempre entera)
+  const c = h + Math.floor(Math.random() * 4);         // costats ≥ h (coherent)
+  const d = h + Math.floor(Math.random() * 4);
 
   currentExercise = {
     forma: 'trapezi',
     b1, b2, c, d, h,
     perimetre: b1 + c + d + b2,
-    area: Math.floor(((b1 + b2) * h) / 2)
+    area: ((b1 + b2) * h) / 2
   };
 
   document.getElementById('exercise-content').innerHTML = `
@@ -3296,19 +3352,20 @@ function checkTrapezi(event) {
 
 function setupPentagon() {
   document.getElementById('exercise-title').textContent = '⬟ Pentàgon';
-  const a = Math.floor(Math.random() * 8) + 3;
-  const apotema = Math.floor(Math.random() * 6) + 2;
+  // Parelles [costat, apotema] plausibles (ap real ≈ 0.688·a) amb àrea sempre entera
+  const PENTAGONS = [[4,2.8],[6,4.2],[8,5.5],[10,6.8],[12,8.3]];
+  const [a, apotema] = PENTAGONS[Math.floor(Math.random() * PENTAGONS.length)];
 
   currentExercise = {
     forma: 'pentagon',
     a, apotema,
     perimetre: 5 * a,
-    area: Math.floor((5 * a * apotema) / 2)
+    area: Math.round(5 * a * apotema) / 2
   };
 
   document.getElementById('exercise-content').innerHTML = `
     <div class="shape-display">
-      ${drawPentagonSVG(a)}
+      ${drawPentagonSVG(a, apotema)}
     </div>
 
     <div class="formula-box">
@@ -3403,19 +3460,20 @@ function checkPentagon(event) {
 
 function setupHexagon() {
   document.getElementById('exercise-title').textContent = '⬡ Hexàgon';
-  const a = Math.floor(Math.random() * 8) + 3;
-  const apotema = Math.floor(Math.random() * 6) + 2;
+  // Parelles [costat, apotema] plausibles (ap real ≈ 0.866·a) amb àrea sempre entera
+  const HEXAGONS = [[4,3.5],[5,4.4],[7,6],[8,7],[10,8.7]];
+  const [a, apotema] = HEXAGONS[Math.floor(Math.random() * HEXAGONS.length)];
 
   currentExercise = {
     forma: 'hexagon',
     a, apotema,
     perimetre: 6 * a,
-    area: Math.floor((6 * a * apotema) / 2)
+    area: Math.round(6 * a * apotema) / 2
   };
 
   document.getElementById('exercise-content').innerHTML = `
     <div class="shape-display">
-      ${drawHexagonSVG(a)}
+      ${drawHexagonSVG(a, apotema)}
     </div>
 
     <div class="formula-box">
@@ -3510,19 +3568,20 @@ function checkHexagon(event) {
 
 function setupOctagon() {
   document.getElementById('exercise-title').textContent = '⎔ Octàgon';
-  const a = Math.floor(Math.random() * 6) + 3;
-  const apotema = Math.floor(Math.random() * 5) + 2;
+  // Parelles [costat, apotema] plausibles (ap real ≈ 1.207·a) amb àrea sempre entera
+  const OCTAGONS = [[3,3.5],[4,5],[5,6],[6,7],[7,8.5]];
+  const [a, apotema] = OCTAGONS[Math.floor(Math.random() * OCTAGONS.length)];
 
   currentExercise = {
     forma: 'octagon',
     a, apotema,
     perimetre: 8 * a,
-    area: Math.floor((8 * a * apotema) / 2)
+    area: Math.round(8 * a * apotema) / 2
   };
 
   document.getElementById('exercise-content').innerHTML = `
     <div class="shape-display">
-      ${drawOctagonSVG(a)}
+      ${drawOctagonSVG(a, apotema)}
     </div>
 
     <div class="formula-box">
@@ -3619,11 +3678,12 @@ function setupCircle() {
   document.getElementById('exercise-title').textContent = '⭕ Cercle';
   const r = Math.floor(Math.random() * 10) + 2;
 
+  // π = 3.14 (el mateix valor que s'ensenya a l'alumne) → resultats exactes amb 2 decimals
   currentExercise = {
     forma: 'circle',
     r,
-    perimetre: Math.round(2 * Math.PI * r),
-    area: Math.round(Math.PI * r * r)
+    perimetre: Math.round(2 * 3.14 * r * 100) / 100,
+    area: Math.round(3.14 * r * r * 100) / 100
   };
 
   document.getElementById('exercise-content').innerHTML = `
@@ -3643,11 +3703,11 @@ function setupCircle() {
       <div class="inputs-grid">
         <div class="input-field">
           <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" step="0.01" inputmode="decimal" required>
         </div>
         <div class="input-field">
           <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-area" placeholder="Escriu el resultat" step="0.01" inputmode="decimal" required>
         </div>
       </div>
       <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
@@ -3661,12 +3721,13 @@ function setupCircle() {
 
 function checkCircle(event) {
   event.preventDefault();
-  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
-  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const perimetreUser = parseFloat(document.getElementById('inp-perimetre').value);
+  const areaUser = parseFloat(document.getElementById('inp-area').value);
   const ex = currentExercise;
 
-  const periOk = perimetreUser === ex.perimetre;
-  const areaOk = areaUser === ex.area;
+  // Tolerància 0.51: accepta tant el valor exacte (43.96) com l'arrodonit (44)
+  const periOk = Math.abs(perimetreUser - ex.perimetre) < 0.51;
+  const areaOk = Math.abs(areaUser - ex.area) < 0.51;
   const allOk = periOk && areaOk;
 
   const resultDiv = document.getElementById('result-circle');
@@ -3790,8 +3851,8 @@ function checkTrophies() {
     newTrofeus.push('mestre_geo');
   }
 
-  // Llegenda de la Geometria (18000 XP = rang màxim)
-  if ((player.xp || 0) >= 18000 && !player.trofeus.includes('llegenda_geometria')) {
+  // Llegenda de la Geometria (15000 XP = rang màxim, Mestre Suprem)
+  if ((player.xp || 0) >= 15000 && !player.trofeus.includes('llegenda_geometria')) {
     newTrofeus.push('llegenda_geometria');
   }
 
@@ -3878,10 +3939,10 @@ function unlockCurios() {
 
 const FORMES_IDENTIFICA = [
   { icon: '⬜', nom: 'Quadrat', sides: 4, angles: 4, tipus: 'Regular' },
-  { icon: '▭', nom: 'Rectangle', sides: 4, angles: 4, tipus: 'Regular' },
+  { icon: '▭', nom: 'Rectangle', sides: 4, angles: 4, tipus: 'Paral·lelogram' },
   { icon: '🔺', nom: 'Triangle', sides: 3, angles: 3, tipus: 'Polígon' },
   { icon: '◇', nom: 'Romboide', sides: 4, angles: 4, tipus: 'Paral·lelogram' },
-  { icon: '◆', nom: 'Rombo', sides: 4, angles: 4, tipus: 'Regular' },
+  { icon: '◆', nom: 'Rombo', sides: 4, angles: 4, tipus: 'Paral·lelogram' },
   { icon: '⊥', nom: 'Trapezi', sides: 4, angles: 4, tipus: 'Trapezi' },
   { icon: '⬟', nom: 'Pentàgon', sides: 5, angles: 5, tipus: 'Regular' },
   { icon: '⬡', nom: 'Hexàgon', sides: 6, angles: 6, tipus: 'Regular' },
@@ -4005,8 +4066,8 @@ function selectIdentifyOption(selectedName) {
   }
 
   html += `
-    <button class="btn-secondary" onclick="setupIdentify()" style="margin-top: 16px;">Següent</button>
-    <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 8px;">Tornar</button>
+    <button class="btn-primary" onclick="setupIdentify()" style="margin-top: 16px;">📝 Següent</button>
+    <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 8px;">🏠 Menú</button>
   </div>`;
 
   resultDiv.innerHTML = html;
@@ -4016,12 +4077,56 @@ function selectIdentifyOption(selectedName) {
 //  INIT
 // ═══════════════════════════════════════════
 
+function initSplash() {
+  const phrases = [
+    'Quants costats té un hexàgon? Ho descobriràs! ⬡',
+    'Domina les àrees i els perímetres pas a pas! 📐',
+    'Preparat per convertir-te en un mestre de la geometria?',
+    'Cada forma amaga una fórmula! 🔺',
+    'La geometria està per tot arreu... fins i tot aquí!',
+    'Triangles, cercles, hexàgons... a punt per jugar-hi! ✨'
+  ];
+  const phraseEl = document.getElementById('splash-phrase');
+  if (phraseEl) phraseEl.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+
+  const container = document.getElementById('splash-shapes-container');
+  const shapes = ['△', '◻', '⬠', '⬡', '○', '▱', '◇', '▭'];
+  const positions = [
+    { top: '9%', left: '7%', delay: '0s' }, { top: '16%', right: '9%', delay: '.5s' },
+    { bottom: '24%', left: '11%', delay: '1s' }, { top: '34%', right: '18%', delay: '1.5s' },
+    { bottom: '14%', right: '8%', delay: '.8s' }, { top: '48%', left: '4%', delay: '1.2s' },
+    { bottom: '36%', right: '30%', delay: '.3s' }, { top: '7%', left: '38%', delay: '1.7s' }
+  ];
+  if (container) {
+    shapes.forEach((txt, i) => {
+      const div = document.createElement('div');
+      div.className = 'shape-anim';
+      div.textContent = txt;
+      const p = positions[i];
+      div.style.top = p.top || 'auto';
+      div.style.bottom = p.bottom || 'auto';
+      div.style.left = p.left || 'auto';
+      div.style.right = p.right || 'auto';
+      div.style.animationDelay = p.delay;
+      container.appendChild(div);
+    });
+  }
+
+  // ⏱️ Temps estàndard ESTIL-JOCS.md (2026-07-10): 4100ms hold + 480ms fadeout
+  setTimeout(() => {
+    const splash = document.getElementById('screen-real-splash');
+    splash.classList.add('fadeout');
+    setTimeout(() => {
+      splash.style.display = 'none';
+      showScreen('screen-portada');
+    }, 480);
+  }, 4100);
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   loadPlayer();
-  // Mostrar portada per defecte
-  showScreen('screen-portada');
+  initSplash();
 });
 </script>
-</head>
 </body>
 </html>

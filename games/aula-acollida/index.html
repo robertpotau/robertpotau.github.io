@@ -149,7 +149,7 @@
       height: 100%;
       background: linear-gradient(90deg, var(--accent), #22d3ee);
       border-radius: 99px;
-      animation: splash-load 1.2s ease-out 0.2s forwards;
+      animation: splash-load 3.4s ease-out 0.2s forwards;
       width: 0%;
     }
     @keyframes splash-load {
@@ -166,7 +166,15 @@
       margin: 0;
     }
     #s-splash .splash-btn-wrap {
-      display: none;
+      position: relative; z-index: 2; margin-top: 22px;
+    }
+    #s-splash .splash-btn-wrap .btn-primary {
+      width: auto; padding: 14px 36px; font-size: 1.05rem;
+      opacity: 0; pointer-events: none; transform: translateY(8px);
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    #s-splash .splash-btn-wrap .btn-primary.ready {
+      opacity: 1; pointer-events: auto; transform: translateY(0);
     }
     @keyframes slideInUp {
       from { opacity: 0; transform: translateY(24px); }
@@ -730,6 +738,9 @@
       <div class="splash-bar-fill"></div>
     </div>
     <div class="splash-phrase" id="splash-phrase"></div>
+    <div class="splash-btn-wrap">
+      <button class="btn-primary" id="splash-start-btn" onclick="goPastSplash()">▶ Comença!</button>
+    </div>
   </div>
 
   <!-- PROFILE SELECT -->
@@ -1131,7 +1142,7 @@
     </div>
     <hr class="credits-divider">
     <div class="credits-cc">
-      <strong>Versió 2.1</strong> · 13 de juny de 2026<br>
+      <strong>Versió 2.3</strong> · 10 de juliol de 2026<br>
       <span>12 unitats · 16 modes + Repàs intel·ligent · lectura fàcil · àudio corregit · 400+ paraules</span>
     </div>
     <button class="credits-close" onclick="closeCredits()">Tancar</button>
@@ -5466,23 +5477,33 @@ function initSplash() {
     phraseEl.textContent = SPLASH_PHRASES[Math.floor(Math.random() * SPLASH_PHRASES.length)];
   }
 
-  // Transicio automatica despres de 1800ms
+  // El botó "Comença!" apareix quan la barra s'omple (3600ms) — cal un TOC REAL per continuar
+  // en lloc d'una transició 100% automàtica. Motiu: bug documentat "primera síl·laba muda"
+  // (ttsWarmup() escalfa el motor al primer pointerdown, però si aquest primer toc coincideix
+  // amb la primera crida REAL a ttsSpeak() el marge és massa curt i es talla l'inici del so).
+  // Amb aquest botó, el toc d'escalfament passa AQUÍ, sol, abans de cap paraula parlada —
+  // veure variant "TTS-safe splash" a ESTIL-JOCS.md secció 1.
   setTimeout(() => {
-    const splash = document.getElementById('s-splash');
-    if (splash && splash.classList.contains('active')) {
-      splash.classList.add('fadeout');
-      setTimeout(() => {
-        splash.classList.remove('active', 'fadeout');
-        const idx = getActiveIdx(), profiles = loadProfiles();
-        if (idx >= 0 && profiles[idx]) {
-          showScreen('s-home');
-        } else {
-          showScreen('s-profile-select');
-          renderProfileSelect();
-        }
-      }, 500);
-    }
-  }, 1800);
+    const btn = document.getElementById('splash-start-btn');
+    if (btn) btn.classList.add('ready');
+  }, 3600);
+}
+
+function goPastSplash() {
+  const splash = document.getElementById('s-splash');
+  if (splash && splash.classList.contains('active')) {
+    splash.classList.add('fadeout');
+    setTimeout(() => {
+      splash.classList.remove('active', 'fadeout');
+      const idx = getActiveIdx(), profiles = loadProfiles();
+      if (idx >= 0 && profiles[idx]) {
+        showScreen('s-home');
+      } else {
+        showScreen('s-profile-select');
+        renderProfileSelect();
+      }
+    }, 480);
+  }
 }
 
 // ══════════════════════════════════════════════════════════════

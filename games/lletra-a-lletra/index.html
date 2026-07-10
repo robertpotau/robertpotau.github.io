@@ -196,6 +196,16 @@
     }
     .splash-btn:hover  { transform: scale(1.04); }
     .splash-btn:active { transform: translateY(4px); box-shadow: 0 4px 0 rgba(0,0,0,0.18); }
+    .splash-btn.pending { opacity: 0; pointer-events: none; transform: translateY(8px); }
+    .splash-btn { transition: opacity 0.4s, transform 0.4s, box-shadow 0.1s; }
+    .splash-bar-bg { width: 210px; height: 6px; background: rgba(255,255,255,0.25); border-radius: 99px;
+      margin: 4px auto 20px; overflow: hidden; position: relative; z-index: 1; }
+    .splash-bar-fill { height: 100%; width: 0%; background: #fff; border-radius: 99px;
+      animation: splash-load 3.4s ease-out 0.2s forwards; }
+    @keyframes splash-load { to { width: 100%; } }
+    .splash-phrase { max-width: 300px; font-size: 0.9rem; color: rgba(255,255,255,0.75); font-style: italic;
+      margin-bottom: 20px; position: relative; z-index: 1; animation: fadeIn 0.8s 0.4s both; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 0.75; } }
     .palette-btn {
       position: absolute; bottom: 24px; right: 24px; z-index: 2;
       background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.5);
@@ -626,7 +636,9 @@
     <div class="splash-deco-strip">
       <span>🅰️</span><span>📚</span><span>💬</span><span>🗣️</span><span>📄</span><span>🔡</span>
     </div>
-    <button class="splash-btn" onclick="goToProfiles()">▶ Començar</button>
+    <div class="splash-bar-bg"><div class="splash-bar-fill"></div></div>
+    <p class="splash-phrase" id="splash-phrase"></p>
+    <button class="splash-btn pending" id="splash-start-btn" onclick="goToProfiles()">▶ Començar</button>
     <button class="palette-btn" onclick="openPaletteModal()">🎨 Colors</button>
   </div>
 
@@ -800,7 +812,7 @@
   <div id="credits" class="screen">
     <div class="credits-logo">📖</div>
     <h1 style="margin-bottom:8px; text-align:center">Lletra a Lletra</h1>
-    <div class="credits-version" style="text-align:center">v1.0 — 19 de maig de 2026</div>
+    <div class="credits-version" style="text-align:center">v1.1 — 10 de juliol de 2026</div>
     <div class="credits-made" style="text-align:center; margin-bottom:24px">Joc de lectoescriptura per a l'aula d'acollida 🏫</div>
     <div class="credits-block">
       <h3>ℹ️ Crèdits</h3>
@@ -833,7 +845,7 @@
       </div>
       <hr class="credits-divider">
       <div class="credits-cc">
-        <strong>Versió 1.0</strong> · 19 de maig de 2026<br>
+        <strong>Versió 1.1</strong> · 10 de juliol de 2026<br>
         <span>6 modes de joc · 26 paraules · 5 fases de dificultat</span>
       </div>
     </div>
@@ -2057,9 +2069,30 @@
   // ══════════════════════════════════════════════════════
   //  INICIALITZACIÓ
   // ══════════════════════════════════════════════════════
+  function initSplash() {
+    const phrases = [
+      'Lletra a lletra, paraula a paraula! ✏️',
+      'Cada dia una mica més a prop de llegir sense parar-te!',
+      'Preparat per convertir les lletres en paraules? 📖',
+      'Aprendre a llegir i escriure obre moltes portes 🔑',
+      'Practica avui, llegeix millor demà 💪',
+      'Cada paraula nova és un pas endavant! 🚀'
+    ];
+    const phraseEl = document.getElementById('splash-phrase');
+    if (phraseEl) phraseEl.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+
+    // La barra es un indicador visual — el botó apareix quan s'omple i cal un toc real
+    // de l'usuari per continuar (necessari perquè el TTS es desbloquegi al WebView de l'APK).
+    setTimeout(() => {
+      const btn = document.getElementById('splash-start-btn');
+      if (btn) btn.classList.remove('pending');
+    }, 3600);
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     loadData();
     initTTS();
+    initSplash();
     document.getElementById('splash-title').addEventListener('click', onSplashTitleClick);
     refreshAvatarPickers();
     renderSkinGrid();

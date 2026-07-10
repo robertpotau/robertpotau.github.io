@@ -916,7 +916,7 @@
     height: 100%;
     background: linear-gradient(90deg, var(--accent), var(--cyan));
     border-radius: 99px;
-    animation: splash-load 1.2s ease-out 0.2s forwards;
+    animation: splash-load 3.4s ease-out 0.2s forwards;
     width: 0%;
   }
   @keyframes splash-pop {
@@ -1501,7 +1501,7 @@
   </div>
 
   <div style="text-align:center; color:var(--text-dim); font-size:0.8rem; margin-top:16px;">
-    Versió 2.1 · Domina les fraccions un pas a la vegada
+    Versió 2.2 · Domina les fraccions un pas a la vegada
   </div>
 </div>
 
@@ -1715,7 +1715,7 @@
 
     <div class="credit-footer">
       <div class="ttl">🍕 Fraccions — Pràctica i reforç</div>
-      <div class="ver"><strong>v2.1</strong> — Juliol 2026</div>
+      <div class="ver"><strong>v2.2</strong> — Juliol 2026</div>
       <div class="lic">📜 Llicència <strong>Creative Commons BY-NC-SA 4.0</strong></div>
       <div class="lic-sub">Compartir — Reconeixement — Mateix tipus de llicència</div>
     </div>
@@ -3817,6 +3817,7 @@ function initSplash() {
   });
 
   // Auto-transició a pantalla de perfils amb fadeOut animation
+  // ⏱️ Temps estàndard (ESTIL-JOCS.md, 2026-07-10): 4100ms hold + 480ms fadeout
   setTimeout(() => {
     const splashScreen = document.getElementById('screen-splash');
     splashScreen.classList.add('fadeout');
@@ -3825,8 +3826,8 @@ function initSplash() {
       splashScreen.classList.remove('fadeout');
       showScreen('screen-select-profile');
       renderProfiles();
-    }, 500);
-  }, 1800);
+    }, 480);
+  }, 4100);
 }
 
 /* ═══════════════════════════════════════════════
