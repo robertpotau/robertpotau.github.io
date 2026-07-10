@@ -268,6 +268,55 @@
   }
   .gcard .play:active { transform: translateY(4px); box-shadow: 0 1px 0 #5d0ba3; }
 
+  /* apps showcase (static section, not part of the scroll-beat/3D corridor) */
+  .app-showcase {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 90px 22px;
+    text-align: center;
+  }
+  .app-showcase h2 { font-size: clamp(24px, 3.4vw, 34px); font-weight: 900; margin: 18px 0 14px; }
+  .app-showcase .lead { max-width: 620px; margin: 0 auto; color: var(--ink-dim); font-size: 15px; }
+  .app-icons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(96px, 110px));
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+  }
+  .app-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .app-icon img {
+    width: 74px;
+    height: 74px;
+    border-radius: 20px;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.4);
+    transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s;
+  }
+  .app-icon:hover img {
+    transform: translateY(-6px) scale(1.06);
+    box-shadow: 0 16px 34px rgba(0,0,0,0.5), 0 0 26px rgba(154,50,239,0.25);
+  }
+  .app-icon span {
+    font-size: 11.5px;
+    font-weight: 800;
+    color: var(--ink-dim);
+    text-align: center;
+    line-height: 1.25;
+  }
+  .app-showcase .app-note {
+    margin-top: 34px;
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+  .app-showcase .app-note a { color: var(--accent); font-weight: 800; text-decoration: underline; }
+
   /* support / kofi */
   .support-box {
     margin-top: 40px;
@@ -579,6 +628,28 @@
     </div>
   </section>
 
+  <!-- Apps showcase (static, not part of the scroll-beat/3D corridor) -->
+  <section class="app-showcase">
+    <div class="plaque">📱 <span data-i18n="apps_plaque">També en Android</span></div>
+    <h2 data-i18n="apps_h">Aquests jocs també existeixen com a apps</h2>
+    <p class="lead" data-i18n="apps_p">Versions APK sense anuncis ni connexió a internet — pensades per instal·lar a les tauletes de l'aula.</p>
+    <div class="app-icons">
+      <div class="app-icon"><img src="app-icons/calcuherois.svg" alt="CalcuHerois" loading="lazy"><span>CalcuHerois</span></div>
+      <div class="app-icon"><img src="app-icons/fraccions.svg" alt="Fraccions" loading="lazy"><span>Fraccions</span></div>
+      <div class="app-icon"><img src="app-icons/geometria.svg" alt="Geometria" loading="lazy"><span>Geometria</span></div>
+      <div class="app-icon"><img src="app-icons/quina-hora-es.svg" alt="Quina Hora És" loading="lazy"><span>Quina Hora És</span></div>
+      <div class="app-icon"><img src="app-icons/lletra-a-lletra.svg" alt="Lletra a Lletra" loading="lazy"><span>Lletra a Lletra</span></div>
+      <div class="app-icon"><img src="app-icons/ortografia.svg" alt="Ortografia" loading="lazy"><span>Ortografia</span></div>
+      <div class="app-icon"><img src="app-icons/aula-acollida.svg" alt="Aula d'Acollida" loading="lazy"><span>Aula d'Acollida</span></div>
+      <div class="app-icon"><img src="app-icons/vistes.svg" alt="Vistes" loading="lazy"><span>Vistes</span></div>
+      <div class="app-icon"><img src="app-icons/what-time-is-it.svg" alt="What Time Is It" loading="lazy"><span>What Time Is It</span></div>
+      <div class="app-icon"><img src="app-icons/verbs-english.svg" alt="VerbQuest" loading="lazy"><span>VerbQuest</span></div>
+    </div>
+    <p class="app-note">📲 <span data-i18n="apps_note_pre">Disponibles sota petició —</span>
+      <a href="mailto:robertpotau@gmail.com?subject=APK%20d%27un%20joc" data-goatcounter-click="mail-apk-request" data-i18n="apps_note_link">escriu-me</a>
+      <span data-i18n="apps_note_post">per rebre l'APK del joc que et vagi bé.</span></p>
+  </section>
+
 </main>
 
 <footer>
@@ -635,6 +706,9 @@ const translations = {
     step1: "Contacte", step2: "Definim l'abast", step3: "Prototip jugable", step4: "Lliurament (web i/o APK)",
     b9_btn: "Escriu-me", b9_pdf: "📄 Portfolio en PDF",
     b9_fallback: "O si el teu correu no obre l'enllaç, escriu directament a", copied: "Copiat! ✅",
+    apps_plaque: "També en Android", apps_h: "Aquests jocs també existeixen com a apps",
+    apps_p: "Versions APK sense anuncis ni connexió a internet — pensades per instal·lar a les tauletes de l'aula.",
+    apps_note_pre: "Disponibles sota petició —", apps_note_link: "escriu-me", apps_note_post: "per rebre l'APK del joc que et vagi bé.",
     f_classic: "Versió clàssica de la pàgina",
     f_privacy: "🔒 Cap joc envia dades a cap servidor: el progrés es desa només al navegador de l'alumne. 📱 Versions APK disponibles sota petició.",
     f_made: "Fet amb ❤️ per a l'aula — Robert Potau"
@@ -678,6 +752,9 @@ const translations = {
     step1: "Contacto", step2: "Definimos el alcance", step3: "Prototipo jugable", step4: "Entrega (web y/o APK)",
     b9_btn: "Escríbeme", b9_pdf: "📄 Portfolio en PDF",
     b9_fallback: "O si tu correo no abre el enlace, escribe directamente a", copied: "¡Copiado! ✅",
+    apps_plaque: "También en Android", apps_h: "Estos juegos también existen como apps",
+    apps_p: "Versiones APK sin anuncios ni conexión a internet — pensadas para instalar en las tabletas del aula.",
+    apps_note_pre: "Disponibles bajo petición —", apps_note_link: "escríbeme", apps_note_post: "para recibir el APK del juego que quieras.",
     f_classic: "Versión clásica de la página",
     f_privacy: "🔒 Ningún juego envía datos a ningún servidor: el progreso se guarda solo en el navegador del alumno. 📱 Versiones APK disponibles bajo petición.",
     f_made: "Hecho con ❤️ para el aula — Robert Potau"
@@ -721,6 +798,9 @@ const translations = {
     step1: "Contact", step2: "Scope it out", step3: "Playable prototype", step4: "Delivery (web and/or APK)",
     b9_btn: "Write to me", b9_pdf: "📄 Portfolio (PDF)",
     b9_fallback: "Or if your mail client doesn't open the link, write directly to", copied: "Copied! ✅",
+    apps_plaque: "Also on Android", apps_h: "These games also exist as apps",
+    apps_p: "APK versions with no ads and no internet connection — built for installing on classroom tablets.",
+    apps_note_pre: "Available on request —", apps_note_link: "write to me", apps_note_post: "to get the APK for whichever game you'd like.",
     f_classic: "Classic version of this page",
     f_privacy: "🔒 No game sends data to any server: progress is stored only in the student's own browser. 📱 APK versions available on request.",
     f_made: "Made with ❤️ for the classroom — Robert Potau"
