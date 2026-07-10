@@ -39,7 +39,9 @@
   }
 
   html {
-    background: linear-gradient(135deg, #f97316 0%, #fbbf24 100%);
+    /* Mateix gradient (i cercles decoratius) que abans només tenia la splash — ara a tota l'app,
+       perquè no hi hagi un canvi de fons en passar de la splash a la resta de pantalles. */
+    background: linear-gradient(155deg, #fbbf24 0%, #f97316 45%, #ef4444 100%);
     background-attachment: fixed;
     min-height: 100%;
   }
@@ -56,6 +58,27 @@
 
   body {
     background: transparent;
+    position: relative;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    width: 380px; height: 380px;
+    background: rgba(255,255,255,0.10);
+    border-radius: 50%;
+    top: -120px; left: -100px;
+    pointer-events: none;
+    z-index: -1;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    width: 240px; height: 240px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 50%;
+    bottom: -60px; right: -60px;
+    pointer-events: none;
+    z-index: -1;
   }
 
   /* ===== SCREENS ===== */
@@ -150,6 +173,8 @@
   .card-sm { padding: 12px 16px; border-radius: var(--radius-sm); }
 
   /* ===== SPLASH SCREEN ===== */
+  /* Fons i cercles decoratius ara vénen de html/body (vegeu més amunt) — es veuen
+     igual a totes les pantalles, no només aquí. */
   #splash { display: none; }
   #splash.active {
     display: flex;
@@ -158,29 +183,10 @@
     justify-content: center;
     text-align: center;
     min-height: 100vh;
-    background: linear-gradient(155deg, #fbbf24 0%, #f97316 45%, #ef4444 100%);
     color: #fff;
     padding: 32px 16px;
     position: relative;
     overflow: hidden;
-  }
-  #splash.active::before {
-    content: '';
-    position: absolute;
-    width: 380px; height: 380px;
-    background: rgba(255,255,255,0.10);
-    border-radius: 50%;
-    top: -120px; left: -100px;
-    pointer-events: none;
-  }
-  #splash.active::after {
-    content: '';
-    position: absolute;
-    width: 240px; height: 240px;
-    background: rgba(255,255,255,0.07);
-    border-radius: 50%;
-    bottom: -60px; right: -60px;
-    pointer-events: none;
   }
   .splash-logo {
     font-size: 6rem;
@@ -225,6 +231,23 @@
   }
   .splash-btn:hover  { transform: scale(1.04); }
   .splash-btn:active { transform: translateY(4px); box-shadow: 0 4px 0 rgba(0,0,0,0.18); }
+  .splash-btn.pending { opacity: 0; pointer-events: none; transform: translateY(8px); }
+  .splash-btn { transition: opacity 0.4s, transform 0.4s, box-shadow 0.1s; }
+  .splash-bar-bg { width: 210px; height: 6px; background: rgba(255,255,255,0.25); border-radius: 99px;
+    margin: 4px auto 24px; overflow: hidden; position: relative; z-index: 1; }
+  .splash-bar-fill { height: 100%; width: 0%; background: #fff; border-radius: 99px;
+    animation: splash-load 3.4s ease-out 0.2s forwards; }
+  @keyframes splash-load { to { width: 100%; } }
+  .splash-phrase { max-width: 300px; font-size: 0.9rem; color: rgba(255,255,255,0.85); font-style: italic;
+    margin-bottom: 24px; position: relative; z-index: 1; animation: fadeInPhrase 0.8s 0.4s both; }
+  @keyframes fadeInPhrase { from { opacity: 0; } to { opacity: 0.85; } }
+  .splash-letters { position: absolute; inset: 0; opacity: 0.25; pointer-events: none; }
+  .letter-anim { position: absolute; font-size: clamp(1.4rem, 5vw, 2.4rem); font-weight: 900; color: #fff;
+    animation: letter-float 4.5s ease-in-out infinite; }
+  @keyframes letter-float {
+    0%,100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
+    50%      { transform: translateY(-28px) rotate(-10deg) scale(1.12); opacity: 0.6; }
+  }
 
   /* ===== PROFILE SCREEN ===== */
   .profiles-grid {
@@ -1350,10 +1373,13 @@
 
 <!-- ===== SPLASH ===== -->
 <div id="splash" class="screen active">
+  <div class="splash-letters" id="splash-letters-container"></div>
   <div class="splash-logo">✍️</div>
   <h1 class="splash-title">Joc d'Ortografia</h1>
   <p class="splash-sub">Aprèn i practica l'ortografia catalana 📖</p>
-  <button class="splash-btn" onclick="showScreen('profiles')">Comença! 🚀</button>
+  <div class="splash-bar-bg"><div class="splash-bar-fill"></div></div>
+  <p class="splash-phrase" id="splash-phrase"></p>
+  <button class="splash-btn pending" id="splash-start-btn" onclick="showScreen('profiles')">Comença! 🚀</button>
 </div>
 
 <!-- ===== PROFILES ===== -->
@@ -1794,7 +1820,7 @@
     </div>
     <hr class="credits-divider">
     <div class="credits-cc">
-      <strong>Versió 2.0</strong> · abril de 2026<br>
+      <strong>Versió 2.2</strong> · 10 de juliol de 2026<br>
       <span>2 temes · 5 modes de joc · 83 paraules B/V · 26 paraules accentuació</span>
     </div>
     <button class="credits-close" onclick="closeCredits()">Tancar</button>
@@ -1898,7 +1924,7 @@ const COLOR_THEMES = [
     primary: '#f97316',
     bg: '#fffbeb',
     card: '#ffffff',
-    bgGradient: 'linear-gradient(135deg, #f97316 0%, #fbbf24 100%)',
+    bgGradient: 'linear-gradient(155deg, #fbbf24 0%, #f97316 45%, #ef4444 100%)',
   },
   {
     id: 'ocean',
@@ -5084,6 +5110,53 @@ if (state.profiles.length === 0) {
 } else if (state.currentProfileIdx !== null && state.profiles[state.currentProfileIdx]) {
   // Auto-login last user? No — always show profile selector
 }
+
+// ===================================================================
+// SPLASH — frase motivadora + lletres flotants + botó retardat
+// ===================================================================
+function initSplash() {
+  const phrases = [
+    'La ce trencada, l\'apòstrof, la ela geminada... els dominaràs tots! 🔤',
+    'Preparat per convertir-te en un mestre de l\'ortografia?',
+    'Cada paraula ben escrita és una petita victòria! ✍️',
+    'Accents, dièresis, dobles consonants... a punt per practicar?',
+    'L\'ortografia catalana no té secrets per a tu! 📖',
+    'Escriu-ho bé a la primera! 💪'
+  ];
+  const phraseEl = document.getElementById('splash-phrase');
+  if (phraseEl) phraseEl.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+
+  const container = document.getElementById('splash-letters-container');
+  const letters = ['Ç', "L·L", 'À', "'", 'SS', 'H', 'NY', 'GU'];
+  const positions = [
+    { top: '9%', left: '7%', delay: '0s' }, { top: '16%', right: '9%', delay: '.5s' },
+    { bottom: '24%', left: '11%', delay: '1s' }, { top: '34%', right: '18%', delay: '1.5s' },
+    { bottom: '14%', right: '8%', delay: '.8s' }, { top: '48%', left: '4%', delay: '1.2s' },
+    { bottom: '36%', right: '30%', delay: '.3s' }, { top: '7%', left: '38%', delay: '1.7s' }
+  ];
+  if (container) {
+    letters.forEach((txt, i) => {
+      const div = document.createElement('div');
+      div.className = 'letter-anim';
+      div.textContent = txt;
+      const p = positions[i];
+      div.style.top = p.top || 'auto';
+      div.style.bottom = p.bottom || 'auto';
+      div.style.left = p.left || 'auto';
+      div.style.right = p.right || 'auto';
+      div.style.animationDelay = p.delay;
+      container.appendChild(div);
+    });
+  }
+
+  // El botó apareix quan la barra s'omple — cal un toc real per continuar
+  // (desbloqueja el TTS al WebView de l'APK, com a lletra-a-lletra).
+  setTimeout(() => {
+    const btn = document.getElementById('splash-start-btn');
+    if (btn) btn.classList.remove('pending');
+  }, 3600);
+}
+initSplash();
 </script>
 </body>
 </html>

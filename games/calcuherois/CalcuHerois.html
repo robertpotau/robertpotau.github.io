@@ -587,8 +587,10 @@
     animation: splash-pop 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
   }
   .splash-sub { color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 4px; animation: fadeIn 0.8s 0.3s both; }
-  .splash-bar-bg { width: 160px; height: 4px; background: rgba(255,255,255,0.15); border-radius: 99px; margin-top: 32px; overflow: hidden; }
-  .splash-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg,#f7c948,#a78bfa); border-radius: 99px; animation: splash-load 1.2s 0.2s ease-out forwards; }
+  .splash-bar-bg { width: 210px; height: 6px; background: rgba(255,255,255,0.15); border-radius: 99px; margin-top: 32px; overflow: hidden; }
+  .splash-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg,#f7c948,#a78bfa); border-radius: 99px; animation: splash-load 3.4s 0.2s ease-out forwards; }
+  .splash-phrase { max-width: 300px; font-size: 0.95rem; color: rgba(255,255,255,0.5); font-style: italic;
+    margin-top: 26px; text-align: center; animation: fadeIn 0.8s 0.4s both; }
   @keyframes splash-pop {
     0%   { transform: scale(0.4); opacity: 0; }
     100% { transform: scale(1);   opacity: 1; }
@@ -596,6 +598,14 @@
   @keyframes splash-load {
     0%   { width: 0%; }
     100% { width: 100%; }
+  }
+  /* ── SPLASH FLOATING NUMBERS/SYMBOLS ── */
+  .splash-nums { position: absolute; inset: 0; opacity: 0.22; pointer-events: none; }
+  .num-anim { position: absolute; font-size: clamp(1.3rem, 4.5vw, 2.3rem); font-weight: 800;
+    color: #f7c948; animation: num-float 4.5s ease-in-out infinite; }
+  @keyframes num-float {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
+    50% { transform: translateY(-28px) rotate(8deg) scale(1.12); opacity: 0.65; }
   }
 
   /* ── TEMA CLAR (M11) ── */
@@ -766,9 +776,11 @@
 
 <!-- ── SPLASH ── -->
 <div id="screen-splash">
+  <div class="splash-nums" id="splash-nums-container"></div>
   <div class="splash-logo">⚡ CalcuHerois</div>
   <div class="splash-sub">Joc de càlcul mental</div>
   <div class="splash-bar-bg"><div class="splash-bar-fill"></div></div>
+  <div class="splash-phrase" id="splash-phrase"></div>
 </div>
 
 <!-- ── THEME FAB ── -->
@@ -1205,7 +1217,7 @@
 
 <div class="credits-modal-bg" id="credits-modal-bg" onclick="closeCreditsIfBg(event)">
   <div class="credits-modal">
-    <h3>ℹ️ Crèdits · <span id="credits-version" style="font-weight:400; opacity:0.55; cursor:default;" onclick="teacherTap()">v2.8</span></h3>
+    <h3>ℹ️ Crèdits · <span id="credits-version" style="font-weight:400; opacity:0.55; cursor:default;" onclick="teacherTap()">v2.9</span></h3>
     <div class="credits-row">
       <div class="credits-icon">👨‍🏫</div>
       <div class="credits-info">
@@ -3594,7 +3606,45 @@ function loadSavedTheme() {
 loadPlayer();
 loadSavedTheme();
 
-// M9: Splash screen — mostrar 1.5s i després anar a la pantalla correcta
+// M9: Splash screen — mostrar 4.1s (perquè es gaudeixin els gràfics) i després anar a la pantalla correcta
+(function initSplash() {
+  const phrases = [
+    'Domina el càlcul mental un pas a la vegada!',
+    'Cada resposta és una nova victòria! 🎯',
+    'Preparat per convertir-te en un heroi dels números? ⚡',
+    'La pràctica fa el mestre... o l\'heroi! 🦸',
+    'Els números no fan por, els dominaràs! 💪',
+    'Cada repte et fa més fort! 🔥'
+  ];
+  const phraseEl = document.getElementById('splash-phrase');
+  if (phraseEl) phraseEl.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+
+  const container = document.getElementById('splash-nums-container');
+  const decos = ['7', '×', '42', '+', '9', '÷', '15', '=', '3', '%', '√', '−'];
+  const positions = [
+    { top: '9%', left: '7%', delay: '0s' }, { top: '16%', right: '9%', delay: '.5s' },
+    { bottom: '24%', left: '11%', delay: '1s' }, { top: '34%', right: '18%', delay: '1.5s' },
+    { bottom: '14%', right: '8%', delay: '.8s' }, { top: '48%', left: '4%', delay: '1.2s' },
+    { bottom: '36%', right: '30%', delay: '.3s' }, { top: '7%', left: '38%', delay: '1.7s' },
+    { bottom: '8%', left: '30%', delay: '.6s' }, { top: '60%', right: '6%', delay: '1.4s' },
+    { top: '22%', left: '22%', delay: '.9s' }, { bottom: '45%', right: '15%', delay: '.2s' }
+  ];
+  if (container) {
+    decos.forEach((txt, i) => {
+      const div = document.createElement('div');
+      div.className = 'num-anim';
+      div.textContent = txt;
+      const p = positions[i] || positions[i % positions.length];
+      div.style.top = p.top || 'auto';
+      div.style.bottom = p.bottom || 'auto';
+      div.style.left = p.left || 'auto';
+      div.style.right = p.right || 'auto';
+      div.style.animationDelay = p.delay;
+      container.appendChild(div);
+    });
+  }
+})();
+
 const splash = document.getElementById('screen-splash');
 setTimeout(() => {
   splash.classList.add('fade-out');
@@ -3611,7 +3661,7 @@ setTimeout(() => {
       showScreen('screen-profile');
     }
   }
-}, 1500);
+}, 4100);
 
 // Enter key on daily
 document.addEventListener('keydown', e => {
