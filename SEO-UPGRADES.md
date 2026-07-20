@@ -73,6 +73,46 @@ landing-page copy (manual `cp` on this machine; the script's `$src` only exists 
   - Ongoing: check GSC "Rendimiento" for query data after a few weeks; use "Inspección de URLs → Solicitar indexación" for any new page (esp. new fitxes). *(fixes P10)*
 - [ ] **C4. Custom domain** (optional, ~10-15 €/year, e.g. `robertpotau.cat`): better branding + memorability; `.github.io` subdomains rank fine but a domain survives a platform move. Not urgent.
 
+## Final QA — 2026-07-20 (end of the SEO sprint)
+
+Ran `tools/qa_check.py` (kept in the repo — re-run it after any structural change):
+38 pages checked — every local link resolves, every canonical matches its page,
+every hreflang target exists, all JSON-LD parses, og:url == canonical, lang attrs
+correct, all 47 sitemap locs exist as files, GSC verification file intact, no
+template leftovers. Plus an interactive Playwright click-through (language switch
+on fitxes, related links, Jugar CTAs, breadcrumbs, hub links): all OK.
+
+**Bugs found & fixed during the sprint** (all fixed BEFORE deploy):
+1. Root homepage init called `applyLang('ca')` before the stored-language check —
+   it re-saved 'ca' and killed the ES/EN redirect. Fixed: redirect check runs first.
+2. Stored-ES visitors clicking "CA" on /es/ bounced straight back to /es/ —
+   fixed with the `/?lang=ca` override (don't "simplify" that link to `/`).
+3. First version of gen_lang_homepages.py left the switcher JS active on the
+   generated pages (would have swapped /es/ text per localStorage). Fixed: the
+   whole switcher block is stripped and replaced on generated pages.
+
+## Known gaps / notes for next session (deliberate, not bugs)
+
+- **classic.html** is CA-only with the old JS-swap switcher: no hreflang, no
+  ES/EN variants, no fitxa links on its cards, and **VerbQuest is missing from it
+  entirely**. Low priority (legacy page). If it ever gets attention: add the card
+  + fitxa links, or fold it into the main page and 301 it.
+- **Generated files rule**: `/es/index.html`, `/en/index.html`, all of `jocs/`,
+  `es/jocs/`, `en/jocs/` and `sitemap.xml` are ARTIFACTS. Never hand-edit; edit
+  the generators in `tools/` and re-run (gen_lang_homepages.py, gen_fitxes.py,
+  gen_sitemap.py). Then run tools/qa_check.py before pushing.
+- **verbs-english runtime lang**: the game's own settings script overwrites
+  `document.documentElement.lang` at runtime; served HTML is correct. Cosmetic.
+- GoatCounter events share names across languages — split by page path in the
+  dashboard if per-language numbers are needed.
+- 7 private game repos still carry a `pre-merge-backup-20260720` branch (local
+  pre-reconciliation state) — deletable once confirmed nothing is missed.
+- `sync-game.ps1`'s `$src` still points at the Tower path — can't run from the
+  Mini PC; manual `cp` canonical→landing there.
+- GSC: revisit **Rendimiento** ~mid-August 2026 for real query data (3 languages);
+  request indexing for any new page via Inspección de URLs (quota ~10/day).
+- Only C4 (custom domain, optional) remains from the original plan.
+
 ### Recommended order
 
 A1-A5 together (one session) → B1+B2 (one session, touches 10 canonical repos + sync) → C3 (needs Robert) → C2 → C1 → C4 whenever.
