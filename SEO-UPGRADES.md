@@ -34,7 +34,13 @@ landing-page copy (manual `cp` on this machine; the script's `$src` only exists 
 
 ## Proposed upgrades
 
-### Tier A — quick technical wins (safe, local, ~no risk) — ✅ DONE 2026-07-20 (local, not yet pushed)
+> **Deployed 2026-07-20** — landing-page pushed (commit `55d01ee`) and all 10 private game repos pushed.
+> During deploy we discovered the Tower had committed Supabase to the canonical repos (older content
+> generation); reconciled by adopting the live landing copies as canonical. Backup branches
+> `pre-merge-backup-20260720` left in the 7 affected repos.
+> Version bumps done as part of this: aula-acollida → 2.4, lletra-a-lletra → 1.2.
+
+### Tier A — quick technical wins (safe, local, ~no risk) — ✅ DONE 2026-07-20
 
 - [x] **A1. Canonical tags**: added to index.html (→ `/`) and classic.html (→ `/classic.html`); classic's `og:url` now points at itself. *(fixes P1)*
 - [x] **A2. JSON-LD on index.html**: `Person` + `WebSite` `@graph` block in `<head>`. *(fixes P2 for the homepage)*
