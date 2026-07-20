@@ -85,12 +85,41 @@ To sync **all** featured games at once (e.g. after a batch of changes), run the 
 C:\Users\PC\Documents\Claude-Sync\claude-projects\landing-page\sync-game.ps1
 ```
 
-## Adding a new game to the landing page
+## Adding a new game to the landing page — FULL CHECKLIST (updated 2026-07-20)
 
-1. Add a new `<div class="game-card">` block in `index.html` (copy an existing card, change icon/subject/title/description/link).
-2. Add the slug + entry file to both the table above and the `$games` map at the top of `sync-game.ps1`.
-3. Run `sync-game.ps1 -Slug <newslug>` to copy its files in and publish.
-4. If the game doesn't yet have its own private GitHub repo, create one first (`gh repo create robertpotau/<slug> --private --source=. --remote=origin`, push).
+Follow ALL steps, in order. Steps 5-9 are the SEO layer added 2026-07-20 — a game
+without them is invisible to Google. Reference examples: any existing game (e.g.
+fraccions) has every piece in place.
+
+**1. Private repo.** If the game doesn't have one: `gh repo create robertpotau/<slug> --private --source=. --remote=origin`, push. Git identity: `Robert Potau <robertpotau@gmail.com>`.
+
+**2. SEO head block in the CANONICAL game file** (`claude-projects/<slug>/<entry>.html`) — never only in the landing copy (robocopy /MIR would wipe it):
+   - keyword-rich `<title>` (e.g. "Joc de X online gratuït — 1r ESO")
+   - `<meta name="description">`, `<link rel="canonical" href="https://robertpotau.github.io/games/<slug>/<entry>">`
+   - OG + Twitter tags (`og:image` = `https://robertpotau.github.io/screenshots/<slug>.jpg`)
+   - `WebApplication`+`LearningResource` JSON-LD (copy from any existing game, adjust name/url/description/teaches/educationalLevel/inLanguage)
+   - correct `lang` attribute on `<html>`
+   - ⚠️ Edit HTML with the Edit tool or Python `io.open` (utf-8) — NEVER PowerShell (mojibake).
+
+**3. Screenshot.** Capture `screenshots/<slug>.jpg` (1200px-ish wide) — `tools/capture_screenshots.py` pattern (headless Playwright).
+
+**4. Copy the game into the landing repo**: `games/<slug>/` (entry file + assets + `supabase-sync.js` if the game has cloud sync). Update the featured-games table above and `sync-game.ps1`'s `$games` map.
+
+**5. Fitxa page.** Add the game's entry to the `GAMES` list in `tools/gen_fitxes.py` (seo_title, meta, subject, grade, lead, 3 paragraphs of real copy, 6 features, related slugs, teaches, level) and re-run it (`python tools/gen_fitxes.py`). This regenerates all of `jocs/` including the hub — that's fine, it's deterministic.
+
+**6. Homepage card** in `index.html`: `<div class="gcard">` in the right classroom beat, with screenshot, grade span, description, `Jugar ▶` link (`data-goatcounter-click="game-<slug>"`) **and** the fitxa link: `<a class="fitxa" href="jocs/<slug>.html" data-i18n="fitxa" data-goatcounter-click="fitxa-<slug>">ℹ️ Fitxa del joc</a>`. Add any new i18n copy to ALL THREE language blocks (ca/es/en) in the inline `translations` object.
+
+**7. classic.html card** too (same pattern, its own translations block).
+
+**8. Sitemap**: add BOTH URLs — `games/<slug>/<entry>` (priority 0.8) and `jocs/<slug>.html` (0.8) — with `<lastmod>` = today.
+
+**9. App icon** (if showcased): `app-icons/<slug>.svg` + entry in the apps showcase section of index.html.
+
+**10. Verify locally** (headless Playwright, file:// URIs): game loads without console errors, JSON-LD parses, fitxa page renders, homepage fitxa link resolves. GoatCounter won't record localhost hits — expected.
+
+**11. Deploy**: commit+push the private game repo, then commit+push this landing repo (Pages rebuilds ~1 min). Verify live with `curl --ssl-no-revoke` (plain curl fails on this machine with schannel error 35).
+
+**12. After Search Console is set up (C3)**: request indexing of the new fitxa URL in GSC for faster discovery.
 
 ## Known limitation: progress doesn't sync across devices
 
