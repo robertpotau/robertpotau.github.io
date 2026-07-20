@@ -17,6 +17,17 @@ Robert is configuring Stripe on Ko-fi so he can eventually sell **full/paid vers
 
 **When Robert says the Shop is actually live with real products:** replace the generic `/shop` link with real per-product links if he wants (or keep the generic shop link if one page listing all games is fine), and drop the "(properament/coming soon)" wording from `b8_shop`/`cta2_shop`. Don't do this speculatively — wait for him to confirm it's ready, since guessing at commercial copy/pricing isn't something to do unprompted.
 
+## SEO (2026-07-20)
+
+See `SEO-UPGRADES.md` for the full audit, what's done, and the remaining Tier C backlog (ES/EN pre-rendered pages, per-game fitxa pages, Search Console, custom domain).
+
+Rules established:
+- `index.html` and `classic.html` each carry a **canonical tag**, JSON-LD (`Person`+`WebSite` on index), PNG touch icons + `site.webmanifest`.
+- **Every game page** (both the canonical file in `claude-projects/<slug>/` AND the landing copy) carries meta description, canonical URL, OG/Twitter tags, and `LearningResource` JSON-LD in `<head>`. **When adding a new game, replicate this block** (copy from any existing game, adjust title/desc/URLs/teaches/level).
+- Game-page SEO lives in the **canonical** files precisely so `sync-game.ps1`'s `robocopy /MIR` doesn't wipe it. Head edits to game SEO must always be made canonical-first.
+- Three.js is now **self-hosted** at `vendor/three-0.160.0.min.js` (was unpkg) — keep the pinned version, r161+ has no UMD build.
+- `sitemap.xml` lists all pages — add new games there too (`<lastmod>` = deploy date).
+
 ## Architecture
 
 - `index.html` — the current (v2, immersive Three.js) landing page.

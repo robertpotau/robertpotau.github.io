@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Potau — Un professor que fa jocs</title>
 <meta name="description" content="Un viatge per l'institut on neixen els jocs: matemàtiques, llengua, geometria i més. Jocs educatius gratuïts creats per Robert Potau, professor de secundària de Tecnologia i Digitalització.">
+<link rel="canonical" href="https://robertpotau.github.io/">
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#9a32ef">
 
 <!-- Open Graph / social preview -->
 <meta property="og:type" content="website">
@@ -20,6 +23,36 @@
 <meta name="twitter:title" content="Robert Potau — Un professor que fa jocs">
 <meta name="twitter:description" content="Jocs educatius gratuïts nascuts a l'aula. Entra a l'institut.">
 <meta name="twitter:image" content="https://robertpotau.github.io/og-image.png">
+
+<!-- Structured data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://robertpotau.github.io/#website",
+      "url": "https://robertpotau.github.io/",
+      "name": "Robert Potau — Jocs educatius",
+      "description": "Jocs educatius gratuïts per a l'aula: matemàtiques, llengua catalana, acollida, tecnologia i anglès.",
+      "inLanguage": ["ca", "es", "en"],
+      "publisher": { "@id": "https://robertpotau.github.io/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://robertpotau.github.io/#person",
+      "name": "Robert Potau",
+      "url": "https://robertpotau.github.io/",
+      "jobTitle": "Professor de secundària de Tecnologia i Digitalització",
+      "knowsLanguage": ["ca", "es", "en"],
+      "sameAs": [
+        "https://github.com/robertpotau",
+        "https://ko-fi.com/robertpotau"
+      ]
+    }
+  ]
+}
+</script>
 
 <!-- ANALYTICS: GoatCounter (free, privacy-friendly, no cookie banner needed). Every "Jugar/Play", Ko-fi, contact and PDF link carries a data-goatcounter-click attribute, tracked automatically as named events. -->
 <script data-goatcounter="https://robertpotau.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -662,7 +695,8 @@
   <p style="margin-top:10px" data-i18n="f_made">Fet amb ❤️ per a l'aula — Robert Potau</p>
 </footer>
 
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"
+<!-- Self-hosted (was unpkg CDN) — pinned 0.160.0, the last version with a UMD build -->
+<script src="vendor/three-0.160.0.min.js"
         onerror="document.body.classList.add('no3d')"></script>
 <script>
 /* ============ i18n ============ */
