@@ -105,13 +105,15 @@ fraccions) has every piece in place.
 
 **4. Copy the game into the landing repo**: `games/<slug>/` (entry file + assets + `supabase-sync.js` if the game has cloud sync). Update the featured-games table above and `sync-game.ps1`'s `$games` map.
 
-**5. Fitxa page.** Add the game's entry to the `GAMES` list in `tools/gen_fitxes.py` (seo_title, meta, subject, grade, lead, 3 paragraphs of real copy, 6 features, related slugs, teaches, level) and re-run it (`python tools/gen_fitxes.py`). This regenerates all of `jocs/` including the hub — that's fine, it's deterministic.
+**5. Fitxa page.** Add the game's entry to the `GAMES` list in `tools/gen_fitxes.py` — since 2026-07-20 it is TRILINGUAL: you must provide the content dict `c` with `ca`, `es` AND `en` blocks (seo_title, meta, subject, grade, lead, 3 paragraphs, 6 features each) plus per-lang `teaches`/`level` and `game_lang`. Re-run `python tools/gen_fitxes.py` → regenerates all 33 pages (jocs/, es/jocs/, en/jocs/) deterministically.
 
 **6. Homepage card** in `index.html`: `<div class="gcard">` in the right classroom beat, with screenshot, grade span, description, `Jugar ▶` link (`data-goatcounter-click="game-<slug>"`) **and** the fitxa link: `<a class="fitxa" href="jocs/<slug>.html" data-i18n="fitxa" data-goatcounter-click="fitxa-<slug>">ℹ️ Fitxa del joc</a>`. Add any new i18n copy to ALL THREE language blocks (ca/es/en) in the inline `translations` object.
 
 **7. classic.html card** too (same pattern, its own translations block).
 
-**8. Sitemap**: add BOTH URLs — `games/<slug>/<entry>` (priority 0.8) and `jocs/<slug>.html` (0.8) — with `<lastmod>` = today.
+**8. Sitemap**: add the slug+entry to `GAME_ENTRIES` in `tools/gen_sitemap.py` and re-run it (sitemap.xml is generated since 2026-07-20 — never hand-edit).
+
+**8b. ES/EN homepages**: if you touched `index.html` (step 6 does), re-run `python tools/gen_lang_homepages.py` — `/es/index.html` and `/en/index.html` are generated from it (new i18n keys must exist in all three languages of the `translations` object or the generator aborts).
 
 **9. App icon** (if showcased): `app-icons/<slug>.svg` + entry in the apps showcase section of index.html.
 
