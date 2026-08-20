@@ -3,7 +3,10 @@
 consistency, duplicate ids, leftover relative URLs on subdirectory pages."""
 import io, json, os, re, sys
 
-ROOT = r"C:\Users\Robert\Documents\Claude-Sync\claude-projects\landing-page"
+# Derived from this file's location. The previous hardcoded
+# C:\Users\Robert\... path does not exist on this machine (the user
+# profile is "PC"), so the script crashed on import before checking anything.
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://robertpotau.github.io"
 
 pages = ["index.html", "classic.html", "404.html",

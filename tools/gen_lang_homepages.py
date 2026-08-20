@@ -103,7 +103,10 @@ for lang in ("es", "en"):
     # neutralize the whole switcher JS block: this page IS its language, the
     # switcher is plain links, and the root page's storedLang redirect must not run here
     t = re.sub(
-        r"/\* ES/EN live on pre-rendered pages.*?applyLang\('ca'\);\n\}",
+        # \r?\n: the repo stores LF but core.autocrlf=true hands us CRLF in the
+        # working tree, and SRC is read with newline="" (no translation) — a bare
+        # \n here silently matches nothing on Windows checkouts.
+        r"/\* ES/EN live on pre-rendered pages.*?applyLang\('ca'\);\r?\n\}",
         "/* pre-rendered page: language fixed, switcher is plain links */\n"
         f"localStorage.setItem('landing_lang', '{lang}');",
         t, count=1, flags=re.S)
