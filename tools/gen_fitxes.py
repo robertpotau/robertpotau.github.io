@@ -24,7 +24,7 @@ UI = {
         what="Què s'hi treballa", feats="Característiques", related="També et pot interessar",
         free="Gratuït", fitxa="ℹ️ Fitxa", jugar="Jugar ▶",
         game_in={"ca": "🗣 Joc en català", "en": "🗣 Joc en anglès"},
-        note='🔒 El progrés es desa al navegador. La sincronització de classe opcional està desactivada: cap dada surt del dispositiu. 📱 Hi ha versió APK per a Android disponible sota petició. Fet per <a href="/index.html">Robert Potau</a>, professor de secundària de Tecnologia i Digitalització.',
+        note='🔒 El progrés es desa al navegador. La sincronització de classe opcional està desactivada: cap dada surt del dispositiu. 📱 Hi ha versió APK per a Android disponible sota petició. Fet per <a href="/index.html">Robert Potau</a>, professor de secundària de Tecnologia i Digitalització. © 2026 Robert Potau Nuñez — Tots els drets reservats.',
         foot_home="🏫 Robert Potau — inici", foot_kofi="☕ Suporta el projecte",
     ),
     "es": dict(
@@ -33,7 +33,7 @@ UI = {
         what="Qué se trabaja", feats="Características", related="También te puede interesar",
         free="Gratis", fitxa="ℹ️ Ficha", jugar="Jugar ▶",
         game_in={"ca": "🗣 Juego en catalán", "en": "🗣 Juego en inglés"},
-        note='🔒 El progreso se guarda en el navegador. La sincronización de clase opcional está desactivada: ningún dato sale del dispositivo. 📱 Hay versión APK para Android disponible bajo petición. Hecho por <a href="/es/index.html">Robert Potau</a>, profesor de secundaria de Tecnología y Digitalización.',
+        note='🔒 El progreso se guarda en el navegador. La sincronización de clase opcional está desactivada: ningún dato sale del dispositivo. 📱 Hay versión APK para Android disponible bajo petición. Hecho por <a href="/es/index.html">Robert Potau</a>, profesor de secundaria de Tecnología y Digitalización. © 2026 Robert Potau Nuñez — Todos los derechos reservados.',
         foot_home="🏫 Robert Potau — inicio", foot_kofi="☕ Apoya el proyecto",
     ),
     "en": dict(
@@ -42,7 +42,7 @@ UI = {
         what="What it teaches", feats="Features", related="You may also like",
         free="Free", fitxa="ℹ️ Info", jugar="Play ▶",
         game_in={"ca": "🗣 Game in Catalan", "en": "🗣 Game in English"},
-        note='🔒 Progress is stored in the browser. The optional class sync is switched off: no data leaves the device. 📱 An Android APK is available on request. Made by <a href="/en/index.html">Robert Potau</a>, secondary school teacher of Technology.',
+        note='🔒 Progress is stored in the browser. The optional class sync is switched off: no data leaves the device. 📱 An Android APK is available on request. Made by <a href="/en/index.html">Robert Potau</a>, secondary school teacher of Technology. © 2026 Robert Potau Nuñez — All rights reserved.',
         foot_home="🏫 Robert Potau — home", foot_kofi="☕ Support the project",
     ),
 }

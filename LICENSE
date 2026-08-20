@@ -1,0 +1,59 @@
+Copyright © 2026 Robert Potau Nuñez. All rights reserved.
+
+This repository contains the source of https://robertpotau.github.io and the
+playable copies of the educational games published there.
+
+The games, their source code, artwork, text, game design and the website
+itself are the original work of Robert Potau Nuñez, developed with Claude Code
+(Anthropic) as a programming assistant. Some games credit teachers who advised
+on or validated their educational content; that advice does not transfer
+authorship or ownership of the games.
+
+No permission is granted to copy, modify, redistribute, republish, sell or
+create derivative works from this material, in whole or in part, without prior
+written permission from the copyright holder.
+
+Playing the games at https://robertpotau.github.io is of course free, and
+teachers are welcome to use them with their classes. What is reserved is
+redistribution and reuse of the material itself. For any other use, including
+use by an institution or publisher, please ask: robertpotau@gmail.com
+
+Note on earlier versions
+------------------------
+Until 20 August 2026 some of these games displayed a Creative Commons notice
+(CC BY-SA 4.0 or CC BY-NC-SA 4.0) in their credits screen. Those notices have
+been withdrawn and no longer apply to this or any later version. Creative
+Commons licences are irrevocable for copies already distributed, so anyone who
+obtained one of those earlier versions keeps the rights that version granted,
+for that version only.
+
+
+Third-party material
+====================
+
+The following third-party components are included or used under their own
+licences. They remain the property of their respective authors and are NOT
+covered by the all-rights-reserved notice above.
+
+OpenMoji — emoji and icon artwork (used in "Aula d'Acollida")
+  Copyright © OpenMoji, the open-source emoji and icon project.
+  Licensed under Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0).
+  https://openmoji.org/  —  https://creativecommons.org/licenses/by-sa/4.0/
+  The OpenMoji files used here are unmodified; only their filenames were
+  changed to match the game's vocabulary list.
+
+Nunito — typeface
+  Copyright © The Nunito Project Authors
+  (https://github.com/googlefonts/nunito).
+  Licensed under the SIL Open Font License, Version 1.1.
+  https://openfontlicense.org/
+
+Three.js — 3D library (used on the website's home page)
+  Copyright © 2010-2023 Three.js Authors.
+  Licensed under the MIT License.
+  https://threejs.org/
+
+supabase-js — client library (loaded from a CDN by some games)
+  Copyright © Supabase.
+  Licensed under the MIT License.
+  https://supabase.com/
