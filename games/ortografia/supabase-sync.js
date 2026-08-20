@@ -25,6 +25,19 @@ const CloudSync = (() => {
   // ship inside client-side code. Access control is enforced by Postgres Row
   // Level Security policies on the server, not by keeping this secret.
   const SUPABASE_KEY = 'sb_publishable_JGdDnmDU2KR3hNnAgPrBig_3L2HyD3e';
+  // ---------------------------------------------------------------------
+  // Cloud parked 2026-08-20. The Supabase project behind SUPABASE_URL was
+  // deleted, so every call below fails against a host that no longer
+  // resolves (NXDOMAIN). The code stays on purpose — class sync is the
+  // feature Robert may monetise for schools later — but the entry points
+  // are hidden so a student never walks into a dead end.
+  //
+  // To bring it back: create a new Supabase project, apply schema.sql +
+  // migrations, update SUPABASE_URL and SUPABASE_KEY above, flip this to
+  // true in ALL copies of this file, and update the site's privacy copy
+  // (it currently says the sync is switched off).
+  // ---------------------------------------------------------------------
+  const CLOUD_ENABLED = false;
 
   // Lazy client creation: if the CDN script failed to load (offline, blocked,
   // slow connection), `window.supabase` won't exist yet. Creating the client
@@ -34,6 +47,9 @@ const CloudSync = (() => {
   // catchable error only at the moment it's actually needed.
   let sb = null;
   function getClient() {
+    // Fail fast and catchably while parked; callers already treat a throw as
+    // "stay local, try again next time".
+    if (!CLOUD_ENABLED) throw new Error('cloud_disabled');
     if (sb) return sb;
     if (!window.supabase) throw new Error('cloud_unavailable_offline');
     sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -120,5 +136,24 @@ const CloudSync = (() => {
     return data;
   }
 
-  return { joinClass, claim, saveProgress, loadProgress };
+  // Hide every cloud entry point while parked. Games tag their button with
+  // data-cloud-entry; each game's markup differs, so the attribute is the only
+  // thing this shared module needs to know about. Runs immediately if the DOM
+  // is already parsed, otherwise on DOMContentLoaded.
+  function applyEntryPointVisibility() {
+    if (CLOUD_ENABLED) return;
+    document.querySelectorAll('[data-cloud-entry]').forEach(function (el) {
+      el.hidden = true;
+      el.style.display = 'none';
+    });
+  }
+  if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', applyEntryPointVisibility);
+    } else {
+      applyEntryPointVisibility();
+    }
+  }
+
+  return { joinClass, claim, saveProgress, loadProgress, enabled: CLOUD_ENABLED };
 })();

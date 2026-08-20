@@ -842,7 +842,7 @@
       <button class="nav-btn" onclick="renderStats();showScreen('s-stats')">📊 Estadístiques</button>
       <button class="nav-btn" onclick="showScreen('s-profile-select');renderProfileSelect()">👤 Perfils</button>
       <button class="nav-btn" onclick="openCredits()">ℹ️ Crèdits</button>
-      <button class="nav-btn" onclick="showScreen('s-cloud');document.getElementById('cloud-feedback').textContent='';renderCloudScreen();">☁️ Classe</button>
+      <button data-cloud-entry class="nav-btn" onclick="showScreen('s-cloud');document.getElementById('cloud-feedback').textContent='';renderCloudScreen();">☁️ Classe</button>
     </div>
   </div>
 

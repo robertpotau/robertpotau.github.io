@@ -795,7 +795,7 @@
       <button class="btn btn-secondary btn-full" onclick="showScreen('credits')">ℹ️ Crèdits</button>
     </div>
     <button class="btn btn-secondary btn-full" onclick="showScreen('perfils')" style="margin-top:10px">← Canviar perfil</button>
-    <button class="btn btn-secondary btn-full" onclick="showScreen('cloud');document.getElementById('cloud-feedback').textContent='';renderCloudScreen();" style="margin-top:10px">☁️ Classe (desar al núvol)</button>
+    <button data-cloud-entry class="btn btn-secondary btn-full" onclick="showScreen('cloud');document.getElementById('cloud-feedback').textContent='';renderCloudScreen();" style="margin-top:10px">☁️ Classe (desar al núvol)</button>
   </div>
 
   <div id="cloud" class="screen">
