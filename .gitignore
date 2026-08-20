@@ -1,1 +1,11 @@
-﻿MONETIZATION.md
+MONETIZATION.md
+
+# Internal-only engineering notes — must never be published.
+# These were served publicly at the site root until 2026-08-20 and were
+# purged from git history. Keep them local; do not un-ignore.
+CLAUDE.md
+SEO-UPGRADES.md
+SEO-INFORME-*.md
+
+# Syncthing conflict copies (may contain unsanitised older text)
+*.sync-conflict-*
