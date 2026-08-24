@@ -41,6 +41,8 @@
   }
 }
 </script>
+  <meta name="theme-color" content="#1a1a2e">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%231a1a2e'/%3E%3Cpolygon points='50,18 84,78 16,78' fill='none' stroke='%23f7c948' stroke-width='8' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+Math&display=swap" rel="stylesheet">
@@ -698,6 +700,21 @@
       line-height: 1.8;
     }
 
+    .formula-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 6px 26px;
+    }
+
+    .formula-row > span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
     .formula-box strong {
       color: var(--accent);
       font-weight: 800;
@@ -972,14 +989,70 @@
       margin-top: 2px;
     }
 
+    /* ── EXERCICI RESPOST (bloquejat) ── */
+    .exercise-form.respost { opacity: 0.65; }
+    .exercise-form.respost input:disabled,
+    .exercise-form.respost button:disabled { cursor: default; }
+    .exercise-form input[type="number"],
+    .exercise-form input[type="text"] { font-family: inherit; }
+
+    .avis-numero {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-align: center;
+    }
+
+    /* ── OPCIONS D'IDENTIFICA, un cop respostes ── */
+    .option-btn:disabled { cursor: default; opacity: 0.55; }
+    .option-btn.opt-correcta {
+      opacity: 1;
+      border-color: var(--success);
+      background: rgba(74, 222, 128, 0.16);
+      color: var(--success);
+    }
+    .option-btn.opt-erronia {
+      opacity: 1;
+      border-color: var(--error);
+      background: rgba(248, 113, 113, 0.14);
+      color: var(--error);
+    }
+
+    /* ── AVÍS DE TROFEU ── */
+    .trofeu-toast {
+      position: fixed; bottom: 20px; right: 20px; z-index: 150;
+      background: linear-gradient(135deg, #f7c948, #f59e0b);
+      color: #1a1a2e; border-radius: 16px; padding: 20px 28px;
+      box-shadow: 0 8px 32px rgba(247, 201, 72, 0.5);
+      animation: slideUp 0.4s ease-out;
+      max-width: 280px;
+    }
+
+    /* ── MODAL PROPI (window.confirm/alert no funcionen dins de webviews) ── */
+    .modal-back {
+      position: fixed; inset: 0; z-index: 1200;
+      background: rgba(0, 0, 0, 0.75);
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-card {
+      background: var(--bg-main);
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 420px; width: 100%;
+      text-align: center;
+      animation: slideUp 0.25s ease-out;
+    }
+    .modal-text { font-size: 1rem; line-height: 1.6; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 500px) {
-      .menu-grid {
-        grid-template-columns: 1fr;
-      }
-      .logo h1 {
-        font-size: 2rem;
-      }
+      /* 11 modes en una sola columna feien una llista interminable */
+      .menu-grid { gap: 10px; }
+      .menu-item { padding: 14px 10px; }
+      .logo h1 { font-size: 2rem; }
+      .shape-display { padding: 10px; }
     }
   </style>
 </head>
@@ -1027,7 +1100,7 @@
         </svg>
         <!-- Trapezi -->
         <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 0.5s;">
-          <polygon points="30,30 70,30 85,80 15,80" fill="rgba(59, 245, 245, 0.3)" stroke="#3bf5f5" stroke-width="3"/>
+          <polygon points="30,30 70,30 85,80 15,80" fill="rgba(34, 211, 238, 0.3)" stroke="#06b6d4" stroke-width="3"/>
         </svg>
         <!-- Pentàgon -->
         <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 0.6s;">
@@ -1202,7 +1275,7 @@
         <div class="menu-item-text">Rombo</div>
         <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
       </div>
-      <div class="menu-item" onclick="showScreen('screen-exercise'); setupTrapezi();" style="background: linear-gradient(135deg, rgba(59, 245, 245, 0.15), rgba(59, 245, 245, 0.05)); border-color: rgba(59, 245, 245, 0.3);">
+      <div class="menu-item" onclick="showScreen('screen-exercise'); setupTrapezi();" style="background: linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(34, 211, 238, 0.05)); border-color: rgba(34, 211, 238, 0.3);">
         <div class="menu-item-icon" id="icon-trapezi"></div>
         <div class="menu-item-text">Trapezi</div>
         <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
@@ -1432,7 +1505,7 @@
         <div style="font-size: 0.85rem; color: var(--text-sub); line-height: 1.8;">
           <div style="margin-bottom: 8px;">🎓 Joc Geometria 1r ESO</div>
           <div style="font-size: 0.75rem; margin-bottom: 8px;">
-            <strong>v1.3</strong> — Juliol 2026
+            <strong>v2.0</strong> — Agost 2026
           </div>
           <div class="credits-cc">
             <strong>© 2026 Robert Potau Nuñez</strong><br>
@@ -1495,6 +1568,19 @@
     <div style="display: flex; gap: 10px; margin-top: 20px;">
       <button class="btn-primary" onclick="saveAvatarEdit()" style="flex: 1;">✓ Guardar</button>
       <button class="btn-secondary" onclick="closeAvatarEditor()" style="flex: 1;">✕ Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODAL: confirmació / avís
+     ══════════════════════════════════════════════ -->
+<div id="modal-confirm" class="modal-back" style="display: none;">
+  <div class="modal-card">
+    <div class="modal-text" id="modal-confirm-text"></div>
+    <div style="display: flex; gap: 10px; margin-top: 20px;" id="modal-confirm-buttons">
+      <button class="btn-secondary" style="flex: 1; margin: 0;" onclick="tancaModal(false)">Cancel·la</button>
+      <button class="btn-primary" style="flex: 1; margin: 0;" onclick="tancaModal(true)">Sí, endavant</button>
     </div>
   </div>
 </div>
@@ -1572,6 +1658,40 @@ function renderFormaProgress(formaKey) {
   </div>`;
 }
 
+// Un exercici només es pot respondre UN cop. Abans, tornar a prémer "Revisar
+// resposta" (o clicar una segona opció a Identifica) comptava un intent nou a
+// les estadístiques cada vegada, i es podien inflar els encerts clicant-ho tot.
+function bloquejaExercici(form) {
+  if (!currentExercise || currentExercise.respost) return false;
+  currentExercise.respost = true;
+  if (form) {
+    form.classList.add('respost');
+    form.querySelectorAll('input, button').forEach(el => { el.disabled = true; });
+  }
+  return true;
+}
+
+// Els alumnes escriuen els decimals amb coma ("6,9"). Acceptem les dues formes.
+function llegirNumero(id) {
+  const el = document.getElementById(id);
+  if (!el) return NaN;
+  const net = String(el.value).replace(',', '.').replace(/\s+/g, '');
+  if (net === '') return NaN;
+  return parseFloat(net);
+}
+
+// Avís quan el camp no té un número: NO consumeix l'intent.
+function avisNumero(form) {
+  if (!form) return;
+  let el = form.querySelector('.avis-numero');
+  if (!el) {
+    el = document.createElement('div');
+    el.className = 'avis-numero';
+    form.appendChild(el);
+  }
+  el.textContent = '✏️ Escriu un número als dos camps (pots fer servir la coma per als decimals).';
+}
+
 function pasAPas(pText, aText) {
   return `<div class="steps-box">
     <div class="steps-title">💡 Com es calcula</div>
@@ -1586,6 +1706,46 @@ document.addEventListener('keydown', e => {
   const btn = document.querySelector('.screen.active .btn-primary[onclick^="setup"]');
   if (btn) { e.preventDefault(); btn.click(); }
 });
+
+// ═══════════════════════════════════════════
+//  MODAL PROPI (confirmació i avís)
+//  window.confirm()/alert() queden bloquejats dins de webviews (l'APK), i allà
+//  el botó es queda mort. Fem servir sempre aquest modal.
+// ═══════════════════════════════════════════
+
+let _modalCallback = null;
+
+function confirmaModal(text, onOk, okText = 'Sí, endavant') {
+  _modalCallback = onOk;
+  document.getElementById('modal-confirm-text').innerHTML = text;
+  document.getElementById('modal-confirm-buttons').innerHTML =
+    `<button class="btn-secondary" style="flex: 1; margin: 0;" onclick="tancaModal(false)">Cancel·la</button>
+     <button class="btn-primary" style="flex: 1; margin: 0;" onclick="tancaModal(true)">${okText}</button>`;
+  document.getElementById('modal-confirm').style.display = 'flex';
+}
+
+function avisModal(text) {
+  _modalCallback = null;
+  document.getElementById('modal-confirm-text').innerHTML = text;
+  document.getElementById('modal-confirm-buttons').innerHTML =
+    `<button class="btn-primary" style="flex: 1; margin: 0;" onclick="tancaModal(false)">D'acord</button>`;
+  document.getElementById('modal-confirm').style.display = 'flex';
+}
+
+function tancaModal(ok) {
+  document.getElementById('modal-confirm').style.display = 'none';
+  const cb = _modalCallback;
+  _modalCallback = null;
+  if (ok && cb) cb();
+}
+
+// Els noms dels perfils es pinten amb innerHTML: un nom amb < o & trencaria
+// la targeta (o hi injectaria etiquetes).
+function esc(txt) {
+  return String(txt == null ? '' : txt)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
 
 // ═══════════════════════════════════════════
 //  PROFILE MANAGEMENT (localStorage)
@@ -1693,12 +1853,14 @@ function importarPerfil(event) {
   reader.onload = e => {
     try {
       const data = JSON.parse(e.target.result);
-      if (!data.nom) { alert('Fitxer no vàlid.'); return; }
-      if (!confirm(`Vols carregar el perfil de "${data.nom}"? Se sobreescriurà el perfil actual.`)) return;
-      player = migratePlayer(data);
-      savePlayer();
-      renderStats();
-    } catch { alert('Error llegint el fitxer. Comprova que sigui un JSON vàlid.'); }
+      if (!data.nom) { avisModal('Aquest fitxer no és un perfil del joc.'); return; }
+      confirmaModal(`Vols carregar el perfil de <strong>${esc(data.nom)}</strong>?<br>Se sobreescriurà el perfil actual.`, () => {
+        player = migratePlayer(data);
+        savePlayer();
+        renderStats();
+        updateMenuProfile();
+      }, 'Carrega');
+    } catch { avisModal('No s\'ha pogut llegir el fitxer. Comprova que sigui un JSON del joc.'); }
   };
   reader.readAsText(file);
   event.target.value = '';
@@ -1746,7 +1908,7 @@ function getStatsSVG(key) {
       <polygon points="50,20 80,50 50,80 20,50" fill="rgba(246, 113, 113, 0.3)" stroke="#f67171" stroke-width="2"/>
     </svg>`,
     trapezi: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="35,30 65,30 80,75 20,75" fill="rgba(59, 245, 245, 0.3)" stroke="#3bf5f5" stroke-width="2"/>
+      <polygon points="35,30 65,30 80,75 20,75" fill="rgba(34, 211, 238, 0.3)" stroke="#06b6d4" stroke-width="2"/>
     </svg>`,
     pentagon: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
       <polygon points="50,15 80,38 70,75 30,75 20,38" fill="rgba(165, 142, 251, 0.3)" stroke="#a58efb" stroke-width="2"/>
@@ -1783,7 +1945,7 @@ function renderStats() {
     { key: 'triangle', nom: 'Triangle', color: '#a855f7' },
     { key: 'romboide', nom: 'Romboide', color: '#ec4899' },
     { key: 'rombo', nom: 'Rombo', color: '#f67171' },
-    { key: 'trapezi', nom: 'Trapezi', color: '#3bf5f5' },
+    { key: 'trapezi', nom: 'Trapezi', color: '#06b6d4' },
     { key: 'pentagon', nom: 'Pentàgon', color: '#a58efb' },
     { key: 'hexagon', nom: 'Hexàgon', color: '#fb923c' },
     { key: 'octagon', nom: 'Octàgon', color: '#84cc16' },
@@ -1866,7 +2028,7 @@ function renderMenuIcons() {
 
   if (iconTrapezi) {
     iconTrapezi.innerHTML = `<svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="30,35 70,35 85,80 15,80" fill="rgba(59, 245, 245, 0.3)" stroke="#3bf5f5" stroke-width="3"/>
+      <polygon points="30,35 70,35 85,80 15,80" fill="rgba(34, 211, 238, 0.3)" stroke="#06b6d4" stroke-width="3"/>
     </svg>`;
   }
 
@@ -2056,7 +2218,7 @@ function renderProfileSlots() {
       div.innerHTML = `
         <div class="profile-slot-avatar">${getAvatarEmoji(p.genere, p.skin, p.hair, p.avatar)}</div>
         <div class="profile-slot-info">
-          <div class="profile-slot-nom">${p.nom}</div>
+          <div class="profile-slot-nom">${esc(p.nom)}</div>
           <div class="profile-slot-rang">${rang.icon} ${getNomRang(rang, p.genere)}</div>
           <div class="profile-slot-xp">${p.xp || 0} XP · ${p.partides || 0} partides</div>
         </div>
@@ -2103,21 +2265,23 @@ function deleteProfile(idx) {
   const profiles = getProfiles();
   const p = profiles[idx];
   if (!p) return;
-  if (!confirm(`Vols eliminar el perfil de "${p.nom}"? Es perdran totes les dades.`)) return;
-  profiles[idx] = null;
-  saveProfiles(profiles);
-  if (getActiveIdx() === idx) {
-    const newIdx = profiles.findIndex(x => x !== null);
-    if (newIdx >= 0) {
-      setActiveIdx(newIdx);
-      player = migratePlayer(profiles[newIdx]);
-    } else {
-      localStorage.removeItem('joc-geometria_active');
-      player = null;
-      showScreen('screen-profile-select');
+  confirmaModal(`Vols eliminar el perfil de <strong>${esc(p.nom)}</strong>?<br>Es perdran totes les dades i no es podrà desfer.`, () => {
+    const llista = getProfiles();
+    llista[idx] = null;
+    saveProfiles(llista);
+    if (getActiveIdx() === idx) {
+      const newIdx = llista.findIndex(x => x !== null);
+      if (newIdx >= 0) {
+        setActiveIdx(newIdx);
+        player = migratePlayer(llista[newIdx]);
+      } else {
+        localStorage.removeItem('joc-geometria_active');
+        player = null;
+        showScreen('screen-profile-select');
+      }
     }
-  }
-  renderProfileSlots();
+    renderProfileSlots();
+  }, 'Sí, elimina');
 }
 
 // ═══════════════════════════════════════════
@@ -2287,7 +2451,7 @@ function updateMenuProfile() {
   document.getElementById('profile-bar-menu').innerHTML = `
     <div class="profile-bar-avatar">${getAvatarEmoji(player.genere, player.skin, player.hair, player.avatar)}</div>
     <div class="profile-bar-info">
-      <div class="profile-bar-nom">${player.nom}</div>
+      <div class="profile-bar-nom">${esc(player.nom)}</div>
       <div class="profile-bar-rang">${rang.icon} ${getNomRang(rang, player.genere)}</div>
       <div class="profile-bar-xp">${player.xp || 0} XP</div>
     </div>`;
@@ -2350,370 +2514,316 @@ function getRang(xp) {
 }
 
 // ═══════════════════════════════════════════
-//  SVG DRAWING FUNCTIONS
+//  SVG DRAWING FUNCTIONS (v2.0, 2026-08-24)
+//  Regles noves d'aquest mòdul:
+//   · UNA sola escala per als dos eixos → el dibuix sempre és proporcional
+//     a les dades (abans amplada i alçada es retallaven per separat i un
+//     rombe de 16×30 es dibuixava gairebé quadrat).
+//   · Cap número damunt d'una línia: totes les cotes van FORA de la figura,
+//     empeses cap enfora des del centre, i el text porta un halo del color
+//     del fons perquè sigui llegible encara que dues cotes s'acostin.
 // ═══════════════════════════════════════════
 
+const SVG_BOX   = 240;   // viewBox 240×240
+const SVG_MAXW  = 150;   // amplada màxima del dibuix (la resta és marge per a les cotes)
+const SVG_MAXH  = 130;   // alçada màxima del dibuix
+const SVG_PXCM  = 21;    // px per cm com a màxim → una figura de 3 cm es veu petita, una de 15 cm gran
+const SVG_CY    = 106;   // centre vertical del dibuix (deixa lloc a la cota de sota)
+const SVG_HALO  = '#0f3460'; // = var(--bg-card), el fons de la targeta .shape-display
+
+// Escala única: mai deforma la figura.
+function fitScale(wCm, hCm, maxW = SVG_MAXW, maxH = SVG_MAXH) {
+  return Math.min(maxW / wCm, maxH / hCm, SVG_PXCM);
+}
+
+function svgWrap(inner) {
+  return `<svg class="shape-svg" viewBox="0 0 ${SVG_BOX} ${SVG_BOX}" width="${SVG_BOX}" height="${SVG_BOX}">${inner}</svg>`;
+}
+
+// Text amb halo: paint-order="stroke" pinta primer el contorn del color del
+// fons, així el número es llegeix encara que caigui damunt d'una línia.
+function svgText(x, y, txt, fill, size = 13, anchor = 'middle') {
+  return `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${anchor}" font-size="${size}"
+    font-weight="bold" fill="${fill}" stroke="${SVG_HALO}" stroke-width="3.5"
+    paint-order="stroke" stroke-linejoin="round">${txt}</text>`;
+}
+
+// Etiqueta al mig d'un costat, desplaçada cap enfora respecte del centre de la figura.
+function sideLabel(p1, p2, cx, cy, txt, fill, dist = 15, size = 13) {
+  const mx = (p1.x + p2.x) / 2, my = (p1.y + p2.y) / 2;
+  const dx = mx - cx, dy = my - cy;
+  const d = Math.hypot(dx, dy) || 1;
+  return svgText(mx + dx / d * dist, my + dy / d * dist + 4.5, txt, fill, size);
+}
+
+// Cota horitzontal (sota la figura) i cota vertical (a l'esquerra).
+function dimH(x1, x2, y, txt, fill, size = 13) {
+  return `<line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${fill}" stroke-width="1.5"/>
+    <line x1="${x1}" y1="${y - 4}" x2="${x1}" y2="${y + 4}" stroke="${fill}" stroke-width="1.5"/>
+    <line x1="${x2}" y1="${y - 4}" x2="${x2}" y2="${y + 4}" stroke="${fill}" stroke-width="1.5"/>
+    ${svgText((x1 + x2) / 2, y + 16, txt, fill, size)}`;
+}
+
+// txtCurt: versió sense unitats, per quan el tram vertical és massa curt
+// perquè hi càpiga el text sencer (rectangles i rombes molt aplanats).
+function dimV(y1, y2, x, txt, fill, size = 13, txtCurt = null) {
+  const my = (y1 + y2) / 2;
+  if (txtCurt && Math.abs(y2 - y1) < txt.length * size * 0.56) txt = txtCurt;
+  return `<line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}" stroke="${fill}" stroke-width="1.5"/>
+    <line x1="${x - 4}" y1="${y1}" x2="${x + 4}" y2="${y1}" stroke="${fill}" stroke-width="1.5"/>
+    <line x1="${x - 4}" y1="${y2}" x2="${x + 4}" y2="${y2}" stroke="${fill}" stroke-width="1.5"/>
+    <g transform="rotate(-90 ${(x - 7).toFixed(1)} ${my.toFixed(1)})">${svgText(x - 7, my + 4.5, txt, fill, size)}</g>`;
+}
+
+// Marca d'angle recte amb el vèrtex a (x,y); dx,dy = sentit dels dos catets (±1).
+function angleRecte(x, y, dx, dy, stroke, mida = 9) {
+  return `<path d="M${x + dx * mida},${y} L${x + dx * mida},${y + dy * mida} L${x},${y + dy * mida}"
+    fill="none" stroke="${stroke}" stroke-width="1.5"/>`;
+}
+
+// ─── QUADRAT ───────────────────────────────
 function drawSquareSVG(costat) {
-  const size = Math.min(150, Math.max(80, costat * 9));
-  const x = (240 - size) / 2;
-  const y = (240 - size) / 2 - 8;
-  const x2 = x + size, y2 = y + size;
-  const mid = x + size / 2;
-  const ra = 10; // right-angle mark size
+  const s = fitScale(costat, costat) * costat;
+  const x = (SVG_BOX - s) / 2, y = SVG_CY - s / 2;
+  const x2 = x + s, y2 = y + s, mid = x + s / 2;
 
-  return `
-    <svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-      <defs>
-        <marker id="sq-arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-          <path d="M1,1 L7,4 L1,7 Z" fill="#60a5fa"/>
-        </marker>
-        <marker id="sq-arr2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse">
-          <path d="M1,1 L7,4 L1,7 Z" fill="#60a5fa"/>
-        </marker>
-      </defs>
-
-      <!-- Quadrat -->
-      <rect x="${x}" y="${y}" width="${size}" height="${size}"
-            fill="rgba(59,130,246,0.18)" stroke="#3b82f6" stroke-width="3"/>
-
-      <!-- Marques angle recte (4 cantons) -->
-      <path d="M${x+ra},${y} L${x+ra},${y+ra} L${x},${y+ra}" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
-      <path d="M${x2-ra},${y} L${x2-ra},${y+ra} L${x2},${y+ra}" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
-      <path d="M${x2-ra},${y2} L${x2-ra},${y2-ra} L${x2},${y2-ra}" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
-      <path d="M${x+ra},${y2} L${x+ra},${y2-ra} L${x},${y2-ra}" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
-
-      <!-- Ticks igualtat (un tick per costat) -->
-      <line x1="${mid-6}" y1="${y-5}" x2="${mid+6}" y2="${y-5}" stroke="#60a5fa" stroke-width="2.5"/>
-      <line x1="${mid-6}" y1="${y2+5}" x2="${mid+6}" y2="${y2+5}" stroke="#60a5fa" stroke-width="2.5"/>
-      <line x1="${x-5}" y1="${mid-6}" x2="${x-5}" y2="${mid+6}" stroke="#60a5fa" stroke-width="2.5"/>
-      <line x1="${x2+5}" y1="${mid-6}" x2="${x2+5}" y2="${mid+6}" stroke="#60a5fa" stroke-width="2.5"/>
-
-      <!-- Línia de cota (baix) + valor -->
-      <line x1="${x}" y1="${y2+18}" x2="${x2}" y2="${y2+18}" stroke="#60a5fa" stroke-width="1.5" marker-start="url(#sq-arr2)" marker-end="url(#sq-arr)"/>
-      <text x="${mid}" y="${y2+34}" text-anchor="middle"
-            font-size="14" font-weight="bold" fill="#60a5fa">a = ${costat} cm</text>
-    </svg>
-  `;
+  return svgWrap(`
+    <rect x="${x}" y="${y}" width="${s}" height="${s}" fill="rgba(59,130,246,0.18)" stroke="#3b82f6" stroke-width="3"/>
+    ${angleRecte(x, y, 1, 1, '#3b82f6')}${angleRecte(x2, y, -1, 1, '#3b82f6')}
+    ${angleRecte(x2, y2, -1, -1, '#3b82f6')}${angleRecte(x, y2, 1, -1, '#3b82f6')}
+    <line x1="${mid - 6}" y1="${y - 5}" x2="${mid + 6}" y2="${y - 5}" stroke="#60a5fa" stroke-width="2.5"/>
+    <line x1="${mid - 6}" y1="${y2 + 5}" x2="${mid + 6}" y2="${y2 + 5}" stroke="#60a5fa" stroke-width="2.5"/>
+    <line x1="${x - 5}" y1="${y + s / 2 - 6}" x2="${x - 5}" y2="${y + s / 2 + 6}" stroke="#60a5fa" stroke-width="2.5"/>
+    <line x1="${x2 + 5}" y1="${y + s / 2 - 6}" x2="${x2 + 5}" y2="${y + s / 2 + 6}" stroke="#60a5fa" stroke-width="2.5"/>
+    ${dimH(x, x2, y2 + 18, `a = ${costat} cm`, '#93c5fd', 14)}
+  `);
 }
 
+// ─── RECTANGLE ─────────────────────────────
 function drawRectangleSVG(base, altura) {
-  const maxW = 155, maxH = 130;
-  const ratio = base / altura;
-  let w, h;
-  if (ratio >= 1) {
-    w = maxW; h = Math.max(50, Math.min(maxH, maxW / ratio));
-  } else {
-    h = maxH; w = Math.max(50, Math.min(maxW, maxH * ratio));
-  }
-  const x = (240 - w) / 2, y = (240 - h) / 2 - 6;
+  const k = fitScale(base, altura);
+  const w = base * k, h = altura * k;
+  const x = (SVG_BOX - w) / 2, y = SVG_CY - h / 2;
   const x2 = x + w, y2 = y + h;
-  const ra = 10;
 
-  return `
-    <svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-      <defs>
-        <marker id="rc-arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-          <path d="M1,1 L7,4 L1,7 Z" fill="#86efac"/>
-        </marker>
-        <marker id="rc-arr2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse">
-          <path d="M1,1 L7,4 L1,7 Z" fill="#86efac"/>
-        </marker>
-      </defs>
-
-      <!-- Rectangle -->
-      <rect x="${x}" y="${y}" width="${w}" height="${h}"
-            fill="rgba(34,197,94,0.18)" stroke="#22c55e" stroke-width="3"/>
-
-      <!-- Marques angle recte -->
-      <path d="M${x+ra},${y} L${x+ra},${y+ra} L${x},${y+ra}" fill="none" stroke="#22c55e" stroke-width="1.5"/>
-      <path d="M${x2-ra},${y} L${x2-ra},${y+ra} L${x2},${y+ra}" fill="none" stroke="#22c55e" stroke-width="1.5"/>
-      <path d="M${x2-ra},${y2} L${x2-ra},${y2-ra} L${x2},${y2-ra}" fill="none" stroke="#22c55e" stroke-width="1.5"/>
-      <path d="M${x+ra},${y2} L${x+ra},${y2-ra} L${x},${y2-ra}" fill="none" stroke="#22c55e" stroke-width="1.5"/>
-
-      <!-- Ticks base (1 tick) i altura (2 ticks — diferent) -->
-      <line x1="${x+w/2-6}" y1="${y2+5}" x2="${x+w/2+6}" y2="${y2+5}" stroke="#86efac" stroke-width="2.5"/>
-      <line x1="${x+w/2-6}" y1="${y-5}" x2="${x+w/2+6}" y2="${y-5}" stroke="#86efac" stroke-width="2.5"/>
-      <line x1="${x-5}" y1="${y+h/2-8}" x2="${x-5}" y2="${y+h/2-2}" stroke="#86efac" stroke-width="2.5"/>
-      <line x1="${x-5}" y1="${y+h/2+2}" x2="${x-5}" y2="${y+h/2+8}" stroke="#86efac" stroke-width="2.5"/>
-      <line x1="${x2+5}" y1="${y+h/2-8}" x2="${x2+5}" y2="${y+h/2-2}" stroke="#86efac" stroke-width="2.5"/>
-      <line x1="${x2+5}" y1="${y+h/2+2}" x2="${x2+5}" y2="${y+h/2+8}" stroke="#86efac" stroke-width="2.5"/>
-
-      <!-- Cota base (baix) -->
-      <line x1="${x}" y1="${y2+18}" x2="${x2}" y2="${y2+18}" stroke="#86efac" stroke-width="1.5" marker-start="url(#rc-arr2)" marker-end="url(#rc-arr)"/>
-      <text x="${x+w/2}" y="${y2+33}" text-anchor="middle" font-size="13" font-weight="bold" fill="#86efac">b = ${base} cm</text>
-
-      <!-- Cota altura (esquerra) -->
-      <line x1="${x-22}" y1="${y}" x2="${x-22}" y2="${y2}" stroke="#86efac" stroke-width="1.5" marker-start="url(#rc-arr2)" marker-end="url(#rc-arr)"/>
-      <text x="${x-22}" y="${y+h/2-8}" text-anchor="middle" font-size="13" font-weight="bold" fill="#86efac" transform="rotate(-90,${x-22},${y+h/2})">h = ${altura} cm</text>
-    </svg>
-  `;
+  return svgWrap(`
+    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="rgba(34,197,94,0.18)" stroke="#22c55e" stroke-width="3"/>
+    ${angleRecte(x, y, 1, 1, '#22c55e')}${angleRecte(x2, y, -1, 1, '#22c55e')}
+    ${angleRecte(x2, y2, -1, -1, '#22c55e')}${angleRecte(x, y2, 1, -1, '#22c55e')}
+    ${dimH(x, x2, y2 + 18, `b = ${base} cm`, '#86efac')}
+    ${dimV(y, y2, x - 18, `h = ${altura} cm`, '#86efac', 13, `h = ${altura}`)}
+  `);
 }
 
-function drawTriangleSVG(sideA, sideB, sideC, altura) {
-  // Escala real: mateixa proporció per base i altura → el dibuix és fidel
-  const scale = Math.min(160 / sideC, 120 / altura);
-  const baseW = sideC * scale;
-  const triH  = altura * scale;
-  const bx = (240 - baseW) / 2;
-  const by = 185;
-  // Posició real de l'àpex: p² + h² = a² (si a és vertical, p = 0 → triangle rectangle)
-  const p = Math.sqrt(Math.max(0, sideA * sideA - altura * altura));
-  const x1 = bx + p * scale, y1 = by - triH;
-  const x2 = bx, y2 = by;
-  const x3 = bx + baseW, y3 = by;
-  const esRectangle = p * scale < 2; // àpex sobre el vèrtex esquerre
+// ─── TRIANGLE ──────────────────────────────
+// a = costat esquerre, b = BASE, c = costat dret, h = altura sobre la base.
+// El peu de l'altura cau a p = √(a² − h²) del vèrtex esquerre → el dibuix
+// correspon de debò als tres costats donats.
+function drawTriangleSVG(a, base, c, h) {
+  const p = Math.min(base, Math.sqrt(Math.max(0, a * a - h * h)));
+  const k = fitScale(base, h);
+  const bw = base * k, th = h * k, px = p * k;
+  const bx = (SVG_BOX - bw) / 2, by = SVG_CY + th / 2;
+  const A = { x: bx + px, y: by - th };   // àpex
+  const B = { x: bx, y: by };             // vèrtex esquerre
+  const C = { x: bx + bw, y: by };        // vèrtex dret
+  const gx = (A.x + B.x + C.x) / 3, gy = (A.y + B.y + C.y) / 3;
+  // Si el peu de l'altura cau sobre el vèrtex esquerre, el costat a ÉS l'altura.
+  const esRecteEsq = px < 2;
+  const cap = px < bw / 2 ? 1 : -1;
 
-  return `
-    <svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-      <!-- Triangle -->
-      <polygon points="${x1},${y1} ${x2},${y2} ${x3},${y3}"
-               fill="rgba(168,85,247,0.18)" stroke="#a855f7" stroke-width="3"/>
-
-      <!-- Línia d'altura (puntejada, des de l'àpex fins a la base) -->
-      ${esRectangle ? '' : `<line x1="${x1}" y1="${y1}" x2="${x1}" y2="${y2}"
-            stroke="#c084fc" stroke-width="2" stroke-dasharray="5,4"/>`}
-      <!-- Marca angle recte de la base amb l'altura -->
-      <path d="M${x1+8},${y2} L${x1+8},${y2-8} L${x1},${y2-8}" fill="none" stroke="#c084fc" stroke-width="1.5"/>
-
-      <!-- Etiqueta costats -->
-      <text x="${(x2+x1)/2 - 14}" y="${(y1+y2)/2 + 5}" text-anchor="middle"
-            font-size="13" font-weight="bold" fill="#e9d5ff">a=${sideA}</text>
-      <text x="${(x3+x1)/2 + 14}" y="${(y1+y3)/2 + 5}" text-anchor="middle"
-            font-size="13" font-weight="bold" fill="#e9d5ff">b=${sideB}</text>
-      <text x="${bx + baseW/2}" y="${y2+20}" text-anchor="middle"
-            font-size="13" font-weight="bold" fill="#e9d5ff">c=${sideC} cm</text>
-
-      <!-- Etiqueta altura -->
-      <text x="${x1+12}" y="${(y1+y2)/2 + 5}" text-anchor="start"
-            font-size="13" font-weight="bold" fill="#c084fc">h=${altura} cm</text>
-    </svg>
-  `;
+  return svgWrap(`
+    <polygon points="${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}"
+             fill="rgba(168,85,247,0.18)" stroke="#a855f7" stroke-width="3"/>
+    ${esRecteEsq ? '' : `<line x1="${A.x}" y1="${A.y}" x2="${A.x}" y2="${by}" stroke="#c084fc" stroke-width="2" stroke-dasharray="5,4"/>`}
+    ${angleRecte(A.x, by, cap, -1, '#c084fc', 8)}
+    ${sideLabel(A, B, gx, gy, esRecteEsq ? `a = h = ${a}` : `a = ${a}`, '#e9d5ff', 16, 12)}
+    ${sideLabel(A, C, gx, gy, `c = ${c}`, '#e9d5ff', 16, 12)}
+    ${esRecteEsq ? '' : dimV(A.y, by, B.x - 20, `h = ${h} cm`, '#c084fc', 12, `h = ${h}`)}
+    ${dimH(B.x, C.x, by + 18, `b = ${base} cm`, '#e9d5ff')}
+  `);
 }
 
-// ═══════════════════════════════════════════
-//  SVG IDENTIFY MODE (sense dimensions)
-// ═══════════════════════════════════════════
+// ─── ROMBOIDE ──────────────────────────────
+// b = base, h = altura, a = costat oblic. El desplaçament del costat de dalt
+// és √(a² − h²), o sigui que el dibuix reflecteix el valor real de a.
+function drawRomboideSVG(base, altura, costat) {
+  const off = costat ? Math.sqrt(Math.max(0, costat * costat - altura * altura)) : altura * 0.6;
+  const k = fitScale(base + off, altura);
+  const bw = base * k, bh = altura * k, ox = off * k;
+  const x = (SVG_BOX - (bw + ox)) / 2, yB = SVG_CY + bh / 2, yT = yB - bh;
+  const P = [{ x: x, y: yB }, { x: x + bw, y: yB }, { x: x + bw + ox, y: yT }, { x: x + ox, y: yT }];
+  const cx = x + (bw + ox) / 2;
 
-function drawSquareIdentify() {
-  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-    <rect x="50" y="50" width="140" height="140" fill="rgba(59, 130, 246, 0.2)" stroke="#3b82f6" stroke-width="3" rx="2"/>
-  </svg>`;
+  return svgWrap(`
+    <polygon points="${P.map(p => `${p.x},${p.y}`).join(' ')}" fill="rgba(236,72,153,0.18)" stroke="#ec4899" stroke-width="3"/>
+    <line x1="${x + ox}" y1="${yT}" x2="${x + ox}" y2="${yB}" stroke="#f9a8d4" stroke-width="2" stroke-dasharray="5,4"/>
+    ${angleRecte(x + ox, yB, 1, -1, '#f9a8d4', 8)}
+    ${costat ? sideLabel(P[1], P[2], cx, SVG_CY, `a = ${costat}`, '#fbcfe8', 18, 12) : ''}
+    ${dimV(yT, yB, x - 18, `h = ${altura} cm`, '#f9a8d4', 12, `h = ${altura}`)}
+    ${dimH(P[0].x, P[1].x, yB + 18, `b = ${base} cm`, '#f9a8d4')}
+  `);
 }
 
-function drawRectangleIdentify() {
-  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-    <rect x="30" y="70" width="180" height="100" fill="rgba(34, 197, 94, 0.2)" stroke="#22c55e" stroke-width="3" rx="2"/>
-  </svg>`;
+// ─── ROMBE ─────────────────────────────────
+function drawRomboSVG(d1, d2, costat) {
+  const k = fitScale(d2, d1);
+  const dv = d1 * k, dh = d2 * k;
+  const cx = SVG_BOX / 2, cy = SVG_CY;
+  const T = { x: cx, y: cy - dv / 2 }, R = { x: cx + dh / 2, y: cy },
+        B = { x: cx, y: cy + dv / 2 }, L = { x: cx - dh / 2, y: cy };
+
+  return svgWrap(`
+    <polygon points="${T.x},${T.y} ${R.x},${R.y} ${B.x},${B.y} ${L.x},${L.y}"
+             fill="rgba(239,68,68,0.18)" stroke="#f87171" stroke-width="3"/>
+    <line x1="${cx}" y1="${T.y}" x2="${cx}" y2="${B.y}" stroke="#fca5a5" stroke-width="2" stroke-dasharray="5,4"/>
+    <line x1="${L.x}" y1="${cy}" x2="${R.x}" y2="${cy}" stroke="#fca5a5" stroke-width="2" stroke-dasharray="5,4"/>
+    ${angleRecte(cx, cy, 1, -1, '#fca5a5', 8)}
+    ${costat ? sideLabel(T, R, cx, cy, `a = ${costat}`, '#fecaca', 15, 12) : ''}
+    ${dimV(T.y, B.y, L.x - 18, `d₁ = ${d1} cm`, '#fca5a5', 12, `d₁ = ${d1}`)}
+    ${dimH(L.x, R.x, B.y + 18, `d₂ = ${d2} cm`, '#fca5a5', 12)}
+  `);
 }
 
-function drawTriangleIdentify(tipo = 'equilater') {
-  let points = '';
+// ─── TRAPEZI ───────────────────────────────
+// tipus: 'isosceles' (els dos costats oblics iguals) o 'rectangle' (un costat = h).
+function drawTrapezSVG(b1, b2, h, c, d, tipus) {
+  const offL = tipus === 'rectangle' ? 0 : (b1 - b2) / 2;
+  const k = fitScale(b1, h);
+  const w1 = b1 * k, w2 = b2 * k, th = h * k, ox = offL * k;
+  const x = (SVG_BOX - w1) / 2, yB = SVG_CY + th / 2, yT = yB - th;
+  const BL = { x: x, y: yB }, BR = { x: x + w1, y: yB },
+        TR = { x: x + ox + w2, y: yT }, TL = { x: x + ox, y: yT };
+  const cx = x + w1 / 2;
+  const hx = x + ox;   // peu de l'altura, sota el vèrtex superior esquerre
+  const esRecte = tipus === 'rectangle';   // el costat esquerre ÉS l'altura
 
-  switch(tipo) {
-    case 'equilater':
-      points = '120,40 50,180 190,180'; // Equilàter
-      break;
-    case 'isosceles':
-      points = '120,50 60,180 180,180'; // Isòsceles
-      break;
-    case 'escale':
-      points = '120,40 40,180 200,170'; // Escalè
-      break;
-    case 'rectangle':
-      points = '50,50 190,50 50,180'; // Rectangle
-      break;
-    case 'acutangle':
-      points = '120,30 50,170 190,160'; // Acutangle
-      break;
-    case 'obtusangle':
-      points = '120,100 30,180 210,180'; // Obtusangle
-      break;
-    default:
-      points = '120,40 50,180 190,180';
-  }
-
-  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-    <polygon points="${points}" fill="rgba(168, 85, 247, 0.2)" stroke="#a855f7" stroke-width="3"/>
-  </svg>`;
+  return svgWrap(`
+    <polygon points="${BL.x},${BL.y} ${BR.x},${BR.y} ${TR.x},${TR.y} ${TL.x},${TL.y}"
+             fill="rgba(34,211,238,0.18)" stroke="#06b6d4" stroke-width="3"/>
+    ${esRecte ? '' : `<line x1="${hx}" y1="${yT}" x2="${hx}" y2="${yB}" stroke="#67e8f9" stroke-width="2" stroke-dasharray="5,4"/>`}
+    ${angleRecte(hx, yB, 1, -1, '#67e8f9', 8)}
+    ${svgText((TL.x + TR.x) / 2, yT - 9, `b₂ = ${b2} cm`, '#67e8f9', 12)}
+    ${c ? sideLabel(BL, TL, cx, SVG_CY, esRecte ? `c = h = ${c}` : `c = ${c}`, '#a5f3fc', 17, 12) : ''}
+    ${d ? sideLabel(BR, TR, cx, SVG_CY, `d = ${d}`, '#a5f3fc', 17, 12) : ''}
+    ${esRecte ? '' : dimV(yT, yB, BL.x - 18, `h = ${h} cm`, '#67e8f9', 12, `h = ${h}`)}
+    ${dimH(BL.x, BR.x, yB + 18, `b₁ = ${b1} cm`, '#67e8f9', 12)}
+  `);
 }
 
-function drawRomboIdentify() {
-  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-    <polygon points="120,30 190,120 120,210 50,120" fill="rgba(236, 72, 153, 0.2)" stroke="#ec4899" stroke-width="3"/>
-  </svg>`;
-}
-
-function drawHexagonIdentify() {
-  const cx = 120, cy = 120, r = 70;
-  let points = '';
-  for (let i = 0; i < 6; i++) {
-    const angle = (i * 60 - 90) * Math.PI / 180;
-    const x = cx + r * Math.cos(angle);
-    const y = cy + r * Math.sin(angle);
-    points += `${x},${y} `;
-  }
-
-  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-    <polygon points="${points}" fill="rgba(251, 146, 60, 0.2)" stroke="#fb923c" stroke-width="3"/>
-  </svg>`;
-}
-
-function drawCircleIdentify() {
-  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-    <circle cx="120" cy="120" r="80" fill="rgba(14, 165, 233, 0.2)" stroke="#0ea5e9" stroke-width="3"/>
-  </svg>`;
-}
-
-// NOVES FORMES SVGs
-function drawRomboideSVG(base, altura) {
-  const bW = Math.min(130, Math.max(70, base * 9));
-  const bH = Math.min(100, Math.max(40, altura * 8));
-  const off = 30; // obliqüitat
-  const x1 = (240 - bW) / 2, y1 = (240 - bH) / 2;
-  const pts = `${x1+off},${y1+bH} ${x1+off+bW},${y1+bH} ${x1+bW},${y1} ${x1},${y1}`;
-  const midX = x1 + off + bW/2;
-
-  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-    <!-- Romboide -->
-    <polygon points="${pts}" fill="rgba(236,72,153,0.18)" stroke="#ec4899" stroke-width="3"/>
-
-    <!-- Línia d'altura (puntejada) -->
-    <line x1="${x1+off}" y1="${y1+bH}" x2="${x1+off}" y2="${y1}"
-          stroke="#f9a8d4" stroke-width="2" stroke-dasharray="5,4"/>
-    <!-- Marca angle recte -->
-    <path d="M${x1+off+9},${y1+bH} L${x1+off+9},${y1+bH-9} L${x1+off},${y1+bH-9}" fill="none" stroke="#f9a8d4" stroke-width="1.5"/>
-
-    <!-- Etiqueta base -->
-    <text x="${midX}" y="${y1+bH+22}" text-anchor="middle"
-          font-size="14" font-weight="bold" fill="#f9a8d4">b = ${base} cm</text>
-    <!-- Etiqueta altura -->
-    <text x="${x1+off-18}" y="${y1+bH/2+5}" text-anchor="middle"
-          font-size="13" font-weight="bold" fill="#f9a8d4">h=${altura}</text>
-  </svg>`;
-}
-
-function drawRomboSVG(d1, d2) {
-  const d1H = Math.min(170, Math.max(70, d1 * 9));
-  const d2W = Math.min(140, Math.max(60, d2 * 9));
-  const cx = 120, cy = 120;
-  const pts = `${cx},${cy-d1H/2} ${cx+d2W/2},${cy} ${cx},${cy+d1H/2} ${cx-d2W/2},${cy}`;
-
-  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-    <!-- Rombo -->
-    <polygon points="${pts}" fill="rgba(239,68,68,0.18)" stroke="#f87171" stroke-width="3"/>
-
-    <!-- Diagonals (puntejades) -->
-    <line x1="${cx}" y1="${cy-d1H/2}" x2="${cx}" y2="${cy+d1H/2}"
-          stroke="#fca5a5" stroke-width="2" stroke-dasharray="5,4"/>
-    <line x1="${cx-d2W/2}" y1="${cy}" x2="${cx+d2W/2}" y2="${cy}"
-          stroke="#fca5a5" stroke-width="2" stroke-dasharray="5,4"/>
-    <!-- Angle recte al centre -->
-    <path d="M${cx+8},${cy} L${cx+8},${cy-8} L${cx},${cy-8}" fill="none" stroke="#fca5a5" stroke-width="1.5"/>
-
-    <!-- Etiquetes -->
-    <text x="${cx+10}" y="${cy-d1H/4}" text-anchor="start"
-          font-size="13" font-weight="bold" fill="#fca5a5">d₁=${d1} cm</text>
-    <text x="${cx+d2W/4}" y="${cy-8}" text-anchor="middle"
-          font-size="13" font-weight="bold" fill="#fca5a5">d₂=${d2} cm</text>
-  </svg>`;
-}
-
-function drawTrapezSVG(b1, b2, h) {
-  const b1W = Math.min(160, Math.max(80, b1 * 10));
-  const b2W = Math.min(120, Math.max(40, b2 * 10));
-  const tH  = Math.min(110, Math.max(50, h * 9));
-  const cx = 120;
-  const y2 = 175, y1 = y2 - tH;
-  const pts = `${cx-b1W/2},${y2} ${cx+b1W/2},${y2} ${cx+b2W/2},${y1} ${cx-b2W/2},${y1}`;
-
-  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-    <!-- Trapezi -->
-    <polygon points="${pts}" fill="rgba(34,211,238,0.18)" stroke="#06b6d4" stroke-width="3"/>
-
-    <!-- Línia d'altura (puntejada) -->
-    <line x1="${cx}" y1="${y2}" x2="${cx}" y2="${y1}"
-          stroke="#67e8f9" stroke-width="2" stroke-dasharray="5,4"/>
-    <!-- Angle recte -->
-    <path d="M${cx+8},${y2} L${cx+8},${y2-8} L${cx},${y2-8}" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
-
-    <!-- Etiquetes bases (b₁ = base gran a baix, b₂ = base petita a dalt) -->
-    <text x="${cx}" y="${y2+20}" text-anchor="middle"
-          font-size="14" font-weight="bold" fill="#67e8f9">b₁ = ${b1} cm</text>
-    <text x="${cx}" y="${y1-8}" text-anchor="middle"
-          font-size="14" font-weight="bold" fill="#67e8f9">b₂ = ${b2} cm</text>
-    <!-- Etiqueta altura -->
-    <text x="${cx+16}" y="${(y1+y2)/2+5}" text-anchor="start"
-          font-size="13" font-weight="bold" fill="#67e8f9">h=${h}</text>
-  </svg>`;
-}
-
-function _regularPolygonSVG(n, costat, apValor, fill, stroke, light, startAngle = -90) {
-  const cx = 120, cy = 118;
-  const r = Math.min(85, Math.max(50, costat * 7));
-  const apotema = r * Math.cos(Math.PI / n);
-  let pts = '';
-  const verts = [];
+// ─── POLÍGONS REGULARS ─────────────────────
+// startAngle = 90 − 180/n col·loca un COSTAT a baix, horitzontal: així
+// l'apotema (perpendicular al costat) es dibuixa recta cap avall, que és on
+// realment va. Abans es dibuixava cap amunt, i en el pentàgon i l'hexàgon
+// amunt hi ha un VÈRTEX — o sigui que aquella línia no era l'apotema.
+function _regularPolygonSVG(n, costat, apValor, fill, stroke, light) {
+  const Rcm = costat / (2 * Math.sin(Math.PI / n));
+  const start = 90 - 180 / n;
+  const raw = [];
   for (let i = 0; i < n; i++) {
-    const ang = (startAngle + i * (360/n)) * Math.PI / 180;
-    const x = cx + r * Math.cos(ang), y = cy + r * Math.sin(ang);
-    pts += `${x},${y} `;
-    verts.push({x, y});
+    const ang = (start + i * (360 / n)) * Math.PI / 180;
+    raw.push({ x: Math.cos(ang) * Rcm, y: Math.sin(ang) * Rcm });
   }
-  // Midpoint of first side for label
-  const s1x = (verts[0].x + verts[1].x) / 2;
-  const s1y = (verts[0].y + verts[1].y) / 2;
-  // Outward direction from center to s1
-  const dx = s1x - cx, dy = s1y - cy;
-  const dl = Math.sqrt(dx*dx + dy*dy);
-  const lx = s1x + dx/dl * 18, ly = s1y + dy/dl * 18;
+  const xs = raw.map(p => p.x), ys = raw.map(p => p.y);
+  const k = fitScale(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
+  const cx = SVG_BOX / 2;
+  const cy = SVG_CY - ((Math.max(...ys) + Math.min(...ys)) / 2) * k;
+  const P = raw.map(p => ({ x: cx + p.x * k, y: cy + p.y * k }));
+  const apPx = Rcm * Math.cos(Math.PI / n) * k;
+  const yBase = cy + apPx;
 
-  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-    <!-- Polígon -->
-    <polygon points="${pts}" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
-    <!-- Apotema (puntejada) -->
-    <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy - apotema}"
-          stroke="${light}" stroke-width="2" stroke-dasharray="5,4"/>
-    <text x="${cx+8}" y="${cy - apotema/2}" font-size="11" fill="${light}" font-weight="bold">ap${apValor ? `=${apValor}` : ''}</text>
-    <!-- Etiqueta costat -->
-    <text x="${lx}" y="${ly}" text-anchor="middle"
-          font-size="14" font-weight="bold" fill="${light}">a=${costat} cm</text>
-  </svg>`;
+  return svgWrap(`
+    <polygon points="${P.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ')}" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
+    <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${yBase}" stroke="${light}" stroke-width="2" stroke-dasharray="5,4"/>
+    ${angleRecte(cx, yBase, 1, -1, light, 8)}
+    <circle cx="${cx}" cy="${cy.toFixed(1)}" r="2.5" fill="${stroke}"/>
+    ${svgText(cx + 9, cy + apPx / 2 + 4.5, `ap = ${apValor}`, light, 12, 'start')}
+    ${dimH(P[0].x, P[1].x, yBase + 18, `a = ${costat} cm`, light)}
+  `);
 }
 
-function drawPentagonSVG(costat, ap) {
-  return _regularPolygonSVG(5, costat, ap, 'rgba(165,142,251,0.18)', '#a58efb', '#d8b4fe', -90);
-}
+function drawPentagonSVG(costat, ap) { return _regularPolygonSVG(5, costat, ap, 'rgba(165,142,251,0.18)', '#a58efb', '#d8b4fe'); }
+function drawHexagonSVG(costat, ap)  { return _regularPolygonSVG(6, costat, ap, 'rgba(251,146,60,0.18)', '#fb923c', '#fed7aa'); }
+function drawOctagonSVG(costat, ap)  { return _regularPolygonSVG(8, costat, ap, 'rgba(132,204,22,0.18)', '#84cc16', '#d4fc79'); }
 
-function drawHexagonSVG(costat, ap) {
-  return _regularPolygonSVG(6, costat, ap, 'rgba(251,146,60,0.18)', '#fb923c', '#fed7aa', -90);
-}
-
-function drawOctagonSVG(costat, ap) {
-  return _regularPolygonSVG(8, costat, ap, 'rgba(132,204,22,0.18)', '#84cc16', '#d4fc79', -22.5);
-}
-
+// ─── CERCLE ────────────────────────────────
 function drawCircleSVG(r) {
-  const rad = Math.min(88, Math.max(40, r * 7));
-  const cx = 120, cy = 118;
+  const rad = fitScale(2 * r, 2 * r) * r;
+  const cx = SVG_BOX / 2, cy = SVG_CY;
 
-  return `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
+  return svgWrap(`
     <defs>
       <marker id="ci-arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
         <path d="M1,1 L7,4 L1,7 Z" fill="#fb7185"/>
       </marker>
     </defs>
-    <!-- Cercle -->
-    <circle cx="${cx}" cy="${cy}" r="${rad}"
-            fill="rgba(244,63,94,0.18)" stroke="#f43f5e" stroke-width="3"/>
-    <!-- Punt centre -->
+    <circle cx="${cx}" cy="${cy}" r="${rad}" fill="rgba(244,63,94,0.18)" stroke="#f43f5e" stroke-width="3"/>
     <circle cx="${cx}" cy="${cy}" r="3" fill="#f43f5e"/>
-    <!-- Radi amb fletxa -->
-    <line x1="${cx}" y1="${cy}" x2="${cx+rad-4}" y2="${cy}"
-          stroke="#fb7185" stroke-width="2.5" marker-end="url(#ci-arr)"/>
-    <!-- Etiqueta -->
-    <text x="${cx + rad/2}" y="${cy - 10}" text-anchor="middle"
-          font-size="14" font-weight="bold" fill="#fecdd3">r = ${r} cm</text>
-  </svg>`;
+    <line x1="${cx}" y1="${cy}" x2="${cx + rad - 4}" y2="${cy}" stroke="#fb7185" stroke-width="2.5" marker-end="url(#ci-arr)"/>
+    ${svgText(cx + rad / 2, cy - 10, `r = ${r} cm`, '#fecdd3', 13)}
+    ${dimH(cx - rad, cx + rad, cy + rad + 18, `d = ${2 * r} cm`, '#fda4af', 12)}
+  `);
+}
+
+// ═══════════════════════════════════════════
+//  SVG MODE IDENTIFICAR (sense dimensions)
+//  Mateixos colors que al menú i a les estadístiques de cada forma.
+// ═══════════════════════════════════════════
+
+function _identifyPoly(points, fill, stroke) {
+  return svgWrap(`<polygon points="${points}" fill="${fill}" stroke="${stroke}" stroke-width="3"/>`);
+}
+
+function drawSquareIdentify() {
+  return svgWrap(`<rect x="50" y="50" width="140" height="140" fill="rgba(59,130,246,0.2)" stroke="#3b82f6" stroke-width="3" rx="2"/>`);
+}
+
+function drawRectangleIdentify() {
+  return svgWrap(`<rect x="30" y="70" width="180" height="100" fill="rgba(34,197,94,0.2)" stroke="#22c55e" stroke-width="3" rx="2"/>`);
+}
+
+function drawTriangleIdentify(tipo = 'equilater') {
+  const punts = {
+    equilater:  '120,40 50,180 190,180',
+    isosceles:  '120,45 60,180 180,180',
+    escale:     '135,40 40,180 200,165',
+    rectangle:  '55,55 190,180 55,180',
+    acutangle:  '120,35 50,175 190,160',
+    obtusangle: '95,70 30,180 210,180',
+  };
+  return _identifyPoly(punts[tipo] || punts.equilater, 'rgba(168,85,247,0.2)', '#a855f7');
+}
+
+// Rombe: vermell, com al menú. Abans era rosa, el mateix color que el
+// romboide, i totes dues formes surten com a opcions del mateix exercici.
+function drawRomboIdentify() {
+  return _identifyPoly('120,30 190,120 120,210 50,120', 'rgba(239,68,68,0.2)', '#f87171');
+}
+
+function drawRomboideIdentify() {
+  return _identifyPoly('60,165 100,60 180,60 140,165', 'rgba(236,72,153,0.2)', '#ec4899');
+}
+
+function drawTrapeziIdentify() {
+  return _identifyPoly('40,165 75,65 165,65 200,165', 'rgba(34,211,238,0.2)', '#06b6d4');
+}
+
+function _regularIdentify(n, fill, stroke, r = 78) {
+  const cx = 120, cy = 120, start = 90 - 180 / n;
+  let pts = '';
+  for (let i = 0; i < n; i++) {
+    const ang = (start + i * (360 / n)) * Math.PI / 180;
+    pts += `${(cx + r * Math.cos(ang)).toFixed(1)},${(cy + r * Math.sin(ang)).toFixed(1)} `;
+  }
+  return _identifyPoly(pts.trim(), fill, stroke);
+}
+
+function drawPentagonIdentify() { return _regularIdentify(5, 'rgba(165,142,251,0.2)', '#a58efb'); }
+function drawHexagonIdentify()  { return _regularIdentify(6, 'rgba(251,146,60,0.2)', '#fb923c'); }
+function drawOctagonIdentify()  { return _regularIdentify(8, 'rgba(132,204,22,0.2)', '#84cc16'); }
+
+function drawCircleIdentify() {
+  return svgWrap(`<circle cx="120" cy="120" r="80" fill="rgba(244,63,94,0.2)" stroke="#f43f5e" stroke-width="3"/>`);
 }
 
 // ═══════════════════════════════════════════
@@ -2739,18 +2849,18 @@ function setupQuadrat() {
     </div>
 
     <div class="formula-box">
-      <div>📐 <strong>P = 4 × a</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = a²</strong></div>
+      <div class="formula-row"><span>📐 <strong>P = 4 × a</strong></span><span>📏 <strong>A = a²</strong></span></div>
     </div>
 
     <form class="exercise-form" onsubmit="checkQuadrat(event)">
       <div class="inputs-grid">
         <div class="input-field">
           <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
         <div class="input-field">
           <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
       </div>
       <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
@@ -2764,8 +2874,10 @@ function setupQuadrat() {
 
 function checkQuadrat(event) {
   event.preventDefault();
-  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
-  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const perimetreUser = llegirNumero('inp-perimetre');
+  const areaUser = llegirNumero('inp-area');
+  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
+  if (!bloquejaExercici(event.target)) return;
   const ex = currentExercise;
 
   const periOk = perimetreUser === ex.perimetre;
@@ -2812,8 +2924,8 @@ function checkQuadrat(event) {
         </div>
       </div>
 
+      ${allOk ? '' : pasAPas(`P = 4 × a = 4 × ${ex.costat} = <strong>${ex.perimetre} cm</strong>`, `A = a² = ${ex.costat}² = <strong>${ex.area} cm²</strong>`)}
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        ${allOk ? '' : pasAPas(`P = 4 × a = 4 × ${ex.costat} = <strong>${ex.perimetre} cm</strong>`, `A = a² = ${ex.costat}² = <strong>${ex.area} cm²</strong>`)}
         <button class="btn-primary" onclick="setupQuadrat()" style="margin-top: 0;">📝 Següent</button>
         <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
       </div>
@@ -2833,11 +2945,15 @@ function setupTriangle() {
   document.getElementById('exercise-title').textContent = '📐 Exercici: Triangle';
 
   // Triangles COHERENTS: compleixen la desigualtat triangular i l'altura és
-  // la real sobre la base c (arrodonida a 1 decimal). [sideA, sideB, sideC(base), altura]
+  // la real sobre la base (arrodonida a 1 decimal).
+  // Format: [a = costat esquerre, c = costat dret, b = BASE, h = altura].
+  // b és la base perquè la fórmula que veu l'alumne és A = (b × h) / 2: abans
+  // el dibuix deia "c" allà on la fórmula deia "b".
   const TRIANGLES = {
     isosceles: [[5,5,8,3],[5,5,6,4],[10,10,16,6],[10,10,12,8],[13,13,10,12]],
-    escale:    [[5,6,7,4.2],[6,7,8,5.1],[7,8,9,6],[4,13,15,3.2]],
-    // Rectangle: ternes pitagòriques → costat vertical = altura, base = altre catet
+    // escalens que NO es repeteixen a la taula d'acutangles
+    escale:    [[5,6,7,4.2],[4,13,15,3.2],[6,8,10,4.8],[9,12,15,7.2]],
+    // Rectangle: ternes pitagòriques → costat esquerre = altura, base = altre catet
     rectangle: [[3,5,4,3],[6,10,8,6],[5,13,12,5],[9,15,12,9],[8,17,15,8]],
     acutangle: [[6,7,8,5.1],[7,8,9,6],[10,11,12,8.6]],
     obtusangle:[[3,5,7,1.9],[4,6,9,2.1],[5,6,10,2.3],[6,7,11,3.4]],
@@ -2883,13 +2999,14 @@ function setupTriangle() {
   const perimetre = sideA + sideB + sideC;
   const area = Math.round((sideC * altura) / 2 * 10) / 10;
 
+  // a = costat esquerre, b = base, c = costat dret (mateixos noms que la fórmula)
   currentExercise = {
     forma: 'triangle',
     tipus,
     nom,
-    sideA,
-    sideB,
-    sideC,
+    a: sideA,
+    b: sideC,
+    c: sideB,
     altura,
     perimetre,
     area,
@@ -2901,23 +3018,23 @@ function setupTriangle() {
     </div>
 
     <div class="shape-display">
-      ${drawTriangleSVG(sideA, sideB, sideC, altura)}
+      ${drawTriangleSVG(sideA, sideC, sideB, altura)}
     </div>
 
     <div class="formula-box">
-      <div>📐 <strong>P = a + b + c</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = <span class="fraction"><span class="fraction-num">b × h</span><span class="fraction-den">2</span></span></strong></div>
-      <div style="font-size: 0.85rem; color: var(--accent); margin-top: 8px; font-weight: 600;">💡 b = base, h = altura (multiplicar la base per l'altura)</div>
+      <div class="formula-row"><span>📐 <strong>P = a + b + c</strong></span><span>📏 <strong>A = <span class="fraction"><span class="fraction-num">b × h</span><span class="fraction-den">2</span></span></strong></span></div>
+      <div style="font-size: 0.85rem; color: var(--accent); margin-top: 8px; font-weight: 600;">💡 b = base (el costat de sota), h = altura</div>
     </div>
 
     <form class="exercise-form" onsubmit="checkTriangle(event)">
       <div class="inputs-grid">
         <div class="input-field">
           <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre-tri" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-perimetre-tri" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
         <div class="input-field">
           <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area-tri" placeholder="Escriu el resultat" step="0.1" required>
+          <input type="text" id="inp-area-tri" inputmode="decimal" placeholder="Pots posar decimals" required>
         </div>
       </div>
       <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
@@ -2931,8 +3048,10 @@ function setupTriangle() {
 
 function checkTriangle(event) {
   event.preventDefault();
-  const perimetreUser = parseFloat(document.getElementById('inp-perimetre-tri').value);
-  const areaUser = parseFloat(document.getElementById('inp-area-tri').value);
+  const perimetreUser = llegirNumero('inp-perimetre-tri');
+  const areaUser = llegirNumero('inp-area-tri');
+  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
+  if (!bloquejaExercici(event.target)) return;
   const ex = currentExercise;
 
   const periOk = Math.abs(perimetreUser - ex.perimetre) < 0.11;
@@ -2980,8 +3099,8 @@ function checkTriangle(event) {
         </div>
       </div>
 
+      ${allOk ? '' : pasAPas(`P = a+b+c = ${ex.a}+${ex.b}+${ex.c} = <strong>${ex.perimetre} cm</strong>`, `A = (b×h)/2 = (${ex.b}×${ex.altura})/2 = <strong>${ex.area} cm²</strong>`)}
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        ${allOk ? '' : pasAPas(`P = a+b+c = ${ex.sideA}+${ex.sideB}+${ex.sideC} = <strong>${ex.perimetre} cm</strong>`, `A = (c×h)/2 = (${ex.sideC}×${ex.altura})/2 = <strong>${ex.area} cm²</strong>`)}
         <button class="btn-primary" onclick="setupTriangle()" style="margin-top: 0;">📝 Següent</button>
         <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
       </div>
@@ -3017,18 +3136,18 @@ function setupRectangle() {
     </div>
 
     <div class="formula-box">
-      <div>📐 <strong>P = 2(a + b)</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = a × b</strong></div>
+      <div class="formula-row"><span>📐 <strong>P = 2(a + b)</strong></span><span>📏 <strong>A = a × b</strong></span></div>
     </div>
 
     <form class="exercise-form" onsubmit="checkRectangle(event)">
       <div class="inputs-grid">
         <div class="input-field">
           <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre-rect" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-perimetre-rect" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
         <div class="input-field">
           <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area-rect" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-area-rect" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
       </div>
       <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
@@ -3042,8 +3161,10 @@ function setupRectangle() {
 
 function checkRectangle(event) {
   event.preventDefault();
-  const perimetreUser = parseInt(document.getElementById('inp-perimetre-rect').value);
-  const areaUser = parseInt(document.getElementById('inp-area-rect').value);
+  const perimetreUser = llegirNumero('inp-perimetre-rect');
+  const areaUser = llegirNumero('inp-area-rect');
+  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
+  if (!bloquejaExercici(event.target)) return;
   const ex = currentExercise;
 
   const periOk = perimetreUser === ex.perimetre;
@@ -3090,8 +3211,8 @@ function checkRectangle(event) {
         </div>
       </div>
 
+      ${allOk ? '' : pasAPas(`P = 2(a+b) = 2×(${ex.base}+${ex.altura}) = 2×${ex.base+ex.altura} = <strong>${ex.perimetre} cm</strong>`, `A = a×b = ${ex.base}×${ex.altura} = <strong>${ex.area} cm²</strong>`)}
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        ${allOk ? '' : pasAPas(`P = 2(a+b) = 2×(${ex.base}+${ex.altura}) = 2×${ex.base+ex.altura} = <strong>${ex.perimetre} cm</strong>`, `A = a×b = ${ex.base}×${ex.altura} = <strong>${ex.area} cm²</strong>`)}
         <button class="btn-primary" onclick="setupRectangle()" style="margin-top: 0;">📝 Següent</button>
         <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
       </div>
@@ -3108,9 +3229,11 @@ function checkRectangle(event) {
 
 function setupRomboide() {
   document.getElementById('exercise-title').textContent = '◇ Romboide';
-  const h = Math.floor(Math.random() * 5) + 2;      // 2-6
-  const a = h + Math.floor(Math.random() * 4) + 1;  // a > h sempre (el costat oblic no pot ser més curt que l'altura)
-  const b = Math.floor(Math.random() * 8) + 3;      // 3-10
+  // El costat oblic ha de ser > h (si no, la figura no existeix) però tampoc
+  // gaire més gran: amb a molt gran el romboide surt esclafat i il·legible.
+  const h = Math.floor(Math.random() * 5) + 4;      // 4-8
+  const a = h + Math.floor(Math.random() * 3) + 1;  // h+1 … h+3
+  const b = h + Math.floor(Math.random() * 7) + 2;  // h+2 … h+8
 
   currentExercise = {
     forma: 'romboide',
@@ -3121,11 +3244,11 @@ function setupRomboide() {
 
   document.getElementById('exercise-content').innerHTML = `
     <div class="shape-display">
-      ${drawRomboideSVG(b, h)}
+      ${drawRomboideSVG(b, h, a)}
     </div>
 
     <div class="formula-box">
-      <div>📐 <strong>P = 2(a + b)</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = b × h</strong></div>
+      <div class="formula-row"><span>📐 <strong>P = 2(a + b)</strong></span><span>📏 <strong>A = b × h</strong></span></div>
     </div>
 
     <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
@@ -3136,11 +3259,11 @@ function setupRomboide() {
       <div class="inputs-grid">
         <div class="input-field">
           <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
         <div class="input-field">
           <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
       </div>
       <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
@@ -3154,8 +3277,10 @@ function setupRomboide() {
 
 function checkRomboide(event) {
   event.preventDefault();
-  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
-  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const perimetreUser = llegirNumero('inp-perimetre');
+  const areaUser = llegirNumero('inp-area');
+  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
+  if (!bloquejaExercici(event.target)) return;
   const ex = currentExercise;
 
   const periOk = perimetreUser === ex.perimetre;
@@ -3202,8 +3327,8 @@ function checkRomboide(event) {
         </div>
       </div>
 
+      ${allOk ? '' : pasAPas(`P = 2(a+b) = 2×(${ex.a}+${ex.b}) = 2×${ex.a+ex.b} = <strong>${ex.perimetre} cm</strong>`, `A = b×h = ${ex.b}×${ex.h} = <strong>${ex.area} cm²</strong>`)}
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        ${allOk ? '' : pasAPas(`P = 2(a+b) = 2×(${ex.a}+${ex.b}) = 2×${ex.a+ex.b} = <strong>${ex.perimetre} cm</strong>`, `A = b×h = ${ex.b}×${ex.h} = <strong>${ex.area} cm²</strong>`)}
         <button class="btn-primary" onclick="setupRomboide()" style="margin-top: 0;">📝 Següent</button>
         <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
       </div>
@@ -3230,11 +3355,11 @@ function setupRombo() {
 
   document.getElementById('exercise-content').innerHTML = `
     <div class="shape-display">
-      ${drawRomboSVG(d1, d2)}
+      ${drawRomboSVG(d1, d2, a)}
     </div>
 
     <div class="formula-box">
-      <div>📐 <strong>P = 4 × a</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = <span class="fraction"><span class="fraction-num">d₁ × d₂</span><span class="fraction-den">2</span></span></strong></div>
+      <div class="formula-row"><span>📐 <strong>P = 4 × a</strong></span><span>📏 <strong>A = <span class="fraction"><span class="fraction-num">d₁ × d₂</span><span class="fraction-den">2</span></span></strong></span></div>
     </div>
 
     <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
@@ -3245,11 +3370,11 @@ function setupRombo() {
       <div class="inputs-grid">
         <div class="input-field">
           <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
         <div class="input-field">
           <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
       </div>
       <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
@@ -3263,8 +3388,10 @@ function setupRombo() {
 
 function checkRombo(event) {
   event.preventDefault();
-  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
-  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const perimetreUser = llegirNumero('inp-perimetre');
+  const areaUser = llegirNumero('inp-area');
+  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
+  if (!bloquejaExercici(event.target)) return;
   const ex = currentExercise;
 
   const periOk = perimetreUser === ex.perimetre;
@@ -3311,8 +3438,8 @@ function checkRombo(event) {
         </div>
       </div>
 
+      ${allOk ? '' : pasAPas(`P = 4×a = 4×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (d₁×d₂)/2 = (${ex.d1}×${ex.d2})/2 = <strong>${ex.area} cm²</strong>`)}
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        ${allOk ? '' : pasAPas(`P = 4×a = 4×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (d₁×d₂)/2 = (${ex.d1}×${ex.d2})/2 = <strong>${ex.area} cm²</strong>`)}
         <button class="btn-primary" onclick="setupRombo()" style="margin-top: 0;">📝 Següent</button>
         <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
       </div>
@@ -3325,26 +3452,38 @@ function checkRombo(event) {
 
 function setupTrapezi() {
   document.getElementById('exercise-title').textContent = '⊥ Trapezi';
-  const b2 = Math.floor(Math.random() * 6) + 3;        // base petita 3-8
-  const b1 = b2 + Math.floor(Math.random() * 5) + 2;   // base gran > base petita
-  const h = (Math.floor(Math.random() * 3) + 1) * 2;   // 2, 4 o 6 (parell → àrea sempre entera)
-  const c = h + Math.floor(Math.random() * 4);         // costats ≥ h (coherent)
-  const d = h + Math.floor(Math.random() * 4);
+  // Trapezis REALS: els costats oblics surten de Pitàgores amb l'altura i el
+  // que sobresurt la base gran, així la figura dibuixada existeix de debò.
+  // [b1 (base gran), b2 (base petita), h, c (costat esq.), d (costat dret), tipus]
+  const TRAPEZIS = [
+    [12, 4, 3, 5, 5, 'isosceles'],
+    [11, 5, 4, 5, 5, 'isosceles'],
+    [20, 4, 6, 10, 10, 'isosceles'],
+    [18, 6, 8, 10, 10, 'isosceles'],
+    [14, 4, 12, 13, 13, 'isosceles'],
+    [10, 6, 3, 3, 5, 'rectangle'],
+    [13, 5, 6, 6, 10, 'rectangle'],
+    [13, 7, 8, 8, 10, 'rectangle'],
+    [16, 4, 5, 5, 13, 'rectangle'],
+    [11, 8, 4, 4, 5, 'rectangle'],
+    [11, 6, 12, 12, 13, 'rectangle'],
+  ];
+  const [b1, b2, h, c, d, tipus] = TRAPEZIS[Math.floor(Math.random() * TRAPEZIS.length)];
 
   currentExercise = {
     forma: 'trapezi',
-    b1, b2, c, d, h,
+    b1, b2, c, d, h, tipus,
     perimetre: b1 + c + d + b2,
     area: ((b1 + b2) * h) / 2
   };
 
   document.getElementById('exercise-content').innerHTML = `
     <div class="shape-display">
-      ${drawTrapezSVG(b1, b2, h)}
+      ${drawTrapezSVG(b1, b2, h, c, d, tipus)}
     </div>
 
     <div class="formula-box">
-      <div>📐 <strong>P = b₁ + b₂ + c + d</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = <span class="fraction"><span class="fraction-num">(b₁ + b₂) × h</span><span class="fraction-den">2</span></span></strong></div>
+      <div class="formula-row"><span>📐 <strong>P = b₁ + b₂ + c + d</strong></span><span>📏 <strong>A = <span class="fraction"><span class="fraction-num">(b₁ + b₂) × h</span><span class="fraction-den">2</span></span></strong></span></div>
     </div>
 
     <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
@@ -3355,11 +3494,11 @@ function setupTrapezi() {
       <div class="inputs-grid">
         <div class="input-field">
           <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
         <div class="input-field">
           <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
       </div>
       <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
@@ -3373,8 +3512,10 @@ function setupTrapezi() {
 
 function checkTrapezi(event) {
   event.preventDefault();
-  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
-  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const perimetreUser = llegirNumero('inp-perimetre');
+  const areaUser = llegirNumero('inp-area');
+  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
+  if (!bloquejaExercici(event.target)) return;
   const ex = currentExercise;
 
   const periOk = perimetreUser === ex.perimetre;
@@ -3421,8 +3562,8 @@ function checkTrapezi(event) {
         </div>
       </div>
 
+      ${allOk ? '' : pasAPas(`P = b₁+b₂+c+d = ${ex.b1}+${ex.b2}+${ex.c}+${ex.d} = <strong>${ex.perimetre} cm</strong>`, `A = ((b₁+b₂)×h)/2 = ((${ex.b1}+${ex.b2})×${ex.h})/2 = <strong>${ex.area} cm²</strong>`)}
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        ${allOk ? '' : pasAPas(`P = b₁+b₂+c+d = ${ex.b1}+${ex.b2}+${ex.c}+${ex.d} = <strong>${ex.perimetre} cm</strong>`, `A = ((b₁+b₂)×h)/2 = ((${ex.b1}+${ex.b2})×${ex.h})/2 = <strong>${ex.area} cm²</strong>`)}
         <button class="btn-primary" onclick="setupTrapezi()" style="margin-top: 0;">📝 Següent</button>
         <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
       </div>
@@ -3452,7 +3593,7 @@ function setupPentagon() {
     </div>
 
     <div class="formula-box">
-      <div>📐 <strong>P = 5 × a</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = <span class="fraction"><span class="fraction-num">P × apotema</span><span class="fraction-den">2</span></span></strong></div>
+      <div class="formula-row"><span>📐 <strong>P = 5 × a</strong></span><span>📏 <strong>A = <span class="fraction"><span class="fraction-num">P × apotema</span><span class="fraction-den">2</span></span></strong></span></div>
     </div>
 
     <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
@@ -3463,11 +3604,11 @@ function setupPentagon() {
       <div class="inputs-grid">
         <div class="input-field">
           <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
         <div class="input-field">
           <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
       </div>
       <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
@@ -3481,8 +3622,10 @@ function setupPentagon() {
 
 function checkPentagon(event) {
   event.preventDefault();
-  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
-  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const perimetreUser = llegirNumero('inp-perimetre');
+  const areaUser = llegirNumero('inp-area');
+  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
+  if (!bloquejaExercici(event.target)) return;
   const ex = currentExercise;
 
   const periOk = perimetreUser === ex.perimetre;
@@ -3529,8 +3672,8 @@ function checkPentagon(event) {
         </div>
       </div>
 
+      ${allOk ? '' : pasAPas(`P = 5×a = 5×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (5×a×ap)/2 = (5×${ex.a}×${ex.apotema})/2 = <strong>${ex.area} cm²</strong>`)}
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        ${allOk ? '' : pasAPas(`P = 5×a = 5×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (5×a×ap)/2 = (5×${ex.a}×${ex.apotema})/2 = <strong>${ex.area} cm²</strong>`)}
         <button class="btn-primary" onclick="setupPentagon()" style="margin-top: 0;">📝 Següent</button>
         <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
       </div>
@@ -3560,7 +3703,7 @@ function setupHexagon() {
     </div>
 
     <div class="formula-box">
-      <div>📐 <strong>P = 6 × a</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = <span class="fraction"><span class="fraction-num">P × apotema</span><span class="fraction-den">2</span></span></strong></div>
+      <div class="formula-row"><span>📐 <strong>P = 6 × a</strong></span><span>📏 <strong>A = <span class="fraction"><span class="fraction-num">P × apotema</span><span class="fraction-den">2</span></span></strong></span></div>
     </div>
 
     <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
@@ -3571,11 +3714,11 @@ function setupHexagon() {
       <div class="inputs-grid">
         <div class="input-field">
           <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
         <div class="input-field">
           <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
       </div>
       <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
@@ -3589,8 +3732,10 @@ function setupHexagon() {
 
 function checkHexagon(event) {
   event.preventDefault();
-  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
-  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const perimetreUser = llegirNumero('inp-perimetre');
+  const areaUser = llegirNumero('inp-area');
+  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
+  if (!bloquejaExercici(event.target)) return;
   const ex = currentExercise;
 
   const periOk = perimetreUser === ex.perimetre;
@@ -3637,8 +3782,8 @@ function checkHexagon(event) {
         </div>
       </div>
 
+      ${allOk ? '' : pasAPas(`P = 6×a = 6×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (6×a×ap)/2 = (6×${ex.a}×${ex.apotema})/2 = <strong>${ex.area} cm²</strong>`)}
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        ${allOk ? '' : pasAPas(`P = 6×a = 6×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (6×a×ap)/2 = (6×${ex.a}×${ex.apotema})/2 = <strong>${ex.area} cm²</strong>`)}
         <button class="btn-primary" onclick="setupHexagon()" style="margin-top: 0;">📝 Següent</button>
         <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
       </div>
@@ -3668,7 +3813,7 @@ function setupOctagon() {
     </div>
 
     <div class="formula-box">
-      <div>📐 <strong>P = 8 × a</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = <span class="fraction"><span class="fraction-num">P × apotema</span><span class="fraction-den">2</span></span></strong></div>
+      <div class="formula-row"><span>📐 <strong>P = 8 × a</strong></span><span>📏 <strong>A = <span class="fraction"><span class="fraction-num">P × apotema</span><span class="fraction-den">2</span></span></strong></span></div>
     </div>
 
     <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
@@ -3679,11 +3824,11 @@ function setupOctagon() {
       <div class="inputs-grid">
         <div class="input-field">
           <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
         <div class="input-field">
           <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" placeholder="Escriu el resultat" required>
+          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
         </div>
       </div>
       <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
@@ -3697,8 +3842,10 @@ function setupOctagon() {
 
 function checkOctagon(event) {
   event.preventDefault();
-  const perimetreUser = parseInt(document.getElementById('inp-perimetre').value);
-  const areaUser = parseInt(document.getElementById('inp-area').value);
+  const perimetreUser = llegirNumero('inp-perimetre');
+  const areaUser = llegirNumero('inp-area');
+  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
+  if (!bloquejaExercici(event.target)) return;
   const ex = currentExercise;
 
   const periOk = perimetreUser === ex.perimetre;
@@ -3745,8 +3892,8 @@ function checkOctagon(event) {
         </div>
       </div>
 
+      ${allOk ? '' : pasAPas(`P = 8×a = 8×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (8×a×ap)/2 = (8×${ex.a}×${ex.apotema})/2 = <strong>${ex.area} cm²</strong>`)}
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        ${allOk ? '' : pasAPas(`P = 8×a = 8×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (8×a×ap)/2 = (8×${ex.a}×${ex.apotema})/2 = <strong>${ex.area} cm²</strong>`)}
         <button class="btn-primary" onclick="setupOctagon()" style="margin-top: 0;">📝 Següent</button>
         <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
       </div>
@@ -3775,7 +3922,7 @@ function setupCircle() {
     </div>
 
     <div class="formula-box">
-      <div>📐 <strong>P = 2πr</strong> &nbsp;&nbsp;&nbsp;&nbsp; 📏 <strong>A = πr²</strong></div>
+      <div class="formula-row"><span>📐 <strong>P = 2πr</strong></span><span>📏 <strong>A = πr²</strong></span></div>
     </div>
 
     <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
@@ -3786,11 +3933,11 @@ function setupCircle() {
       <div class="inputs-grid">
         <div class="input-field">
           <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" placeholder="Escriu el resultat" step="0.01" inputmode="decimal" required>
+          <input type="text" id="inp-perimetre" inputmode="decimal" placeholder="Pots posar decimals" required>
         </div>
         <div class="input-field">
           <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" placeholder="Escriu el resultat" step="0.01" inputmode="decimal" required>
+          <input type="text" id="inp-area" inputmode="decimal" placeholder="Pots posar decimals" required>
         </div>
       </div>
       <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
@@ -3804,8 +3951,10 @@ function setupCircle() {
 
 function checkCircle(event) {
   event.preventDefault();
-  const perimetreUser = parseFloat(document.getElementById('inp-perimetre').value);
-  const areaUser = parseFloat(document.getElementById('inp-area').value);
+  const perimetreUser = llegirNumero('inp-perimetre');
+  const areaUser = llegirNumero('inp-area');
+  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
+  if (!bloquejaExercici(event.target)) return;
   const ex = currentExercise;
 
   // Tolerància 0.51: accepta tant el valor exacte (43.96) com l'arrodonit (44)
@@ -3853,8 +4002,8 @@ function checkCircle(event) {
         </div>
       </div>
 
+      ${allOk ? '' : pasAPas(`P = 2×π×r ≈ 2×3.14×${ex.r} = <strong>${ex.perimetre} cm</strong>`, `A = π×r² ≈ 3.14×${ex.r}² = <strong>${ex.area} cm²</strong>`)}
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        ${allOk ? '' : pasAPas(`P = 2×π×r ≈ 2×3.14×${ex.r} = <strong>${ex.perimetre} cm</strong>`, `A = π×r² ≈ 3.14×${ex.r}² = <strong>${ex.area} cm²</strong>`)}
         <button class="btn-primary" onclick="setupCircle()" style="margin-top: 0;">📝 Següent</button>
         <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
       </div>
@@ -3957,8 +4106,25 @@ function checkTrophies() {
     if (!player.trofeus.includes(id)) {
       player.trofeus.push(id);
       showSerpentines();
-    }
+      mostraAvisTrofeu(TROFEUS.find(t => t.id === id));   // abans les serpentines
+    }                                                     // sortien sense dir per què
   });
+}
+
+// Notificació d'un trofeu acabat de desbloquejar.
+function mostraAvisTrofeu(t) {
+  if (!t) return;
+  const overlay = document.createElement('div');
+  overlay.className = 'trofeu-toast';
+  overlay.innerHTML = `
+    <div style="text-align: center;">
+      <div style="font-size: 2.5rem; margin-bottom: 8px;">${t.icon}</div>
+      <div style="font-size: 0.9rem; font-weight: 700; margin-bottom: 4px;">TROFEU DESBLOQUEJAT!</div>
+      <div style="font-size: 1.1rem; font-weight: 800;">${t.nom}</div>
+      <div style="font-size: 0.75rem; margin-top: 6px; opacity: 0.8;">${t.desc}</div>
+    </div>`;
+  document.body.appendChild(overlay);
+  setTimeout(() => overlay.remove(), 3600);
 }
 
 // ═══════════════════════════════════════════
@@ -3990,31 +4156,8 @@ function unlockCurios() {
 
   player.trofeus.push('curios');
   savePlayer();
-  showSerpentines(); // Serpentines!
-
-  // Show notification
-  const t = TROFEUS.find(t => t.id === 'curios');
-  if (t) {
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
-      position: fixed; bottom: 20px; right: 20px; z-index: 150;
-      background: linear-gradient(135deg, #f7c948, #f59e0b);
-      color: #1a1a2e; border-radius: 16px; padding: 20px 28px;
-      box-shadow: 0 8px 32px rgba(247, 201, 72, 0.5);
-      animation: slideUp 0.4s ease-out;
-      max-width: 280px;
-    `;
-    overlay.innerHTML = `
-      <div style="text-align: center;">
-        <div style="font-size: 2.5rem; margin-bottom: 8px;">🕵️</div>
-        <div style="font-size: 0.9rem; font-weight: 700; margin-bottom: 4px;">TROFEU DESBLOQUEJAT!</div>
-        <div style="font-size: 1.1rem; font-weight: 800;">Curiós</div>
-        <div style="font-size: 0.75rem; margin-top: 6px; opacity: 0.8;">Has llegit els crèdits</div>
-      </div>
-    `;
-    document.body.appendChild(overlay);
-    setTimeout(() => overlay.remove(), 3000);
-  }
+  showSerpentines();
+  mostraAvisTrofeu(TROFEUS.find(t => t.id === 'curios'));
 }
 
 // ═══════════════════════════════════════════
@@ -4062,21 +4205,17 @@ function setupIdentify() {
   switch(formaCorrecta.nom) {
     case 'Quadrat': shapeSVG = drawSquareIdentify(); break;
     case 'Rectangle': shapeSVG = drawRectangleIdentify(); break;
-    case 'Triangle': shapeSVG = drawTriangleIdentify('equilater'); break;
-    case 'Romboide': shapeSVG = `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-      <polygon points="60,160 100,50 180,50 140,160" fill="rgba(236, 72, 153, 0.2)" stroke="#ec4899" stroke-width="3"/>
-    </svg>`; break;
+    case 'Triangle': {
+      const tipusTri = ['equilater','isosceles','escale','rectangle','acutangle','obtusangle'];
+      shapeSVG = drawTriangleIdentify(tipusTri[Math.floor(Math.random() * tipusTri.length)]);
+      break;
+    }
+    case 'Romboide': shapeSVG = drawRomboideIdentify(); break;
     case 'Rombo': shapeSVG = drawRomboIdentify(); break;
-    case 'Trapezi': shapeSVG = `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-      <polygon points="40,160 70,60 170,60 200,160" fill="rgba(59, 245, 245, 0.2)" stroke="#3bf5f5" stroke-width="3"/>
-    </svg>`; break;
-    case 'Pentàgon': shapeSVG = `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-      <polygon points="120,30 190,85 155,165 85,165 50,85" fill="rgba(165, 142, 251, 0.2)" stroke="#a58efb" stroke-width="3"/>
-    </svg>`; break;
+    case 'Trapezi': shapeSVG = drawTrapeziIdentify(); break;
+    case 'Pentàgon': shapeSVG = drawPentagonIdentify(); break;
     case 'Hexàgon': shapeSVG = drawHexagonIdentify(); break;
-    case 'Octàgon': shapeSVG = `<svg class="shape-svg" viewBox="0 0 240 240" width="240" height="240">
-      <polygon points="50,90 90,50 150,50 190,90 190,150 150,190 90,190 50,150" fill="rgba(132, 204, 22, 0.2)" stroke="#84cc16" stroke-width="3"/>
-    </svg>`; break;
+    case 'Octàgon': shapeSVG = drawOctagonIdentify(); break;
     case 'Cercle': shapeSVG = drawCircleIdentify(); break;
     default: shapeSVG = drawSquareIdentify();
   }
@@ -4105,8 +4244,17 @@ function setupIdentify() {
 }
 
 function selectIdentifyOption(selectedName) {
+  if (!currentExercise || currentExercise.respost) return;   // una sola resposta per forma
+  currentExercise.respost = true;
   const correcteName = currentExercise.formaCorrecta.nom;
   const isCorrect = selectedName === correcteName;
+
+  // Deixa les opcions bloquejades i marca quina era la bona
+  document.querySelectorAll('#identify-content .option-btn').forEach(btn => {
+    btn.disabled = true;
+    if (btn.textContent === correcteName) btn.classList.add('opt-correcta');
+    else if (btn.textContent === selectedName) btn.classList.add('opt-erronia');
+  });
 
   const resultDiv = document.getElementById('identify-result');
   resultDiv.style.display = 'block';
