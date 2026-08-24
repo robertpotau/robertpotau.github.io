@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%23ffffff%22%2F%3E%3Cg%20fill%3D%22%232f6fb0%22%20stroke%3D%22%232f6fb0%22%3E%3Crect%20x%3D%2214%22%20y%3D%2214%22%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22none%22%20stroke-width%3D%227%22%2F%3E%3Crect%20x%3D%2254%22%20y%3D%2214%22%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22none%22%20stroke-width%3D%227%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%2254%22%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22none%22%20stroke-width%3D%227%22%2F%3E%3Cpath%20d%3D%22M58%2072%20L70%2058%20L86%2058%20L86%2076%20L74%2090%20L58%2090%20Z%22%20fill%3D%22none%22%20stroke-width%3D%226%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M70%2058%20L70%2076%20L58%2090%20M70%2076%20L86%2076%22%20fill%3D%22none%22%20stroke-width%3D%224%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+  <meta name="theme-color" content="#dff0ff">
 <title>Vistes: Planta, Alçat i Perfil — Joc de dibuix tècnic (ESO)</title>
 <meta name="description" content="Aprèn el sistema dièdric jugant: peces 3D interactives i 4 modes per practicar planta, alçat i perfil. Joc gratuït de Tecnologia per a ESO.">
 <link rel="canonical" href="https://robertpotau.github.io/games/vistes/index.html">
@@ -322,7 +324,54 @@
   .grid.click.edgemode{box-shadow:0 0 0 2px var(--v-taronja)}
   .grid .c .edg.bad{background:var(--warn)}
   .grid .c .edg.miss{background:var(--warn);opacity:.45}
-</style>
+
+    /* ── MODAL PROPI ──────────────────────────────────────────────────
+       alert(), confirm() i prompt() queden bloquejats dins d'un WebView
+       (l'APK): el botó es queda mort i l'alumne no en surt. Aquest modal
+       fa la mateixa feina i funciona a tot arreu. */
+    .jm-back {
+      position: fixed; inset: 0; z-index: 99999;
+      background: rgba(0, 0, 0, 0.65);
+      display: none; align-items: center; justify-content: center; padding: 20px;
+    }
+    .jm-back.obert { display: flex; }
+    .jm-card {
+      background: #ffffff;
+      color: #1f2a36;
+      border: 2px solid #2f6fb0;
+      border-radius: 16px;
+      padding: 24px;
+      width: 100%; max-width: 420px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+      font-family: inherit;
+      animation: jm-entra 0.22s ease-out;
+    }
+    @keyframes jm-entra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .jm-text { font-size: 1rem; line-height: 1.55; text-align: center; }
+    .jm-text small { color: #5b6b7b; }
+    .jm-input {
+      display: none;
+      width: 100%; margin-top: 16px; padding: 12px 14px;
+      font-family: inherit; font-size: 1.05rem; text-align: center;
+      color: #1f2a36; background: rgba(127, 127, 127, 0.14);
+      border: 2px solid #2f6fb0; border-radius: 10px;
+    }
+    .jm-input.visible { display: block; }
+    .jm-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(127, 127, 127, 0.25); }
+    .jm-btns { display: flex; gap: 10px; margin-top: 20px; }
+    .jm-btn {
+      flex: 1; padding: 12px 14px; border-radius: 10px; cursor: pointer;
+      font-family: inherit; font-size: 0.95rem; font-weight: 800;
+      border: 2px solid transparent; transition: 0.18s;
+    }
+    .jm-btn-ok { background: #2f6fb0; color: #ffffff; }
+    .jm-btn-ok:hover { filter: brightness(1.08); }
+    .jm-btn-cancel {
+      background: transparent; color: #1f2a36;
+      border-color: rgba(127, 127, 127, 0.45);
+    }
+    .jm-btn-cancel:hover { border-color: #2f6fb0; }
+  </style>
 </head>
 <body>
 
@@ -534,7 +583,7 @@
     Tots els drets reservats<br>
     <span>Idea original, disseny i programació: Robert Potau Nuñez amb Claude Code (Anthropic).</span>
   </div>
-  <p class="credits" id="credits">Vistes v1.7.0 · 10/07/2026 · Joc educatiu per a l'aula</p>
+  <p class="credits" id="credits">Vistes v1.7.1 · 24/08/2026 · Joc educatiu per a l'aula</p>
 </div>
 
 <!-- HELP MODAL -->
@@ -1899,15 +1948,19 @@ function importProfile(ev){
       const prof=getProfiles(); let slot=getActiveIdx();
       if(slot<0){ slot=prof.findIndex(x=>x===null); if(slot<0) slot=0; }
       player=ensureShape(obj); prof[slot]=player; saveProfiles(prof); setActiveIdx(slot);
-      updateHud(); renderStats(); alert('Perfil importat correctament!');
-    }catch(e){ alert('El fitxer no és un perfil vàlid.'); }
+      updateHud(); renderStats(); jmAvis('✅ Perfil importat correctament!');
+    }catch(e){ jmAvis('Aquest fitxer no és un perfil del joc.'); }
     ev.target.value='';
   };
   r.readAsText(f);
 }
 function resetStats(){
   if(!player) return;
-  if(!confirm('Segur que vols reiniciar totes les estadístiques i trofeus d\'aquest perfil? (No es pot desfer)')) return;
+  // confirm() natiu queda bloquejat dins d'un WebView: el botó es quedava mort
+  jmConfirma('Segur que vols reiniciar les estadístiques i els trofeus d\'aquest perfil?<br><small>No es pot desfer.</small>',
+    ferResetStats, 'Sí, reinicia');
+}
+function ferResetStats(){
   const nom=player.nom, gender=player.gender, skin=player.skin, av=player.avatar, idx=getActiveIdx();
   player=newProfile(nom,gender,skin,av);
   const prof=getProfiles(); prof[idx]=player; saveProfiles(prof);
@@ -2054,5 +2107,91 @@ function startApp(){
 }
 startApp();
 </script>
+
+<!-- ═══ MODAL PROPI (substitueix alert/confirm/prompt) ═══ -->
+<div id="jm-back" class="jm-back">
+  <div class="jm-card" role="dialog" aria-modal="true" aria-labelledby="jm-text">
+    <div class="jm-text" id="jm-text"></div>
+    <input class="jm-input" id="jm-input" autocomplete="off">
+    <div class="jm-btns" id="jm-btns"></div>
+  </div>
+</div>
+
+<script>
+/* Modal propi: alert(), confirm() i prompt() queden bloquejats dins d'un
+   WebView, i allà el botó que els crida es queda mort. Aquestes tres funcions
+   fan el mateix però amb DOM del joc.
+     jmAvis(text[, quanTanqui])
+     jmConfirma(text, quanSigui[, textOk][, textCancel])
+     jmDemana(text, quanEscrigui[, {placeholder, password, numeric, textOk}])
+   La resposta arriba per callback, no com a valor de retorn. */
+(function () {
+  var cb = null, ambInput = false;
+  function el(id) { return document.getElementById(id); }
+
+  function obre(text, botons, opc) {
+    el('jm-text').innerHTML = text;
+    var inp = el('jm-input');
+    ambInput = !!opc;
+    inp.classList.toggle('visible', ambInput);
+    if (ambInput) {
+      inp.value = opc.valor || '';
+      inp.type = opc.password ? 'password' : 'text';
+      inp.inputMode = opc.numeric ? 'numeric' : 'text';
+      inp.placeholder = opc.placeholder || '';
+    }
+    el('jm-btns').innerHTML = botons;
+    el('jm-back').classList.add('obert');
+    setTimeout(function () {
+      var f = ambInput ? inp : el('jm-btns').querySelector('.jm-btn-ok');
+      if (f) f.focus();
+    }, 40);
+  }
+
+  window.jmAvis = function (text, quanTanqui) {
+    cb = quanTanqui || null;
+    obre(text, '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">D\'acord</button>');
+  };
+
+  window.jmConfirma = function (text, quanSigui, textOk, textCancel) {
+    cb = quanSigui || null;
+    obre(text,
+      '<button type="button" class="jm-btn jm-btn-cancel" onclick="jmTanca(false)">' + (textCancel || 'Cancel\u00b7la') + '</button>' +
+      '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">' + (textOk || 'S\u00ed, endavant') + '</button>');
+  };
+
+  window.jmDemana = function (text, quanEscrigui, opc) {
+    opc = opc || {};
+    cb = quanEscrigui || null;
+    obre(text,
+      '<button type="button" class="jm-btn jm-btn-cancel" onclick="jmTanca(false)">' + (opc.textCancel || 'Cancel\u00b7la') + '</button>' +
+      '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">' + (opc.textOk || 'D\'acord') + '</button>',
+      opc);
+  };
+
+  window.jmTanca = function (ok) {
+    var valor = ambInput ? el('jm-input').value : null;
+    el('jm-back').classList.remove('obert');
+    var f = cb; cb = null; ambInput = false;
+    if (ok && f) f(valor);
+  };
+
+  // En fase de captura, perquè les tecles no arribin al joc mentre el modal
+  // és obert (alguns jocs tenen dreceres amb Enter o Espai).
+  document.addEventListener('keydown', function (e) {
+    var back = el('jm-back');
+    if (!back || !back.classList.contains('obert')) return;
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); jmTanca(false); }
+    else if (e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); jmTanca(true); }
+    else if (e.key === ' ' && document.activeElement !== el('jm-input')) { e.stopPropagation(); }
+  }, true);
+
+  // Clicar el fons fosc equival a cancel·lar.
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.id === 'jm-back') jmTanca(false);
+  });
+})();
+</script>
+
 </body>
 </html>

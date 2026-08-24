@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%230b1437%22%2F%3E%3Cg%20fill%3D%22%23ffd166%22%20stroke%3D%22%23ffd166%22%3E%3Ctext%20x%3D%2250%22%20y%3D%2242%22%20font-size%3D%2238%22%20font-weight%3D%22900%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%3E1%3C%2Ftext%3E%3Crect%20x%3D%2222%22%20y%3D%2247%22%20width%3D%2256%22%20height%3D%227%22%20rx%3D%223%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2290%22%20font-size%3D%2238%22%20font-weight%3D%22900%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%3E2%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+  <meta name="theme-color" content="#0b1437">
 <title>Joc de Fraccions online gratuït — 1r ESO</title>
 <meta name="description" content="Aprèn i practica les fraccions jugant: 6 modes de joc i mode barreja — representació, equivalència, comparació, sumes i restes. Joc educatiu gratuït per a 1r d'ESO.">
 <link rel="canonical" href="https://robertpotau.github.io/games/fraccions/fraccions.html">
@@ -1413,7 +1415,54 @@
     background: rgba(255,255,255,0.14);
     border-color: var(--accent);
   }
-</style>
+
+    /* ── MODAL PROPI ──────────────────────────────────────────────────
+       alert(), confirm() i prompt() queden bloquejats dins d'un WebView
+       (l'APK): el botó es queda mort i l'alumne no en surt. Aquest modal
+       fa la mateixa feina i funciona a tot arreu. */
+    .jm-back {
+      position: fixed; inset: 0; z-index: 99999;
+      background: rgba(0, 0, 0, 0.65);
+      display: none; align-items: center; justify-content: center; padding: 20px;
+    }
+    .jm-back.obert { display: flex; }
+    .jm-card {
+      background: #1a1148;
+      color: #ffffff;
+      border: 2px solid #ffd166;
+      border-radius: 16px;
+      padding: 24px;
+      width: 100%; max-width: 420px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+      font-family: inherit;
+      animation: jm-entra 0.22s ease-out;
+    }
+    @keyframes jm-entra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .jm-text { font-size: 1rem; line-height: 1.55; text-align: center; }
+    .jm-text small { color: rgba(255,255,255,0.65); }
+    .jm-input {
+      display: none;
+      width: 100%; margin-top: 16px; padding: 12px 14px;
+      font-family: inherit; font-size: 1.05rem; text-align: center;
+      color: #ffffff; background: rgba(127, 127, 127, 0.14);
+      border: 2px solid #ffd166; border-radius: 10px;
+    }
+    .jm-input.visible { display: block; }
+    .jm-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(127, 127, 127, 0.25); }
+    .jm-btns { display: flex; gap: 10px; margin-top: 20px; }
+    .jm-btn {
+      flex: 1; padding: 12px 14px; border-radius: 10px; cursor: pointer;
+      font-family: inherit; font-size: 0.95rem; font-weight: 800;
+      border: 2px solid transparent; transition: 0.18s;
+    }
+    .jm-btn-ok { background: #ffd166; color: #1a1148; }
+    .jm-btn-ok:hover { filter: brightness(1.08); }
+    .jm-btn-cancel {
+      background: transparent; color: #ffffff;
+      border-color: rgba(127, 127, 127, 0.45);
+    }
+    .jm-btn-cancel:hover { border-color: #ffd166; }
+  </style>
 </head>
 <body>
 
@@ -1789,7 +1838,7 @@
 
     <div class="credit-footer">
       <div class="ttl">🍕 Fraccions — Pràctica i reforç</div>
-      <div class="ver"><strong>v2.2</strong> — Juliol 2026</div>
+      <div class="ver"><strong>v2.3</strong> — Agost 2026</div>
       <div class="credits-cc">
         <strong>© 2026 Robert Potau Nuñez</strong><br>
         Tots els drets reservats<br>
@@ -2680,7 +2729,10 @@ function confirmExit() {
     ? state.chrono_time > 0
     : !(state.q >= TOTAL_QS && state.answered);
   if (state.q > 0 && midGame) {
-    if (!confirm('Vols sortir? Es perdrà el progrés de la partida.')) return;
+    // confirm() natiu no funciona dins d'un WebView: el botó es quedava mort
+    jmConfirma("Vols sortir?<br><small>Es perdrà el progrés d'aquesta partida.</small>",
+      goMenu, 'Sí, surt', 'Segueixo jugant');
+    return;
   }
   goMenu();
 }
@@ -3670,18 +3722,18 @@ function importarDades(event) {
   reader.onload = e => {
     try {
       const data = JSON.parse(e.target.result);
-      if (!data.player) { alert('Fitxer no vàlid.'); return; }
-      if (!confirm('Vols carregar aquestes dades? Se sobreescriuran les dades actuals.')) return;
-
-      player = data.player;
-      if (data.records) {
-        localStorage.setItem(STORE_KEY, JSON.stringify(data.records));
-      }
-      savePlayer();
-      renderStats();
-      alert('✅ Dades carregades correctament!');
+      if (!data.player) { jmAvis('Aquest fitxer no és un perfil del joc.'); return; }
+      jmConfirma('Vols carregar aquestes dades?<br><small>Se sobreescriuran les dades actuals.</small>', () => {
+        player = data.player;
+        if (data.records) {
+          localStorage.setItem(STORE_KEY, JSON.stringify(data.records));
+        }
+        savePlayer();
+        renderStats();
+        showToast('✅ Dades carregades correctament!');
+      }, 'Carrega');
     } catch (err) {
-      alert('❌ Error llegint el fitxer. Comprova que sigui un JSON vàlid.');
+      jmAvis("❌ No s'ha pogut llegir el fitxer. Comprova que sigui un JSON del joc.");
     }
   };
   reader.readAsText(file);
@@ -3833,7 +3885,7 @@ function updateAvatarPreview() {
 function saveNewProfile() {
   const nom = document.getElementById('profile-name').value.trim();
   if (!nom) {
-    alert('⚠️ El nom no pot estar buit!');
+    showToast('⚠️ El nom no pot estar buit!');
     return;
   }
 
@@ -4380,5 +4432,91 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 </script>
+
+<!-- ═══ MODAL PROPI (substitueix alert/confirm/prompt) ═══ -->
+<div id="jm-back" class="jm-back">
+  <div class="jm-card" role="dialog" aria-modal="true" aria-labelledby="jm-text">
+    <div class="jm-text" id="jm-text"></div>
+    <input class="jm-input" id="jm-input" autocomplete="off">
+    <div class="jm-btns" id="jm-btns"></div>
+  </div>
+</div>
+
+<script>
+/* Modal propi: alert(), confirm() i prompt() queden bloquejats dins d'un
+   WebView, i allà el botó que els crida es queda mort. Aquestes tres funcions
+   fan el mateix però amb DOM del joc.
+     jmAvis(text[, quanTanqui])
+     jmConfirma(text, quanSigui[, textOk][, textCancel])
+     jmDemana(text, quanEscrigui[, {placeholder, password, numeric, textOk}])
+   La resposta arriba per callback, no com a valor de retorn. */
+(function () {
+  var cb = null, ambInput = false;
+  function el(id) { return document.getElementById(id); }
+
+  function obre(text, botons, opc) {
+    el('jm-text').innerHTML = text;
+    var inp = el('jm-input');
+    ambInput = !!opc;
+    inp.classList.toggle('visible', ambInput);
+    if (ambInput) {
+      inp.value = opc.valor || '';
+      inp.type = opc.password ? 'password' : 'text';
+      inp.inputMode = opc.numeric ? 'numeric' : 'text';
+      inp.placeholder = opc.placeholder || '';
+    }
+    el('jm-btns').innerHTML = botons;
+    el('jm-back').classList.add('obert');
+    setTimeout(function () {
+      var f = ambInput ? inp : el('jm-btns').querySelector('.jm-btn-ok');
+      if (f) f.focus();
+    }, 40);
+  }
+
+  window.jmAvis = function (text, quanTanqui) {
+    cb = quanTanqui || null;
+    obre(text, '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">D\'acord</button>');
+  };
+
+  window.jmConfirma = function (text, quanSigui, textOk, textCancel) {
+    cb = quanSigui || null;
+    obre(text,
+      '<button type="button" class="jm-btn jm-btn-cancel" onclick="jmTanca(false)">' + (textCancel || 'Cancel\u00b7la') + '</button>' +
+      '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">' + (textOk || 'S\u00ed, endavant') + '</button>');
+  };
+
+  window.jmDemana = function (text, quanEscrigui, opc) {
+    opc = opc || {};
+    cb = quanEscrigui || null;
+    obre(text,
+      '<button type="button" class="jm-btn jm-btn-cancel" onclick="jmTanca(false)">' + (opc.textCancel || 'Cancel\u00b7la') + '</button>' +
+      '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">' + (opc.textOk || 'D\'acord') + '</button>',
+      opc);
+  };
+
+  window.jmTanca = function (ok) {
+    var valor = ambInput ? el('jm-input').value : null;
+    el('jm-back').classList.remove('obert');
+    var f = cb; cb = null; ambInput = false;
+    if (ok && f) f(valor);
+  };
+
+  // En fase de captura, perquè les tecles no arribin al joc mentre el modal
+  // és obert (alguns jocs tenen dreceres amb Enter o Espai).
+  document.addEventListener('keydown', function (e) {
+    var back = el('jm-back');
+    if (!back || !back.classList.contains('obert')) return;
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); jmTanca(false); }
+    else if (e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); jmTanca(true); }
+    else if (e.key === ' ' && document.activeElement !== el('jm-input')) { e.stopPropagation(); }
+  }, true);
+
+  // Clicar el fons fosc equival a cancel·lar.
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.id === 'jm-back') jmTanca(false);
+  });
+})();
+</script>
+
 </body>
 </html>

@@ -2614,7 +2614,7 @@ function updateAvatarPreview() {
 function finishProfileCreate() {
   const nom = document.getElementById('inp-name').value.trim();
   if (!nom) {
-    alert('Posa-hi un nom!');
+    avisModal('Posa-hi un nom!');
     return;
   }
   const idx = window._newProfileSlot;

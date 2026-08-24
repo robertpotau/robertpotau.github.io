@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%234f46e5%22%2F%3E%3Cg%20fill%3D%22%23ffd166%22%20stroke%3D%22%23ffd166%22%3E%3Ccircle%20cx%3D%2235%22%20cy%3D%2238%22%20r%3D%228%22%2F%3E%3Ccircle%20cx%3D%2265%22%20cy%3D%2238%22%20r%3D%228%22%2F%3E%3Cpath%20d%3D%22M24%2058%20Q50%2084%2076%2058%22%20stroke-width%3D%229%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
   <title>Jocs Aula d'Acollida — Vocabulari català per a nouvinguts</title>
 <meta name="description" content="Joc de vocabulari català per a alumnat nouvingut de l'ESO: 12 unitats, 16 modes de joc, repàs intel·ligent i lectura fàcil. Gratuït.">
 <link rel="canonical" href="https://robertpotau.github.io/games/aula-acollida/index.html">
@@ -756,6 +757,53 @@
     body.lectura-facil .vowels-input, body.lectura-facil #ww-input, body.lectura-facil #ph-input {
       font-size: 1.2em; letter-spacing: 0.12em;
     }
+  
+    /* ── MODAL PROPI ──────────────────────────────────────────────────
+       alert(), confirm() i prompt() queden bloquejats dins d'un WebView
+       (l'APK): el botó es queda mort i l'alumne no en surt. Aquest modal
+       fa la mateixa feina i funciona a tot arreu. */
+    .jm-back {
+      position: fixed; inset: 0; z-index: 99999;
+      background: rgba(0, 0, 0, 0.65);
+      display: none; align-items: center; justify-content: center; padding: 20px;
+    }
+    .jm-back.obert { display: flex; }
+    .jm-card {
+      background: #ffffff;
+      color: #1e1b4b;
+      border: 2px solid #6366f1;
+      border-radius: 16px;
+      padding: 24px;
+      width: 100%; max-width: 420px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+      font-family: inherit;
+      animation: jm-entra 0.22s ease-out;
+    }
+    @keyframes jm-entra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .jm-text { font-size: 1rem; line-height: 1.55; text-align: center; }
+    .jm-text small { color: #6b7280; }
+    .jm-input {
+      display: none;
+      width: 100%; margin-top: 16px; padding: 12px 14px;
+      font-family: inherit; font-size: 1.05rem; text-align: center;
+      color: #1e1b4b; background: rgba(127, 127, 127, 0.14);
+      border: 2px solid #6366f1; border-radius: 10px;
+    }
+    .jm-input.visible { display: block; }
+    .jm-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(127, 127, 127, 0.25); }
+    .jm-btns { display: flex; gap: 10px; margin-top: 20px; }
+    .jm-btn {
+      flex: 1; padding: 12px 14px; border-radius: 10px; cursor: pointer;
+      font-family: inherit; font-size: 0.95rem; font-weight: 800;
+      border: 2px solid transparent; transition: 0.18s;
+    }
+    .jm-btn-ok { background: #6366f1; color: #ffffff; }
+    .jm-btn-ok:hover { filter: brightness(1.08); }
+    .jm-btn-cancel {
+      background: transparent; color: #1e1b4b;
+      border-color: rgba(127, 127, 127, 0.45);
+    }
+    .jm-btn-cancel:hover { border-color: #6366f1; }
   </style>
 </head>
 <body>
@@ -3094,13 +3142,16 @@ function renderProfileSelect() {
       slot.onclick = () => { setActiveIdx(i); renderHUD(p); renderHome(); showScreen('s-home'); pullFromCloudIfLinked(p); };
       slot.querySelector('.slot-delete').onclick = (e) => {
         e.stopPropagation();
-        if (!confirm(`Esborrar el perfil de "${p.nom}"? Aquesta acció no es pot desfer.`)) return;
-        const profs = loadProfiles();
-        profs[i] = null;
-        saveProfiles(profs);
-        if (getActiveIdx() === i) setActiveIdx(-1);
-        renderProfileSelect();
-        announce('Perfil esborrat');
+        // confirm() natiu queda bloquejat dins d'un WebView: el botó es
+        // quedava mort al mòbil
+        jmConfirma(`Vols esborrar el perfil de <strong>${p.nom}</strong>?<br><small>No es pot desfer.</small>`, () => {
+          const profs = loadProfiles();
+          profs[i] = null;
+          saveProfiles(profs);
+          if (getActiveIdx() === i) setActiveIdx(-1);
+          renderProfileSelect();
+          announce('Perfil esborrat');
+        }, 'Sí, esborra');
       };
     } else {
       slot.innerHTML = '<div class="slot-plus">＋</div><div class="slot-rank">Nou perfil</div>';
@@ -3181,7 +3232,7 @@ function renderAvatarGroup(id, arr) {
 
 function createProfile() {
   const nom = document.getElementById('profile-name-input').value.trim();
-  if (!nom) { alert('Escriu el teu nom!'); return; }
+  if (!nom) { jmAvis('Escriu el teu nom!'); return; }
   const idx = window._pendingSlot !== undefined ? window._pendingSlot : 0;
   const finalAvatar = applySkintone(selectedAvatar, selectedSkin);
   const player = defaultPlayer(nom, finalAvatar);
@@ -3261,7 +3312,7 @@ let timerInterval = null;
 // ══════════════════════════════════════════════════════════════
 function exportProfile() {
   const player = getPlayer();
-  if (!player) { alert('No hi ha cap perfil actiu.'); return; }
+  if (!player) { jmAvis('No hi ha cap perfil actiu.'); return; }
   const json = JSON.stringify({ v: 1, exported: new Date().toISOString(), player });
   const code = btoa(unescape(encodeURIComponent(json)));
   const wrap = document.createElement('div');
@@ -3281,23 +3332,26 @@ function exportProfile() {
 }
 
 function importProfile() {
-  const code = prompt('Enganxa el codi del perfil:');
-  if (!code) return;
-  try {
-    const json = decodeURIComponent(escape(atob(code.trim())));
-    const obj = JSON.parse(json);
-    if (!obj || !obj.player || !obj.player.nom) throw new Error('Codi invàlid');
-    const profs = loadProfiles();
-    const slot = profs.findIndex(p => p === null);
-    if (slot < 0) { alert('Tots els 5 perfils estan ocupats. Esborra'+"'"+'n un primer.'); return; }
-    profs[slot] = obj.player;
-    saveProfiles(profs);
-    setActiveIdx(slot);
-    renderProfileSelect();
-    alert('✓ Perfil "' + obj.player.nom + '" importat correctament.');
-  } catch(e) {
-    alert('No s'+"'"+'ha pogut llegir el codi. Comprova que estigui complet.');
-  }
+  // Abans això era un prompt(), que dins d'un WebView (el mòbil) està
+  // bloquejat: recuperar un perfil des del codi no funcionava mai.
+  jmDemana("Enganxa aquí el <strong>codi del perfil</strong>", code => {
+    if (!code) return;
+    try {
+      const json = decodeURIComponent(escape(atob(code.trim())));
+      const obj = JSON.parse(json);
+      if (!obj || !obj.player || !obj.player.nom) throw new Error('Codi invàlid');
+      const profs = loadProfiles();
+      const slot = profs.findIndex(p => p === null);
+      if (slot < 0) { jmAvis("Tots els 5 perfils estan ocupats. Esborra'n un primer."); return; }
+      profs[slot] = obj.player;
+      saveProfiles(profs);
+      setActiveIdx(slot);
+      renderProfileSelect();
+      jmAvis('✓ Perfil <strong>' + obj.player.nom + '</strong> importat correctament.');
+    } catch(e) {
+      jmAvis("No s'ha pogut llegir el codi. Comprova que estigui complet.");
+    }
+  }, { placeholder: 'Codi del perfil', textOk: 'Importa' });
 }
 
 function quickPlay() {
@@ -3328,7 +3382,7 @@ function startRepas() {
   });
   if (scored.length < 4) {
     announce('Encara no hi ha prou dades per al repàs.');
-    alert('🎯 Repàs intel·ligent\n\nEncara no tinc prou informació sobre les teves paraules difícils. Juga unes quantes partides (Tria la imatge, Contrarellotge o Vides) i després aquí et proposaré les paraules que més falles per repassar-les!');
+    jmAvis('🎯 <strong>Repàs intel·ligent</strong><br><br>Encara no tinc prou informació sobre les teves paraules difícils.<br><br>Juga unes quantes partides a <strong>Tria la imatge</strong>, <strong>Contrarellotge</strong> o <strong>Vides</strong> i després aquí et proposaré les paraules que més falles, per repassar-les!');
     return;
   }
   scored.sort((a, b) => (b.weak - a.weak) || (a.last - b.last));
@@ -3711,7 +3765,7 @@ function startWordSearchLevel(level) {
     sopa = generateWordSearchSopaCustom(sourceWords, cfg);
   }
   if (!sopa || sopa.paraules.length === 0) {
-    alert('No s\'han pogut col·locar paraules a la graella. Torna-ho a provar.');
+    jmAvis("No s'han pogut col·locar paraules a la graella. Torna-ho a provar.");
     showScreen('s-modes'); return;
   }
 
@@ -4406,7 +4460,7 @@ function renderStats() {
 function startFillBlanks(u) {
   const withFrase = u.vocab.filter(v => v.frase);
   if (withFrase.length === 0) {
-    alert('Aquest tema encara no té frases disponibles.');
+    jmAvis('Aquest tema encara no té frases disponibles.');
     return;
   }
   showScreen('s-fillblanks');
@@ -4574,7 +4628,7 @@ function startSopaDin(u) {
   const words = vocabSel.map(v => v.n); // uppercase names
   const sopa = generateWordSearchSopa(words, 12);
   if (sopa.paraules.length === 0) {
-    alert('No s\'han pogut col·locar paraules a la graella. Torna-ho a provar.');
+    jmAvis("No s'han pogut col·locar paraules a la graella. Torna-ho a provar.");
     return;
   }
   // Build vocabMap so icons can be shown
@@ -4623,7 +4677,7 @@ function startAssociacio(u) {
   });
   // Only keep categories with ≥ 3 words so each group is meaningful
   const catNames = Object.keys(catMap).filter(c => catMap[c].length >= 3);
-  if (catNames.length < 2) { alert('Aquesta unitat no té prou categories per al mode Associació.'); return; }
+  if (catNames.length < 2) { jmAvis('Aquesta unitat no té prou categories per al mode Associació.'); return; }
 
   // Pick up to 3 categories, 3-4 words each → ~9-12 words total
   const selCats = shuffle(catNames).slice(0, 3);
@@ -4767,7 +4821,7 @@ function checkAssociacio() {
 // ══════════════════════════════════════════════════════════════
 function startOrdenar(u) {
   if (!u.oracions || u.oracions.length === 0) {
-    alert('Aquesta unitat no té frases disponibles.'); return;
+    jmAvis('Aquesta unitat no té frases disponibles.'); return;
   }
   const oracions = shuffle([...u.oracions]).slice(0, 3);
   showScreen('s-ordenar');
@@ -4890,7 +4944,7 @@ function checkOrdenar() {
 // ══════════════════════════════════════════════════════════════
 function startCompletar(u) {
   if (!u.textos || u.textos.length === 0) {
-    alert('Aquesta unitat no té textos disponibles.'); return;
+    jmAvis('Aquesta unitat no té textos disponibles.'); return;
   }
   const textos = shuffle([...u.textos]).slice(0, 3);
   // Flatten all blanks across texts, tracking which text+blank each belongs to
@@ -5064,7 +5118,7 @@ function speakCurrentWord() {
 
 function startPhonetics(u) {
   if (!window.speechSynthesis) {
-    alert('El teu navegador no suporta la síntesi de veu. Prova Chrome o Edge.');
+    jmAvis('Aquest navegador no pot llegir en veu alta. Prova el Chrome o l' + "'" + 'Edge.');
     return;
   }
   showScreen('s-phonetics');
@@ -5750,5 +5804,91 @@ if ('serviceWorker' in navigator) {
   } catch(e) {}
 })();
 </script>
+
+<!-- ═══ MODAL PROPI (substitueix alert/confirm/prompt) ═══ -->
+<div id="jm-back" class="jm-back">
+  <div class="jm-card" role="dialog" aria-modal="true" aria-labelledby="jm-text">
+    <div class="jm-text" id="jm-text"></div>
+    <input class="jm-input" id="jm-input" autocomplete="off">
+    <div class="jm-btns" id="jm-btns"></div>
+  </div>
+</div>
+
+<script>
+/* Modal propi: alert(), confirm() i prompt() queden bloquejats dins d'un
+   WebView, i allà el botó que els crida es queda mort. Aquestes tres funcions
+   fan el mateix però amb DOM del joc.
+     jmAvis(text[, quanTanqui])
+     jmConfirma(text, quanSigui[, textOk][, textCancel])
+     jmDemana(text, quanEscrigui[, {placeholder, password, numeric, textOk}])
+   La resposta arriba per callback, no com a valor de retorn. */
+(function () {
+  var cb = null, ambInput = false;
+  function el(id) { return document.getElementById(id); }
+
+  function obre(text, botons, opc) {
+    el('jm-text').innerHTML = text;
+    var inp = el('jm-input');
+    ambInput = !!opc;
+    inp.classList.toggle('visible', ambInput);
+    if (ambInput) {
+      inp.value = opc.valor || '';
+      inp.type = opc.password ? 'password' : 'text';
+      inp.inputMode = opc.numeric ? 'numeric' : 'text';
+      inp.placeholder = opc.placeholder || '';
+    }
+    el('jm-btns').innerHTML = botons;
+    el('jm-back').classList.add('obert');
+    setTimeout(function () {
+      var f = ambInput ? inp : el('jm-btns').querySelector('.jm-btn-ok');
+      if (f) f.focus();
+    }, 40);
+  }
+
+  window.jmAvis = function (text, quanTanqui) {
+    cb = quanTanqui || null;
+    obre(text, '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">D\'acord</button>');
+  };
+
+  window.jmConfirma = function (text, quanSigui, textOk, textCancel) {
+    cb = quanSigui || null;
+    obre(text,
+      '<button type="button" class="jm-btn jm-btn-cancel" onclick="jmTanca(false)">' + (textCancel || 'Cancel\u00b7la') + '</button>' +
+      '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">' + (textOk || 'S\u00ed, endavant') + '</button>');
+  };
+
+  window.jmDemana = function (text, quanEscrigui, opc) {
+    opc = opc || {};
+    cb = quanEscrigui || null;
+    obre(text,
+      '<button type="button" class="jm-btn jm-btn-cancel" onclick="jmTanca(false)">' + (opc.textCancel || 'Cancel\u00b7la') + '</button>' +
+      '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">' + (opc.textOk || 'D\'acord') + '</button>',
+      opc);
+  };
+
+  window.jmTanca = function (ok) {
+    var valor = ambInput ? el('jm-input').value : null;
+    el('jm-back').classList.remove('obert');
+    var f = cb; cb = null; ambInput = false;
+    if (ok && f) f(valor);
+  };
+
+  // En fase de captura, perquè les tecles no arribin al joc mentre el modal
+  // és obert (alguns jocs tenen dreceres amb Enter o Espai).
+  document.addEventListener('keydown', function (e) {
+    var back = el('jm-back');
+    if (!back || !back.classList.contains('obert')) return;
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); jmTanca(false); }
+    else if (e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); jmTanca(true); }
+    else if (e.key === ' ' && document.activeElement !== el('jm-input')) { e.stopPropagation(); }
+  }, true);
+
+  // Clicar el fons fosc equival a cancel·lar.
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.id === 'jm-back') jmTanca(false);
+  });
+})();
+</script>
+
 </body>
 </html>
