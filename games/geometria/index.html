@@ -989,6 +989,136 @@
       margin-top: 2px;
     }
 
+    /* ── CHIPS DE MODE I NIVELL ── */
+    .chips-fila {
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+      width: 100%; margin-bottom: 10px;
+    }
+    .chip {
+      background: var(--bg-card);
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: 0.18s;
+    }
+    .chip:hover { border-color: var(--accent); }
+    .chip.actiu {
+      border-color: var(--accent);
+      background: rgba(247, 201, 72, 0.18);
+      color: var(--accent);
+    }
+    .chips-niv .chip { font-size: 0.78rem; padding: 6px 12px; opacity: 0.85; }
+    .chips-niv .chip.actiu { opacity: 1; }
+
+    /* ── BARRA DEL REPTE ── */
+    .repte-barra {
+      width: 100%;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: rgba(247, 201, 72, 0.1);
+      border: 1px solid rgba(247, 201, 72, 0.3);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.85rem; font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .repte-punts { letter-spacing: 2px; font-size: 1rem; }
+    .repte-punt { color: rgba(255, 255, 255, 0.3); }
+    .repte-punt.fet { color: var(--accent); }
+    .repte-punt.fallat { color: var(--error); }
+
+    .repte-guanyat {
+      background: linear-gradient(135deg, rgba(247, 201, 72, 0.2), rgba(168, 85, 247, 0.12));
+      border: 2px solid rgba(247, 201, 72, 0.5);
+      border-radius: 14px;
+      padding: 18px; margin-top: 16px; text-align: center;
+    }
+
+    /* ── ENUNCIAT, AJUDA I DADES ── */
+    .ex-subtitol {
+      text-align: center; font-size: 0.85rem; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--accent); font-weight: 800; margin-bottom: 4px;
+    }
+    .enunciat {
+      background: var(--bg-card);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.98rem; line-height: 1.6;
+      margin: 4px 0 12px;
+    }
+    .dades-box {
+      background: var(--bg-card); border-radius: 10px;
+      padding: 12px; margin-bottom: 4px; font-size: 0.9rem;
+    }
+    .btn-ajuda {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: var(--text-main);
+      font-family: inherit; font-size: 0.85rem; font-weight: 700;
+      padding: 8px 14px; border-radius: 999px; cursor: pointer;
+      transition: 0.18s;
+    }
+    .btn-ajuda:hover { border-color: var(--accent); color: var(--accent); }
+    .ajuda-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 0.92rem; line-height: 1.65;
+    }
+    .ajuda-box p { margin-bottom: 8px; }
+    .ajuda-box p:last-child { margin-bottom: 0; }
+    .ajuda-box em { color: var(--accent); font-style: normal; font-weight: 800; }
+
+    /* ── RESULTAT ── */
+    .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .res-grid.un-camp { grid-template-columns: 1fr; }
+    .res-camp {
+      background: var(--bg-main); border-radius: 10px; padding: 12px;
+      border-left: 4px solid transparent; text-align: left;
+    }
+    .res-camp-tit {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--accent); font-weight: 700; margin-bottom: 6px;
+    }
+    .res-camp-val { font-size: 1.2rem; font-weight: 800; margin-bottom: 4px; }
+    .res-camp-bo { font-size: 0.85rem; color: var(--text-sub); }
+
+    .inputs-grid.un-camp { grid-template-columns: 1fr; max-width: 320px; margin-left: auto; margin-right: auto; }
+
+    /* ── ENTRADES AMPLES DEL MENÚ ── */
+    .menu-ampla {
+      width: 100%; display: flex; align-items: center; gap: 14px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 14px 18px; margin-top: 10px; cursor: pointer;
+      transition: 0.2s;
+    }
+    .menu-ampla:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .menu-ampla-icon { font-size: 1.9rem; }
+    .menu-ampla-tit { font-weight: 800; font-size: 1rem; }
+    .menu-ampla-sub { font-size: 0.75rem; color: rgba(255, 255, 255, 0.45); }
+    .menu-fet { color: var(--success); font-size: 0.75rem; font-weight: 700; }
+
+    .menu-item { position: relative; }
+    .menu-estrella { position: absolute; top: 6px; right: 8px; font-size: 1rem; }
+
+    /* ── PROGRÉS DELS TROFEUS ── */
+    .trophy-prog { margin-top: 6px; }
+    .trophy-prog-bar {
+      height: 5px; background: rgba(255, 255, 255, 0.12);
+      border-radius: 3px; overflow: hidden;
+    }
+    .trophy-prog-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
+    .trophy-prog-txt { font-size: 0.62rem; color: var(--text-sub); margin-top: 3px; }
+
     /* ── EXERCICI RESPOST (bloquejat) ── */
     .exercise-form.respost { opacity: 0.65; }
     .exercise-form.respost input:disabled,
@@ -1096,7 +1226,7 @@
         </svg>
         <!-- Rombo -->
         <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 0.4s;">
-          <polygon points="50,15 80,50 50,85 20,50" fill="rgba(246, 113, 113, 0.3)" stroke="#f67171" stroke-width="3"/>
+          <polygon points="50,15 80,50 50,85 20,50" fill="rgba(248, 113, 113, 0.3)" stroke="#f87171" stroke-width="3"/>
         </svg>
         <!-- Trapezi -->
         <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg" style="animation: bounce 2s infinite 0.5s;">
@@ -1250,52 +1380,52 @@
     <div class="profile-bar" id="profile-bar-menu"></div>
 
     <div class="menu-grid">
-      <div class="menu-item" onclick="showScreen('screen-exercise'); setupQuadrat();" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-color: rgba(59, 130, 246, 0.3);">
+      <div class="menu-item" data-forma="quadrat" onclick="obreForma('quadrat')" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-color: rgba(59, 130, 246, 0.3);">
         <div class="menu-item-icon" id="icon-quadrat"></div>
         <div class="menu-item-text">Quadrat</div>
         <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
       </div>
-      <div class="menu-item" onclick="showScreen('screen-exercise'); setupTriangle();" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.05)); border-color: rgba(168, 85, 247, 0.3);">
+      <div class="menu-item" data-forma="triangle" onclick="obreForma('triangle')" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.05)); border-color: rgba(168, 85, 247, 0.3);">
         <div class="menu-item-icon" id="icon-triangle"></div>
         <div class="menu-item-text">Triangle</div>
         <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">6 tipus</div>
       </div>
-      <div class="menu-item" onclick="showScreen('screen-exercise'); setupRectangle();" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05)); border-color: rgba(34, 197, 94, 0.3);">
+      <div class="menu-item" data-forma="rectangle" onclick="obreForma('rectangle')" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05)); border-color: rgba(34, 197, 94, 0.3);">
         <div class="menu-item-icon" id="icon-rectangle"></div>
         <div class="menu-item-text">Rectangle</div>
         <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
       </div>
-      <div class="menu-item" onclick="showScreen('screen-exercise'); setupRomboide();" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(236, 72, 153, 0.05)); border-color: rgba(236, 72, 153, 0.3);">
+      <div class="menu-item" data-forma="romboide" onclick="obreForma('romboide')" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(236, 72, 153, 0.05)); border-color: rgba(236, 72, 153, 0.3);">
         <div class="menu-item-icon" id="icon-romboide"></div>
         <div class="menu-item-text">Romboide</div>
         <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
       </div>
-      <div class="menu-item" onclick="showScreen('screen-exercise'); setupRombo();" style="background: linear-gradient(135deg, rgba(246, 113, 113, 0.15), rgba(246, 113, 113, 0.05)); border-color: rgba(246, 113, 113, 0.3);">
+      <div class="menu-item" data-forma="rombo" onclick="obreForma('rombo')" style="background: linear-gradient(135deg, rgba(248, 113, 113, 0.15), rgba(248, 113, 113, 0.05)); border-color: rgba(248, 113, 113, 0.3);">
         <div class="menu-item-icon" id="icon-rombo"></div>
-        <div class="menu-item-text">Rombo</div>
+        <div class="menu-item-text">Rombe</div>
         <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
       </div>
-      <div class="menu-item" onclick="showScreen('screen-exercise'); setupTrapezi();" style="background: linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(34, 211, 238, 0.05)); border-color: rgba(34, 211, 238, 0.3);">
+      <div class="menu-item" data-forma="trapezi" onclick="obreForma('trapezi')" style="background: linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(34, 211, 238, 0.05)); border-color: rgba(34, 211, 238, 0.3);">
         <div class="menu-item-icon" id="icon-trapezi"></div>
         <div class="menu-item-text">Trapezi</div>
         <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
       </div>
-      <div class="menu-item" onclick="showScreen('screen-exercise'); setupPentagon();" style="background: linear-gradient(135deg, rgba(165, 142, 251, 0.15), rgba(165, 142, 251, 0.05)); border-color: rgba(165, 142, 251, 0.3);">
+      <div class="menu-item" data-forma="pentagon" onclick="obreForma('pentagon')" style="background: linear-gradient(135deg, rgba(165, 142, 251, 0.15), rgba(165, 142, 251, 0.05)); border-color: rgba(165, 142, 251, 0.3);">
         <div class="menu-item-icon" id="icon-pentagon"></div>
         <div class="menu-item-text">Pentàgon</div>
         <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
       </div>
-      <div class="menu-item" onclick="showScreen('screen-exercise'); setupHexagon();" style="background: linear-gradient(135deg, rgba(251, 146, 60, 0.15), rgba(251, 146, 60, 0.05)); border-color: rgba(251, 146, 60, 0.3);">
+      <div class="menu-item" data-forma="hexagon" onclick="obreForma('hexagon')" style="background: linear-gradient(135deg, rgba(251, 146, 60, 0.15), rgba(251, 146, 60, 0.05)); border-color: rgba(251, 146, 60, 0.3);">
         <div class="menu-item-icon" id="icon-hexagon"></div>
         <div class="menu-item-text">Hexàgon</div>
         <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
       </div>
-      <div class="menu-item" onclick="showScreen('screen-exercise'); setupOctagon();" style="background: linear-gradient(135deg, rgba(132, 204, 22, 0.15), rgba(132, 204, 22, 0.05)); border-color: rgba(132, 204, 22, 0.3);">
+      <div class="menu-item" data-forma="octagon" onclick="obreForma('octagon')" style="background: linear-gradient(135deg, rgba(132, 204, 22, 0.15), rgba(132, 204, 22, 0.05)); border-color: rgba(132, 204, 22, 0.3);">
         <div class="menu-item-icon" id="icon-octagon"></div>
         <div class="menu-item-text">Octàgon</div>
         <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
       </div>
-      <div class="menu-item" onclick="showScreen('screen-exercise'); setupCircle();" style="background: linear-gradient(135deg, rgba(244, 63, 94, 0.15), rgba(244, 63, 94, 0.05)); border-color: rgba(244, 63, 94, 0.3);">
+      <div class="menu-item" data-forma="circle" onclick="obreForma('circle')" style="background: linear-gradient(135deg, rgba(244, 63, 94, 0.15), rgba(244, 63, 94, 0.05)); border-color: rgba(244, 63, 94, 0.3);">
         <div class="menu-item-icon" id="icon-circle"></div>
         <div class="menu-item-text">Cercle</div>
         <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">P, A</div>
@@ -1304,6 +1434,29 @@
         <div class="menu-item-icon">🔍</div>
         <div class="menu-item-text">Identifica</div>
         <div style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); margin-top: 4px;">10 formes</div>
+      </div>
+    </div>
+
+    <!-- Reptes i repàs -->
+    <div class="menu-ampla" onclick="repasIntelligent()" style="background: linear-gradient(135deg, rgba(52, 211, 153, 0.16), rgba(52, 211, 153, 0.05)); border-color: rgba(52, 211, 153, 0.35);">
+      <div class="menu-ampla-icon">🎯</div>
+      <div>
+        <div class="menu-ampla-tit">Repàs intel·ligent</div>
+        <div class="menu-ampla-sub">Et treu les formes que et costen més</div>
+      </div>
+    </div>
+    <div class="menu-ampla" onclick="obreRepteMestre()" style="background: linear-gradient(135deg, rgba(247, 201, 72, 0.16), rgba(247, 201, 72, 0.05)); border-color: rgba(247, 201, 72, 0.35);">
+      <div class="menu-ampla-icon">🏆</div>
+      <div>
+        <div class="menu-ampla-tit">Repte mestre <span id="menu-estrella-mestre"></span></div>
+        <div class="menu-ampla-sub">10 seguides amb totes les formes barrejades</div>
+      </div>
+    </div>
+    <div class="menu-ampla" onclick="obreRepteDelDia()" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.16), rgba(139, 92, 246, 0.05)); border-color: rgba(139, 92, 246, 0.35);">
+      <div class="menu-ampla-icon">📅</div>
+      <div>
+        <div class="menu-ampla-tit">Repte del dia <span id="menu-repte-dia"></span></div>
+        <div class="menu-ampla-sub">5 exercicis, els mateixos per a tota la classe</div>
       </div>
     </div>
 
@@ -1323,7 +1476,8 @@
       </div>
     </div>
 
-    <button class="btn-secondary" onclick="showScreen('screen-profile-select'); renderProfileSlots();" style="margin-top: 20px;">Canviar Perfil</button>
+    <button class="btn-secondary" data-so-btn onclick="alternaSo()" style="margin-top: 20px;">🔊 So activat</button>
+    <button class="btn-secondary" onclick="showScreen('screen-profile-select'); renderProfileSlots();" style="margin-top: 8px;">Canviar Perfil</button>
     <button class="btn-secondary" onclick="showScreen('screen-credits');" style="margin-top: 8px; opacity: 0.7;">👨‍💻 Crèdits</button>
     <button data-cloud-entry class="btn-secondary" onclick="showScreen('screen-cloud'); document.getElementById('cloud-feedback').textContent=''; renderCloudScreen();" style="margin-top: 8px;">☁️ Classe (desar al núvol)</button>
   </div>
@@ -1496,6 +1650,7 @@
             <div><strong>JavaScript ES6+</strong> — Single-page application</div>
             <div><strong>SVG</strong> — Dibuixos de formes geomètriques</div>
             <div><strong>localStorage</strong> — Persistència de dades</div>
+            <div><strong>Web Audio API</strong> — Efectes de so sense fitxers externs</div>
           </div>
         </div>
       </div>
@@ -1505,7 +1660,7 @@
         <div style="font-size: 0.85rem; color: var(--text-sub); line-height: 1.8;">
           <div style="margin-bottom: 8px;">🎓 Joc Geometria 1r ESO</div>
           <div style="font-size: 0.75rem; margin-bottom: 8px;">
-            <strong>v2.0</strong> — Agost 2026
+            <strong>v2.1</strong> — Agost 2026
           </div>
           <div class="credits-cc">
             <strong>© 2026 Robert Potau Nuñez</strong><br>
@@ -1600,18 +1755,54 @@ const AVATARS_NEUT  = ["🦊","🐱","🐼","🤖","👾","🦄","🐸","🐧","
 
 // ═══════════════════════════════════════════
 
+// Cada trofeu diu com es guanya (`prog`: [aconseguit, objectiu]) perquè la
+// pantalla de trofeus en pugui ensenyar la barra de progrés en comptes d'un
+// "???" que no diu res.
 const TROFEUS = [
-  { id:'primer_vol', nom:'Primer vol', icon:'🕊️', desc:'Primera partida completada', cat:'prog' },
-  { id:'geomeatra', nom:'Geòmetra', icon:'📐', desc:'50 exercicis completats', cat:'prog' },
-  { id:'mestre_geo', nom:'Mestre Geòmetra', icon:'👑', desc:'100 exercicis completats', cat:'prog' },
-  { id:'llegenda_geometria', nom:'Llegenda de la Geometria', icon:'✨', desc:'Assolir el rang màxim (Mestre Suprem)', cat:'rang' },
-  { id:'sense_errors', nom:'Sense errors', icon:'⭐', desc:'10/10 en una forma', cat:'hab' },
-  { id:'ratxa_perfecta', nom:'Ratxa Perfecta', icon:'🔥', desc:'5 encerts consecutius', cat:'hab' },
-  { id:'perfectcionista', nom:'Perfeccionista', icon:'💎', desc:'20 exercicis perfectes', cat:'hab' },
-  { id:'polimata_geometrica', nom:'Polímata Geomètrica', icon:'🎓', desc:'Dominar 9+ formes geomètriques', cat:'hab' },
-  { id:'identifica_expert', nom:'Identificador Expert', icon:'🔍', desc:'10 formes identificades correctament', cat:'id' },
-  { id:'desafiament_completat', nom:'Desafiament Completat', icon:'⚡', desc:'Completar 1 sessió de repte', cat:'desafiament' },
-  { id:'curios', nom:'Curiós', icon:'🕵️', desc:'Has llegit els crèdits', cat:'secret' },
+  { id:'primer_vol', nom:'Primer vol', icon:'🕊️', desc:'Fes el teu primer exercici', cat:'prog',
+    prog: p => [Math.min(p.partides || 0, 1), 1] },
+  { id:'geomeatra', nom:'Geòmetra', icon:'📐', desc:'Fes 50 exercicis', cat:'prog',
+    prog: p => [p.partides || 0, 50] },
+  { id:'mestre_geo', nom:'Mestre Geòmetra', icon:'👑', desc:'Fes 100 exercicis', cat:'prog',
+    prog: p => [p.partides || 0, 100] },
+  { id:'tot_el_tauler', nom:'Tot el tauler', icon:'🏅', desc:'Encerta almenys un exercici de cada forma i d\'Identifica', cat:'prog',
+    prog: p => [ORDRE_FORMES.concat('identificar').filter(k => ((p.stats_forma || {})[k] || {}).encerts > 0).length, 11] },
+  { id:'tres_dies', nom:'Tres dies seguits', icon:'📅', desc:'Juga 3 dies diferents', cat:'prog',
+    prog: p => [Math.min((p.dies || []).length, 3), 3] },
+
+  { id:'llegenda_geometria', nom:'Llegenda de la Geometria', icon:'✨', desc:'Arriba al rang màxim (Mestre Suprem)', cat:'rang',
+    prog: p => [p.xp || 0, 15000] },
+
+  { id:'sense_errors', nom:'Sense errors', icon:'⭐', desc:'10 encerts en una forma sense cap error', cat:'hab',
+    prog: p => [Math.max(0, ...Object.values(p.stats_forma || {}).map(s => s.errors === 0 ? s.encerts : 0)), 10] },
+  { id:'ratxa_perfecta', nom:'Ratxa Perfecta', icon:'🔥', desc:'5 encerts seguits', cat:'hab',
+    prog: p => [Math.max(p.ratxa || 0, Math.min(p.ratxa_max || 0, 5)), 5] },
+  { id:'imparable', nom:'Imparable', icon:'🌋', desc:'15 encerts seguits sense fallar', cat:'hab',
+    prog: p => [Math.max(p.ratxa || 0, Math.min(p.ratxa_max || 0, 15)), 15] },
+  { id:'perfectcionista', nom:'Perfeccionista', icon:'💎', desc:'Encerta 20 exercicis', cat:'hab',
+    prog: p => [Math.floor((p.xp || 0) / 10), 20] },
+  { id:'polimata_geometrica', nom:'Polímata Geomètrica', icon:'🎓', desc:'Aconsegueix 10 encerts en 9 formes diferents', cat:'hab',
+    prog: p => [Object.values(p.stats_forma || {}).filter(s => s.encerts >= 10).length, 9] },
+  { id:'identifica_expert', nom:'Identificador Expert', icon:'🔍', desc:'Identifica 10 formes correctament', cat:'id',
+    prog: p => [((p.stats_forma || {}).identificar || {}).encerts || 0, 10] },
+
+  { id:'pensament_invers', nom:'Pensament invers', icon:'🔄', desc:'Encerta 15 exercicis del mode «Al revés»', cat:'modes',
+    prog: p => [(p.comptadors || {}).invers || 0, 15] },
+  { id:'enginyer', nom:'Enginyer/a', icon:'🧩', desc:'Resol 10 problemes amb context', cat:'modes',
+    prog: p => [(p.comptadors || {}).problema || 0, 10] },
+  { id:'estudiant_aplicat', nom:'Estudiant aplicat', icon:'🎒', desc:'Llegeix el «Com es fa?» de les 10 formes', cat:'modes',
+    prog: p => [Object.keys(p.teoria || {}).length, 10] },
+
+  { id:'desafiament_completat', nom:'Desafiament Completat', icon:'⚡', desc:'Supera el repte de 5 seguides d\'una forma', cat:'desafiament',
+    prog: p => [Math.min(Object.keys(p.estrelles || {}).filter(k => k !== '_mestre').length, 1), 1] },
+  { id:'constellacio', nom:'Constel·lació completa', icon:'⭐', desc:'Aconsegueix l\'estrella del repte de les 10 formes', cat:'desafiament',
+    prog: p => [Object.keys(p.estrelles || {}).filter(k => k !== '_mestre').length, 10] },
+  { id:'repte_mestre', nom:'Repte mestre', icon:'🏆', desc:'Encerta 10 seguides al repte de formes barrejades', cat:'desafiament',
+    prog: p => [(p.estrelles || {})._mestre ? 1 : 0, 1] },
+  { id:'ple_del_dia', nom:'Ple del dia', icon:'🥇', desc:'Fes els 5 encerts del repte del dia', cat:'desafiament',
+    prog: p => [(p.repte_dia && p.repte_dia.encerts) || 0, 5] },
+
+  { id:'curios', nom:'Curiós', icon:'🕵️', desc:'Has llegit els crèdits', cat:'secret', secret: true },
 ];
 
 const RANGS = [
@@ -1810,6 +2001,13 @@ function defaultPlayer(nom, genere) {
       circle:     { encerts: 0, errors: 0, partides: 0 },
       identificar:{ encerts: 0, errors: 0, partides: 0 },
     },
+    nivell: 'normal',
+    estrelles: {},                    // repte superat, per forma (+ '_mestre')
+    comptadors: { invers: 0, problema: 0 },
+    teoria: {},                       // formes de les quals ha llegit el "Com es fa?"
+    dies: [],                         // dates ISO en què ha jugat
+    ratxa_max: 0,
+    repte_dia: null,                  // { data, encerts }
     cloud_student_id: null,  // set once joined/claimed via la pantalla Classe
     cloud_class_code: null,
     cloud_synced_at: 0       // ms epoch de l'últim desat/pull al núvol amb èxit
@@ -1824,6 +2022,13 @@ function migratePlayer(p) {
   });
   if (!p.trofeus) p.trofeus = [];
   if (typeof p.ratxa !== 'number') p.ratxa = 0;
+  if (typeof p.ratxa_max !== 'number') p.ratxa_max = p.ratxa || 0;
+  if (!p.nivell) p.nivell = 'normal';
+  if (!p.estrelles) p.estrelles = {};
+  if (!p.comptadors) p.comptadors = { invers: 0, problema: 0 };
+  if (!p.teoria) p.teoria = {};
+  if (!Array.isArray(p.dies)) p.dies = [];
+  if (p.repte_dia === undefined) p.repte_dia = null;
   if (p.cloud_student_id === undefined) p.cloud_student_id = null;
   if (p.cloud_class_code === undefined) p.cloud_class_code = null;
   if (p.cloud_synced_at === undefined) p.cloud_synced_at = 0;
@@ -1905,7 +2110,7 @@ function getStatsSVG(key) {
       <polygon points="30,35 65,25 70,65 35,75" fill="rgba(236, 72, 153, 0.3)" stroke="#ec4899" stroke-width="2"/>
     </svg>`,
     rombo: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="50,20 80,50 50,80 20,50" fill="rgba(246, 113, 113, 0.3)" stroke="#f67171" stroke-width="2"/>
+      <polygon points="50,20 80,50 50,80 20,50" fill="rgba(248, 113, 113, 0.3)" stroke="#f87171" stroke-width="2"/>
     </svg>`,
     trapezi: `<svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
       <polygon points="35,30 65,30 80,75 20,75" fill="rgba(34, 211, 238, 0.3)" stroke="#06b6d4" stroke-width="2"/>
@@ -1944,7 +2149,7 @@ function renderStats() {
     { key: 'rectangle', nom: 'Rectangle', color: '#22c55e' },
     { key: 'triangle', nom: 'Triangle', color: '#a855f7' },
     { key: 'romboide', nom: 'Romboide', color: '#ec4899' },
-    { key: 'rombo', nom: 'Rombo', color: '#f67171' },
+    { key: 'rombo', nom: 'Rombe', color: '#f87171' },
     { key: 'trapezi', nom: 'Trapezi', color: '#06b6d4' },
     { key: 'pentagon', nom: 'Pentàgon', color: '#a58efb' },
     { key: 'hexagon', nom: 'Hexàgon', color: '#fb923c' },
@@ -1963,7 +2168,7 @@ function renderStats() {
         <div style="display: flex; align-items: center; gap: 12px;">
           ${getStatsSVG(forma.key)}
           <div>
-            <div style="font-weight: 800; margin-bottom: 8px; font-size: 1.1rem;">${forma.nom}</div>
+            <div style="font-weight: 800; margin-bottom: 8px; font-size: 1.1rem;">${forma.nom} ${(player.estrelles || {})[forma.key] ? '⭐' : ''}</div>
             <div style="color: var(--text-sub); font-size: 0.9rem;">
               <span style="color: var(--success);">✓ ${s.encerts}</span> •
               <span style="color: var(--error);">✕ ${s.errors}</span> •
@@ -2022,7 +2227,7 @@ function renderMenuIcons() {
 
   if (iconRombo) {
     iconRombo.innerHTML = `<svg viewBox="0 0 100 100" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="50,20 80,50 50,80 20,50" fill="rgba(246, 113, 113, 0.3)" stroke="#f67171" stroke-width="3"/>
+      <polygon points="50,20 80,50 50,80 20,50" fill="rgba(248, 113, 113, 0.3)" stroke="#f87171" stroke-width="3"/>
     </svg>`;
   }
 
@@ -2453,8 +2658,33 @@ function updateMenuProfile() {
     <div class="profile-bar-info">
       <div class="profile-bar-nom">${esc(player.nom)}</div>
       <div class="profile-bar-rang">${rang.icon} ${getNomRang(rang, player.genere)}</div>
-      <div class="profile-bar-xp">${player.xp || 0} XP</div>
+      <div class="profile-bar-xp">${player.xp || 0} XP · ${NIVELLS.find(n => n.id === nivell()).icon} ${NIVELLS.find(n => n.id === nivell()).nom}</div>
     </div>`;
+  pintaEstrellesMenu();
+  actualitzaBotoSo();
+}
+
+// Una estrella a la targeta de cada forma amb el repte superat.
+function pintaEstrellesMenu() {
+  const est = (player && player.estrelles) || {};
+  document.querySelectorAll('.menu-item[data-forma]').forEach(el => {
+    const vella = el.querySelector('.menu-estrella');
+    if (vella) vella.remove();
+    if (est[el.dataset.forma]) {
+      const sp = document.createElement('div');
+      sp.className = 'menu-estrella';
+      sp.textContent = '⭐';
+      sp.title = 'Repte superat';
+      el.appendChild(sp);
+    }
+  });
+  const m = document.getElementById('menu-estrella-mestre');
+  if (m) m.textContent = est._mestre ? '⭐' : '';
+  const d = document.getElementById('menu-repte-dia');
+  if (d) {
+    const fet = player && player.repte_dia && player.repte_dia.data === avuiISO();
+    d.innerHTML = fet ? `<span class="menu-fet">fet avui: ${player.repte_dia.encerts}/5</span>` : '';
+  }
 }
 
 // ═══════════════════════════════════════════
@@ -2467,7 +2697,8 @@ function renderTrophies() {
     { id: 'rang', nom: '👑 Rang', color: '#f472b6' },
     { id: 'hab', nom: '⭐ Habilitat', color: '#f7c948' },
     { id: 'id', nom: '🔍 Identificació', color: '#a78bfa' },
-    { id: 'desafiament', nom: '⚡ Desafiament', color: '#38bdf8' },
+    { id: 'modes', nom: '🧩 Maneres de jugar', color: '#34d399' },
+    { id: 'desafiament', nom: '⚡ Reptes', color: '#38bdf8' },
     { id: 'secret', nom: '🔒 Secret', color: '#94a3b8' },
   ];
 
@@ -2492,10 +2723,18 @@ function renderTrophies() {
       const div = document.createElement('div');
       div.className = 'trophy-card ' + (unlocked ? 'unlocked' : 'locked');
       if (unlocked) div.style.borderColor = cat.color + '66';
+      // Els bloquejats ara diuen QUÈ has de fer i com ho portes; només el
+      // trofeu secret continua sent una sorpresa.
+      const amagat = !unlocked && t.secret;
+      const pr = unlocked ? null : progresTrofeu(t);
       div.innerHTML = `
-        <div class="trophy-icon">${unlocked ? t.icon : '❓'}</div>
-        <div class="trophy-name">${unlocked ? t.nom : '???'}</div>
-        <div class="trophy-desc">${unlocked ? t.desc : '...'}</div>`;
+        <div class="trophy-icon">${amagat ? '❓' : t.icon}</div>
+        <div class="trophy-name">${amagat ? '???' : t.nom}</div>
+        <div class="trophy-desc">${amagat ? 'Un secret... busca\'l!' : t.desc}</div>
+        ${pr && !amagat && pr.total > 1 ? `<div class="trophy-prog">
+            <div class="trophy-prog-bar"><div class="trophy-prog-fill" style="width:${Math.round(pr.fet / pr.total * 100)}%;background:${cat.color}"></div></div>
+            <div class="trophy-prog-txt">${pr.fet} / ${pr.total}</div>
+          </div>` : ''}`;
       catGrid.appendChild(div);
     });
     grid.appendChild(catGrid);
@@ -2581,8 +2820,15 @@ function angleRecte(x, y, dx, dy, stroke, mida = 9) {
     fill="none" stroke="${stroke}" stroke-width="1.5"/>`;
 }
 
+// Al mode "Al revés" la mesura que s'ha de trobar es dibuixa com a "?", però
+// la figura es continua escalant amb el valor real: no fa trampa, només amaga
+// el número. lb() decideix què s'escriu a cada etiqueta.
+function lbl(subs, clau, valor) {
+  return (subs && subs[clau] !== undefined) ? subs[clau] : valor;
+}
+
 // ─── QUADRAT ───────────────────────────────
-function drawSquareSVG(costat) {
+function drawSquareSVG(costat, subsA) {
   const s = fitScale(costat, costat) * costat;
   const x = (SVG_BOX - s) / 2, y = SVG_CY - s / 2;
   const x2 = x + s, y2 = y + s, mid = x + s / 2;
@@ -2595,12 +2841,12 @@ function drawSquareSVG(costat) {
     <line x1="${mid - 6}" y1="${y2 + 5}" x2="${mid + 6}" y2="${y2 + 5}" stroke="#60a5fa" stroke-width="2.5"/>
     <line x1="${x - 5}" y1="${y + s / 2 - 6}" x2="${x - 5}" y2="${y + s / 2 + 6}" stroke="#60a5fa" stroke-width="2.5"/>
     <line x1="${x2 + 5}" y1="${y + s / 2 - 6}" x2="${x2 + 5}" y2="${y + s / 2 + 6}" stroke="#60a5fa" stroke-width="2.5"/>
-    ${dimH(x, x2, y2 + 18, `a = ${costat} cm`, '#93c5fd', 14)}
+    ${dimH(x, x2, y2 + 18, `a = ${subsA !== undefined ? subsA : costat} cm`, '#93c5fd', 14)}
   `);
 }
 
 // ─── RECTANGLE ─────────────────────────────
-function drawRectangleSVG(base, altura) {
+function drawRectangleSVG(base, altura, subs) {
   const k = fitScale(base, altura);
   const w = base * k, h = altura * k;
   const x = (SVG_BOX - w) / 2, y = SVG_CY - h / 2;
@@ -2610,8 +2856,8 @@ function drawRectangleSVG(base, altura) {
     <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="rgba(34,197,94,0.18)" stroke="#22c55e" stroke-width="3"/>
     ${angleRecte(x, y, 1, 1, '#22c55e')}${angleRecte(x2, y, -1, 1, '#22c55e')}
     ${angleRecte(x2, y2, -1, -1, '#22c55e')}${angleRecte(x, y2, 1, -1, '#22c55e')}
-    ${dimH(x, x2, y2 + 18, `b = ${base} cm`, '#86efac')}
-    ${dimV(y, y2, x - 18, `h = ${altura} cm`, '#86efac', 13, `h = ${altura}`)}
+    ${dimH(x, x2, y2 + 18, `b = ${lbl(subs, 'b', base)} cm`, '#86efac')}
+    ${dimV(y, y2, x - 18, `h = ${lbl(subs, 'h', altura)} cm`, '#86efac', 13, `h = ${lbl(subs, 'h', altura)}`)}
   `);
 }
 
@@ -2619,7 +2865,7 @@ function drawRectangleSVG(base, altura) {
 // a = costat esquerre, b = BASE, c = costat dret, h = altura sobre la base.
 // El peu de l'altura cau a p = √(a² − h²) del vèrtex esquerre → el dibuix
 // correspon de debò als tres costats donats.
-function drawTriangleSVG(a, base, c, h) {
+function drawTriangleSVG(a, base, c, h, subs) {
   const p = Math.min(base, Math.sqrt(Math.max(0, a * a - h * h)));
   const k = fitScale(base, h);
   const bw = base * k, th = h * k, px = p * k;
@@ -2637,17 +2883,17 @@ function drawTriangleSVG(a, base, c, h) {
              fill="rgba(168,85,247,0.18)" stroke="#a855f7" stroke-width="3"/>
     ${esRecteEsq ? '' : `<line x1="${A.x}" y1="${A.y}" x2="${A.x}" y2="${by}" stroke="#c084fc" stroke-width="2" stroke-dasharray="5,4"/>`}
     ${angleRecte(A.x, by, cap, -1, '#c084fc', 8)}
-    ${sideLabel(A, B, gx, gy, esRecteEsq ? `a = h = ${a}` : `a = ${a}`, '#e9d5ff', 16, 12)}
-    ${sideLabel(A, C, gx, gy, `c = ${c}`, '#e9d5ff', 16, 12)}
-    ${esRecteEsq ? '' : dimV(A.y, by, B.x - 20, `h = ${h} cm`, '#c084fc', 12, `h = ${h}`)}
-    ${dimH(B.x, C.x, by + 18, `b = ${base} cm`, '#e9d5ff')}
+    ${sideLabel(A, B, gx, gy, esRecteEsq && !subs ? `a = h = ${a}` : `a = ${lbl(subs, 'a', a)}`, '#e9d5ff', 16, 12)}
+    ${sideLabel(A, C, gx, gy, `c = ${lbl(subs, 'c', c)}`, '#e9d5ff', 16, 12)}
+    ${esRecteEsq && !subs ? '' : dimV(A.y, by, B.x - 20, `h = ${lbl(subs, 'h', h)} cm`, '#c084fc', 12, `h = ${lbl(subs, 'h', h)}`)}
+    ${dimH(B.x, C.x, by + 18, `b = ${lbl(subs, 'b', base)} cm`, '#e9d5ff')}
   `);
 }
 
 // ─── ROMBOIDE ──────────────────────────────
 // b = base, h = altura, a = costat oblic. El desplaçament del costat de dalt
 // és √(a² − h²), o sigui que el dibuix reflecteix el valor real de a.
-function drawRomboideSVG(base, altura, costat) {
+function drawRomboideSVG(base, altura, costat, subs) {
   const off = costat ? Math.sqrt(Math.max(0, costat * costat - altura * altura)) : altura * 0.6;
   const k = fitScale(base + off, altura);
   const bw = base * k, bh = altura * k, ox = off * k;
@@ -2659,14 +2905,14 @@ function drawRomboideSVG(base, altura, costat) {
     <polygon points="${P.map(p => `${p.x},${p.y}`).join(' ')}" fill="rgba(236,72,153,0.18)" stroke="#ec4899" stroke-width="3"/>
     <line x1="${x + ox}" y1="${yT}" x2="${x + ox}" y2="${yB}" stroke="#f9a8d4" stroke-width="2" stroke-dasharray="5,4"/>
     ${angleRecte(x + ox, yB, 1, -1, '#f9a8d4', 8)}
-    ${costat ? sideLabel(P[1], P[2], cx, SVG_CY, `a = ${costat}`, '#fbcfe8', 18, 12) : ''}
-    ${dimV(yT, yB, x - 18, `h = ${altura} cm`, '#f9a8d4', 12, `h = ${altura}`)}
-    ${dimH(P[0].x, P[1].x, yB + 18, `b = ${base} cm`, '#f9a8d4')}
+    ${costat ? sideLabel(P[1], P[2], cx, SVG_CY, `a = ${lbl(subs, 'a', costat)}`, '#fbcfe8', 18, 12) : ''}
+    ${dimV(yT, yB, x - 18, `h = ${lbl(subs, 'h', altura)} cm`, '#f9a8d4', 12, `h = ${lbl(subs, 'h', altura)}`)}
+    ${dimH(P[0].x, P[1].x, yB + 18, `b = ${lbl(subs, 'b', base)} cm`, '#f9a8d4')}
   `);
 }
 
 // ─── ROMBE ─────────────────────────────────
-function drawRomboSVG(d1, d2, costat) {
+function drawRomboSVG(d1, d2, costat, subs) {
   const k = fitScale(d2, d1);
   const dv = d1 * k, dh = d2 * k;
   const cx = SVG_BOX / 2, cy = SVG_CY;
@@ -2679,15 +2925,15 @@ function drawRomboSVG(d1, d2, costat) {
     <line x1="${cx}" y1="${T.y}" x2="${cx}" y2="${B.y}" stroke="#fca5a5" stroke-width="2" stroke-dasharray="5,4"/>
     <line x1="${L.x}" y1="${cy}" x2="${R.x}" y2="${cy}" stroke="#fca5a5" stroke-width="2" stroke-dasharray="5,4"/>
     ${angleRecte(cx, cy, 1, -1, '#fca5a5', 8)}
-    ${costat ? sideLabel(T, R, cx, cy, `a = ${costat}`, '#fecaca', 15, 12) : ''}
-    ${dimV(T.y, B.y, L.x - 18, `d₁ = ${d1} cm`, '#fca5a5', 12, `d₁ = ${d1}`)}
-    ${dimH(L.x, R.x, B.y + 18, `d₂ = ${d2} cm`, '#fca5a5', 12)}
+    ${costat ? sideLabel(T, R, cx, cy, `a = ${lbl(subs, 'a', costat)}`, '#fecaca', 15, 12) : ''}
+    ${dimV(T.y, B.y, L.x - 18, `d₁ = ${lbl(subs, 'd1', d1)} cm`, '#fca5a5', 12, `d₁ = ${lbl(subs, 'd1', d1)}`)}
+    ${dimH(L.x, R.x, B.y + 18, `d₂ = ${lbl(subs, 'd2', d2)} cm`, '#fca5a5', 12)}
   `);
 }
 
 // ─── TRAPEZI ───────────────────────────────
 // tipus: 'isosceles' (els dos costats oblics iguals) o 'rectangle' (un costat = h).
-function drawTrapezSVG(b1, b2, h, c, d, tipus) {
+function drawTrapezSVG(b1, b2, h, c, d, tipus, subs) {
   const offL = tipus === 'rectangle' ? 0 : (b1 - b2) / 2;
   const k = fitScale(b1, h);
   const w1 = b1 * k, w2 = b2 * k, th = h * k, ox = offL * k;
@@ -2703,11 +2949,11 @@ function drawTrapezSVG(b1, b2, h, c, d, tipus) {
              fill="rgba(34,211,238,0.18)" stroke="#06b6d4" stroke-width="3"/>
     ${esRecte ? '' : `<line x1="${hx}" y1="${yT}" x2="${hx}" y2="${yB}" stroke="#67e8f9" stroke-width="2" stroke-dasharray="5,4"/>`}
     ${angleRecte(hx, yB, 1, -1, '#67e8f9', 8)}
-    ${svgText((TL.x + TR.x) / 2, yT - 9, `b₂ = ${b2} cm`, '#67e8f9', 12)}
-    ${c ? sideLabel(BL, TL, cx, SVG_CY, esRecte ? `c = h = ${c}` : `c = ${c}`, '#a5f3fc', 17, 12) : ''}
+    ${svgText((TL.x + TR.x) / 2, yT - 9, `b₂ = ${lbl(subs, 'b2', b2)} cm`, '#67e8f9', 12)}
+    ${c ? sideLabel(BL, TL, cx, SVG_CY, esRecte && !subs ? `c = h = ${c}` : `c = ${c}`, '#a5f3fc', 17, 12) : ''}
     ${d ? sideLabel(BR, TR, cx, SVG_CY, `d = ${d}`, '#a5f3fc', 17, 12) : ''}
-    ${esRecte ? '' : dimV(yT, yB, BL.x - 18, `h = ${h} cm`, '#67e8f9', 12, `h = ${h}`)}
-    ${dimH(BL.x, BR.x, yB + 18, `b₁ = ${b1} cm`, '#67e8f9', 12)}
+    ${esRecte ? '' : dimV(yT, yB, BL.x - 18, `h = ${lbl(subs, 'h', h)} cm`, '#67e8f9', 12, `h = ${lbl(subs, 'h', h)}`)}
+    ${dimH(BL.x, BR.x, yB + 18, `b₁ = ${lbl(subs, 'b1', b1)} cm`, '#67e8f9', 12)}
   `);
 }
 
@@ -2716,7 +2962,7 @@ function drawTrapezSVG(b1, b2, h, c, d, tipus) {
 // l'apotema (perpendicular al costat) es dibuixa recta cap avall, que és on
 // realment va. Abans es dibuixava cap amunt, i en el pentàgon i l'hexàgon
 // amunt hi ha un VÈRTEX — o sigui que aquella línia no era l'apotema.
-function _regularPolygonSVG(n, costat, apValor, fill, stroke, light) {
+function _regularPolygonSVG(n, costat, apValor, fill, stroke, light, subs) {
   const Rcm = costat / (2 * Math.sin(Math.PI / n));
   const start = 90 - 180 / n;
   const raw = [];
@@ -2737,17 +2983,17 @@ function _regularPolygonSVG(n, costat, apValor, fill, stroke, light) {
     <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${yBase}" stroke="${light}" stroke-width="2" stroke-dasharray="5,4"/>
     ${angleRecte(cx, yBase, 1, -1, light, 8)}
     <circle cx="${cx}" cy="${cy.toFixed(1)}" r="2.5" fill="${stroke}"/>
-    ${svgText(cx + 9, cy + apPx / 2 + 4.5, `ap = ${apValor}`, light, 12, 'start')}
-    ${dimH(P[0].x, P[1].x, yBase + 18, `a = ${costat} cm`, light)}
+    ${svgText(cx + 9, cy + apPx / 2 + 4.5, `ap = ${lbl(subs, 'ap', apValor)}`, light, 12, 'start')}
+    ${dimH(P[0].x, P[1].x, yBase + 18, `a = ${lbl(subs, 'a', costat)} cm`, light)}
   `);
 }
 
-function drawPentagonSVG(costat, ap) { return _regularPolygonSVG(5, costat, ap, 'rgba(165,142,251,0.18)', '#a58efb', '#d8b4fe'); }
-function drawHexagonSVG(costat, ap)  { return _regularPolygonSVG(6, costat, ap, 'rgba(251,146,60,0.18)', '#fb923c', '#fed7aa'); }
-function drawOctagonSVG(costat, ap)  { return _regularPolygonSVG(8, costat, ap, 'rgba(132,204,22,0.18)', '#84cc16', '#d4fc79'); }
+function drawPentagonSVG(costat, ap, subs) { return _regularPolygonSVG(5, costat, ap, 'rgba(165,142,251,0.18)', '#a58efb', '#d8b4fe', subs); }
+function drawHexagonSVG(costat, ap, subs)  { return _regularPolygonSVG(6, costat, ap, 'rgba(251,146,60,0.18)', '#fb923c', '#fed7aa', subs); }
+function drawOctagonSVG(costat, ap, subs)  { return _regularPolygonSVG(8, costat, ap, 'rgba(132,204,22,0.18)', '#84cc16', '#d4fc79', subs); }
 
 // ─── CERCLE ────────────────────────────────
-function drawCircleSVG(r) {
+function drawCircleSVG(r, subsR) {
   const rad = fitScale(2 * r, 2 * r) * r;
   const cx = SVG_BOX / 2, cy = SVG_CY;
 
@@ -2760,8 +3006,8 @@ function drawCircleSVG(r) {
     <circle cx="${cx}" cy="${cy}" r="${rad}" fill="rgba(244,63,94,0.18)" stroke="#f43f5e" stroke-width="3"/>
     <circle cx="${cx}" cy="${cy}" r="3" fill="#f43f5e"/>
     <line x1="${cx}" y1="${cy}" x2="${cx + rad - 4}" y2="${cy}" stroke="#fb7185" stroke-width="2.5" marker-end="url(#ci-arr)"/>
-    ${svgText(cx + rad / 2, cy - 10, `r = ${r} cm`, '#fecdd3', 13)}
-    ${dimH(cx - rad, cx + rad, cy + rad + 18, `d = ${2 * r} cm`, '#fda4af', 12)}
+    ${svgText(cx + rad / 2, cy - 10, `r = ${subsR !== undefined ? subsR : r} cm`, '#fecdd3', 13)}
+    ${subsR !== undefined ? '' : dimH(cx - rad, cx + rad, cy + rad + 18, `d = ${2 * r} cm`, '#fda4af', 12)}
   `);
 }
 
@@ -2827,1191 +3073,949 @@ function drawCircleIdentify() {
 }
 
 // ═══════════════════════════════════════════
-//  EXERCICI: QUADRAT (P = 4a, A = a²)
+//  MOTOR D'EXERCICIS (v2.1)
+//  Abans hi havia deu parelles setupX()/checkX() gairebé idèntiques (uns 1.200
+//  línies duplicades). Ara cada forma només declara com genera les dades i el
+//  motor s'encarrega de pintar, corregir i puntuar. Això és el que fa que els
+//  modes nous (invers, problema, repte) i els nivells surtin gratis a totes.
 // ═══════════════════════════════════════════
 
-function setupQuadrat() {
-  document.getElementById('exercise-title').textContent = '⬜ Quadrat';
-  const costat = Math.floor(Math.random() * 15) + 2; // 2-16
-  const perimetre = 4 * costat;
-  const area = costat * costat;
+let formaActual   = 'quadrat';
+let modeExercici  = 'practica';   // 'practica' | 'invers' | 'problema' | 'repte'
+let repteEstat    = null;         // { encerts, total } mentre dura un repte
+const REPTE_TOTAL = 5;
 
-  currentExercise = {
-    forma: 'quadrat',
-    costat,
-    perimetre,
-    area,
+const MODES = [
+  { id: 'practica', nom: 'Practica', icon: '📐' },
+  { id: 'invers',   nom: 'Al revés',  icon: '🔄' },
+  { id: 'problema', nom: 'Problema',  icon: '🧩' },
+  { id: 'repte',    nom: 'Repte',     icon: '⚡' },
+];
+
+const NIVELLS = [
+  { id: 'facil',   nom: 'Fàcil',   icon: '🟢' },
+  { id: 'normal',  nom: 'Normal',  icon: '🟡' },
+  { id: 'dificil', nom: 'Difícil', icon: '🔴' },
+];
+
+function nivell() {
+  return (player && player.nivell) || 'normal';
+}
+
+// Tria el valor que toca segons el nivell (al repte sempre juguem a Normal).
+function perNivell(facil, normal, dificil) {
+  if (modeExercici === 'repte') return normal;
+  return nivell() === 'facil' ? facil : nivell() === 'dificil' ? dificil : normal;
+}
+
+function ri(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+function tria(arr)    { return arr[Math.floor(Math.random() * arr.length)]; }
+function arrod(x, d = 2) { const f = Math.pow(10, d); return Math.round(x * f) / f; }
+
+// ═══════════════════════════════════════════
+//  REGISTRE DE FORMES
+//  Cada forma declara:
+//    genera()   → exercici de practicar (calcular P i A)
+//    invers()   → donada l'àrea o el perímetre, trobar la mesura que falta
+//    problema() → el mateix però amb un enunciat de la vida real
+//    ajuda      → la teoria que surt amb el botó "Com es fa?"
+//  Format d'un exercici: { svg, enunciat?, dadesText?, formules?, camps[], passos[] }
+//  Cada camp: { id, label, valor, decimal?, tol? }
+// ═══════════════════════════════════════════
+
+const FORMES = {
+
+  // ───────────────────────────────── QUADRAT
+  quadrat: {
+    nom: 'Quadrat', titol: '⬜ Quadrat', color: '#3b82f6',
+    ajuda: `<p>El quadrat té els <strong>4 costats iguals</strong> i els 4 angles rectes.</p>
+      <p>Per al <strong>perímetre</strong> sumes els quatre costats, que és el mateix que multiplicar-ne un per 4:
+      <em>P = 4 × a</em>.</p>
+      <p>Per a l'<strong>àrea</strong> multipliques el costat per ell mateix: <em>A = a × a = a²</em>.</p>
+      <p><strong>Exemple</strong> amb a = 5 cm → P = 4 × 5 = 20 cm i A = 5² = 25 cm².</p>`,
+    genera() {
+      const a = ri(...perNivell([2, 6], [3, 14], [8, 25]));
+      return {
+        svg: drawSquareSVG(a),
+        formules: ['P = 4 × a', 'A = a²'],
+        camps: [
+          { id: 'p', label: 'Perímetre (cm)', valor: 4 * a },
+          { id: 'a', label: 'Àrea (cm²)', valor: a * a },
+        ],
+        passos: [`P = 4 × a = 4 × ${a} = <strong>${4 * a} cm</strong>`,
+                 `A = a² = ${a}² = <strong>${a * a} cm²</strong>`],
+      };
+    },
+    invers() {
+      const a = ri(...perNivell([2, 6], [3, 12], [5, 20]));
+      return {
+        svg: drawSquareSVG(a, '?'),
+        enunciat: `Aquest quadrat té una àrea de <strong>${a * a} cm²</strong>. Quant fa el costat?`,
+        formules: ['A = a²  →  a = √A'],
+        camps: [
+          { id: 'c', label: 'Costat a (cm)', valor: a },
+          { id: 'p', label: 'Perímetre (cm)', valor: 4 * a },
+        ],
+        passos: [`a = √A = √${a * a} = <strong>${a} cm</strong>`,
+                 `P = 4 × a = 4 × ${a} = <strong>${4 * a} cm</strong>`],
+      };
+    },
+    problema() {
+      const a = ri(...perNivell([2, 5], [3, 9], [6, 15]));
+      return {
+        svg: drawSquareSVG(a),
+        enunciat: `Vols posar gespa en un pati <strong>quadrat</strong> de ${a} m de costat i envoltar-lo amb una tanca.
+          Quants metres de tanca necessites? I quants metres quadrats de gespa?`,
+        formules: ['P = 4 × a', 'A = a²'],
+        camps: [
+          { id: 'p', label: 'Tanca (m)', valor: 4 * a },
+          { id: 'a', label: 'Gespa (m²)', valor: a * a },
+        ],
+        passos: [`Tanca = P = 4 × ${a} = <strong>${4 * a} m</strong>`,
+                 `Gespa = A = ${a}² = <strong>${a * a} m²</strong>`],
+      };
+    },
+  },
+
+  // ─────────────────────────────── RECTANGLE
+  rectangle: {
+    nom: 'Rectangle', titol: '▭ Rectangle', color: '#22c55e',
+    ajuda: `<p>El rectangle té els costats iguals <strong>dos a dos</strong> i els 4 angles rectes.</p>
+      <p><strong>Perímetre</strong>: dues bases i dues altures → <em>P = 2 × (b + h)</em>.</p>
+      <p><strong>Àrea</strong>: base per altura → <em>A = b × h</em>.</p>
+      <p><strong>Exemple</strong> amb b = 8 cm i h = 3 cm → P = 2 × (8 + 3) = 22 cm i A = 8 × 3 = 24 cm².</p>`,
+    genera() {
+      const [lo, hi] = perNivell([2, 7], [3, 14], [6, 24]);
+      let b = ri(lo, hi), h = ri(lo, hi);
+      if (b === h) h = h === hi ? h - 1 : h + 1;   // que no surti un quadrat
+      return {
+        svg: drawRectangleSVG(b, h),
+        formules: ['P = 2 × (b + h)', 'A = b × h'],
+        camps: [
+          { id: 'p', label: 'Perímetre (cm)', valor: 2 * (b + h) },
+          { id: 'a', label: 'Àrea (cm²)', valor: b * h },
+        ],
+        passos: [`P = 2 × (b + h) = 2 × (${b} + ${h}) = 2 × ${b + h} = <strong>${2 * (b + h)} cm</strong>`,
+                 `A = b × h = ${b} × ${h} = <strong>${b * h} cm²</strong>`],
+      };
+    },
+    invers() {
+      const [lo, hi] = perNivell([2, 6], [3, 12], [5, 20]);
+      const h = ri(lo, hi), b = ri(lo, hi);
+      return {
+        svg: drawRectangleSVG(b, h, { h: '?' }),
+        enunciat: `Aquest rectangle té una àrea de <strong>${b * h} cm²</strong> i una base de <strong>${b} cm</strong>. Quant fa l'altura?`,
+        formules: ['A = b × h  →  h = A : b'],
+        camps: [
+          { id: 'h', label: 'Altura h (cm)', valor: h },
+          { id: 'p', label: 'Perímetre (cm)', valor: 2 * (b + h) },
+        ],
+        passos: [`h = A : b = ${b * h} : ${b} = <strong>${h} cm</strong>`,
+                 `P = 2 × (${b} + ${h}) = <strong>${2 * (b + h)} cm</strong>`],
+      };
+    },
+    problema() {
+      const b = ri(...perNivell([3, 7], [4, 12], [8, 20]));
+      const h = ri(...perNivell([2, 5], [3, 9], [5, 15]));
+      return {
+        svg: drawRectangleSVG(b, h),
+        enunciat: `Una pista de bàsquet <strong>rectangular</strong> fa ${b} m de llarg i ${h} m d'ample.
+          Quants metres recorres si en fas la volta? Quants metres quadrats ocupa?`,
+        formules: ['P = 2 × (b + h)', 'A = b × h'],
+        camps: [
+          { id: 'p', label: 'La volta (m)', valor: 2 * (b + h) },
+          { id: 'a', label: 'Superfície (m²)', valor: b * h },
+        ],
+        passos: [`Volta = 2 × (${b} + ${h}) = <strong>${2 * (b + h)} m</strong>`,
+                 `Superfície = ${b} × ${h} = <strong>${b * h} m²</strong>`],
+      };
+    },
+  },
+
+  // ──────────────────────────────── TRIANGLE
+  triangle: {
+    nom: 'Triangle', titol: '📐 Triangle', color: '#a855f7',
+    ajuda: `<p>Al triangle, <strong>a</strong> i <strong>c</strong> són els costats i <strong>b</strong> és la
+      <strong>base</strong> (el costat de sota). L'<strong>altura h</strong> és la línia de punts que va del
+      vèrtex de dalt fins a la base, formant angle recte.</p>
+      <p><strong>Perímetre</strong>: suma dels tres costats → <em>P = a + b + c</em>.</p>
+      <p><strong>Àrea</strong>: base per altura, dividit entre 2 → <em>A = (b × h) : 2</em>.
+      El "dividit entre 2" hi és perquè el triangle és mig rectangle.</p>
+      <p><strong>Exemple</strong> amb a = 5, b = 6, c = 5 i h = 4 → P = 16 cm i A = (6 × 4) : 2 = 12 cm².</p>`,
+    // [a = costat esquerre, c = costat dret, b = BASE, h = altura sobre la base]
+    taules: {
+      isosceles: [[5, 5, 8, 3], [5, 5, 6, 4], [10, 10, 16, 6], [10, 10, 12, 8], [13, 13, 10, 12]],
+      escale:    [[5, 6, 7, 4.2], [4, 13, 15, 3.2], [6, 8, 10, 4.8], [9, 12, 15, 7.2]],
+      rectangle: [[3, 5, 4, 3], [6, 10, 8, 6], [5, 13, 12, 5], [9, 15, 12, 9], [8, 17, 15, 8]],
+      acutangle: [[6, 7, 8, 5.1], [7, 8, 9, 6], [10, 11, 12, 8.6]],
+      obtusangle:[[3, 5, 7, 1.9], [4, 6, 9, 2.1], [5, 6, 10, 2.3], [6, 7, 11, 3.4]],
+    },
+    _tria() {
+      // Fàcil: només els que tenen l'altura entera. Difícil: tots, decimals inclosos.
+      const T = FORMES.triangle.taules;
+      const grups = perNivell(
+        [['Isòsceles', T.isosceles], ['Rectangle', T.rectangle]],
+        [['Isòsceles', T.isosceles], ['Rectangle', T.rectangle], ['Escalè', T.escale], ['Equilàter', null]],
+        [['Isòsceles', T.isosceles], ['Rectangle', T.rectangle], ['Escalè', T.escale],
+         ['Acutangle', T.acutangle], ['Obtusangle', T.obtusangle], ['Equilàter', null]]);
+      const [nom, taula] = tria(grups);
+      if (!taula) {                       // equilàter: es genera al vol
+        const s = ri(4, 11);
+        return { nom, a: s, b: s, c: s, h: arrod(s * Math.sqrt(3) / 2, 1) };
+      }
+      const [a, c, b, h] = tria(taula);
+      return { nom, a, b, c, h };
+    },
+    genera() {
+      const t = FORMES.triangle._tria();
+      const area = arrod(t.b * t.h / 2, 1);
+      return {
+        subtitol: `🔺 ${t.nom}`,
+        svg: drawTriangleSVG(t.a, t.b, t.c, t.h),
+        formules: ['P = a + b + c', 'A = (b × h) : 2'],
+        pista: 'b = base (el costat de sota), h = altura',
+        camps: [
+          { id: 'p', label: 'Perímetre (cm)', valor: t.a + t.b + t.c },
+          { id: 'a', label: 'Àrea (cm²)', valor: area, decimal: true, tol: 0.2 },
+        ],
+        passos: [`P = a + b + c = ${t.a} + ${t.b} + ${t.c} = <strong>${t.a + t.b + t.c} cm</strong>`,
+                 `A = (b × h) : 2 = (${t.b} × ${t.h}) : 2 = <strong>${area} cm²</strong>`],
+      };
+    },
+    invers() {
+      // Fora els triangles rectangles: hi ha un costat que ES l'altura i la
+      // resposta ja seria a la vista.
+      let t = FORMES.triangle._tria();
+      let voltes = 0;
+      while (t.nom === 'Rectangle' && voltes++ < 30) t = FORMES.triangle._tria();
+      const area = arrod(t.b * t.h / 2, 1);
+      return {
+        subtitol: `🔺 ${t.nom}`,
+        svg: drawTriangleSVG(t.a, t.b, t.c, t.h, { h: '?' }),
+        enunciat: `Aquest triangle té una àrea de <strong>${area} cm²</strong> i una base de <strong>${t.b} cm</strong>. Quant fa l'altura?`,
+        formules: ['A = (b × h) : 2  →  h = (2 × A) : b'],
+        camps: [{ id: 'h', label: 'Altura h (cm)', valor: t.h, decimal: true, tol: 0.15 }],
+        passos: [`h = (2 × A) : b = (2 × ${area}) : ${t.b} = <strong>${t.h} cm</strong>`,
+                 `Comprova-ho: A = (${t.b} × ${t.h}) : 2 = ${area} cm²`],
+      };
+    },
+    problema() {
+      const t = tria(FORMES.triangle.taules.rectangle.concat(FORMES.triangle.taules.isosceles));
+      const [a, c, b, h] = t;
+      const area = arrod(b * h / 2, 1);
+      return {
+        svg: drawTriangleSVG(a, b, c, h),
+        enunciat: `La vela <strong>triangular</strong> d'un vaixell té una base de ${b} m i una altura de ${h} m.
+          Els altres dos costats fan ${a} m i ${c} m. Quanta tela fa falta? I quanta corda per a tot el contorn?`,
+        formules: ['P = a + b + c', 'A = (b × h) : 2'],
+        camps: [
+          { id: 'p', label: 'Corda (m)', valor: a + b + c },
+          { id: 'a', label: 'Tela (m²)', valor: area, decimal: true, tol: 0.2 },
+        ],
+        passos: [`Corda = ${a} + ${b} + ${c} = <strong>${a + b + c} m</strong>`,
+                 `Tela = (${b} × ${h}) : 2 = <strong>${area} m²</strong>`],
+      };
+    },
+  },
+
+  // ──────────────────────────────── ROMBOIDE
+  romboide: {
+    nom: 'Romboide', titol: '◇ Romboide', color: '#ec4899',
+    ajuda: `<p>El romboide és un <strong>paral·lelogram</strong>: els costats oposats són paral·lels i iguals,
+      però els angles no són rectes.</p>
+      <p><strong>Compte</strong>: el costat oblic <strong>a</strong> NO és l'altura. L'altura <strong>h</strong>
+      és la perpendicular entre les dues bases, i sempre és més curta que a.</p>
+      <p><em>P = 2 × (a + b)</em> i <em>A = b × h</em> (com el rectangle: si el retalles i el mous, en surt un).</p>
+      <p><strong>Exemple</strong> amb a = 5, b = 8 i h = 4 → P = 26 cm i A = 32 cm².</p>`,
+    _dades() {
+      const h = ri(...perNivell([3, 5], [4, 8], [5, 12]));
+      const a = h + ri(1, 3);
+      const b = h + ri(2, 8);
+      return { a, b, h };
+    },
+    genera() {
+      const { a, b, h } = FORMES.romboide._dades();
+      return {
+        svg: drawRomboideSVG(b, h, a),
+        formules: ['P = 2 × (a + b)', 'A = b × h'],
+        camps: [
+          { id: 'p', label: 'Perímetre (cm)', valor: 2 * (a + b) },
+          { id: 'ar', label: 'Àrea (cm²)', valor: b * h },
+        ],
+        passos: [`P = 2 × (a + b) = 2 × (${a} + ${b}) = <strong>${2 * (a + b)} cm</strong>`,
+                 `A = b × h = ${b} × ${h} = <strong>${b * h} cm²</strong>`],
+      };
+    },
+    invers() {
+      const { a, b, h } = FORMES.romboide._dades();
+      return {
+        svg: drawRomboideSVG(b, h, a, { h: '?' }),
+        enunciat: `Aquest romboide té una àrea de <strong>${b * h} cm²</strong> i una base de <strong>${b} cm</strong>. Quant fa l'altura?`,
+        formules: ['A = b × h  →  h = A : b'],
+        camps: [{ id: 'h', label: 'Altura h (cm)', valor: h }],
+        passos: [`h = A : b = ${b * h} : ${b} = <strong>${h} cm</strong>`,
+                 `Fixa't que h (${h}) és més petita que el costat a (${a}): sempre ha de ser així.`],
+      };
+    },
+    problema() {
+      const { a, b, h } = FORMES.romboide._dades();
+      return {
+        svg: drawRomboideSVG(b, h, a),
+        enunciat: `Un rètol amb forma de <strong>romboide</strong> fa ${b} dm de base, ${h} dm d'altura i
+          ${a} dm de costat. Quant fa la vora metàl·lica que l'envolta? Quanta superfície s'ha de pintar?`,
+        formules: ['P = 2 × (a + b)', 'A = b × h'],
+        camps: [
+          { id: 'p', label: 'Vora (dm)', valor: 2 * (a + b) },
+          { id: 'ar', label: 'Pintura (dm²)', valor: b * h },
+        ],
+        passos: [`Vora = 2 × (${a} + ${b}) = <strong>${2 * (a + b)} dm</strong>`,
+                 `Pintura = ${b} × ${h} = <strong>${b * h} dm²</strong>`],
+      };
+    },
+  },
+
+  // ─────────────────────────────────── ROMBE
+  rombo: {
+    nom: 'Rombe', titol: '◆ Rombe', color: '#f87171',
+    ajuda: `<p>El rombe té els <strong>4 costats iguals</strong> (com el quadrat) però els angles no són rectes.</p>
+      <p>Les seves dues <strong>diagonals</strong> (d₁ i d₂) es tallen pel mig formant angle recte.</p>
+      <p><em>P = 4 × a</em> i <em>A = (d₁ × d₂) : 2</em>.</p>
+      <p><strong>Exemple</strong> amb a = 5, d₁ = 6 i d₂ = 8 → P = 20 cm i A = (6 × 8) : 2 = 24 cm².</p>`,
+    // [d1, d2, costat] amb el costat sortint de Pitàgores: a = √((d₁/2)² + (d₂/2)²)
+    taula: [[6, 8, 5], [8, 6, 5], [12, 16, 10], [16, 12, 10], [10, 24, 13], [24, 10, 13],
+            [18, 24, 15], [24, 18, 15], [16, 30, 17], [30, 16, 17]],
+    _dades() {
+      const t = FORMES.rombo.taula;
+      const pool = perNivell(t.filter(r => r[2] <= 10), t.filter(r => r[2] <= 13), t);
+      const [d1, d2, a] = tria(pool.length ? pool : t);
+      return { d1, d2, a };
+    },
+    genera() {
+      const { d1, d2, a } = FORMES.rombo._dades();
+      return {
+        svg: drawRomboSVG(d1, d2, a),
+        formules: ['P = 4 × a', 'A = (d₁ × d₂) : 2'],
+        camps: [
+          { id: 'p', label: 'Perímetre (cm)', valor: 4 * a },
+          { id: 'ar', label: 'Àrea (cm²)', valor: d1 * d2 / 2 },
+        ],
+        passos: [`P = 4 × a = 4 × ${a} = <strong>${4 * a} cm</strong>`,
+                 `A = (d₁ × d₂) : 2 = (${d1} × ${d2}) : 2 = <strong>${d1 * d2 / 2} cm²</strong>`],
+      };
+    },
+    invers() {
+      const { d1, d2, a } = FORMES.rombo._dades();
+      return {
+        svg: drawRomboSVG(d1, d2, a, { d2: '?' }),
+        enunciat: `Aquest rombe té una àrea de <strong>${d1 * d2 / 2} cm²</strong> i la diagonal d₁ fa <strong>${d1} cm</strong>. Quant fa d₂?`,
+        formules: ['A = (d₁ × d₂) : 2  →  d₂ = (2 × A) : d₁'],
+        camps: [{ id: 'd', label: 'Diagonal d₂ (cm)', valor: d2 }],
+        passos: [`d₂ = (2 × A) : d₁ = (2 × ${d1 * d2 / 2}) : ${d1} = <strong>${d2} cm</strong>`,
+                 `Comprova-ho: A = (${d1} × ${d2}) : 2 = ${d1 * d2 / 2} cm²`],
+      };
+    },
+    problema() {
+      const { d1, d2, a } = FORMES.rombo._dades();
+      return {
+        svg: drawRomboSVG(d1, d2, a),
+        enunciat: `Una estel de paper té forma de <strong>rombe</strong>, amb diagonals de ${d1} dm i ${d2} dm
+          i costats de ${a} dm. Quant paper fa falta? I quanta cinta per a la vora?`,
+        formules: ['P = 4 × a', 'A = (d₁ × d₂) : 2'],
+        camps: [
+          { id: 'p', label: 'Cinta (dm)', valor: 4 * a },
+          { id: 'ar', label: 'Paper (dm²)', valor: d1 * d2 / 2 },
+        ],
+        passos: [`Cinta = 4 × ${a} = <strong>${4 * a} dm</strong>`,
+                 `Paper = (${d1} × ${d2}) : 2 = <strong>${d1 * d2 / 2} dm²</strong>`],
+      };
+    },
+  },
+
+  // ───────────────────────────────── TRAPEZI
+  trapezi: {
+    nom: 'Trapezi', titol: '⏢ Trapezi', color: '#06b6d4',
+    ajuda: `<p>El trapezi té <strong>dos costats paral·lels</strong> (les bases b₁ i b₂) i dos que no ho són.</p>
+      <p><em>P = b₁ + b₂ + c + d</em> (sumar-ho tot) i <em>A = ((b₁ + b₂) × h) : 2</em>.</p>
+      <p>El truc de l'àrea: fes la <strong>mitjana de les dues bases</strong> i multiplica-la per l'altura.</p>
+      <p><strong>Exemple</strong> amb b₁ = 12, b₂ = 4, h = 3 i costats de 5 → P = 26 cm i A = ((12+4)×3):2 = 24 cm².</p>`,
+    // [b1, b2, h, c, d, tipus] — costats obtinguts amb Pitàgores: existeixen de debò
+    taula: [
+      [12, 4, 3, 5, 5, 'isosceles'], [11, 5, 4, 5, 5, 'isosceles'],
+      [20, 4, 6, 10, 10, 'isosceles'], [18, 6, 8, 10, 10, 'isosceles'],
+      [14, 4, 12, 13, 13, 'isosceles'],
+      [10, 6, 3, 3, 5, 'rectangle'], [13, 5, 6, 6, 10, 'rectangle'],
+      [13, 7, 8, 8, 10, 'rectangle'], [16, 4, 5, 5, 13, 'rectangle'],
+      [11, 8, 4, 4, 5, 'rectangle'], [11, 6, 12, 12, 13, 'rectangle'],
+    ],
+    _dades() {
+      const t = FORMES.trapezi.taula;
+      const pool = perNivell(t.filter(r => r[0] <= 13), t, t);
+      const [b1, b2, h, c, d, tipus] = tria(pool.length ? pool : t);
+      return { b1, b2, h, c, d, tipus };
+    },
+    genera() {
+      const { b1, b2, h, c, d, tipus } = FORMES.trapezi._dades();
+      return {
+        svg: drawTrapezSVG(b1, b2, h, c, d, tipus),
+        formules: ['P = b₁ + b₂ + c + d', 'A = ((b₁ + b₂) × h) : 2'],
+        camps: [
+          { id: 'p', label: 'Perímetre (cm)', valor: b1 + b2 + c + d },
+          { id: 'ar', label: 'Àrea (cm²)', valor: (b1 + b2) * h / 2 },
+        ],
+        passos: [`P = ${b1} + ${b2} + ${c} + ${d} = <strong>${b1 + b2 + c + d} cm</strong>`,
+                 `A = ((${b1} + ${b2}) × ${h}) : 2 = (${b1 + b2} × ${h}) : 2 = <strong>${(b1 + b2) * h / 2} cm²</strong>`],
+      };
+    },
+    invers() {
+      // Nomes isosceles: al trapezi rectangle el costat c val el mateix que
+      // l'altura, i la resposta ja es veuria al dibuix.
+      let dades = FORMES.trapezi._dades();
+      let voltes = 0;
+      while (dades.tipus !== 'isosceles' && voltes++ < 30) dades = FORMES.trapezi._dades();
+      const { b1, b2, h, c, d, tipus } = dades;
+      const A = (b1 + b2) * h / 2;
+      return {
+        svg: drawTrapezSVG(b1, b2, h, c, d, tipus, { h: '?' }),
+        enunciat: `Aquest trapezi té una àrea de <strong>${A} cm²</strong> i les bases fan
+          <strong>${b1} cm</strong> i <strong>${b2} cm</strong>. Quant fa l'altura?`,
+        formules: ['A = ((b₁ + b₂) × h) : 2  →  h = (2 × A) : (b₁ + b₂)'],
+        camps: [{ id: 'h', label: 'Altura h (cm)', valor: h }],
+        passos: [`h = (2 × A) : (b₁ + b₂) = (2 × ${A}) : ${b1 + b2} = <strong>${h} cm</strong>`,
+                 `Comprova-ho: A = (${b1 + b2} × ${h}) : 2 = ${A} cm²`],
+      };
+    },
+    problema() {
+      const { b1, b2, h, c, d, tipus } = FORMES.trapezi._dades();
+      return {
+        svg: drawTrapezSVG(b1, b2, h, c, d, tipus),
+        enunciat: `Un camp amb forma de <strong>trapezi</strong> té les bases de ${b1} m i ${b2} m,
+          una altura de ${h} m i els altres costats de ${c} m i ${d} m.
+          Quants metres de tanca fan falta? Quants metres quadrats té el camp?`,
+        formules: ['P = b₁ + b₂ + c + d', 'A = ((b₁ + b₂) × h) : 2'],
+        camps: [
+          { id: 'p', label: 'Tanca (m)', valor: b1 + b2 + c + d },
+          { id: 'ar', label: 'Camp (m²)', valor: (b1 + b2) * h / 2 },
+        ],
+        passos: [`Tanca = ${b1} + ${b2} + ${c} + ${d} = <strong>${b1 + b2 + c + d} m</strong>`,
+                 `Camp = ((${b1} + ${b2}) × ${h}) : 2 = <strong>${(b1 + b2) * h / 2} m²</strong>`],
+      };
+    },
+  },
+
+  // ────────────────────────────────── CERCLE
+  circle: {
+    nom: 'Cercle', titol: '⭕ Cercle', color: '#f43f5e',
+    ajuda: `<p>El <strong>radi r</strong> va del centre a la vora. El <strong>diàmetre</strong> travessa el cercle
+      pel mig i és el doble: d = 2 × r.</p>
+      <p>La <strong>longitud de la circumferència</strong> (el "perímetre") és <em>P = 2 × π × r</em>,
+      i l'<strong>àrea</strong> és <em>A = π × r²</em>. Aquí fem servir <strong>π ≈ 3,14</strong>.</p>
+      <p><strong>Exemple</strong> amb r = 5 cm → P = 2 × 3,14 × 5 = 31,4 cm i A = 3,14 × 25 = 78,5 cm².</p>`,
+    genera() {
+      const r = ri(...perNivell([2, 6], [2, 11], [5, 20]));
+      return {
+        svg: drawCircleSVG(r),
+        dadesText: `r = ${r} cm (π ≈ 3,14)`,
+        formules: ['P = 2 × π × r', 'A = π × r²'],
+        camps: [
+          { id: 'p', label: 'Longitud (cm)', valor: arrod(2 * 3.14 * r), decimal: true, tol: 0.51 },
+          { id: 'ar', label: 'Àrea (cm²)', valor: arrod(3.14 * r * r), decimal: true, tol: 0.51 },
+        ],
+        passos: [`P = 2 × π × r ≈ 2 × 3,14 × ${r} = <strong>${arrod(2 * 3.14 * r)} cm</strong>`,
+                 `A = π × r² ≈ 3,14 × ${r}² = 3,14 × ${r * r} = <strong>${arrod(3.14 * r * r)} cm²</strong>`],
+      };
+    },
+    invers() {
+      const r = ri(...perNivell([2, 6], [2, 10], [4, 18]));
+      const P = arrod(2 * 3.14 * r);
+      return {
+        svg: drawCircleSVG(r, '?'),
+        enunciat: `La circumferència d'aquest cercle fa <strong>${P} cm</strong>. Quant fa el radi? (π ≈ 3,14)`,
+        formules: ['P = 2 × π × r  →  r = P : (2 × π)'],
+        camps: [
+          { id: 'r', label: 'Radi r (cm)', valor: r, decimal: true, tol: 0.15 },
+          { id: 'd', label: 'Diàmetre (cm)', valor: 2 * r, decimal: true, tol: 0.3 },
+        ],
+        passos: [`r = P : (2 × π) = ${P} : 6,28 = <strong>${r} cm</strong>`,
+                 `d = 2 × r = <strong>${2 * r} cm</strong>`],
+      };
+    },
+    problema() {
+      const r = ri(...perNivell([2, 5], [3, 9], [5, 15]));
+      return {
+        svg: drawCircleSVG(r),
+        enunciat: `Una tapa de claveguera <strong>rodona</strong> té ${r} dm de radi.
+          Quanta goma fa falta per a tot el contorn? Quanta xapa per a la tapa? (π ≈ 3,14)`,
+        formules: ['P = 2 × π × r', 'A = π × r²'],
+        camps: [
+          { id: 'p', label: 'Goma (dm)', valor: arrod(2 * 3.14 * r), decimal: true, tol: 0.51 },
+          { id: 'ar', label: 'Xapa (dm²)', valor: arrod(3.14 * r * r), decimal: true, tol: 0.51 },
+        ],
+        passos: [`Goma = 2 × 3,14 × ${r} = <strong>${arrod(2 * 3.14 * r)} dm</strong>`,
+                 `Xapa = 3,14 × ${r}² = <strong>${arrod(3.14 * r * r)} dm²</strong>`],
+      };
+    },
+  },
+};
+
+// ─── Polígons regulars: pentàgon, hexàgon i octàgon comparteixen tot ──────
+function _defineixPoligon(clau, n, nom, titol, color, taula, draw) {
+  FORMES[clau] = {
+    nom, titol, color,
+    ajuda: `<p>El ${nom.toLowerCase()} regular té <strong>${n} costats iguals</strong> i ${n} angles iguals.</p>
+      <p>L'<strong>apotema</strong> és la distància del centre fins al <strong>mig d'un costat</strong>
+      (no fins a una punta!), i sempre hi arriba formant angle recte.</p>
+      <p><em>P = ${n} × a</em> i <em>A = (P × apotema) : 2</em>.</p>
+      <p><strong>Truc</strong>: primer calcula el perímetre, i després fes servir el resultat per a l'àrea.</p>`,
+    taula,
+    _dades() {
+      const t = FORMES[clau].taula;
+      const pool = perNivell(t.slice(0, 2), t.slice(0, 4), t);
+      const [a, ap] = tria(pool.length ? pool : t);
+      return { a, ap, P: n * a, A: arrod(n * a * ap / 2, 1) };
+    },
+    genera() {
+      const { a, ap, P, A } = FORMES[clau]._dades();
+      return {
+        svg: draw(a, String(ap).replace('.', ',')),
+        dadesText: `a = ${a} cm, apotema = ${String(ap).replace('.', ',')} cm`,
+        formules: [`P = ${n} × a`, 'A = (P × apotema) : 2'],
+        camps: [
+          { id: 'p', label: 'Perímetre (cm)', valor: P },
+          { id: 'ar', label: 'Àrea (cm²)', valor: A, decimal: true, tol: 0.2 },
+        ],
+        passos: [`P = ${n} × a = ${n} × ${a} = <strong>${P} cm</strong>`,
+                 `A = (P × ap) : 2 = (${P} × ${String(ap).replace('.', ',')}) : 2 = <strong>${String(A).replace('.', ',')} cm²</strong>`],
+      };
+    },
+    invers() {
+      const { a, ap, P, A } = FORMES[clau]._dades();
+      return {
+        svg: draw(a, String(ap).replace('.', ','), { a: '?' }),
+        enunciat: `Aquest ${nom.toLowerCase()} té un perímetre de <strong>${P} cm</strong>. Quant fa cada costat?`,
+        formules: [`P = ${n} × a  →  a = P : ${n}`],
+        camps: [{ id: 'c', label: 'Costat a (cm)', valor: a }],
+        passos: [`a = P : ${n} = ${P} : ${n} = <strong>${a} cm</strong>`,
+                 `Amb l'apotema podries trobar l'àrea: A = (${P} × ${String(ap).replace('.', ',')}) : 2 = ${String(A).replace('.', ',')} cm²`],
+      };
+    },
+    problema() {
+      const { a, ap, P, A } = FORMES[clau]._dades();
+      return {
+        svg: draw(a, String(ap).replace('.', ',')),
+        enunciat: `Una tauleta amb forma de <strong>${nom.toLowerCase()} regular</strong> té els costats de ${a} dm
+          i una apotema de ${String(ap).replace('.', ',')} dm. Quant fa la vora? Quanta superfície té?`,
+        formules: [`P = ${n} × a`, 'A = (P × apotema) : 2'],
+        camps: [
+          { id: 'p', label: 'Vora (dm)', valor: P },
+          { id: 'ar', label: 'Superfície (dm²)', valor: A, decimal: true, tol: 0.2 },
+        ],
+        passos: [`Vora = ${n} × ${a} = <strong>${P} dm</strong>`,
+                 `Superfície = (${P} × ${String(ap).replace('.', ',')}) : 2 = <strong>${String(A).replace('.', ',')} dm²</strong>`],
+      };
+    },
   };
+}
+
+_defineixPoligon('pentagon', 5, 'Pentàgon', '⬟ Pentàgon', '#a58efb',
+  [[4, 2.8], [6, 4.2], [8, 5.5], [10, 6.8], [12, 8.3]], drawPentagonSVG);
+_defineixPoligon('hexagon', 6, 'Hexàgon', '⬡ Hexàgon', '#fb923c',
+  [[4, 3.5], [5, 4.4], [7, 6], [8, 7], [10, 8.7]], drawHexagonSVG);
+_defineixPoligon('octagon', 8, 'Octàgon', '⎔ Octàgon', '#84cc16',
+  [[3, 3.5], [4, 5], [5, 6], [6, 7], [7, 8.5]], drawOctagonSVG);
+
+const ORDRE_FORMES = ['quadrat', 'rectangle', 'triangle', 'romboide', 'rombo',
+                      'trapezi', 'pentagon', 'hexagon', 'octagon', 'circle'];
+
+// ═══════════════════════════════════════════
+//  ATZAR AMB LLAVOR
+//  El "repte del dia" ha de ser el MATEIX per a tothom que hi jugui avui:
+//  generem els exercicis substituint temporalment Math.random per una
+//  seqüència que depèn només de la data.
+// ═══════════════════════════════════════════
+
+function ambLlavor(llavor, fn) {
+  const original = Math.random;
+  let x = llavor % 2147483647;
+  if (x <= 0) x += 2147483646;
+  Math.random = () => { x = (x * 16807) % 2147483647; return (x - 1) / 2147483646; };
+  try { return fn(); } finally { Math.random = original; }
+}
+
+function avuiISO() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+function llavorDelDia() {
+  const [y, m, d] = avuiISO().split('-').map(Number);
+  return y * 10000 + m * 100 + d;
+}
+
+// ═══════════════════════════════════════════
+//  PANTALLA D'EXERCICI
+// ═══════════════════════════════════════════
+
+const REPTES = {
+  forma:  { total: 5,  nom: 'Repte',           reinicia: true  },
+  mestre: { total: 10, nom: 'Repte mestre',    reinicia: true  },
+  dia:    { total: 5,  nom: 'Repte del dia',   reinicia: false },
+};
+
+function obreForma(clau, mode = 'practica') {
+  formaActual = clau;
+  modeExercici = mode;
+  repteEstat = (mode === 'repte') ? nouRepte('forma') : null;
+  showScreen('screen-exercise');
+  novaPregunta();
+}
+
+function nouRepte(tipus) {
+  return { tipus, encerts: 0, fets: 0, total: REPTES[tipus].total };
+}
+
+function obreRepteMestre() {
+  modeExercici = 'repte';
+  repteEstat = nouRepte('mestre');
+  showScreen('screen-exercise');
+  novaPregunta();
+}
+
+function obreRepteDelDia() {
+  if (player && player.repte_dia && player.repte_dia.data === avuiISO()) {
+    avisModal(`Avui ja has fet el repte del dia: <strong>${player.repte_dia.encerts} de ${REPTES.dia.total}</strong>.<br>
+      Torna-hi demà, que en surt un de nou!`);
+    return;
+  }
+  modeExercici = 'repte';
+  repteEstat = nouRepte('dia');
+  showScreen('screen-exercise');
+  novaPregunta();
+}
+
+function canviaMode(m) {
+  if (m === modeExercici && m !== 'repte') return;
+  modeExercici = m;
+  repteEstat = (m === 'repte') ? nouRepte('forma') : null;
+  novaPregunta();
+}
+
+function canviaNivell(n) {
+  if (!player) return;
+  player.nivell = n;
+  savePlayer();
+  novaPregunta();
+}
+
+function novaPregunta() {
+  // Al repte mestre i al del dia, cada pregunta és d'una forma diferent.
+  if (repteEstat && repteEstat.tipus !== 'forma') {
+    if (repteEstat.tipus === 'dia') {
+      formaActual = ambLlavor(llavorDelDia() + repteEstat.fets * 977, () => tria(ORDRE_FORMES));
+    } else {
+      formaActual = tria(ORDRE_FORMES);
+    }
+  }
+  const F = FORMES[formaActual];
+  if (!F) return;
+  document.getElementById('exercise-title').textContent =
+    repteEstat ? `${repteEstat.tipus === 'dia' ? '📅' : repteEstat.tipus === 'mestre' ? '🏆' : '⚡'} ${REPTES[repteEstat.tipus].nom}` : F.titol;
+
+  const gen = modeExercici === 'invers' ? F.invers
+            : modeExercici === 'problema' ? F.problema
+            : F.genera;
+  const ex = repteEstat && repteEstat.tipus === 'dia'
+    ? ambLlavor(llavorDelDia() + repteEstat.fets * 131 + 7, () => gen.call(F))
+    : gen.call(F);
+  ex.forma = formaActual;
+  ex.mode = modeExercici;
+  currentExercise = ex;
+
+  const camps = ex.camps.map(c => `
+    <div class="input-field">
+      <label for="camp-${c.id}">${c.label}</label>
+      <input id="camp-${c.id}" type="text" inputmode="${c.decimal ? 'decimal' : 'numeric'}"
+             autocomplete="off" placeholder="${c.decimal ? 'Pots posar decimals' : 'Escriu el resultat'}">
+    </div>`).join('');
 
   document.getElementById('exercise-content').innerHTML = `
-    <div class="shape-display">
-      ${drawSquareSVG(costat)}
-    </div>
+    ${repteEstat ? renderRepteBarra() : renderChips()}
+    ${repteEstat ? `<div class="ex-subtitol">${FORMES[formaActual].titol}</div>` : ''}
+    ${ex.subtitol ? `<div class="ex-subtitol">${ex.subtitol}</div>` : ''}
 
-    <div class="formula-box">
-      <div class="formula-row"><span>📐 <strong>P = 4 × a</strong></span><span>📏 <strong>A = a²</strong></span></div>
-    </div>
+    <div class="shape-display">${ex.svg}</div>
 
-    <form class="exercise-form" onsubmit="checkQuadrat(event)">
-      <div class="inputs-grid">
-        <div class="input-field">
-          <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-        <div class="input-field">
-          <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-      </div>
+    ${ex.enunciat ? `<div class="enunciat">${ex.enunciat}</div>` : ''}
+
+    <button class="btn-ajuda" type="button" onclick="alternaAjuda()">💡 Com es fa?</button>
+    <div id="ajuda-box" class="ajuda-box" style="display:none;">${F.ajuda}</div>
+
+    ${ex.formules ? `<div class="formula-box">
+        <div class="formula-row">${ex.formules.map(f => `<span><strong>${f}</strong></span>`).join('')}</div>
+        ${ex.pista ? `<div style="font-size:0.85rem;color:var(--accent);margin-top:8px;font-weight:600;">💡 ${ex.pista}</div>` : ''}
+      </div>` : ''}
+
+    ${ex.dadesText ? `<div class="dades-box"><strong>Dades:</strong> ${ex.dadesText}</div>` : ''}
+
+    <form class="exercise-form" onsubmit="comprovaResposta(event)">
+      <div class="inputs-grid${ex.camps.length === 1 ? ' un-camp' : ''}">${camps}</div>
       <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
     </form>
 
-    <div id="result-quadrat" style="display: none;"></div>
+    <div id="result-box" style="display: none;"></div>
   `;
 
-  document.getElementById('inp-perimetre').focus();
+  const primer = document.getElementById('camp-' + ex.camps[0].id);
+  if (primer) primer.focus();
+  renderFormaProgress(formaActual);
 }
 
-function checkQuadrat(event) {
+function renderChips() {
+  const modes = MODES.map(m =>
+    `<button type="button" class="chip${m.id === modeExercici ? ' actiu' : ''}"
+       onclick="canviaMode('${m.id}')">${m.icon} ${m.nom}</button>`).join('');
+  const nivs = NIVELLS.map(n =>
+    `<button type="button" class="chip chip-niv${n.id === nivell() ? ' actiu' : ''}"
+       onclick="canviaNivell('${n.id}')">${n.icon} ${n.nom}</button>`).join('');
+  return `<div class="chips-fila">${modes}</div><div class="chips-fila chips-niv">${nivs}</div>`;
+}
+
+function renderRepteBarra() {
+  const r = REPTES[repteEstat.tipus];
+  const marca = repteEstat.tipus === 'dia'
+    ? i => (i < repteEstat.fets ? (repteEstat.encertsPerPregunta && repteEstat.encertsPerPregunta[i] ? '★' : '✗') : '☆')
+    : i => (i < repteEstat.encerts ? '★' : '☆');
+  let punts = '';
+  for (let i = 0; i < repteEstat.total; i++) {
+    const m = marca(i);
+    punts += `<span class="repte-punt${m === '★' ? ' fet' : m === '✗' ? ' fallat' : ''}">${m}</span>`;
+  }
+  const text = repteEstat.tipus === 'dia'
+    ? `${r.nom}: pregunta ${Math.min(repteEstat.fets + 1, repteEstat.total)} de ${repteEstat.total}`
+    : `${r.nom}: ${repteEstat.encerts}/${repteEstat.total} seguides`;
+  return `<div class="repte-barra"><span>${text}</span><span class="repte-punts">${punts}</span></div>`;
+}
+
+function alternaAjuda() {
+  const box = document.getElementById('ajuda-box');
+  if (!box) return;
+  const obrint = box.style.display === 'none';
+  box.style.display = obrint ? 'block' : 'none';
+  if (obrint && player) {                       // trofeu "Estudiant aplicat"
+    if (!player.teoria) player.teoria = {};
+    if (!player.teoria[formaActual]) {
+      player.teoria[formaActual] = true;
+      savePlayer();
+      checkTrophies();
+    }
+  }
+}
+
+// ═══════════════════════════════════════════
+//  CORRECCIÓ
+// ═══════════════════════════════════════════
+
+function comprovaResposta(event) {
   event.preventDefault();
-  const perimetreUser = llegirNumero('inp-perimetre');
-  const areaUser = llegirNumero('inp-area');
-  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
-  if (!bloquejaExercici(event.target)) return;
   const ex = currentExercise;
+  if (!ex || !ex.camps) return;
 
-  const periOk = perimetreUser === ex.perimetre;
-  const areaOk = areaUser === ex.area;
-  const allOk = periOk && areaOk;
+  const lectures = ex.camps.map(c => llegirNumero('camp-' + c.id));
+  if (lectures.some(isNaN)) { avisNumero(event.target); return; }
+  if (!bloquejaExercici(event.target)) return;
 
-  const resultDiv = document.getElementById('result-quadrat');
-  resultDiv.style.display = 'block';
+  const resultats = ex.camps.map((c, i) => {
+    const tol = c.tol !== undefined ? c.tol : (c.decimal ? 0.2 : 0.001);
+    return { camp: c, resposta: lectures[i], ok: Math.abs(lectures[i] - c.valor) < tol };
+  });
+  const allOk = resultats.every(r => r.ok);
 
-  const boxClass = allOk ? 'correct-box' : 'error-box';
-  const emoji = allOk ? '🎉' : '📚';
-  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
-  const titleColor = allOk ? '#4ade80' : '#f87171';
-
-  let html = `
-    <div style="margin-top: 20px;">
-      <div class="${boxClass}" style="margin-bottom: 20px;">
-        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
-        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
-        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
-      </div>
-
-      <div class="exercise-question">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${periOk ? '✓' : '✗'} ${perimetreUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.perimetre}</strong> cm
-            </div>
-          </div>
-
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${areaOk ? '✓' : '✗'} ${areaUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.area}</strong> cm²
-            </div>
-          </div>
-        </div>
-      </div>
-
-      ${allOk ? '' : pasAPas(`P = 4 × a = 4 × ${ex.costat} = <strong>${ex.perimetre} cm</strong>`, `A = a² = ${ex.costat}² = <strong>${ex.area} cm²</strong>`)}
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        <button class="btn-primary" onclick="setupQuadrat()" style="margin-top: 0;">📝 Següent</button>
-        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
-      </div>
-    </div>
-  `;
-
-  resultDiv.innerHTML = html;
-  updatePlayerStats('quadrat', allOk);
-}
-
-// ═══════════════════════════════════════════
-//  EXERCICI: TRIANGLE (P = a+b+c, A = (base×altura)/2)
-//  Tipus: Equilàter, Isòsceles, Escalè, Rectangle, Acutangle, Obtusangle
-// ═══════════════════════════════════════════
-
-function setupTriangle() {
-  document.getElementById('exercise-title').textContent = '📐 Exercici: Triangle';
-
-  // Triangles COHERENTS: compleixen la desigualtat triangular i l'altura és
-  // la real sobre la base (arrodonida a 1 decimal).
-  // Format: [a = costat esquerre, c = costat dret, b = BASE, h = altura].
-  // b és la base perquè la fórmula que veu l'alumne és A = (b × h) / 2: abans
-  // el dibuix deia "c" allà on la fórmula deia "b".
-  const TRIANGLES = {
-    isosceles: [[5,5,8,3],[5,5,6,4],[10,10,16,6],[10,10,12,8],[13,13,10,12]],
-    // escalens que NO es repeteixen a la taula d'acutangles
-    escale:    [[5,6,7,4.2],[4,13,15,3.2],[6,8,10,4.8],[9,12,15,7.2]],
-    // Rectangle: ternes pitagòriques → costat esquerre = altura, base = altre catet
-    rectangle: [[3,5,4,3],[6,10,8,6],[5,13,12,5],[9,15,12,9],[8,17,15,8]],
-    acutangle: [[6,7,8,5.1],[7,8,9,6],[10,11,12,8.6]],
-    obtusangle:[[3,5,7,1.9],[4,6,9,2.1],[5,6,10,2.3],[6,7,11,3.4]],
-  };
-
-  const tipus = Math.floor(Math.random() * 6);
-  let sideA, sideB, sideC, altura, nom;
-
-  function triaDe(taula) {
-    return taula[Math.floor(Math.random() * taula.length)];
+  // Comptadors per als trofeus dels modes nous
+  if (allOk && player) {
+    if (!player.comptadors) player.comptadors = { invers: 0, problema: 0 };
+    if (ex.mode === 'invers' || ex.mode === 'problema') player.comptadors[ex.mode]++;
   }
 
-  switch(tipus) {
-    case 0: // Equilàter (3 costats iguals, altura real = a·√3/2)
-      sideA = Math.floor(Math.random() * 8) + 4;  // 4-11
-      sideB = sideA;
-      sideC = sideA;
-      altura = Math.round((sideA * Math.sqrt(3)) / 2 * 10) / 10;
-      nom = 'Equilàter';
-      break;
-    case 1: // Isòsceles (a = b ≠ c, altura real = √(a² − (c/2)²))
-      [sideA, sideB, sideC, altura] = triaDe(TRIANGLES.isosceles);
-      nom = 'Isòsceles';
-      break;
-    case 2: // Escalè (3 costats diferents)
-      [sideA, sideB, sideC, altura] = triaDe(TRIANGLES.escale);
-      nom = 'Escalè';
-      break;
-    case 3: // Rectangle (90°) — terna pitagòrica, perímetre sempre enter
-      [sideA, sideB, sideC, altura] = triaDe(TRIANGLES.rectangle);
-      nom = 'Rectangle';
-      break;
-    case 4: // Acutangle (tots els angles < 90°)
-      [sideA, sideB, sideC, altura] = triaDe(TRIANGLES.acutangle);
-      nom = 'Acutangle';
-      break;
-    case 5: // Obtusangle (un angle > 90°)
-      [sideA, sideB, sideC, altura] = triaDe(TRIANGLES.obtusangle);
-      nom = 'Obtusangle';
-      break;
+  let repteFet = false, repteAcabat = false;
+  if (repteEstat) {
+    repteEstat.fets++;
+    if (!repteEstat.encertsPerPregunta) repteEstat.encertsPerPregunta = [];
+    repteEstat.encertsPerPregunta.push(allOk);
+    if (allOk) repteEstat.encerts++;
+    else if (REPTES[repteEstat.tipus].reinicia) repteEstat.encerts = 0;
+    repteFet = REPTES[repteEstat.tipus].reinicia && repteEstat.encerts >= repteEstat.total;
+    repteAcabat = !REPTES[repteEstat.tipus].reinicia && repteEstat.fets >= repteEstat.total;
   }
 
-  const perimetre = sideA + sideB + sideC;
-  const area = Math.round((sideC * altura) / 2 * 10) / 10;
-
-  // a = costat esquerre, b = base, c = costat dret (mateixos noms que la fórmula)
-  currentExercise = {
-    forma: 'triangle',
-    tipus,
-    nom,
-    a: sideA,
-    b: sideC,
-    c: sideB,
-    altura,
-    perimetre,
-    area,
-  };
-
-  document.getElementById('exercise-content').innerHTML = `
-    <div style="text-align: center; margin-bottom: 16px;">
-      <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 800; margin-bottom: 8px;">🔺 ${nom}</div>
-    </div>
-
-    <div class="shape-display">
-      ${drawTriangleSVG(sideA, sideC, sideB, altura)}
-    </div>
-
-    <div class="formula-box">
-      <div class="formula-row"><span>📐 <strong>P = a + b + c</strong></span><span>📏 <strong>A = <span class="fraction"><span class="fraction-num">b × h</span><span class="fraction-den">2</span></span></strong></span></div>
-      <div style="font-size: 0.85rem; color: var(--accent); margin-top: 8px; font-weight: 600;">💡 b = base (el costat de sota), h = altura</div>
-    </div>
-
-    <form class="exercise-form" onsubmit="checkTriangle(event)">
-      <div class="inputs-grid">
-        <div class="input-field">
-          <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre-tri" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-        <div class="input-field">
-          <label>Àrea (cm²)</label>
-          <input type="text" id="inp-area-tri" inputmode="decimal" placeholder="Pots posar decimals" required>
-        </div>
+  const caixes = resultats.map(r => `
+    <div class="res-camp" style="border-left-color: ${r.ok ? '#4ade80' : '#f87171'};">
+      <div class="res-camp-tit">${r.camp.label}</div>
+      <div class="res-camp-val" style="color: ${r.ok ? '#4ade80' : '#f87171'};">
+        ${r.ok ? '✓' : '✗'} ${String(r.resposta).replace('.', ',')}
       </div>
-      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
-    </form>
+      ${r.ok ? '' : `<div class="res-camp-bo">Correcte: <strong>${String(r.camp.valor).replace('.', ',')}</strong></div>`}
+    </div>`).join('');
 
-    <div id="result-triangle" style="display: none;"></div>
-  `;
-
-  document.getElementById('inp-perimetre-tri').focus();
-}
-
-function checkTriangle(event) {
-  event.preventDefault();
-  const perimetreUser = llegirNumero('inp-perimetre-tri');
-  const areaUser = llegirNumero('inp-area-tri');
-  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
-  if (!bloquejaExercici(event.target)) return;
-  const ex = currentExercise;
-
-  const periOk = Math.abs(perimetreUser - ex.perimetre) < 0.11;
-  const areaOk = Math.abs(areaUser - ex.area) < 0.2;
-  const allOk = periOk && areaOk;
-
-  const resultDiv = document.getElementById('result-triangle');
-  resultDiv.style.display = 'block';
-
-  const boxClass = allOk ? 'correct-box' : 'error-box';
-  const emoji = allOk ? '🎉' : '📚';
-  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
-  const titleColor = allOk ? '#4ade80' : '#f87171';
-
-  let html = `
+  const box = document.getElementById('result-box');
+  box.style.display = 'block';
+  box.innerHTML = `
     <div style="margin-top: 20px;">
-      <div class="${boxClass}" style="margin-bottom: 20px;">
-        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
-        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
-        <div style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 8px;">Triangle ${ex.nom}</div>
+      <div class="${allOk ? 'correct-box' : 'error-box'}" style="margin-bottom: 20px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">${allOk ? '🎉' : '📚'}</div>
+        <div style="font-weight: 800; font-size: 1.3rem; color: ${allOk ? '#4ade80' : '#f87171'}; margin-bottom: 8px;">
+          ${allOk ? 'CORRECTE!' : 'INCORRECTE'}</div>
         ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
+        ${repteEstat && !allOk && REPTES[repteEstat.tipus].reinicia
+          ? '<div style="color:#f87171;font-weight:700;margin-top:8px;">El repte torna a començar de zero</div>' : ''}
       </div>
 
       <div class="exercise-question">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${periOk ? '✓' : '✗'} ${perimetreUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.perimetre}</strong> cm
-            </div>
-          </div>
-
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${areaOk ? '✓' : '✗'} ${areaUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.area}</strong> cm²
-            </div>
-          </div>
-        </div>
+        <div class="res-grid${resultats.length === 1 ? ' un-camp' : ''}">${caixes}</div>
       </div>
 
-      ${allOk ? '' : pasAPas(`P = a+b+c = ${ex.a}+${ex.b}+${ex.c} = <strong>${ex.perimetre} cm</strong>`, `A = (b×h)/2 = (${ex.b}×${ex.altura})/2 = <strong>${ex.area} cm²</strong>`)}
+      ${allOk ? '' : pasAPasLlista(ex.passos)}
+      ${repteFet ? renderRepteGuanyat() : ''}
+      ${repteAcabat ? renderRepteDiaAcabat() : ''}
+
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        <button class="btn-primary" onclick="setupTriangle()" style="margin-top: 0;">📝 Següent</button>
-        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
+        ${repteAcabat
+          ? `<button class="btn-primary" onclick="showScreen('screen-menu')" style="margin-top:0;grid-column:1/-1;">🏠 Tornar al menú</button>`
+          : `<button class="btn-primary" onclick="novaPregunta()" style="margin-top: 0;">📝 Següent</button>
+             <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>`}
       </div>
-    </div>
-  `;
+    </div>`;
 
-  resultDiv.innerHTML = html;
-  updatePlayerStats('triangle', allOk);
+  so(allOk ? 'be' : 'malament');
+  updatePlayerStats(ex.forma, allOk);
+  if (repteFet) guanyaEstrella(ex.forma);
+  else if (repteAcabat) tancaRepteDelDia();
+  else if (repteEstat) renderRepteBarraViva();
+}
+
+function renderRepteBarraViva() {
+  const el = document.querySelector('.repte-barra');
+  if (el && repteEstat) el.outerHTML = renderRepteBarra();
+}
+
+function renderRepteGuanyat() {
+  const esMestre = repteEstat.tipus === 'mestre';
+  return `<div class="repte-guanyat">
+    <div style="font-size:2.6rem;">${esMestre ? '🏆' : '⭐'}</div>
+    <div style="font-weight:900;font-size:1.15rem;margin-top:6px;">Repte superat!</div>
+    <div style="font-size:0.9rem;opacity:0.85;margin-top:4px;">
+      ${repteEstat.total} de ${repteEstat.total} seguides.
+      ${esMestre ? 'I amb formes barrejades!' : `Ja tens l'estrella de ${FORMES[formaActual].nom.toLowerCase()}.`}</div>
+  </div>`;
+}
+
+function renderRepteDiaAcabat() {
+  const e = repteEstat.encerts, t = repteEstat.total;
+  const medalla = e === t ? '🥇' : e >= t - 1 ? '🥈' : e >= t - 2 ? '🥉' : '📘';
+  return `<div class="repte-guanyat">
+    <div style="font-size:2.6rem;">${medalla}</div>
+    <div style="font-weight:900;font-size:1.15rem;margin-top:6px;">Repte del dia acabat</div>
+    <div style="font-size:0.9rem;opacity:0.85;margin-top:4px;">
+      ${e} encerts de ${t}. Demà en surt un de nou (el mateix per a tota la classe).</div>
+  </div>`;
+}
+
+function tancaRepteDelDia() {
+  if (!player) return;
+  player.repte_dia = { data: avuiISO(), encerts: repteEstat.encerts };
+  savePlayer();
+  so(repteEstat.encerts === repteEstat.total ? 'trofeu' : 'be');
+  if (repteEstat.encerts === repteEstat.total) showSerpentines();
+  checkTrophies();
+}
+
+function guanyaEstrella(forma) {
+  if (!player) return;
+  if (!player.estrelles) player.estrelles = {};
+  const clau = repteEstat.tipus === 'mestre' ? '_mestre' : forma;
+  const nova = !player.estrelles[clau];
+  player.estrelles[clau] = true;
+  repteEstat = nouRepte(repteEstat.tipus);
+  savePlayer();
+  if (nova) { showSerpentines(); so('trofeu'); }
+  checkTrophies();
+}
+
+function pasAPasLlista(passos) {
+  if (!passos || !passos.length) return '';
+  const icones = ['📐', '📏', '🔎'];
+  return `<div class="steps-box">
+    <div class="steps-title">💡 Com es calcula</div>
+    ${passos.map((p, i) => `<div class="step-line">${icones[i] || '•'} ${p}</div>`).join('')}
+  </div>`;
 }
 
 // ═══════════════════════════════════════════
-//  EXERCICI: RECTANGLE (P = 2(a+b), A = a×b)
+//  REPÀS INTEL·LIGENT
+//  Tria la forma on l'alumne va més fluix (i les que encara no ha tocat).
 // ═══════════════════════════════════════════
 
-function setupRectangle() {
-  document.getElementById('exercise-title').textContent = '▭ Rectangle';
-  const base = Math.floor(Math.random() * 12) + 3;    // 3-14
-  const altura = Math.floor(Math.random() * 12) + 3;  // 3-14
-  const perimetre = 2 * (base + altura);
-  const area = base * altura;
-
-  currentExercise = {
-    forma: 'rectangle',
-    base,
-    altura,
-    perimetre,
-    area,
-  };
-
-  document.getElementById('exercise-content').innerHTML = `
-    <div class="shape-display">
-      ${drawRectangleSVG(base, altura)}
-    </div>
-
-    <div class="formula-box">
-      <div class="formula-row"><span>📐 <strong>P = 2(a + b)</strong></span><span>📏 <strong>A = a × b</strong></span></div>
-    </div>
-
-    <form class="exercise-form" onsubmit="checkRectangle(event)">
-      <div class="inputs-grid">
-        <div class="input-field">
-          <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre-rect" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-        <div class="input-field">
-          <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area-rect" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-      </div>
-      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
-    </form>
-
-    <div id="result-rectangle" style="display: none;"></div>
-  `;
-
-  document.getElementById('inp-perimetre-rect').focus();
+function pesRepas(clau) {
+  const s = (player && player.stats_forma && player.stats_forma[clau]) || { encerts: 0, errors: 0 };
+  const total = s.encerts + s.errors;
+  if (total === 0) return 3;                 // no tocada: prioritat alta
+  const encert = s.encerts / total;
+  if (encert >= 0.9) return 0.4;             // dominada: hi tornem poc
+  return 1 + (1 - encert) * 4;               // com pitjor va, més surt
 }
 
-function checkRectangle(event) {
-  event.preventDefault();
-  const perimetreUser = llegirNumero('inp-perimetre-rect');
-  const areaUser = llegirNumero('inp-area-rect');
-  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
-  if (!bloquejaExercici(event.target)) return;
-  const ex = currentExercise;
-
-  const periOk = perimetreUser === ex.perimetre;
-  const areaOk = areaUser === ex.area;
-  const allOk = periOk && areaOk;
-
-  const resultDiv = document.getElementById('result-rectangle');
-  resultDiv.style.display = 'block';
-
-  const boxClass = allOk ? 'correct-box' : 'error-box';
-  const emoji = allOk ? '🎉' : '📚';
-  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
-  const titleColor = allOk ? '#4ade80' : '#f87171';
-
-  let html = `
-    <div style="margin-top: 20px;">
-      <div class="${boxClass}" style="margin-bottom: 20px;">
-        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
-        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
-        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
-      </div>
-
-      <div class="exercise-question">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${periOk ? '✓' : '✗'} ${perimetreUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.perimetre}</strong> cm
-            </div>
-          </div>
-
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${areaOk ? '✓' : '✗'} ${areaUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.area}</strong> cm²
-            </div>
-          </div>
-        </div>
-      </div>
-
-      ${allOk ? '' : pasAPas(`P = 2(a+b) = 2×(${ex.base}+${ex.altura}) = 2×${ex.base+ex.altura} = <strong>${ex.perimetre} cm</strong>`, `A = a×b = ${ex.base}×${ex.altura} = <strong>${ex.area} cm²</strong>`)}
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        <button class="btn-primary" onclick="setupRectangle()" style="margin-top: 0;">📝 Següent</button>
-        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
-      </div>
-    </div>
-  `;
-
-  resultDiv.innerHTML = html;
-  updatePlayerStats('rectangle', allOk);
+function repasIntelligent() {
+  const pesos = ORDRE_FORMES.map(k => ({ k, p: pesRepas(k) }));
+  const suma = pesos.reduce((t, x) => t + x.p, 0);
+  let r = Math.random() * suma;
+  let escollida = pesos[0].k;
+  for (const x of pesos) { r -= x.p; if (r <= 0) { escollida = x.k; break; } }
+  obreForma(escollida, 'practica');
 }
 
 // ═══════════════════════════════════════════
-//  SETUP FUNCIONS PER FUTURES FORMES
+//  SO I VIBRACIÓ
+//  Sense fitxers externs: tons curts generats amb WebAudio. Es pot silenciar
+//  (a l'aula fa falta) i la preferència es desa al navegador.
 // ═══════════════════════════════════════════
 
-function setupRomboide() {
-  document.getElementById('exercise-title').textContent = '◇ Romboide';
-  // El costat oblic ha de ser > h (si no, la figura no existeix) però tampoc
-  // gaire més gran: amb a molt gran el romboide surt esclafat i il·legible.
-  const h = Math.floor(Math.random() * 5) + 4;      // 4-8
-  const a = h + Math.floor(Math.random() * 3) + 1;  // h+1 … h+3
-  const b = h + Math.floor(Math.random() * 7) + 2;  // h+2 … h+8
+let _ctxAudio = null;
 
-  currentExercise = {
-    forma: 'romboide',
-    a, b, h,
-    perimetre: 2 * (a + b),
-    area: b * h
-  };
+function soActivat() { return localStorage.getItem('joc-geometria_so') !== 'off'; }
 
-  document.getElementById('exercise-content').innerHTML = `
-    <div class="shape-display">
-      ${drawRomboideSVG(b, h, a)}
-    </div>
-
-    <div class="formula-box">
-      <div class="formula-row"><span>📐 <strong>P = 2(a + b)</strong></span><span>📏 <strong>A = b × h</strong></span></div>
-    </div>
-
-    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
-      <strong>Dades:</strong> a = ${a} cm, b = ${b} cm, h = ${h} cm
-    </div>
-
-    <form class="exercise-form" onsubmit="checkRomboide(event)">
-      <div class="inputs-grid">
-        <div class="input-field">
-          <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-        <div class="input-field">
-          <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-      </div>
-      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
-    </form>
-
-    <div id="result-romboide" style="display: none;"></div>
-  `;
-
-  document.getElementById('inp-perimetre').focus();
+function alternaSo() {
+  localStorage.setItem('joc-geometria_so', soActivat() ? 'off' : 'on');
+  actualitzaBotoSo();
+  if (soActivat()) so('be');
 }
 
-function checkRomboide(event) {
-  event.preventDefault();
-  const perimetreUser = llegirNumero('inp-perimetre');
-  const areaUser = llegirNumero('inp-area');
-  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
-  if (!bloquejaExercici(event.target)) return;
-  const ex = currentExercise;
-
-  const periOk = perimetreUser === ex.perimetre;
-  const areaOk = areaUser === ex.area;
-  const allOk = periOk && areaOk;
-
-  const resultDiv = document.getElementById('result-romboide');
-  resultDiv.style.display = 'block';
-
-  const boxClass = allOk ? 'correct-box' : 'error-box';
-  const emoji = allOk ? '🎉' : '📚';
-  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
-  const titleColor = allOk ? '#4ade80' : '#f87171';
-
-  let html = `
-    <div style="margin-top: 20px;">
-      <div class="${boxClass}" style="margin-bottom: 20px;">
-        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
-        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
-        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
-      </div>
-
-      <div class="exercise-question">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${periOk ? '✓' : '✗'} ${perimetreUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.perimetre}</strong> cm
-            </div>
-          </div>
-
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${areaOk ? '✓' : '✗'} ${areaUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.area}</strong> cm²
-            </div>
-          </div>
-        </div>
-      </div>
-
-      ${allOk ? '' : pasAPas(`P = 2(a+b) = 2×(${ex.a}+${ex.b}) = 2×${ex.a+ex.b} = <strong>${ex.perimetre} cm</strong>`, `A = b×h = ${ex.b}×${ex.h} = <strong>${ex.area} cm²</strong>`)}
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        <button class="btn-primary" onclick="setupRomboide()" style="margin-top: 0;">📝 Següent</button>
-        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
-      </div>
-    </div>
-  `;
-
-  resultDiv.innerHTML = html;
-  updatePlayerStats('romboide', allOk);
+function actualitzaBotoSo() {
+  document.querySelectorAll('[data-so-btn]').forEach(b => {
+    b.textContent = soActivat() ? '🔊 So activat' : '🔇 So silenciat';
+  });
 }
 
-function setupRombo() {
-  document.getElementById('exercise-title').textContent = '◆ Rombo';
-  // Rombos COHERENTS: a = √((d₁/2)² + (d₂/2)²) via ternes pitagòriques.
-  // [d1, d2, a] — l'àrea (d₁·d₂)/2 sempre és entera (diagonals parelles).
-  const ROMBOS = [[6,8,5],[8,6,5],[12,16,10],[16,12,10],[10,24,13],[24,10,13],[18,24,15],[24,18,15],[16,30,17]];
-  const [d1, d2, a] = ROMBOS[Math.floor(Math.random() * ROMBOS.length)];
-
-  currentExercise = {
-    forma: 'rombo',
-    a, d1, d2,
-    perimetre: 4 * a,
-    area: (d1 * d2) / 2
-  };
-
-  document.getElementById('exercise-content').innerHTML = `
-    <div class="shape-display">
-      ${drawRomboSVG(d1, d2, a)}
-    </div>
-
-    <div class="formula-box">
-      <div class="formula-row"><span>📐 <strong>P = 4 × a</strong></span><span>📏 <strong>A = <span class="fraction"><span class="fraction-num">d₁ × d₂</span><span class="fraction-den">2</span></span></strong></span></div>
-    </div>
-
-    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
-      <strong>Dades:</strong> a = ${a} cm, d₁ = ${d1} cm, d₂ = ${d2} cm
-    </div>
-
-    <form class="exercise-form" onsubmit="checkRombo(event)">
-      <div class="inputs-grid">
-        <div class="input-field">
-          <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-        <div class="input-field">
-          <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-      </div>
-      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
-    </form>
-
-    <div id="result-rombo" style="display: none;"></div>
-  `;
-
-  document.getElementById('inp-perimetre').focus();
-}
-
-function checkRombo(event) {
-  event.preventDefault();
-  const perimetreUser = llegirNumero('inp-perimetre');
-  const areaUser = llegirNumero('inp-area');
-  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
-  if (!bloquejaExercici(event.target)) return;
-  const ex = currentExercise;
-
-  const periOk = perimetreUser === ex.perimetre;
-  const areaOk = areaUser === ex.area;
-  const allOk = periOk && areaOk;
-
-  const resultDiv = document.getElementById('result-rombo');
-  resultDiv.style.display = 'block';
-
-  const boxClass = allOk ? 'correct-box' : 'error-box';
-  const emoji = allOk ? '🎉' : '📚';
-  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
-  const titleColor = allOk ? '#4ade80' : '#f87171';
-
-  let html = `
-    <div style="margin-top: 20px;">
-      <div class="${boxClass}" style="margin-bottom: 20px;">
-        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
-        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
-        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
-      </div>
-
-      <div class="exercise-question">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${periOk ? '✓' : '✗'} ${perimetreUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.perimetre}</strong> cm
-            </div>
-          </div>
-
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${areaOk ? '✓' : '✗'} ${areaUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.area}</strong> cm²
-            </div>
-          </div>
-        </div>
-      </div>
-
-      ${allOk ? '' : pasAPas(`P = 4×a = 4×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (d₁×d₂)/2 = (${ex.d1}×${ex.d2})/2 = <strong>${ex.area} cm²</strong>`)}
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        <button class="btn-primary" onclick="setupRombo()" style="margin-top: 0;">📝 Següent</button>
-        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
-      </div>
-    </div>
-  `;
-
-  resultDiv.innerHTML = html;
-  updatePlayerStats('rombo', allOk);
-}
-
-function setupTrapezi() {
-  document.getElementById('exercise-title').textContent = '⊥ Trapezi';
-  // Trapezis REALS: els costats oblics surten de Pitàgores amb l'altura i el
-  // que sobresurt la base gran, així la figura dibuixada existeix de debò.
-  // [b1 (base gran), b2 (base petita), h, c (costat esq.), d (costat dret), tipus]
-  const TRAPEZIS = [
-    [12, 4, 3, 5, 5, 'isosceles'],
-    [11, 5, 4, 5, 5, 'isosceles'],
-    [20, 4, 6, 10, 10, 'isosceles'],
-    [18, 6, 8, 10, 10, 'isosceles'],
-    [14, 4, 12, 13, 13, 'isosceles'],
-    [10, 6, 3, 3, 5, 'rectangle'],
-    [13, 5, 6, 6, 10, 'rectangle'],
-    [13, 7, 8, 8, 10, 'rectangle'],
-    [16, 4, 5, 5, 13, 'rectangle'],
-    [11, 8, 4, 4, 5, 'rectangle'],
-    [11, 6, 12, 12, 13, 'rectangle'],
-  ];
-  const [b1, b2, h, c, d, tipus] = TRAPEZIS[Math.floor(Math.random() * TRAPEZIS.length)];
-
-  currentExercise = {
-    forma: 'trapezi',
-    b1, b2, c, d, h, tipus,
-    perimetre: b1 + c + d + b2,
-    area: ((b1 + b2) * h) / 2
-  };
-
-  document.getElementById('exercise-content').innerHTML = `
-    <div class="shape-display">
-      ${drawTrapezSVG(b1, b2, h, c, d, tipus)}
-    </div>
-
-    <div class="formula-box">
-      <div class="formula-row"><span>📐 <strong>P = b₁ + b₂ + c + d</strong></span><span>📏 <strong>A = <span class="fraction"><span class="fraction-num">(b₁ + b₂) × h</span><span class="fraction-den">2</span></span></strong></span></div>
-    </div>
-
-    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
-      <strong>Dades:</strong> b₁ = ${b1} cm, b₂ = ${b2} cm, c = ${c} cm, d = ${d} cm, h = ${h} cm
-    </div>
-
-    <form class="exercise-form" onsubmit="checkTrapezi(event)">
-      <div class="inputs-grid">
-        <div class="input-field">
-          <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-        <div class="input-field">
-          <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-      </div>
-      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
-    </form>
-
-    <div id="result-trapezi" style="display: none;"></div>
-  `;
-
-  document.getElementById('inp-perimetre').focus();
-}
-
-function checkTrapezi(event) {
-  event.preventDefault();
-  const perimetreUser = llegirNumero('inp-perimetre');
-  const areaUser = llegirNumero('inp-area');
-  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
-  if (!bloquejaExercici(event.target)) return;
-  const ex = currentExercise;
-
-  const periOk = perimetreUser === ex.perimetre;
-  const areaOk = areaUser === ex.area;
-  const allOk = periOk && areaOk;
-
-  const resultDiv = document.getElementById('result-trapezi');
-  resultDiv.style.display = 'block';
-
-  const boxClass = allOk ? 'correct-box' : 'error-box';
-  const emoji = allOk ? '🎉' : '📚';
-  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
-  const titleColor = allOk ? '#4ade80' : '#f87171';
-
-  let html = `
-    <div style="margin-top: 20px;">
-      <div class="${boxClass}" style="margin-bottom: 20px;">
-        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
-        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
-        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
-      </div>
-
-      <div class="exercise-question">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${periOk ? '✓' : '✗'} ${perimetreUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.perimetre}</strong> cm
-            </div>
-          </div>
-
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${areaOk ? '✓' : '✗'} ${areaUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.area}</strong> cm²
-            </div>
-          </div>
-        </div>
-      </div>
-
-      ${allOk ? '' : pasAPas(`P = b₁+b₂+c+d = ${ex.b1}+${ex.b2}+${ex.c}+${ex.d} = <strong>${ex.perimetre} cm</strong>`, `A = ((b₁+b₂)×h)/2 = ((${ex.b1}+${ex.b2})×${ex.h})/2 = <strong>${ex.area} cm²</strong>`)}
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        <button class="btn-primary" onclick="setupTrapezi()" style="margin-top: 0;">📝 Següent</button>
-        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
-      </div>
-    </div>
-  `;
-
-  resultDiv.innerHTML = html;
-  updatePlayerStats('trapezi', allOk);
-}
-
-function setupPentagon() {
-  document.getElementById('exercise-title').textContent = '⬟ Pentàgon';
-  // Parelles [costat, apotema] plausibles (ap real ≈ 0.688·a) amb àrea sempre entera
-  const PENTAGONS = [[4,2.8],[6,4.2],[8,5.5],[10,6.8],[12,8.3]];
-  const [a, apotema] = PENTAGONS[Math.floor(Math.random() * PENTAGONS.length)];
-
-  currentExercise = {
-    forma: 'pentagon',
-    a, apotema,
-    perimetre: 5 * a,
-    area: Math.round(5 * a * apotema) / 2
-  };
-
-  document.getElementById('exercise-content').innerHTML = `
-    <div class="shape-display">
-      ${drawPentagonSVG(a, apotema)}
-    </div>
-
-    <div class="formula-box">
-      <div class="formula-row"><span>📐 <strong>P = 5 × a</strong></span><span>📏 <strong>A = <span class="fraction"><span class="fraction-num">P × apotema</span><span class="fraction-den">2</span></span></strong></span></div>
-    </div>
-
-    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
-      <strong>Dades:</strong> a = ${a} cm, apotema = ${apotema} cm
-    </div>
-
-    <form class="exercise-form" onsubmit="checkPentagon(event)">
-      <div class="inputs-grid">
-        <div class="input-field">
-          <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-        <div class="input-field">
-          <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-      </div>
-      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
-    </form>
-
-    <div id="result-pentagon" style="display: none;"></div>
-  `;
-
-  document.getElementById('inp-perimetre').focus();
-}
-
-function checkPentagon(event) {
-  event.preventDefault();
-  const perimetreUser = llegirNumero('inp-perimetre');
-  const areaUser = llegirNumero('inp-area');
-  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
-  if (!bloquejaExercici(event.target)) return;
-  const ex = currentExercise;
-
-  const periOk = perimetreUser === ex.perimetre;
-  const areaOk = areaUser === ex.area;
-  const allOk = periOk && areaOk;
-
-  const resultDiv = document.getElementById('result-pentagon');
-  resultDiv.style.display = 'block';
-
-  const boxClass = allOk ? 'correct-box' : 'error-box';
-  const emoji = allOk ? '🎉' : '📚';
-  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
-  const titleColor = allOk ? '#4ade80' : '#f87171';
-
-  let html = `
-    <div style="margin-top: 20px;">
-      <div class="${boxClass}" style="margin-bottom: 20px;">
-        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
-        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
-        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
-      </div>
-
-      <div class="exercise-question">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${periOk ? '✓' : '✗'} ${perimetreUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.perimetre}</strong> cm
-            </div>
-          </div>
-
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${areaOk ? '✓' : '✗'} ${areaUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.area}</strong> cm²
-            </div>
-          </div>
-        </div>
-      </div>
-
-      ${allOk ? '' : pasAPas(`P = 5×a = 5×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (5×a×ap)/2 = (5×${ex.a}×${ex.apotema})/2 = <strong>${ex.area} cm²</strong>`)}
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        <button class="btn-primary" onclick="setupPentagon()" style="margin-top: 0;">📝 Següent</button>
-        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
-      </div>
-    </div>
-  `;
-
-  resultDiv.innerHTML = html;
-  updatePlayerStats('pentagon', allOk);
-}
-
-function setupHexagon() {
-  document.getElementById('exercise-title').textContent = '⬡ Hexàgon';
-  // Parelles [costat, apotema] plausibles (ap real ≈ 0.866·a) amb àrea sempre entera
-  const HEXAGONS = [[4,3.5],[5,4.4],[7,6],[8,7],[10,8.7]];
-  const [a, apotema] = HEXAGONS[Math.floor(Math.random() * HEXAGONS.length)];
-
-  currentExercise = {
-    forma: 'hexagon',
-    a, apotema,
-    perimetre: 6 * a,
-    area: Math.round(6 * a * apotema) / 2
-  };
-
-  document.getElementById('exercise-content').innerHTML = `
-    <div class="shape-display">
-      ${drawHexagonSVG(a, apotema)}
-    </div>
-
-    <div class="formula-box">
-      <div class="formula-row"><span>📐 <strong>P = 6 × a</strong></span><span>📏 <strong>A = <span class="fraction"><span class="fraction-num">P × apotema</span><span class="fraction-den">2</span></span></strong></span></div>
-    </div>
-
-    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
-      <strong>Dades:</strong> a = ${a} cm, apotema = ${apotema} cm
-    </div>
-
-    <form class="exercise-form" onsubmit="checkHexagon(event)">
-      <div class="inputs-grid">
-        <div class="input-field">
-          <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-        <div class="input-field">
-          <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-      </div>
-      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
-    </form>
-
-    <div id="result-hexagon" style="display: none;"></div>
-  `;
-
-  document.getElementById('inp-perimetre').focus();
-}
-
-function checkHexagon(event) {
-  event.preventDefault();
-  const perimetreUser = llegirNumero('inp-perimetre');
-  const areaUser = llegirNumero('inp-area');
-  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
-  if (!bloquejaExercici(event.target)) return;
-  const ex = currentExercise;
-
-  const periOk = perimetreUser === ex.perimetre;
-  const areaOk = areaUser === ex.area;
-  const allOk = periOk && areaOk;
-
-  const resultDiv = document.getElementById('result-hexagon');
-  resultDiv.style.display = 'block';
-
-  const boxClass = allOk ? 'correct-box' : 'error-box';
-  const emoji = allOk ? '🎉' : '📚';
-  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
-  const titleColor = allOk ? '#4ade80' : '#f87171';
-
-  let html = `
-    <div style="margin-top: 20px;">
-      <div class="${boxClass}" style="margin-bottom: 20px;">
-        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
-        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
-        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
-      </div>
-
-      <div class="exercise-question">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${periOk ? '✓' : '✗'} ${perimetreUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.perimetre}</strong> cm
-            </div>
-          </div>
-
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${areaOk ? '✓' : '✗'} ${areaUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.area}</strong> cm²
-            </div>
-          </div>
-        </div>
-      </div>
-
-      ${allOk ? '' : pasAPas(`P = 6×a = 6×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (6×a×ap)/2 = (6×${ex.a}×${ex.apotema})/2 = <strong>${ex.area} cm²</strong>`)}
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        <button class="btn-primary" onclick="setupHexagon()" style="margin-top: 0;">📝 Següent</button>
-        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
-      </div>
-    </div>
-  `;
-
-  resultDiv.innerHTML = html;
-  updatePlayerStats('hexagon', allOk);
-}
-
-function setupOctagon() {
-  document.getElementById('exercise-title').textContent = '⎔ Octàgon';
-  // Parelles [costat, apotema] plausibles (ap real ≈ 1.207·a) amb àrea sempre entera
-  const OCTAGONS = [[3,3.5],[4,5],[5,6],[6,7],[7,8.5]];
-  const [a, apotema] = OCTAGONS[Math.floor(Math.random() * OCTAGONS.length)];
-
-  currentExercise = {
-    forma: 'octagon',
-    a, apotema,
-    perimetre: 8 * a,
-    area: Math.round(8 * a * apotema) / 2
-  };
-
-  document.getElementById('exercise-content').innerHTML = `
-    <div class="shape-display">
-      ${drawOctagonSVG(a, apotema)}
-    </div>
-
-    <div class="formula-box">
-      <div class="formula-row"><span>📐 <strong>P = 8 × a</strong></span><span>📏 <strong>A = <span class="fraction"><span class="fraction-num">P × apotema</span><span class="fraction-den">2</span></span></strong></span></div>
-    </div>
-
-    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
-      <strong>Dades:</strong> a = ${a} cm, apotema = ${apotema} cm
-    </div>
-
-    <form class="exercise-form" onsubmit="checkOctagon(event)">
-      <div class="inputs-grid">
-        <div class="input-field">
-          <label>Perímetre (cm)</label>
-          <input type="number" id="inp-perimetre" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-        <div class="input-field">
-          <label>Àrea (cm²)</label>
-          <input type="number" id="inp-area" inputmode="numeric" min="0" placeholder="Escriu el resultat" required>
-        </div>
-      </div>
-      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
-    </form>
-
-    <div id="result-octagon" style="display: none;"></div>
-  `;
-
-  document.getElementById('inp-perimetre').focus();
-}
-
-function checkOctagon(event) {
-  event.preventDefault();
-  const perimetreUser = llegirNumero('inp-perimetre');
-  const areaUser = llegirNumero('inp-area');
-  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
-  if (!bloquejaExercici(event.target)) return;
-  const ex = currentExercise;
-
-  const periOk = perimetreUser === ex.perimetre;
-  const areaOk = areaUser === ex.area;
-  const allOk = periOk && areaOk;
-
-  const resultDiv = document.getElementById('result-octagon');
-  resultDiv.style.display = 'block';
-
-  const boxClass = allOk ? 'correct-box' : 'error-box';
-  const emoji = allOk ? '🎉' : '📚';
-  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
-  const titleColor = allOk ? '#4ade80' : '#f87171';
-
-  let html = `
-    <div style="margin-top: 20px;">
-      <div class="${boxClass}" style="margin-bottom: 20px;">
-        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
-        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
-        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
-      </div>
-
-      <div class="exercise-question">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${periOk ? '✓' : '✗'} ${perimetreUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.perimetre}</strong> cm
-            </div>
-          </div>
-
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${areaOk ? '✓' : '✗'} ${areaUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.area}</strong> cm²
-            </div>
-          </div>
-        </div>
-      </div>
-
-      ${allOk ? '' : pasAPas(`P = 8×a = 8×${ex.a} = <strong>${ex.perimetre} cm</strong>`, `A = (8×a×ap)/2 = (8×${ex.a}×${ex.apotema})/2 = <strong>${ex.area} cm²</strong>`)}
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        <button class="btn-primary" onclick="setupOctagon()" style="margin-top: 0;">📝 Següent</button>
-        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
-      </div>
-    </div>
-  `;
-
-  resultDiv.innerHTML = html;
-  updatePlayerStats('octagon', allOk);
-}
-
-function setupCircle() {
-  document.getElementById('exercise-title').textContent = '⭕ Cercle';
-  const r = Math.floor(Math.random() * 10) + 2;
-
-  // π = 3.14 (el mateix valor que s'ensenya a l'alumne) → resultats exactes amb 2 decimals
-  currentExercise = {
-    forma: 'circle',
-    r,
-    perimetre: Math.round(2 * 3.14 * r * 100) / 100,
-    area: Math.round(3.14 * r * r * 100) / 100
-  };
-
-  document.getElementById('exercise-content').innerHTML = `
-    <div class="shape-display">
-      ${drawCircleSVG(r)}
-    </div>
-
-    <div class="formula-box">
-      <div class="formula-row"><span>📐 <strong>P = 2πr</strong></span><span>📏 <strong>A = πr²</strong></span></div>
-    </div>
-
-    <div style="background: var(--bg-card); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem;">
-      <strong>Dades:</strong> r = ${r} cm (π ≈ 3.14)
-    </div>
-
-    <form class="exercise-form" onsubmit="checkCircle(event)">
-      <div class="inputs-grid">
-        <div class="input-field">
-          <label>Perímetre (cm)</label>
-          <input type="text" id="inp-perimetre" inputmode="decimal" placeholder="Pots posar decimals" required>
-        </div>
-        <div class="input-field">
-          <label>Àrea (cm²)</label>
-          <input type="text" id="inp-area" inputmode="decimal" placeholder="Pots posar decimals" required>
-        </div>
-      </div>
-      <button class="btn-primary" type="submit" style="margin-top: 16px;">✓ REVISAR RESPOSTA</button>
-    </form>
-
-    <div id="result-circle" style="display: none;"></div>
-  `;
-
-  document.getElementById('inp-perimetre').focus();
-}
-
-function checkCircle(event) {
-  event.preventDefault();
-  const perimetreUser = llegirNumero('inp-perimetre');
-  const areaUser = llegirNumero('inp-area');
-  if (isNaN(perimetreUser) || isNaN(areaUser)) { avisNumero(event.target); return; }
-  if (!bloquejaExercici(event.target)) return;
-  const ex = currentExercise;
-
-  // Tolerància 0.51: accepta tant el valor exacte (43.96) com l'arrodonit (44)
-  const periOk = Math.abs(perimetreUser - ex.perimetre) < 0.51;
-  const areaOk = Math.abs(areaUser - ex.area) < 0.51;
-  const allOk = periOk && areaOk;
-
-  const resultDiv = document.getElementById('result-circle');
-  resultDiv.style.display = 'block';
-
-  const boxClass = allOk ? 'correct-box' : 'error-box';
-  const emoji = allOk ? '🎉' : '📚';
-  const title = allOk ? 'CORRECTE!' : 'INCORRECTE';
-  const titleColor = allOk ? '#4ade80' : '#f87171';
-
-  let html = `
-    <div style="margin-top: 20px;">
-      <div class="${boxClass}" style="margin-bottom: 20px;">
-        <div style="font-size: 3rem; margin-bottom: 12px;">${emoji}</div>
-        <div style="font-weight: 800; font-size: 1.3rem; color: ${titleColor}; margin-bottom: 8px;">${title}</div>
-        ${allOk ? '<div style="color: #4ade80; font-weight: 600;">+10 XP</div>' : ''}
-      </div>
-
-      <div class="exercise-question">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${periOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Perímetre</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${periOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${periOk ? '✓' : '✗'} ${perimetreUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.perimetre}</strong> cm
-            </div>
-          </div>
-
-          <div style="background: var(--bg-main); border-radius: 10px; padding: 12px; border-left: 4px solid ${areaOk ? '#4ade80' : '#f87171'};">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Àrea</div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: ${areaOk ? '#4ade80' : '#f87171'}; margin-bottom: 4px;">
-              ${areaOk ? '✓' : '✗'} ${areaUser}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-sub);">
-              Correcte: <strong>${ex.area}</strong> cm²
-            </div>
-          </div>
-        </div>
-      </div>
-
-      ${allOk ? '' : pasAPas(`P = 2×π×r ≈ 2×3.14×${ex.r} = <strong>${ex.perimetre} cm</strong>`, `A = π×r² ≈ 3.14×${ex.r}² = <strong>${ex.area} cm²</strong>`)}
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
-        <button class="btn-primary" onclick="setupCircle()" style="margin-top: 0;">📝 Següent</button>
-        <button class="btn-secondary" onclick="showScreen('screen-menu')" style="margin-top: 0;">🏠 Menú</button>
-      </div>
-    </div>
-  `;
-
-  resultDiv.innerHTML = html;
-  updatePlayerStats('circle', allOk);
+function so(tipus) {
+  if (!soActivat()) return;
+  try {
+    if (navigator.vibrate) navigator.vibrate(tipus === 'malament' ? [90, 60, 90] : 40);
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    if (!_ctxAudio) _ctxAudio = new AC();
+    if (_ctxAudio.state === 'suspended') _ctxAudio.resume();
+    const notes = tipus === 'be'     ? [[660, 0], [880, 0.09]]
+                : tipus === 'trofeu' ? [[660, 0], [880, 0.09], [1175, 0.18]]
+                :                      [[210, 0], [160, 0.11]];
+    notes.forEach(([f, t]) => {
+      const osc = _ctxAudio.createOscillator(), g = _ctxAudio.createGain();
+      osc.type = tipus === 'malament' ? 'sawtooth' : 'triangle';
+      osc.frequency.value = f;
+      const ini = _ctxAudio.currentTime + t;
+      g.gain.setValueAtTime(0.0001, ini);
+      g.gain.exponentialRampToValueAtTime(0.14, ini + 0.015);
+      g.gain.exponentialRampToValueAtTime(0.0001, ini + 0.16);
+      osc.connect(g); g.connect(_ctxAudio.destination);
+      osc.start(ini); osc.stop(ini + 0.18);
+    });
+  } catch (e) { /* si el navegador no deixa fer sons, el joc segueix igual */ }
 }
 
 // ═══════════════════════════════════════════
@@ -4034,6 +4038,8 @@ function updatePlayerStats(forma, correcte) {
   }
 
   player.partides = (player.partides || 0) + 1;
+  player.ratxa_max = Math.max(player.ratxa_max || 0, player.ratxa || 0);
+  registraDia();
 
   checkTrophies();
   renderFormaProgress(forma);
@@ -4042,72 +4048,30 @@ function updatePlayerStats(forma, correcte) {
   syncToCloudIfLinked(); // fire-and-forget; aquest joc desa despres de CADA exercici, no nomes al final
 }
 
+// Guarda els dies en què s'ha jugat (per al trofeu "Tres dies seguits").
+function registraDia() {
+  if (!player) return;
+  if (!Array.isArray(player.dies)) player.dies = [];
+  const avui = avuiISO();
+  if (player.dies[player.dies.length - 1] !== avui) {
+    player.dies.push(avui);
+    if (player.dies.length > 30) player.dies = player.dies.slice(-30);
+  }
+}
+
 function checkTrophies() {
-  const newTrofeus = [];
-
-  // Primer vol
-  if (player.partides === 1 && !player.trofeus.includes('primer_vol')) {
-    newTrofeus.push('primer_vol');
-  }
-
-  // Sense errors: 10+ encerts amb 0 errors en qualsevol forma
-  const formaAmbPerfecte = Object.values(player.stats_forma || {}).find(
-    s => s.encerts >= 10 && s.errors === 0
-  );
-  if (formaAmbPerfecte && !player.trofeus.includes('sense_errors')) {
-    newTrofeus.push('sense_errors');
-  }
-
-  // Ratxa perfecta: 5 encerts consecutius
-  if ((player.ratxa || 0) >= 5 && !player.trofeus.includes('ratxa_perfecta')) {
-    newTrofeus.push('ratxa_perfecta');
-  }
-
-  // Perfectcionista: 20 exercicis correctes (xp = 10 per encert)
-  if ((player.xp || 0) >= 200 && !player.trofeus.includes('perfectcionista')) {
-    newTrofeus.push('perfectcionista');
-  }
-
-  // Identificador Expert: 10 formes identificades correctament
-  if (player.stats_forma.identificar && player.stats_forma.identificar.encerts >= 10 &&
-      !player.trofeus.includes('identifica_expert')) {
-    newTrofeus.push('identifica_expert');
-  }
-
-  // Geòmetra (50 partides)
-  if (player.partides >= 50 && !player.trofeus.includes('geomeatra')) {
-    newTrofeus.push('geomeatra');
-  }
-
-  // Mestre Geòmetra (100 partides)
-  if (player.partides >= 100 && !player.trofeus.includes('mestre_geo')) {
-    newTrofeus.push('mestre_geo');
-  }
-
-  // Llegenda de la Geometria (15000 XP = rang màxim, Mestre Suprem)
-  if ((player.xp || 0) >= 15000 && !player.trofeus.includes('llegenda_geometria')) {
-    newTrofeus.push('llegenda_geometria');
-  }
-
-  // Polímata Geomètrica: 10+ encerts en 9+ formes
-  const formesMestredes = Object.values(player.stats_forma || {}).filter(
-    s => s.encerts >= 10
-  ).length;
-  if (formesMestredes >= 9 && !player.trofeus.includes('polimata_geometrica')) {
-    newTrofeus.push('polimata_geometrica');
-  }
-
-  // Desafiament Completat: 50+ XP en una única sessió (aproximat per 5 correctes seguides)
-  if ((player.ratxa || 0) >= 5 && (player.xp || 0) >= 50 && !player.trofeus.includes('desafiament_completat')) {
-    newTrofeus.push('desafiament_completat');
-  }
-
-  newTrofeus.forEach(id => {
-    if (!player.trofeus.includes(id)) {
-      player.trofeus.push(id);
+  if (!player) return;
+  // Un trofeu es desbloqueja quan el seu propi comptador arriba a l'objectiu:
+  // així la condició i la barra de progrés no poden dir coses diferents.
+  TROFEUS.forEach(t => {
+    if (t.secret || !t.prog || player.trofeus.includes(t.id)) return;
+    const [fet, total] = t.prog(player);
+    if (fet >= total) {
+      player.trofeus.push(t.id);
       showSerpentines();
-      mostraAvisTrofeu(TROFEUS.find(t => t.id === id));   // abans les serpentines
-    }                                                     // sortien sense dir per què
+      so('trofeu');
+      mostraAvisTrofeu(t);
+    }
   });
 }
 
@@ -4125,6 +4089,15 @@ function mostraAvisTrofeu(t) {
     </div>`;
   document.body.appendChild(overlay);
   setTimeout(() => overlay.remove(), 3600);
+}
+
+// Progrés d'un trofeu, per a la pantalla de trofeus.
+function progresTrofeu(t) {
+  if (!player || !t.prog) return null;
+  try {
+    const [fet, total] = t.prog(player);
+    return { fet: Math.max(0, Math.min(fet, total)), total };
+  } catch (e) { return null; }
 }
 
 // ═══════════════════════════════════════════
@@ -4169,7 +4142,7 @@ const FORMES_IDENTIFICA = [
   { icon: '▭', nom: 'Rectangle', sides: 4, angles: 4, tipus: 'Paral·lelogram' },
   { icon: '🔺', nom: 'Triangle', sides: 3, angles: 3, tipus: 'Polígon' },
   { icon: '◇', nom: 'Romboide', sides: 4, angles: 4, tipus: 'Paral·lelogram' },
-  { icon: '◆', nom: 'Rombo', sides: 4, angles: 4, tipus: 'Paral·lelogram' },
+  { icon: '◆', nom: 'Rombe', sides: 4, angles: 4, tipus: 'Paral·lelogram' },
   { icon: '⊥', nom: 'Trapezi', sides: 4, angles: 4, tipus: 'Trapezi' },
   { icon: '⬟', nom: 'Pentàgon', sides: 5, angles: 5, tipus: 'Regular' },
   { icon: '⬡', nom: 'Hexàgon', sides: 6, angles: 6, tipus: 'Regular' },
@@ -4211,7 +4184,7 @@ function setupIdentify() {
       break;
     }
     case 'Romboide': shapeSVG = drawRomboideIdentify(); break;
-    case 'Rombo': shapeSVG = drawRomboIdentify(); break;
+    case 'Rombe': shapeSVG = drawRomboIdentify(); break;
     case 'Trapezi': shapeSVG = drawTrapeziIdentify(); break;
     case 'Pentàgon': shapeSVG = drawPentagonIdentify(); break;
     case 'Hexàgon': shapeSVG = drawHexagonIdentify(); break;
