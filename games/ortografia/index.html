@@ -212,7 +212,7 @@
   .card-sm { padding: 12px 16px; border-radius: var(--radius-sm); }
 
   /* ===== SPLASH SCREEN ===== */
-  /* Fons i cercles decoratius ara vénen de html/body (vegeu més amunt) — es veuen
+  /* Fons i cercles decoratius ara venen de html/body (vegeu més amunt) — es veuen
      igual a totes les pantalles, no només aquí. */
   #splash { display: none; }
   #splash.active {
@@ -1406,7 +1406,54 @@
   .mb12 { margin-bottom: 12px; }
   .mb16 { margin-bottom: 16px; }
 
-</style>
+
+    /* ── MODAL PROPI ──────────────────────────────────────────────────
+       alert(), confirm() i prompt() queden bloquejats dins d'un WebView
+       (l'APK): el botó es queda mort i l'alumne no en surt. Aquest modal
+       fa la mateixa feina i funciona a tot arreu. */
+    .jm-back {
+      position: fixed; inset: 0; z-index: 99999;
+      background: rgba(0, 0, 0, 0.65);
+      display: none; align-items: center; justify-content: center; padding: 20px;
+    }
+    .jm-back.obert { display: flex; }
+    .jm-card {
+      background: #ffffff;
+      color: #1e293b;
+      border: 2px solid #6366f1;
+      border-radius: 16px;
+      padding: 24px;
+      width: 100%; max-width: 420px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+      font-family: inherit;
+      animation: jm-entra 0.22s ease-out;
+    }
+    @keyframes jm-entra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .jm-text { font-size: 1rem; line-height: 1.55; text-align: center; }
+    .jm-text small { color: #64748b; }
+    .jm-input {
+      display: none;
+      width: 100%; margin-top: 16px; padding: 12px 14px;
+      font-family: inherit; font-size: 1.05rem; text-align: center;
+      color: #1e293b; background: rgba(127, 127, 127, 0.14);
+      border: 2px solid #6366f1; border-radius: 10px;
+    }
+    .jm-input.visible { display: block; }
+    .jm-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(127, 127, 127, 0.25); }
+    .jm-btns { display: flex; gap: 10px; margin-top: 20px; }
+    .jm-btn {
+      flex: 1; padding: 12px 14px; border-radius: 10px; cursor: pointer;
+      font-family: inherit; font-size: 0.95rem; font-weight: 800;
+      border: 2px solid transparent; transition: 0.18s;
+    }
+    .jm-btn-ok { background: #6366f1; color: #ffffff; }
+    .jm-btn-ok:hover { filter: brightness(1.08); }
+    .jm-btn-cancel {
+      background: transparent; color: #1e293b;
+      border-color: rgba(127, 127, 127, 0.45);
+    }
+    .jm-btn-cancel:hover { border-color: #6366f1; }
+  </style>
 </head>
 <body>
 
@@ -1791,6 +1838,16 @@
 </div>
 
 <!-- ===== EXPLICA LA REGLA ===== -->
+<!-- ===== PANELL DEL PROFESSOR ===== -->
+<div id="teacher-screen" class="screen" style="padding-bottom:90px;">
+  <button class="back-btn" onclick="showScreen('home')">← Tornar</button>
+  <h2 style="text-align:center;margin:8px 0 4px;">🧑‍🏫 Panell del professor</h2>
+  <p style="text-align:center;font-size:0.82rem;color:var(--text-muted);margin-bottom:14px;">
+    Dades desades en aquest dispositiu. No surten d'aquí.
+  </p>
+  <div id="teacher-body"></div>
+</div>
+
 <div id="rules-explain-screen" class="screen">
   <button class="back-btn" onclick="showScreen('home')">← Tornar</button>
   <h2 class="mb16">📚 Aprèn les Regles</h2>
@@ -1883,6 +1940,9 @@
       </div>
     </div>
     <hr class="credits-divider">
+    <div class="credits-version" onclick="teacherTap()" style="text-align:center;font-size:0.78rem;opacity:0.75;margin-bottom:8px;cursor:default;">
+      🎓 Joc d'Ortografia · <strong>v1.2</strong> — 25 d'agost de 2026
+    </div>
     <div class="credits-cc">
       <strong>© 2026 Robert Potau Nuñez</strong><br>
       Tots els drets reservats<br>
@@ -1891,7 +1951,7 @@
     <hr class="credits-divider">
     <div class="credits-cc">
       <strong>Versió 2.2</strong> · 10 de juliol de 2026<br>
-      <span>2 temes · 5 modes de joc · 83 paraules B/V · 26 paraules accentuació</span>
+      <span>18 temes · 5 modes de joc · més de 500 paraules i frases</span>
     </div>
     <button class="credits-close" onclick="closeCredits()">Tancar</button>
   </div>
@@ -2112,11 +2172,11 @@ const PARAULES_BV = [
   { paraula:'arbre',     lletra:'b', buit:'ar_re',    posicio:2, exemple:"L\'arbre té moltes fulles a la tardor.", imatge:'🌳', nivell:2, regla:'B1', regla_explicada:'Regla B1: S\'escriu <b>B</b> davant de R → ar<b>br</b>e' },
   { paraula:'poble',     lletra:'b', buit:'po_le',    posicio:2, exemple:"El nostre poble és molt bonic.",        imatge:'🏘️', nivell:2, regla:'B1', regla_explicada:'Regla B1: S\'escriu <b>B</b> davant de L → po<b>bl</b>e' },
   { paraula:'brillant',  lletra:'b', buit:'_rillant', posicio:0, exemple:"L\'estel és molt brillant.",            imatge:'⭐', nivell:2, regla:'B1', regla_explicada:'Regla B1: S\'escriu <b>B</b> davant de R → <b>br</b>illant' },
-  { paraula:'oblidar',   lletra:'b', buit:'o_lidar',  posicio:1, exemple:"No oblidis tancar la porta.",           imatge:'🔒', nivell:2, regla:'B1', regla_explicada:'Regla B1: S\'escriu <b>B</b> davant de L → o<b>bl</b>idar' },
+  { paraula:'oblidar',   lletra:'b', buit:'o_lidar',  posicio:1, exemple:"No vull oblidar el teu aniversari.",    imatge:'🔒', nivell:2, regla:'B1', regla_explicada:'Regla B1: S\'escriu <b>B</b> davant de L → o<b>bl</b>idar' },
   { paraula:'ambre',     lletra:'b', buit:'am_re',    posicio:2, exemple:"El collaret és d\'ambre groc.",         imatge:'🟡', nivell:3, regla:'B1', regla_explicada:'Regla B1: S\'escriu <b>B</b> davant de R → am<b>br</b>e' },
   { paraula:'doble',     lletra:'b', buit:'do_le',    posicio:2, exemple:"Tinc el doble de caramels que tu.",     imatge:'✌️', nivell:3, regla:'B1', regla_explicada:'Regla B1: S\'escriu <b>B</b> davant de L → do<b>bl</b>e' },
   { paraula:'noble',     lletra:'b', buit:'no_le',    posicio:2, exemple:"El cavaller noble defensa el poble.",   imatge:'⚔️', nivell:3, regla:'B1', regla_explicada:'Regla B1: S\'escriu <b>B</b> davant de L → no<b>bl</b>e' },
-  { paraula:'cobrir',    lletra:'b', buit:'co_rir',   posicio:2, exemple:"Cobriu la taula amb el mantell.",       imatge:'🎨', nivell:3, regla:'B1', regla_explicada:'Regla B1: S\'escriu <b>B</b> davant de R → co<b>br</b>ir' },
+  { paraula:'cobrir',    lletra:'b', buit:'co_rir',   posicio:2, exemple:"Cal cobrir la taula amb el mantell.",   imatge:'🎨', nivell:3, regla:'B1', regla_explicada:'Regla B1: S\'escriu <b>B</b> davant de R → co<b>br</b>ir' },
 
   // ── REGLA B2: B DARRERE DE M ──────────────────────────────────
   { paraula:'ambient',   lletra:'b', buit:'am_ient',  posicio:2, exemple:"L\'ambient del bosc és fresc.",         imatge:'🌿', nivell:1, regla:'B2', regla_explicada:'Regla B2: S\'escriu <b>B</b> darrere de M → a<b>mb</b>ient' },
@@ -2124,7 +2184,7 @@ const PARAULES_BV = [
   { paraula:'embenar',   lletra:'b', buit:'em_enar',  posicio:2, exemple:"Cal embenar la ferida amb cura.",       imatge:'🩹', nivell:2, regla:'B2', regla_explicada:'Regla B2: S\'escriu <b>B</b> darrere de M → e<b>mb</b>enar' },
   { paraula:'embolica',  lletra:'b', buit:'em_olica', posicio:2, exemple:"Embolica el regal amb paper de colors.", imatge:'🎁', nivell:2, regla:'B2', regla_explicada:'Regla B2: S\'escriu <b>B</b> darrere de M → e<b>mb</b>olica' },
   { paraula:'tomba',     lletra:'b', buit:'tom_a',    posicio:3, exemple:"El faraó dormia dins la tomba.",        imatge:'🪦', nivell:2, regla:'B2', regla_explicada:'Regla B2: S\'escriu <b>B</b> darrere de M → to<b>mb</b>a' },
-  { paraula:'membre',    lletra:'b', buit:'mem_re',   posicio:3, exemple:"Sóc membre del club d\'escacs.",        imatge:'👥', nivell:2, regla:'B2', regla_explicada:'Regla B2: S\'escriu <b>B</b> darrere de M → me<b>mb</b>re' },
+  { paraula:'membre',    lletra:'b', buit:'mem_re',   posicio:3, exemple:"Soc membre del club d\'escacs.",        imatge:'👥', nivell:2, regla:'B2', regla_explicada:'Regla B2: S\'escriu <b>B</b> darrere de M → me<b>mb</b>re' },
   { paraula:'símbol',    lletra:'b', buit:'sím_ol',   posicio:3, exemple:"La creu és un símbol important.",       imatge:'✝️', nivell:3, regla:'B2', regla_explicada:'Regla B2: S\'escriu <b>B</b> darrere de M → sí<b>mb</b>ol' },
   { paraula:'combat',    lletra:'b', buit:'com_at',   posicio:3, exemple:"Els karateces van fer un combat.",      imatge:'🥊', nivell:3, regla:'B2', regla_explicada:'Regla B2: S\'escriu <b>B</b> darrere de M → co<b>mb</b>at' },
   { paraula:'timbal',    lletra:'b', buit:'tim_al',   posicio:3, exemple:"El timbal sona molt fort a la banda.",  imatge:'🥁', nivell:3, regla:'B2', regla_explicada:'Regla B2: S\'escriu <b>B</b> darrere de M → ti<b>mb</b>al' },
@@ -2132,7 +2192,7 @@ const PARAULES_BV = [
   // ── REGLA B3: ALTERNANÇA P → B ────────────────────────────────
   { paraula:'saber',     lletra:'b', buit:'sa_er',    posicio:2, exemple:"Vull saber la resposta.",               imatge:'🧠', nivell:1, regla:'B3', regla_explicada:'Regla B3: <i>sap</i> → sa<b>b</b>er (P alterna amb B)' },
   { paraula:'lloba',     lletra:'b', buit:'llo_a',    posicio:3, exemple:"La lloba protegeix les cries.",         imatge:'🐺', nivell:1, regla:'B3', regla_explicada:'Regla B3: <i>llop</i> → llo<b>b</b>a (P alterna amb B)' },
-  { paraula:'rebre',     lletra:'b', buit:'re_re',    posicio:2, exemple:"Rebré una carta avui.",                 imatge:'📬', nivell:2, regla:'B3', regla_explicada:'Regla B3: <i>rep</i> → re<b>b</b>re (P alterna amb B)' },
+  { paraula:'rebre',     lletra:'b', buit:'re_re',    posicio:2, exemple:"Avui he de rebre una carta.",           imatge:'📬', nivell:2, regla:'B3', regla_explicada:'Regla B3: <i>rep</i> → re<b>b</b>re (P alterna amb B)' },
   { paraula:'cabdell',   lletra:'b', buit:'ca_dell',  posicio:2, exemple:"El cabdell de llana és vermell.",       imatge:'🧶', nivell:2, regla:'B3', regla_explicada:'Regla B3: <i>cap</i> → ca<b>b</b>dell (P alterna amb B)' },
   { paraula:'sabia',     lletra:'b', buit:'sa_ia',    posicio:2, exemple:"La meva àvia ho sabia tot.",            imatge:'👵', nivell:3, regla:'B3', regla_explicada:'Regla B3: <i>sap</i> → sa<b>b</b>ia (P alterna amb B)' },
   { paraula:'cubeta',    lletra:'b', buit:'cu_eta',   posicio:2, exemple:"Omple la cubeta d\'aigua freda.",       imatge:'🪣', nivell:3, regla:'B3', regla_explicada:'Regla B3: <i>cup</i> → cu<b>b</b>eta (P alterna amb B)' },
@@ -2249,9 +2309,10 @@ const PARAULES_ACC = [
 // REGLES_GJ — Definicions de regles per a G/J
 // ============================================================================
 const REGLES_GJ = {
-  G1: { nom:'G dur (davant a,o,u,l,r)', color:'#ef4444', icon:'🔴', desc:"S'escriu G amb so dur davant de vocals a,o,u i consonants L,R.",                       exemples:'gat, gos, gust, glaçó, gran, graó, arbre' },
-  G2: { nom:'G tendra (davant e,i)',     color:'#f97316', icon:'🟠', desc:"S'escriu G amb so tendre davant de vocals e,i.",                                     exemples:'gé, gest, germana, gira, girafa, gir' },
-  J1: { nom:'J (sempre sona igual)',     color:'#eab308', icon:'🟡', desc:"S'escriu J amb el mateix so en tots els contextos.",                               exemples:'joc, jove, joguina, jugar, jardí, joia' },
+  G1: { nom:'G dur (davant a,o,u,l,r)', color:'#ef4444', icon:'🔴', desc:"S'escriu G amb so dur davant de vocals a,o,u i consonants L,R.",                       exemples:'gat, gos, gust, glaçó, gran, graó' },
+  G2: { nom:'G tendra (davant e,i)',     color:'#f97316', icon:'🟠', desc:"El so de J davant de E i I s'escriu normalment amb G: gel, gent, girafa. Compte amb les excepcions!",                                     exemples:'gel, gest, germana, gerra, gira, girafa' },
+  J1: { nom:'J davant a, o, u',          color:'#eab308', icon:'🟡', desc:"El so de J davant de A, O i U sempre s'escriu amb J: jardí, joc, jugar.",           exemples:'joc, jove, joguina, jugar, jardí, joia' },
+  J2: { nom:'Excepcions: J davant e, i',  color:'#f43f5e', icon:'⚠️', desc:"Un grup petit de mots porta J davant de E tot i la regla general. Cal saber-los de memòria.", exemples:'jeure, jersei, jeroglífic, jerarquia, Jesús, majestat' },
   memoritzar: { nom:'Cal memoritzar',    color:'#a855f7', icon:'🟣', desc:"Paraules sense regla clara que cal memoritzar.",                                   exemples:'gaiola, gairebé, jaqueca' },
 };
 
@@ -2268,7 +2329,7 @@ const PARAULES_GJ = [
   { paraula:'gràcia',    lletra:'b', buit:'_ràcia',     posicio:0, exemple:"Té molta gràcia aquest acudit.",                        imatge:'🙏',  nivell:1, regla:'G1', regla_explicada:'Regla G1: <b>G</b> dur davant de consonant R.' },
   // NIVELL 1 — Paraules amb G tendra
   { paraula:'germana',   lletra:'b', buit:'_ermana',    posicio:0, exemple:"La meva germana és gran.",                     imatge:'👧',  nivell:1, regla:'G2', regla_explicada:'Regla G2: <b>G</b> tendra davant de vocal E (origen llatí).' },
-  { paraula:'gira',      lletra:'b', buit:'_ira',       posicio:0, exemple:"El girasol es mou amb el sol.",                imatge:'🌻',  nivell:1, regla:'G2', regla_explicada:'Regla G2: <b>G</b> tendra davant de vocal I.' },
+  { paraula:'gira',      lletra:'b', buit:'_ira',       posicio:0, exemple:"El gira-sol es gira cap al sol.",             imatge:'🌻',  nivell:1, regla:'G2', regla_explicada:'Regla G2: el so de J davant de <b>I</b> s\'escriu amb <b>G</b> → <b>g</b>ira.' },
   { paraula:'gent',      lletra:'b', buit:'_ent',       posicio:0, exemple:"Hi havia molta gent al mercat.",               imatge:'👥',  nivell:1, regla:'G2', regla_explicada:'Regla G2: <b>G</b> tendra davant de vocal E (< llatí gentem).' },
   // NIVELL 1 — Paraules amb J (lletra:'v' = botó J correcte)
   { paraula:'joc',       lletra:'v', buit:'_oc',        posicio:0, exemple:"Juguem un joc interessant.",                   imatge:'🎮',  nivell:1, regla:'J1', regla_explicada:'Regla J1: <b>J</b> sempre té el mateix so (< llatí jocus).' },
@@ -2286,9 +2347,9 @@ const PARAULES_GJ = [
   { paraula:'genoll',    lletra:'b', buit:'_enoll',     posicio:0, exemple:"Em dol el genoll.",                            imatge:'🦵',  nivell:2, regla:'G2', regla_explicada:'Regla G2: <b>G</b> tendra davant de vocal E.' },
   { paraula:'girafa',    lletra:'b', buit:'_irafa',     posicio:0, exemple:"La girafa té un coll llarg.",                  imatge:'🦒',  nivell:2, regla:'G2', regla_explicada:'Regla G2: <b>G</b> tendra davant de vocal I.' },
   // NIVELL 2 — J
-  { paraula:'jugar',     lletra:'v', buit:'_ugar',      posicio:0, exemple:"Juguem al futbol.",                            imatge:'⚽',  nivell:2, regla:'J1', regla_explicada:'Regla J1: <b>J</b> sempre té el mateix so.' },
+  { paraula:'jugar',     lletra:'v', buit:'_ugar',      posicio:0, exemple:"Ens agrada jugar a futbol.",                   imatge:'⚽',  nivell:2, regla:'J1', regla_explicada:'Regla J1: <b>J</b> sempre té el mateix so.' },
   { paraula:'jutge',     lletra:'v', buit:'_utge',      posicio:0, exemple:"El jutge dicta la sentència.",                 imatge:'⚖️',  nivell:2, regla:'J1', regla_explicada:'Regla J1: <b>J</b> sempre té el mateix so (< llatí judicem).' },
-  { paraula:'jaqueca',   lletra:'v', buit:'_aqueca',    posicio:0, exemple:"Tinc una jaqueca forta.",                      imatge:'😵',  nivell:2, regla:'memoritzar', regla_explicada:'Paraula que cal memoritzar: <b>j</b>aqueca.' },
+  { paraula:'jaqueta',   lletra:'v', buit:'_aqueta',    posicio:0, exemple:"Posa\'t la jaqueta, que fa fred.",             imatge:'🧥',  nivell:2, regla:'J1', regla_explicada:'Regla J1: el so de J davant de <b>A</b> s\'escriu amb <b>J</b> → <b>j</b>aqueta.' },
   { paraula:'jardí',     lletra:'v', buit:'_ardí',      posicio:0, exemple:"El jardí té moltes flors.",                    imatge:'🌸',  nivell:2, regla:'J1', regla_explicada:'Regla J1: <b>J</b> sempre té el mateix so.' },
   // NIVELL 3
   { paraula:'glaç',      lletra:'b', buit:'_laç',       posicio:0, exemple:"El glaç és molt fred.",                        imatge:'🧊',  nivell:3, regla:'G1', regla_explicada:'Regla G1: <b>G</b> dur davant de consonant L.' },
@@ -2296,7 +2357,9 @@ const PARAULES_GJ = [
   { paraula:'genealogia',lletra:'b', buit:'_enealogia',  posicio:0, exemple:"La genealogia és l\'estudi de famílies.",      imatge:'🌳',  nivell:3, regla:'G2', regla_explicada:'Regla G2: <b>G</b> tendra davant de vocal E (origen grec).' },
   { paraula:'joventut',  lletra:'v', buit:'_oventut',   posicio:0, exemple:"La joventut és l\'etapa més alegre.",          imatge:'🎉',  nivell:3, regla:'J1', regla_explicada:'Regla J1: <b>J</b> sempre té el mateix so (< llatí juventutem).' },
   { paraula:'justícia',  lletra:'v', buit:'_ustícia',   posicio:0, exemple:"La justícia és important.",                    imatge:'⚖️',  nivell:3, regla:'J1', regla_explicada:'Regla J1: <b>J</b> sempre té el mateix so (< llatí justitia).' },
-  { paraula:'jeure',     lletra:'v', buit:'_eure',      posicio:0, exemple:"El gat jeu a la cadira.",                      imatge:'🛋️',  nivell:3, regla:'J1', regla_explicada:'Regla J1: <b>J</b> sempre té el mateix so (< llatí jacere).' },
+  { paraula:'jeure',     lletra:'v', buit:'_eure',      posicio:0, exemple:"Al gat li agrada jeure a la cadira.",          imatge:'🛋️',  nivell:3, regla:'J2', regla_explicada:'Regla J2: <b>excepció</b>! Davant de E tocaria G, però <b>jeure</b> porta J. Com jersei, jeroglífic o jerarquia.' },
+  { paraula:'jersei',    lletra:'v', buit:'_ersei',     posicio:0, exemple:"Fa fred: posa\'t el jersei.",                 imatge:'🧥',  nivell:2, regla:'J2', regla_explicada:'Regla J2: <b>excepció</b>! Davant de E tocaria G, però <b>jersei</b> porta J.' },
+  { paraula:'jeroglífic',lletra:'v', buit:'_eroglífic', posicio:0, exemple:"Els egipcis escrivien cada jeroglífic a mà.",  imatge:'🔺',  nivell:3, regla:'J2', regla_explicada:'Regla J2: <b>excepció</b>! Davant de E tocaria G, però <b>jeroglífic</b> porta J.' },
 ];
 
 // ============================================================================
@@ -2304,7 +2367,7 @@ const PARAULES_GJ = [
 // ============================================================================
 const PARAULES_HM = [
   // NIVELL 1 — lletra:'b' = botó "Porta H" correcte (tots els mots del tema porten H)
-  { paraula:'haver',    lletra:'b', buit:'aver',      formaErrada:'aver',      exempleErrat:"Haig de aver parlat.",          exemple:"Haig de haver parlat.",          imatge:'📚', nivell:1, regla:'H1', regla_explicada:'<b>Haver</b>: verb auxiliar, sempre amb H (< llatí habere).' },
+  { paraula:'haver',    lletra:'b', buit:'aver',      formaErrada:'aver',      exempleErrat:"Haig de aver parlat.",          exemple:"Haig d\'haver parlat.",          imatge:'📚', nivell:1, regla:'H1', regla_explicada:'<b>Haver</b>: verb auxiliar, sempre amb H (< llatí habere).' },
   { paraula:'ha',       lletra:'b', buit:'a',         formaErrada:'a',         exempleErrat:"Ella a arribat a casa.",        exemple:"Ella ha arribat a casa.",        imatge:'✅', nivell:1, regla:'H1', regla_explicada:'<b>Ha</b>: verb auxiliar, sempre amb H. Compte: «a» és preposició, «ha» és verb.' },
   { paraula:'havia',    lletra:'b', buit:'avia',      formaErrada:'avia',      exempleErrat:"Avia anat al parc.",            exemple:"Havia anat al parc.",            imatge:'⏰', nivell:1, regla:'H1', regla_explicada:'<b>Havia</b>: imperfet de «haver», sempre amb H.' },
   { paraula:'herba',    lletra:'b', buit:'erba',      formaErrada:'erba',      exempleErrat:"L\'erba creix a primavera.",    exemple:"L\'herba creix a primavera.",    imatge:'🌿', nivell:1, regla:'H2', regla_explicada:'<b>Herba</b>: nom, porta H del llatí herba.' },
@@ -2314,17 +2377,17 @@ const PARAULES_HM = [
   { paraula:'humà',     lletra:'b', buit:'umà',       formaErrada:'umà',       exempleErrat:"Els éssers umans parlen.",     exemple:"Els éssers humans parlen.",     imatge:'👤', nivell:1, regla:'H2', regla_explicada:'<b>Humà</b>: adjectiu, porta H del llatí humanus.' },
   { paraula:'humit',    lletra:'b', buit:'umit',      formaErrada:'umit',      exempleErrat:"Avui fa umit.",               exemple:"Avui fa humit.",               imatge:'💧', nivell:1, regla:'H2', regla_explicada:'<b>Humit</b>: adjectiu, porta H del llatí humidus.' },
   { paraula:'humitat',  lletra:'b', buit:'umitat',    formaErrada:'umitat',    exempleErrat:"La umitat és alta.",           exemple:"La humitat és alta.",           imatge:'💨', nivell:1, regla:'H2', regla_explicada:'<b>Humitat</b>: nom derivat de humit, porta H.' },
-  { paraula:'herència', lletra:'b', buit:'erència',   formaErrada:'erència',   exempleErrat:"La erència del pare.",        exemple:"La herència del pare.",        imatge:'💰', nivell:1, regla:'H2', regla_explicada:'<b>Herència</b>: nom, porta H del llatí haereditas.' },
+  { paraula:'herència', lletra:'b', buit:'erència',   formaErrada:'erència',   exempleErrat:"La erència del pare.",        exemple:"L\'herència del pare.",        imatge:'💰', nivell:1, regla:'H2', regla_explicada:'<b>Herència</b>: nom, porta H del llatí haereditas.' },
   { paraula:'hereu',    lletra:'b', buit:'ereu',      formaErrada:'ereu',      exempleErrat:"L\'ereu ha rebut la casa.",    exemple:"L\'hereu ha rebut la casa.",    imatge:'👶', nivell:1, regla:'H2', regla_explicada:'<b>Hereu</b>: nom, porta H del llatí heres.' },
   // NIVELL 2
   { paraula:'hivern',   lletra:'b', buit:'ivern',     formaErrada:'ivern',     exempleErrat:"A l\'ivern fa molt fred.",     exemple:"A l\'hivern fa molt fred.",     imatge:'❄️', nivell:2, regla:'H2', regla_explicada:'<b>Hivern</b>: estació, porta H del llatí hibernum.' },
   { paraula:'hospital', lletra:'b', buit:'ospital',   formaErrada:'ospital',   exempleErrat:"He anat a l\'ospital.",        exemple:"He anat a l\'hospital.",        imatge:'🏥', nivell:2, regla:'H2', regla_explicada:'<b>Hospital</b>: nom, porta H del llatí hospitalis.' },
   { paraula:'heroi',    lletra:'b', buit:'eroi',      formaErrada:'eroi',      exempleErrat:"L\'eroi és valent.",           exemple:"L\'heroi és valent.",           imatge:'🦸', nivell:2, regla:'H2', regla_explicada:'<b>Heroi</b>: nom, porta H del grec heros.' },
-  { paraula:'hectàrea', lletra:'b', buit:'ectàrea',   formaErrada:'ectàrea',   exempleErrat:"El camp fa dos ectàrees.",    exemple:"El camp fa dos hectàrees.",    imatge:'📏', nivell:2, regla:'H3', regla_explicada:'<b>Hectàrea</b>: mesura, porta H del grec hekaton.' },
-  { paraula:'hiena',    lletra:'b', buit:'iena',      formaErrada:'iena',      exempleErrat:"La iena viu a Àfrica.",        exemple:"La hiena viu a Àfrica.",        imatge:'🦁', nivell:2, regla:'H3', regla_explicada:'<b>Hiena</b>: animal, porta H del grec hyaina.' },
+  { paraula:'hectàrea', lletra:'b', buit:'ectàrea',   formaErrada:'ectàrea',   exempleErrat:"El camp fa dues ectàrees.",   exemple:"El camp fa dues hectàrees.",    imatge:'📏', nivell:2, regla:'H3', regla_explicada:'<b>Hectàrea</b>: mesura, porta H del grec hekaton.' },
+  { paraula:'hiena',    lletra:'b', buit:'iena',      formaErrada:'iena',      exempleErrat:"La iena viu a Àfrica.",        exemple:"La hiena viu a Àfrica.",        imatge:'🐺', nivell:2, regla:'H3', regla_explicada:'<b>Hiena</b>: animal, porta H del grec hyaina.' },
   // NIVELL 3
   { paraula:'hemisferi',lletra:'b', buit:'emisferi',  formaErrada:'emisferi',  exempleErrat:"L\'emisferi nord és fred.",   exemple:"L\'hemisferi nord és fred.",   imatge:'🌍', nivell:3, regla:'H3', regla_explicada:'<b>Hemisferi</b>: meitat del globus, porta H del grec hemisphairion.' },
-  { paraula:'hegemonia',lletra:'b', buit:'egemonia',  formaErrada:'egemonia',  exempleErrat:"La egemonia política.",      exemple:"L\'hegemonia política.",      imatge:'👑', nivell:3, regla:'H3', regla_explicada:'<b>Hegemonia</b>: domini, porta H del grec hegemonia.' },
+  { paraula:'hegemonia',lletra:'b', buit:'egemonia',  formaErrada:'egemonia',  exempleErrat:"L\'egemonia política.",     exemple:"L\'hegemonia política.",      imatge:'👑', nivell:3, regla:'H3', regla_explicada:'<b>Hegemonia</b>: domini, porta H del grec hegemonia.' },
   { paraula:'helenisme',lletra:'b', buit:'elenisme',  formaErrada:'elenisme',  exempleErrat:"L\'elenisme és cultura grega.",exemple:"L\'helenisme és cultura grega.",imatge:'🏛️', nivell:3, regla:'H3', regla_explicada:'<b>Helenisme</b>: cultura hel·lènica, porta H del grec Hellas.' },
   { paraula:'hematoma', lletra:'b', buit:'ematoma',   formaErrada:'ematoma',   exempleErrat:"Tinc un ematoma al braç.",    exemple:"Tinc un hematoma al braç.",    imatge:'🩸', nivell:3, regla:'H3', regla_explicada:'<b>Hematoma</b>: blau, porta H del grec haima (sang).' },
 ];
@@ -2332,6 +2395,22 @@ const PARAULES_HM = [
 // ============================================================================
 // REGLES_HM — Categories de repàs per H muda
 // ============================================================================
+// ── Ampliació 2026-08 ──
+PARAULES_HM.push(
+  { paraula:'haurem',    lletra:'b', buit:'aurem',     formaErrada:'aurem',     exempleErrat:"Demà aurem acabat la feina.", exemple:"Demà haurem acabat la feina.", imatge:'📆', nivell:2, regla:'H1', regla_explicada:"<b>Haurem</b>: futur de haver, sempre amb H." },
+  { paraula:'hem',       lletra:'b', buit:'em',        formaErrada:'em',        exempleErrat:"Avui em anat al museu.", exemple:"Avui hem anat al museu.", imatge:'🏛️', nivell:1, regla:'H1', regla_explicada:"<b>Hem</b> (verb haver) porta H. Compte: <i>em</i> sense H és el pronom (em dic Pere)." },
+  { paraula:'han',       lletra:'b', buit:'an',        formaErrada:'an',        exempleErrat:"Els nens an arribat tard.", exemple:"Els nens han arribat tard.", imatge:'🏃', nivell:1, regla:'H1', regla_explicada:"<b>Han</b> (verb haver) porta H." },
+  { paraula:'història',  lletra:'b', buit:'istòria',   formaErrada:'istòria',   exempleErrat:"M'agrada la istòria antiga.", exemple:"M'agrada la història antiga.", imatge:'📜', nivell:1, regla:'H3', regla_explicada:"<b>Història</b>: del grec <i>historia</i>, porta H." },
+  { paraula:'hivernacle',lletra:'b', buit:'ivernacle', formaErrada:'ivernacle', exempleErrat:"Les tomàquenes creixen a l'ivernacle.", exemple:"Les tomàquenes creixen a l'hivernacle.", imatge:'🪴', nivell:3, regla:'H2', regla_explicada:"<b>Hivernacle</b>: de la mateixa família que <i>hivern</i>, porta H." },
+  { paraula:'hostal',    lletra:'b', buit:'ostal',     formaErrada:'ostal',     exempleErrat:"Vam dormir en un ostal petit.", exemple:"Vam dormir en un hostal petit.", imatge:'🏨', nivell:2, regla:'H2', regla_explicada:"<b>Hostal</b>: de la mateixa família que <i>hoste</i> i <i>hospital</i>." },
+  { paraula:'humor',     lletra:'b', buit:'umor',      formaErrada:'umor',      exempleErrat:"Avui està de bon umor.", exemple:"Avui està de bon humor.", imatge:'😄', nivell:1, regla:'H2', regla_explicada:"<b>Humor</b>: porta H del llatí <i>humor</i>." },
+  { paraula:'harmonia',  lletra:'b', buit:'armonia',   formaErrada:'armonia',   exempleErrat:"Canten amb molta armonia.", exemple:"Canten amb molta harmonia.", imatge:'🎼', nivell:3, regla:'H3', regla_explicada:"<b>Harmonia</b>: del grec <i>harmonia</i>, porta H." },
+  { paraula:'hàbit',     lletra:'b', buit:'àbit',      formaErrada:'àbit',      exempleErrat:"Té l'àbit de llegir cada nit.", exemple:"Té l'hàbit de llegir cada nit.", imatge:'📗', nivell:2, regla:'H2', regla_explicada:"<b>Hàbit</b>: porta H del llatí <i>habitus</i>." },
+  { paraula:'ahir',      lletra:'b', buit:'air',       formaErrada:'air',       exempleErrat:"Air vam anar al cine.", exemple:"Ahir vam anar al cine.", imatge:'🌙', nivell:1, regla:'H2', regla_explicada:"<b>Ahir</b> porta una H <b>al mig</b>: cal recordar-la." },
+  { paraula:'prohibir',  lletra:'b', buit:'proibir',   formaErrada:'proibir',   exempleErrat:"Van proibir fumar aquí.", exemple:"Van prohibir fumar aquí.", imatge:'🚭', nivell:3, regla:'H2', regla_explicada:"<b>Prohibir</b> també porta una H al mig, encara que no se senti." },
+  { paraula:'hora',      lletra:'v', buit:'hora',      formaErrada:'ora',       exempleErrat:"Resen una ora cada dia.", exemple:"Resen una hora cada dia.", imatge:'⏳', nivell:3, regla:'H2', regla_explicada:"Compte amb la parella <b>hora</b> (60 minuts) i <b>ora</b> (del verb orar): no volen dir el mateix." },
+);
+
 const REGLES_HM = {
   H1: { nom:'H en verbs auxiliars', color:'#7c3aed', icon:'🔵', desc:"S'escriu H en els verbs haver i les seves formes: ha, havia, hauria...", exemples:'haver, ha, havia, hauria, haurien' },
   H2: { nom:'H en noms/adjectius (llatí)', color:'#a855f7', icon:'🟣', desc:"S'escriu H en mots heretats del llatí: herba, hora, home, hort, humà, humit...", exemples:'herba, hora, home, hort, hivern, hospital, humà, humit' },
@@ -2348,7 +2427,7 @@ const PARAULES_LL = [
   { paraula:'col·legi',    lletra:'b', buit:'collegi',    formaErrada:'collegi',    exempleErrat:"Vaig al collegi cada dia.",         exemple:"Vaig al col·legi cada dia.",         imatge:'🏫', nivell:1, regla:'LL1', regla_explicada:'<b>Col·legi</b>: ela geminada. Ve del llatí collegium (prefix col- + -legium).' },
   { paraula:'novel·la',    lletra:'b', buit:'novella',    formaErrada:'novella',    exempleErrat:"Llegeixo una novella molt bona.",    exemple:"Llegeixo una novel·la molt bona.",    imatge:'📖', nivell:1, regla:'LL1', regla_explicada:'<b>Novel·la</b>: ela geminada. Ve del llatí novella.' },
   { paraula:'il·lusió',    lletra:'b', buit:'illusió',    formaErrada:'illusió',    exempleErrat:"Tinc moltes illusions pel viatge.", exemple:"Tinc moltes il·lusions pel viatge.", imatge:'✨', nivell:1, regla:'LL1', regla_explicada:'<b>Il·lusió</b>: ela geminada. Prefix il- + -lusió.' },
-  { paraula:'síl·laba',    lletra:'b', buit:'síllaba',    formaErrada:'síllaba',    exempleErrat:"La paraula té dues síl·labes.",      exemple:"La paraula té dues síl·labes.",      imatge:'📝', nivell:1, regla:'LL1', regla_explicada:'<b>Síl·laba</b>: ela geminada. Del llatí syllaba (del grec syllabē).' },
+  { paraula:'síl·laba',    lletra:'b', buit:'síllaba',    formaErrada:'síllaba',    exempleErrat:"La paraula té dues síllabes.",       exemple:"La paraula té dues síl·labes.",      imatge:'📝', nivell:1, regla:'LL1', regla_explicada:'<b>Síl·laba</b>: ela geminada. Del llatí syllaba (del grec syllabē).' },
   { paraula:'cel·la',      lletra:'b', buit:'cella',      formaErrada:'cella',      exempleErrat:"L\'abella viu a la cella.",          exemple:"L\'abella viu a la cel·la.",          imatge:'🐝', nivell:1, regla:'LL1', regla_explicada:'<b>Cel·la</b>: ela geminada. Del llatí cella.' },
   // NIVELL 1 — LL palatal (mostrem forma errada amb punt volat → alumne tria LL)
   { paraula:'lluna',       lletra:'v', buit:'l·luna',     formaErrada:'l·luna',     exempleErrat:"La l·luna brilla de nit.",           exemple:"La lluna brilla de nit.",           imatge:'🌙', nivell:1, regla:'LL2', regla_explicada:'<b>Lluna</b>: ela palatal (LL). No porta punt volat.' },
@@ -2360,7 +2439,7 @@ const PARAULES_LL = [
   { paraula:'intel·ligent',lletra:'b', buit:'intelligent', formaErrada:'intelligent', exempleErrat:"L\'alumne és molt intelligent.",  exemple:"L\'alumne és molt intel·ligent.",  imatge:'🧠', nivell:2, regla:'LL1', regla_explicada:'<b>Intel·ligent</b>: ela geminada. Prefix intel- + -ligent.' },
   { paraula:'il·legal',    lletra:'b', buit:'illegal',    formaErrada:'illegal',    exempleErrat:"Aparcar aquí és illegal.",           exemple:"Aparcar aquí és il·legal.",           imatge:'🚫', nivell:2, regla:'LL1', regla_explicada:'<b>Il·legal</b>: ela geminada. Prefix il- + -legal.' },
   { paraula:'al·lèrgia',   lletra:'b', buit:'allèrgia',   formaErrada:'allèrgia',   exempleErrat:"Tinc allèrgia al pol·len.",          exemple:"Tinc al·lèrgia al pol·len.",          imatge:'🤧', nivell:2, regla:'LL1', regla_explicada:'<b>Al·lèrgia</b>: ela geminada. Del grec allergia.' },
-  { paraula:'clorofil·la', lletra:'b', buit:'clorofilla', formaErrada:'clorofilla', exempleErrat:"La clorofilla dóna color verd.",     exemple:"La clorofil·la dóna color verd.",     imatge:'🍃', nivell:2, regla:'LL1', regla_explicada:'<b>Clorofil·la</b>: ela geminada. Del grec chlorophyllum.' },
+  { paraula:'clorofil·la', lletra:'b', buit:'clorofilla', formaErrada:'clorofilla', exempleErrat:"La clorofilla dona color verd.",      exemple:"La clorofil·la dona color verd.",     imatge:'🍃', nivell:2, regla:'LL1', regla_explicada:'<b>Clorofil·la</b>: ela geminada. Del grec chlorophyllum.' },
   // NIVELL 2 — LL palatal
   { paraula:'brillant',    lletra:'v', buit:'bril·lant',  formaErrada:'bril·lant',  exempleErrat:"L\'or és molt bril·lant.",           exemple:"L\'or és molt brillant.",           imatge:'💎', nivell:2, regla:'LL2', regla_explicada:'<b>Brillant</b>: ela palatal (LL). No porta punt volat.' },
   { paraula:'pastilla',    lletra:'v', buit:'pastil·la',  formaErrada:'pastil·la',  exempleErrat:"Pren una pastil·la.",                exemple:"Pren una pastilla.",                imatge:'💊', nivell:2, regla:'LL2', regla_explicada:'<b>Pastilla</b>: ela palatal (LL). No porta punt volat.' },
@@ -2372,11 +2451,25 @@ const PARAULES_LL = [
   { paraula:'mol·lusc',    lletra:'b', buit:'mollusc',    formaErrada:'mollusc',    exempleErrat:"El cargol és un mollusc.",          exemple:"El cargol és un mol·lusc.",          imatge:'🐌', nivell:3, regla:'LL1', regla_explicada:'<b>Mol·lusc</b>: ela geminada. Del llatí molluscum.' },
   // NIVELL 3 — LL palatal
   { paraula:'butlletí',    lletra:'v', buit:'butl·letí',  formaErrada:'butl·letí',  exempleErrat:"El butl·letí és important.",        exemple:"El butlletí és important.",        imatge:'📋', nivell:3, regla:'LL2', regla_explicada:'<b>Butlletí</b>: ela palatal (LL). No porta punt volat.' },
-  { paraula:'tallat',      lletra:'v', buit:'tal·lat',    formaErrada:'tal·lat',    exempleErrat:"El pa és tal·lat bé.",               exemple:"El pa és tallat bé.",               imatge:'🍞', nivell:3, regla:'LL2', regla_explicada:'<b>Tallat</b>: ela palatal (LL). No porta punt volat.' },
+  { paraula:'tallat',      lletra:'v', buit:'tal·lat',    formaErrada:'tal·lat',    exempleErrat:"El pa està ben tal·lat.",            exemple:"El pa està ben tallat.",               imatge:'🍞', nivell:3, regla:'LL2', regla_explicada:'<b>Tallat</b>: ela palatal (LL). No porta punt volat.' },
 ];
 
+// ── Ampliació 2026-08 ──
+PARAULES_LL.push(
+  { paraula:'excel·lent',  lletra:'b', buit:'excellent',  formaErrada:'excellent',  exempleErrat:"Has tret una nota excellent.", exemple:"Has tret una nota excel·lent.", imatge:'🌟', nivell:1, regla:'LL1', regla_explicada:"<b>Excel·lent</b>: ela geminada, del llatí <i>excellens</i>." },
+  { paraula:'pel·lícula',  lletra:'b', buit:'pellícula',  formaErrada:'pellícula',  exempleErrat:"Anit vam veure una pellícula.", exemple:"Anit vam veure una pel·lícula.", imatge:'🎬', nivell:1, regla:'LL1', regla_explicada:"<b>Pel·lícula</b>: ela geminada. És de les que més s'escriuen malament." },
+  { paraula:'paral·lel',   lletra:'b', buit:'parallel',   formaErrada:'parallel',   exempleErrat:"Dibuixa un carrer parallel a aquest.", exemple:"Dibuixa un carrer paral·lel a aquest.", imatge:'📐', nivell:2, regla:'LL1', regla_explicada:"<b>Paral·lel</b>: ela geminada, del grec <i>parallelos</i>." },
+  { paraula:'instal·lar',  lletra:'b', buit:'installar',  formaErrada:'installar',  exempleErrat:"Cal installar el programa.", exemple:"Cal instal·lar el programa.", imatge:'💾', nivell:2, regla:'LL1', regla_explicada:"<b>Instal·lar</b>: ela geminada (i <i>instal·lació</i> també)." },
+  { paraula:'síl·labes',   lletra:'b', buit:'síllabes',   formaErrada:'síllabes',   exempleErrat:"Compta les síllabes del vers.", exemple:"Compta les síl·labes del vers.", imatge:'🔤', nivell:2, regla:'LL1', regla_explicada:"<b>Síl·labes</b>: ela geminada, del grec <i>syllabē</i>." },
+  { paraula:'cèl·lula',    lletra:'b', buit:'cèllula',    formaErrada:'cèllula',    exempleErrat:"La cèllula és la unitat de la vida.", exemple:"La cèl·lula és la unitat de la vida.", imatge:'🔬', nivell:2, regla:'LL1', regla_explicada:"<b>Cèl·lula</b>: ela geminada, del llatí <i>cellula</i>." },
+  { paraula:'cavall',      lletra:'v', buit:'caval·l',    formaErrada:'caval·l',    exempleErrat:"El caval·l galopa pel prat.", exemple:"El cavall galopa pel prat.", imatge:'🐎', nivell:1, regla:'LL2', regla_explicada:"<b>Cavall</b>: ela palatal, sense punt volat." },
+  { paraula:'castell',     lletra:'v', buit:'castel·l',   formaErrada:'castel·l',   exempleErrat:"Hem visitat el castel·l.", exemple:"Hem visitat el castell.", imatge:'🏰', nivell:1, regla:'LL2', regla_explicada:"<b>Castell</b>: ela palatal, sense punt volat." },
+  { paraula:'estrella',    lletra:'v', buit:'estrel·la',  formaErrada:'estrel·la',  exempleErrat:"Aquella estrel·la brilla molt.", exemple:"Aquella estrella brilla molt.", imatge:'⭐', nivell:2, regla:'LL2', regla_explicada:"<b>Estrella</b>: ela palatal. Compte, que <i>cel·la</i> sí que en porta!" },
+  { paraula:'família',     lletra:'v', buit:'famíl·lia',  formaErrada:'famíl·lia',  exempleErrat:"La meva famíl·lia és gran.", exemple:"La meva família és gran.", imatge:'👨‍👩‍👧', nivell:2, regla:'LL2', regla_explicada:"<b>Família</b> només porta una L: ni ela geminada ni ela palatal." },
+);
+
 const REGLES_LL = {
-  LL1: { nom:'L·L Ela geminada', color:'#10b981', icon:'🟢', desc:"S'escriu L·L (amb punt volat) en mots d\'origen llatí o grec amb prefix acabat en L.", exemples:'col·legi, novel·la, il·lusió, il·legal, síl·laba, intel·ligent' },
+  LL1: { nom:'L·L Ela geminada', color:'#10b981', icon:'🟢', desc:"S'escriu L·L (amb punt volat) en mots cultes vinguts del llatí o del grec: hi ha dues eles seguides que es pronuncien totes dues.", exemples:'col·legi, novel·la, il·lusió, il·legal, síl·laba, intel·ligent' },
   LL2: { nom:'LL Ela palatal',   color:'#0891b2', icon:'🔵', desc:"S'escriu LL (sense punt volat) en paraules patrimonials amb so palatal [ʎ].", exemples:'lluna, gallina, ella, fill, ull, brillant, pastilla' },
 };
 
@@ -2402,7 +2495,7 @@ const PARAULES_MP = [
   { paraula:'ambdós',    lletra:'b', buit:'a_bdós',    posicio:1, exemple:"Ambdós germans juguen.",                   imatge:'👫', nivell:2, regla:'MP2', regla_explicada:'Davant de <b>B</b> s\'escriu <b>M</b>: a<b>mb</b>dós.' },
   { paraula:'cambra',    lletra:'b', buit:'ca_bra',    posicio:2, exemple:"La cambra és gran.",                       imatge:'🛏️', nivell:2, regla:'MP2', regla_explicada:'Davant de <b>B</b> s\'escriu <b>M</b>: ca<b>mb</b>ra.' },
   { paraula:'empat',     lletra:'b', buit:'e_pat',     posicio:1, exemple:"El partit acaba en empat.",                imatge:'🤝', nivell:2, regla:'MP1', regla_explicada:'Davant de <b>P</b> s\'escriu <b>M</b>: e<b>mp</b>at.' },
-  { paraula:'ampolla',   lletra:'b', buit:'a_polla',   posicio:1, exemple:"L\'ampolla d\'aigua és gran.",              imatge:'🍶', nivell:2, regla:'MP1', regla_explicada:'Davant de <b>P</b> s\'escriu <b>M</b>: a<b>mp</b>olla.' },
+  { paraula:'ampolla',   lletra:'b', buit:'a_polla',   posicio:1, formaErrada:'anpolla', exempleErrat:"L\'anpolla d\'aigua és gran.", exemple:"L\'ampolla d\'aigua és gran.", imatge:'🍶', nivell:2, regla:'MP1', regla_explicada:'Davant de <b>P</b> s\'escriu <b>M</b>: a<b>mp</b>olla.' },
   { paraula:'embut',     lletra:'b', buit:'e_but',     posicio:1, exemple:"L\'embut serveix per omplir.",              imatge:'🫙', nivell:2, regla:'MP2', regla_explicada:'Davant de <b>B</b> s\'escriu <b>M</b>: e<b>mb</b>ut.' },
   { paraula:'comprar',   lletra:'b', buit:'co_prar',   posicio:2, exemple:"Vaig a comprar pa.",                       imatge:'🛒', nivell:2, regla:'MP1', regla_explicada:'Davant de <b>P</b> s\'escriu <b>M</b>: co<b>mp</b>rar.' },
   { paraula:'omplir',    lletra:'b', buit:'o_plir',    posicio:1, exemple:"Cal omplir el got d\'aigua.",               imatge:'🥛', nivell:2, regla:'MP1', regla_explicada:'Davant de <b>P</b> s\'escriu <b>M</b>: o<b>mp</b>lir.' },
@@ -2414,9 +2507,25 @@ const PARAULES_MP = [
   { paraula:'prompte',   lletra:'b', buit:'pro_pte',   posicio:3, exemple:"Vine prompte!",                            imatge:'⏰', nivell:3, regla:'MP1', regla_explicada:'Davant de <b>P</b> s\'escriu <b>M</b>: pro<b>mp</b>te.' },
 ];
 
+// ── Ampliació 2026-08: també la N davant de F i V, i les excepcions ──
+PARAULES_MP.push(
+  { paraula:'important',  lletra:'b', buit:'i_portant',  posicio:1, formaErrada:'inportant', exempleErrat:"És molt inportant estudiar.", exemple:"És molt important estudiar.", imatge:'❗', nivell:1, regla:'MP1', regla_explicada:"Davant de <b>P</b> s'escriu <b>M</b>: i<b>mp</b>ortant." },
+  { paraula:'sempre',     lletra:'b', buit:'se_pre',     posicio:2, formaErrada:'senpre',    exempleErrat:"Arribo senpre a l'hora.", exemple:"Arribo sempre a l'hora.", imatge:'🕐', nivell:1, regla:'MP1', regla_explicada:"Davant de <b>P</b> → <b>M</b>: se<b>mp</b>re." },
+  { paraula:'bombolla',   lletra:'b', buit:'bo_bolla',   posicio:2, formaErrada:'bonbolla',  exempleErrat:"Ha fet una bonbolla de sabó.", exemple:"Ha fet una bombolla de sabó.", imatge:'🫧', nivell:2, regla:'MP2', regla_explicada:"Davant de <b>B</b> → <b>M</b>: bo<b>mb</b>olla." },
+  { paraula:'gambes',     lletra:'b', buit:'ga_bes',     posicio:2, formaErrada:'ganbes',    exempleErrat:"Hem menjat ganbes a la planxa.", exemple:"Hem menjat gambes a la planxa.", imatge:'🦐', nivell:2, regla:'MP2', regla_explicada:"Davant de <b>B</b> → <b>M</b>: ga<b>mb</b>es." },
+  { paraula:'canvi',      lletra:'v', buit:'ca_vi',      posicio:2, formaErrada:'cambi',     exempleErrat:"Necessito un cambi de roba.", exemple:"Necessito un canvi de roba.", imatge:'🔄', nivell:1, regla:'MP3', regla_explicada:"Davant de <b>V</b> s'escriu <b>N</b> (no M): ca<b>nv</b>i." },
+  { paraula:'enveja',     lletra:'v', buit:'e_veja',     posicio:1, formaErrada:'emveja',    exempleErrat:"Li té molta emveja.", exemple:"Li té molta enveja.", imatge:'😒', nivell:2, regla:'MP3', regla_explicada:"Davant de <b>V</b> → <b>N</b>: e<b>nv</b>eja." },
+  { paraula:'infant',     lletra:'v', buit:'i_fant',     posicio:1, formaErrada:'imfant',    exempleErrat:"L'imfant dorm tranquil.", exemple:"L'infant dorm tranquil.", imatge:'👶', nivell:1, regla:'MP3', regla_explicada:"Davant de <b>F</b> s'escriu normalment <b>N</b>: i<b>nf</b>ant." },
+  { paraula:'confitura',  lletra:'v', buit:'co_fitura',  posicio:2, formaErrada:'comfitura', exempleErrat:"M'agrada la comfitura de maduixa.", exemple:"M'agrada la confitura de maduixa.", imatge:'🍓', nivell:2, regla:'MP3', regla_explicada:"Davant de <b>F</b> → <b>N</b>: co<b>nf</b>itura." },
+  { paraula:'triomf',     lletra:'b', buit:'trio_f',     posicio:4, formaErrada:'trionf',    exempleErrat:"Va ser un gran trionf.", exemple:"Va ser un gran triomf.", imatge:'🏆', nivell:3, regla:'MP4', regla_explicada:"<b>Excepció!</b> Davant de F normalment hi va N, però <b>triomf</b>, <b>àmfora</b>, <b>amfibi</b> i <b>simfonia</b> porten M." },
+  { paraula:'amfibi',     lletra:'b', buit:'a_fibi',     posicio:1, formaErrada:'anfibi',    exempleErrat:"La granota és un anfibi.", exemple:"La granota és un amfibi.", imatge:'🐸', nivell:3, regla:'MP4', regla_explicada:"<b>Excepció!</b> <b>Amfibi</b> porta M davant de F, com triomf i àmfora." },
+);
+
 const REGLES_MP = {
   MP1: { nom:'M davant P', color:'#f97316', icon:'🟠', desc:"Davant de la consonant P s\'escriu sempre M (mai N).", exemples:'camp, temps, sempre, ample, trampa, comprar, empat' },
   MP2: { nom:'M davant B', color:'#ef4444', icon:'🔴', desc:"Davant de la consonant B s\'escriu sempre M (mai N).", exemples:'tomba, combat, membre, tambor, cambra, ambient, símbol' },
+  MP3: { nom:'N davant F i V', color:'#0ea5e9', icon:'🔵', desc:"Davant de <b>F</b> i de <b>V</b> passa just al revés: s\'escriu <b>N</b>.", exemples:'canvi, enveja, infant, confitura, enfadar' },
+  MP4: { nom:'Excepcions amb M davant F', color:'#a855f7', icon:'⚠️', desc:"Quatre mots porten M davant de F. Cal saber-los de memòria.", exemples:'triomf, àmfora, amfibi, simfonia' },
 };
 
 // ============================================================================
@@ -2425,8 +2534,8 @@ const REGLES_MP = {
 // ============================================================================
 const PARAULES_APO = [
   // NIVELL 1 — Article el → l' (davant vocal o H)
-  { paraula:"l'arbre",  lletra:'b', buit:'la arbre',  formaErrada:'la arbre',  exempleErrat:"Surt la arbre al jardí.",        exemple:"Surt l\'arbre al jardí.",        imatge:'🌳', nivell:1, regla:'APO1', regla_explicada:'<b>L\'arbre</b>: el+vocal → l\'. L\'article <em>el</em> s\'apostrofa davant de vocal.' },
-  { paraula:"l'escola",  lletra:'b', buit:'la escola', formaErrada:'la escola', exempleErrat:"Vaig a la escola cada dia.",      exemple:"Vaig a l\'escola cada dia.",      imatge:'🏫', nivell:1, regla:'APO1', regla_explicada:'<b>L\'escola</b>: la+vocal → l\'. L\'article <em>la</em> s\'apostrofa davant de vocal tònica.' },
+  { paraula:"l'arbre",  lletra:'b', buit:'el arbre',  formaErrada:'el arbre',  exempleErrat:"El arbre del jardí és molt alt.", exemple:"L\'arbre del jardí és molt alt.", imatge:'🌳', nivell:1, regla:'APO1', regla_explicada:'<b>L\'arbre</b>: el+vocal → l\'. L\'article <em>el</em> s\'apostrofa davant de vocal.' },
+  { paraula:"l'escola",  lletra:'b', buit:'la escola', formaErrada:'la escola', exempleErrat:"Vaig a la escola cada dia.",      exemple:"Vaig a l\'escola cada dia.",      imatge:'🏫', nivell:1, regla:'APO1', regla_explicada:'<b>L\'escola</b>: la+vocal → l\'. L\'article <em>la</em> s\'apostrofa davant de vocal.' },
   { paraula:"l'home",    lletra:'b', buit:'el home',   formaErrada:'el home',   exempleErrat:"El home és alt.",                exemple:"L\'home és alt.",                imatge:'👨', nivell:1, regla:'APO1', regla_explicada:'<b>L\'home</b>: el+H → l\'. La H és muda, per tant s\'apostrofa.' },
   { paraula:"l'hora",    lletra:'b', buit:'la hora',   formaErrada:'la hora',   exempleErrat:"Saps la hora que és?",           exemple:"Saps l\'hora que és?",           imatge:'🕐', nivell:1, regla:'APO1', regla_explicada:'<b>L\'hora</b>: la+H → l\'. La H és muda, per tant s\'apostrofa.' },
   { paraula:"la porta",  lletra:'v', buit:'la porta',  formaErrada:"l'porta",   exempleErrat:"Obro l\'porta de casa.",         exemple:"Obro la porta de casa.",         imatge:'🚪', nivell:1, regla:'APO2', regla_explicada:'<b>La porta</b>: NO s\'apostrofa. La consonant inicial <em>p</em> no permet apòstrof.' },
@@ -2434,9 +2543,9 @@ const PARAULES_APO = [
   { paraula:"el gat",    lletra:'v', buit:'el gat',    formaErrada:"l'gat",     exempleErrat:"L\'gat dorm al sofà.",           exemple:"El gat dorm al sofà.",           imatge:'🐱', nivell:1, regla:'APO2', regla_explicada:'<b>El gat</b>: NO s\'apostrofa. Consonant inicial <em>g</em>.' },
   // NIVELL 2 — Preposició de → d'
   { paraula:"d'arbres",  lletra:'b', buit:'de arbres', formaErrada:'de arbres', exempleErrat:"Un grup de arbres al parc.",     exemple:"Un grup d\'arbres al parc.",     imatge:'🌲', nivell:2, regla:'APO3', regla_explicada:'<b>D\'arbres</b>: de+vocal → d\'. La preposició <em>de</em> s\'apostrofa davant vocal.' },
-  { paraula:"d'hores",   lletra:'b', buit:'de hores',  formaErrada:'de hores',  exempleErrat:"Treballo moltes de hores.",      exemple:"Treballo moltes d\'hores.",      imatge:'⏰', nivell:2, regla:'APO3', regla_explicada:'<b>D\'hores</b>: de+H → d\'. La H és muda, per tant s\'apostrofa.' },
-  { paraula:"d'amics",   lletra:'b', buit:'de amics',  formaErrada:'de amics',  exempleErrat:"Tinc molts de amics.",           exemple:"Tinc molts d\'amics.",           imatge:'👫', nivell:2, regla:'APO3', regla_explicada:'<b>D\'amics</b>: de+vocal → d\'.' },
-  { paraula:"de cotxes", lletra:'v', buit:'de cotxes', formaErrada:"d'cotxes",  exempleErrat:"Hi ha molts d\'cotxes.",         exemple:"Hi ha molts de cotxes.",         imatge:'🚗', nivell:2, regla:'APO4', regla_explicada:'<b>De cotxes</b>: NO s\'apostrofa. Consonant inicial <em>c</em>.' },
+  { paraula:"d'hores",   lletra:'b', buit:'de hores',  formaErrada:'de hores',  exempleErrat:"Un viatge de hores i hores.",   exemple:"Un viatge d\'hores i hores.",   imatge:'⏰', nivell:2, regla:'APO3', regla_explicada:'<b>D\'hores</b>: de+H → d\'. La H és muda, per tant s\'apostrofa.' },
+  { paraula:"d'amics",   lletra:'b', buit:'de amics',  formaErrada:'de amics',  exempleErrat:"Un grup de amics juga al pati.", exemple:"Un grup d\'amics juga al pati.", imatge:'👫', nivell:2, regla:'APO3', regla_explicada:'<b>D\'amics</b>: de+vocal → d\'.' },
+  { paraula:"de cotxes", lletra:'v', buit:'de cotxes', formaErrada:"d'cotxes",  exempleErrat:"Una fila d\'cotxes al carrer.", exemple:"Una fila de cotxes al carrer.",  imatge:'🚗', nivell:2, regla:'APO4', regla_explicada:'<b>De cotxes</b>: NO s\'apostrofa. Consonant inicial <em>c</em>.' },
   // NIVELL 2 — Pronoms febles
   { paraula:"m'agrada",  lletra:'b', buit:'em agrada', formaErrada:'em agrada', exempleErrat:"Em agrada la música.",           exemple:"M\'agrada la música.",           imatge:'🎵', nivell:2, regla:'APO5', regla_explicada:'<b>M\'agrada</b>: em+vocal → m\'. El pronom feble <em>em</em> s\'apostrofa davant vocal.' },
   { paraula:"t'estimo",  lletra:'b', buit:'et estimo', formaErrada:'et estimo', exempleErrat:"Et estimo molt.",                exemple:"T\'estimo molt.",                imatge:'❤️', nivell:2, regla:'APO5', regla_explicada:'<b>T\'estimo</b>: et+vocal → t\'. El pronom feble <em>et</em> s\'apostrofa davant vocal.' },
@@ -2447,6 +2556,26 @@ const PARAULES_APO = [
   { paraula:"l'amic",    lletra:'b', buit:'el amic',   formaErrada:'el amic',   exempleErrat:"El amic és simpàtic.",           exemple:"L\'amic és simpàtic.",           imatge:'🤗', nivell:3, regla:'APO1', regla_explicada:'<b>L\'amic</b>: el+vocal → l\'.' },
 ];
 
+// ── Ampliació 2026-08: l'excepció de la i/u àtones i més casos ──
+PARAULES_APO.push(
+  { paraula:"la idea",    lletra:'v', buit:"l'idea",   formaErrada:"l'idea",   exempleErrat:"Va tenir l'idea de sortir.", exemple:"Va tenir la idea de sortir.", imatge:'💡', nivell:2, regla:'APO7', regla_explicada:"<b>La idea</b>: NO s'apostrofa. La <em>i</em> d'idea és <b>àtona</b> (el cop de veu cau a la e)." },
+  { paraula:"la universitat", lletra:'v', buit:"l'universitat", formaErrada:"l'universitat", exempleErrat:"El meu germà va a l'universitat.", exemple:"El meu germà va a la universitat.", imatge:'🎓', nivell:2, regla:'APO7', regla_explicada:"<b>La universitat</b>: NO s'apostrofa. La <em>u</em> és <b>àtona</b>." },
+  { paraula:"la humitat", lletra:'v', buit:"l'humitat", formaErrada:"l'humitat", exempleErrat:"A l'estiu l'humitat és alta.", exemple:"A l'estiu la humitat és alta.", imatge:'💧', nivell:3, regla:'APO7', regla_explicada:"<b>La humitat</b>: la h és muda i darrere hi ha una <em>u</em> <b>àtona</b>, per tant NO s'apostrofa." },
+  { paraula:"la unió",    lletra:'v', buit:"l'unió",   formaErrada:"l'unió",   exempleErrat:"L'unió fa la força.", exemple:"La unió fa la força.", imatge:'🤝', nivell:2, regla:'APO7', regla_explicada:"<b>La unió</b>: la <em>u</em> és àtona → no s'apostrofa." },
+  { paraula:"l'illa",     lletra:'b', buit:"la illa",  formaErrada:"la illa",  exempleErrat:"Vam anar a la illa de Menorca.", exemple:"Vam anar a l'illa de Menorca.", imatge:'🏝️', nivell:3, regla:'APO1', regla_explicada:"<b>L'illa</b>: aquí la <em>i</em> SÍ que és <b>tònica</b> (Í-lla), per tant s'apostrofa." },
+  { paraula:"l'única",    lletra:'b', buit:"la única", formaErrada:"la única", exempleErrat:"És la única que ho sap.", exemple:"És l'única que ho sap.", imatge:'☝️', nivell:3, regla:'APO1', regla_explicada:"<b>L'única</b>: la <em>ú</em> és <b>tònica</b>, per tant s'apostrofa." },
+  { paraula:"l'aigua",    lletra:'b', buit:"la aigua", formaErrada:"la aigua", exempleErrat:"Beu la aigua del got.", exemple:"Beu l'aigua del got.", imatge:'🚰', nivell:1, regla:'APO1', regla_explicada:"<b>L'aigua</b>: la + vocal → l'." },
+  { paraula:"l'ocell",    lletra:'b', buit:"el ocell", formaErrada:"el ocell", exempleErrat:"El ocell canta.", exemple:"L'ocell canta.", imatge:'🐦', nivell:1, regla:'APO1', regla_explicada:"<b>L'ocell</b>: el + vocal → l'." },
+  { paraula:"la Isabel",  lletra:'v', buit:"l'Isabel", formaErrada:"l'Isabel", exempleErrat:"He vist l'Isabel al mercat.", exemple:"He vist la Isabel al mercat.", imatge:'👩', nivell:3, regla:'APO7', regla_explicada:"<b>La Isabel</b>: la <em>i</em> és àtona → no s'apostrofa (com la idea)." },
+  { paraula:"d'escola",   lletra:'b', buit:"de escola", formaErrada:"de escola", exempleErrat:"Va sortir de escola content.", exemple:"Va sortir d'escola content.", imatge:'🏫', nivell:1, regla:'APO3', regla_explicada:"<b>D'escola</b>: de + vocal → d'." },
+  { paraula:"d'història", lletra:'b', buit:"de història", formaErrada:"de història", exempleErrat:"El llibre de història és gruixut.", exemple:"El llibre d'història és gruixut.", imatge:'📜', nivell:2, regla:'APO3', regla_explicada:"<b>D'història</b>: de + h muda → d'." },
+  { paraula:"n'hi ha",    lletra:'b', buit:"ne hi ha", formaErrada:"ne hi ha", exempleErrat:"De pomes, ne hi ha tres.", exemple:"De pomes, n'hi ha tres.", imatge:'🍏', nivell:3, regla:'APO5', regla_explicada:"<b>N'hi ha</b>: el pronom <em>en</em> davant de vocal fa <b>n'</b>." },
+  { paraula:"s'esperen",  lletra:'b', buit:"es esperen", formaErrada:"es esperen", exempleErrat:"Els nens es esperen a la porta.", exemple:"Els nens s'esperen a la porta.", imatge:'🚸', nivell:2, regla:'APO5', regla_explicada:"<b>S'esperen</b>: el pronom <em>es</em> davant de vocal fa <b>s'</b>." },
+  { paraula:"pel matí",   lletra:'v', buit:"per el matí", formaErrada:"per el matí", exempleErrat:"Estudio per el matí.", exemple:"Estudio pel matí.", imatge:'🌅', nivell:3, regla:'APO6', regla_explicada:"<b>Pel</b> = per + el (contracció). Com <em>al</em> i <em>del</em>, mai amb apòstrof." },
+  { paraula:"la sal",     lletra:'v', buit:"l'sal",    formaErrada:"l'sal",    exempleErrat:"Passa'm l'sal.", exemple:"Passa'm la sal.", imatge:'🧂', nivell:1, regla:'APO2', regla_explicada:"<b>La sal</b>: davant de consonant no s'apostrofa mai." },
+  { paraula:"el rellotge",lletra:'v', buit:"l'rellotge", formaErrada:"l'rellotge", exempleErrat:"S'ha aturat l'rellotge.", exemple:"S'ha aturat el rellotge.", imatge:'⏰', nivell:1, regla:'APO2', regla_explicada:"<b>El rellotge</b>: davant de consonant no s'apostrofa." },
+);
+
 const REGLES_APO = {
   APO1: { nom:'el/la + vocal/H → l\'', color:'#6366f1', icon:'🔵', desc:"L\'article el o la s\'apostrofa davant de paraula que comença per vocal o H muda.", exemples:"l'arbre, l'escola, l'home, l'hora, l'amic" },
   APO2: { nom:'No apostrofem davant consonant', color:'#94a3b8', icon:'⬛', desc:"L\'article no s\'apostrofa davant de paraula que comença per consonant.", exemples:"la porta, la taula, el gat, el cotxe" },
@@ -2454,6 +2583,7 @@ const REGLES_APO = {
   APO4: { nom:'de + consonant → de', color:'#94a3b8', icon:'⬛', desc:"La preposició de NO s\'apostrofa davant de consonant.", exemples:"de cotxes, de cases, de gats" },
   APO5: { nom:'Pronoms febles em/et/es → m\'/t\'/s\'', color:'#f59e0b', icon:'🟡', desc:"Els pronoms febles em, et, es s\'apostrofen davant de vocal.", exemples:"m'agrada, t'estimo, s'ha" },
   APO6: { nom:'del/al (contracció, no apòstrof)', color:'#ef4444', icon:'🔴', desc:"de+el = del, a+el = al. Contracció obligatòria, no apòstrof.", exemples:"del mercat, al parc, del pare" },
+  APO7: { nom:'la + i/u àtones → NO s\'apostrofa', color:'#d946ef', icon:'⚠️', desc:"L\'article <em>la</em> NO s\'apostrofa davant de i o u àtones (ni de la h que les precedeix). És l\'excepció que més cau.", exemples:"la idea, la unió, la universitat, la humitat — però l\'illa i l\'única, perquè aquí la i i la u són tòniques" },
 };
 
 // ============================================================================
@@ -2476,23 +2606,41 @@ const PARAULES_DIE = [
   { paraula:'guitarra',   lletra:'v', buit:'güitarra',   formaErrada:'güitarra',   exempleErrat:"Toco la güitarra.",             exemple:"Toco la guitarra.",             imatge:'🎸', nivell:1, regla:'DIE4', regla_explicada:'<b>Guitarra</b>: NO porta dièresi. La U en GUI és muda.' },
   // NIVELL 2
   { paraula:'aïllar',     lletra:'b', buit:'aillar',     formaErrada:'aillar',     exempleErrat:"Cal aillar la casa del fred.",  exemple:"Cal aïllar la casa del fred.",  imatge:'🏠', nivell:2, regla:'DIE1', regla_explicada:'<b>Aïllar</b>: la I forma hiat, cal dièresi.' },
-  { paraula:'heroïna',    lletra:'b', buit:'heroina',    formaErrada:'heroina',    exempleErrat:"La heroina de la pel·lícula.",  exemple:"La heroïna de la pel·lícula.",  imatge:'🦸‍♀️', nivell:2, regla:'DIE1', regla_explicada:'<b>Heroïna</b>: la I forma hiat (he-ro-i-na), cal dièresi.' },
+  { paraula:'heroïna',    lletra:'b', buit:'heroina',    formaErrada:'heroina',    exempleErrat:"L\'heroina de la pel·lícula.", exemple:"L\'heroïna de la pel·lícula.", imatge:'🦸‍♀️', nivell:2, regla:'DIE1', regla_explicada:'<b>Heroïna</b>: la I forma hiat (he-ro-ï-na), cal dièresi.' },
   { paraula:'lingüístic', lletra:'b', buit:'linguistic', formaErrada:'linguistic', exempleErrat:"L\'estudi linguistic.",          exemple:"L\'estudi lingüístic.",          imatge:'🗣️', nivell:2, regla:'DIE2', regla_explicada:'<b>Lingüístic</b>: GÜ = la U es pronuncia, cal dièresi.' },
   { paraula:'bilingüe',   lletra:'b', buit:'bilingue',   formaErrada:'bilingue',   exempleErrat:"Soc una persona bilingue.",     exemple:"Soc una persona bilingüe.",     imatge:'🌍', nivell:2, regla:'DIE2', regla_explicada:'<b>Bilingüe</b>: GÜ = la U es pronuncia, cal dièresi.' },
   { paraula:'maduixa',    lletra:'v', buit:'maduïxa',    formaErrada:'maduïxa',    exempleErrat:"La maduïxa és vermella.",       exemple:"La maduixa és vermella.",       imatge:'🍓', nivell:2, regla:'DIE3', regla_explicada:'<b>Maduixa</b>: NO porta dièresi. La UI forma diftong.' },
   { paraula:'boia',       lletra:'v', buit:'boïa',       formaErrada:'boïa',       exempleErrat:"La boïa flota a l\'aigua.",      exemple:"La boia flota a l\'aigua.",      imatge:'🔴', nivell:2, regla:'DIE3', regla_explicada:'<b>Boia</b>: NO porta dièresi. La OI forma diftong.' },
   // NIVELL 3
   { paraula:'construït',  lletra:'b', buit:'construit',  formaErrada:'construit',  exempleErrat:"L\'edifici és construit amb fusta.", exemple:"L\'edifici és construït amb fusta.", imatge:'🏗️', nivell:3, regla:'DIE1', regla_explicada:'<b>Construït</b>: participi de construir, la Ï forma hiat (cons-tru-ït), cal dièresi.' },
-  { paraula:'coincidir',  lletra:'v', buit:'coïncidir',  formaErrada:'coïncidir',  exempleErrat:"Els plans coïncidiran.",        exemple:"Els plans coincidiran.",        imatge:'🎯', nivell:3, regla:'DIE3', regla_explicada:'<b>Coincidir</b>: NO porta dièresi. La OI forma diftong (coin-ci-dir).' },
-  { paraula:'reincidir',  lletra:'v', buit:'reïncidir',  formaErrada:'reïncidir',  exempleErrat:"No pot reïncidir en l\'error.", exemple:"No pot reincidir en l\'error.", imatge:'🔄', nivell:3, regla:'DIE3', regla_explicada:'<b>Reincidir</b>: NO porta dièresi. La EI forma diftong (rein-ci-dir).' },
+  { paraula:'coincidir',  lletra:'v', buit:'coïncidir',  formaErrada:'coïncidir',  exempleErrat:"Els plans coïncidiran.",        exemple:"Els plans coincidiran.",        imatge:'🎯', nivell:3, regla:'DIE5', regla_explicada:'<b>Coincidir</b>: NO porta dièresi perquè <b>co-</b> és un prefix. Darrere de prefix (co-, re-, anti-, auto-…) no se n\'hi posa mai.' },
+  { paraula:'reincidir',  lletra:'v', buit:'reïncidir',  formaErrada:'reïncidir',  exempleErrat:"No pot reïncidir en l\'error.", exemple:"No pot reincidir en l\'error.", imatge:'🔄', nivell:3, regla:'DIE5', regla_explicada:'<b>Reincidir</b>: NO porta dièresi perquè <b>re-</b> és un prefix. Darrere de prefix no se n\'hi posa mai.' },
   { paraula:'peu',        lletra:'v', buit:'peü',        formaErrada:'peü',        exempleErrat:"Em fa mal el peü.",             exemple:"Em fa mal el peu.",             imatge:'🦶', nivell:3, regla:'DIE3', regla_explicada:'<b>Peu</b>: NO porta dièresi. La EU forma diftong.' },
 ];
+
+// ── Ampliació 2026-08: les excepcions, que són el que més cau ──
+PARAULES_DIE.push(
+  { paraula:'conduir',   lletra:'v', buit:'conduïr',   formaErrada:'conduïr',   exempleErrat:"El meu pare sap conduïr.", exemple:"El meu pare sap conduir.", imatge:'🚙', nivell:2, regla:'DIE5', regla_explicada:"<b>Conduir</b>: els <b>infinitius</b> dels verbs en -ir no porten dièresi." },
+  { paraula:'conduiré',  lletra:'v', buit:'conduïré',  formaErrada:'conduïré',  exempleErrat:"Demà conduïré jo.", exemple:"Demà conduiré jo.", imatge:'🛣️', nivell:3, regla:'DIE5', regla_explicada:"<b>Conduiré</b>: el <b>futur</b> dels verbs en -ir tampoc no en porta." },
+  { paraula:'conduint',  lletra:'v', buit:'conduïnt',  formaErrada:'conduïnt',  exempleErrat:"Va passar l'estona conduïnt.", exemple:"Va passar l'estona conduint.", imatge:'🚗', nivell:3, regla:'DIE5', regla_explicada:"<b>Conduint</b>: el <b>gerundi</b> en -int no porta dièresi." },
+  { paraula:'conduïa',   lletra:'b', buit:'conduia',   formaErrada:'conduia',   exempleErrat:"Ella conduia molt a poc a poc.", exemple:"Ella conduïa molt a poc a poc.", imatge:'🚕', nivell:3, regla:'DIE1', regla_explicada:"<b>Conduïa</b>: aquí SÍ que en porta! L'excepció només val per a l'infinitiu, el futur, el condicional i el gerundi." },
+  { paraula:'egoisme',   lletra:'v', buit:'egoïsme',   formaErrada:'egoïsme',   exempleErrat:"L'egoïsme no ajuda ningú.", exemple:"L'egoisme no ajuda ningú.", imatge:'🙅', nivell:3, regla:'DIE5', regla_explicada:"<b>Egoisme</b>: els sufixos <b>-isme</b> i <b>-ista</b> no porten dièresi." },
+  { paraula:'altruista', lletra:'v', buit:'altruïsta', formaErrada:'altruïsta', exempleErrat:"És una persona altruïsta.", exemple:"És una persona altruista.", imatge:'💝', nivell:3, regla:'DIE5', regla_explicada:"<b>Altruista</b>: sufix <b>-ista</b> → sense dièresi." },
+  { paraula:'països',    lletra:'b', buit:'paisos',    formaErrada:'paisos',    exempleErrat:"Hem visitat tres paisos.", exemple:"Hem visitat tres països.", imatge:'🗺️', nivell:2, regla:'DIE1', regla_explicada:"<b>Països</b>: la I fa hiat (pa-ï-sos), cal dièresi." },
+  { paraula:'traïdor',   lletra:'b', buit:'traidor',   formaErrada:'traidor',   exempleErrat:"El traidor va fugir.", exemple:"El traïdor va fugir.", imatge:'🗡️', nivell:2, regla:'DIE1', regla_explicada:"<b>Traïdor</b>: la I fa hiat (tra-ï-dor), cal dièresi." },
+  { paraula:'ungüent',   lletra:'b', buit:'unguent',   formaErrada:'unguent',   exempleErrat:"Posa't aquest unguent a la ferida.", exemple:"Posa't aquest ungüent a la ferida.", imatge:'🧴', nivell:3, regla:'DIE2', regla_explicada:"<b>Ungüent</b>: GÜ, la U es pronuncia → dièresi." },
+  { paraula:'freqüent',  lletra:'b', buit:'frequent',  formaErrada:'frequent',  exempleErrat:"És un error molt frequent.", exemple:"És un error molt freqüent.", imatge:'🔁', nivell:2, regla:'DIE2', regla_explicada:"<b>Freqüent</b>: QÜ, la U es pronuncia → dièresi." },
+  { paraula:'aigua',     lletra:'v', buit:'aigüa',     formaErrada:'aigüa',     exempleErrat:"Beu un got d'aigüa.", exemple:"Beu un got d'aigua.", imatge:'💧', nivell:2, regla:'DIE4', regla_explicada:"<b>Aigua</b>: aquí la U ja se sent sense necessitat de dièresi, perquè no va davant de E ni de I." },
+  { paraula:'seguir',    lletra:'v', buit:'següir',    formaErrada:'següir',    exempleErrat:"Cal següir el camí.", exemple:"Cal seguir el camí.", imatge:'🥾', nivell:1, regla:'DIE4', regla_explicada:"<b>Seguir</b>: la U de GUI és muda, no es pronuncia → sense dièresi." },
+  { paraula:'suïcidi',   lletra:'b', buit:'suicidi',   formaErrada:'suicidi',   exempleErrat:"La paraula suicidi s'escriu amb dièresi.", exemple:"La paraula suïcidi s'escriu amb dièresi.", imatge:'📖', nivell:3, regla:'DIE1', regla_explicada:"<b>Suïcidi</b>: la I fa hiat (su-ï-ci-di), cal dièresi." },
+);
 
 const REGLES_DIE = {
   DIE1: { nom:'Dièresi en ï (hiat)',    color:'#06b6d4', icon:'🔵', desc:"S\'escriu ï quan la I va darrere d\'una vocal i formen síl·labes separades (hiat).", exemples:'raïm, veïna, agraïda, Lluís, aïllar, heroïna, construït' },
   DIE2: { nom:'Dièresi en ü (GÜ/QÜ)',  color:'#0891b2', icon:'🟦', desc:"S\'escriu ü en les seqüències GÜ i QÜ per indicar que la U es pronuncia.", exemples:'pingüí, qüestió, aigüera, lingüístic, bilingüe' },
-  DIE3: { nom:'Sense dièresi (diftong)',color:'#94a3b8', icon:'⬛', desc:"NO porta dièresi quan I/U formen diftong amb la vocal anterior (una sola síl·laba).", exemples:'rei, feina, maduixa, boia, peu, coincidir, reincidir' },
+  DIE3: { nom:'Sense dièresi (diftong)',color:'#94a3b8', icon:'⬛', desc:"NO porta dièresi quan I/U formen diftong amb la vocal anterior (una sola síl·laba).", exemples:'rei, feina, maduixa, boia, peu, aire, cuina' },
   DIE4: { nom:'GU/QU sense dièresi (U muda)', color:'#64748b', icon:'⬜', desc:"NO porta dièresi quan la U de GU/QU és muda (no es pronuncia).", exemples:'guitarra, guia, guerra, quina, quatre' },
+  DIE5: { nom:'Excepcions: sense dièresi', color:'#f43f5e', icon:'⚠️', desc:"No es posa dièresi darrere d\'un prefix (co-, re-, anti-, auto-…), ni a l\'infinitiu, futur i condicional dels verbs en -ir, ni al gerundi -int, ni als sufixos -isme i -ista.", exemples:'coincidir, reincidir · conduir, conduiré, conduiria · conduint · egoisme, altruista' },
 };
 
 // ============================================================================
@@ -2502,8 +2650,8 @@ const REGLES_DIE = {
 const PARAULES_SC = [
   // NIVELL 1 — SC1: Ç davant A/O/U
   { paraula:'plaça',    lletra:'b', buit:'pla_a',    exemple:"La plaça del poble és gran i alegre.",     imatge:'🏛️', nivell:1, regla:'SC1', regla_explicada:'<b>Plaça</b>: Ç davant de A → pla<b>ç</b>a (no "plasa"). So [s] davant A → Ç.' },
-  { paraula:'braç',     lletra:'b', buit:'bra_',     exemple:"Em fa mal el braç dret.",                  imatge:'💪', nivell:1, regla:'SC1', regla_explicada:'<b>Braç</b>: Ç al final de paraula → bra<b>ç</b> (no "bras"). Paraules acabades en so [s] → Ç.' },
-  { paraula:'dolç',     lletra:'b', buit:'dol_',     exemple:"Aquest pastís és molt dolç.",              imatge:'🍰', nivell:1, regla:'SC1', regla_explicada:'<b>Dolç</b>: Ç al final → dol<b>ç</b> (no "dols"). Adjectius acabats en so [s] → Ç.' },
+  { paraula:'braç',     lletra:'b', buit:'bra_',     exemple:"Em fa mal el braç dret.",                  imatge:'💪', nivell:1, regla:'SC1', regla_explicada:'<b>Braç</b>: al final, mira el plural → bra<b>ç</b>os, per tant bra<b>ç</b> (no "bras").' },
+  { paraula:'dolç',     lletra:'b', buit:'dol_',     exemple:"Aquest pastís és molt dolç.",              imatge:'🍰', nivell:1, regla:'SC1', regla_explicada:'<b>Dolç</b>: al final, mira el femení → dol<b>ç</b>a, per tant dol<b>ç</b> (no "dols").' },
   { paraula:'força',    lletra:'b', buit:'for_a',    exemple:"Necessita molta força per aixecar-ho.",    imatge:'🏋️', nivell:1, regla:'SC1', regla_explicada:'<b>Força</b>: Ç davant de A → for<b>ç</b>a (no "forsa"). So [s] davant A → Ç.' },
   { paraula:'peça',     lletra:'b', buit:'pe_a',     exemple:"He perdut una peça del trencaclosques.",   imatge:'🧩', nivell:1, regla:'SC1', regla_explicada:'<b>Peça</b>: Ç davant de A → pe<b>ç</b>a (no "pesa"). So [s] davant A → Ç.' },
   // NIVELL 1 — SC2: C davant E/I
@@ -2518,12 +2666,12 @@ const PARAULES_SC = [
   { paraula:'casa',     lletra:'v', buit:'ca_a',     exemple:"La meva casa és molt gran.",               imatge:'🏠', nivell:1, regla:'SC4', regla_explicada:'<b>Casa</b>: S simple entre vocals → ca<b>s</b>a. La S entre vocals fa so [z] suau (com una Z).' },
   { paraula:'rosa',     lletra:'v', buit:'ro_a',     exemple:"M\'agrada l\'olor de la rosa al jardí.",   imatge:'🌹', nivell:1, regla:'SC4', regla_explicada:'<b>Rosa</b>: S simple entre vocals → ro<b>s</b>a. So [z] suau, no [s] fort.' },
   // NIVELL 2 — SC1
-  { paraula:'llaç',     lletra:'b', buit:'lla_',     exemple:"Ha posat un llaç vermell al regal.",       imatge:'🎀', nivell:2, regla:'SC1', regla_explicada:'<b>Llaç</b>: Ç al final → lla<b>ç</b> (no "llas"). Paraules acabades en so [s] → Ç.' },
-  { paraula:'feliç',    lletra:'b', buit:'feli_',    exemple:"El nen es va sentir molt feliç aquell dia.", imatge:'😊', nivell:2, regla:'SC1', regla_explicada:'<b>Feliç</b>: Ç al final → feli<b>ç</b> (no "felis"). Adjectius acabats en so [s] → Ç.' },
+  { paraula:'llaç',     lletra:'b', buit:'lla_',     exemple:"Ha posat un llaç vermell al regal.",       imatge:'🎀', nivell:2, regla:'SC1', regla_explicada:'<b>Llaç</b>: al final, mira el plural → lla<b>ç</b>os, per tant lla<b>ç</b> (no "llas").' },
+  { paraula:'feliç',    lletra:'b', buit:'feli_',    exemple:"El nen es va sentir molt feliç aquell dia.", imatge:'😊', nivell:2, regla:'SC1', regla_explicada:'<b>Feliç</b>: al final, mira el femení → feli<b>ç</b>a/felices, per tant feli<b>ç</b> (no "felis").' },
   { paraula:'llançar',  lletra:'b', buit:'llan_ar',  exemple:"Va llançar la pilota molt lluny.",         imatge:'⚾', nivell:2, regla:'SC1', regla_explicada:'<b>Llançar</b>: Ç davant de A → llan<b>ç</b>ar (no "llansar"). So [s] davant A → Ç.' },
   // NIVELL 2 — SC2
   { paraula:'cert',     lletra:'b', buit:'_ert',     exemple:"Estic cert que has fet la feina bé.",      imatge:'✅', nivell:2, regla:'SC2', regla_explicada:'<b>Cert</b>: C davant de E → <b>c</b>ert (no "sert"). C davant E fa so [s].' },
-  { paraula:'cera',     lletra:'b', buit:'_era',     exemple:"Les bugies de cera fan una llum càlida.",  imatge:'🕯️', nivell:2, regla:'SC2', regla_explicada:'<b>Cera</b>: C davant de E → <b>c</b>era (no "sera"). C davant E fa so [s].' },
+  { paraula:'cera',     lletra:'b', buit:'_era',     exemple:"Les espelmes de cera fan una llum càlida.",  imatge:'🕯️', nivell:2, regla:'SC2', regla_explicada:'<b>Cera</b>: C davant de E → <b>c</b>era (no "sera"). C davant E fa so [s].' },
   // NIVELL 2 — SC3
   { paraula:'possible', lletra:'b', buit:'po_ible',  exemple:"És possible que plogui avui a la tarda.",  imatge:'🌧️', nivell:2, regla:'SC3', regla_explicada:'<b>Possible</b>: SS entre vocals (o-<b>SS</b>-i) → po<b>ss</b>ible. SS per mantenir so [s] fort.' },
   // NIVELL 2 — SC4
@@ -2536,11 +2684,26 @@ const PARAULES_SC = [
   { paraula:'desig',    lletra:'v', buit:'de_ig',    exemple:"El meu gran desig és viatjar pel món.",    imatge:'⭐', nivell:3, regla:'SC4', regla_explicada:'<b>Desig</b>: S simple entre vocals → de<b>s</b>ig. So [z] suau entre E i I.' },
 ];
 
+// ── Ampliació 2026-08 ──
+PARAULES_SC.push(
+  { paraula:'cançó',     lletra:'b', buit:'can_ó',     formaErrada:'cansó',     exempleErrat:"Canta una cansó bonica.", exemple:"Canta una cançó bonica.", imatge:'🎵', nivell:1, regla:'SC1', regla_explicada:"<b>Cançó</b>: Ç davant de O → can<b>ç</b>ó." },
+  { paraula:'esperança', lletra:'b', buit:'esperan_a', formaErrada:'esperansa', exempleErrat:"No perdis mai l'esperansa.", exemple:"No perdis mai l'esperança.", imatge:'🌈', nivell:2, regla:'SC1', regla_explicada:"<b>Esperança</b>: Ç davant de A → esperan<b>ç</b>a." },
+  { paraula:'çabata',    lletra:'v', buit:'_abata',    formaErrada:'çabata',    exempleErrat:"S'ha comprat una çabata nova.", exemple:"S'ha comprat una sabata nova.", imatge:'👟', nivell:2, regla:'SC5', regla_explicada:"<b>Sabata</b>: al <b>començament</b> de paraula el so [s] mai s'escriu amb Ç. Va amb S (o amb C davant de E/I)." },
+  { paraula:'servei',    lletra:'v', buit:'_ervei',    formaErrada:'çervei',    exempleErrat:"El çervei ha estat molt bo.", exemple:"El servei ha estat molt bo.", imatge:'🛎️', nivell:2, regla:'SC5', regla_explicada:"Al començament de paraula, so [s] → <b>S</b>: <b>s</b>ervei." },
+  { paraula:'ciutat',    lletra:'b', buit:'_iutat',    formaErrada:'siutat',    exempleErrat:"Barcelona és una siutat gran.", exemple:"Barcelona és una ciutat gran.", imatge:'🏙️', nivell:1, regla:'SC2', regla_explicada:"<b>Ciutat</b>: C davant de I fa el so [s] → <b>c</b>iutat." },
+  { paraula:'cendra',    lletra:'b', buit:'_endra',    formaErrada:'sendra',    exempleErrat:"La sendra del foc és grisa.", exemple:"La cendra del foc és grisa.", imatge:'🔥', nivell:2, regla:'SC2', regla_explicada:"<b>Cendra</b>: C davant de E fa el so [s] → <b>c</b>endra." },
+  { paraula:'massa',     lletra:'b', buit:'ma_a',      formaErrada:'masa',      exempleErrat:"Hi ha masa gent aquí.", exemple:"Hi ha massa gent aquí.", imatge:'👥', nivell:1, regla:'SC3', regla_explicada:"<b>Massa</b>: SS entre vocals per al so [s] fort. Amb una sola S, <i>masa</i> no vol dir res." },
+  { paraula:'assegut',   lletra:'b', buit:'a_egut',    formaErrada:'asegut',    exempleErrat:"Està asegut a la cadira.", exemple:"Està assegut a la cadira.", imatge:'🪑', nivell:2, regla:'SC3', regla_explicada:"<b>Assegut</b>: SS entre vocals → a<b>ss</b>egut." },
+  { paraula:'camisa',    lletra:'v', buit:'cami_a',    formaErrada:'camissa',   exempleErrat:"Porta una camissa blanca.", exemple:"Porta una camisa blanca.", imatge:'👔', nivell:1, regla:'SC4', regla_explicada:"<b>Camisa</b>: aquí la S sona [z] (suau), per tant una de sola." },
+  { paraula:'música',    lletra:'v', buit:'mú_ica',    formaErrada:'mússica',   exempleErrat:"M'agrada molt la mússica.", exemple:"M'agrada molt la música.", imatge:'🎶', nivell:1, regla:'SC4', regla_explicada:"<b>Música</b>: la S sona [z] (suau) → una sola S." },
+);
+
 const REGLES_SC = {
-  SC1: { nom:'Ç davant A/O/U',        color:'#ec4899', icon:'🔴', desc:"S\'escriu Ç (ce trencada) quan el so [s] va davant de A, O o U, i al final de paraula.", exemples:'plaça, braç, dolç, força, peça, llaç, feliç, caça' },
+  SC1: { nom:'Ç davant A/O/U',        color:'#ec4899', icon:'🔴', desc:"S\'escriu Ç (ce trencada) quan el so [s] va davant de A, O o U. Al final de paraula, mira el femení o el plural: bra<b>ç</b>→braços i dol<b>ç</b>→dolça porten Ç; pa<b>s</b>→passos porta S.", exemples:'plaça, braç, dolç, força, peça, llaç, feliç, caça' },
   SC2: { nom:'C davant E/I',           color:'#db2777', icon:'🩷', desc:"S\'escriu C quan el so [s] va davant de E o I. La mateixa C que fa so dur (ka) davant A/O/U, però suau (sa) davant E/I.", exemples:'cel, cinc, cent, cert, cera' },
   SC3: { nom:'SS entre vocals (so [s])',color:'#be185d', icon:'⚡', desc:"S\'escriu SS (doble S) quan el so [s] fort va entre dues vocals. S simple entre vocals sona com Z!", exemples:'passar, pissarra, classe, possible, ressò' },
   SC4: { nom:'S entre vocals (so [z])', color:'#94a3b8', icon:'⬜', desc:"S\'escriu S simple quan fa el so [z] (suau, com una Z) entre dues vocals. No confondre amb SS!", exemples:'casa, rosa, museu, cosir, mesos, desig' },
+  SC5: { nom:'Mai Ç al començament',   color:'#f97316', icon:'🚫', desc:"Al principi de paraula el so [s] no s\'escriu mai amb Ç: va amb <b>S</b>, o amb <b>C</b> si ve una E o una I.", exemples:'sabata, servei, sol · cel, ciutat, cendra' },
 };
 
 // ============================================================================
@@ -2553,7 +2716,7 @@ const PARAULES_PUN = [
   { paraula:"Volia venir, però estava malalt.",         lletra:'b', buit:"Volia venir però estava malalt",         formaErrada:"Volia venir però estava malalt.",         exempleErrat:"Volia venir però estava malalt.",         exemple:"Volia venir, però estava malalt.",         imatge:'🤒', nivell:1, regla:'PUN1', regla_explicada:'Davant de <b>però</b> sempre hi va coma: "...venir<b>,</b> però..."' },
   { paraula:"No tenia gana, sinó set.",                lletra:'b', buit:"No tenia gana sinó set",                formaErrada:"No tenia gana sinó set.",                exempleErrat:"No tenia gana sinó set.",                exemple:"No tenia gana, sinó set.",                imatge:'💧', nivell:1, regla:'PUN1', regla_explicada:'Davant de <b>sinó</b> sempre hi va coma: "...gana<b>,</b> sinó..."' },
   // NIVELL 1 — PUN2: Coma darrere element introductori
-  { paraula:"Ahir, vam anar al parc.",                 lletra:'b', buit:"Ahir vam anar al parc",                 formaErrada:"Ahir vam anar al parc.",                 exempleErrat:"Ahir vam anar al parc.",                 exemple:"Ahir, vam anar al parc.",                 imatge:'🌳', nivell:1, regla:'PUN2', regla_explicada:'Darrere d\'un element temporal introductori → coma: "Ahir<b>,</b> vam..."' },
+  { paraula:"Abans de sopar, farem els deures.",      lletra:'b', buit:"Abans de sopar farem els deures",       formaErrada:"Abans de sopar farem els deures.",       exempleErrat:"Abans de sopar farem els deures.",       exemple:"Abans de sopar, farem els deures.",       imatge:'🌳', nivell:1, regla:'PUN2', regla_explicada:'Darrere d\'un complement llarg posat al davant → coma: "Abans de sopar<b>,</b> farem..."' },
   { paraula:"Si plou, no sortirem.",                   lletra:'b', buit:"Si plou no sortirem",                   formaErrada:"Si plou no sortirem.",                   exempleErrat:"Si plou no sortirem.",                   exemple:"Si plou, no sortirem.",                   imatge:'🌧️', nivell:1, regla:'PUN2', regla_explicada:'Darrere d\'una oració condicional introductòria → coma: "Si plou<b>,</b> no..."' },
   // NIVELL 1 — PUN3: Coma en enumeració
   { paraula:"Comprem pa, llet i formatge.",             lletra:'b', buit:"Comprem pa llet i formatge",             formaErrada:"Comprem pa llet i formatge.",             exempleErrat:"Comprem pa llet i formatge.",             exemple:"Comprem pa, llet i formatge.",             imatge:'🛒', nivell:1, regla:'PUN3', regla_explicada:'En una llista, coma entre els elements: pa<b>,</b> llet i formatge.' },
@@ -2582,7 +2745,7 @@ const PARAULES_PUN = [
 
 const REGLES_PUN = {
   PUN1: { nom:'Coma davant però/sinó',       color:'#ef4444', icon:'🔴', desc:"Sempre cal coma davant de però, sinó, tanmateix i altres conjuncions adversatives.", exemples:"...llegir, però... · ...gana, sinó... · ...gran, però..." },
-  PUN2: { nom:'Coma darrere introductori',   color:'#f59e0b', icon:'🟡', desc:"Cal coma darrere d\'un element introductori temporal o condicional: Si, Quan, Ahir, En acabar...", exemples:"Si plou, · Ahir, · Quan arribi, · En acabar la classe," },
+  PUN2: { nom:'Coma darrere introductori',   color:'#f59e0b', icon:'🟡', desc:"Cal coma quan una oració o un complement llarg va davant del verb principal: Si plou, Quan arribi, En acabar la classe... Amb un adverbi curt (avui, ahir) no cal.", exemples:"Si plou, · Quan arribi, · En acabar la classe, · Abans de sopar," },
   PUN3: { nom:'Coma en enumeració',          color:'#10b981', icon:'🟢', desc:"En una llista, coma entre cada element. Davant de i/o (l\'últim element) no cal coma.", exemples:"pa, llet i formatge · gats, gossos i conills · córrer, saltar i nedar" },
   PUN4: { nom:'SENSE coma davant "que"',     color:'#6366f1', icon:'🟣', desc:"NO hi va coma quan que introdueix una oració subordinada completiva (complement del verb).", exemples:"Crec que vindrà. · Sé que tens raó. · Vull que m'ajudis." },
   PUN5: { nom:'SENSE coma subjecte-verb',    color:'#94a3b8', icon:'⬜', desc:"MAI s\'ha de separar el subjecte del verb principal amb una coma.", exemples:"El gat dorm. · Els alumnes treballen. · La mare cuina." },
@@ -2590,11 +2753,341 @@ const REGLES_PUN = {
   PUN7: { nom:'Coma en incís',               color:'#8b5cf6', icon:'🟪', desc:"Un incís (informació afegida) va entre dues comes separant-lo del cos de la frase.", exemples:"El Joan, el meu amic, viu aquí. · Barcelona, capital de Catalunya, és gran." },
 };
 
+// ============================================================================
+// PARAULES_DIA — Accent diacrític (els 15 parells vigents des del 2016)
+// lletra:'b' = porta accent | lletra:'v' = no en porta
+// buit = la frase sencera amb la paraula escrita SENSE accent
+// ============================================================================
+const PARAULES_DIA = [
+  // ── bé / be ──
+  { paraula:'bé', lletra:'b', buit:"Ho has fet molt be.", formaErrada:'be', exempleErrat:"Ho has fet molt be.", exemple:"Ho has fet molt bé.", imatge:'👍', nivell:1, regla:'DIA1', regla_explicada:"<b>bé</b> = correctament (adverbi). Sense accent, <i>be</i> és el xai o la lletra B." },
+  { paraula:'be', lletra:'v', buit:"El be pastura al prat.", formaErrada:'bé', exempleErrat:"El bé pastura al prat.", exemple:"El be pastura al prat.", imatge:'🐑', nivell:2, regla:'DIA1', regla_explicada:"<b>be</b> = el xai. Amb accent, <i>bé</i> vol dir correctament." },
+  // ── és / es ──
+  { paraula:'és', lletra:'b', buit:"El gos es molt gran.", formaErrada:'es', exempleErrat:"El gos es molt gran.", exemple:"El gos és molt gran.", imatge:'🐕', nivell:1, regla:'DIA2', regla_explicada:"<b>és</b> = verb ser. Sense accent, <i>es</i> és el pronom (es renta)." },
+  { paraula:'es', lletra:'v', buit:"La nena és renta les mans.", formaErrada:'és', exempleErrat:"La nena és renta les mans.", exemple:"La nena es renta les mans.", imatge:'🧼', nivell:1, regla:'DIA2', regla_explicada:"<b>es</b> = pronom feble. Amb accent, <i>és</i> és el verb ser." },
+  // ── sí / si ──
+  { paraula:'sí', lletra:'b', buit:"Li vaig dir que si.", formaErrada:'si', exempleErrat:"Li vaig dir que si.", exemple:"Li vaig dir que sí.", imatge:'✅', nivell:1, regla:'DIA3', regla_explicada:"<b>sí</b> = afirmació. Sense accent, <i>si</i> és condicional (si plou) o la nota musical." },
+  { paraula:'si', lletra:'v', buit:"Sí plou, no sortirem.", formaErrada:'sí', exempleErrat:"Sí plou, no sortirem.", exemple:"Si plou, no sortirem.", imatge:'🌧️', nivell:1, regla:'DIA3', regla_explicada:"<b>si</b> = conjunció condicional. Amb accent, <i>sí</i> és l'afirmació." },
+  // ── són / son ──
+  { paraula:'són', lletra:'b', buit:"Els meus amics son simpàtics.", formaErrada:'son', exempleErrat:"Els meus amics son simpàtics.", exemple:"Els meus amics són simpàtics.", imatge:'👫', nivell:1, regla:'DIA4', regla_explicada:"<b>són</b> = verb ser (ells són). Sense accent, <i>son</i> són les ganes de dormir." },
+  { paraula:'son', lletra:'v', buit:"Tinc molta són, me'n vaig al llit.", formaErrada:'són', exempleErrat:"Tinc molta són, me'n vaig al llit.", exemple:"Tinc molta son, me'n vaig al llit.", imatge:'😴', nivell:2, regla:'DIA4', regla_explicada:"<b>son</b> = ganes de dormir. Amb accent, <i>són</i> és el verb ser." },
+  // ── té / te ──
+  { paraula:'té', lletra:'b', buit:"La Maria te dos germans.", formaErrada:'te', exempleErrat:"La Maria te dos germans.", exemple:"La Maria té dos germans.", imatge:'👧', nivell:1, regla:'DIA5', regla_explicada:"<b>té</b> = verb tenir. Sense accent, <i>te</i> és la beguda o el pronom." },
+  { paraula:'te', lletra:'v', buit:"M'agrada el té amb llimona.", formaErrada:'té', exempleErrat:"M'agrada el té amb llimona.", exemple:"M'agrada el te amb llimona.", imatge:'🍵', nivell:2, regla:'DIA5', regla_explicada:"<b>te</b> = la beguda. Amb accent, <i>té</i> és el verb tenir." },
+  // ── més / mes ──
+  { paraula:'més', lletra:'b', buit:"En vull mes, que estan boníssimes.", formaErrada:'mes', exempleErrat:"En vull mes, que estan boníssimes.", exemple:"En vull més, que estan boníssimes.", imatge:'➕', nivell:1, regla:'DIA6', regla_explicada:"<b>més</b> = quantitat. Sense accent, <i>mes</i> és el mes de l'any." },
+  { paraula:'mes', lletra:'v', buit:"El més de gener fa fred.", formaErrada:'més', exempleErrat:"El més de gener fa fred.", exemple:"El mes de gener fa fred.", imatge:'📅', nivell:2, regla:'DIA6', regla_explicada:"<b>mes</b> = període de 30 dies. Amb accent, <i>més</i> indica quantitat." },
+  // ── món / mon ──
+  { paraula:'món', lletra:'b', buit:"Vull donar la volta al mon.", formaErrada:'mon', exempleErrat:"Vull donar la volta al mon.", exemple:"Vull donar la volta al món.", imatge:'🌍', nivell:1, regla:'DIA7', regla_explicada:"<b>món</b> = la Terra. Sense accent, <i>mon</i> vol dir «el meu» (mon pare)." },
+  { paraula:'mon', lletra:'v', buit:"Món pare treballa a la fàbrica.", formaErrada:'món', exempleErrat:"Món pare treballa a la fàbrica.", exemple:"Mon pare treballa a la fàbrica.", imatge:'👨', nivell:3, regla:'DIA7', regla_explicada:"<b>mon</b> = el meu (davant de pare, germà…). Amb accent, <i>món</i> és la Terra." },
+  // ── mà / ma ──
+  { paraula:'mà', lletra:'b', buit:"Em fa mal la ma dreta.", formaErrada:'ma', exempleErrat:"Em fa mal la ma dreta.", exemple:"Em fa mal la mà dreta.", imatge:'✋', nivell:1, regla:'DIA8', regla_explicada:"<b>mà</b> = part del braç. Sense accent, <i>ma</i> vol dir «la meva» (ma mare)." },
+  // ── què / que ──
+  { paraula:'què', lletra:'b', buit:"No sé de que parles.", formaErrada:'que', exempleErrat:"No sé de que parles.", exemple:"No sé de què parles.", imatge:'❓', nivell:2, regla:'DIA9', regla_explicada:"<b>què</b> porta accent quan va darrere d'una preposició (de què, amb què) o quan és interrogatiu." },
+  { paraula:'que', lletra:'v', buit:"Crec què vindrà demà.", formaErrada:'què', exempleErrat:"Crec què vindrà demà.", exemple:"Crec que vindrà demà.", imatge:'💭', nivell:2, regla:'DIA9', regla_explicada:"<b>que</b> sense accent quan només enllaça dues frases (crec que…)." },
+  // ── sé / se ──
+  { paraula:'sé', lletra:'b', buit:"No se la resposta.", formaErrada:'se', exempleErrat:"No se la resposta.", exemple:"No sé la resposta.", imatge:'🤷', nivell:2, regla:'DIA10', regla_explicada:"<b>sé</b> = verb saber. Sense accent, <i>se</i> és el pronom feble." },
+  { paraula:'se', lletra:'v', buit:"Sé sent música al carrer.", formaErrada:'sé', exempleErrat:"Sé sent música al carrer.", exemple:"Se sent música al carrer.", imatge:'🎶', nivell:2, regla:'DIA10', regla_explicada:"<b>se</b> = pronom feble. Amb accent, <i>sé</i> és el verb saber." },
+  // ── sòl / sol ──
+  { paraula:'sòl', lletra:'b', buit:"El sol d'aquest camp és molt fèrtil.", formaErrada:'sol', exempleErrat:"El sol d'aquest camp és molt fèrtil.", exemple:"El sòl d'aquest camp és molt fèrtil.", imatge:'🪨', nivell:3, regla:'DIA11', regla_explicada:"<b>sòl</b> = la terra que trepitgem. Sense accent, <i>sol</i> és l'astre o «tot sol»." },
+  { paraula:'sol', lletra:'v', buit:"Avui el sòl escalfa molt.", formaErrada:'sòl', exempleErrat:"Avui el sòl escalfa molt.", exemple:"Avui el sol escalfa molt.", imatge:'☀️', nivell:2, regla:'DIA11', regla_explicada:"<b>sol</b> = l'astre. Amb accent obert, <i>sòl</i> és el terreny." },
+  // ── ús / us ──
+  { paraula:'ús', lletra:'b', buit:"Fes un bon us del material.", formaErrada:'us', exempleErrat:"Fes un bon us del material.", exemple:"Fes un bon ús del material.", imatge:'🧰', nivell:3, regla:'DIA12', regla_explicada:"<b>ús</b> = fer servir una cosa. Sense accent, <i>us</i> és el pronom (us espero)." },
+  { paraula:'us', lletra:'v', buit:"Ús espero a la porta.", formaErrada:'ús', exempleErrat:"Ús espero a la porta.", exemple:"Us espero a la porta.", imatge:'🚪', nivell:3, regla:'DIA12', regla_explicada:"<b>us</b> = pronom feble (a vosaltres). Amb accent, <i>ús</i> és l'acció de fer servir." },
+  // ── pèl / pel ──
+  { paraula:'pèl', lletra:'b', buit:"El gat té el pel molt suau.", formaErrada:'pel', exempleErrat:"El gat té el pel molt suau.", exemple:"El gat té el pèl molt suau.", imatge:'🐈', nivell:3, regla:'DIA13', regla_explicada:"<b>pèl</b> = allò que cobreix la pell. Sense accent, <i>pel</i> és la contracció per + el." },
+  { paraula:'pel', lletra:'v', buit:"Passegem pèl parc cada tarda.", formaErrada:'pèl', exempleErrat:"Passegem pèl parc cada tarda.", exemple:"Passegem pel parc cada tarda.", imatge:'🌳', nivell:3, regla:'DIA13', regla_explicada:"<b>pel</b> = per + el (contracció). Amb accent, <i>pèl</i> és el del cap o del gat." },
+  // ── déu / deu ──
+  { paraula:'déu', lletra:'b', buit:"Zeus era el deu del llamp.", formaErrada:'deu', exempleErrat:"Zeus era el deu del llamp.", exemple:"Zeus era el déu del llamp.", imatge:'⚡', nivell:3, regla:'DIA14', regla_explicada:"<b>déu</b> = divinitat. Sense accent, <i>deu</i> és el número 10 o el verb deure." },
+  { paraula:'deu', lletra:'v', buit:"Tinc déu anys.", formaErrada:'déu', exempleErrat:"Tinc déu anys.", exemple:"Tinc deu anys.", imatge:'🔟', nivell:1, regla:'DIA14', regla_explicada:"<b>deu</b> = el número 10. Amb accent, <i>déu</i> és una divinitat." },
+  // ── vós / vos ──
+  { paraula:'vós', lletra:'b', buit:"Bon dia, com esteu vos?", formaErrada:'vos', exempleErrat:"Bon dia, com esteu vos?", exemple:"Bon dia, com esteu vós?", imatge:'🎩', nivell:3, regla:'DIA15', regla_explicada:"<b>vós</b> = tractament de respecte. Sense accent, <i>vos</i> és el pronom (renteu-vos)." },
+  { paraula:'vos', lletra:'v', buit:"Renteu-vós les mans abans de menjar.", formaErrada:'vós', exempleErrat:"Renteu-vós les mans abans de menjar.", exemple:"Renteu-vos les mans abans de menjar.", imatge:'🧼', nivell:3, regla:'DIA15', regla_explicada:"<b>vos</b> = pronom feble darrere del verb. Amb accent, <i>vós</i> és el tractament de respecte." },
+];
+
+const REGLES_DIA = {
+  DIA1:  { nom:'bé / be',   color:'#6366f1', icon:'👍', desc:"<b>bé</b> = correctament · <b>be</b> = el xai, la lletra B", exemples:'Ho fas bé · El be del ramat' },
+  DIA2:  { nom:'és / es',   color:'#8b5cf6', icon:'🔵', desc:"<b>és</b> = verb ser · <b>es</b> = pronom feble", exemples:'Això és meu · Es renta les mans' },
+  DIA3:  { nom:'sí / si',   color:'#a855f7', icon:'✅', desc:"<b>sí</b> = afirmació · <b>si</b> = condició, nota musical", exemples:'Digues que sí · Si vols, vine' },
+  DIA4:  { nom:'són / son', color:'#d946ef', icon:'😴', desc:"<b>són</b> = verb ser · <b>son</b> = ganes de dormir", exemples:'Són les cinc · Tinc son' },
+  DIA5:  { nom:'té / te',   color:'#ec4899', icon:'🍵', desc:"<b>té</b> = verb tenir · <b>te</b> = la beguda, el pronom", exemples:'Té gana · Un te amb llet' },
+  DIA6:  { nom:'més / mes', color:'#f43f5e', icon:'➕', desc:"<b>més</b> = quantitat · <b>mes</b> = període de l'any", exemples:'Vull més pa · El mes d\'abril' },
+  DIA7:  { nom:'món / mon', color:'#ef4444', icon:'🌍', desc:"<b>món</b> = la Terra · <b>mon</b> = el meu", exemples:'Tot el món · Mon pare' },
+  DIA8:  { nom:'mà / ma',   color:'#f97316', icon:'✋', desc:"<b>mà</b> = part del braç · <b>ma</b> = la meva", exemples:'La mà dreta · Ma mare' },
+  DIA9:  { nom:'què / que', color:'#f59e0b', icon:'❓', desc:"<b>què</b> darrere de preposició o interrogatiu · <b>que</b> quan només enllaça", exemples:'De què parles? · Crec que sí' },
+  DIA10: { nom:'sé / se',   color:'#eab308', icon:'🤷', desc:"<b>sé</b> = verb saber · <b>se</b> = pronom feble", exemples:'No ho sé · Se sent música' },
+  DIA11: { nom:'sòl / sol', color:'#84cc16', icon:'☀️', desc:"<b>sòl</b> = el terreny · <b>sol</b> = l'astre, tot sol", exemples:'El sòl del bosc · Fa sol' },
+  DIA12: { nom:'ús / us',   color:'#22c55e', icon:'🧰', desc:"<b>ús</b> = fer servir · <b>us</b> = pronom (a vosaltres)", exemples:"Un bon ús · Us espero" },
+  DIA13: { nom:'pèl / pel', color:'#10b981', icon:'🐈', desc:"<b>pèl</b> = el del cap o del gat · <b>pel</b> = per + el", exemples:'Un pèl ros · Pel carrer' },
+  DIA14: { nom:'déu / deu', color:'#06b6d4', icon:'⚡', desc:"<b>déu</b> = divinitat · <b>deu</b> = el número 10, verb deure", exemples:'Un déu grec · Deu euros' },
+  DIA15: { nom:'vós / vos', color:'#0ea5e9', icon:'🎩', desc:"<b>vós</b> = tractament de respecte · <b>vos</b> = pronom darrere del verb", exemples:'Com esteu, vós? · Seieu-vos' },
+};
+
+// ============================================================================
+// PARAULES_XIX — X · IX (so de xeix) contra TX · IG (so de tx)
+// lletra:'b' = X o IX | lletra:'v' = TX o IG
+// ============================================================================
+const PARAULES_XIX = [
+  // ── so de XEIX [ʃ] ──
+  { paraula:'xocolata', lletra:'b', buit:'__ocolata', posicio:0, formaErrada:'txocolata', exempleErrat:"M'agrada la txocolata calenta.", exemple:"M'agrada la xocolata calenta.", imatge:'🍫', nivell:1, regla:'XI1', regla_explicada:"Al <b>començament</b> de paraula el so de xeix s'escriu sempre <b>X</b>: <b>x</b>ocolata." },
+  { paraula:'xai', lletra:'b', buit:'__ai', posicio:0, formaErrada:'txai', exempleErrat:"El txai belava al prat.", exemple:"El xai belava al prat.", imatge:'🐑', nivell:1, regla:'XI1', regla_explicada:"Al començament de paraula, so de xeix → <b>X</b>: <b>x</b>ai." },
+  { paraula:'xarxa', lletra:'b', buit:'__arxa', posicio:0, formaErrada:'txarxa', exempleErrat:"El pescador estén la txarxa.", exemple:"El pescador estén la xarxa.", imatge:'🕸️', nivell:1, regla:'XI1', regla_explicada:"Al començament de paraula, so de xeix → <b>X</b>: <b>x</b>arxa." },
+  { paraula:'caixa', lletra:'b', buit:'ca__a', posicio:2, formaErrada:'catxa', exempleErrat:"Guarda les joguines a la catxa.", exemple:"Guarda les joguines a la caixa.", imatge:'📦', nivell:1, regla:'XI2', regla_explicada:"Darrere de <b>a, e, o, u</b> el so de xeix s'escriu <b>IX</b>: ca<b>ix</b>a." },
+  { paraula:'peix', lletra:'b', buit:'pe__', posicio:2, formaErrada:'petx', exempleErrat:"Hem menjat petx al forn.", exemple:"Hem menjat peix al forn.", imatge:'🐟', nivell:1, regla:'XI2', regla_explicada:"Darrere de vocal, so de xeix → <b>IX</b>: pe<b>ix</b>." },
+  { paraula:'coixí', lletra:'b', buit:'co__í', posicio:2, formaErrada:'cotxí', exempleErrat:"Dormo amb un cotxí molt tou.", exemple:"Dormo amb un coixí molt tou.", imatge:'🛏️', nivell:2, regla:'XI2', regla_explicada:"Darrere de vocal, so de xeix → <b>IX</b>: co<b>ix</b>í." },
+  { paraula:'guix', lletra:'b', buit:'gu__', posicio:2, formaErrada:'gutx', exempleErrat:"Escriu amb el gutx a la pissarra.", exemple:"Escriu amb el guix a la pissarra.", imatge:'🖍️', nivell:2, regla:'XI2', regla_explicada:"Darrere de vocal, so de xeix → <b>IX</b>: gu<b>ix</b>." },
+  { paraula:'moixó', lletra:'b', buit:'mo__ó', posicio:2, formaErrada:'motxó', exempleErrat:"Un motxó canta a la branca.", exemple:"Un moixó canta a la branca.", imatge:'🐦', nivell:3, regla:'XI2', regla_explicada:"Darrere de vocal, so de xeix → <b>IX</b>: mo<b>ix</b>ó." },
+  { paraula:'punxa', lletra:'b', buit:'pun__a', posicio:3, formaErrada:'puntxa', exempleErrat:"La rosa té una puntxa.", exemple:"La rosa té una punxa.", imatge:'🌹', nivell:2, regla:'XI3', regla_explicada:"Darrere de <b>consonant</b> el so de xeix s'escriu <b>X</b>: pun<b>x</b>a." },
+  { paraula:'panxa', lletra:'b', buit:'pan__a', posicio:3, formaErrada:'pantxa', exempleErrat:"Em fa mal la pantxa.", exemple:"Em fa mal la panxa.", imatge:'🤰', nivell:2, regla:'XI3', regla_explicada:"Darrere de consonant, so de xeix → <b>X</b>: pan<b>x</b>a." },
+  { paraula:'marxa', lletra:'b', buit:'mar__a', posicio:3, formaErrada:'martxa', exempleErrat:"La banda toca una martxa.", exemple:"La banda toca una marxa.", imatge:'🥁', nivell:2, regla:'XI3', regla_explicada:"Darrere de consonant, so de xeix → <b>X</b>: mar<b>x</b>a." },
+  { paraula:'bruixa', lletra:'b', buit:'bru__a', posicio:3, formaErrada:'brutxa', exempleErrat:"La brutxa vola amb l'escombra.", exemple:"La bruixa vola amb l'escombra.", imatge:'🧙', nivell:1, regla:'XI2', regla_explicada:"Darrere de vocal, so de xeix → <b>IX</b>: bru<b>ix</b>a." },
+  // ── so de TX [tʃ] ──
+  { paraula:'cotxe', lletra:'v', buit:'co__e', posicio:2, formaErrada:'coixe', exempleErrat:"El coixe és vermell.", exemple:"El cotxe és vermell.", imatge:'🚗', nivell:1, regla:'XI4', regla_explicada:"El so de <b>tx</b> enmig de paraula s'escriu <b>TX</b>: co<b>tx</b>e." },
+  { paraula:'butxaca', lletra:'v', buit:'bu__aca', posicio:2, formaErrada:'buixaca', exempleErrat:"Les claus són a la buixaca.", exemple:"Les claus són a la butxaca.", imatge:'👖', nivell:1, regla:'XI4', regla_explicada:"So de tx enmig de paraula → <b>TX</b>: bu<b>tx</b>aca." },
+  { paraula:'fitxa', lletra:'v', buit:'fi__a', posicio:2, formaErrada:'fixa', exempleErrat:"Omple la fixa del joc.", exemple:"Omple la fitxa del joc.", imatge:'🎴', nivell:2, regla:'XI4', regla_explicada:"So de tx enmig de paraula → <b>TX</b>: fi<b>tx</b>a." },
+  { paraula:'despatx', lletra:'v', buit:'despa__', posicio:5, formaErrada:'despaig', exempleErrat:"El director és al despaig.", exemple:"El director és al despatx.", imatge:'🏢', nivell:2, regla:'XI5', regla_explicada:"Al <b>final</b>, mira el plural: despa<b>tx</b>os → despa<b>tx</b>." },
+  { paraula:'esquitx', lletra:'v', buit:'esqui__', posicio:5, formaErrada:'esquig', exempleErrat:"M'ha caigut un esquig de pintura.", exemple:"M'ha caigut un esquitx de pintura.", imatge:'💦', nivell:3, regla:'XI5', regla_explicada:"Al final, mira el plural: esqui<b>tx</b>os → esqui<b>tx</b>." },
+  { paraula:'mig', lletra:'v', buit:'mi__', posicio:2, formaErrada:'mitx', exempleErrat:"En vull mitx got.", exemple:"En vull mig got.", imatge:'🥛', nivell:2, regla:'XI5', regla_explicada:"Al final, mira el femení: mi<b>tj</b>a → mi<b>g</b>. (No pas «mitx».)" },
+  { paraula:'lleig', lletra:'v', buit:'llei__', posicio:4, formaErrada:'lleitx', exempleErrat:"Aquest dibuix és lleitx.", exemple:"Aquest dibuix és lleig.", imatge:'😖', nivell:2, regla:'XI5', regla_explicada:"Al final, mira el femení: llet<b>j</b>a → llei<b>g</b>. (No pas «lleitx».)" },
+  { paraula:'roig', lletra:'v', buit:'roi__', posicio:3, formaErrada:'roitx', exempleErrat:"Un pebrot roitx i gros.", exemple:"Un pebrot roig i gros.", imatge:'🌶️', nivell:3, regla:'XI5', regla_explicada:"Al final, mira el femení: ro<b>j</b>a → roi<b>g</b>." },
+  { paraula:'boig', lletra:'v', buit:'boi__', posicio:3, formaErrada:'boitx', exempleErrat:"Aquest gos està boitx!", exemple:"Aquest gos està boig!", imatge:'🤪', nivell:3, regla:'XI5', regla_explicada:"Al final, mira el femení: bo<b>j</b>a → boi<b>g</b>." },
+  { paraula:'gronxador', lletra:'b', buit:'gron__ador', posicio:4, formaErrada:'grontxador', exempleErrat:"El grontxador del parc és nou.", exemple:"El gronxador del parc és nou.", imatge:'🛝', nivell:3, regla:'XI3', regla_explicada:"Darrere de consonant, so de xeix → <b>X</b>: gron<b>x</b>ador." },
+];
+
+const REGLES_XIX = {
+  XI1: { nom:'X al començament',        color:'#8b5cf6', icon:'🅧', desc:"El so de xeix al principi de paraula sempre s'escriu <b>X</b>.", exemples:'xocolata, xai, xarxa, xiular, xerrar' },
+  XI2: { nom:'IX darrere de vocal',     color:'#6366f1', icon:'🔵', desc:"Darrere de a, e, o, u el so de xeix s'escriu <b>IX</b>.", exemples:'caixa, peix, coixí, guix, bruixa' },
+  XI3: { nom:'X darrere de consonant',  color:'#0ea5e9', icon:'🔷', desc:"Darrere de consonant (n, r…) el so de xeix s'escriu <b>X</b> sola.", exemples:'punxa, panxa, marxa, gronxador' },
+  XI4: { nom:'TX enmig de paraula',     color:'#f97316', icon:'🟠', desc:"El so de tx (com «cotxe») enmig de paraula s'escriu <b>TX</b>.", exemples:'cotxe, butxaca, fitxa, matxucar' },
+  XI5: { nom:'TX o IG al final',        color:'#ef4444', icon:'🔴', desc:"Al final no ho pots saber pel so: mira el femení o el plural. Si hi surt J, va <b>IG</b> (mitja→mig); si hi surt TX, va <b>TX</b> (despatxos→despatx).", exemples:'despatx, esquitx · mig, lleig, roig, boig' },
+};
+
+// ============================================================================
+// PARAULES_TGTJ — TG · TJ contra TZ
+// lletra:'b' = TG o TJ | lletra:'v' = TZ
+// ============================================================================
+const PARAULES_TGTJ = [
+  { paraula:'viatge', lletra:'b', buit:'via__e', posicio:3, formaErrada:'viatze', exempleErrat:"Farem un viatze a París.", exemple:"Farem un viatge a París.", imatge:'✈️', nivell:1, regla:'TG1', regla_explicada:"Davant de <b>E</b> i <b>I</b> el so de tj s'escriu <b>TG</b>: via<b>tg</b>e." },
+  { paraula:'formatge', lletra:'b', buit:'forma__e', posicio:5, formaErrada:'formatze', exempleErrat:"M'agrada el formatze de cabra.", exemple:"M'agrada el formatge de cabra.", imatge:'🧀', nivell:1, regla:'TG1', regla_explicada:"Davant de E, so de tj → <b>TG</b>: forma<b>tg</b>e." },
+  { paraula:'metge', lletra:'b', buit:'me__e', posicio:2, formaErrada:'metze', exempleErrat:"El metze m'ha receptat un xarop.", exemple:"El metge m'ha receptat un xarop.", imatge:'🩺', nivell:1, regla:'TG1', regla_explicada:"Davant de E, so de tj → <b>TG</b>: me<b>tg</b>e." },
+  { paraula:'paisatge', lletra:'b', buit:'paisa__e', posicio:5, formaErrada:'paisatze', exempleErrat:"Quin paisatze més bonic!", exemple:"Quin paisatge més bonic!", imatge:'🏞️', nivell:2, regla:'TG1', regla_explicada:"Davant de E, so de tj → <b>TG</b>: paisa<b>tg</b>e." },
+  { paraula:'jutge', lletra:'b', buit:'ju__e', posicio:2, formaErrada:'jutze', exempleErrat:"El jutze dicta sentència.", exemple:"El jutge dicta sentència.", imatge:'⚖️', nivell:2, regla:'TG1', regla_explicada:"Davant de E, so de tj → <b>TG</b>: ju<b>tg</b>e." },
+  { paraula:'platja', lletra:'b', buit:'pla__a', posicio:3, formaErrada:'platza', exempleErrat:"A l'estiu anem a la platza.", exemple:"A l'estiu anem a la platja.", imatge:'🏖️', nivell:1, regla:'TG2', regla_explicada:"Davant de <b>A, O, U</b> el so de tj s'escriu <b>TJ</b>: pla<b>tj</b>a." },
+  { paraula:'mitja', lletra:'b', buit:'mi__a', posicio:2, formaErrada:'mitza', exempleErrat:"Vull mitza poma.", exemple:"Vull mitja poma.", imatge:'🍎', nivell:2, regla:'TG2', regla_explicada:"Davant de A, so de tj → <b>TJ</b>: mi<b>tj</b>a." },
+  { paraula:'corretja', lletra:'b', buit:'corre__a', posicio:5, formaErrada:'corretza', exempleErrat:"La corretza del gos és nova.", exemple:"La corretja del gos és nova.", imatge:'🦮', nivell:2, regla:'TG2', regla_explicada:"Davant de A, so de tj → <b>TJ</b>: corre<b>tj</b>a." },
+  { paraula:'jutjat', lletra:'b', buit:'ju__at', posicio:2, formaErrada:'jutzat', exempleErrat:"Els van citar al jutzat.", exemple:"Els van citar al jutjat.", imatge:'🏛️', nivell:3, regla:'TG2', regla_explicada:"Davant de A, so de tj → <b>TJ</b>: ju<b>tj</b>at." },
+  { paraula:'llotja', lletra:'b', buit:'llo__a', posicio:3, formaErrada:'llotza', exempleErrat:"Van seure a la llotza del teatre.", exemple:"Van seure a la llotja del teatre.", imatge:'🎭', nivell:3, regla:'TG2', regla_explicada:"Davant de A, so de tj → <b>TJ</b>: llo<b>tj</b>a." },
+  { paraula:'setze', lletra:'v', buit:'se__e', posicio:2, formaErrada:'setge', exempleErrat:"La meva germana té setge anys.", exemple:"La meva germana té setze anys.", imatge:'1️⃣', nivell:1, regla:'TG3', regla_explicada:"El so de <b>tz</b> (més xiulat) s'escriu <b>TZ</b>: se<b>tz</b>e." },
+  { paraula:'dotze', lletra:'v', buit:'do__e', posicio:2, formaErrada:'dotge', exempleErrat:"Un dotge d'ous.", exemple:"Un dotze d'ous.", imatge:'🥚', nivell:1, regla:'TG3', regla_explicada:"So de tz → <b>TZ</b>: do<b>tz</b>e." },
+  { paraula:'tretze', lletra:'v', buit:'tre__e', posicio:3, formaErrada:'tretge', exempleErrat:"El tretge de novembre.", exemple:"El tretze de novembre.", imatge:'📅', nivell:1, regla:'TG3', regla_explicada:"So de tz → <b>TZ</b>: tre<b>tz</b>e." },
+  { paraula:'atzar', lletra:'v', buit:'a__ar', posicio:1, formaErrada:'atjar', exempleErrat:"Ho vam trobar per atjar.", exemple:"Ho vam trobar per atzar.", imatge:'🎲', nivell:2, regla:'TG3', regla_explicada:"So de tz → <b>TZ</b>: a<b>tz</b>ar." },
+  { paraula:'horitzó', lletra:'v', buit:'hori__ó', posicio:4, formaErrada:'horitjó', exempleErrat:"El sol es pon a l'horitjó.", exemple:"El sol es pon a l'horitzó.", imatge:'🌅', nivell:2, regla:'TG3', regla_explicada:"So de tz → <b>TZ</b>: hori<b>tz</b>ó." },
+  { paraula:'magatzem', lletra:'v', buit:'maga__em', posicio:4, formaErrada:'magatgem', exempleErrat:"Les caixes són al magatgem.", exemple:"Les caixes són al magatzem.", imatge:'📦', nivell:3, regla:'TG3', regla_explicada:"So de tz → <b>TZ</b>: maga<b>tz</b>em." },
+  { paraula:'organitzar', lletra:'v', buit:'organi__ar', posicio:6, formaErrada:'organitjar', exempleErrat:"Cal organitjar la festa.", exemple:"Cal organitzar la festa.", imatge:'🗓️', nivell:3, regla:'TG4', regla_explicada:"Els verbs acabats en <b>-itzar</b> sempre porten TZ: organi<b>tz</b>ar, utili<b>tz</b>ar, reali<b>tz</b>ar." },
+  { paraula:'utilitzar', lletra:'v', buit:'utili__ar', posicio:5, formaErrada:'utilitjar', exempleErrat:"Pots utilitjar el meu boli.", exemple:"Pots utilitzar el meu boli.", imatge:'🖊️', nivell:2, regla:'TG4', regla_explicada:"Verbs en <b>-itzar</b> → TZ: utili<b>tz</b>ar." },
+  { paraula:'coratge', lletra:'b', buit:'cora__e', posicio:4, formaErrada:'coratze', exempleErrat:"Va actuar amb molt coratze.", exemple:"Va actuar amb molt coratge.", imatge:'🦁', nivell:3, regla:'TG1', regla_explicada:"Els noms acabats en <b>-atge</b> porten TG: cor<b>atge</b>, vi<b>atge</b>, form<b>atge</b>." },
+  { paraula:'salvatge', lletra:'b', buit:'salva__e', posicio:5, formaErrada:'salvatze', exempleErrat:"Un animal salvatze.", exemple:"Un animal salvatge.", imatge:'🐅', nivell:2, regla:'TG1', regla_explicada:"Acabat en <b>-atge</b> → TG: salv<b>atge</b>." },
+];
+
+const REGLES_TGTJ = {
+  TG1: { nom:'TG davant E, I',   color:'#10b981', icon:'🟢', desc:"El so de tj davant de <b>E</b> o <b>I</b> s'escriu <b>TG</b>. Tots els noms acabats en <b>-atge</b> hi entren.", exemples:'viatge, formatge, metge, paisatge, jutge, coratge' },
+  TG2: { nom:'TJ davant A, O, U', color:'#059669', icon:'🟩', desc:"El so de tj davant de <b>A, O, U</b> s'escriu <b>TJ</b>.", exemples:'platja, mitja, corretja, jutjat, llotja' },
+  TG3: { nom:'TZ (so xiulat)',   color:'#0891b2', icon:'🔵', desc:"Un so diferent, més xiulat, que s'escriu <b>TZ</b>. Fixa-t'hi bé: no sona igual que «viatge».", exemples:'setze, dotze, tretze, atzar, horitzó, magatzem' },
+  TG4: { nom:'Verbs en -itzar',  color:'#6366f1', icon:'⚙️', desc:"Tots els verbs acabats en <b>-itzar</b> porten TZ, i els noms que en surten també (-ització).", exemples:'organitzar, utilitzar, realitzar, analitzar' },
+};
+
+// ============================================================================
+// PARAULES_ERRA — R i RR (i la r final que no sona)
+// lletra:'b' = RR doble | lletra:'v' = R simple
+// ============================================================================
+const PARAULES_ERRA = [
+  { paraula:'carro', lletra:'b', buit:'ca__o', posicio:2, formaErrada:'caro', exempleErrat:"El cavall estira el caro.", exemple:"El cavall estira el carro.", imatge:'🛒', nivell:1, regla:'ER1', regla_explicada:"Entre vocals, el so fort de erra s'escriu <b>RR</b>: ca<b>rr</b>o." },
+  { paraula:'terra', lletra:'b', buit:'te__a', posicio:2, formaErrada:'tera', exempleErrat:"Hem sembrat la tera del jardí.", exemple:"Hem sembrat la terra del jardí.", imatge:'🌍', nivell:1, regla:'ER1', regla_explicada:"Entre vocals, so fort → <b>RR</b>: te<b>rr</b>a." },
+  { paraula:'gerra', lletra:'b', buit:'ge__a', posicio:2, formaErrada:'gera', exempleErrat:"Omple la gera d'aigua.", exemple:"Omple la gerra d'aigua.", imatge:'🏺', nivell:2, regla:'ER1', regla_explicada:"Entre vocals, so fort → <b>RR</b>: ge<b>rr</b>a." },
+  { paraula:'arròs', lletra:'b', buit:'a__òs', posicio:1, formaErrada:'aròs', exempleErrat:"Per dinar hi ha aròs.", exemple:"Per dinar hi ha arròs.", imatge:'🍚', nivell:1, regla:'ER1', regla_explicada:"Entre vocals, so fort → <b>RR</b>: a<b>rr</b>òs." },
+  { paraula:'guitarra', lletra:'b', buit:'guita__a', posicio:5, formaErrada:'guitara', exempleErrat:"Toco la guitara cada dia.", exemple:"Toco la guitarra cada dia.", imatge:'🎸', nivell:1, regla:'ER1', regla_explicada:"Entre vocals, so fort → <b>RR</b>: guita<b>rr</b>a." },
+  { paraula:'burro', lletra:'b', buit:'bu__o', posicio:2, formaErrada:'buro', exempleErrat:"El buro porta la càrrega.", exemple:"El burro porta la càrrega.", imatge:'🫏', nivell:2, regla:'ER1', regla_explicada:"Entre vocals, so fort → <b>RR</b>: bu<b>rr</b>o." },
+  { paraula:'corredor', lletra:'b', buit:'co__edor', posicio:2, formaErrada:'coredor', exempleErrat:"El coredor arriba primer.", exemple:"El corredor arriba primer.", imatge:'🏃', nivell:2, regla:'ER1', regla_explicada:"Entre vocals, so fort → <b>RR</b>: co<b>rr</b>edor." },
+  { paraula:'arribar', lletra:'b', buit:'a__ibar', posicio:1, formaErrada:'aribar', exempleErrat:"Vull aribar aviat.", exemple:"Vull arribar aviat.", imatge:'🎯', nivell:2, regla:'ER1', regla_explicada:"Entre vocals, so fort → <b>RR</b>: a<b>rr</b>ibar." },
+  { paraula:'cara', lletra:'v', buit:'ca__a', posicio:2, formaErrada:'carra', exempleErrat:"Es renta la carra.", exemple:"Es renta la cara.", imatge:'😊', nivell:1, regla:'ER2', regla_explicada:"Entre vocals, el so <b>suau</b> de erra s'escriu amb una sola <b>R</b>: ca<b>r</b>a." },
+  { paraula:'pera', lletra:'v', buit:'pe__a', posicio:2, formaErrada:'perra', exempleErrat:"Menja't la perra.", exemple:"Menja't la pera.", imatge:'🍐', nivell:1, regla:'ER2', regla_explicada:"Entre vocals, so suau → una sola <b>R</b>: pe<b>r</b>a." },
+  { paraula:'ferida', lletra:'v', buit:'fe__ida', posicio:2, formaErrada:'ferrida', exempleErrat:"Em van curar la ferrida.", exemple:"Em van curar la ferida.", imatge:'🩹', nivell:1, regla:'ER2', regla_explicada:"Entre vocals, so suau → una sola <b>R</b>: fe<b>r</b>ida." },
+  { paraula:'cadira', lletra:'v', buit:'cadi__a', posicio:4, formaErrada:'cadirra', exempleErrat:"Seu a la cadirra.", exemple:"Seu a la cadira.", imatge:'🪑', nivell:2, regla:'ER2', regla_explicada:"Entre vocals, so suau → una sola <b>R</b>: cadi<b>r</b>a." },
+  { paraula:'honrat', lletra:'v', buit:'hon__at', posicio:3, formaErrada:'honrrat', exempleErrat:"És un home honrrat.", exemple:"És un home honrat.", imatge:'🎖️', nivell:3, regla:'ER3', regla_explicada:"Darrere de <b>consonant</b> (n, l, s) el so ja és fort tot sol, per tant una sola <b>R</b>: hon<b>r</b>at, Is<b>r</b>ael, en<b>r</b>ere." },
+  { paraula:'somriure', lletra:'v', buit:'som__iure', posicio:3, formaErrada:'somrriure', exempleErrat:"Té un somrriure preciós.", exemple:"Té un somriure preciós.", imatge:'😄', nivell:3, regla:'ER3', regla_explicada:"Darrere de consonant, una sola <b>R</b>: som<b>r</b>iure." },
+  { paraula:'carrer', lletra:'v', buit:'carre__', posicio:5, formaErrada:'carre', exempleErrat:"Visc en aquest carre.", exemple:"Visc en aquest carrer.", imatge:'🛣️', nivell:2, regla:'ER4', regla_explicada:"La <b>R final</b> gairebé no se sent, però s'escriu: carre<b>r</b>. Comprova-ho amb el plural: carrers." },
+  { paraula:'dinar', lletra:'v', buit:'dina__', posicio:4, formaErrada:'dina', exempleErrat:"Anem a dina a casa.", exemple:"Anem a dinar a casa.", imatge:'🍽️', nivell:1, regla:'ER4', regla_explicada:"Els infinitius acaben en <b>R</b> encara que no se senti: dina<b>r</b>, canta<b>r</b>, veni<b>r</b>." },
+  { paraula:'cantar', lletra:'v', buit:'canta__', posicio:5, formaErrada:'canta', exempleErrat:"M'agrada canta al cor.", exemple:"M'agrada cantar al cor.", imatge:'🎤', nivell:1, regla:'ER4', regla_explicada:"Infinitiu → acaba en <b>R</b>: canta<b>r</b>." },
+  { paraula:'fuster', lletra:'v', buit:'fuste__', posicio:5, formaErrada:'fuste', exempleErrat:"El meu oncle és fuste.", exemple:"El meu oncle és fuster.", imatge:'🪚', nivell:2, regla:'ER4', regla_explicada:"Els oficis en <b>-er</b> porten R final: fuste<b>r</b>, forne<b>r</b>, cuine<b>r</b>." },
+  { paraula:'clar', lletra:'v', buit:'cla__', posicio:3, formaErrada:'cla', exempleErrat:"El cel està ben cla.", exemple:"El cel està ben clar.", imatge:'🌤️', nivell:2, regla:'ER4', regla_explicada:"R final que no se sent però s'escriu: cla<b>r</b> (femení: cla<b>r</b>a)." },
+  { paraula:'primer', lletra:'v', buit:'prime__', posicio:5, formaErrada:'prime', exempleErrat:"Soc el prime de la fila.", exemple:"Soc el primer de la fila.", imatge:'🥇', nivell:2, regla:'ER4', regla_explicada:"R final muda: prime<b>r</b> (femení: prime<b>r</b>a)." },
+];
+
+const REGLES_ERRA = {
+  ER1: { nom:'RR entre vocals (so fort)', color:'#ef4444', icon:'🔴', desc:"Entre dues vocals, el so fort de erra s'escriu amb <b>RR</b>.", exemples:'carro, terra, arròs, guitarra, arribar' },
+  ER2: { nom:'R entre vocals (so suau)',  color:'#f59e0b', icon:'🟡', desc:"Entre dues vocals, el so suau s'escriu amb una sola <b>R</b>.", exemples:'cara, pera, mira, moré' },
+  ER3: { nom:'R darrere de consonant',    color:'#8b5cf6', icon:'🟣', desc:"Darrere de consonant el so ja és fort, per tant només cal una <b>R</b>.", exemples:'honrat, somriure, Israel, enrere' },
+  ER4: { nom:'La R final que no sona',    color:'#0ea5e9', icon:'🔇', desc:"Molts mots acaben en R encara que no se senti. Comprova-ho amb el femení o el plural: clar→clara, carrer→carrers.", exemples:'cantar, dinar, carrer, fuster, clar, primer' },
+};
+// ============================================================================
+// PARAULES_BAR — Barbarismes: paraules que semblen catalanes i no ho són
+// lletra:'b' = és català correcte | lletra:'v' = és un barbarisme
+// buit = la paraula tal com es mostra (a vegades bona, a vegades barbarisme)
+// ============================================================================
+const PARAULES_BAR = [
+  // ── barbarismes (resposta: 'v') ──
+  { paraula:"d'acord", lletra:'v', buit:'vale', formaErrada:'vale', exempleErrat:"Vale, ens veiem demà.", exemple:"D'acord, ens veiem demà.", imatge:'👌', nivell:1, regla:'BA1', regla_explicada:"<b>Vale</b> és castellà. En català diem <b>d'acord</b>, <b>entesos</b> o <b>molt bé</b>." },
+  { paraula:'bé', lletra:'v', buit:'bueno', formaErrada:'bueno', exempleErrat:"Bueno, ja ho parlarem.", exemple:"Bé, ja ho parlarem.", imatge:'🗣️', nivell:1, regla:'BA1', regla_explicada:"<b>Bueno</b> és castellà. En català: <b>bé</b>, <b>doncs</b> o <b>vaja</b>." },
+  { paraula:'escombraries', lletra:'v', buit:'bassura', formaErrada:'bassura', exempleErrat:"Treu la bassura, si us plau.", exemple:"Treu les escombraries, si us plau.", imatge:'🗑️', nivell:1, regla:'BA2', regla_explicada:"<b>Bassura</b> és castellà. En català: <b>escombraries</b> (i el cubell és la <b>galleda</b>)." },
+  { paraula:'bústia', lletra:'v', buit:'busson', formaErrada:'busson', exempleErrat:"He mirat el busson i era buit.", exemple:"He mirat la bústia i era buida.", imatge:'📬', nivell:2, regla:'BA2', regla_explicada:"<b>Busson</b> és castellà. En català: <b>bústia</b>." },
+  { paraula:'entrepà', lletra:'v', buit:'bocata', formaErrada:'bocata', exempleErrat:"Per esmorzar porto un bocata.", exemple:"Per esmorzar porto un entrepà.", imatge:'🥪', nivell:1, regla:'BA2', regla_explicada:"<b>Bocata</b> és castellà. En català: <b>entrepà</b>." },
+  { paraula:'brossa', lletra:'v', buit:'basura', formaErrada:'basura', exempleErrat:"Recollim la basura del pati.", exemple:"Recollim la brossa del pati.", imatge:'♻️', nivell:2, regla:'BA2', regla_explicada:"<b>Basura</b> és castellà. En català: <b>brossa</b> o <b>escombraries</b>." },
+  { paraula:'adonar-se', lletra:'v', buit:'donar-se compte', formaErrada:'donar-se compte', exempleErrat:"No es va donar compte de l'error.", exemple:"No es va adonar de l'error.", imatge:'💡', nivell:3, regla:'BA3', regla_explicada:"<b>Donar-se compte</b> és un calc del castellà. En català: <b>adonar-se</b> (adonar-se d'una cosa)." },
+  { paraula:'haver de', lletra:'v', buit:'tenir que', formaErrada:'tenir que', exempleErrat:"Tinc que estudiar per demà.", exemple:"He d'estudiar per demà.", imatge:'📚', nivell:2, regla:'BA3', regla_explicada:"<b>Tenir que</b> és un calc del castellà. L'obligació es diu amb <b>haver de</b>: he d'estudiar." },
+  { paraula:'a veure', lletra:'v', buit:'aviam', formaErrada:'aviam', exempleErrat:"Aviam si ho endevines.", exemple:"A veure si ho endevines.", imatge:'👁️', nivell:3, regla:'BA3', regla_explicada:"<b>Aviam</b> és col·loquial i no és normatiu. Escriu <b>a veure</b>." },
+  { paraula:'gairebé', lletra:'v', buit:'casi', formaErrada:'casi', exempleErrat:"Casi he acabat els deures.", exemple:"Gairebé he acabat els deures.", imatge:'⏳', nivell:2, regla:'BA1', regla_explicada:"<b>Casi</b> és castellà. En català: <b>gairebé</b> o <b>quasi</b>." },
+  { paraula:'endoll', lletra:'v', buit:'enxufe', formaErrada:'enxufe', exempleErrat:"Connecta-ho a l'enxufe.", exemple:"Connecta-ho a l'endoll.", imatge:'🔌', nivell:2, regla:'BA2', regla_explicada:"<b>Enxufe</b> és castellà. En català: <b>endoll</b>." },
+  { paraula:'enganyar', lletra:'v', buit:'engañar', formaErrada:'engañar', exempleErrat:"No em vulguis engañar.", exemple:"No em vulguis enganyar.", imatge:'🎭', nivell:2, regla:'BA2', regla_explicada:"<b>Engañar</b> és castellà, i la <b>ñ</b> no existeix en català: el so s'escriu <b>NY</b>. Digues <b>enganyar</b>." },
+  { paraula:'acomiadar', lletra:'v', buit:'despedir', formaErrada:'despedir', exempleErrat:"El van despedir de la feina.", exemple:"El van acomiadar de la feina.", imatge:'💼', nivell:3, regla:'BA2', regla_explicada:"<b>Despedir</b> és castellà. En català: <b>acomiadar</b> (i «acomiadar-se» quan dius adéu)." },
+  { paraula:'gaudir', lletra:'v', buit:'disfrutar', formaErrada:'disfrutar', exempleErrat:"Vaig disfrutar molt de la festa.", exemple:"Vaig gaudir molt de la festa.", imatge:'🥳', nivell:2, regla:'BA2', regla_explicada:"<b>Disfrutar</b> és castellà. En català: <b>gaudir</b> (gaudir d'una cosa) o <b>passar-s'ho bé</b>." },
+  // ── formes correctes (resposta: 'b') ──
+  { paraula:'entrepà', lletra:'b', buit:'entrepà', formaErrada:'bocata', exempleErrat:"Per esmorzar porto un bocata.", exemple:"Per esmorzar porto un entrepà.", imatge:'🥪', nivell:1, regla:'BA4', regla_explicada:"<b>Entrepà</b> és la forma catalana correcta (el castellanisme seria «bocata»)." },
+  { paraula:'galleda', lletra:'b', buit:'galleda', formaErrada:'cubo', exempleErrat:"Omple el cubo d'aigua.", exemple:"Omple la galleda d'aigua.", imatge:'🪣', nivell:1, regla:'BA4', regla_explicada:"<b>Galleda</b> és correcte (el castellanisme seria «cubo»)." },
+  { paraula:'llençol', lletra:'b', buit:'llençol', formaErrada:'sàbana', exempleErrat:"Canvia la sàbana del llit.", exemple:"Canvia el llençol del llit.", imatge:'🛏️', nivell:2, regla:'BA4', regla_explicada:"<b>Llençol</b> és correcte (el castellanisme seria «sàbana»)." },
+  { paraula:'entrenador', lletra:'b', buit:'entrenador', formaErrada:'entrenado', exempleErrat:"L'entrenado ens ha felicitat.", exemple:"L'entrenador ens ha felicitat.", imatge:'🧑‍🏫', nivell:2, regla:'BA4', regla_explicada:"<b>Entrenador</b> és correcte, amb la R final que no se sent." },
+  { paraula:'bombeta', lletra:'b', buit:'bombeta', formaErrada:'bombilla', exempleErrat:"S'ha fos la bombilla.", exemple:"S'ha fos la bombeta.", imatge:'💡', nivell:2, regla:'BA4', regla_explicada:"<b>Bombeta</b> és correcte (el castellanisme seria «bombilla»)." },
+  { paraula:'estoig', lletra:'b', buit:'estoig', formaErrada:'estutx', exempleErrat:"Els llapis són a l'estutx.", exemple:"Els llapis són a l'estoig.", imatge:'✏️', nivell:2, regla:'BA4', regla_explicada:"<b>Estoig</b> és correcte i s'acaba en <b>-ig</b> (el castellanisme seria «estutx»)." },
+  { paraula:'vorera', lletra:'b', buit:'vorera', formaErrada:'acera', exempleErrat:"Camina per l'acera.", exemple:"Camina per la vorera.", imatge:'🚶', nivell:1, regla:'BA4', regla_explicada:"<b>Vorera</b> és correcte (el castellanisme seria «acera»)." },
+  { paraula:'espelma', lletra:'b', buit:'espelma', formaErrada:'vela', exempleErrat:"Encén la vela del pastís.", exemple:"Encén l'espelma del pastís.", imatge:'🕯️', nivell:2, regla:'BA4', regla_explicada:"<b>Espelma</b> és la de cera (una <b>vela</b> és la del vaixell, i una <b>bugia</b> la del motor)." },
+];
+
+const REGLES_BAR = {
+  BA1: { nom:'Mots del dia a dia',   color:'#ef4444', icon:'🗣️', desc:"Paraules castellanes que s'han colat en la conversa i que tenen forma catalana pròpia.", exemples:'vale → d\'acord · bueno → bé · casi → gairebé' },
+  BA2: { nom:'Objectes i accions',   color:'#f97316', icon:'🧰', desc:"Noms d'objectes i verbs que sovint es diuen en castellà.", exemples:'bassura → escombraries · busson → bústia · enxufe → endoll' },
+  BA3: { nom:'Expressions calcades', color:'#a855f7', icon:'🔗', desc:"Frases fetes traduïdes literalment del castellà. Són les més difícils de detectar.", exemples:'tenir que → haver de · donar-se compte → adonar-se · aviam → a veure' },
+  BA4: { nom:'Aquestes són bones!',  color:'#22c55e', icon:'✅', desc:"Formes catalanes correctes que de vegades es canvien per un castellanisme sense necessitat.", exemples:'entrepà, galleda, vorera, bombeta, espelma, estoig' },
+};
+
+// ============================================================================
+// PARAULES_PLU — Plurals: -S o -OS
+// lletra:'b' = afegim -OS | lletra:'v' = afegim només -S
+// ============================================================================
+const PARAULES_PLU = [
+  { paraula:'peixos', lletra:'b', buit:'peix → …', formaErrada:'peixs', exempleErrat:"A la peixera hi ha tres peixs.", exemple:"A la peixera hi ha tres peixos.", imatge:'🐟', nivell:1, regla:'PL1', regla_explicada:"Els mots acabats en <b>-x</b> fan el plural en <b>-os</b>: pei<b>x</b> → pei<b>xos</b>." },
+  { paraula:'braços', lletra:'b', buit:'braç → …', formaErrada:'braçs', exempleErrat:"Aixeca els dos braçs.", exemple:"Aixeca els dos braços.", imatge:'💪', nivell:1, regla:'PL1', regla_explicada:"Els mots acabats en <b>-ç</b> fan el plural en <b>-os</b>, i la ç es torna c: bra<b>ç</b> → bra<b>ços</b>." },
+  { paraula:'gossos', lletra:'b', buit:'gos → …', formaErrada:'goss', exempleErrat:"Al parc hi ha molts goss.", exemple:"Al parc hi ha molts gossos.", imatge:'🐕', nivell:1, regla:'PL2', regla_explicada:"Els mots aguts acabats en <b>-s</b> doblen la s i fan <b>-ssos</b>: go<b>s</b> → go<b>ssos</b>." },
+  { paraula:'nassos', lletra:'b', buit:'nas → …', formaErrada:'nass', exempleErrat:"Tenen els nass vermells de fred.", exemple:"Tenen els nassos vermells de fred.", imatge:'👃', nivell:2, regla:'PL2', regla_explicada:"Agut acabat en <b>-s</b> → <b>-ssos</b>: na<b>s</b> → na<b>ssos</b>." },
+  { paraula:'passos', lletra:'b', buit:'pas → …', formaErrada:'pass', exempleErrat:"Fes tres pass endavant.", exemple:"Fes tres passos endavant.", imatge:'👣', nivell:2, regla:'PL2', regla_explicada:"Agut acabat en <b>-s</b> → <b>-ssos</b>: pa<b>s</b> → pa<b>ssos</b>." },
+  { paraula:'reflexos', lletra:'b', buit:'reflex → …', formaErrada:'reflexs', exempleErrat:"Té molt bons reflexs.", exemple:"Té molt bons reflexos.", imatge:'⚡', nivell:3, regla:'PL1', regla_explicada:"Acabat en <b>-x</b> → <b>-os</b>: refle<b>x</b> → refle<b>xos</b>." },
+  { paraula:'discos', lletra:'b', buit:'disc → …', formaErrada:'discs', exempleErrat:"Té una col·lecció de discs.", exemple:"Té una col·lecció de discos.", imatge:'💿', nivell:3, regla:'PL1', regla_explicada:"Acabat en <b>-sc</b> → <b>-os</b>: di<b>sc</b> → di<b>scos</b>." },
+  { paraula:'lluços', lletra:'b', buit:'lluç → …', formaErrada:'lluçs', exempleErrat:"Hem comprat dos lluçs.", exemple:"Hem comprat dos lluços.", imatge:'🐠', nivell:3, regla:'PL1', regla_explicada:"Acabat en <b>-ç</b> → <b>-os</b> (i la ç es torna c): llu<b>ç</b> → llu<b>ços</b>." },
+  { paraula:'cases', lletra:'v', buit:'casa → …', formaErrada:'casos', exempleErrat:"Al carrer hi ha deu casos noves.", exemple:"Al carrer hi ha deu cases noves.", imatge:'🏠', nivell:1, regla:'PL3', regla_explicada:"Els mots acabats en <b>-a</b> àtona fan el plural en <b>-es</b>: cas<b>a</b> → cas<b>es</b>." },
+  { paraula:'taules', lletra:'v', buit:'taula → …', formaErrada:'taulas', exempleErrat:"Hem posat quatre taulas.", exemple:"Hem posat quatre taules.", imatge:'🪑', nivell:1, regla:'PL3', regla_explicada:"Acabat en <b>-a</b> àtona → <b>-es</b> (mai «-as»): taul<b>a</b> → taul<b>es</b>." },
+  { paraula:'llibres', lletra:'v', buit:'llibre → …', formaErrada:'llibros', exempleErrat:"He llegit tres llibros aquest estiu.", exemple:"He llegit tres llibres aquest estiu.", imatge:'📚', nivell:1, regla:'PL4', regla_explicada:"Acabat en vocal àtona → només <b>-s</b>: llibre → llibre<b>s</b>." },
+  { paraula:'cotxes', lletra:'v', buit:'cotxe → …', formaErrada:'cotxos', exempleErrat:"Al pàrquing hi ha molts cotxos.", exemple:"Al pàrquing hi ha molts cotxes.", imatge:'🚗', nivell:1, regla:'PL4', regla_explicada:"Acabat en vocal àtona → només <b>-s</b>: cotxe → cotxe<b>s</b>." },
+  { paraula:'cafès', lletra:'v', buit:'cafè → …', formaErrada:'cafesos', exempleErrat:"Hem demanat dos cafesos.", exemple:"Hem demanat dos cafès.", imatge:'☕', nivell:2, regla:'PL4', regla_explicada:"Acabat en vocal <b>tònica</b> amb accent → només <b>-s</b>: cafè → cafè<b>s</b>." },
+  { paraula:'peus', lletra:'v', buit:'peu → …', formaErrada:'peuos', exempleErrat:"Em fan mal els peuos.", exemple:"Em fan mal els peus.", imatge:'🦶', nivell:2, regla:'PL4', regla_explicada:"Acabat en diftong → només <b>-s</b>: peu → peu<b>s</b>." },
+  { paraula:'llapis', lletra:'v', buit:'llapis → …', formaErrada:'llapissos', exempleErrat:"Porto tres llapissos a l'estoig.", exemple:"Porto tres llapis a l'estoig.", imatge:'✏️', nivell:3, regla:'PL5', regla_explicada:"Els mots <b>plans</b> acabats en -s no canvien: un llapi<b>s</b>, tres llapi<b>s</b>. (Igual: dilluns, atles.)" },
+  { paraula:'dilluns', lletra:'v', buit:'dilluns → …', formaErrada:'dillunsos', exempleErrat:"Tots els dillunsos tinc gimnàs.", exemple:"Tots els dilluns tinc gimnàs.", imatge:'📅', nivell:3, regla:'PL5', regla_explicada:"Pla acabat en -s → no canvia: un dilluns, tots els dilluns." },
+  { paraula:'mans', lletra:'v', buit:'mà → …', formaErrada:'màs', exempleErrat:"Renta't les màs.", exemple:"Renta't les mans.", imatge:'✋', nivell:3, regla:'PL6', regla_explicada:"Alguns mots acabats en vocal tònica recuperen una <b>N</b> amagada: mà → ma<b>ns</b>, pa → pa<b>ns</b>, bo → bo<b>ns</b>." },
+  { paraula:'pans', lletra:'v', buit:'pa → …', formaErrada:'pas', exempleErrat:"Hem comprat dos pas.", exemple:"Hem comprat dos pans.", imatge:'🍞', nivell:3, regla:'PL6', regla_explicada:"Recupera la N: pa → pa<b>ns</b> (com mà → mans)." },
+  { paraula:'esquitxos', lletra:'b', buit:'esquitx → …', formaErrada:'esquitxs', exempleErrat:"Hi ha esquitxs de pintura.", exemple:"Hi ha esquitxos de pintura.", imatge:'💦', nivell:3, regla:'PL1', regla_explicada:"Acabat en <b>-tx</b> → <b>-os</b>: esqui<b>tx</b> → esqui<b>txos</b>." },
+  { paraula:'boscos', lletra:'b', buit:'bosc → …', formaErrada:'boscs', exempleErrat:"Al Montseny hi ha boscs frondosos.", exemple:"Al Montseny hi ha boscos frondosos.", imatge:'🌲', nivell:2, regla:'PL1', regla_explicada:"Acabat en <b>-sc</b> → <b>-os</b>: bo<b>sc</b> → bo<b>scos</b>." },
+];
+
+const REGLES_PLU = {
+  PL1: { nom:'-OS darrere de x, ç, sc, xt', color:'#6366f1', icon:'➕', desc:"Els mots aguts acabats en consonants difícils de pronunciar juntes afegeixen <b>-os</b>.", exemples:'peix→peixos · braç→braços · bosc→boscos · text→textos' },
+  PL2: { nom:'-SSOS (aguts en -s)',        color:'#8b5cf6', icon:'🔁', desc:"Els mots <b>aguts</b> acabats en -s doblen la essa: <b>-ssos</b>.", exemples:'gos→gossos · nas→nassos · pas→passos' },
+  PL3: { nom:'-A àtona → -ES',             color:'#22c55e', icon:'🟢', desc:"Els mots acabats en -a àtona fan <b>-es</b>. Mai «-as».", exemples:'casa→cases · taula→taules · dona→dones' },
+  PL4: { nom:'Només -S',                   color:'#0ea5e9', icon:'🔵', desc:"La majoria de mots només afegeixen una <b>-s</b>.", exemples:'llibre→llibres · cotxe→cotxes · cafè→cafès · peu→peus' },
+  PL5: { nom:'Plans en -s: no canvien',    color:'#94a3b8', icon:'⬜', desc:"Els mots <b>plans</b> acabats en -s són iguals en singular i en plural.", exemples:'llapis, dilluns, atles, cactus' },
+  PL6: { nom:'La N amagada',               color:'#f59e0b', icon:'🟡', desc:"Alguns mots acabats en vocal tònica recuperen una N al plural.", exemples:'mà→mans · pa→pans · bo→bons · ple→plens' },
+};
+
+// ============================================================================
+// PARAULES_MAJ — Majúscules i minúscules
+// lletra:'b' = va en MAJÚSCULA | lletra:'v' = va en minúscula
+// buit = la paraula escrita en minúscula, perquè no es vegi la resposta
+// ============================================================================
+const PARAULES_MAJ = [
+  { paraula:'dilluns', lletra:'v', buit:'dilluns', formaErrada:'Dilluns', exempleErrat:"Cada Dilluns tinc música.", exemple:"Cada dilluns tinc música.", imatge:'📅', nivell:1, regla:'MA1', regla_explicada:"Els <b>dies de la setmana</b> van en minúscula: dilluns, dimarts, dimecres…" },
+  { paraula:'gener', lletra:'v', buit:'gener', formaErrada:'Gener', exempleErrat:"Vaig néixer el tres de Gener.", exemple:"Vaig néixer el tres de gener.", imatge:'❄️', nivell:1, regla:'MA1', regla_explicada:"Els <b>mesos de l'any</b> van en minúscula: gener, febrer, març…" },
+  { paraula:'primavera', lletra:'v', buit:'primavera', formaErrada:'Primavera', exempleErrat:"A la Primavera floreixen els ametllers.", exemple:"A la primavera floreixen els ametllers.", imatge:'🌸', nivell:2, regla:'MA1', regla_explicada:"Les <b>estacions de l'any</b> van en minúscula: primavera, estiu, tardor, hivern." },
+  { paraula:'català', lletra:'v', buit:'català', formaErrada:'Català', exempleErrat:"A l'escola estudiem Català i anglès.", exemple:"A l'escola estudiem català i anglès.", imatge:'💬', nivell:1, regla:'MA2', regla_explicada:"Els <b>noms d'idiomes</b> van en minúscula: català, castellà, anglès, francès." },
+  { paraula:'matemàtiques', lletra:'v', buit:'matemàtiques', formaErrada:'Matemàtiques', exempleErrat:"Els dimarts tinc Matemàtiques.", exemple:"Els dimarts tinc matemàtiques.", imatge:'➗', nivell:2, regla:'MA2', regla_explicada:"Els <b>noms d'assignatures</b> i de matèries van en minúscula quan són genèrics." },
+  { paraula:'metge', lletra:'v', buit:'metge', formaErrada:'Metge', exempleErrat:"Ha vingut el Metge del poble.", exemple:"Ha vingut el metge del poble.", imatge:'🩺', nivell:2, regla:'MA2', regla_explicada:"Els <b>oficis i càrrecs</b> van en minúscula: el metge, la mestra, el president." },
+  { paraula:'nord', lletra:'v', buit:'nord', formaErrada:'Nord', exempleErrat:"El vent bufa del Nord.", exemple:"El vent bufa del nord.", imatge:'🧭', nivell:3, regla:'MA2', regla_explicada:"Els <b>punts cardinals</b> van en minúscula quan indiquen direcció: cap al nord." },
+  { paraula:'Barcelona', lletra:'b', buit:'barcelona', formaErrada:'barcelona', exempleErrat:"Visc a barcelona des de petit.", exemple:"Visc a Barcelona des de petit.", imatge:'🏙️', nivell:1, regla:'MA3', regla_explicada:"Els <b>noms de lloc</b> (ciutats, pobles, països) van en majúscula: Barcelona, Girona, Catalunya." },
+  { paraula:'Montseny', lletra:'b', buit:'montseny', formaErrada:'montseny', exempleErrat:"Hem pujat al montseny.", exemple:"Hem pujat al Montseny.", imatge:'⛰️', nivell:2, regla:'MA3', regla_explicada:"Els noms propis de <b>muntanyes i rius</b> van en majúscula: el Montseny, el Ter, el Pirineu." },
+  { paraula:'Mediterrani', lletra:'b', buit:'mediterrani', formaErrada:'mediterrani', exempleErrat:"Ens banyem al mar mediterrani.", exemple:"Ens banyem al mar Mediterrani.", imatge:'🌊', nivell:2, regla:'MA3', regla_explicada:"En «mar <b>Mediterrani</b>», el genèric (mar) va en minúscula i el nom propi en majúscula." },
+  { paraula:'Nadal', lletra:'b', buit:'nadal', formaErrada:'nadal', exempleErrat:"Per nadal mengem torrons.", exemple:"Per Nadal mengem torrons.", imatge:'🎄', nivell:1, regla:'MA4', regla_explicada:"Els noms de <b>festes assenyalades</b> van en majúscula: Nadal, Pasqua, Sant Joan." },
+  { paraula:'Setmana Santa', lletra:'b', buit:'setmana santa', formaErrada:'setmana santa', exempleErrat:"Anirem a la platja per setmana santa.", exemple:"Anirem a la platja per Setmana Santa.", imatge:'🐣', nivell:3, regla:'MA4', regla_explicada:"Les festivitats de dues paraules porten majúscula a totes dues: <b>S</b>etmana <b>S</b>anta." },
+  { paraula:'Pere', lletra:'b', buit:'pere', formaErrada:'pere', exempleErrat:"En pere és el meu cosí.", exemple:"En Pere és el meu cosí.", imatge:'👦', nivell:1, regla:'MA3', regla_explicada:"Els <b>noms de persona</b> van en majúscula. L'article que els acompanya (en, la), no." },
+  { paraula:'Institut Vall Verda', lletra:'b', buit:'institut vall verda', formaErrada:'institut vall verda', exempleErrat:"Estudio a l'institut vall verda.", exemple:"Estudio a l'Institut Vall Verda.", imatge:'🏫', nivell:3, regla:'MA5', regla_explicada:"El nom propi d'una <b>institució</b> porta majúscula a cada paraula important: l'<b>I</b>nstitut <b>V</b>all <b>V</b>erda. Però «vaig a l'institut» és genèric i va en minúscula." },
+  { paraula:'institut', lletra:'v', buit:'institut', formaErrada:'Institut', exempleErrat:"Cada matí vaig a l'Institut.", exemple:"Cada matí vaig a l'institut.", imatge:'🎒', nivell:3, regla:'MA5', regla_explicada:"Quan parlem d'un institut qualsevol (genèric), va en <b>minúscula</b>. Només el nom propi porta majúscula." },
+  { paraula:'Sant Jordi', lletra:'b', buit:'sant jordi', formaErrada:'sant jordi', exempleErrat:"Per sant jordi regalem llibres i roses.", exemple:"Per Sant Jordi regalem llibres i roses.", imatge:'🌹', nivell:2, regla:'MA4', regla_explicada:"La <b>diada</b> de Sant Jordi va en majúscula, com Nadal o Pasqua." },
+  { paraula:'Terra', lletra:'b', buit:'terra', formaErrada:'terra', exempleErrat:"La terra gira al voltant del Sol.", exemple:"La Terra gira al voltant del Sol.", imatge:'🌍', nivell:3, regla:'MA3', regla_explicada:"Com a <b>planeta</b>, la <b>T</b>erra va en majúscula (i el <b>S</b>ol també). Com a terreny, «la terra del camp» va en minúscula." },
+  { paraula:'castellà', lletra:'v', buit:'castellà', formaErrada:'Castellà', exempleErrat:"Parlo català i Castellà.", exemple:"Parlo català i castellà.", imatge:'💬', nivell:1, regla:'MA2', regla_explicada:"Idioma → <b>minúscula</b>: castellà, anglès, alemany." },
+  { paraula:'Pirineu', lletra:'b', buit:'pirineu', formaErrada:'pirineu', exempleErrat:"A l'hivern esquiem al pirineu.", exemple:"A l'hivern esquiem al Pirineu.", imatge:'🏔️', nivell:2, regla:'MA3', regla_explicada:"Nom propi de serralada → <b>majúscula</b>: el Pirineu, el Montsec." },
+  { paraula:'tardor', lletra:'v', buit:'tardor', formaErrada:'Tardor', exempleErrat:"A la Tardor cauen les fulles.", exemple:"A la tardor cauen les fulles.", imatge:'🍂', nivell:1, regla:'MA1', regla_explicada:"Estació de l'any → <b>minúscula</b>: tardor, hivern, primavera, estiu." },
+];
+
+const REGLES_MAJ = {
+  MA1: { nom:'Dies, mesos i estacions', color:'#0ea5e9', icon:'📅', desc:"Van en <b>minúscula</b>: dilluns, gener, primavera. (En castellà i en anglès no funciona igual!)", exemples:'dilluns, dimarts · gener, març · estiu, tardor' },
+  MA2: { nom:'Idiomes, oficis i matèries', color:'#22c55e', icon:'💬', desc:"Van en <b>minúscula</b>: els idiomes, les assignatures, els oficis i càrrecs, i els punts cardinals.", exemples:'català, anglès · matemàtiques · el metge, la presidenta · el nord' },
+  MA3: { nom:'Noms propis',            color:'#f59e0b', icon:'📍', desc:"Van en <b>majúscula</b>: persones, ciutats, països, muntanyes, rius, mars i planetes.", exemples:'Pere, Barcelona, Catalunya, el Montseny, el Ter, la Terra' },
+  MA4: { nom:'Festes assenyalades',    color:'#ec4899', icon:'🎉', desc:"Van en <b>majúscula</b>: Nadal, Pasqua, Sant Jordi, Setmana Santa.", exemples:'Nadal, Pasqua, Sant Joan, Setmana Santa' },
+  MA5: { nom:'Genèric o nom propi?',   color:'#8b5cf6', icon:'🔍', desc:"La mateixa paraula pot anar de les dues maneres: «vaig a l'institut» (genèric, minúscula) però «l'Institut Marià Manent» (nom propi, majúscula).", exemples:"l'institut / l'Institut Vall Verda · el riu / el riu Ter" },
+};
+// ============================================================================
+// PARAULES_SIG — Els altres signes: ; : … « » ¿? !
+// lletra:'b' = la frase està ben puntuada | lletra:'v' = hi ha un error
+// ============================================================================
+const PARAULES_SIG = [
+  // ── DOS PUNTS ──
+  { paraula:"Necessito tres coses: pa, llet i ous.", lletra:'b', buit:"Necessito tres coses: pa, llet i ous.", formaErrada:"Necessito tres coses, pa, llet i ous.", exempleErrat:"Necessito tres coses, pa, llet i ous.", exemple:"Necessito tres coses: pa, llet i ous.", imatge:'🛒', nivell:1, regla:'SI1', regla_explicada:"Els <b>dos punts</b> anuncien una enumeració: «tres coses<b>:</b> pa, llet i ous»." },
+  { paraula:"Ja ho saps: qui no arrisca, no pisca.", lletra:'b', buit:"Ja ho saps: qui no arrisca, no pisca.", formaErrada:"Ja ho saps; qui no arrisca, no pisca.", exempleErrat:"Ja ho saps; qui no arrisca, no pisca.", exemple:"Ja ho saps: qui no arrisca, no pisca.", imatge:'💬', nivell:2, regla:'SI1', regla_explicada:"Els <b>dos punts</b> introdueixen una explicació o una citació." },
+  { paraula:"Vaig arribar tard: havia perdut el tren.", lletra:'b', buit:"Vaig arribar tard: havia perdut el tren.", formaErrada:"Vaig arribar tard, havia perdut el tren.", exempleErrat:"Vaig arribar tard, havia perdut el tren.", exemple:"Vaig arribar tard: havia perdut el tren.", imatge:'🚆', nivell:2, regla:'SI1', regla_explicada:"Els <b>dos punts</b> poden indicar la causa del que s'acaba de dir." },
+  // ── PUNT I COMA ──
+  { paraula:"Uns volien anar al cine; els altres, a la platja.", lletra:'b', buit:"Uns volien anar al cine; els altres, a la platja.", formaErrada:"Uns volien anar al cine, els altres, a la platja.", exempleErrat:"Uns volien anar al cine, els altres, a la platja.", exemple:"Uns volien anar al cine; els altres, a la platja.", imatge:'🎬', nivell:3, regla:'SI2', regla_explicada:"El <b>punt i coma</b> separa dues parts llargues que ja tenen comes a dins." },
+  { paraula:"Va estudiar molt; per això va aprovar.", lletra:'b', buit:"Va estudiar molt; per això va aprovar.", formaErrada:"Va estudiar molt: per això va aprovar.", exempleErrat:"Va estudiar molt: per això va aprovar.", exemple:"Va estudiar molt; per això va aprovar.", imatge:'📖', nivell:3, regla:'SI2', regla_explicada:"El <b>punt i coma</b> va davant de connectors com «per això», «tanmateix», «en canvi»." },
+  // ── PUNTS SUSPENSIUS ──
+  { paraula:"Hi havia gats, gossos, ocells…", lletra:'b', buit:"Hi havia gats, gossos, ocells…", formaErrada:"Hi havia gats, gossos, ocells….", exempleErrat:"Hi havia gats, gossos, ocells….", exemple:"Hi havia gats, gossos, ocells…", imatge:'🐾', nivell:2, regla:'SI3', regla_explicada:"Els <b>punts suspensius</b> són tres i prou. Darrere seu no s'hi posa un punt més." },
+  { paraula:"No sé què dir…", lletra:'b', buit:"No sé què dir…", formaErrada:"No sé què dir....", exempleErrat:"No sé què dir....", exemple:"No sé què dir…", imatge:'🤐', nivell:1, regla:'SI3', regla_explicada:"Sempre <b>tres</b> punts suspensius, ni dos ni quatre." },
+  { paraula:"Hi havia gats, gossos i ocells.", lletra:'v', buit:"Hi havia gats, gossos i ocells…", formaErrada:"Hi havia gats, gossos i ocells…", exempleErrat:"Hi havia gats, gossos i ocells…", exemple:"Hi havia gats, gossos i ocells.", imatge:'🐕', nivell:3, regla:'SI3', regla_explicada:"No es posen punts suspensius darrere d'<b>etcètera</b> ni darrere d'una llista tancada amb «i». Trieu-ne un dels dos." },
+  // ── INTERROGACIÓ I EXCLAMACIÓ ──
+  { paraula:"Què has dit?", lletra:'b', buit:"Què has dit?", formaErrada:"¿Què has dit?", exempleErrat:"¿Què has dit?", exemple:"Què has dit?", imatge:'❓', nivell:1, regla:'SI4', regla_explicada:"En català <b>no</b> es posa el signe d'obertura ¿ ni ¡. Només el del final." },
+  { paraula:"Quina sort!", lletra:'b', buit:"Quina sort!", formaErrada:"¡Quina sort!", exempleErrat:"¡Quina sort!", exemple:"Quina sort!", imatge:'🎉', nivell:1, regla:'SI4', regla_explicada:"En català només es posa el signe final: <b>Quina sort!</b>" },
+  { paraula:"On vas?", lletra:'v', buit:"On vas?.", formaErrada:"On vas?.", exempleErrat:"On vas?.", exemple:"On vas?", imatge:'🚶', nivell:2, regla:'SI4', regla_explicada:"Darrere d'un <b>?</b> o d'un <b>!</b> no s'hi afegeix un punt: ja tanquen la frase." },
+  // ── COMETES I RATLLA DE DIÀLEG ──
+  { paraula:"La mestra va dir: «Obriu el llibre».", lletra:'b', buit:"La mestra va dir: «Obriu el llibre».", formaErrada:"La mestra va dir: Obriu el llibre.", exempleErrat:"La mestra va dir: Obriu el llibre.", exemple:"La mestra va dir: «Obriu el llibre».", imatge:'📕', nivell:3, regla:'SI5', regla_explicada:"Les paraules d'algú altre van entre <b>cometes baixes</b> «…», que són les que fem servir en català." },
+  { paraula:"—Bon dia —va dir en Pere.", lletra:'b', buit:"—Bon dia —va dir en Pere.", formaErrada:"-Bon dia -va dir en Pere.", exempleErrat:"-Bon dia -va dir en Pere.", exemple:"—Bon dia —va dir en Pere.", imatge:'💬', nivell:3, regla:'SI5', regla_explicada:"Als diàlegs es fa servir la <b>ratlla llarga</b> (—), no un guionet curt (-)." },
+  // ── PUNT ──
+  { paraula:"Vaig al mercat. Compraré fruita.", lletra:'b', buit:"Vaig al mercat. Compraré fruita.", formaErrada:"Vaig al mercat. compraré fruita.", exempleErrat:"Vaig al mercat. compraré fruita.", exemple:"Vaig al mercat. Compraré fruita.", imatge:'🍎', nivell:1, regla:'SI6', regla_explicada:"Darrere d'un <b>punt</b> sempre s'escriu <b>majúscula</b>." },
+  { paraula:"Són les 9.30 h.", lletra:'b', buit:"Són les 9.30 h.", formaErrada:"Són les 9,30 h.", exempleErrat:"Són les 9,30 h.", exemple:"Són les 9.30 h.", imatge:'🕘', nivell:3, regla:'SI6', regla_explicada:"Les hores se separen amb un <b>punt</b> (9.30 h), no amb una coma." },
+  { paraula:"Ell va marxar, jo em vaig quedar.", lletra:'v', buit:"Ell va marxar. jo em vaig quedar.", formaErrada:"Ell va marxar. jo em vaig quedar.", exempleErrat:"Ell va marxar. jo em vaig quedar.", exemple:"Ell va marxar, jo em vaig quedar.", imatge:'🚪', nivell:2, regla:'SI6', regla_explicada:"O bé punt i majúscula, o bé coma i minúscula. Barrejar-ho és un error." },
+  { paraula:"Tinc gana; però encara no és hora.", lletra:'v', buit:"Tinc gana; però encara no és hora.", formaErrada:"Tinc gana; però encara no és hora.", exempleErrat:"Tinc gana; però encara no és hora.", exemple:"Tinc gana, però encara no és hora.", imatge:'🍽️', nivell:3, regla:'SI2', regla_explicada:"Davant de <b>però</b> en una frase curta hi va <b>coma</b>, no punt i coma. El punt i coma és per a parts llargues." },
+  { paraula:"Estimada Marta:", lletra:'b', buit:"Estimada Marta:", formaErrada:"Estimada Marta,", exempleErrat:"Estimada Marta, com estàs?", exemple:"Estimada Marta: com estàs?", imatge:'✉️', nivell:3, regla:'SI1', regla_explicada:"A l'encapçalament d'una carta, darrere del nom hi van <b>dos punts</b>." },
+  { paraula:"Va comprar pomes, peres i plàtans.", lletra:'v', buit:"Va comprar: pomes, peres i plàtans.", formaErrada:"Va comprar: pomes, peres i plàtans.", exempleErrat:"Va comprar: pomes, peres i plàtans.", exemple:"Va comprar pomes, peres i plàtans.", imatge:'🍌', nivell:3, regla:'SI1', regla_explicada:"No es posen dos punts entre el <b>verb</b> i el seu complement directe. Caldria: «Va comprar tres fruites: pomes, peres i plàtans»." },
+  { paraula:"Quin dia més bonic!", lletra:'v', buit:"Quin dia més bonic!!!", formaErrada:"Quin dia més bonic!!!", exempleErrat:"Quin dia més bonic!!!", exemple:"Quin dia més bonic!", imatge:'☀️', nivell:2, regla:'SI4', regla_explicada:"N'hi ha prou amb <b>un</b> signe d'exclamació. Repetir-lo és propi dels xats, no d'un text escrit." },
+];
+
+const REGLES_SIG = {
+  SI1: { nom:'Dos punts (:)',        color:'#6366f1', icon:'🔷', desc:"Anuncien una enumeració, una explicació, una causa o una citació. No se'n posen mai entre el verb i el complement.", exemples:'Tres coses: pa, llet i ous · Vaig arribar tard: havia perdut el tren' },
+  SI2: { nom:'Punt i coma (;)',      color:'#8b5cf6', icon:'🟣', desc:"Separa dues parts llargues que ja porten comes, o va davant de connectors com «per això» i «en canvi».", exemples:'Uns volien cine; els altres, platja · Va estudiar molt; per això va aprovar' },
+  SI3: { nom:'Punts suspensius (…)', color:'#0ea5e9', icon:'⋯', desc:"Sempre <b>tres</b>. No es combinen amb «etcètera» ni amb una llista ja tancada amb «i».", exemples:'Gats, gossos, ocells… · No sé què dir…' },
+  SI4: { nom:'Interrogants (?) i exclamacions (!)', color:'#f59e0b', icon:'❗', desc:"En català <b>no</b> s'obren amb ¿ ni ¡: només es posa el signe final. I amb un n'hi ha prou.", exemples:'Què has dit? · Quina sort!' },
+  SI5: { nom:'Cometes i diàlegs',    color:'#ec4899', icon:'💬', desc:"Les cometes catalanes són les baixes «…». Als diàlegs, ratlla llarga (—), no guionet.", exemples:'Va dir: «Obriu el llibre» · —Bon dia —va dir.' },
+  SI6: { nom:'El punt (.)',          color:'#22c55e', icon:'⏹️', desc:"Darrere d'un punt, sempre majúscula. I les hores se separen amb punt: 9.30 h.", exemples:'Vaig al mercat. Compraré fruita. · Són les 9.30 h.' },
+};
+
 // Mapa global tema → regles (evita duplicació)
 const REGLES_MAP = {
   bv: REGLES_BV, gj: REGLES_GJ, hm: REGLES_HM,
   ela_geminada: REGLES_LL, mp: REGLES_MP, apostrof: REGLES_APO,
-  dieresi: REGLES_DIE, sc: REGLES_SC, puntuacio: REGLES_PUN
+  dieresi: REGLES_DIE, sc: REGLES_SC, puntuacio: REGLES_PUN,
+  diacritic: REGLES_DIA, xeix: REGLES_XIX, tgtj: REGLES_TGTJ, erra: REGLES_ERRA,
+  barbarismes: REGLES_BAR, plurals: REGLES_PLU, majuscules: REGLES_MAJ, signes: REGLES_SIG
 };
 
 const TEMES = {
@@ -2654,8 +3147,8 @@ const TEMES = {
     labelV: 'No, sense ´',
     hintC1: 'Aquesta paraula porta accent?',
     strictC5: true,
-    regla_curta: "En català, no totes les paraules porten accent. Depèn de quina síl·laba és la tònica.",
-    regla_completa: `<strong>Agudes</strong> (accent a l'última síl·laba): porten accent si acaben en vocal, <em>-en</em> o <em>-in</em>.<br>Exemples: <em>cafè, camí, però, avió</em><br><br><strong>Planes</strong> (accent a la penúltima): porten accent si <strong>no</strong> acaben en vocal, <em>-s</em>, <em>-en</em> o <em>-in</em>.<br>Exemples sense accent: <em>taula, porta, casa, arbre</em><br><br><strong>Esdrúixoles</strong> (accent a l'antepenúltima): <strong>SEMPRE</strong> porten accent.<br>Exemples: <em>música, màquina, pàgina, ràdio</em><br><br><em>💡 Truc: llegeix en veu alta i marca on cau el cop de veu!</em>`,
+    regla_curta: "Busca la síl·laba tònica. Les agudes porten accent si acaben en vocal, vocal+s, -en o -in; les planes, just al revés; les esdrúixoles, sempre.",
+    regla_completa: `<strong>Pas 1.</strong> Busca la síl·laba <strong>tònica</strong>, la del cop de veu.<br><br><strong>Agudes</strong> (tònica a l'última síl·laba): porten accent si acaben en <strong>vocal</strong>, <strong>vocal + s</strong>, <em>-en</em> o <em>-in</em>.<br>Amb accent: <em>cafè, camí, però, avió, cançons, després, entén</em><br>Sense accent: <em>carrer, dinar, feliç, papers, camins</em><br><br><strong>Planes</strong> (tònica a la penúltima): és la regla <strong>al revés</strong>. Porten accent si <strong>no</strong> acaben en vocal, vocal + s, <em>-en</em> ni <em>-in</em>.<br>Amb accent: <em>fàcil, mòbil, càstig, préssec, tòrax, ràpid</em><br>Sense accent: <em>taula, porta, casa, arbre, cases, corren</em><br><br><strong>Esdrúixoles</strong> (tònica a l'antepenúltima): <strong>SEMPRE</strong> porten accent.<br>Exemples: <em>música, màquina, pàgina, ràdio</em><br><br><strong>Pas 2. Obert o tancat?</strong><br>La <strong>a</strong> sempre obert (<em>à</em>): màquina, català.<br>La <strong>i</strong> i la <strong>u</strong> sempre tancat (<em>í, ú</em>): camí, comú.<br>La <strong>e</strong> i la <strong>o</strong> poden ser de les dues menes:<br>&nbsp;&nbsp;<em>è</em> obert: cafè, però, èxit, mercè · <em>é</em> tancat: també, préssec, església<br>&nbsp;&nbsp;<em>ò</em> obert: això, allò, òpera · <em>ó</em> tancat: cançó, camió, avió<br><br><em>💡 Truc: llegeix en veu alta, marca on cau el cop de veu i després mira com acaba la paraula.</em>`,
     paraules: PARAULES_ACC,
   },
   ela_geminada: {
@@ -2695,7 +3188,7 @@ const TEMES = {
     labelB: 'G',
     labelV: 'J',
     hintC1: 'Quina lletra s\'escriu aquí: G o J?',
-    regla_curta: "La G té dos sons: dur (davant a,o,u,l,r) i tendre (davant e,i). La J sempre sona igual.",
+    regla_curta: "El so de J s'escriu G davant de E/I (gel, girafa) i J davant de A/O/U (jardí, joc). Excepcions: jeure, jersei, jeroglífic, jerarquia, majestat.",
     regla_completa: `
       <strong style="color:var(--primary-dark);font-size:1.1rem;">La G i la J en català</strong><br>
       La G es pronuncia de dues maneres segons la lletra que la segueix, mentre que la J sempre sona igual.<br><br>
@@ -2706,10 +3199,17 @@ const TEMES = {
 
       <strong style="color:#f97316;font-size:1rem;">🟠 Regla G2: G tendra (davant e,i)</strong><br>
       S'escriu <strong>G</strong> amb so <strong>tendre</strong> (com una J suau) quan va davant de vocals <strong>E, I</strong>.<br>
-      <em>Exemples: <strong>g</strong>é, <strong>g</strong>est, <strong>g</strong>ermana · <strong>g</strong>ira, <strong>g</strong>irafa, <strong>g</strong>ir</em><br><br>
+      <em>Exemples: <strong>g</strong>el, <strong>g</strong>est, <strong>g</strong>ermana · <strong>g</strong>erra, <strong>g</strong>ira, <strong>g</strong>irafa</em><br><br>
 
-      <strong style="color:#eab308;font-size:1rem;">🟡 Regla J1: J sempre sona igual</strong><br>
-      La <strong>J</strong> té <strong>sempre</strong> el mateix so, sigui quina sigui la vocal que la segueix.<br>
+      <strong style="color:#eab308;font-size:1rem;">🟡 Regla J1: J davant de A, O, U</strong><br>
+      El so de la J davant de <strong>A, O, U</strong> sempre s'escriu amb <strong>J</strong>.<br>
+      <em>Exemples: <strong>j</strong>ardí · <strong>j</strong>oc · <strong>j</strong>ugar · <strong>j</strong>ove · <strong>j</strong>uny</em><br><br>
+
+      <strong style="color:#f43f5e;font-size:1rem;">⚠️ Regla J2: les excepcions (J davant de E)</strong><br>
+      Davant de <strong>E</strong> la regla diu G… però hi ha un grup de mots que porten <strong>J</strong>.
+      Aquests s'han de saber de memòria, i són els que més cauen als exàmens:<br>
+      <em><strong>j</strong>eure · <strong>j</strong>ersei · <strong>j</strong>eroglífic · <strong>j</strong>erarquia ·
+      <strong>J</strong>esús · ma<strong>j</strong>estat · ob<strong>j</strong>ecte · in<strong>j</strong>ecció</em><br>
       <em>Exemples: <strong>j</strong>oc, <strong>j</strong>ove, <strong>j</strong>oguina · <strong>j</strong>ugar, <strong>j</strong>ugador · <strong>j</strong>ar, <strong>j</strong>oia</em><br><br>
 
       <strong style="color:#a855f7;font-size:1rem;">🟣 Paraules per memoritzar</strong><br>
@@ -2853,7 +3353,10 @@ const TEMES = {
       En català, el so [s] es pot escriure de 4 maneres. La clau és la <strong>posició dins la paraula</strong>.<br><br>
 
       <strong style="color:#ec4899;font-size:1rem;">🔴 Regla SC1: Ç davant de A, O, U</strong><br>
-      S'escriu <strong>Ç</strong> (ce trencada) quan el so [s] va davant de A, O, U o al final de paraula.<br>
+      S'escriu <strong>Ç</strong> (ce trencada) quan el so [s] va davant de <strong>A, O, U</strong>.<br>
+      Al <strong>final de paraula</strong> no ho pots saber pel so: mira el femení o el plural.
+      Si hi surt una Ç o una C, va Ç (bra<strong>ç</strong> → bra<strong>ç</strong>os, dol<strong>ç</strong> → dol<strong>ç</strong>a);
+      si hi surt una S, va S (pa<strong>s</strong> → pa<strong>ss</strong>os, gri<strong>s</strong> → gri<strong>s</strong>a).<br>
       <em>Exemples: pla<strong>ç</strong>a · bra<strong>ç</strong> · dol<strong>ç</strong> · for<strong>ç</strong>a · feli<strong>ç</strong></em><br><br>
 
       <strong style="color:#db2777;font-size:1rem;">🩷 Regla SC2: C davant de E, I</strong><br>
@@ -2871,8 +3374,307 @@ const TEMES = {
       <em>💡 Truc: pronuncia en veu alta. So fort [s] entre vocals → SS. So suau [z] entre vocals → S simple.</em>`,
     paraules: PARAULES_SC,
   },
+
+  diacritic: {
+    id: 'diacritic',
+    nom: 'Accent diacrític',
+    icon: '´´',
+    color: '#8b5cf6',
+    disponible: true,
+    hasRegles: true,
+    modes: ['c1', 'c4'],
+    labelB: 'Sí, porta accent',
+    labelV: 'No, sense accent',
+    hintC1: 'La paraula marcada, en aquesta frase, porta accent?',
+    regla_curta: "Quinze parells de paraules s'escriuen igual però una porta accent i l'altra no. El significat és el que mana.",
+    regla_completa: `
+      <strong style="color:#8b5cf6;font-size:1.1rem;">L'accent diacrític</strong><br>
+      Hi ha parelles de paraules que sonen gairebé igual i s'escriuen igual, i l'accent serveix
+      només per distingir-les. <strong>El sentit de la frase és qui decideix.</strong><br><br>
+
+      <strong style="color:#6366f1;">⚠️ Des del 2016 només en queden 15</strong><br>
+      L'Institut d'Estudis Catalans va reduir la llista. Paraules com <em>dóna</em>, <em>sóc</em>,
+      <em>ós</em> o <em>vénen</em> <strong>ja no porten accent</strong>: ara s'escriuen
+      <em>dona, soc, os, venen</em>.<br><br>
+
+      <strong style="color:#8b5cf6;">Els 15 que hi ha:</strong><br>
+      <em>bé</em> (correctament) / <em>be</em> (xai) &nbsp;·&nbsp;
+      <em>déu</em> (divinitat) / <em>deu</em> (10) &nbsp;·&nbsp;
+      <em>és</em> (verb ser) / <em>es</em> (pronom) &nbsp;·&nbsp;
+      <em>mà</em> (del braç) / <em>ma</em> (la meva) &nbsp;·&nbsp;
+      <em>més</em> (quantitat) / <em>mes</em> (de l'any) &nbsp;·&nbsp;
+      <em>món</em> (la Terra) / <em>mon</em> (el meu) &nbsp;·&nbsp;
+      <em>pèl</em> (del gat) / <em>pel</em> (per + el) &nbsp;·&nbsp;
+      <em>què</em> (rere preposició) / <em>que</em> (enllaç) &nbsp;·&nbsp;
+      <em>sé</em> (verb saber) / <em>se</em> (pronom) &nbsp;·&nbsp;
+      <em>sí</em> (afirmació) / <em>si</em> (condició) &nbsp;·&nbsp;
+      <em>sòl</em> (terreny) / <em>sol</em> (astre) &nbsp;·&nbsp;
+      <em>són</em> (verb ser) / <em>son</em> (dormir) &nbsp;·&nbsp;
+      <em>té</em> (verb tenir) / <em>te</em> (beguda) &nbsp;·&nbsp;
+      <em>ús</em> (fer servir) / <em>us</em> (pronom) &nbsp;·&nbsp;
+      <em>vós</em> (respecte) / <em>vos</em> (pronom)<br><br>
+
+      <em>💡 Truc: canvia la paraula per un sinònim. Si «és» el pots canviar per «resulta», és el verb.</em>`,
+    paraules: PARAULES_DIA,
+  },
+  xeix: {
+    id: 'xeix',
+    nom: 'X · IX · TX · IG',
+    icon: '🅧',
+    color: '#8b5cf6',
+    disponible: true,
+    hasRegles: true,
+    labelB: 'X · IX',
+    labelV: 'TX · IG',
+    hintC1: 'Quina grafia hi va: X/IX o TX/IG?',
+    regla_curta: "El so de «xocolata» s'escriu X o IX segons què hi hagi al davant. El so de «cotxe» s'escriu TX enmig i TX o IG al final.",
+    regla_completa: `
+      <strong style="color:#8b5cf6;font-size:1.1rem;">Dos sons que es confonen</strong><br>
+      Primer de tot, escolta: <strong>xocolata</strong> no sona igual que <strong>cotxe</strong>.
+      El primer és el so de <em>xeix</em>; el segon, el de <em>tx</em>.<br><br>
+
+      <strong style="color:#8b5cf6;">🅧 So de XEIX (com «xocolata»)</strong><br>
+      · Al <strong>començament</strong> de paraula → <strong>X</strong>: <em>xocolata, xai, xarxa</em><br>
+      · Darrere de <strong>vocal</strong> (a, e, o, u) → <strong>IX</strong>: <em>caixa, peix, coixí, bruixa</em><br>
+      · Darrere de <strong>consonant</strong> → <strong>X</strong>: <em>punxa, panxa, marxa</em><br><br>
+
+      <strong style="color:#f97316;">🟠 So de TX (com «cotxe»)</strong><br>
+      · <strong>Enmig</strong> de paraula → <strong>TX</strong>: <em>cotxe, butxaca, fitxa</em><br>
+      · Al <strong>final</strong> no ho pots saber pel so! Mira el femení o el plural:<br>
+      &nbsp;&nbsp;despa<strong>tx</strong>os → despa<strong>tx</strong> &nbsp;|&nbsp;
+      mi<strong>tj</strong>a → mi<strong>g</strong> &nbsp;|&nbsp;
+      ro<strong>j</strong>a → roi<strong>g</strong><br><br>
+
+      <em>💡 Truc: si el femení o el plural té una J, al final hi va IG. Si té TX, hi va TX.</em>`,
+    paraules: PARAULES_XIX,
+  },
+  tgtj: {
+    id: 'tgtj',
+    nom: 'TG · TJ · TZ',
+    icon: '🧀',
+    color: '#10b981',
+    disponible: true,
+    hasRegles: true,
+    labelB: 'TG · TJ',
+    labelV: 'TZ',
+    hintC1: 'Quina grafia hi va: TG/TJ o TZ?',
+    regla_curta: "TG davant de E/I i TJ davant de A/O/U (viatge, platja). El so més xiulat de «setze» s'escriu TZ.",
+    regla_completa: `
+      <strong style="color:#10b981;font-size:1.1rem;">TG · TJ contra TZ</strong><br>
+      Torna a escoltar: <strong>viatge</strong> i <strong>setze</strong> no sonen igual.
+      El de «setze» és més xiulat.<br><br>
+
+      <strong style="color:#10b981;">🟢 El so de «viatge»</strong><br>
+      · Davant de <strong>E</strong> i <strong>I</strong> → <strong>TG</strong>:
+      <em>via<strong>tg</strong>e, forma<strong>tg</strong>e, me<strong>tg</strong>e, ju<strong>tg</strong>e</em><br>
+      · Davant de <strong>A, O, U</strong> → <strong>TJ</strong>:
+      <em>pla<strong>tj</strong>a, mi<strong>tj</strong>a, corre<strong>tj</strong>a, ju<strong>tj</strong>at</em><br>
+      · <strong>Tots</strong> els noms acabats en <strong>-atge</strong> hi entren:
+      <em>paisatge, coratge, salvatge, formatge</em><br><br>
+
+      <strong style="color:#0891b2;">🔵 El so xiulat de «setze» → TZ</strong><br>
+      <em>se<strong>tz</strong>e, do<strong>tz</strong>e, tre<strong>tz</strong>e, a<strong>tz</strong>ar,
+      hori<strong>tz</strong>ó, maga<strong>tz</strong>em</em><br>
+      I <strong>tots</strong> els verbs acabats en <strong>-itzar</strong>:
+      <em>organi<strong>tz</strong>ar, utili<strong>tz</strong>ar, reali<strong>tz</strong>ar</em><br><br>
+
+      <em>💡 Truc: si la paraula acaba en -atge o -atja, sempre TG/TJ. Si acaba en -itzar, sempre TZ.</em>`,
+    paraules: PARAULES_TGTJ,
+  },
+  erra: {
+    id: 'erra',
+    nom: 'R i RR',
+    icon: '🐕',
+    color: '#ef4444',
+    disponible: true,
+    hasRegles: true,
+    labelB: 'RR (doble)',
+    labelV: 'R (simple)',
+    hintC1: 'Quantes erres hi van: una o dues?',
+    regla_curta: "Entre vocals, so fort = RR i so suau = R. Darrere de consonant, sempre una. I compte amb la R final que no se sent!",
+    regla_completa: `
+      <strong style="color:#ef4444;font-size:1.1rem;">La R i la RR</strong><br>
+
+      <strong style="color:#ef4444;">🔴 Entre dues vocals</strong><br>
+      · So <strong>fort</strong> (com a «carro») → <strong>RR</strong>:
+      <em>ca<strong>rr</strong>o, te<strong>rr</strong>a, a<strong>rr</strong>òs, guita<strong>rr</strong>a</em><br>
+      · So <strong>suau</strong> (com a «cara») → <strong>R</strong>:
+      <em>ca<strong>r</strong>a, pe<strong>r</strong>a, ferida, cadira</em><br><br>
+
+      <strong style="color:#8b5cf6;">🟣 Darrere de consonant: una sola R</strong><br>
+      Darrere de n, l o s el so ja és fort tot sol, per tant no cal doblar-la:
+      <em>hon<strong>r</strong>at, som<strong>r</strong>iure, Is<strong>r</strong>ael, en<strong>r</strong>ere</em><br><br>
+
+      <strong style="color:#0ea5e9;">🔇 La R final que no sona</strong><br>
+      Molts mots acaben en R encara que no la sentis. Comprova-ho amb el femení o el plural:<br>
+      <em>cla<strong>r</strong> → cla<strong>r</strong>a &nbsp;|&nbsp; carre<strong>r</strong> → carre<strong>r</strong>s
+      &nbsp;|&nbsp; prime<strong>r</strong> → prime<strong>r</strong>a</em><br>
+      I <strong>tots</strong> els infinitius: <em>canta<strong>r</strong>, dina<strong>r</strong>, veni<strong>r</strong></em>.<br><br>
+
+      <em>💡 Truc: per saber si hi va R al final, posa la paraula en femení o en plural.</em>`,
+    paraules: PARAULES_ERRA,
+  },
+  barbarismes: {
+    id: 'barbarismes',
+    nom: 'Barbarismes',
+    icon: '🚫',
+    color: '#f97316',
+    disponible: true,
+    hasRegles: true,
+    modes: ['c1', 'c2', 'c4', 'c5'],
+    labelB: 'És català ✓',
+    labelV: 'És un barbarisme ✗',
+    hintC1: 'Aquesta paraula, es diu així en català?',
+    regla_curta: "Un barbarisme és una paraula d'una altra llengua que fem servir tenint-ne una de catalana.",
+    regla_completa: `
+      <strong style="color:#f97316;font-size:1.1rem;">Els barbarismes</strong><br>
+      Un <strong>barbarisme</strong> és una paraula manllevada d'una altra llengua (aquí, gairebé
+      sempre del castellà) quan el català ja en té una de pròpia. De tant sentir-los, sonen
+      normals… i és per això que costen tant de detectar.<br><br>
+
+      <strong style="color:#ef4444;">🗣️ Del dia a dia</strong><br>
+      <em>vale → <strong>d'acord</strong> · bueno → <strong>bé</strong> · casi → <strong>gairebé</strong></em><br><br>
+
+      <strong style="color:#f97316;">🧰 Objectes i accions</strong><br>
+      <em>bassura → <strong>escombraries</strong> · busson → <strong>bústia</strong> ·
+      enxufe → <strong>endoll</strong> · bocata → <strong>entrepà</strong> ·
+      disfrutar → <strong>gaudir</strong> · despedir → <strong>acomiadar</strong></em><br><br>
+
+      <strong style="color:#a855f7;">🔗 Expressions calcades</strong><br>
+      Aquestes són les més difícils, perquè totes les paraules són catalanes però l'expressió no ho és:<br>
+      <em>tenir que → <strong>haver de</strong> · donar-se compte → <strong>adonar-se</strong> ·
+      aviam → <strong>a veure</strong></em><br><br>
+
+      <strong style="color:#22c55e;">✅ I compte!</strong><br>
+      Al joc també hi surten paraules que <strong>ja són correctes</strong> i que a vegades canviem
+      sense necessitat: <em>entrepà, galleda, vorera, bombeta, espelma, estoig</em>.<br><br>
+
+      <em>💡 Truc: si dubtes, pensa com ho diria una àvia que no hagi sentit mai el castellà.</em>`,
+    paraules: PARAULES_BAR,
+  },
+  plurals: {
+    id: 'plurals',
+    nom: 'Plurals',
+    icon: '➕',
+    color: '#6366f1',
+    disponible: true,
+    hasRegles: true,
+    modes: ['c1', 'c2', 'c4', 'c5'],
+    strictC5: true,
+    labelB: 'Afegim -OS',
+    labelV: 'Només -S',
+    hintC1: 'Com es fa el plural d\'aquesta paraula?',
+    regla_curta: "La majoria de mots només afegeixen -s, però els acabats en x, ç, sc i els aguts en -s fan -os o -ssos.",
+    regla_completa: `
+      <strong style="color:#6366f1;font-size:1.1rem;">Com es fa el plural</strong><br>
+
+      <strong style="color:#0ea5e9;">🔵 La norma: només -S</strong><br>
+      <em>llibre → llibre<strong>s</strong> · cotxe → cotxe<strong>s</strong> ·
+      cafè → cafè<strong>s</strong> · peu → peu<strong>s</strong></em><br><br>
+
+      <strong style="color:#22c55e;">🟢 Acabats en -A àtona → -ES</strong><br>
+      <em>casa → cas<strong>es</strong> · taula → taul<strong>es</strong> · dona → don<strong>es</strong></em><br>
+      Mai «-as». I compte que la lletra de davant pot canviar:
+      <em>oca → o<strong>ques</strong>, platja → plat<strong>ges</strong></em>.<br><br>
+
+      <strong style="color:#6366f1;">➕ Acabats en X, Ç, SC, TX → -OS</strong><br>
+      <em>peix → peix<strong>os</strong> · braç → bra<strong>ços</strong> ·
+      bosc → bosc<strong>os</strong> · esquitx → esquitx<strong>os</strong></em><br><br>
+
+      <strong style="color:#8b5cf6;">🔁 Aguts acabats en -S → -SSOS</strong><br>
+      <em>gos → go<strong>ssos</strong> · nas → na<strong>ssos</strong> · pas → pa<strong>ssos</strong></em><br><br>
+
+      <strong style="color:#94a3b8;">⬜ Plans acabats en -S: no canvien</strong><br>
+      <em>un llapis → dos llapis · un dilluns → tots els dilluns</em><br><br>
+
+      <strong style="color:#f59e0b;">🟡 La N amagada</strong><br>
+      <em>mà → ma<strong>ns</strong> · pa → pa<strong>ns</strong> · bo → bo<strong>ns</strong></em><br><br>
+
+      <em>💡 Truc: digues el plural en veu alta. Si «peixs» no et surt de la boca, és que hi va -os.</em>`,
+    paraules: PARAULES_PLU,
+  },
+  majuscules: {
+    id: 'majuscules',
+    nom: 'Majúscules',
+    icon: 'Aa',
+    color: '#f59e0b',
+    disponible: true,
+    hasRegles: true,
+    modes: ['c1', 'c2', 'c4'],
+    labelB: 'Majúscula',
+    labelV: 'minúscula',
+    hintC1: 'Aquesta paraula, com s\'escriu?',
+    regla_curta: "Els dies, els mesos, les estacions, els idiomes i els oficis van en minúscula. Els noms propis i les festes, en majúscula.",
+    regla_completa: `
+      <strong style="color:#f59e0b;font-size:1.1rem;">Majúscules i minúscules</strong><br>
+      Compte: el català <strong>no</strong> funciona com el castellà ni com l'anglès.<br><br>
+
+      <strong style="color:#0ea5e9;">📅 En MINÚSCULA</strong><br>
+      · Dies, mesos i estacions: <em>dilluns, gener, primavera</em><br>
+      · Idiomes: <em>català, castellà, anglès</em><br>
+      · Assignatures i matèries: <em>matemàtiques, tecnologia</em><br>
+      · Oficis i càrrecs: <em>el metge, la mestra, el president</em><br>
+      · Punts cardinals: <em>cap al nord, el sud del país</em><br><br>
+
+      <strong style="color:#f59e0b;">📍 En MAJÚSCULA</strong><br>
+      · Noms de persona i de lloc: <em>Pere, Barcelona, Catalunya</em><br>
+      · Muntanyes, rius i mars: <em>el Montseny, el Ter, el mar Mediterrani</em><br>
+      · Planetes: <em>la Terra, el Sol, Mart</em><br>
+      · Festes assenyalades: <em>Nadal, Pasqua, Sant Jordi, Setmana Santa</em><br>
+      · Noms propis d'institucions: <em>l'Institut Vall Verda</em><br><br>
+
+      <strong style="color:#8b5cf6;">🔍 La mateixa paraula, de les dues maneres</strong><br>
+      <em>Vaig a l'<strong>i</strong>nstitut</em> (un institut qualsevol) però
+      <em>l'<strong>I</strong>nstitut Vall Verda</em> (aquell en concret).<br>
+      <em>La <strong>t</strong>erra del camp</em> però <em>la <strong>T</strong>erra gira</em>.<br><br>
+
+      <em>💡 Truc: pregunta't si és el nom propi d'algú o d'alguna cosa concreta. Si ho és, majúscula.</em>`,
+    paraules: PARAULES_MAJ,
+  },
+  signes: {
+    id: 'signes',
+    nom: 'Els altres signes',
+    icon: ';:',
+    color: '#0891b2',
+    disponible: true,
+    hasRegles: true,
+    modes: ['c1', 'c2', 'c5'],
+    labelB: 'Està bé ✓',
+    labelV: 'Hi ha un error ✗',
+    hintC1: 'Aquesta frase està ben puntuada?',
+    regla_curta: "Dos punts, punt i coma, punts suspensius, cometes i interrogants. En català no s'obren els signes ¿ ni ¡.",
+    regla_completa: `
+      <strong style="color:#0891b2;font-size:1.1rem;">Els signes que no són la coma</strong><br>
+
+      <strong style="color:#6366f1;">🔷 Dos punts (:)</strong><br>
+      Anuncien una enumeració, una explicació, una causa o unes paraules d'algú:<br>
+      <em>Necessito tres coses<strong>:</strong> pa, llet i ous.</em><br>
+      <em>Vaig arribar tard<strong>:</strong> havia perdut el tren.</em><br>
+      ⚠️ Mai entre el verb i el seu complement: no «Va comprar<strong>:</strong> pomes i peres».<br><br>
+
+      <strong style="color:#8b5cf6;">🟣 Punt i coma (;)</strong><br>
+      Separa dues parts llargues que ja porten comes a dins, o va davant de connectors:<br>
+      <em>Uns volien anar al cine<strong>;</strong> els altres, a la platja.</em><br><br>
+
+      <strong style="color:#0ea5e9;">⋯ Punts suspensius (…)</strong><br>
+      Sempre <strong>tres</strong>, ni dos ni cinc. No es posen darrere d'«etcètera» ni
+      darrere d'una llista ja tancada amb «i».<br><br>
+
+      <strong style="color:#f59e0b;">❗ Interrogants i exclamacions</strong><br>
+      En català <strong>només es posa el signe del final</strong>: <em>Què has dit?</em> i
+      <em>Quina sort!</em> — mai <em>¿Què has dit?</em>. I amb un n'hi ha prou: no «!!!».<br>
+      Darrere d'un ? o d'un ! no s'hi afegeix cap punt.<br><br>
+
+      <strong style="color:#ec4899;">💬 Cometes i diàlegs</strong><br>
+      Les cometes catalanes són les <strong>baixes</strong>: «així».<br>
+      Als diàlegs es fa servir la <strong>ratlla llarga</strong> (—), no un guionet (-).<br><br>
+
+      <em>💡 Truc: llegeix la frase en veu alta. Si t'hi cal una pausa llarga, prova el punt i coma.</em>`,
+    paraules: PARAULES_SIG,
+  },
   puntuacio: {
     id: 'puntuacio',
+    modes: ['c1', 'c2', 'c3', 'c5'],
     nom: 'La coma',
     icon: ',',
     color: '#6366f1',
@@ -2997,6 +3799,8 @@ function getOrInitProfile(p) {
   if (!p.correctBv) p.correctBv = 0;
   if (!p.errorFinds) p.errorFinds = 0;
   if (!p.correctByRegla) p.correctByRegla = {};
+  if (!p.errorsByRegla) p.errorsByRegla = {};
+  if (!p.intentsByRegla) p.intentsByRegla = {};
   if (!p.consecutivePerfect) p.consecutivePerfect = 0;
   if (!p.dictPerfectGames) p.dictPerfectGames = 0;
   if (!p.c8PerfectGames) p.c8PerfectGames = 0;
@@ -3202,6 +4006,10 @@ function openTopic(temaId) {
   modesList.innerHTML = '';
   MODES.forEach(m => {
     if (m.id === 'repas') return; // El repàs té la seva pròpia pantalla (botó al home)
+    // Hi ha temes on algun mode no té sentit: al diacrític la paraula sola no es
+    // pot classificar sense la frase, i a «la coma» no hi ha cap mot mal escrit
+    // per buscar. Cada tema pot dir a quins modes es pot jugar.
+    if (Array.isArray(tema.modes) && !tema.modes.includes(m.id)) return;
     const desc = m.descFn ? m.descFn(tema) : m.desc;
     const btn = document.createElement('button');
     btn.className = 'mode-btn';
@@ -3418,13 +4226,25 @@ function buildC3(w) {
 }
 
 function buildC4(w) {
-  const wrongWord = w.formaErrada !== undefined
+  const formaDolenta = w.formaErrada !== undefined
     ? w.formaErrada
     : w.paraula.replace(w.lletra, w.lletra === 'b' ? 'v' : 'b');
   const sentence = w.exempleErrat !== undefined
     ? w.exempleErrat
-    : w.exemple.replace(new RegExp(w.paraula, 'i'), wrongWord);
+    : w.exemple.replace(new RegExp(w.paraula, 'i'), formaDolenta);
   const words = sentence.split(' ');
+
+  // La paraula que l'alumne ha de trobar surt de comparar la frase bona amb la
+  // dolenta: la primera que no coincideix. Si busquéssim el text de
+  // «formaErrada» tal qual, no el trobaríem quan a la frase hi surt amb
+  // l'article enganxat (L'ome), en plural (umans) o conjugat (Juguem).
+  let wrongWord = formaDolenta;
+  if (w.exemple) {
+    const bones = w.exemple.split(' ');
+    for (let i = 0; i < words.length; i++) {
+      if (bones[i] === undefined || bones[i] !== words[i]) { wrongWord = stripPunct(words[i]); break; }
+    }
+  }
   return { type:'c4', word:w, sentence, words, wrongWord, answer: wrongWord };
 }
 
@@ -3705,6 +4525,215 @@ function normalizeStr(s) {
 }
 
 // ===================================================================
+// PANELL DEL PROFESSOR
+// S'hi entra tocant cinc vegades el número de versió dels crèdits i posant
+// el PIN. Fa servir el modal propi del joc: prompt() queda bloquejat dins
+// d'un WebView i allà el panell no s'obriria mai.
+// ===================================================================
+
+const TEACHER_PIN_KEY = 'ortografia_teacher_pin';
+let _teacherTaps = 0, _teacherTapTimer = null;
+
+function getTeacherPin() { return localStorage.getItem(TEACHER_PIN_KEY) || '3141'; }
+
+function teacherTap() {
+  _teacherTaps++;
+  clearTimeout(_teacherTapTimer);
+  _teacherTapTimer = setTimeout(() => { _teacherTaps = 0; }, 2500);
+  if (_teacherTaps >= 5) {
+    _teacherTaps = 0;
+    demanaPinProfessor();
+  }
+}
+
+function demanaPinProfessor() {
+  jmDemana('🔑 <strong>PIN del professor</strong>', pin => {
+    if (pin === null) return;
+    if (pin.trim() === getTeacherPin()) {
+      closeCreditsIfAny();
+      showScreen('teacher-screen');
+      renderTeacherPanel();
+    } else {
+      jmAvis('❌ PIN incorrecte');
+    }
+  }, { password: true, numeric: true, placeholder: '••••', textOk: 'Entra' });
+}
+
+function canviaPinProfessor() {
+  jmDemana('Escriu el <strong>PIN nou</strong><br><small>Mínim 4 xifres</small>', nou => {
+    if (nou === null) return;
+    if (nou.trim().length < 4) { jmAvis('⚠️ El PIN ha de tenir com a mínim 4 xifres.'); return; }
+    localStorage.setItem(TEACHER_PIN_KEY, nou.trim());
+    jmAvis('✅ PIN actualitzat.');
+  }, { password: true, numeric: true, textOk: 'Desa' });
+}
+
+function closeCreditsIfAny() {
+  const bg = document.getElementById('credits-modal-bg');
+  if (bg) bg.classList.remove('open');
+}
+
+// Recompte per regla de tots els perfils del dispositiu.
+function recompteRegles() {
+  const files = [];
+  (state.profiles || []).forEach(p => {
+    const intents = p.intentsByRegla || {};
+    const errors = p.errorsByRegla || {};
+    Object.keys(intents).forEach(clau => {
+      const [tema, regla] = clau.split('|');
+      let f = files.find(x => x.clau === clau);
+      if (!f) { f = { clau, tema, regla, intents: 0, errors: 0, alumnes: 0 }; files.push(f); }
+      f.intents += intents[clau];
+      f.errors += errors[clau] || 0;
+      f.alumnes++;
+    });
+  });
+  files.forEach(f => { f.pct = f.intents ? Math.round((f.intents - f.errors) / f.intents * 100) : 0; });
+  return files;
+}
+
+function nomRegla(tema, regla) {
+  const rs = REGLES_MAP[tema];
+  return (rs && rs[regla] && rs[regla].nom) || regla;
+}
+
+function nomTema(tema) {
+  return (TEMES[tema] && TEMES[tema].nom) || tema;
+}
+
+function renderTeacherPanel() {
+  const cos = document.getElementById('teacher-body');
+  const perfils = state.profiles || [];
+
+  if (!perfils.length) {
+    cos.innerHTML = '<div class="card" style="text-align:center;padding:24px;">Encara no hi ha cap perfil en aquest dispositiu.</div>';
+    return;
+  }
+
+  // ── Resum per alumne ──
+  const filesAlumnes = perfils.map(p => {
+    const tot = p.totalAnswered || 0, ok = p.totalCorrect || 0;
+    const pct = tot ? Math.round(ok / tot * 100) : 0;
+    const color = tot === 0 ? '#94a3b8' : pct >= 80 ? '#22c55e' : pct >= 60 ? '#f59e0b' : '#ef4444';
+    return `<tr>
+      <td style="padding:6px 8px;">${esc(p.avatar || '👤')} ${esc(p.nom || '?')}</td>
+      <td style="padding:6px 8px;text-align:right;">${tot}</td>
+      <td style="padding:6px 8px;text-align:right;font-weight:800;color:${color};">${tot ? pct + '%' : '—'}</td>
+      <td style="padding:6px 8px;text-align:right;">${p.xp || 0}</td>
+    </tr>`;
+  }).join('');
+
+  // ── Regles: les que més fallen ──
+  const regles = recompteRegles().filter(f => f.intents >= 3).sort((a, b) => a.pct - b.pct);
+  const fluixes = regles.slice(0, 12);
+  const filesRegles = fluixes.length ? fluixes.map(f => {
+    const color = f.pct >= 80 ? '#22c55e' : f.pct >= 60 ? '#f59e0b' : '#ef4444';
+    return `<tr>
+      <td style="padding:6px 8px;">
+        <div style="font-weight:700;">${esc(nomRegla(f.tema, f.regla))}</div>
+        <div style="font-size:0.72rem;color:var(--text-muted);">${esc(nomTema(f.tema))}</div>
+      </td>
+      <td style="padding:6px 8px;text-align:right;">${f.intents}</td>
+      <td style="padding:6px 8px;text-align:right;">${f.errors}</td>
+      <td style="padding:6px 8px;text-align:right;">
+        <div style="font-weight:800;color:${color};">${f.pct}%</div>
+        <div style="height:4px;width:52px;background:rgba(0,0,0,0.08);border-radius:2px;margin-top:3px;">
+          <div style="height:100%;width:${f.pct}%;background:${color};border-radius:2px;"></div>
+        </div>
+      </td>
+    </tr>`;
+  }).join('') : '<tr><td colspan="4" style="padding:14px;text-align:center;color:var(--text-muted);">Encara no hi ha prou respostes. Cal que hagin jugat una mica.</td></tr>';
+
+  // ── Temes ──
+  const perTema = {};
+  perfils.forEach(p => {
+    Object.entries(p.stats || {}).forEach(([tema, modes]) => {
+      if (!perTema[tema]) perTema[tema] = { ok: 0, tot: 0, partides: 0 };
+      Object.values(modes).forEach(m => {
+        perTema[tema].ok += m.totalCorrect || 0;
+        perTema[tema].tot += m.totalAnswered || 0;
+        perTema[tema].partides += m.partides || 0;
+      });
+    });
+  });
+  const filesTemes = Object.entries(perTema).sort((a, b) => b[1].tot - a[1].tot).map(([tema, d]) => {
+    const pct = d.tot ? Math.round(d.ok / d.tot * 100) : 0;
+    const color = pct >= 80 ? '#22c55e' : pct >= 60 ? '#f59e0b' : '#ef4444';
+    return `<tr>
+      <td style="padding:6px 8px;">${esc(nomTema(tema))}</td>
+      <td style="padding:6px 8px;text-align:right;">${d.partides}</td>
+      <td style="padding:6px 8px;text-align:right;">${d.tot}</td>
+      <td style="padding:6px 8px;text-align:right;font-weight:800;color:${color};">${d.tot ? pct + '%' : '—'}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="4" style="padding:14px;text-align:center;color:var(--text-muted);">Cap partida encara.</td></tr>';
+
+  const th = 'padding:6px 8px;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.4px;color:var(--text-muted);text-align:right;';
+  const th1 = th.replace('text-align:right', 'text-align:left');
+  const taula = 'width:100%;border-collapse:collapse;font-size:0.86rem;';
+
+  cos.innerHTML = `
+    <div class="card" style="margin-bottom:14px;">
+      <div style="font-weight:800;margin-bottom:8px;">🔴 Regles que cal repassar</div>
+      <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:8px;">
+        Ordenades de pitjor a millor, comptant totes les respostes de tots els perfils del dispositiu.
+      </div>
+      <div style="overflow-x:auto;">
+        <table style="${taula}">
+          <tr><th style="${th1}">Regla</th><th style="${th}">Intents</th><th style="${th}">Errors</th><th style="${th}">Encerts</th></tr>
+          ${filesRegles}
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px;">
+      <div style="font-weight:800;margin-bottom:8px;">📚 Per tema</div>
+      <div style="overflow-x:auto;">
+        <table style="${taula}">
+          <tr><th style="${th1}">Tema</th><th style="${th}">Partides</th><th style="${th}">Respostes</th><th style="${th}">Encerts</th></tr>
+          ${filesTemes}
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px;">
+      <div style="font-weight:800;margin-bottom:8px;">🧑‍🎓 Per alumne</div>
+      <div style="overflow-x:auto;">
+        <table style="${taula}">
+          <tr><th style="${th1}">Perfil</th><th style="${th}">Respostes</th><th style="${th}">Encerts</th><th style="${th}">XP</th></tr>
+          ${filesAlumnes}
+        </table>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-full" onclick="copiaResumProfessor()" style="margin-bottom:8px;">📋 Copia el resum</button>
+    <button class="btn btn-secondary btn-full" onclick="canviaPinProfessor()" style="margin-bottom:8px;">🔑 Canvia el PIN</button>
+    <button class="btn btn-secondary btn-full" onclick="showScreen('home')">← Tornar al joc</button>
+  `;
+}
+
+// Resum en text pla, per enganxar-lo on convingui.
+function copiaResumProfessor() {
+  const perfils = state.profiles || [];
+  const l = ['JOC ORTOGRAFIA — resum del ' + new Date().toLocaleDateString('ca-ES'), ''];
+  l.push('PER ALUMNE');
+  perfils.forEach(p => {
+    const tot = p.totalAnswered || 0, ok = p.totalCorrect || 0;
+    l.push(`  ${p.nom || '?'}: ${ok}/${tot} (${tot ? Math.round(ok / tot * 100) : 0}%) · ${p.xp || 0} XP`);
+  });
+  l.push('', 'REGLES QUE CAL REPASSAR');
+  recompteRegles().filter(f => f.intents >= 3).sort((a, b) => a.pct - b.pct).slice(0, 12)
+    .forEach(f => l.push(`  ${f.pct}%  ${nomRegla(f.tema, f.regla)} (${nomTema(f.tema)}) — ${f.errors} errors de ${f.intents}`));
+  const txt = l.join('\n');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(
+      () => showToast('✅ Resum copiat'),
+      () => jmAvis('<div style="text-align:left;white-space:pre-wrap;font-size:0.8rem;">' + esc(txt) + '</div>'));
+  } else {
+    jmAvis('<div style="text-align:left;white-space:pre-wrap;font-size:0.8rem;">' + esc(txt) + '</div>');
+  }
+}
+
+// ===================================================================
 // ANSWER PROCESSING
 // ===================================================================
 function processAnswer(correct, q) {
@@ -3718,6 +4747,19 @@ function processAnswer(correct, q) {
   if (correct && q.word?.regla) {
     if (!p.correctByRegla) p.correctByRegla = {};
     p.correctByRegla[q.word.regla] = (p.correctByRegla[q.word.regla] || 0) + 1;
+  }
+  // …i també els errors, que és el que li interessa al professor per saber
+  // quina regla cal tornar a explicar. Es desa el tema amb la regla perquè
+  // dos temes poden fer servir el mateix codi.
+  if (!correct && q.word?.regla) {
+    if (!p.errorsByRegla) p.errorsByRegla = {};
+    const clau = state.currentTema + '|' + q.word.regla;
+    p.errorsByRegla[clau] = (p.errorsByRegla[clau] || 0) + 1;
+  }
+  if (q.word?.regla) {
+    if (!p.intentsByRegla) p.intentsByRegla = {};
+    const clau = state.currentTema + '|' + q.word.regla;
+    p.intentsByRegla[clau] = (p.intentsByRegla[clau] || 0) + 1;
   }
 
   if (correct) {
@@ -5336,5 +6378,91 @@ function initSplash() {
 }
 initSplash();
 </script>
+
+<!-- ═══ MODAL PROPI (substitueix alert/confirm/prompt) ═══ -->
+<div id="jm-back" class="jm-back">
+  <div class="jm-card" role="dialog" aria-modal="true" aria-labelledby="jm-text">
+    <div class="jm-text" id="jm-text"></div>
+    <input class="jm-input" id="jm-input" autocomplete="off">
+    <div class="jm-btns" id="jm-btns"></div>
+  </div>
+</div>
+
+<script>
+/* Modal propi: alert(), confirm() i prompt() queden bloquejats dins d'un
+   WebView, i allà el botó que els crida es queda mort. Aquestes tres funcions
+   fan el mateix però amb DOM del joc.
+     jmAvis(text[, quanTanqui])
+     jmConfirma(text, quanSigui[, textOk][, textCancel])
+     jmDemana(text, quanEscrigui[, {placeholder, password, numeric, textOk}])
+   La resposta arriba per callback, no com a valor de retorn. */
+(function () {
+  var cb = null, ambInput = false;
+  function el(id) { return document.getElementById(id); }
+
+  function obre(text, botons, opc) {
+    el('jm-text').innerHTML = text;
+    var inp = el('jm-input');
+    ambInput = !!opc;
+    inp.classList.toggle('visible', ambInput);
+    if (ambInput) {
+      inp.value = opc.valor || '';
+      inp.type = opc.password ? 'password' : 'text';
+      inp.inputMode = opc.numeric ? 'numeric' : 'text';
+      inp.placeholder = opc.placeholder || '';
+    }
+    el('jm-btns').innerHTML = botons;
+    el('jm-back').classList.add('obert');
+    setTimeout(function () {
+      var f = ambInput ? inp : el('jm-btns').querySelector('.jm-btn-ok');
+      if (f) f.focus();
+    }, 40);
+  }
+
+  window.jmAvis = function (text, quanTanqui) {
+    cb = quanTanqui || null;
+    obre(text, '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">D\'acord</button>');
+  };
+
+  window.jmConfirma = function (text, quanSigui, textOk, textCancel) {
+    cb = quanSigui || null;
+    obre(text,
+      '<button type="button" class="jm-btn jm-btn-cancel" onclick="jmTanca(false)">' + (textCancel || 'Cancel\u00b7la') + '</button>' +
+      '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">' + (textOk || 'S\u00ed, endavant') + '</button>');
+  };
+
+  window.jmDemana = function (text, quanEscrigui, opc) {
+    opc = opc || {};
+    cb = quanEscrigui || null;
+    obre(text,
+      '<button type="button" class="jm-btn jm-btn-cancel" onclick="jmTanca(false)">' + (opc.textCancel || 'Cancel\u00b7la') + '</button>' +
+      '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">' + (opc.textOk || 'D\'acord') + '</button>',
+      opc);
+  };
+
+  window.jmTanca = function (ok) {
+    var valor = ambInput ? el('jm-input').value : null;
+    el('jm-back').classList.remove('obert');
+    var f = cb; cb = null; ambInput = false;
+    if (ok && f) f(valor);
+  };
+
+  // En fase de captura, perquè les tecles no arribin al joc mentre el modal
+  // és obert (alguns jocs tenen dreceres amb Enter o Espai).
+  document.addEventListener('keydown', function (e) {
+    var back = el('jm-back');
+    if (!back || !back.classList.contains('obert')) return;
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); jmTanca(false); }
+    else if (e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); jmTanca(true); }
+    else if (e.key === ' ' && document.activeElement !== el('jm-input')) { e.stopPropagation(); }
+  }, true);
+
+  // Clicar el fons fosc equival a cancel·lar.
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.id === 'jm-back') jmTanca(false);
+  });
+})();
+</script>
+
 </body>
 </html>
