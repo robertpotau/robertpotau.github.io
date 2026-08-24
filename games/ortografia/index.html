@@ -629,14 +629,26 @@
   /* ===== C1 ANSWER BUTTONS (B / V) ===== */
   .answers-grid-bv {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* minmax(0,1fr): sense això una etiqueta llarga eixampla la columna i
+       el botó surt de la pantalla */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 18px;
     margin-bottom: 16px;
   }
   .answer-btn-bv {
-    font-size: 3.2rem;
+    /* La mida s'adapta a l'amplada: hi ha temes amb etiquetes d'una lletra
+       (B / V) i temes amb frases senceres («És un barbarisme») */
+    font-size: clamp(0.95rem, 6vw, 3.2rem);
+    line-height: 1.15;
+    /* break-word i no anywhere: anywhere partia «Barbarisme» pel mig */
+    overflow-wrap: break-word;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     font-weight: 900;
-    padding: 28px 16px;
+    padding: 22px 12px;
     min-height: 120px;
     border: none;
     border-radius: var(--radius);
@@ -644,7 +656,8 @@
     font-family: inherit;
     color: #fff;
     transition: transform 0.1s, box-shadow 0.1s;
-    letter-spacing: 2px;
+    /* 2px per lletra feien desbordar les etiquetes llargues dels temes nous */
+    letter-spacing: 0.5px;
     text-shadow: 0 2px 6px rgba(0,0,0,0.18);
   }
   .answer-btn-bv:active { transform: translateY(6px) !important; }
@@ -1105,7 +1118,9 @@
     .avatar-grid    { grid-template-columns: repeat(5, 1fr); }
     .topics-grid    { grid-template-columns: 1fr; }
     .question-word  { font-size: 2.2rem; }
-    .answer-btn-bv  { font-size: 2.6rem; min-height: 100px; }
+    /* clamp, no una mida fixa: en pantalla estreta les etiquetes llargues
+       («Majúscula», «Barbarisme») no hi cabien */
+    .answer-btn-bv  { font-size: clamp(0.95rem, 5.6vw, 2.6rem); min-height: 100px; }
     .trophies-grid  { grid-template-columns: repeat(2, 1fr); }
     .stats-grid     { grid-template-columns: 1fr; }
   }
@@ -3143,8 +3158,8 @@ const TEMES = {
     icon: '´',
     color: '#f59e0b',
     disponible: true,
-    labelB: 'Sí, porta ´',
-    labelV: 'No, sense ´',
+    labelB: 'Amb accent ´',
+    labelV: 'Sense accent',
     hintC1: 'Aquesta paraula porta accent?',
     strictC5: true,
     regla_curta: "Busca la síl·laba tònica. Les agudes porten accent si acaben en vocal, vocal+s, -en o -in; les planes, just al revés; les esdrúixoles, sempre.",
@@ -3158,8 +3173,8 @@ const TEMES = {
     color: '#10b981',
     disponible: true,
     hasRegles: true,
-    labelB: 'L·L (ela geminada)',
-    labelV: 'LL (ela palatal)',
+    labelB: 'L·L',
+    labelV: 'LL',
     hintC1: 'Com s\'escriu? Té L·L o LL?',
     regla_curta: "La L·L (amb punt volat ·) és l'ela geminada. No s'ha de confondre amb LL (ela palatal).",
     regla_completa: `
@@ -3254,8 +3269,8 @@ const TEMES = {
     color: '#06b6d4',
     disponible: true,
     hasRegles: true,
-    labelB: 'Sí, porta dièresi (ï/ü)',
-    labelV: 'No, sense dièresi',
+    labelB: 'Amb dièresi',
+    labelV: 'Sense dièresi',
     hintC1: 'Aquesta paraula porta dièresi?',
     strictC5: true,
     regla_curta: "La dièresi (¨) indica hiat (ra-ïm) o que la U de GÜ/QÜ es pronuncia (pingüí).",
@@ -3311,8 +3326,8 @@ const TEMES = {
     color: '#84cc16',
     disponible: true,
     hasRegles: true,
-    labelB: "Sí, s'apostrofa",
-    labelV: "No, no s'apostrofa",
+    labelB: "S'apostrofa",
+    labelV: "No s'apostrofa",
     hintC1: "Cal apostrofar aquí?",
     strictC5: false,
     regla_curta: "L'apòstrof indica l'elisió d'una vocal: el/la → l' davant vocal/H, de → d' davant vocal/H.",
@@ -3383,8 +3398,8 @@ const TEMES = {
     disponible: true,
     hasRegles: true,
     modes: ['c1', 'c4'],
-    labelB: 'Sí, porta accent',
-    labelV: 'No, sense accent',
+    labelB: 'Amb accent', 
+    labelV: 'Sense accent',
     hintC1: 'La paraula marcada, en aquesta frase, porta accent?',
     regla_curta: "Quinze parells de paraules s'escriuen igual però una porta accent i l'altra no. El significat és el que mana.",
     regla_completa: `
@@ -3488,8 +3503,8 @@ const TEMES = {
     color: '#ef4444',
     disponible: true,
     hasRegles: true,
-    labelB: 'RR (doble)',
-    labelV: 'R (simple)',
+    labelB: 'RR',
+    labelV: 'R',
     hintC1: 'Quantes erres hi van: una o dues?',
     regla_curta: "Entre vocals, so fort = RR i so suau = R. Darrere de consonant, sempre una. I compte amb la R final que no se sent!",
     regla_completa: `
@@ -3522,8 +3537,8 @@ const TEMES = {
     disponible: true,
     hasRegles: true,
     modes: ['c1', 'c2', 'c4', 'c5'],
-    labelB: 'És català ✓',
-    labelV: 'És un barbarisme ✗',
+    labelB: 'Català ✓',
+    labelV: 'Barbarisme ✗',
     hintC1: 'Aquesta paraula, es diu així en català?',
     regla_curta: "Un barbarisme és una paraula d'una altra llengua que fem servir tenint-ne una de catalana.",
     regla_completa: `
@@ -3561,8 +3576,8 @@ const TEMES = {
     hasRegles: true,
     modes: ['c1', 'c2', 'c4', 'c5'],
     strictC5: true,
-    labelB: 'Afegim -OS',
-    labelV: 'Només -S',
+    labelB: '-OS',
+    labelV: 'només -S',
     hintC1: 'Com es fa el plural d\'aquesta paraula?',
     regla_curta: "La majoria de mots només afegeixen -s, però els acabats en x, ç, sc i els aguts en -s fan -os o -ssos.",
     regla_completa: `
@@ -3639,8 +3654,8 @@ const TEMES = {
     disponible: true,
     hasRegles: true,
     modes: ['c1', 'c2', 'c5'],
-    labelB: 'Està bé ✓',
-    labelV: 'Hi ha un error ✗',
+    labelB: 'Ben posat ✓',
+    labelV: 'Hi ha error ✗',
     hintC1: 'Aquesta frase està ben puntuada?',
     regla_curta: "Dos punts, punt i coma, punts suspensius, cometes i interrogants. En català no s'obren els signes ¿ ni ¡.",
     regla_completa: `
@@ -3680,8 +3695,8 @@ const TEMES = {
     color: '#6366f1',
     disponible: true,
     hasRegles: true,
-    labelB: 'Sí, hi va coma ✓',
-    labelV: 'No, sense coma ✗',
+    labelB: 'Amb coma ✓',
+    labelV: 'Sense coma ✗',
     hintC1: 'Cal posar coma en aquest lloc de la frase?',
     regla_curta: "La coma va davant però/sinó, darrere d'introductoris, en llistes i vocatius. MAI entre subjecte i verb, ni davant 'que'.",
     regla_completa: `
