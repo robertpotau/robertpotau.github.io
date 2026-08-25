@@ -6,11 +6,11 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%236d28d9%22%2F%3E%3Cg%20fill%3D%22%23ffffff%22%20stroke%3D%22%23ffffff%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2234%22%20fill%3D%22none%22%20stroke-width%3D%228%22%2F%3E%3Cpath%20d%3D%22M50%2030%20L50%2052%20L66%2060%22%20fill%3D%22none%22%20stroke-width%3D%228%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
   <meta name="theme-color" content="#6d28d9">
 <title>Quina hora és? — Joc del rellotge en català</title>
-<meta name="description" content="Aprèn les hores en català amb un rellotge analògic interactiu: 2 modes de joc i 5 estils de rellotge. Joc educatiu gratuït per a Primària i aula d'acollida.">
+<meta name="description" content="Aprèn les hores en català amb un rellotge analògic interactiu: sistema de campanar (quarts i mig quarts) i sistema de rellotge, 3 modes de joc i 3 nivells. Joc educatiu gratuït.">
 <link rel="canonical" href="https://robertpotau.github.io/games/quina-hora-es/index.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Quina hora és? — Joc del rellotge en català">
-<meta property="og:description" content="Aprèn les hores en català amb un rellotge analògic interactiu: 2 modes de joc i 5 estils de rellotge. Joc educatiu gratuït per a Primària i aula d'acollida.">
+<meta property="og:description" content="Aprèn les hores en català amb un rellotge analògic interactiu: sistema de campanar (quarts i mig quarts) i sistema de rellotge, 3 modes de joc i 3 nivells. Joc educatiu gratuït.">
 <meta property="og:image" content="https://robertpotau.github.io/screenshots/quina-hora-es.jpg">
 <meta property="og:url" content="https://robertpotau.github.io/games/quina-hora-es/index.html">
 <meta name="twitter:card" content="summary_large_image">
@@ -23,14 +23,14 @@
   ],
   "name": "Quina hora és?",
   "url": "https://robertpotau.github.io/games/quina-hora-es/index.html",
-  "description": "Aprèn les hores en català amb un rellotge analògic interactiu: 2 modes de joc i 5 estils de rellotge. Joc educatiu gratuït per a Primària i aula d'acollida.",
+  "description": "Aprèn les hores en català amb un rellotge analògic interactiu: sistema de campanar (quarts i mig quarts) i sistema de rellotge, 3 modes de joc i 3 nivells. Joc educatiu gratuït.",
   "image": "https://robertpotau.github.io/screenshots/quina-hora-es.jpg",
   "inLanguage": "ca",
   "applicationCategory": "EducationalApplication",
   "learningResourceType": "Game",
   "educationalUse": "practice",
   "educationalLevel": "Primària i acollida",
-  "teaches": "les hores, rellotge analògic, català",
+  "teaches": "les hores en català, sistema de campanar, sistema de rellotge, rellotge analògic",
   "audience": {
     "@type": "EducationalAudience",
     "educationalRole": "student"
@@ -163,6 +163,40 @@ h1 {
   color: #fff;
   background: rgba(255,255,255,0.15);
 }
+
+/* ── Options row (sistema + nivell) ── */
+.opts-row {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 8px; margin-bottom: 10px; z-index: 1;
+}
+.opt-group {
+  display: flex; align-items: center; gap: 3px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 22px; padding: 3px 3px 3px 11px;
+}
+.opt-label {
+  font-size: 0.68rem; font-weight: 800; letter-spacing: 0.04em;
+  text-transform: uppercase; color: rgba(255,255,255,0.6);
+  margin-right: 4px; white-space: nowrap;
+}
+.opt-btn {
+  background: transparent; border: none; border-radius: 18px;
+  padding: 6px 12px;
+  font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 800;
+  color: rgba(255,255,255,0.72); cursor: pointer;
+  transition: all 0.2s; white-space: nowrap;
+}
+.opt-btn.active {
+  background: rgba(255,255,255,0.92);
+  color: var(--mode-active);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.16);
+}
+.opt-btn:hover:not(.active):not(:disabled) {
+  color: #fff; background: rgba(255,255,255,0.14);
+}
+.opt-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
 /* ── How to play button ── */
 .howto-btn {
@@ -699,6 +733,9 @@ h1 {
   .clock-wrapper, #clock-svg { width: 190px; height: 190px; }
   .answer-btn { font-size: 0.88rem; padding: 12px 6px; }
   .mode-btn { padding: 8px 13px; font-size: 0.82rem; }
+  .opt-btn { padding: 6px 9px; font-size: 0.72rem; }
+  .opt-group { padding-left: 9px; }
+  .opt-label { font-size: 0.62rem; }
 }
 </style>
 </head>
@@ -715,6 +752,23 @@ h1 {
   <button class="mode-btn active" data-mode="mix">🎲 Barreja</button>
   <button class="mode-btn"        data-mode="set">🕐 Posa el rellotge</button>
   <button class="mode-btn"        data-mode="name">💬 Digues-ho</button>
+</div>
+
+<div class="opts-row">
+  <div class="opt-group" id="system-selector">
+    <span class="opt-label">Sistema</span>
+    <button class="opt-btn active" data-system="campanar"
+            title="Sistema tradicional de quarts — català central i nord-occidental">🔔 Campanar</button>
+    <button class="opt-btn"        data-system="rellotge"
+            title="Sistema de mitges — valencià, balear, rossellonès i part del tortosí">🕰️ Rellotge</button>
+  </div>
+  <div class="opt-group" id="level-selector">
+    <span class="opt-label">Nivell</span>
+    <button class="opt-btn"        data-level="basic"  title="Només en punt i quarts">🟢 Bàsic</button>
+    <button class="opt-btn active" data-level="mitja"  title="Tots els minuts de 5 en 5">🟡 Mitjà</button>
+    <button class="opt-btn" id="btn-level-migs" data-level="migs"
+            title="Afegeix els mig quarts (7 min 30 s) — només al sistema de campanar">🔴 Mig quarts</button>
+  </div>
 </div>
 
 <button class="howto-btn" onclick="openHowTo()">📖 Com es juga</button>
@@ -796,7 +850,7 @@ h1 {
 
       <div class="credit-footer">
         <div class="cf-title">⏰ Quina hora és?</div>
-        <div class="cf-ver"><strong>v2.1</strong> — Agost 2026</div>
+        <div class="cf-ver"><strong>v3.0</strong> — 25 d'agost de 2026</div>
         <div class="credits-cc">
           <strong>© 2026 Robert Potau Nuñez</strong><br>
           Tots els drets reservats<br>
@@ -951,35 +1005,114 @@ document.addEventListener('click', e => {
 });
 
 // ═══════════════════════════════════════════════
-//  DATA — Sistema de quarts català
+//  DATA — Els dos sistemes horaris catalans
+//  Vegeu hores-en-catala.md per a la justificació normativa.
 // ═══════════════════════════════════════════════
 
 const H_NAMES_CA = ['una','dues','tres','quatre','cinc','sis','set','vuit','nou','deu','onze','dotze'];
-const MIN_WORDS_CA = { 5:'cinc', 10:'deu', 20:'vint', 25:'vint-i-cinc' };
 
 function deContracted(hourName) {
   return (hourName === 'una' || hourName === 'onze') ? "d'" : 'de ';
 }
 
-function timeToPhrase(h, m) {
-  const curr = H_NAMES_CA[h - 1];
-  const next = H_NAMES_CA[h % 12];
-  const artCurr = (h === 1) ? 'la' : 'les';
-  const artNext = (h % 12 === 0) ? 'la' : 'les';
+// Cada taula rep (c = hora en curs, n = hora següent) i retorna la frase.
+// Objecte { name, art, de }.
 
-  if (m === 0)  return `${artCurr} ${curr} en punt`;
-  if (m === 15) return `un quart ${deContracted(next)}${next}`;
-  if (m === 30) return `dos quarts ${deContracted(next)}${next}`;
-  if (m === 45) return `tres quarts ${deContracted(next)}${next}`;
-  if (m < 30)   return `${artCurr} ${curr} i ${MIN_WORDS_CA[m]}`;
-  return `${artNext} ${next} menys ${MIN_WORDS_CA[60 - m]}`;
+// ── 🔔 SISTEMA DE CAMPANAR (quarts) ────────────────────────────────
+// Regla d'or: als quarts els minuts només s'hi SUMEN.
+// "tres quarts menys cinc" NO és correcte → 8:40 = "dos quarts i deu de nou".
+const T_CAMPANAR = {
+  0:    (c,n) => `${c.art} ${c.name} en punt`,
+  5:    (c,n) => `${c.art} ${c.name} i cinc`,
+  7.5:  (c,n) => `mig quart ${n.de}${n.name}`,
+  10:   (c,n) => `${c.art} ${c.name} i deu`,
+  15:   (c,n) => `un quart ${n.de}${n.name}`,
+  20:   (c,n) => `un quart i cinc ${n.de}${n.name}`,
+  22.5: (c,n) => `un quart i mig ${n.de}${n.name}`,
+  25:   (c,n) => `un quart i deu ${n.de}${n.name}`,
+  30:   (c,n) => `dos quarts ${n.de}${n.name}`,
+  35:   (c,n) => `dos quarts i cinc ${n.de}${n.name}`,
+  37.5: (c,n) => `dos quarts i mig ${n.de}${n.name}`,
+  40:   (c,n) => `dos quarts i deu ${n.de}${n.name}`,
+  45:   (c,n) => `tres quarts ${n.de}${n.name}`,
+  50:   (c,n) => `tres quarts i cinc ${n.de}${n.name}`,
+  52.5: (c,n) => `tres quarts i mig ${n.de}${n.name}`,
+  55:   (c,n) => `tres quarts i deu ${n.de}${n.name}`
+};
+
+// ── 🕰️ SISTEMA DE RELLOTGE (mitges) ────────────────────────────────
+// Primera meitat: se suma a l'hora en curs. Segona: es resta de la següent.
+// No hi ha mig quarts: són exclusius del sistema de campanar.
+const T_RELLOTGE = {
+  0:  (c,n) => `${c.art} ${c.name} en punt`,
+  5:  (c,n) => `${c.art} ${c.name} i cinc`,
+  10: (c,n) => `${c.art} ${c.name} i deu`,
+  15: (c,n) => `${c.art} ${c.name} i quart`,
+  20: (c,n) => `${c.art} ${c.name} i vint`,
+  25: (c,n) => `${c.art} ${c.name} i vint-i-cinc`,
+  30: (c,n) => `${c.art} ${c.name} i mitja`,
+  35: (c,n) => `${n.art} ${n.name} menys vint-i-cinc`,
+  40: (c,n) => `${n.art} ${n.name} menys vint`,
+  45: (c,n) => `${n.art} ${n.name} menys quart`,
+  50: (c,n) => `${n.art} ${n.name} menys deu`,
+  55: (c,n) => `${n.art} ${n.name} menys cinc`
+};
+
+const SYSTEMS = {
+  campanar: { table: T_CAMPANAR, migQuarts: true  },
+  rellotge: { table: T_RELLOTGE, migQuarts: false }
+};
+
+const LEVELS = {
+  basic: [0,15,30,45],
+  mitja: [0,5,10,15,20,25,30,35,40,45,50,55],
+  migs:  [0,5,7.5,10,15,20,22.5,25,30,35,37.5,40,45,50,52.5,55]
+};
+
+let hourSystem = 'campanar';
+let gameLevel  = 'mitja';
+
+function hourInfo(h) {
+  const name = H_NAMES_CA[h - 1];
+  return { name, art: (h === 1) ? 'la' : 'les', de: deContracted(name) };
 }
 
-const ALL_TIMES = [];
-for (let h=1;h<=12;h++) for (let m of [0,5,10,15,20,25,30,35,40,45,50,55]) ALL_TIMES.push([h,m]);
-function randomTime() { return ALL_TIMES[Math.floor(Math.random()*ALL_TIMES.length)]; }
+function timeToPhrase(h, m, sys) {
+  const fn = SYSTEMS[sys || hourSystem].table[m];
+  if (!fn) return '';
+  return fn(hourInfo(h), hourInfo((h % 12) + 1));
+}
+
+// Minuts jugables segons nivell + sistema (els mig quarts només al campanar)
+function activeMinutes() {
+  if (gameLevel === 'migs' && !SYSTEMS[hourSystem].migQuarts) return LEVELS.mitja;
+  return LEVELS[gameLevel];
+}
+// Minuts explorables al rellotge de "Com es juga" (sempre el màxim del sistema)
+function teachMinutes() {
+  return SYSTEMS[hourSystem].migQuarts ? LEVELS.migs : LEVELS.mitja;
+}
+
+function allTimes() {
+  const out = [];
+  for (let h = 1; h <= 12; h++) for (const m of activeMinutes()) out.push([h, m]);
+  return out;
+}
+function randomTime() { const t = allTimes(); return t[Math.floor(Math.random()*t.length)]; }
+
+// Ajusta uns minuts crus (0–60) al valor permès més proper, tenint en compte
+// que la busca dona la volta (p. ex. 59 min és més a prop de :00 que de :55).
+function snapMinute(raw, mins) {
+  let best = mins[0], bd = Infinity;
+  for (const m of mins) {
+    let d = Math.abs(raw - m); d = Math.min(d, 60 - d);
+    if (d < bd) { bd = d; best = m; }
+  }
+  return best;
+}
 
 function generateDistractors(th,tm,count) {
+  const ALL_TIMES = allTimes();
   const pool = ALL_TIMES.filter(([h,m])=>!(h===th&&m===tm));
   pool.sort(([h1,m1],[h2,m2])=>{
     const d1=Math.min(Math.abs(h1-th),12-Math.abs(h1-th))*60+Math.abs(m1-tm);
@@ -1071,7 +1204,7 @@ document.addEventListener('mouseup',()=>{dragging=null;});
 document.addEventListener('touchend',()=>{dragging=null;});
 
 function applyDrag(a){
-  if(dragging==='minute'){clockM=Math.round((a/360)*60/5)*5%60;}
+  if(dragging==='minute'){clockM=snapMinute((a/360)*60,activeMinutes());}
   else{let s=Math.round((a/360)*12)%12;clockH=s===0?12:s;}
   setHands(clockH,clockM);
 }
@@ -1186,6 +1319,53 @@ document.querySelectorAll('.mode-btn').forEach(btn=>{
 });
 
 // ═══════════════════════════════════════════════
+//  SELECTORS DE SISTEMA I NIVELL
+// ═══════════════════════════════════════════════
+
+function loadOptions(){
+  try{
+    const s=localStorage.getItem('qhe-system'), l=localStorage.getItem('qhe-level');
+    if(s && SYSTEMS[s]) hourSystem=s;
+    if(l && LEVELS[l])  gameLevel=l;
+  }catch(e){}
+}
+
+function applyOptionUI(){
+  const migsOk=SYSTEMS[hourSystem].migQuarts;
+  if(!migsOk && gameLevel==='migs') gameLevel='mitja';
+
+  document.querySelectorAll('#system-selector .opt-btn').forEach(b=>
+    b.classList.toggle('active', b.dataset.system===hourSystem));
+  document.querySelectorAll('#level-selector .opt-btn').forEach(b=>
+    b.classList.toggle('active', b.dataset.level===gameLevel));
+
+  const migsBtn=document.getElementById('btn-level-migs');
+  migsBtn.disabled=!migsOk;
+  migsBtn.title=migsOk
+    ? 'Afegeix els mig quarts (7 min 30 s) — un quart i mig, dos quarts i mig...'
+    : 'Els mig quarts només existeixen al sistema de campanar';
+
+  try{
+    localStorage.setItem('qhe-system',hourSystem);
+    localStorage.setItem('qhe-level',gameLevel);
+  }catch(e){}
+}
+
+function onOptionChange(){
+  applyOptionUI();
+  buildSlides();
+  if(roundTimer)clearTimeout(roundTimer);
+  answered=true; newRound();
+}
+
+document.querySelectorAll('#system-selector .opt-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{ hourSystem=btn.dataset.system; onOptionChange(); });
+});
+document.querySelectorAll('#level-selector .opt-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{ if(btn.disabled)return; gameLevel=btn.dataset.level; onOptionChange(); });
+});
+
+// ═══════════════════════════════════════════════
 //  CONFETTI
 // ═══════════════════════════════════════════════
 
@@ -1238,15 +1418,16 @@ function playWrong(){const t=getAC().currentTime;playTone(220,t,0.18,'sawtooth',
   document.body.appendChild(b);}})();
 
 // ═══════════════════════════════════════════════
-//  HOW-TO SLIDES — Sistema de quarts català
+//  HOW-TO SLIDES — un joc de diapositives per sistema
 // ═══════════════════════════════════════════════
 
-const SLIDES = [
-  {
-    title: '🕐 El rellotge!',
-    color: 'linear-gradient(135deg,#5c35c9,#1a5fe8)',
-    h: 12, m: 0,
-    content: `
+// ── Diapositives compartides ──────────────────────────────────
+
+const SL_RELLOTGE_INTRO = {
+  title: '🕐 El rellotge!',
+  color: 'linear-gradient(135deg,#5c35c9,#1a5fe8)',
+  h: 12, m: 0,
+  content: `
       <div class="ht-slide">
         <div class="ht-big-emoji">⏰</div>
         <div class="ht-hand-cards">
@@ -1267,12 +1448,13 @@ const SLIDES = [
         </div>
         <div class="ht-note">💡 <em>Docent:</em> assenyala cada busca i pregunta: "Quina és més llarga?"</div>
       </div>`
-  },
-  {
-    title: '🔔 En punt!',
-    color: 'linear-gradient(135deg,#e8612a,#f5c842)',
-    h: 3, m: 0,
-    content: `
+};
+
+const SL_EN_PUNT = {
+  title: '🔔 En punt!',
+  color: 'linear-gradient(135deg,#e8612a,#f5c842)',
+  h: 3, m: 0,
+  content: `
       <div class="ht-slide">
         <div class="ht-big-emoji">⬆️</div>
         <div class="ht-rule">
@@ -1290,9 +1472,46 @@ const SLIDES = [
           👉 Arrossega la busca <strong>curta</strong> a qualsevol número!<br>
           Deixa la busca <strong>llarga</strong> apuntant al <strong>12</strong>.
         </div>
-        <div class="ht-note">💡 <em>Docent:</em> "Quan la busca llarga és al 12, diem <em>en punt</em>!" — assenyala i pregunta!</div>
+        <div class="ht-note">💡 <em>Docent:</em> "Quan la busca llarga és al 12, diem <em>en punt</em>!" — i recorda: <em>és la una</em>, però <em>són les tres</em>.</div>
       </div>`
-  },
+};
+
+const SL_COMPARA = {
+  title: '🗺️ Els dos sistemes',
+  color: 'linear-gradient(135deg,#37474f,#78909c)',
+  h: 8, m: 45,
+  content: `
+      <div class="ht-slide">
+        <div class="ht-rule">
+          El català té <strong>DOS sistemes tradicionals</strong> per dir l'hora...<br>
+          ...i <strong style="color:#1b7a45">tots dos són correctes!</strong> 🎉
+        </div>
+        <div class="ht-mini-grid">
+          <div class="ht-pill ht-pill-past">🔔 8:15 → <strong>un quart de nou</strong></div>
+          <div class="ht-pill ht-pill-to">🕰️ 8:15 → <strong>les vuit i quart</strong></div>
+          <div class="ht-pill ht-pill-past">🔔 8:30 → <strong>dos quarts de nou</strong></div>
+          <div class="ht-pill ht-pill-to">🕰️ 8:30 → <strong>les vuit i mitja</strong></div>
+          <div class="ht-pill ht-pill-past">🔔 8:45 → <strong>tres quarts de nou</strong></div>
+          <div class="ht-pill ht-pill-to">🕰️ 8:45 → <strong>les nou menys quart</strong></div>
+        </div>
+        <div class="ht-rule" style="background:#e8f5e9;border-color:#1b7a45">
+          🔔 <strong>Campanar</strong> — català central i nord-occidental.<br>
+          🕰️ <strong>Rellotge</strong> — valencià, balear, rossellonès i part del tortosí.
+        </div>
+        <div class="ht-rule" style="background:#ffebee;border-color:#c62828">
+          ⚠️ L'únic error és <strong>BARREJAR-LOS</strong>:<br>
+          ❌ <em>un quart de nou i mitja</em> · ❌ <em>tres quarts menys cinc</em><br>
+          ✅ Tria un sistema i mantén-lo fins al final.
+        </div>
+        <div class="ht-note">💡 <em>Docent:</em> canvia el selector <strong>Sistema</strong> de dalt i torna a obrir aquesta guia per veure com canvien totes les frases.</div>
+      </div>`
+};
+
+// ── 🔔 Sistema de campanar ────────────────────────────────────
+
+const SLIDES_CAMPANAR = [
+  SL_RELLOTGE_INTRO,
+  SL_EN_PUNT,
   {
     title: '🍕 Un quart!',
     color: 'linear-gradient(135deg,#1b7a45,#4caf7c)',
@@ -1306,7 +1525,7 @@ const SLIDES = [
         </div>
         <div class="ht-rule" style="background:#e8f5e9;border-color:#1b7a45">
           🍕 Un <em>quart</em> = 1 tros de 4 trossos iguals = <strong>15 minuts</strong>.<br>
-          ⚠️ En català parlem de l'hora <strong>SEGÜENT</strong>:<br>
+          ⚠️ En el sistema de campanar parlem de l'hora <strong>SEGÜENT</strong>:<br>
           Un quart de <strong>TRES</strong> = les 2:15 h
         </div>
         <div class="ht-example">
@@ -1316,7 +1535,7 @@ const SLIDES = [
             La granota salta molt amunt! 💨
           </div>
         </div>
-        <div class="ht-note">💡 <em>Docent:</em> remarca que "un quart de TRES" = 2:15 — en català sempre es fa referència a l'hora SEGÜENT!</div>
+        <div class="ht-note">💡 <em>Docent:</em> remarca que "un quart de TRES" = 2:15 — sempre es fa referència a l'hora SEGÜENT! I es diu <em>ÉS un quart</em> (singular).</div>
       </div>`
   },
   {
@@ -1342,7 +1561,7 @@ const SLIDES = [
             El gos vol córrer! 🏃
           </div>
         </div>
-        <div class="ht-note">💡 <em>Docent:</em> dibuixa una línia horitzontal al rellotge per mostrar la "meitat" visualment.</div>
+        <div class="ht-note">💡 <em>Docent:</em> dibuixa una línia horitzontal al rellotge per mostrar la "meitat" visualment. Ara sí: <em>SÓN dos quarts</em> (plural).</div>
       </div>`
   },
   {
@@ -1372,14 +1591,14 @@ const SLIDES = [
       </div>`
   },
   {
-    title: '🗺️ El sistema català!',
+    title: '🔔 El sistema de campanar!',
     color: 'linear-gradient(135deg,#5c6bc0,#26c6da)',
     h: 10, m: 15,
     content: `
       <div class="ht-slide">
         <div class="ht-rule">
-          En català usem el <strong>sistema de quarts</strong> 🔔<br>
-          Sempre fa referència a l'hora <strong>SEGÜENT</strong> — no a la passada!
+          Aquest és el <strong>sistema de campanar</strong> 🔔 — el de les campanes!<br>
+          Sempre fa referència a l'hora <strong>SEGÜENT</strong>, no a la passada.
         </div>
         <div class="ht-mini-grid">
           <div class="ht-pill ht-pill-past">⬆️ Busca al <strong>12</strong> → EN PUNT</div>
@@ -1394,7 +1613,162 @@ const SLIDES = [
             Són les 10:15 — parlem de les <em>onze</em>! 🕐
           </div>
         </div>
+        <div class="ht-rule" style="background:#fff8e1;border-color:#f5c842">
+          ✍️ Davant d'<strong>una</strong> i d'<strong>onze</strong> fem l'apòstrof:<br>
+          un quart <strong>d'</strong>una · dos quarts <strong>d'</strong>onze
+        </div>
         <div class="ht-note">💡 <em>Docent:</em> traça la busca llarga del 12 → 3 → 6 → 9 per mostrar els quatre quarts de l'hora.</div>
+      </div>`
+  },
+  {
+    title: '➕ I els altres minuts?',
+    color: 'linear-gradient(135deg,#c9174a,#ff6f00)',
+    h: 8, m: 20,
+    content: `
+      <div class="ht-slide">
+        <div class="ht-rule">
+          Regla d'or del sistema de campanar:<br>
+          els minuts <strong style="color:#1b7a45">SE SUMEN</strong> als quarts — mai no se'n resten!
+        </div>
+        <div class="ht-mini-grid">
+          <div class="ht-pill ht-pill-past">:20 → <strong>un quart i cinc</strong> de X+1</div>
+          <div class="ht-pill ht-pill-past">:25 → <strong>un quart i deu</strong> de X+1</div>
+          <div class="ht-pill ht-pill-past">:35 → <strong>dos quarts i cinc</strong> de X+1</div>
+          <div class="ht-pill ht-pill-past">:40 → <strong>dos quarts i deu</strong> de X+1</div>
+          <div class="ht-pill ht-pill-past">:50 → <strong>tres quarts i cinc</strong> de X+1</div>
+          <div class="ht-pill ht-pill-past">:55 → <strong>tres quarts i deu</strong> de X+1</div>
+        </div>
+        <div class="ht-rule" style="background:#fff8e1;border-color:#f5c842">
+          I abans del primer quart, els minuts se sumen a l'hora:<br>
+          :05 → <strong>les vuit i cinc</strong> · :10 → <strong>les vuit i deu</strong>
+        </div>
+        <div class="ht-rule" style="background:#ffebee;border-color:#c62828">
+          ⚠️ ❌ <em>tres quarts menys cinc</em> — no existeix!<br>
+          Les 8:40 h són <strong>dos quarts i deu de nou</strong>.
+        </div>
+        <div class="ht-example">
+          <div class="ht-ex-emoji">🦁</div>
+          <div class="ht-ex-body">
+            <div class="ht-ex-phrase">Un quart i cinc de nou!</div>
+            Són les 8:20 h — el lleó fa tard! 🏃
+          </div>
+        </div>
+        <div class="ht-note">💡 <em>Docent:</em> "Comptem quarts sencers i després hi afegim els minuts que sobren." Prova-ho arrossegant la busca llarga.</div>
+      </div>`
+  },
+  {
+    title: '✂️ Els mig quarts!',
+    color: 'linear-gradient(135deg,#6a1b9a,#ab47bc)',
+    h: 8, m: 7.5,
+    content: `
+      <div class="ht-slide">
+        <div class="ht-big-emoji">🍕</div>
+        <div class="ht-rule">
+          Si partim un quart per la meitat tenim un <strong style="color:#6a1b9a">MIG QUART</strong>:<br>
+          <strong>7 minuts i mig</strong>. L'hora té <strong>8 mig quarts</strong>!
+        </div>
+        <div class="ht-mini-grid">
+          <div class="ht-pill ht-pill-to">8:07:30 → <strong>mig quart de nou</strong></div>
+          <div class="ht-pill ht-pill-to">8:22:30 → <strong>un quart i mig de nou</strong></div>
+          <div class="ht-pill ht-pill-to">8:37:30 → <strong>dos quarts i mig de nou</strong></div>
+          <div class="ht-pill ht-pill-to">8:52:30 → <strong>tres quarts i mig de nou</strong></div>
+        </div>
+        <div class="ht-rule" style="background:#f3e5f5;border-color:#6a1b9a">
+          🔔 És l'expressió més fina del sistema de campanar, i s'usa com a hora
+          <strong>aproximada</strong>: "mig quart de nou" vol dir cap a les 8:07 h.
+        </div>
+        <div class="ht-example">
+          <div class="ht-ex-emoji">🐭</div>
+          <div class="ht-ex-body">
+            <div class="ht-ex-phrase">Mig quart de nou!</div>
+            El ratolí surt just entre les 8 i el primer quart 🧀
+          </div>
+        </div>
+        <div class="ht-note">💡 <em>Docent:</em> activa el nivell <strong>🔴 Mig quarts</strong> del selector per practicar-los al joc. Arrossega la busca llarga fins a mig camí entre l'1 i el 2.</div>
+      </div>`
+  },
+  SL_COMPARA
+];
+
+// ── 🕰️ Sistema de rellotge ────────────────────────────────────
+
+const SLIDES_RELLOTGE = [
+  SL_RELLOTGE_INTRO,
+  SL_EN_PUNT,
+  {
+    title: '🍕 I quart!',
+    color: 'linear-gradient(135deg,#1b7a45,#4caf7c)',
+    h: 2, m: 15,
+    content: `
+      <div class="ht-slide">
+        <div class="ht-big-emoji">➡️</div>
+        <div class="ht-rule">
+          Quan la busca <strong>llarga</strong> apunta a la <strong>DRETA ➡️ al 3</strong>...<br>
+          ...diem <strong style="font-size:1.3em;color:#1b7a45">... I QUART! 🍕</strong>
+        </div>
+        <div class="ht-rule" style="background:#e8f5e9;border-color:#1b7a45">
+          🍕 Un <em>quart</em> = 1 tros de 4 trossos iguals = <strong>15 minuts</strong>.<br>
+          Al sistema de rellotge <strong>sumem</strong> a l'hora que ja ha passat:<br>
+          Les <strong>DUES</strong> i quart = les 2:15 h
+        </div>
+        <div class="ht-example">
+          <div class="ht-ex-emoji">🐸</div>
+          <div class="ht-ex-body">
+            <div class="ht-ex-phrase">Les dues i quart!</div>
+            La granota salta molt amunt! 💨
+          </div>
+        </div>
+        <div class="ht-note">💡 <em>Docent:</em> ⚠️ es diu <em>quart</em>, mai "cuarto" — és un castellanisme molt estès.</div>
+      </div>`
+  },
+  {
+    title: '🌙 I mitja!',
+    color: 'linear-gradient(135deg,#01337d,#00b4d8)',
+    h: 4, m: 30,
+    content: `
+      <div class="ht-slide">
+        <div class="ht-big-emoji">⬇️</div>
+        <div class="ht-rule">
+          Quan la busca <strong>llarga</strong> apunta cap <strong>AVALL ⬇️ al 6</strong>...<br>
+          ...diem <strong style="font-size:1.3em;color:#0077b6">... I MITJA! ✂️</strong>
+        </div>
+        <div class="ht-rule" style="background:#e3f2fd;border-color:#0077b6">
+          ✂️ 30 minuts = <strong>mitja hora</strong>, la meitat exacta!<br>
+          Les <strong>QUATRE</strong> i mitja = les 4:30 h
+        </div>
+        <div class="ht-example">
+          <div class="ht-ex-emoji">🐶</div>
+          <div class="ht-ex-body">
+            <div class="ht-ex-phrase">Les quatre i mitja!</div>
+            El gos vol córrer! 🏃
+          </div>
+        </div>
+        <div class="ht-note">💡 <em>Docent:</em> dibuixa una línia horitzontal al rellotge per mostrar la "meitat" visualment.</div>
+      </div>`
+  },
+  {
+    title: '⏰ Menys quart!',
+    color: 'linear-gradient(135deg,#880e4f,#e040fb)',
+    h: 4, m: 45,
+    content: `
+      <div class="ht-slide">
+        <div class="ht-big-emoji">⬅️</div>
+        <div class="ht-rule">
+          Quan la busca <strong>llarga</strong> apunta a l'<strong>ESQUERRA ⬅️ al 9</strong>...<br>
+          ...diem <strong style="font-size:1.3em;color:#880e4f">... MENYS QUART! ⏰</strong>
+        </div>
+        <div class="ht-rule" style="background:#fce4ec;border-color:#e040fb">
+          🍕 Passada la mitja hora ja <strong>restem</strong> de l'hora <em>següent</em>:<br>
+          Les <strong>CINC</strong> menys quart = les 4:45 h
+        </div>
+        <div class="ht-example">
+          <div class="ht-ex-emoji">🦊</div>
+          <div class="ht-ex-body">
+            <div class="ht-ex-phrase">Les cinc menys quart!</div>
+            La guineu gairebé és a casa! 🏠
+          </div>
+        </div>
+        <div class="ht-note">💡 <em>Docent:</em> "A partir del 6, mirem endavant: quant falta per a l'hora següent?"</div>
       </div>`
   },
   {
@@ -1404,8 +1778,8 @@ const SLIDES = [
     content: `
       <div class="ht-slide">
         <div class="ht-rule">
-          Per als minuts que no són quarts exactes:<br>
-          <strong>"i"</strong> per a la primera meitat · <strong>"menys"</strong> per a la segona:
+          Al sistema de rellotge la <strong>mitja hora</strong> mana:<br>
+          <strong style="color:#1b5e20">"i"</strong> a la primera meitat · <strong style="color:#880e4f">"menys"</strong> a la segona.
         </div>
         <div class="ht-mini-grid">
           <div class="ht-pill ht-pill-past">:05 → les X <strong>i cinc</strong></div>
@@ -1427,7 +1801,16 @@ const SLIDES = [
         <div class="ht-note">💡 <em>Docent:</em> "Primera meitat → i X. Segona meitat → menys X a l'hora SEGÜENT."</div>
       </div>`
   },
+  SL_COMPARA
 ];
+
+let SLIDES = SLIDES_CAMPANAR;
+
+function buildSlides() {
+  SLIDES = (hourSystem === 'campanar') ? SLIDES_CAMPANAR : SLIDES_RELLOTGE;
+  if (currentSlide >= SLIDES.length) currentSlide = 0;
+  buildHtDots();
+}
 
 // ═══════════════════════════════════════════════
 //  HOW-TO STATE & CLOCK
@@ -1475,7 +1858,7 @@ document.addEventListener('mouseup', ()=>{ if(htDragging) htRestoreTransition();
 document.addEventListener('touchend',()=>{ if(htDragging) htRestoreTransition(); htDragging=null; });
 
 function applyHtDrag(a){
-  if(htDragging==='minute'){htClockM=Math.round((a/360)*60/5)*5%60;}
+  if(htDragging==='minute'){htClockM=snapMinute((a/360)*60,teachMinutes());}
   else{let s=Math.round((a/360)*12)%12;htClockH=s===0?12:s;}
   setHtHands(htClockH,htClockM); updateHtDisplay();
 }
@@ -1556,7 +1939,9 @@ document.addEventListener('keydown', e=>{
 buildClockFaceInto('ticks','numbers');
 buildClockFaceInto('ht-ticks','ht-numbers');
 buildSkinPanel();
-buildHtDots();
+loadOptions();
+applyOptionUI();
+buildSlides();
 newRound();
 </script>
 </body>
