@@ -63,7 +63,7 @@ foreach ($g in $targets) {
   Write-Output "Syncing $g ..."
   robocopy "$src\$g" "$dest" /E /MIR `
     /XD .git apk backups pdf `
-    /XF *.py *.md *.bak* server.log *.txt review_svgs.html revisio_icones.html figures_revision.html manifest.json .gitignore `
+    /XF *.py *.md *.pdf *.bak* *_backup_* server.log *.txt review_svgs.html revisio_icones.html figures_revision*.html manifest.json .gitignore `
     /NFL /NDL /NJH | Out-Null
   # robocopy: 0-7 = success (0 = nothing to do), 8+ = real failure
   if ($LASTEXITCODE -ge 8) {
