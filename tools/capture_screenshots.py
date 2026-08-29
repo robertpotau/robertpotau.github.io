@@ -2,8 +2,9 @@ import time
 import os
 from playwright.sync_api import sync_playwright
 
-BASE = r"C:\Users\PC\Documents\claude-code-pcsobretaula\claude-projects\landing-page\games"
-OUT = r"C:\Users\PC\Documents\claude-code-pcsobretaula\claude-projects\landing-page\screenshots"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE = os.path.join(ROOT, "games")
+OUT = os.path.join(ROOT, "screenshots")
 os.makedirs(OUT, exist_ok=True)
 
 # slug -> (entry file relative to games/<slug>/, wait seconds for splash/animations to settle)
@@ -17,6 +18,7 @@ targets = {
     "geometria": "index.html",
     "quina-hora-es": "index.html",
     "what-time-is-it": "index.html",
+    "euroexplora": "index.html",
 }
 
 with sync_playwright() as p:

@@ -646,8 +646,26 @@
     </div>
   </section>
 
-  <!-- 8 · Support -->
+  <!-- 8 · Geography -->
   <section class="beat" data-beat="8">
+    <div class="plaque reveal">🚪 <span data-i18n="room6_plaque">Aula 5 · Geografia</span></div>
+    <h2 class="reveal d1" data-i18n="room6_h">Un continent sencer, capital a capital.</h2>
+    <div class="cards reveal d2">
+      <div class="gcard">
+        <img src="screenshots/euroexplora.jpg" alt="EuroExplora" loading="lazy">
+        <div class="inner">
+          <span class="grade" data-i18n="grade_euroexplora">ESO 1r-3r</span>
+          <h3>EuroExplora</h3>
+          <p data-i18n="desc_euroexplora">Països, capitals i banderes d'Europa — 8 modes de joc.</p>
+          <a class="play" href="games/euroexplora/index.html" data-i18n="play" data-goatcounter-click="game-euroexplora">Jugar ▶</a>
+          <a class="fitxa" href="jocs/euroexplora.html" data-i18n="fitxa" data-goatcounter-click="fitxa-euroexplora">ℹ️ Fitxa del joc</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · Support -->
+  <section class="beat" data-beat="9">
     <p class="kicker reveal" data-i18n="b8_kicker">Després de corregir, quan l'institut calla</p>
     <h2 class="reveal d1" data-i18n="b8_h">Aquests jocs els faig als vespres. Les demos seran sempre gratuïtes.</h2>
     <p class="lead reveal d2" data-i18n="b8_p">Si un d'aquests jocs ha fet somriure la teva classe, o ha ajudat el teu fill o filla a entendre les fraccions, pots donar-hi suport amb un cafè — o desbloquejar properament la versió completa a la meva botiga. Cada cafè és una hora més de jocs nous.</p>
@@ -661,8 +679,8 @@
     </div>
   </section>
 
-  <!-- 9 · Custom / contact -->
-  <section class="beat" data-beat="9">
+  <!-- 10 · Custom / contact -->
+  <section class="beat" data-beat="10">
     <p class="kicker reveal" data-i18n="b9_kicker">Per a centres i editorials</p>
     <h2 class="reveal d1" data-i18n="b9_h">Vols un joc fet a mida per al teu centre?</h2>
     <p class="lead reveal d2" data-i18n="b9_p">Dissenyo i desenvolupo jocs adaptats al teu currículum, idioma i estil — des de zero o partint dels d'aquest institut.</p>
@@ -750,7 +768,9 @@ const translations = {
     grade_acollida: "Tots els nivells", title_acollida: "Aula d'Acollida", desc_acollida: "Vocabulari i jocs per unitats temàtiques, amb progressió d'XP.",
     grade_vistes: "ESO 3r-4t / Batxillerat", title_vistes: "Vistes", desc_vistes: "Alçat, planta i perfil. Sistema dièdric jugant.",
     grade_whattime: "Primària 2n-4t", desc_whattime: "Telling the time on an analogue clock.",
+    room6_plaque: "Aula 5 · Geografia", room6_h: "Un continent sencer, capital a capital.",
     grade_verbquest: "ESO", desc_verbquest: "Verbs anglesos regulars i irregulars — 8 modes de joc.",
+    grade_euroexplora: "ESO 1r-3r", desc_euroexplora: "Països, capitals i banderes d'Europa — 8 modes de joc.",
     play: "Jugar ▶",
     fitxa: "ℹ️ Fitxa del joc",
     b8_kicker: "Després de corregir, quan l'institut calla",
@@ -799,7 +819,9 @@ const translations = {
     grade_acollida: "Todos los niveles", title_acollida: "Aula de Acogida", desc_acollida: "Vocabulario y juegos por unidades temáticas, con progresión de XP.",
     grade_vistes: "ESO 3º-4º / Bachillerato", title_vistes: "Vistas", desc_vistes: "Alzado, planta y perfil. Sistema diédrico jugando.",
     grade_whattime: "Primaria 2º-4º", desc_whattime: "Telling the time on an analogue clock.",
+    room6_plaque: "Aula 5 · Geografía", room6_h: "Un continente entero, capital a capital.",
     grade_verbquest: "ESO", desc_verbquest: "Verbos ingleses regulares e irregulares — 8 modos de juego.",
+    grade_euroexplora: "ESO 1º-3º", desc_euroexplora: "Países, capitales y banderas de Europa — 8 modos de juego.",
     play: "Jugar ▶",
     fitxa: "ℹ️ Ficha del juego",
     b8_kicker: "Después de corregir, cuando el instituto calla",
@@ -848,7 +870,9 @@ const translations = {
     grade_acollida: "All levels", title_acollida: "Aula d'Acollida", desc_acollida: "Vocabulary and games in themed units, with XP progression.",
     grade_vistes: "Secondary 3-4 / Baccalaureate", title_vistes: "Vistes", desc_vistes: "Front, top and side views. Descriptive geometry as a game.",
     grade_whattime: "Primary 2-4", desc_whattime: "Telling the time on an analogue clock.",
+    room6_plaque: "Room 5 · Geography", room6_h: "A whole continent, one capital at a time.",
     grade_verbquest: "Secondary", desc_verbquest: "Regular & irregular English verbs — 8 game modes.",
+    grade_euroexplora: "Ages 12-15", desc_euroexplora: "Countries, capitals and flags of Europe — 8 game modes.",
     play: "Play ▶",
     fitxa: "ℹ️ Game info",
     b8_kicker: "After the marking is done, when the high school goes quiet",
@@ -957,7 +981,7 @@ window.addEventListener('scroll', () => {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(58, 1, 0.1, 260);
 
-  const BEATS = 10;
+  const BEATS = 11;
   const SPACING = 70;                       // depth per beat
   const START_Z = 18;
   const END_Z = -(BEATS - 1) * SPACING + 6; // camera at last beat
@@ -972,6 +996,7 @@ window.addEventListener('scroll', () => {
     0x14204f, // acollida — blue
     0x0f2440, // tech — steel blue
     0x251047, // english
+    0x0b2a3d, // geography — atlantic teal
     0x341457, // support — warm violet
     0x180a33  // contact
   ].map(c => new THREE.Color(c));
@@ -1359,11 +1384,75 @@ window.addEventListener('scroll', () => {
     registerFloater(uk, 1.3, 0);
   }
 
-  /* ---------- beat 8: support — hearts & coffee ---------- */
-  scatter(['❤️', '☕', '✨', '😊', '❤️', '☕', '🙂', '🙌'].map(e => textSprite(e, { scale: 5 })), 8, 30, 14, 22);
+  /* ---------- beat 8: geography room — a wire globe and European flags ---------- */
+  {
+    const globe = new THREE.Group();
+    const globeMat = new THREE.LineBasicMaterial({ color: 0x5ce1c6, transparent: true, opacity: 0.75 });
+    globe.add(new THREE.LineSegments(
+      new THREE.WireframeGeometry(new THREE.SphereGeometry(5.4, 16, 10)), globeMat
+    ));
+    globe.scale.setScalar(mobileScale);
+    place(globe, 8, 17 * mobileSpread, 5, -10);
+    registerFloater(globe, 1.2, 0.08);
 
-  /* ---------- beat 9: contact — paper planes & stars ---------- */
-  scatter(['✈️', '✉️', '⭐', '🎨', '🧪'].map(e => textSprite(e, { scale: 4.8 })), 9, 28, 13, 20);
+    scatter(['🗺️', '🧭', '🏰', '🗼', '🌍', '📍'].map(e => textSprite(e, { scale: 4.8 })), 8, 26, 12, 18);
+
+    // a handful of European flags (drawn by hand — flag emojis don't render on Windows)
+    const euroFlags = [
+      // França
+      (ctx, W, H) => {
+        ctx.fillStyle = '#002395'; ctx.fillRect(0, 0, W / 3, H);
+        ctx.fillStyle = '#ffffff'; ctx.fillRect(W / 3, 0, W / 3, H);
+        ctx.fillStyle = '#ed2939'; ctx.fillRect((2 * W) / 3, 0, W / 3, H);
+      },
+      // Itàlia
+      (ctx, W, H) => {
+        ctx.fillStyle = '#008c45'; ctx.fillRect(0, 0, W / 3, H);
+        ctx.fillStyle = '#f4f5f0'; ctx.fillRect(W / 3, 0, W / 3, H);
+        ctx.fillStyle = '#cd212a'; ctx.fillRect((2 * W) / 3, 0, W / 3, H);
+      },
+      // Alemanya
+      (ctx, W, H) => {
+        ctx.fillStyle = '#000000'; ctx.fillRect(0, 0, W, H / 3);
+        ctx.fillStyle = '#dd0000'; ctx.fillRect(0, H / 3, W, H / 3);
+        ctx.fillStyle = '#ffce00'; ctx.fillRect(0, (2 * H) / 3, W, H / 3);
+      },
+      // Grècia
+      (ctx, W, H) => {
+        ctx.fillStyle = '#0d5eaf'; ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#ffffff';
+        for (let i = 1; i < 9; i += 2) ctx.fillRect(0, (H / 9) * i, W, H / 9);
+        ctx.fillStyle = '#0d5eaf'; ctx.fillRect(0, 0, (H / 9) * 5, (H / 9) * 5);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, (H / 9) * 2, (H / 9) * 5, H / 9);
+        ctx.fillRect((H / 9) * 2, 0, H / 9, (H / 9) * 5);
+      },
+      // Suècia
+      (ctx, W, H) => {
+        ctx.fillStyle = '#006aa7'; ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#fecc00';
+        ctx.fillRect(0, H / 2 - 9, W, 18);
+        ctx.fillRect(W / 3 - 9, 0, 18, H);
+      },
+      // Portugal
+      (ctx, W, H) => {
+        ctx.fillStyle = '#f00'; ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#006600'; ctx.fillRect(0, 0, (W * 2) / 5, H);
+        ctx.fillStyle = '#ffe900';
+        ctx.beginPath(); ctx.arc((W * 2) / 5, H / 2, 20, 0, Math.PI * 2); ctx.fill();
+      }
+    ];
+    euroFlags.map(f => flagSprite(f, 3.1)).forEach((s, i) => {
+      place(s, 8, [-25, -17, 17, -21, 23, 27][i] * mobileSpread, [8, -9, -7, 2, 10, -4][i], (Math.random() - 0.5) * 20);
+      registerFloater(s, 1.4, 0);
+    });
+  }
+
+  /* ---------- beat 9: support — hearts & coffee ---------- */
+  scatter(['❤️', '☕', '✨', '😊', '❤️', '☕', '🙂', '🙌'].map(e => textSprite(e, { scale: 5 })), 9, 30, 14, 22);
+
+  /* ---------- beat 10: contact — paper planes & stars ---------- */
+  scatter(['✈️', '✉️', '⭐', '🎨', '🧪'].map(e => textSprite(e, { scale: 4.8 })), 10, 28, 13, 20);
 
   /* ---------- soft glow orbs sprinkled everywhere ---------- */
   {

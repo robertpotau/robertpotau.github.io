@@ -13,6 +13,7 @@ GAME_ENTRIES = {  # slug -> playable entry file
     "lletra-a-lletra": "index.html", "ortografia": "index.html",
     "aula-acollida": "index.html", "vistes": "index.html",
     "what-time-is-it": "index.html", "verbs-english": "index.html",
+    "euroexplora": "index.html",
 }
 
 urls = [("/", 1.0), ("/classic.html", 0.5), ("/es/", 0.9), ("/en/", 0.9)]

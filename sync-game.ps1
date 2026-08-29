@@ -36,7 +36,7 @@ if (-not (Test-Path -LiteralPath $src)) {
 }
 Write-Output "Source root: $src"
 
-$games = @("calcuherois","aula-acollida","fraccions","lletra-a-lletra","ortografia","vistes","geometria","quina-hora-es","what-time-is-it","verbs-english")
+$games = @("calcuherois","aula-acollida","fraccions","lletra-a-lletra","ortografia","vistes","geometria","quina-hora-es","what-time-is-it","verbs-english","euroexplora")
 
 if ($Slug) {
   if ($games -notcontains $Slug) {
@@ -63,7 +63,7 @@ foreach ($g in $targets) {
   Write-Output "Syncing $g ..."
   robocopy "$src\$g" "$dest" /E /MIR `
     /XD .git apk backups pdf `
-    /XF *.py *.md *.pdf *.bak* *_backup_* server.log *.txt review_svgs.html revisio_icones.html figures_revision*.html manifest.json .gitignore `
+    /XF *.py *.md *.pdf *.bak* *_backup_* server.log *.txt review_svgs.html revisio_icones.html figures_revision*.html descarrega_landmarks.html manifest.json .gitignore `
     /NFL /NDL /NJH | Out-Null
   # robocopy: 0-7 = success (0 = nothing to do), 8+ = real failure
   if ($LASTEXITCODE -ge 8) {

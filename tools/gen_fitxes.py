@@ -50,9 +50,9 @@ UI = {
 HUB = {
     "ca": dict(
         title="Jocs educatius gratuïts en català — Primària i ESO",
-        meta="10 jocs educatius online gratuïts en català: matemàtiques, ortografia, lectoescriptura, acollida, dibuix tècnic i anglès. Sense registre, sense anuncis, fets per un professor.",
+        meta="11 jocs educatius online gratuïts en català: matemàtiques, ortografia, lectoescriptura, acollida, dibuix tècnic i anglès. Sense registre, sense anuncis, fets per un professor.",
         h1="🎮 Jocs educatius gratuïts en català",
-        lead="Deu jocs per a Primària, ESO i aula d'acollida, fets als vespres per un professor de secundària. Tots funcionen directament al navegador — ordinador, tauleta, mòbil o pissarra digital — sense instal·lar res, sense registre i sense anuncis.",
+        lead="Onze jocs per a Primària, ESO i aula d'acollida, fets als vespres per un professor de secundària. Tots funcionen directament al navegador — ordinador, tauleta, mòbil o pissarra digital — sense instal·lar res, sense registre i sense anuncis.",
         p2='Cada joc té la seva fitxa amb tota la informació per al docent: què s\'hi treballa, per a quins cursos és adequat i quins modes de joc inclou. Les demos són gratuïtes per sempre; si un joc t\'estalvia una tarda de feina, pots <a href="https://ko-fi.com/robertpotau" data-goatcounter-click="kofi-hub">convidar-me a un cafè</a>.',
         note='🏫 Vols un joc fet a mida per al teu centre o editorial? <a href="/index.html">Escriu-me</a> — el procés és senzill: definim l\'abast, et faig un prototip i l\'iterem junts.',
         coll_name="Jocs educatius gratuïts en català",
@@ -60,9 +60,9 @@ HUB = {
     ),
     "es": dict(
         title="Juegos educativos gratuitos para Primaria y ESO",
-        meta="10 juegos educativos online gratuitos: matemáticas, ortografía catalana, lectoescritura, aula de acogida, dibujo técnico e inglés. Sin registro, sin anuncios, hechos por un profesor.",
+        meta="11 juegos educativos online gratuitos: matemáticas, ortografía catalana, lectoescritura, aula de acogida, dibujo técnico e inglés. Sin registro, sin anuncios, hechos por un profesor.",
         h1="🎮 Juegos educativos gratuitos",
-        lead="Diez juegos para Primaria, ESO y aula de acogida, hechos por las tardes por un profesor de secundaria de Cataluña. Todos funcionan directamente en el navegador — ordenador, tableta, móvil o pizarra digital — sin instalar nada, sin registro y sin anuncios. La mayoría están en catalán (son para la escuela catalana); los de inglés, en inglés.",
+        lead="Once juegos para Primaria, ESO y aula de acogida, hechos por las tardes por un profesor de secundaria de Cataluña. Todos funcionan directamente en el navegador — ordenador, tableta, móvil o pizarra digital — sin instalar nada, sin registro y sin anuncios. La mayoría están en catalán (son para la escuela catalana); los de inglés, en inglés.",
         p2='Cada juego tiene su ficha con toda la información para el docente: qué se trabaja, para qué cursos es adecuado y qué modos de juego incluye. Las demos son gratuitas para siempre; si un juego te ahorra una tarde de trabajo, puedes <a href="https://ko-fi.com/robertpotau" data-goatcounter-click="kofi-hub">invitarme a un café</a>.',
         note='🏫 ¿Quieres un juego a medida para tu centro o editorial? <a href="/es/index.html">Escríbeme</a> — el proceso es sencillo: definimos el alcance, te hago un prototipo y lo iteramos juntos.',
         coll_name="Juegos educativos gratuitos",
@@ -70,9 +70,9 @@ HUB = {
     ),
     "en": dict(
         title="Free educational games for primary and secondary school",
-        meta="10 free online educational games: maths, Catalan spelling, literacy, newcomer classes, technical drawing and English. No sign-up, no ads, made by a teacher.",
+        meta="11 free online educational games: maths, Catalan spelling, literacy, newcomer classes, technical drawing and English. No sign-up, no ads, made by a teacher.",
         h1="🎮 Free educational games",
-        lead="Ten games for primary school, lower secondary (ESO) and newcomer classes, made in the evenings by a secondary school teacher in Catalonia. They all run right in the browser — computer, tablet, phone or interactive whiteboard — nothing to install, no sign-up, no ads. Most are in Catalan (they were built for Catalan schools); the English-learning ones are in English.",
+        lead="Eleven games for primary school, lower secondary (ESO) and newcomer classes, made in the evenings by a secondary school teacher in Catalonia. They all run right in the browser — computer, tablet, phone or interactive whiteboard — nothing to install, no sign-up, no ads. Most are in Catalan (they were built for Catalan schools); the English-learning ones are in English.",
         p2='Every game has an info page with everything a teacher needs: what it teaches, which ages it suits and which game modes it includes. The demos are free forever; if a game saves you an afternoon of work, you can <a href="https://ko-fi.com/robertpotau" data-goatcounter-click="kofi-hub">buy me a coffee</a>.',
         note='🏫 Want a custom game for your school or publisher? <a href="/en/index.html">Write to me</a> — the process is simple: we define the scope, I build a prototype and we iterate together.',
         coll_name="Free educational games",
@@ -224,12 +224,17 @@ GAMES = [
                 subject="Geometria", grade="Primària 5è - ESO 2n",
                 lead="Figures, costats, angles i propietats — apresos jugant, no memoritzant.",
                 paragraphs=[
-                    "Aquest joc repassa la geometria plana de manera interactiva: reconèixer figures, comptar costats i vèrtexs, i relacionar cada forma amb les seves propietats. Pensat per al final de Primària i el primer cicle d'ESO, on aquests continguts s'han de consolidar.",
+                    "Aquest joc treballa el <strong>perímetre i l'àrea</strong> d'onze figures planes: quadrat, rectangle, triangle, romboide, rombe, trapezi, pentàgon, hexàgon, octàgon i cercle, més un bloc per identificar-les. Cada figura es dibuixa a escala i amb les cotes fora del dibuix, de manera que les mides sempre es llegeixen bé.",
+                    "Hi ha <strong>quatre maneres de treballar cada figura</strong>: practicar el perímetre i l'àrea, fer-ho <strong>al revés</strong> (donada l'àrea, trobar la mesura que falta), resoldre <strong>problemes amb context</strong>, i el <strong>repte</strong> de cinc seguides sense fallar. Amb tres nivells de dificultat, i un botó «Com es fa?» amb la teoria i un exemple resolt abans de respondre.",
                     "Tot és autocorrectiu: l'alumne rep la resposta a l'instant i pot repetir tantes vegades com calgui. El sistema d'avatars personalitzables fa que cadascú tingui el seu personatge i el seu progrés.",
                     "Funciona al navegador de qualsevol dispositiu — també a la pissarra digital de l'aula — sense instal·lació ni registre.",
                 ],
                 features=[
-                    "Figures geomètriques planes i les seves propietats",
+                    "Perímetre i àrea d'11 figures planes, amb el dibuix a escala",
+                    "4 maneres de treballar-les: practicar, al revés, problemes i repte",
+                    "Tres nivells de dificultat i repàs intel·ligent",
+                    "Teoria amb exemple resolt a cada exercici",
+                    "Repte mestre i repte del dia, igual per a tota la classe",
                     "Autocorrecció immediata",
                     "Avatars personalitzables",
                     "Dificultat adequada de 5è de Primària a 2n d'ESO",
@@ -411,24 +416,28 @@ GAMES = [
         slug="ortografia", entry="index.html", shot="ortografia", emoji="✍️",
         name="Ortografia", game_lang="ca", related=["lletra-a-lletra", "aula-acollida", "fraccions"],
         teaches={"ca": "ortografia catalana", "es": "ortografía catalana", "en": "Catalan spelling"},
-        level={"ca": "Primària 3r-6è", "es": "Primaria 3.º-6.º", "en": "Ages 8-12"},
+        level={"ca": "Primària 5è - ESO 2n", "es": "Primaria 3.º-6.º", "en": "Ages 8-12"},
         c=dict(
             ca=dict(
                 seo_title="Joc d'Ortografia Catalana online gratuït",
-                meta="Joc online gratuït d'ortografia catalana: accentuació, apòstrof, essa sorda i sonora, ce trencada, comes i més — 10 blocs temàtics autocorrectius.",
-                subject="Ortografia", grade="Primària 3r-6è",
+                meta="Joc online gratuït d'ortografia catalana: accentuació, accent diacrític, apòstrof, dièresi, g/j, x/ix/tx/ig, plurals, majúscules, barbarismes i puntuació — 18 blocs temàtics autocorrectius.",
+                subject="Ortografia", grade="Primària 5è - ESO 2n",
                 lead="L'ortografia catalana, bloc a bloc i sense por del bolígraf vermell.",
                 paragraphs=[
-                    "Deu blocs temàtics cobreixen els punts on l'ortografia catalana fa més mal: l'accentuació, l'apòstrof, la essa sorda i la sonora, la ce trencada, les comes i més. Cada bloc es pot treballar per separat, de manera que el joc s'adapta al tema que s'estigui fent a classe.",
+                    "<strong>Divuit blocs temàtics</strong> cobreixen els punts on l'ortografia catalana fa més mal: l'accentuació i l'accent diacrític, l'apòstrof, la dièresi, la g i la j, la x/ix/tx/ig, la tg/tj/tz, la r i la rr, la essa sorda i la sonora, la ce trencada, l'ela geminada, la h muda, la m davant de b i p, els plurals, les majúscules, els barbarismes, la coma i la resta de signes de puntuació. Cada bloc es pot treballar per separat, de manera que el joc s'adapta al tema que s'estigui fent a classe.",
+                    "Cada bloc té <strong>cinc maneres de jugar-hi</strong>: omplir el buit, triar la paraula ben escrita, classificar, buscar l'error dins d'una frase i <strong>dictat</strong> (el joc llegeix la paraula en veu alta i l'alumne l'escriu). I tres nivells de dificultat.",
                     "Totes les activitats són autocorrectives i es poden repetir tantes vegades com calgui: l'error no penalitza, ensenya. La progressió queda desada al dispositiu de cada alumne.",
                     "És una eina de repàs perfecta per als últims cursos de Primària, i també funciona molt bé com a reforç a l'ESO i a l'aula d'acollida.",
                 ],
                 features=[
-                    "10 blocs temàtics d'ortografia catalana",
-                    "Accentuació, apòstrof, s/ss/ç, comes i més",
+                    "18 blocs temàtics i més de 500 paraules i frases",
+                    "Accentuació, accent diacrític, apòstrof, dièresi, g/j, plurals, majúscules, barbarismes…",
+                    "5 maneres de jugar-hi a cada bloc, dictat inclòs",
+                    "Tres nivells de dificultat i repàs intel·ligent",
+                    "Cada regla explicada amb exemples abans i després de respondre",
+                    "Panell del professor: quines regles falla més la classe",
                     "Activitats autocorrectives i repetibles",
-                    "Progressió desada per alumne",
-                    "Útil de Primària fins a reforç d'ESO",
+                    "Útil de final de Primària fins a l'ESO i l'aula d'acollida",
                     "Gratuït, sense registre i sense anuncis",
                 ],
             ),
@@ -732,6 +741,71 @@ GAMES = [
             ),
         ),
     ),
+    dict(
+        slug="euroexplora", entry="index.html", shot="euroexplora", emoji="🗺️",
+        name="EuroExplora", game_lang="ca", related=["geometria", "aula-acollida", "quina-hora-es"],
+        teaches={"ca": "geografia d'Europa: països, capitals i banderes", "es": "geografía de Europa: países, capitales y banderas", "en": "geography of Europe: countries, capitals and flags"},
+        level={"ca": "1r-3r ESO", "es": "1º-3º ESO", "en": "Ages 12-16"},
+        c=dict(
+            ca=dict(
+                seo_title="EuroExplora — Joc de països i capitals d'Europa",
+                meta="Joc gratuït per aprendre els països, les capitals i les banderes d'Europa: 46 països, 8 modes de joc, 4 nivells i trofeus. Per a l'ESO, sense registre.",
+                subject="Geografia", grade="1r-3r ESO",
+                lead="46 països, 46 capitals i totes les banderes d'Europa, apresos jugant.",
+                paragraphs=[
+                    "Aprendre el mapa d'Europa amb una llista és una feina ingrata. EuroExplora la converteix en partides curtes de preguntes: quina és la capital, de quin país és aquesta bandera i a quin país pertany aquest edifici emblemàtic. Les banderes són les de debò, en format vectorial, i cada capital té el seu símbol reconeixible.",
+                    "Hi ha vuit modes de joc per no repetir mai la mateixa sessió: Clàssic al ritme de cadascú, Contrarellotge de 60 segons, Vides, Repte Progressiu de cinc fases, Geo-Velocitat, Per Regions (Balcans, Bàltic, Escandinàvia, Europa Central…), Memòria Visual i Atles Mestre. I quatre nivells que van dels 12 països més coneguts als 46 del continent, així que serveix igual a 1r que a 3r d'ESO.",
+                    "Els trofeus, els punts d'experiència i els cinc rangs — d'Aprenent a Mestre del Món — donen un motiu per tornar-hi. Cinc perfils permeten compartir l'ordinador o la tauleta a l'aula, i el progrés de cadascú es desa al navegador. Gratuït i sense registre, com tota la col·lecció.",
+                ],
+                features=[
+                    "46 països d'Europa amb banderes reals",
+                    "Capitals, banderes i edificis emblemàtics",
+                    "8 modes de joc i 4 nivells de dificultat",
+                    "Repte per regions: Balcans, Bàltic, Escandinàvia…",
+                    "18 trofeus, rangs i estadístiques · 5 perfils",
+                    "Gratuït, sense registre i sense anuncis",
+                ],
+            ),
+            es=dict(
+                seo_title="EuroExplora — Juego de países y capitales de Europa",
+                meta="Juego gratuito para aprender los países, las capitales y las banderas de Europa: 46 países, 8 modos de juego, 4 niveles y trofeos. Para ESO, sin registro.",
+                subject="Geografía", grade="1º-3º ESO",
+                lead="46 países, 46 capitales y todas las banderas de Europa, aprendidos jugando.",
+                paragraphs=[
+                    "Aprenderse el mapa de Europa con una lista es una tarea ingrata. EuroExplora la convierte en partidas cortas de preguntas: cuál es la capital, de qué país es esta bandera y a qué país pertenece este edificio emblemático. Las banderas son las de verdad, en formato vectorial, y cada capital tiene su símbolo reconocible.",
+                    "Hay ocho modos de juego para no repetir nunca la misma sesión: Clásico al ritmo de cada uno, Contrarreloj de 60 segundos, Vidas, Reto Progresivo de cinco fases, Geo-Velocidad, Por Regiones (Balcanes, Báltico, Escandinavia, Europa Central…), Memoria Visual y Atlas Maestro. Y cuatro niveles que van de los 12 países más conocidos a los 46 del continente, así que sirve igual en 1º que en 3º de ESO.",
+                    "Los trofeos, los puntos de experiencia y los cinco rangos — de Aprendiz a Maestro del Mundo — dan un motivo para volver. Cinco perfiles permiten compartir el ordenador o la tableta en el aula, y el progreso de cada uno se guarda en el navegador. Gratuito y sin registro, como toda la colección.",
+                ],
+                features=[
+                    "46 países de Europa con banderas reales",
+                    "Capitales, banderas y edificios emblemáticos",
+                    "8 modos de juego y 4 niveles de dificultad",
+                    "Reto por regiones: Balcanes, Báltico, Escandinavia…",
+                    "18 trofeos, rangos y estadísticas · 5 perfiles",
+                    "Gratuito, sin registro y sin anuncios",
+                ],
+            ),
+            en=dict(
+                seo_title="EuroExplora — Free Europe countries and capitals game",
+                meta="Free game to learn the countries, capitals and flags of Europe: 46 countries, 8 game modes, 4 levels and trophies. For secondary students, no sign-up.",
+                subject="Geography", grade="Ages 12-16",
+                lead="46 countries, 46 capitals and every flag in Europe, learnt by playing.",
+                paragraphs=[
+                    "Learning the map of Europe from a list is a thankless job. EuroExplora turns it into short rounds of questions: what is the capital, which country does this flag belong to, and which country is this landmark in. The flags are the real ones, in vector format, and every capital has its own recognisable symbol.",
+                    "Eight game modes keep sessions from repeating: Classic at your own pace, a 60-second Time Trial, Lives, a five-phase Progressive Challenge, Geo-Speed, By Region (Balkans, Baltic, Scandinavia, Central Europe…), Visual Memory and Master Atlas. Four difficulty levels run from the 12 best-known countries to all 46 of them, so it works just as well at 12 as at 15.",
+                    "Trophies, experience points and five ranks — from Apprentice to Master of the World — give students a reason to come back. Five profiles allow sharing a computer or tablet in class, and everyone's progress is stored in the browser. Free and sign-up-free, like the whole collection.",
+                ],
+                features=[
+                    "46 European countries with real flags",
+                    "Capitals, flags and famous landmarks",
+                    "8 game modes and 4 difficulty levels",
+                    "Region challenges: Balkans, Baltic, Scandinavia…",
+                    "18 trophies, ranks and stats · 5 profiles",
+                    "Free, no sign-up, no ads",
+                ],
+            ),
+        ),
+    ),
 ]
 
 BY_SLUG = {g["slug"]: g for g in GAMES}
@@ -978,5 +1052,5 @@ for lang in LANGS:
             f.write(fitxa_page(g, lang))
     with io.open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8", newline="\n") as f:
         f.write(hub_page(lang))
-    print(f"ok {lang}: 10 fitxes + hub")
-print("done: 33 pages")
+    print(f"ok {lang}: {len(GAMES)} fitxes + hub")
+print(f"done: {len(LANGS) * (len(GAMES) + 1)} pages")
