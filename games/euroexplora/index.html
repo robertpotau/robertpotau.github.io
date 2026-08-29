@@ -1,0 +1,2702 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EuroExplora — Joc de països i capitals d'Europa online gratuït</title>
+<meta name="description" content="Aprèn els països, capitals i banderes d'Europa jugant: 46 països, 8 modes de joc, 4 nivells i trofeus. Joc educatiu gratuït de geografia per a l'ESO.">
+<link rel="canonical" href="https://robertpotau.github.io/games/euroexplora/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="EuroExplora — Joc de països i capitals d'Europa online gratuït">
+<meta property="og:description" content="Aprèn els països, capitals i banderes d'Europa jugant: 46 països, 8 modes de joc, 4 nivells i trofeus. Joc educatiu gratuït de geografia per a l'ESO.">
+<meta property="og:image" content="https://robertpotau.github.io/screenshots/euroexplora.jpg">
+<meta property="og:url" content="https://robertpotau.github.io/games/euroexplora/index.html">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "WebApplication",
+    "LearningResource"
+  ],
+  "name": "EuroExplora — Joc de països i capitals d'Europa",
+  "url": "https://robertpotau.github.io/games/euroexplora/index.html",
+  "description": "Aprèn els països, capitals i banderes d'Europa jugant: 46 països, 8 modes de joc, 4 nivells i trofeus. Joc educatiu gratuït de geografia per a l'ESO.",
+  "image": "https://robertpotau.github.io/screenshots/euroexplora.jpg",
+  "inLanguage": "ca",
+  "applicationCategory": "EducationalApplication",
+  "learningResourceType": "Game",
+  "educationalUse": "practice",
+  "educationalLevel": "1r-3r ESO",
+  "teaches": "geografia d'Europa, països, capitals, banderes",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "student"
+  },
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Person",
+    "name": "Robert Potau",
+    "url": "https://robertpotau.github.io/"
+  }
+}
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+<style>
+  /* ═══════════════════════════════════════════
+     EUROEXPLORA - Joc de Paisos d'Europa
+     Inspirat en CalcuHerois amb temàtica geogràfica
+  ═══════════════════════════════════════════ */
+
+  :root {
+    --bg: #0d1f3c;
+    --bg2: #1a3a5c;
+    --accent: #ffd60a;
+    --green: #4ade80;
+    --red: #f87171;
+    --blue: #60a5fa;
+    --purple: #a78bfa;
+    --orange: #fb923c;
+    --pink: #f472b6;
+    --teal: #14b8a6;
+    --card: rgba(255,255,255,0.07);
+    --card-border: rgba(255,255,255,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', 'Nunito', system-ui, sans-serif;
+    background: linear-gradient(135deg, #0d1f3c, #1a3a5c, #0f4c75);
+    min-height: 100vh;
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  /* ── MAPA BACKGROUND (substitueix les estrelles) ── */
+  .stars {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      radial-gradient(2px 2px at 15% 20%, rgba(255,214,10,0.4), transparent),
+      radial-gradient(1.5px 1.5px at 30% 40%, rgba(96,165,250,0.5), transparent),
+      radial-gradient(2px 2px at 50% 15%, rgba(255,214,10,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 70% 50%, rgba(167,139,250,0.4), transparent),
+      radial-gradient(2px 2px at 85% 30%, rgba(255,214,10,0.3), transparent),
+      radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 60% 80%, rgba(96,165,250,0.3), transparent),
+      radial-gradient(1px 1px at 90% 65%, rgba(255,214,10,0.3), transparent),
+      radial-gradient(2px 2px at 40% 90%, rgba(167,139,250,0.3), transparent);
+    opacity: 0.6;
+  }
+
+  /* ── MAPA OVERLAY (subtle pattern) ── */
+  .map-overlay {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.3;
+  }
+
+  /* ── SCREEN SYSTEM ── */
+  .screen { display: none; position: relative; z-index: 1; min-height: 100vh; padding: 20px; padding-bottom: 80px; }
+  .screen.active { display: flex; flex-direction: column; align-items: center; }
+
+  /* ── LOGO ── */
+  .logo {
+    text-align: center; margin-bottom: 8px;
+  }
+  .logo h1 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffd60a, #14b8a6, #60a5fa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    text-shadow: none;
+    letter-spacing: -1px;
+    line-height: 1.1;
+  }
+  .logo .subtitle {
+    color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    width: 100%; max-width: 480px;
+    padding: 14px 24px; border-radius: 14px;
+    font-family: inherit; font-weight: 800; font-size: 1rem;
+    cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+    border: none; color: #fff;
+    margin: 6px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-yellow { background: linear-gradient(135deg, #ffd60a, #f59e0b); color: #1a1a2e; }
+  .btn-blue   { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
+  .btn-green  { background: linear-gradient(135deg, #4ade80, #22c55e); color: #0a2410; }
+  .btn-red    { background: linear-gradient(135deg, #f87171, #ef4444); }
+  .btn-purple { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+  .btn-orange { background: linear-gradient(135deg, #fb923c, #ea580c); }
+  .btn-teal   { background: linear-gradient(135deg, #14b8a6, #0d9488); }
+  .btn-ghost  { background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.2); color: #fff; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card);
+    border: 1.5px solid var(--card-border);
+    border-radius: 16px;
+    padding: 18px;
+    width: 100%;
+    max-width: 480px;
+    backdrop-filter: blur(8px);
+  }
+
+  /* ── INPUTS ── */
+  input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 2px solid var(--card-border);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    font-family: inherit; font-size: 1rem; font-weight: 600;
+    outline: none; transition: border-color 0.2s;
+    margin-bottom: 12px;
+  }
+  input:focus { border-color: var(--accent); }
+  input::placeholder { color: rgba(255,255,255,0.4); }
+
+  /* ── PROFILE BAR ── */
+  .profile-bar {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--card); border: 1.5px solid var(--card-border);
+    border-radius: 14px; padding: 12px 16px;
+    width: 100%; max-width: 480px; margin-bottom: 12px;
+  }
+  .profile-bar-avatar { font-size: 2.4rem; line-height: 1; }
+  .profile-bar-info { flex: 1; }
+  .profile-bar-info .nom { font-weight: 800; font-size: 1.05rem; }
+  .profile-bar .rang { font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+
+  /* ── XP BAR ── */
+  .xp-bar {
+    width: 100%; height: 10px; border-radius: 99px;
+    background: rgba(255,255,255,0.1); overflow: hidden;
+    margin-top: 4px;
+  }
+  .xp-bar-fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, #ffd60a, #f59e0b);
+    transition: width 0.6s;
+  }
+  .xp-bar-text { font-size: 0.72rem; color: rgba(255,255,255,0.5); margin-top: 3px; }
+
+  /* ── OPERATION CARDS (modes) ── */
+  .ops-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 10px; width: 100%; max-width: 480px;
+  }
+  .op-card {
+    padding: 14px; border-radius: 14px;
+    background: var(--card); border: 2px solid var(--card-border);
+    cursor: pointer; transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    text-align: center;
+  }
+  .op-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+  .op-card .icon { font-size: 2.2rem; margin-bottom: 4px; line-height: 1; }
+  .op-card .nom { font-weight: 800; font-size: 0.95rem; margin-bottom: 2px; }
+  .op-card .desc { font-size: 0.72rem; color: rgba(255,255,255,0.55); line-height: 1.25; }
+
+  .op-card[data-color="blue"]   { border-color: rgba(96,165,250,0.5); }
+  .op-card[data-color="yellow"] { border-color: rgba(255,214,10,0.5); }
+  .op-card[data-color="red"]    { border-color: rgba(248,113,113,0.5); }
+  .op-card[data-color="purple"] { border-color: rgba(167,139,250,0.5); }
+  .op-card[data-color="orange"] { border-color: rgba(251,146,60,0.5); }
+  .op-card[data-color="teal"]   { border-color: rgba(20,184,166,0.5); }
+  .op-card[data-color="green"]  { border-color: rgba(74,222,128,0.5); }
+  .op-card[data-color="pink"]   { border-color: rgba(244,114,182,0.5); }
+
+  /* ── LEVEL BUTTONS ── */
+  .level-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; width: 100%; max-width: 480px;
+  }
+  .level-btn {
+    padding: 16px; border-radius: 12px;
+    background: var(--card); border: 2px solid var(--card-border);
+    cursor: pointer; transition: all 0.15s;
+    text-align: center;
+    color: #fff; font-family: inherit;
+  }
+  .level-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .level-btn.selected {
+    background: rgba(255,214,10,0.15); border-color: var(--accent);
+    box-shadow: 0 6px 20px rgba(255,214,10,0.2);
+  }
+  .level-btn .nivel-num { font-size: 0.7rem; color: var(--accent); font-weight: 800; letter-spacing: 1px; }
+  .level-btn .nivel-nom { font-size: 1.05rem; font-weight: 800; margin-top: 4px; }
+  .level-btn .nivel-desc { font-size: 0.72rem; color: rgba(255,255,255,0.55); margin-top: 4px; line-height: 1.3; }
+
+  /* ── GAME SCREEN ── */
+  .game-header {
+    display: flex; justify-content: space-between; align-items: center;
+    width: 100%; max-width: 480px; margin-bottom: 14px;
+    background: var(--card); padding: 10px 14px; border-radius: 12px;
+    border: 1.5px solid var(--card-border);
+  }
+  .game-header-left, .game-header-right { display: flex; align-items: center; gap: 8px; }
+  .game-mode-badge { font-size: 0.75rem; color: rgba(255,255,255,0.6); font-weight: 700; }
+  .game-score { font-weight: 900; font-size: 1.1rem; color: var(--accent); }
+  .game-stat { font-size: 0.82rem; color: rgba(255,255,255,0.7); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    width: 100%; max-width: 480px; height: 6px;
+    background: rgba(255,255,255,0.1); border-radius: 99px;
+    overflow: hidden; margin-bottom: 10px;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    transition: width 0.4s;
+  }
+
+  /* ── TIMER BAR ── */
+  .timer-bar { width: 100%; max-width: 480px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; margin-bottom: 10px; }
+  .timer-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #4ade80, #ffd60a); transition: width 0.1s linear; }
+  .timer-fill.danger { background: linear-gradient(90deg, #f87171, #ef4444); }
+
+  /* ── QUESTION BOX ── */
+  .question-box {
+    width: 100%; max-width: 480px;
+    background: var(--card); border: 2.5px solid var(--card-border);
+    border-radius: 18px; padding: 24px 18px;
+    text-align: center; margin-bottom: 18px;
+    transition: all 0.2s;
+    min-height: 200px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  .question-box.correct {
+    border-color: var(--green);
+    background: rgba(74,222,128,0.12);
+    animation: pulse-green 0.4s;
+  }
+  .question-box.wrong {
+    border-color: var(--red);
+    background: rgba(248,113,113,0.12);
+    animation: shake 0.4s;
+  }
+
+  /* ── FLAG DISPLAY ── */
+  .flag-display {
+    width: 140px; height: 95px;
+    margin: 0 auto 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4), 0 0 0 2px rgba(255,255,255,0.1);
+    overflow: hidden;
+    position: relative;
+  }
+  .flag-display.fi {
+    background-size: cover !important;
+  }
+  .flag-display.large {
+    width: 180px; height: 120px;
+  }
+  .flag-display.small {
+    width: 60px; height: 40px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  /* ── LANDMARK DISPLAY ── */
+  .landmark-display {
+    font-size: 4rem;
+    margin-bottom: 12px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    line-height: 1;
+    animation: landmark-float 3s ease-in-out infinite;
+  }
+
+  @keyframes landmark-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* ── QUESTION TEXT ── */
+  .question-text {
+    font-size: 1.25rem; font-weight: 800;
+    margin: 8px 0; color: #fff;
+    line-height: 1.3;
+  }
+  .question-prompt {
+    font-size: 0.85rem; color: rgba(255,255,255,0.6);
+    font-weight: 700; letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  /* ── ANSWERS GRID ── */
+  .answers-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; width: 100%; max-width: 480px;
+  }
+  .answer-btn {
+    padding: 16px 12px; border-radius: 12px;
+    background: rgba(255,255,255,0.07);
+    border: 2px solid rgba(255,255,255,0.15);
+    color: #fff;
+    font-family: inherit; font-weight: 700; font-size: 0.95rem;
+    cursor: pointer; transition: all 0.2s;
+    min-height: 56px;
+    line-height: 1.2;
+  }
+  .answer-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: rgba(255,214,10,0.1);
+    transform: translateY(-2px);
+  }
+  .answer-btn.correct {
+    background: rgba(74,222,128,0.25);
+    border-color: var(--green);
+    color: var(--green);
+    box-shadow: 0 0 20px rgba(74,222,128,0.3);
+  }
+  .answer-btn.wrong {
+    background: rgba(248,113,113,0.25);
+    border-color: var(--red);
+    color: var(--red);
+  }
+  .answer-btn:disabled { cursor: not-allowed; }
+
+  /* ── FEEDBACK MESSAGE ── */
+  .feedback-msg { font-size: 0.95rem; font-weight: 800; margin: 10px 0; min-height: 24px; text-align: center; }
+  .feedback-msg.correct { color: var(--green); }
+  .feedback-msg.wrong { color: var(--red); }
+
+  /* ── STREAK BANNER ── */
+  .streak-banner {
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    background: linear-gradient(135deg, #ff6b35, #ffd60a);
+    padding: 20px 32px; border-radius: 22px;
+    text-align: center; z-index: 200;
+    box-shadow: 0 20px 60px rgba(255,107,53,0.5);
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    pointer-events: none;
+  }
+  .streak-banner.show { transform: translate(-50%,-50%) scale(1); }
+  .streak-banner .streak-icon { font-size: 2.4rem; display: block; margin-bottom: 4px; }
+  .streak-banner .streak-num { font-size: 2rem; font-weight: 900; color: #1a1a2e; }
+  .streak-banner .streak-text { font-size: 0.85rem; font-weight: 800; color: #1a1a2e; letter-spacing: 1px; }
+
+  /* ── RESULT SCREEN ── */
+  .result-stars { font-size: 3rem; text-align: center; margin: 12px 0; letter-spacing: 8px; }
+  .result-score-big { font-size: 2.6rem; font-weight: 900; text-align: center; color: var(--accent); }
+  .result-label { text-align: center; color: rgba(255,255,255,0.6); font-size: 0.95rem; margin-top: 4px; font-weight: 700; }
+  .result-phrase { text-align: center; font-size: 1.05rem; font-weight: 800; margin: 10px 0; color: #fff; padding: 0 10px; }
+  .result-xp { text-align: center; font-size: 1.1rem; font-weight: 800; color: var(--green); margin: 8px 0; }
+  .result-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.92rem; }
+  .result-row:last-child { border-bottom: none; }
+  .result-row .lab { color: rgba(255,255,255,0.6); }
+  .result-row .val { font-weight: 800; color: var(--accent); }
+  .result-tip {
+    background: rgba(96,165,250,0.1); border: 1.5px solid rgba(96,165,250,0.3);
+    border-radius: 12px; padding: 12px 14px; margin-top: 12px;
+    font-size: 0.88rem; color: rgba(255,255,255,0.85); font-weight: 600;
+  }
+
+  /* ── TROPHIES SCREEN ── */
+  .trophy-section-title {
+    font-size: 0.78rem; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; margin: 18px 0 8px;
+    width: 100%; max-width: 480px; padding: 0 4px;
+  }
+  .trophy-section-title.cat-progres { color: #60a5fa; }
+  .trophy-section-title.cat-habilit { color: #4ade80; }
+  .trophy-section-title.cat-modes { color: #fb923c; }
+  .trophy-section-title.cat-bandera { color: #f472b6; }
+  .trophy-section-title.cat-capital { color: #a78bfa; }
+  .trophy-section-title.cat-misteri { color: #ffd60a; }
+
+  .trophies-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 10px; width: 100%; max-width: 480px;
+  }
+  .trophy-card {
+    background: var(--card); border: 2px solid var(--card-border);
+    border-radius: 14px; padding: 12px 8px;
+    text-align: center; cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .trophy-card.unlocked { border-color: var(--accent); background: rgba(255,214,10,0.08); }
+  .trophy-card.unlocked.cat-progres { border-color: #60a5fa; background: rgba(96,165,250,0.08); }
+  .trophy-card.unlocked.cat-habilit { border-color: #4ade80; background: rgba(74,222,128,0.08); }
+  .trophy-card.unlocked.cat-modes { border-color: #fb923c; background: rgba(251,146,60,0.08); }
+  .trophy-card.unlocked.cat-bandera { border-color: #f472b6; background: rgba(244,114,182,0.08); }
+  .trophy-card.unlocked.cat-capital { border-color: #a78bfa; background: rgba(167,139,250,0.08); }
+  .trophy-card.unlocked.cat-misteri { border-color: #ffd60a; background: rgba(255,214,10,0.08); }
+  .trophy-card:hover.unlocked { transform: translateY(-2px); }
+  .trophy-icon { font-size: 2.2rem; line-height: 1; margin-bottom: 4px; filter: grayscale(1) opacity(0.4); }
+  .trophy-card.unlocked .trophy-icon { filter: none; }
+  .trophy-name { font-size: 0.78rem; font-weight: 800; margin-top: 4px; line-height: 1.2; }
+  .trophy-desc { font-size: 0.68rem; color: rgba(255,255,255,0.5); margin-top: 3px; line-height: 1.25; }
+
+  /* ── RANKUP OVERLAY ── */
+  .rankup-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(13,31,60,0.95);
+    z-index: 300;
+    justify-content: center; align-items: center;
+    cursor: pointer;
+  }
+  .rankup-overlay.show { display: flex; animation: fadeIn 0.3s; }
+  .rankup-content { text-align: center; padding: 24px; }
+  .rankup-label { font-size: 0.75rem; letter-spacing: 3px; color: rgba(255,255,255,0.5); font-weight: 800; margin-bottom: 12px; }
+  .rankup-transition { display: flex; align-items: center; gap: 16px; justify-content: center; margin-bottom: 16px; }
+  .rankup-rang-old { font-size: 2rem; opacity: 0.5; }
+  .rankup-arrow { font-size: 2rem; color: var(--accent); animation: bounce 0.5s infinite alternate; }
+  .rankup-rang-new { font-size: 2.8rem; animation: splash-pop 0.5s 0.2s both; }
+  .rankup-icon { font-size: 5rem; animation: bounce 0.6s infinite alternate; margin-bottom: 8px; }
+  .rankup-title { font-size: 2rem; font-weight: 900; color: var(--accent); margin: 4px 0; animation: splash-pop 0.4s both; }
+  .rankup-sub { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 8px; }
+
+  /* ── TROPHY OVERLAY (notification) ── */
+  .trophy-overlay {
+    position: fixed; right: 16px; bottom: 16px;
+    background: linear-gradient(135deg, #ffd60a, #f59e0b);
+    color: #1a1a2e; padding: 16px 22px; border-radius: 16px;
+    z-index: 250; box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    transform: translateX(600px);
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    text-align: center; min-width: 200px;
+  }
+  .trophy-overlay.show { transform: translateX(0); }
+  .trophy-overlay .t-icon { font-size: 3rem; line-height: 1; margin-bottom: 4px; }
+  .trophy-overlay .t-title { font-size: 0.7rem; letter-spacing: 1.5px; opacity: 0.7; font-weight: 800; }
+  .trophy-overlay .t-name { font-size: 1.3rem; font-weight: 900; }
+
+  @keyframes serpentina-fall {
+    0%   { transform: translate(0,0) rotate(0deg); opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity: 0; }
+  }
+
+  /* ── BACK BUTTON ── */
+  .back-btn {
+    position: absolute; top: 16px; left: 16px;
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 10px; padding: 8px 14px; cursor: pointer;
+    font-family: inherit; font-weight: 700; font-size: 0.85rem; color: #fff;
+    z-index: 10;
+    transition: background 0.2s;
+  }
+  .back-btn:hover { background: rgba(255,255,255,0.15); }
+
+  /* ── PROFILE CREATION ── */
+  .gender-wrap { display: flex; gap: 10px; margin-bottom: 16px; }
+  .gender-btn {
+    flex: 1; padding: 12px; border-radius: 12px; cursor: pointer; text-align: center;
+    background: rgba(255,255,255,0.07); border: 2px solid rgba(255,255,255,0.15);
+    font-family: inherit; font-weight: 700; font-size: 0.95rem; color: #fff;
+    transition: all 0.2s;
+  }
+  .gender-btn.selected { border-color: var(--accent); background: rgba(255,214,10,0.15); color: var(--accent); }
+  .gender-btn:hover { border-color: rgba(255,214,10,0.5); }
+
+  .avatar-preview-wrap { text-align: center; margin: 12px 0; }
+  .avatar-preview { font-size: 4rem; line-height: 1; display: block; }
+  .picker-label { font-size: 0.82rem; color: rgba(255,255,255,0.6); font-weight: 700; margin: 12px 0 7px; display: block; }
+  .skin-wrap { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 4px; }
+  .skin-swatch {
+    width: 38px; height: 38px; border-radius: 50%; cursor: pointer;
+    border: 3px solid transparent; transition: transform 0.15s, border-color 0.15s;
+  }
+  .skin-swatch.selected { border-color: var(--accent); transform: scale(1.18); }
+  .skin-swatch:hover { transform: scale(1.1); }
+  .hair-wrap { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+  .hair-swatch {
+    width: 46px; height: 46px; border-radius: 10px; cursor: pointer; font-size: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.07); border: 2px solid transparent; transition: all 0.15s;
+  }
+  .hair-swatch.selected { border-color: var(--accent); background: rgba(255,214,10,0.15); }
+  .hair-swatch:hover { border-color: rgba(255,214,10,0.4); }
+
+  /* ── PROFILE SLOTS ── */
+  .profile-slots-list { width: 100%; max-width: 480px; }
+  .profile-slot {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--card); border: 2px solid var(--card-border);
+    border-radius: 14px; padding: 14px 16px;
+    margin-bottom: 10px; cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .profile-slot:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); border-color: var(--accent); }
+  .profile-slot-avatar { font-size: 2.4rem; line-height: 1; }
+  .profile-slot-info { flex: 1; }
+  .profile-slot-nom { font-weight: 800; font-size: 1rem; }
+  .profile-slot-rang { font-size: 0.75rem; color: var(--accent); font-weight: 700; margin-top: 1px; }
+  .profile-slot-stats { font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .profile-slot-empty {
+    border-style: dashed; border-color: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.5);
+    text-align: center; justify-content: center;
+  }
+  .profile-slot-delete {
+    background: none; border: none; color: rgba(255,255,255,0.4);
+    cursor: pointer; font-size: 1.1rem; padding: 6px;
+    transition: color 0.2s;
+  }
+  .profile-slot-delete:hover { color: var(--red); }
+
+  /* ── STATS SCREEN ── */
+  .stats-hero {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--card); border: 1.5px solid var(--card-border);
+    border-radius: 16px; padding: 16px;
+    width: 100%; max-width: 480px; margin-bottom: 12px;
+    position: relative;
+  }
+  .stats-hero-avatar { font-size: 3.4rem; line-height: 1; position: relative; }
+  .stats-hero-edit-btn {
+    position: absolute; top: 8px; right: 8px;
+    background: rgba(255,214,10,0.15);
+    border: 1.5px solid rgba(255,214,10,0.4);
+    color: var(--accent); cursor: pointer;
+    width: 30px; height: 30px; border-radius: 8px;
+    font-size: 0.85rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .stats-hero-edit-btn:hover { background: rgba(255,214,10,0.3); }
+  .stats-hero-info { flex: 1; }
+  .stats-hero-nom { font-size: 1.4rem; font-weight: 900; }
+  .stats-hero-sub { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  .stats-xp-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0;
+    width: 100%; max-width: 480px;
+  }
+  .stats-xp-row .lab { font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 700; }
+  .stats-xp-row .val { font-weight: 800; color: var(--accent); }
+
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 10px; width: 100%; max-width: 480px; margin-bottom: 14px;
+  }
+  .stat-box {
+    background: var(--card); border: 1.5px solid var(--card-border);
+    border-radius: 12px; padding: 12px; text-align: center;
+  }
+  .stat-box .stat-num { font-size: 1.5rem; font-weight: 900; color: var(--accent); line-height: 1; }
+  .stat-box .stat-lab { font-size: 0.72rem; color: rgba(255,255,255,0.55); font-weight: 700; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ── HISTORIAL ── */
+  .hist-row {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 10px; padding: 8px 12px;
+    margin-bottom: 6px;
+    width: 100%; max-width: 480px;
+    font-size: 0.85rem;
+  }
+  .hist-icon { font-size: 1.4rem; }
+  .hist-info { flex: 1; }
+  .hist-mode { font-weight: 800; }
+  .hist-detail { font-size: 0.72rem; color: rgba(255,255,255,0.5); }
+  .hist-score { font-weight: 800; color: var(--accent); }
+  .hist-xp { font-size: 0.72rem; color: var(--green); text-align: right; }
+
+  /* ── CHART ── */
+  .chart-bar-wrap {
+    display: flex; align-items: flex-end; gap: 4px;
+    height: 80px;
+    background: rgba(0,0,0,0.15); border-radius: 10px;
+    padding: 8px;
+    width: 100%; max-width: 480px;
+  }
+  .chart-bar {
+    flex: 1; min-width: 8px;
+    background: linear-gradient(to top, var(--accent), #f59e0b);
+    border-radius: 3px;
+    position: relative;
+    transition: height 0.4s;
+  }
+  .chart-bar:hover::after {
+    content: attr(data-val);
+    position: absolute; top: -22px; left: 50%; transform: translateX(-50%);
+    background: var(--bg2); color: var(--accent);
+    padding: 2px 6px; border-radius: 4px;
+    font-size: 0.7rem; font-weight: 800; white-space: nowrap;
+  }
+
+  /* ── CREDITS MODAL ── */
+  .modal-bg {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 400; justify-content: center; align-items: center;
+    padding: 20px;
+  }
+  .modal-bg.active { display: flex; animation: fadeIn 0.3s; }
+  .credits-modal {
+    background: var(--bg2); border: 2px solid var(--card-border);
+    border-radius: 18px; padding: 24px;
+    max-width: 500px; width: 100%;
+    max-height: 85vh; overflow-y: auto;
+    animation: splash-pop 0.4s;
+  }
+  .credits-modal h3 {
+    font-size: 1.4rem; font-weight: 900; margin-bottom: 14px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffd60a, #14b8a6);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .credits-row {
+    display: flex; gap: 12px; padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .credits-row:last-of-type { border-bottom: none; }
+  .credits-icon { font-size: 2rem; line-height: 1; flex-shrink: 0; }
+  .credits-info { flex: 1; }
+  .credits-info strong { display: block; font-size: 1rem; color: var(--accent); margin-bottom: 2px; }
+  .credits-info span { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.4; }
+  .credits-divider { border: none; height: 1px; background: rgba(255,255,255,0.1); margin: 14px 0; }
+  .credits-cc {
+    background: rgba(96,165,250,0.1); border: 1.5px solid rgba(96,165,250,0.3);
+    border-radius: 10px; padding: 12px; margin-top: 8px;
+    font-size: 0.85rem; line-height: 1.5; text-align: center;
+  }
+  .credits-cc strong { color: var(--blue); display: block; margin-bottom: 4px; }
+  .credits-close {
+    width: 100%; margin-top: 14px; padding: 12px; border-radius: 10px;
+    background: var(--card); border: 1.5px solid var(--card-border);
+    color: #fff; font-family: inherit; font-weight: 800; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .credits-close:hover { background: rgba(255,255,255,0.15); }
+
+  /* ── THEME PICKER FAB ── */
+  .theme-fab {
+    position: fixed; bottom: 18px; right: 18px;
+    background: linear-gradient(135deg, #ffd60a, #f59e0b);
+    border: none; border-radius: 50%;
+    width: 52px; height: 52px;
+    cursor: pointer; z-index: 50;
+    font-size: 1.4rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    transition: transform 0.2s;
+  }
+  .theme-fab:hover { transform: scale(1.1) rotate(15deg); }
+
+  .theme-modal {
+    background: var(--bg2); border: 2px solid var(--card-border);
+    border-radius: 18px; padding: 22px;
+    max-width: 480px; width: 100%;
+  }
+  .theme-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .theme-card {
+    padding: 12px; border-radius: 14px; cursor: pointer;
+    border: 2px solid transparent;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .theme-card.active { border-color: var(--accent); }
+  .theme-card:hover { transform: translateY(-2px); }
+  .theme-card-name { font-weight: 800; font-size: 0.95rem; margin-top: 6px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+
+  /* ── PARTICLES ── */
+  .particle {
+    position: fixed; pointer-events: none; z-index: 50;
+    width: 8px; height: 8px; border-radius: 50%;
+    animation: particle-fall 0.8s forwards;
+  }
+
+  /* ── TIMER LABEL ── */
+  .timer-label {
+    text-align: center; font-size: 0.85rem; color: rgba(255,255,255,0.6);
+    margin-bottom: 6px; font-weight: 700;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes pulse-green {
+    0%,100% { box-shadow: 0 0 0 rgba(74,222,128,0); }
+    50%      { box-shadow: 0 0 30px rgba(74,222,128,0.4); }
+  }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20%     { transform: translateX(-8px); }
+    40%     { transform: translateX(8px); }
+    60%     { transform: translateX(-5px); }
+    80%     { transform: translateX(5px); }
+  }
+  @keyframes bounce {
+    from { transform: scale(1); } to { transform: scale(1.15); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes particle-fall {
+    0%   { opacity: 1; transform: translate(0,0) scale(1); }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0); }
+  }
+  @keyframes slideInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes splash-pop {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes wave {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+  .animate-in { animation: slideInUp 0.4s forwards; }
+  .animate-pop { animation: splash-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+  /* ── DAY THEME ── */
+  body.tema-dia { color: #1a1a2e; }
+  body.tema-dia .card,
+  body.tema-dia .profile-bar,
+  body.tema-dia .op-card,
+  body.tema-dia .level-btn,
+  body.tema-dia .game-header,
+  body.tema-dia .question-box,
+  body.tema-dia .answer-btn,
+  body.tema-dia .stat-box,
+  body.tema-dia .trophy-card,
+  body.tema-dia .hist-row,
+  body.tema-dia .stats-hero,
+  body.tema-dia .profile-slot { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.15); color: #1a1a2e; }
+  body.tema-dia input[type="text"],
+  body.tema-dia input[type="number"] { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.2); color: #1a1a2e; }
+  body.tema-dia input::placeholder { color: rgba(0,0,0,0.4); }
+  body.tema-dia .answer-btn { color: #1a1a2e; }
+  body.tema-dia .game-stat,
+  body.tema-dia .stats-hero-sub,
+  body.tema-dia .result-row .lab,
+  body.tema-dia .picker-label,
+  body.tema-dia .stats-xp-row .lab { color: rgba(0,0,0,0.6) !important; }
+  body.tema-dia .question-prompt { color: rgba(0,0,0,0.5); }
+  body.tema-dia .stars,
+  body.tema-dia .map-overlay { display: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .ops-grid { grid-template-columns: 1fr 1fr; }
+    .answers-grid { grid-template-columns: 1fr 1fr; }
+    .level-grid { grid-template-columns: 1fr 1fr; }
+    .question-text { font-size: 1.1rem; }
+    .flag-display { width: 110px; height: 75px; }
+  }
+
+  /* ── DUEL HANDOFF ── */
+  .handoff-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(13,31,60,0.97); z-index: 350;
+    justify-content: center; align-items: center;
+  }
+  .handoff-overlay.active { display: flex; }
+  .handoff-content { text-align: center; padding: 24px; }
+  .handoff-icon { font-size: 5rem; animation: wave 1s ease-in-out infinite; }
+  .handoff-title { font-size: 1.8rem; font-weight: 900; color: var(--accent); margin: 12px 0; }
+  .handoff-msg { color: rgba(255,255,255,0.7); margin-bottom: 18px; }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="map-overlay"></div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN: SPLASH
+═══════════════════════════════════════════ -->
+<div class="screen active" id="screen-splash">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;">
+    <div class="logo animate-in">
+      <h1>🗺️ EuroExplora</h1>
+      <p class="subtitle">Paisos · Capitals · Banderes</p>
+    </div>
+    <div style="margin-top:30px;font-size:0.9rem;color:rgba(255,255,255,0.5);font-weight:700;letter-spacing:2px;">CARREGANT...</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN: PROFILE SELECT
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-profile-select">
+  <div style="margin-top:30px;width:100%;max-width:480px;" class="animate-in">
+    <div class="logo">
+      <h1>🗺️ EuroExplora</h1>
+      <p class="subtitle">Tria el teu perfil</p>
+    </div>
+    <div style="margin-top:20px;width:100%;" id="profile-slots-list"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN: PROFILE CREATION
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-profile-create">
+  <button class="back-btn" onclick="goToProfileSelect()">← Enrere</button>
+  <div style="margin-top:40px;width:100%;max-width:480px;" class="animate-in">
+    <div class="logo">
+      <h1>🗺️ EuroExplora</h1>
+      <p class="subtitle">Crea el teu perfil</p>
+    </div>
+    <div class="card" style="margin-top:18px;">
+      <h2 style="font-size:1.15rem;margin-bottom:10px;font-weight:800;">👤 Identitat de l'explorador</h2>
+      <label class="picker-label">El teu nom</label>
+      <input type="text" id="inp-name" placeholder="Escriu el teu nom..." maxlength="20">
+      <label class="picker-label">Com vols que et digui?</label>
+      <div class="gender-wrap">
+        <div class="gender-btn selected" data-g="M" onclick="selectGender(this)">Noi 🧒</div>
+        <div class="gender-btn" data-g="F" onclick="selectGender(this)">Noia 👧</div>
+        <div class="gender-btn" data-g="N" onclick="selectGender(this)">Altres 🧑</div>
+      </div>
+      <div class="avatar-preview-wrap">
+        <span class="avatar-preview" id="avatar-preview-big">👦</span>
+      </div>
+      <span class="picker-label">Color de pell</span>
+      <div class="skin-wrap" id="skin-wrap">
+        <div class="skin-swatch selected" data-s="0" style="background:#F5C518" onclick="selectSkin(this)" title="Per defecte"></div>
+        <div class="skin-swatch" data-s="1" style="background:#FDDBB4" onclick="selectSkin(this)" title="Clar"></div>
+        <div class="skin-swatch" data-s="2" style="background:#E8B88A" onclick="selectSkin(this)" title="Clar-mig"></div>
+        <div class="skin-swatch" data-s="3" style="background:#C78B5C" onclick="selectSkin(this)" title="Mig"></div>
+        <div class="skin-swatch" data-s="4" style="background:#8D5524" onclick="selectSkin(this)" title="Fosc-mig"></div>
+        <div class="skin-swatch" data-s="5" style="background:#4A2912" onclick="selectSkin(this)" title="Fosc"></div>
+      </div>
+      <span class="picker-label">Estil de cabell</span>
+      <div class="hair-wrap" id="hair-wrap">
+        <div class="hair-swatch selected" data-h="default" onclick="selectHair(this)" title="Fosc">🧑‍🦱</div>
+        <div class="hair-swatch" data-h="blonde" onclick="selectHair(this)" title="Ros">👱</div>
+        <div class="hair-swatch" data-h="red" onclick="selectHair(this)" title="Vermell">🧑‍🦰</div>
+        <div class="hair-swatch" data-h="white" onclick="selectHair(this)" title="Blanc/Gris">🧑‍🦳</div>
+        <div class="hair-swatch" data-h="bald" onclick="selectHair(this)" title="Calb">🧑‍🦲</div>
+      </div>
+      <button class="btn btn-yellow" style="margin-top:14px;" onclick="createProfile()">Començar aventura! 🚀</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN: MENU PRINCIPAL
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-menu">
+  <div style="margin-top:20px;width:100%;max-width:480px;" class="animate-in">
+    <div class="logo">
+      <h1>🗺️ EuroExplora</h1>
+      <p class="subtitle">Aventura geogràfica</p>
+    </div>
+    <div class="profile-bar" style="margin-top:18px;">
+      <div class="profile-bar-avatar" id="menu-avatar">👦</div>
+      <div class="profile-bar-info">
+        <div class="nom" id="menu-nom">Jugador</div>
+        <div class="rang" id="menu-rang">🧭 Aprenent · 0 XP</div>
+        <div class="xp-bar"><div class="xp-bar-fill" id="menu-xp-fill" style="width:0%"></div></div>
+        <div class="xp-bar-text" id="menu-xp-text">0 / 100 XP</div>
+      </div>
+    </div>
+    <div id="area-feble-wrap"></div>
+    <button class="btn btn-yellow" onclick="goToSelectMode()">▶️ JUGAR</button>
+    <div class="ops-grid" style="margin-top:6px;">
+      <button class="btn btn-blue" style="margin:0;" onclick="showScreen('screen-stats')">📊 Estadístiques</button>
+      <button class="btn btn-purple" style="margin:0;" onclick="showScreen('screen-trophies')">🏆 Trofeus</button>
+    </div>
+    <div class="ops-grid" style="margin-top:8px;">
+      <button class="btn btn-ghost" style="margin:0;" onclick="changeProfile()">👤 Canviar perfil</button>
+      <button class="btn btn-ghost" style="margin:0;" onclick="openCredits()">ℹ️ Crèdits</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN: SELECT MODE
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-select-mode">
+  <button class="back-btn" onclick="showScreen('screen-menu')">← Enrere</button>
+  <div style="margin-top:40px;width:100%;max-width:480px;" class="animate-in">
+    <div class="logo">
+      <h1>🎮 Modes de Joc</h1>
+      <p class="subtitle">Tria com vols jugar</p>
+    </div>
+    <div class="ops-grid" style="margin-top:14px;" id="modes-grid"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN: SELECT TYPE (banderes/capitals/edificis)
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-select-type">
+  <button class="back-btn" onclick="showScreen('screen-select-mode')">← Enrere</button>
+  <div style="margin-top:40px;width:100%;max-width:480px;" class="animate-in">
+    <div class="logo">
+      <h1 style="font-size:1.8rem;">🎯 Tipus de Pregunta</h1>
+      <p class="subtitle">Què vols practicar?</p>
+    </div>
+    <div class="ops-grid" style="margin-top:14px;" id="types-grid"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN: SELECT LEVEL
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-select-level">
+  <button class="back-btn" onclick="showScreen('screen-select-type')">← Enrere</button>
+  <div style="margin-top:40px;width:100%;max-width:480px;" class="animate-in">
+    <div class="logo">
+      <h1 style="font-size:1.8rem;">📍 Nivell</h1>
+      <p class="subtitle">Quants paisos vols incloure?</p>
+    </div>
+    <div class="level-grid" style="margin-top:14px;" id="levels-grid"></div>
+    <button class="btn btn-yellow" id="btn-start-game" onclick="startGame()" disabled style="margin-top:14px;opacity:0.5;">Selecciona un nivell</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN: GAME
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-game">
+  <div style="width:100%;max-width:480px;margin-top:14px;">
+    <div class="game-header">
+      <div class="game-header-left">
+        <div class="game-mode-badge" id="game-mode-badge">📚 Clàssic · Bàsic</div>
+      </div>
+      <div class="game-header-right">
+        <div class="game-stat" id="game-stat-text">0/10</div>
+        <div class="game-score" id="game-score">⭐ 0</div>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <div id="timer-wrap" style="display:none;">
+      <div class="timer-label" id="timer-label">⏱️ 60s</div>
+      <div class="timer-bar"><div class="timer-fill" id="timer-fill" style="width:100%"></div></div>
+    </div>
+    <div id="lives-wrap" style="display:none;text-align:center;font-size:1.5rem;margin-bottom:8px;" class="game-lives">❤️❤️❤️</div>
+    <div class="question-box" id="question-box">
+      <div class="question-prompt" id="question-prompt"></div>
+      <div id="question-visual"></div>
+      <div class="question-text" id="question-text"></div>
+    </div>
+    <div class="feedback-msg" id="feedback-msg"></div>
+    <div class="answers-grid" id="answers-grid"></div>
+    <button class="btn btn-ghost" style="margin-top:14px;" onclick="quitGame()">Abandonar partida</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN: RESULTS
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-results">
+  <div style="margin-top:30px;width:100%;max-width:480px;" class="animate-in">
+    <div class="logo">
+      <h1 style="font-size:2rem;">🏁 Final!</h1>
+    </div>
+    <div class="card animate-pop" style="margin-top:14px;">
+      <div class="result-stars" id="result-stars">⭐⭐⭐</div>
+      <div class="result-score-big" id="result-score-big">8/10</div>
+      <div class="result-label" id="result-label">punts</div>
+      <div class="result-phrase" id="result-phrase">Bona partida!</div>
+      <div class="result-xp" id="result-xp">+12 XP</div>
+      <hr class="credits-divider">
+      <div id="result-details"></div>
+      <div id="result-tip" class="result-tip" style="display:none;"></div>
+    </div>
+    <div class="ops-grid" style="margin-top:12px;">
+      <button class="btn btn-yellow" style="margin:0;" onclick="startGame()">🔁 Una altra</button>
+      <button class="btn btn-ghost" style="margin:0;" onclick="showScreen('screen-menu')">🏠 Menú</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN: STATS
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-stats">
+  <button class="back-btn" onclick="showScreen('screen-menu')">← Enrere</button>
+  <div style="margin-top:40px;width:100%;max-width:480px;" class="animate-in">
+    <div class="logo">
+      <h1 style="font-size:1.8rem;">📊 Les meves estadístiques</h1>
+    </div>
+    <div class="stats-hero">
+      <div class="stats-hero-avatar" id="stats-avatar">👦</div>
+      <div class="stats-hero-info">
+        <div class="stats-hero-nom" id="stats-nom">Jugador</div>
+        <div class="stats-hero-sub" id="stats-rang">🧭 Aprenent</div>
+        <div class="xp-bar" style="margin-top:6px;"><div class="xp-bar-fill" id="stats-xp-fill" style="width:0%"></div></div>
+        <div class="xp-bar-text" id="stats-xp-text">0 / 100 XP</div>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-num" id="stats-partides">0</div><div class="stat-lab">Partides</div></div>
+      <div class="stat-box"><div class="stat-num" id="stats-encerts">0</div><div class="stat-lab">Encerts</div></div>
+      <div class="stat-box"><div class="stat-num" id="stats-precisio">0%</div><div class="stat-lab">Precisió</div></div>
+      <div class="stat-box"><div class="stat-num" id="stats-temps">0m</div><div class="stat-lab">Temps jugat</div></div>
+    </div>
+
+    <div class="trophy-section-title cat-progres">📈 Progrés últimes 10 partides</div>
+    <div class="chart-bar-wrap" id="stats-chart"></div>
+
+    <div class="trophy-section-title cat-bandera">🚩 Per tipus de pregunta</div>
+    <div class="stat-grid" id="stats-by-type"></div>
+
+    <div class="trophy-section-title cat-modes">🎮 Per mode</div>
+    <div class="stat-grid" id="stats-by-mode"></div>
+
+    <div class="trophy-section-title cat-progres">📜 Historial recent</div>
+    <div id="stats-history"></div>
+
+    <button class="btn btn-ghost" style="margin-top:14px;" onclick="showScreen('screen-menu')">🏠 Tornar al menú</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN: TROPHIES
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-trophies">
+  <button class="back-btn" onclick="showScreen('screen-menu')">← Enrere</button>
+  <div style="margin-top:40px;width:100%;max-width:480px;" class="animate-in">
+    <div class="logo">
+      <h1 style="font-size:1.8rem;">🏆 Sala de Trofeus</h1>
+      <p class="subtitle" id="trophy-count">0 / 18 desbloquejats</p>
+    </div>
+    <div id="trophies-content" style="margin-top:14px;"></div>
+    <button class="btn btn-ghost" style="margin-top:14px;" onclick="showScreen('screen-menu')">🏠 Tornar al menú</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     OVERLAYS
+═══════════════════════════════════════════ -->
+<div class="streak-banner" id="streak-banner">
+  <span class="streak-icon" id="streak-icon">🔥</span>
+  <div class="streak-num" id="streak-num">5</div>
+  <div class="streak-text" id="streak-text">RATXA!</div>
+</div>
+
+<div class="rankup-overlay" id="rankup-overlay" onclick="this.classList.remove('show')">
+  <div class="rankup-content">
+    <div class="rankup-label">🎖️ NOU RANG!</div>
+    <div class="rankup-transition">
+      <div class="rankup-rang-old" id="rankup-rang-old">🧭</div>
+      <div class="rankup-arrow">→</div>
+      <div class="rankup-rang-new" id="rankup-rang-new">🗺️</div>
+    </div>
+    <div class="rankup-icon" id="rankup-icon">⬆️</div>
+    <div class="rankup-title" id="rankup-title">RANG NOU!</div>
+    <div class="rankup-sub" id="rankup-sub">Continua jugant per pujar més!</div>
+  </div>
+</div>
+
+<div class="trophy-overlay" id="trophy-overlay">
+  <div class="t-icon" id="trophy-overlay-icon">🏆</div>
+  <div class="t-title">TROFEU NOU</div>
+  <div class="t-name" id="trophy-overlay-name">Primer pas</div>
+</div>
+
+<!-- CREDITS MODAL -->
+<div class="modal-bg" id="credits-modal-bg" onclick="closeCreditsIfBg(event)">
+  <div class="credits-modal" onclick="event.stopPropagation()">
+    <h3>ℹ️ Crèdits · <span style="font-weight:400;opacity:0.6;font-size:0.85rem;">v3.0</span></h3>
+    <div class="credits-row">
+      <div class="credits-icon">👨‍🏫</div>
+      <div class="credits-info">
+        <strong>Robert Potau Núñez</strong>
+        <span>Disseny, pedagogia i coordinació del projecte<br>Professor de Tecnologia, ESO</span>
+      </div>
+    </div>
+    <div class="credits-row">
+      <div class="credits-icon">🌍</div>
+      <div class="credits-info">
+        <strong>Josep Rostoll Fuentes</strong>
+        <span>Continguts curriculars i validació pedagògica<br>Professor de Geografia i Història, ESO</span>
+      </div>
+    </div>
+    <div class="credits-row">
+      <div class="credits-icon">🤖</div>
+      <div class="credits-info">
+        <strong>Claude Code · Anthropic</strong>
+        <span>Programació i implementació tècnica</span>
+      </div>
+    </div>
+    <hr class="credits-divider">
+    <div style="font-size:0.78rem;color:rgba(255,255,255,0.5);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Recursos opensource</div>
+    <div class="credits-row">
+      <div class="credits-icon">🚩</div>
+      <div class="credits-info">
+        <strong>flag-icons (Lipis)</strong>
+        <span>Banderes SVG dels paisos<br><a href="https://github.com/lipis/flag-icons" target="_blank" style="color:var(--blue);">github.com/lipis/flag-icons</a> · Llicència MIT</span>
+      </div>
+    </div>
+    <div class="credits-row">
+      <div class="credits-icon">🏛️</div>
+      <div class="credits-info">
+        <strong>Emojis Unicode + OpenMoji</strong>
+        <span>Edificis, monuments i símbols<br><a href="https://openmoji.org" target="_blank" style="color:var(--blue);">openmoji.org</a> · Llicència CC BY-SA 4.0</span>
+      </div>
+    </div>
+    <div class="credits-row">
+      <div class="credits-icon">📚</div>
+      <div class="credits-info">
+        <strong>Dades geogràfiques</strong>
+        <span>Capitals i informació de paisos<br>Font: Viquipèdia · Llicència CC BY-SA 4.0</span>
+      </div>
+    </div>
+    <hr class="credits-divider">
+    <div class="credits-cc">
+      <strong>🔓 Llicència Creative Commons</strong>
+      CC BY-SA 4.0 — Reconeixement · CompartirIgual<br>
+      <span style="font-size:0.8rem;opacity:0.85;">Podeu usar, adaptar i redistribuir aquest material<br>sempre que en citeu l'autoria i mantingueu la mateixa llicència.</span>
+    </div>
+    <button class="credits-close" onclick="closeCredits()">Tancar</button>
+  </div>
+</div>
+
+<!-- THEME PICKER MODAL -->
+<div class="modal-bg" id="theme-modal-bg" onclick="if(event.target.id==='theme-modal-bg')closeThemeModal()">
+  <div class="theme-modal">
+    <h3 style="text-align:center;margin-bottom:14px;font-weight:900;">🎨 Tema Visual</h3>
+    <div class="theme-grid" id="theme-grid"></div>
+    <button class="credits-close" onclick="closeThemeModal()" style="margin-top:14px;">Tancar</button>
+  </div>
+</div>
+
+<!-- THEME FAB -->
+<button class="theme-fab" onclick="openThemeModal()" title="Canviar tema">🎨</button>
+
+<script>
+// ═══════════════════════════════════════════
+//  CONSTANTS
+// ═══════════════════════════════════════════
+
+// Mapping ISO codes per a flag-icons CSS
+const COUNTRIES = {
+  'França': { capital: 'París', code: 'fr', landmark: '🗼', region: 'Europa Occidental' },
+  'Alemanya': { capital: 'Berlín', code: 'de', landmark: '🏛️', region: 'Europa Central' },
+  'Itàlia': { capital: 'Roma', code: 'it', landmark: '🏛️', region: 'Europa Meridional' },
+  'Espanya': { capital: 'Madrid', code: 'es', landmark: '🐂', region: 'Europa Meridional' },
+  'Portugal': { capital: 'Lisboa', code: 'pt', landmark: '⛵', region: 'Europa Meridional' },
+  'Suïssa': { capital: 'Berna', code: 'ch', landmark: '⛰️', region: 'Europa Central' },
+  'Bèlgica': { capital: 'Brussel·les', code: 'be', landmark: '🍫', region: 'Europa Occidental' },
+  'Holanda': { capital: 'Ámsterdam', code: 'nl', landmark: '🌷', region: 'Europa Occidental' },
+  'Dinamarca': { capital: 'Copenhaguen', code: 'dk', landmark: '🧜‍♀️', region: 'Escandinàvia' },
+  'Suècia': { capital: 'Estocolm', code: 'se', landmark: '🛶', region: 'Escandinàvia' },
+  'Noruega': { capital: 'Oslo', code: 'no', landmark: '⛵', region: 'Escandinàvia' },
+  'Finlàndia': { capital: 'Hèlsinki', code: 'fi', landmark: '🦌', region: 'Escandinàvia' },
+  'Polònia': { capital: 'Varsòvia', code: 'pl', landmark: '🏰', region: 'Europa Oriental' },
+  'República Txeca': { capital: 'Praga', code: 'cz', landmark: '🏰', region: 'Europa Central' },
+  'Hongria': { capital: 'Budapest', code: 'hu', landmark: '🌉', region: 'Europa Central' },
+  'Croàcia': { capital: 'Zàgreb', code: 'hr', landmark: '⛵', region: 'Balcans' },
+  'Romania': { capital: 'Bucarest', code: 'ro', landmark: '🦇', region: 'Europa Oriental' },
+  'Bulgària': { capital: 'Sofia', code: 'bg', landmark: '⛪', region: 'Balcans' },
+  'Grècia': { capital: 'Atenes', code: 'gr', landmark: '🏛️', region: 'Europa Meridional' },
+  'Sèrbia': { capital: 'Belgrad', code: 'rs', landmark: '🏛️', region: 'Balcans' },
+  'Albània': { capital: 'Tirana', code: 'al', landmark: '🦅', region: 'Balcans' },
+  'Macedònia': { capital: 'Skopje', code: 'mk', landmark: '🏛️', region: 'Balcans' },
+  'Bòsnia': { capital: 'Sarajevo', code: 'ba', landmark: '🌉', region: 'Balcans' },
+  'Montenegro': { capital: 'Podgorica', code: 'me', landmark: '⛰️', region: 'Balcans' },
+  'Kosovo': { capital: 'Pristina', code: 'xk', landmark: '🏛️', region: 'Balcans' },
+  'Lituània': { capital: 'Vílnius', code: 'lt', landmark: '🏰', region: 'Bàltic' },
+  'Letònia': { capital: 'Riga', code: 'lv', landmark: '🏛️', region: 'Bàltic' },
+  'Estònia': { capital: 'Tallinn', code: 'ee', landmark: '🏰', region: 'Bàltic' },
+  'Eslovàquia': { capital: 'Bratislava', code: 'sk', landmark: '🏰', region: 'Europa Central' },
+  'Eslovènia': { capital: 'Liubliana', code: 'si', landmark: '🐉', region: 'Balcans' },
+  'Andorra': { capital: 'Andorra la Vella', code: 'ad', landmark: '⛰️', region: 'Europa Meridional' },
+  'Luxemburg': { capital: 'Luxemburg', code: 'lu', landmark: '🏰', region: 'Europa Occidental' },
+  'Malta': { capital: 'La Valleta', code: 'mt', landmark: '⛪', region: 'Europa Meridional' },
+  'Xipre': { capital: 'Nicòsia', code: 'cy', landmark: '🌊', region: 'Europa Meridional' },
+  'Irlanda': { capital: 'Dublín', code: 'ie', landmark: '🍀', region: 'Europa Occidental' },
+  'Regne Unit': { capital: 'Londres', code: 'gb', landmark: '🎡', region: 'Europa Occidental' },
+  'Moldàvia': { capital: 'Chișinău', code: 'md', landmark: '🍇', region: 'Europa Oriental' },
+  'Ucraïna': { capital: 'Kíev', code: 'ua', landmark: '⛪', region: 'Europa Oriental' },
+  'Bielorússia': { capital: 'Minsk', code: 'by', landmark: '🏛️', region: 'Europa Oriental' },
+  'Rússia': { capital: 'Moscou', code: 'ru', landmark: '⛪', region: 'Europa Oriental' },
+  'Àustria': { capital: 'Viena', code: 'at', landmark: '🎵', region: 'Europa Central' },
+  'Liechtenstein': { capital: 'Vaduz', code: 'li', landmark: '🏰', region: 'Europa Central' },
+  'Mònaco': { capital: 'Mònaco', code: 'mc', landmark: '🎰', region: 'Europa Occidental' },
+  'San Marino': { capital: 'San Marino', code: 'sm', landmark: '🏰', region: 'Europa Meridional' },
+  'Vaticà': { capital: 'Ciutat del Vaticà', code: 'va', landmark: '⛪', region: 'Europa Meridional' },
+  'Islàndia': { capital: 'Reykjavík', code: 'is', landmark: '🌋', region: 'Escandinàvia' }
+};
+
+// Niveles progressius - nous Robert va proposar 4 nivells
+const LEVELS = [
+  {
+    id: 0,
+    nom: 'Bàsic',
+    desc: 'Paisos més coneguts',
+    countries: ['França','Alemanya','Itàlia','Espanya','Portugal','Regne Unit','Irlanda','Holanda','Bèlgica','Suïssa','Àustria','Grècia']
+  },
+  {
+    id: 1,
+    nom: 'Intermedi',
+    desc: '+ Escandinàvia i Centre',
+    countries: ['França','Alemanya','Itàlia','Espanya','Portugal','Regne Unit','Irlanda','Holanda','Bèlgica','Suïssa','Àustria','Grècia',
+      'Dinamarca','Suècia','Noruega','Finlàndia','Polònia','República Txeca','Hongria','Eslovàquia','Eslovènia','Croàcia','Islàndia']
+  },
+  {
+    id: 2,
+    nom: 'Avançat',
+    desc: '+ Balcans i Bàltic',
+    countries: ['França','Alemanya','Itàlia','Espanya','Portugal','Regne Unit','Irlanda','Holanda','Bèlgica','Suïssa','Àustria','Grècia',
+      'Dinamarca','Suècia','Noruega','Finlàndia','Polònia','República Txeca','Hongria','Eslovàquia','Eslovènia','Croàcia','Islàndia',
+      'Romania','Bulgària','Sèrbia','Bòsnia','Albània','Macedònia','Montenegro','Kosovo','Lituània','Letònia','Estònia']
+  },
+  {
+    id: 3,
+    nom: 'Expert',
+    desc: 'Tots els paisos d\'Europa',
+    countries: Object.keys(COUNTRIES)
+  }
+];
+
+// MODES DE JOC (8 modes)
+const MODES = [
+  { id: 0, nom: 'Clàssic', icon: '📚', color: 'blue', desc: '10 preguntes, ritme propi', xpBase: 10, totalQ: 10 },
+  { id: 1, nom: 'Contrarellotge', icon: '⏱️', color: 'yellow', desc: '60 segons, tantes com puguis', xpBase: 12, timeLimit: 60 },
+  { id: 2, nom: 'Vides', icon: '❤️', color: 'red', desc: '3 vides, partida infinita', xpBase: 15, lives: 3 },
+  { id: 3, nom: 'Repte Progressiu', icon: '🚀', color: 'purple', desc: '5 fases creixent, màx 3 errors', xpBase: 20 },
+  { id: 4, nom: 'Geo-Velocitat', icon: '⚡', color: 'orange', desc: '20 preguntes ràpides, 5s cada', xpBase: 18, totalQ: 20, perQTime: 5 },
+  { id: 5, nom: 'Per Regions', icon: '🗺️', color: 'teal', desc: 'Tria una regió específica', xpBase: 14 },
+  { id: 6, nom: 'Memòria Visual', icon: '👁️', color: 'green', desc: 'Visualitza i memoritza', xpBase: 16, totalQ: 10 },
+  { id: 7, nom: 'Atles Mestre', icon: '🌟', color: 'pink', desc: 'Combina 3 tipus de preguntes', xpBase: 22, totalQ: 15 }
+];
+
+// TIPUS DE PREGUNTA
+const QUESTION_TYPES = [
+  { id: 0, nom: 'Capitals', icon: '🏛️', color: 'purple', desc: 'Quina és la capital?' },
+  { id: 1, nom: 'Banderes', icon: '🚩', color: 'red', desc: 'Identifica el pais per la bandera' },
+  { id: 2, nom: 'Edificis', icon: '🏰', color: 'orange', desc: 'A quin pais pertany?' },
+  { id: 3, nom: 'Mixt', icon: '🎲', color: 'teal', desc: 'Tots els tipus barrejats' }
+];
+
+// REGIONS (per al mode Per Regions)
+const REGIONS = [
+  'Europa Occidental', 'Europa Central', 'Europa Meridional',
+  'Europa Oriental', 'Escandinàvia', 'Bàltic', 'Balcans'
+];
+
+// RANGS
+const RANGS = [
+  { nom: 'Aprenent', icon: '🧭', xp: 0 },
+  { nom: 'Explorador', icon: '🗺️', xp: 100 },
+  { nom: 'Cartògraf', icon: '🧑‍🎨', xp: 300 },
+  { nom: 'Geògraf', icon: '🌍', xp: 700 },
+  { nom: 'Mestre del Món', icon: '👑', xp: 1500 }
+];
+
+// TROFEUS (18 trofeus en 6 categories)
+const TROFEUS = [
+  // Progressió
+  { id: 'primer_viatge', cat: 'progres', icon: '🧗', nom: 'Primer Viatge', desc: 'Primera partida' },
+  { id: 'centenari', cat: 'progres', icon: '🏅', nom: 'Centenari', desc: '100 partides' },
+  { id: 'mestre_mon', cat: 'progres', icon: '👑', nom: 'Mestre del Món', desc: 'Rang màxim' },
+  // Habilitat
+  { id: 'sense_errors', cat: 'habilit', icon: '⭐', nom: 'Perfecte', desc: '10/10 al Clàssic' },
+  { id: 'velocitat', cat: 'habilit', icon: '⚡', nom: 'Velocitat', desc: '+20 al Contrarellotge' },
+  { id: 'invencible', cat: 'habilit', icon: '🛡️', nom: 'Invencible', desc: 'Vides sense perdre cap' },
+  // Modes
+  { id: 'repte_complet', cat: 'modes', icon: '🚀', nom: 'Llegenda Repte', desc: 'Completa el Repte Progressiu' },
+  { id: 'ratxa_foc', cat: 'modes', icon: '🔥', nom: 'Ratxa de Foc', desc: '10 correctes seguides' },
+  { id: 'atles_mestre', cat: 'modes', icon: '🌟', nom: 'Atles Mestre', desc: 'Completa Atles Mestre' },
+  // Banderes
+  { id: 'bandera_pro', cat: 'bandera', icon: '🚩', nom: 'Banderista', desc: '10/10 en mode Banderes' },
+  { id: 'bandera_avancada', cat: 'bandera', icon: '🎌', nom: 'Banderista Expert', desc: '8+ Banderes nivell Avançat' },
+  { id: 'bandera_expert', cat: 'bandera', icon: '🏁', nom: 'Banderista Suprem', desc: '10/10 Banderes nivell Expert' },
+  // Capitals
+  { id: 'capitals_pro', cat: 'capital', icon: '🏛️', nom: 'Coneixedor', desc: '10/10 en mode Capitals' },
+  { id: 'tour_europeu', cat: 'capital', icon: '✈️', nom: 'Tour Europeu', desc: 'Encerts a 30+ capitals' },
+  { id: 'expert_capitals', cat: 'capital', icon: '🗽', nom: 'Expert de Capitals', desc: '10/10 Capitals nivell Expert' },
+  // Misteris i regions
+  { id: 'tot_regions', cat: 'misteri', icon: '🌐', nom: 'Polifacètic', desc: 'Joga totes les regions' },
+  { id: 'memoria_perfecta', cat: 'misteri', icon: '🧠', nom: 'Memòria Perfecta', desc: '10/10 Memòria Visual' },
+  { id: 'velocitat_extrema', cat: 'misteri', icon: '💨', nom: 'Velocitat Extrema', desc: 'Geo-Velocitat 18+ correctes' }
+];
+
+// FRASES MOTIVACIONALS
+const FRASES = {
+  100: {
+    M: ['Increïble! Perfecte! 🎉', 'Ets una llegenda viva! ⭐', 'Perfecte! Eres un mestre! 🏆'],
+    F: ['Increïble! Perfecte! 🎉', 'Ets una llegenda viva! ⭐', 'Perfecte! Eres una mestra! 🏆'],
+    N: ['Increïble! Perfecte! 🎉', 'Ets una llegenda viva! ⭐', 'Perfecte! Eres expertesa! 🏆']
+  },
+  80: {
+    M: ['Fantàstic! Bona feina! 👏', 'Ho has fet molt bé! 💪', 'Excel·lent partida! 🌟'],
+    F: ['Fantàstic! Bona feina! 👏', 'Ho has fet molt bé! 💪', 'Excel·lent partida! 🌟'],
+    N: ['Fantàstic! Bona feina! 👏', 'Ho has fet molt bé! 💪', 'Excel·lent partida! 🌟']
+  },
+  60: {
+    M: ['Bona partida! Continua! 👍', 'Vas progressant! 📈', 'Quasi quasi! 🎯'],
+    F: ['Bona partida! Continua! 👍', 'Vas progressant! 📈', 'Quasi quasi! 🎯'],
+    N: ['Bona partida! Continua! 👍', 'Vas progressant! 📈', 'Quasi quasi! 🎯']
+  },
+  0: {
+    M: ['No et rendeixis, practica més! 💪', 'A la pròxima ho faràs millor! 🚀', 'Cada error és una lliçó! 📚'],
+    F: ['No et rendeixis, practica més! 💪', 'A la pròxima ho faràs millor! 🚀', 'Cada error és una lliçó! 📚'],
+    N: ['No et rendeixis, practica més! 💪', 'A la pròxima ho faràs millor! 🚀', 'Cada error és una lliçó! 📚']
+  }
+};
+
+// THEMES (geographic-themed)
+const THEMES = [
+  { id: 'mapa', nom: '🗺️ Mapa', swatch: 'linear-gradient(135deg,#0d1f3c,#0f4c75)', bg: 'linear-gradient(135deg,#0d1f3c,#1a3a5c,#0f4c75)', accent: '#ffd60a' },
+  { id: 'oceania', nom: '🌊 Atlàntic', swatch: 'linear-gradient(135deg,#0a3d62,#00d2ff)', bg: 'linear-gradient(135deg,#0c1a2e,#0a3d62,#0c2a4a)', accent: '#00d2ff' },
+  { id: 'bosc', nom: '🌲 Bosc Boreal', swatch: 'linear-gradient(135deg,#1a3a1a,#52e07e)', bg: 'linear-gradient(135deg,#0a1a0f,#1a3a1a,#0d2b0d)', accent: '#52e07e' },
+  { id: 'mediterrani', nom: '🏛️ Mediterrani', swatch: 'linear-gradient(135deg,#3d1a0a,#ff8c42)', bg: 'linear-gradient(135deg,#1a0a05,#3d1a0a,#2d1010)', accent: '#ff8c42' },
+  { id: 'alps', nom: '⛰️ Alps Nevats', swatch: 'linear-gradient(135deg,#1e3a8a,#e0e7ff)', bg: 'linear-gradient(135deg,#0f1a3a,#1e3a8a,#312e81)', accent: '#a5b4fc' },
+  { id: 'sahara', nom: '🌅 Sahara', swatch: 'linear-gradient(135deg,#5c2a0a,#ffa726)', bg: 'linear-gradient(135deg,#2a1a08,#5c2a0a,#3d1a05)', accent: '#ffa726' },
+  { id: 'dia', nom: '☀️ Dia', swatch: 'linear-gradient(135deg,#e0e7ff,#3b82f6)', bg: 'linear-gradient(135deg,#f0f4ff,#dbeafe,#ede9fe)', accent: '#2563eb', clar: true }
+];
+
+// ═══════════════════════════════════════════
+//  ESTAT GLOBAL
+// ═══════════════════════════════════════════
+let player = null;
+let profiles = []; // 5 perfils slots
+let activeProfileIdx = -1;
+let G = {}; // game state
+let profileCreationData = { genere: 'M', skin: 0, hair: 'default' };
+let selectedMode = null;
+let selectedType = null;
+let selectedLevel = null;
+let selectedRegion = null;
+
+// ═══════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════
+function init() {
+  loadProfiles();
+  loadTheme();
+  // Splash → Profile select
+  setTimeout(() => {
+    if (profiles.filter(p => p).length === 0) {
+      showScreen('screen-profile-create');
+    } else {
+      showScreen('screen-profile-select');
+      renderProfileSlots();
+    }
+  }, 1200);
+}
+
+// ═══════════════════════════════════════════
+//  SCREEN MGMT
+// ═══════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+  window.scrollTo(0, 0);
+
+  // Render según screen
+  if (id === 'screen-menu') renderMenu();
+  if (id === 'screen-stats') renderStats();
+  if (id === 'screen-trophies') renderTrophies();
+  if (id === 'screen-select-mode') renderModes();
+  if (id === 'screen-select-type') renderTypes();
+  if (id === 'screen-select-level') renderLevels();
+}
+
+// ═══════════════════════════════════════════
+//  PROFILES
+// ═══════════════════════════════════════════
+function loadProfiles() {
+  const raw = localStorage.getItem('paisos_profiles_v3');
+  if (raw) {
+    try {
+      profiles = JSON.parse(raw);
+      profiles = profiles.map(p => p ? migrateProfile(p) : null);
+      while (profiles.length < 5) profiles.push(null);
+    } catch(e) {
+      profiles = [null,null,null,null,null];
+    }
+  } else {
+    profiles = [null,null,null,null,null];
+    // Migrate from v2 if exists
+    const v2 = localStorage.getItem('paisos_player');
+    if (v2) {
+      try {
+        const old = JSON.parse(v2);
+        profiles[0] = migrateProfile(old);
+      } catch(e){}
+    }
+  }
+  saveProfiles();
+}
+
+function migrateProfile(p) {
+  // Bugfix: Preservar valors numèrics encara que siguin 0
+  return {
+    nom: p.nom || p.name || 'Jugador',
+    genere: p.genere || 'M',
+    skin: p.skin !== undefined ? p.skin : 0,
+    hair: p.hair || 'default',
+    avatar: p.avatar || '👦',
+    xp: p.xp !== undefined ? p.xp : 0,
+    rang: p.rang || 'Aprenent',
+    partides: p.partides !== undefined ? p.partides : (p.partides_jugades || 0),
+    encerts: p.encerts !== undefined ? p.encerts : (p.encerts_total || 0),
+    errors: p.errors !== undefined ? p.errors : (p.errors_total || 0),
+    temps_jugat: p.temps_jugat !== undefined ? p.temps_jugat : 0,
+    millor_ratxa: p.millor_ratxa !== undefined ? p.millor_ratxa : 0,
+    trofeus: p.trofeus || {},
+    historial: p.historial || [],
+    stats_per_type: p.stats_per_type || { 0: {q:0,c:0}, 1: {q:0,c:0}, 2: {q:0,c:0}, 3: {q:0,c:0} },
+    stats_per_mode: p.stats_per_mode || {},
+    regions_jugades: p.regions_jugades || [],
+    capitals_correctes: p.capitals_correctes || []
+  };
+}
+
+function saveProfiles() {
+  localStorage.setItem('paisos_profiles_v3', JSON.stringify(profiles));
+}
+
+function renderProfileSlots() {
+  const list = document.getElementById('profile-slots-list');
+  list.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const p = profiles[i];
+    const slot = document.createElement('div');
+    if (p) {
+      slot.className = 'profile-slot';
+      slot.onclick = () => activateProfile(i);
+      slot.innerHTML = `
+        <div class="profile-slot-avatar">${p.avatar}</div>
+        <div class="profile-slot-info">
+          <div class="profile-slot-nom">${p.nom}</div>
+          <div class="profile-slot-rang">${RANGS.find(r=>r.nom===p.rang)?.icon||'🧭'} ${p.rang} · ${p.xp} XP</div>
+          <div class="profile-slot-stats">${p.partides} partides · ${p.encerts} encerts</div>
+        </div>
+        <button class="profile-slot-delete" onclick="event.stopPropagation();deleteProfile(${i})" title="Eliminar perfil">🗑️</button>
+      `;
+    } else {
+      slot.className = 'profile-slot profile-slot-empty';
+      slot.onclick = () => createNewProfile(i);
+      slot.innerHTML = `
+        <div class="profile-slot-avatar">➕</div>
+        <div class="profile-slot-info">
+          <div class="profile-slot-nom">Crear nou perfil</div>
+        </div>
+      `;
+    }
+    list.appendChild(slot);
+  }
+}
+
+function createNewProfile(idx) {
+  activeProfileIdx = idx;
+  profileCreationData = { genere: 'M', skin: 0, hair: 'default' };
+  // Reset selectors
+  document.querySelectorAll('.gender-btn').forEach((b,i)=>b.classList.toggle('selected',i===0));
+  document.querySelectorAll('.skin-swatch').forEach((b,i)=>b.classList.toggle('selected',i===0));
+  document.querySelectorAll('.hair-swatch').forEach((b,i)=>b.classList.toggle('selected',i===0));
+  document.getElementById('inp-name').value = '';
+  updateAvatarPreview();
+  showScreen('screen-profile-create');
+}
+
+function deleteProfile(idx) {
+  if (!confirm('Estàs segur que vols eliminar aquest perfil? No es pot recuperar.')) return;
+  profiles[idx] = null;
+  // Bugfix: Si s'elimina el perfil actiu, netejar referència
+  if (idx === activeProfileIdx) {
+    player = null;
+    activeProfileIdx = -1;
+  }
+  saveProfiles();
+  renderProfileSlots();
+}
+
+function activateProfile(idx) {
+  activeProfileIdx = idx;
+  player = profiles[idx];
+  showScreen('screen-menu');
+}
+
+function changeProfile() {
+  showScreen('screen-profile-select');
+  renderProfileSlots();
+}
+
+function goToProfileSelect() {
+  if (profiles.filter(p=>p).length > 0) {
+    showScreen('screen-profile-select');
+  } else {
+    // First profile, can't go back
+  }
+}
+
+function selectGender(el) {
+  document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  profileCreationData.genere = el.dataset.g;
+  updateAvatarPreview();
+}
+
+function selectSkin(el) {
+  document.querySelectorAll('.skin-swatch').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  profileCreationData.skin = parseInt(el.dataset.s);
+  updateAvatarPreview();
+}
+
+function selectHair(el) {
+  document.querySelectorAll('.hair-swatch').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  profileCreationData.hair = el.dataset.h;
+  updateAvatarPreview();
+}
+
+function buildAvatar(genere, skin, hair) {
+  const skinTones = ['', '🏻', '🏼', '🏽', '🏾', '🏿'];
+  const tone = skinTones[skin] || '';
+
+  // Hair-based avatar selection
+  // NOTE: For ZWJ sequences (gendered/hair emojis), skin tone MUST go AFTER base emoji, BEFORE gender modifier
+  if (hair === 'bald') {
+    // 🧑‍🦲 → 🧑{tone}‍🦲
+    return '🧑' + tone + '‍🦲';
+  }
+
+  if (hair === 'white') {
+    if (genere === 'M') return '🧓' + tone;
+    if (genere === 'F') return '👵' + tone;
+    // 🧑‍🦳 → 🧑{tone}‍🦳
+    return '🧑' + tone + '‍🦳';
+  }
+
+  if (hair === 'red') {
+    // 🧑‍🦰 → 🧑{tone}‍🦰
+    return '🧑' + tone + '‍🦰';
+  }
+
+  if (hair === 'blonde') {
+    // 👱‍♂️ → 👱{tone}‍♂️, 👱‍♀️ → 👱{tone}‍♀️
+    if (genere === 'M') return '👱' + tone + '‍♂️';
+    if (genere === 'F') return '👱' + tone + '‍♀️';
+    return '👱' + tone;
+  }
+
+  // default (dark hair)
+  if (genere === 'M') return '👦' + tone;
+  if (genere === 'F') return '👧' + tone;
+  return '🧑' + tone;
+}
+
+function updateAvatarPreview() {
+  const av = buildAvatar(profileCreationData.genere, profileCreationData.skin, profileCreationData.hair);
+  document.getElementById('avatar-preview-big').textContent = av;
+}
+
+function createProfile() {
+  const nom = document.getElementById('inp-name').value.trim();
+  if (!nom) { alert('Has d\'escriure el teu nom!'); return; }
+
+  const newProfile = {
+    nom: nom,
+    genere: profileCreationData.genere,
+    skin: profileCreationData.skin,
+    hair: profileCreationData.hair,
+    avatar: buildAvatar(profileCreationData.genere, profileCreationData.skin, profileCreationData.hair),
+    xp: 0,
+    rang: 'Aprenent',
+    partides: 0,
+    encerts: 0,
+    errors: 0,
+    temps_jugat: 0,
+    millor_ratxa: 0,
+    trofeus: {},
+    historial: [],
+    stats_per_type: { 0: {q:0,c:0}, 1: {q:0,c:0}, 2: {q:0,c:0}, 3: {q:0,c:0} },
+    stats_per_mode: {},
+    regions_jugades: [],
+    capitals_correctes: []
+  };
+
+  if (activeProfileIdx === -1 || !profiles[activeProfileIdx]) {
+    // Find first empty slot
+    const emptyIdx = profiles.findIndex(p => !p);
+    activeProfileIdx = emptyIdx >= 0 ? emptyIdx : 0;
+  }
+  profiles[activeProfileIdx] = newProfile;
+  player = newProfile;
+  saveProfiles();
+  showScreen('screen-menu');
+}
+
+// ═══════════════════════════════════════════
+//  MENU
+// ═══════════════════════════════════════════
+function renderMenu() {
+  if (!player) return;
+  document.getElementById('menu-avatar').textContent = player.avatar;
+  document.getElementById('menu-nom').textContent = player.nom;
+  const rang = RANGS.find(r => r.nom === player.rang) || RANGS[0];
+  document.getElementById('menu-rang').textContent = `${rang.icon} ${rang.nom} · ${player.xp} XP`;
+  // XP bar
+  const idxRang = RANGS.indexOf(rang);
+  const nextRang = RANGS[idxRang + 1];
+  if (nextRang) {
+    const pct = Math.min(100, ((player.xp - rang.xp) / (nextRang.xp - rang.xp)) * 100);
+    document.getElementById('menu-xp-fill').style.width = pct + '%';
+    document.getElementById('menu-xp-text').textContent = `${player.xp} / ${nextRang.xp} XP per ${nextRang.nom}`;
+  } else {
+    document.getElementById('menu-xp-fill').style.width = '100%';
+    document.getElementById('menu-xp-text').textContent = `🏆 Rang màxim assolit!`;
+  }
+
+  // Àrea feble suggestion
+  renderAreaFeble();
+}
+
+function renderAreaFeble() {
+  const wrap = document.getElementById('area-feble-wrap');
+  wrap.innerHTML = '';
+  if (!player) return;
+  // Find weak type
+  let weakType = null;
+  let weakPct = 100;
+  for (let t = 0; t < 4; t++) {
+    const stat = player.stats_per_type[t];
+    if (stat && stat.q >= 5) {
+      const pct = (stat.c / stat.q) * 100;
+      if (pct < 70 && pct < weakPct) {
+        weakPct = pct;
+        weakType = t;
+      }
+    }
+  }
+  if (weakType !== null) {
+    const typeData = QUESTION_TYPES[weakType];
+    wrap.innerHTML = `
+      <div class="card" style="background:rgba(251,146,60,0.1);border-color:rgba(251,146,60,0.3);margin-bottom:8px;">
+        <div style="font-size:0.78rem;color:#fb923c;font-weight:800;letter-spacing:1px;text-transform:uppercase;">💡 Suggeriment</div>
+        <div style="margin-top:4px;font-size:0.92rem;font-weight:700;">Practica més ${typeData.icon} ${typeData.nom} (${weakPct.toFixed(0)}% encerts)</div>
+      </div>
+    `;
+  }
+}
+
+function renderModes() {
+  const grid = document.getElementById('modes-grid');
+  grid.innerHTML = '';
+  MODES.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'op-card';
+    card.dataset.color = m.color;
+    card.onclick = () => selectMode(m.id);
+    card.innerHTML = `
+      <div class="icon">${m.icon}</div>
+      <div class="nom">${m.nom}</div>
+      <div class="desc">${m.desc}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function selectMode(id) {
+  selectedMode = MODES.find(m => m.id === id);
+  if (selectedMode.id === 5) {
+    // Per Regions: trial selecció regió
+    selectRegion();
+    return;
+  }
+  if (selectedMode.id === 7) {
+    // Atles Mestre: tot mixt
+    selectedType = QUESTION_TYPES[3];
+    showScreen('screen-select-level');
+    return;
+  }
+  showScreen('screen-select-type');
+}
+
+function selectRegion() {
+  // Show regions picker
+  const grid = document.getElementById('types-grid');
+  grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;font-size:0.8rem;color:rgba(255,255,255,0.6);margin-bottom:8px;">Tria una regió:</div>';
+  REGIONS.forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'op-card';
+    card.dataset.color = 'teal';
+    card.onclick = () => {
+      selectedRegion = r;
+      selectedType = QUESTION_TYPES[3]; // mixt
+      // Skip level, use intermedi as default
+      selectedLevel = LEVELS[1];
+      startGame();
+    };
+    const sample = Object.entries(COUNTRIES).filter(([k,v])=>v.region===r).slice(0,3).map(([k,v])=>v.landmark).join(' ');
+    card.innerHTML = `
+      <div class="icon">🗺️</div>
+      <div class="nom">${r}</div>
+      <div class="desc">${sample}</div>
+    `;
+    grid.appendChild(card);
+  });
+  showScreen('screen-select-type');
+}
+
+function renderTypes() {
+  if (selectedMode && selectedMode.id === 5) return; // already rendered
+  const grid = document.getElementById('types-grid');
+  grid.innerHTML = '';
+  QUESTION_TYPES.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 'op-card';
+    card.dataset.color = t.color;
+    card.onclick = () => {
+      selectedType = t;
+      showScreen('screen-select-level');
+    };
+    card.innerHTML = `
+      <div class="icon">${t.icon}</div>
+      <div class="nom">${t.nom}</div>
+      <div class="desc">${t.desc}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderLevels() {
+  const grid = document.getElementById('levels-grid');
+  grid.innerHTML = '';
+  selectedLevel = null;
+  document.getElementById('btn-start-game').disabled = true;
+  document.getElementById('btn-start-game').style.opacity = '0.5';
+  document.getElementById('btn-start-game').textContent = 'Selecciona un nivell';
+
+  LEVELS.forEach(l => {
+    const btn = document.createElement('button');
+    btn.className = 'level-btn';
+    btn.onclick = () => {
+      document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedLevel = l;
+      const startBtn = document.getElementById('btn-start-game');
+      startBtn.disabled = false;
+      startBtn.style.opacity = '1';
+      startBtn.textContent = `🚀 Començar (${l.countries.length} paisos)`;
+    };
+    btn.innerHTML = `
+      <div class="nivel-num">NIVELL ${l.id + 1}</div>
+      <div class="nivel-nom">${l.nom}</div>
+      <div class="nivel-desc">${l.desc}<br>(${l.countries.length} paisos)</div>
+    `;
+    grid.appendChild(btn);
+  });
+}
+
+// ═══════════════════════════════════════════
+//  GAME LOGIC
+// ═══════════════════════════════════════════
+function startGame() {
+  if (!selectedMode) return;
+  if (!selectedLevel) {
+    // Per Regions cas: selectedLevel preassignat
+    if (selectedMode.id === 5) {
+      selectedLevel = LEVELS[1];
+    } else {
+      return;
+    }
+  }
+  if (!selectedType) selectedType = QUESTION_TYPES[3];
+
+  G = {
+    mode: selectedMode,
+    type: selectedType,
+    level: selectedLevel,
+    region: selectedRegion,
+    punts: 0,
+    errors: 0,
+    total: 0,
+    fase: 0,
+    ratxa: 0,
+    millor_ratxa: 0,
+    timeLeft: selectedMode.timeLimit || 0,
+    lives: selectedMode.lives || 3,
+    startTime: Date.now(),
+    questions: [],
+    currentQ: 0,
+    temps_respostes: [],
+    questStartTime: 0
+  };
+
+  // Generate countries pool
+  let pool;
+  if (selectedRegion) {
+    pool = Object.entries(COUNTRIES)
+      .filter(([k,v]) => v.region === selectedRegion)
+      .map(([k]) => k);
+    G.regionPool = pool;
+  } else {
+    pool = [...selectedLevel.countries];
+  }
+  G.countries = pool;
+
+  // Generate questions
+  if (selectedMode.totalQ) {
+    for (let i = 0; i < selectedMode.totalQ; i++) {
+      G.questions.push(generateQuestion());
+    }
+  }
+
+  showScreen('screen-game');
+  setupGameUI();
+  showQuestion();
+
+  if (selectedMode.timeLimit) startTimer();
+  if (selectedMode.perQTime) startQuestionTimer();
+}
+
+function setupGameUI() {
+  let modeLabel = `${G.mode.icon} ${G.mode.nom}`;
+  if (G.region) modeLabel += ` · ${G.region}`;
+  else if (G.level) modeLabel += ` · ${G.level.nom}`;
+
+  document.getElementById('game-mode-badge').textContent = modeLabel;
+  document.getElementById('game-score').textContent = `⭐ ${G.punts}`;
+  document.getElementById('progress-fill').style.width = '0%';
+
+  // Timer
+  document.getElementById('timer-wrap').style.display = G.mode.timeLimit ? 'block' : 'none';
+  // Lives
+  document.getElementById('lives-wrap').style.display = G.mode.lives ? 'block' : 'none';
+  if (G.mode.lives) updateLives();
+}
+
+function updateLives() {
+  const hearts = '❤️'.repeat(G.lives) + '🤍'.repeat(Math.max(0, (G.mode.lives||3) - G.lives));
+  document.getElementById('lives-wrap').textContent = hearts;
+}
+
+function generateQuestion() {
+  const country = G.countries[Math.floor(Math.random() * G.countries.length)];
+  const data = COUNTRIES[country];
+  let qType;
+
+  if (G.type.id === 3) {
+    // mixt
+    qType = Math.floor(Math.random() * 3); // 0,1,2 (no 3)
+    // S'inclou també type 4 (capital→pais) i 5 (edifici→capital)
+    qType = [0, 1, 2, 4, 5][Math.floor(Math.random() * 5)];
+  } else if (G.type.id === 0) {
+    // Capitals: pais→capital
+    qType = 0;
+  } else if (G.type.id === 1) {
+    // Banderes: bandera→pais
+    qType = 1;
+  } else if (G.type.id === 2) {
+    // Edificis: edifici→pais
+    qType = 2;
+  }
+
+  return { country, qType, data };
+}
+
+function showQuestion() {
+  if (G.mode.totalQ && G.currentQ >= G.mode.totalQ) {
+    endGame();
+    return;
+  }
+
+  let q;
+  if (G.mode.id === 3) {
+    // Bugfix: Repte usa el seu generador específic per fases (dificultat creixent)
+    if (G.fase >= 5) { endGame('repte_win'); return; }
+    q = generateRepteQuestion();
+  } else if (G.mode.totalQ) {
+    q = G.questions[G.currentQ];
+  } else {
+    q = generateQuestion();
+  }
+  G.currentQuestion = q;
+  G.questStartTime = Date.now();
+  G.total++;
+
+  const data = q.data;
+
+  // Update progress
+  if (G.mode.totalQ) {
+    const pct = (G.currentQ / G.mode.totalQ) * 100;
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('game-stat-text').textContent = `${G.currentQ + 1}/${G.mode.totalQ}`;
+  } else {
+    document.getElementById('game-stat-text').textContent = `${G.total}`;
+    document.getElementById('progress-fill').style.width = ((G.total % 10) * 10) + '%';
+  }
+
+  // Render question
+  const visualEl = document.getElementById('question-visual');
+  const promptEl = document.getElementById('question-prompt');
+  const textEl = document.getElementById('question-text');
+  const ansGrid = document.getElementById('answers-grid');
+  visualEl.innerHTML = '';
+
+  let answerOptions = [];
+  let correctAnswer = '';
+
+  if (q.qType === 0) {
+    // pais → capital
+    promptEl.textContent = '🏛️ QUINA ÉS LA CAPITAL?';
+    // Mode Clàssic: només el nom del pais, sense bandera
+    visualEl.innerHTML = (G.mode.id === 0)
+      ? `<div style="font-size:1.6rem;font-weight:900;margin-top:6px;">${q.country}</div>`
+      : `<div class="flag-display fi fi-${data.code}"></div><div style="font-size:1.6rem;font-weight:900;margin-top:6px;">${q.country}</div>`;
+    textEl.textContent = '';
+    correctAnswer = data.capital;
+    answerOptions = generateOptions(correctAnswer, 'capital');
+  } else if (q.qType === 1) {
+    // bandera → pais
+    promptEl.textContent = '🚩 QUIN PAIS ÉS AQUESTA BANDERA?';
+    visualEl.innerHTML = `<div class="flag-display fi fi-${data.code} large"></div>`;
+    textEl.textContent = '';
+    correctAnswer = q.country;
+    answerOptions = generateOptions(correctAnswer, 'country');
+  } else if (q.qType === 2) {
+    // edifici → pais
+    promptEl.textContent = '🏰 A QUIN PAIS PERTANY?';
+    visualEl.innerHTML = `<div class="landmark-display">${data.landmark}</div><div style="font-size:1rem;color:rgba(255,255,255,0.6);font-weight:700;">${data.capital}</div>`;
+    textEl.textContent = '';
+    correctAnswer = q.country;
+    answerOptions = generateOptions(correctAnswer, 'country');
+  } else if (q.qType === 4) {
+    // capital → pais
+    promptEl.textContent = '🌍 DE QUIN PAIS ÉS LA CAPITAL?';
+    visualEl.innerHTML = `<div style="font-size:2.4rem;font-weight:900;margin:10px 0;color:var(--accent);">${data.capital}</div>`;
+    textEl.textContent = '';
+    correctAnswer = q.country;
+    answerOptions = generateOptions(correctAnswer, 'country');
+  } else if (q.qType === 5) {
+    // edifici/landmark → capital
+    promptEl.textContent = '🏛️ A QUINA CAPITAL ESTÀ?';
+    visualEl.innerHTML = `<div class="landmark-display">${data.landmark}</div>`;
+    textEl.textContent = q.country;
+    correctAnswer = data.capital;
+    answerOptions = generateOptions(correctAnswer, 'capital');
+  }
+
+  // Render answers
+  ansGrid.innerHTML = '';
+  answerOptions.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'answer-btn';
+    btn.textContent = opt;
+    btn.onclick = () => answer(opt, correctAnswer, btn);
+    ansGrid.appendChild(btn);
+  });
+
+  // Reset feedback
+  document.getElementById('feedback-msg').textContent = '';
+  document.getElementById('question-box').classList.remove('correct','wrong');
+}
+
+function generateRepteQuestion() {
+  // Fase 0: bàsic, fase 4: expert
+  const levelByPhase = [LEVELS[0], LEVELS[0], LEVELS[1], LEVELS[2], LEVELS[3]];
+  const phaseLevel = levelByPhase[G.fase];
+  const country = phaseLevel.countries[Math.floor(Math.random() * phaseLevel.countries.length)];
+  const data = COUNTRIES[country];
+  const types = [0, 1, 2, 4];
+  const qType = types[Math.floor(Math.random() * types.length)];
+  return { country, qType, data };
+}
+
+function generateOptions(correct, type) {
+  const all = type === 'capital'
+    ? Object.values(COUNTRIES).map(c => c.capital)
+    : Object.keys(COUNTRIES);
+  const wrong = all.filter(o => o !== correct);
+  const shuffled = wrong.sort(() => Math.random() - 0.5).slice(0, 3);
+  const options = [correct, ...shuffled];
+  return options.sort(() => Math.random() - 0.5);
+}
+
+function answer(selected, correct, btn) {
+  // Bugfix: Aturar el timer per pregunta per evitar race conditions
+  clearInterval(qTimerInterval);
+  document.querySelectorAll('.answer-btn').forEach(b => b.disabled = true);
+  const responseTime = (Date.now() - G.questStartTime) / 1000;
+  G.temps_respostes.push(responseTime);
+
+  if (selected === correct) {
+    btn.classList.add('correct');
+    G.punts++;
+    G.ratxa++;
+    G.millor_ratxa = Math.max(G.millor_ratxa, G.ratxa);
+    document.getElementById('question-box').classList.add('correct');
+    document.getElementById('feedback-msg').textContent = '✅ Correcte!';
+    document.getElementById('feedback-msg').className = 'feedback-msg correct';
+    document.getElementById('game-score').textContent = `⭐ ${G.punts}`;
+
+    // Update stats
+    if (player) {
+      const tType = G.currentQuestion.qType;
+      const statKey = tType === 4 || tType === 5 ? 0 : (tType === 1 ? 1 : (tType === 2 ? 2 : 0));
+      if (player.stats_per_type[statKey]) {
+        player.stats_per_type[statKey].c++;
+        player.stats_per_type[statKey].q++;
+      }
+      if (G.currentQuestion.country && !player.capitals_correctes.includes(G.currentQuestion.country)) {
+        player.capitals_correctes.push(G.currentQuestion.country);
+      }
+    }
+
+    showParticles();
+    if (G.ratxa === 3 || G.ratxa === 5 || G.ratxa === 7 || G.ratxa === 10 || G.ratxa === 15) {
+      showStreakBanner(G.ratxa);
+    }
+
+    // Repte progressiu: avança fase cada 5 correctes
+    if (G.mode.id === 3 && G.punts > 0 && G.punts % 5 === 0) {
+      G.fase++;
+    }
+
+    // Bugfix: Desbloquejar trofeu "invencible" durant el joc en mode Vides (sinó seria inaccessible)
+    if (G.mode.id === 2 && G.lives === G.mode.lives && G.punts >= 10 && player && !player.trofeus['invencible']) {
+      player.trofeus['invencible'] = true;
+      saveProfiles();
+      const trophy = TROFEUS.find(t => t.id === 'invencible');
+      if (trophy) setTimeout(() => showTrophyOverlay('invencible'), 800);
+    }
+
+    setTimeout(() => nextQuestion(), 700);
+  } else {
+    btn.classList.add('wrong');
+    // Highlight correcta
+    document.querySelectorAll('.answer-btn').forEach(b => {
+      if (b.textContent === correct) b.classList.add('correct');
+    });
+    G.errors++;
+    G.ratxa = 0;
+    document.getElementById('question-box').classList.add('wrong');
+    document.getElementById('feedback-msg').textContent = `❌ Era: ${correct}`;
+    document.getElementById('feedback-msg').className = 'feedback-msg wrong';
+
+    if (player) {
+      const tType = G.currentQuestion.qType;
+      const statKey = tType === 4 || tType === 5 ? 0 : (tType === 1 ? 1 : (tType === 2 ? 2 : 0));
+      if (player.stats_per_type[statKey]) {
+        player.stats_per_type[statKey].q++;
+      }
+    }
+
+    if (G.mode.lives) {
+      G.lives--;
+      updateLives();
+      if (G.lives <= 0) { setTimeout(() => endGame('lives_out'), 900); return; }
+    }
+    if (G.mode.id === 3 && G.errors >= 3) {
+      setTimeout(() => endGame('repte_fail'), 900);
+      return;
+    }
+    setTimeout(() => nextQuestion(), 1300);
+  }
+}
+
+function nextQuestion() {
+  G.currentQ++;
+  if (G.mode.totalQ && G.currentQ >= G.mode.totalQ) {
+    endGame();
+    return;
+  }
+  showQuestion();
+  if (G.mode.perQTime) startQuestionTimer();
+}
+
+let timerInterval = null;
+function startTimer() {
+  clearInterval(timerInterval);
+  const total = G.mode.timeLimit;
+  const startT = Date.now();
+  document.getElementById('timer-fill').classList.remove('danger');
+  timerInterval = setInterval(() => {
+    const elapsed = (Date.now() - startT) / 1000;
+    G.timeLeft = Math.max(0, total - elapsed);
+    const pct = (G.timeLeft / total) * 100;
+    document.getElementById('timer-fill').style.width = pct + '%';
+    document.getElementById('timer-label').textContent = `⏱️ ${Math.ceil(G.timeLeft)}s`;
+    if (pct < 30) document.getElementById('timer-fill').classList.add('danger');
+    if (G.timeLeft <= 0) {
+      clearInterval(timerInterval);
+      endGame('time_out');
+    }
+  }, 100);
+}
+
+let qTimerInterval = null;
+function startQuestionTimer() {
+  clearInterval(qTimerInterval);
+  const total = G.mode.perQTime;
+  document.getElementById('timer-wrap').style.display = 'block';
+  const startT = Date.now();
+  qTimerInterval = setInterval(() => {
+    const elapsed = (Date.now() - startT) / 1000;
+    const left = Math.max(0, total - elapsed);
+    const pct = (left / total) * 100;
+    document.getElementById('timer-fill').style.width = pct + '%';
+    document.getElementById('timer-label').textContent = `⚡ ${left.toFixed(1)}s`;
+    if (left <= 0) {
+      clearInterval(qTimerInterval);
+      // Bugfix: Desactivar botons per evitar clics després del time-out
+      document.querySelectorAll('.answer-btn').forEach(b => b.disabled = true);
+      // Time out per pregunta
+      const correct = G.currentQuestion.qType === 0 || G.currentQuestion.qType === 5
+        ? G.currentQuestion.data.capital : G.currentQuestion.country;
+      // Highlight resposta correcta
+      document.querySelectorAll('.answer-btn').forEach(b => {
+        if (b.textContent === correct) b.classList.add('correct');
+      });
+      G.errors++;
+      G.ratxa = 0;
+      // Bugfix: Actualitzar stats per pregunta perduda per timeout
+      if (player && G.currentQuestion) {
+        const tType = G.currentQuestion.qType;
+        const statKey = tType === 4 || tType === 5 ? 0 : (tType === 1 ? 1 : (tType === 2 ? 2 : 0));
+        if (player.stats_per_type[statKey]) {
+          player.stats_per_type[statKey].q++;
+        }
+      }
+      document.getElementById('feedback-msg').textContent = `⏱️ Massa lent! Era: ${correct}`;
+      document.getElementById('feedback-msg').className = 'feedback-msg wrong';
+      document.getElementById('question-box').classList.add('wrong');
+      setTimeout(() => nextQuestion(), 1300);
+    }
+  }, 100);
+}
+
+function quitGame() {
+  if (!confirm('Segur que vols abandonar la partida? Perdràs el progrés.')) return;
+  clearInterval(timerInterval);
+  clearInterval(qTimerInterval);
+  showScreen('screen-menu');
+}
+
+function endGame(reason) {
+  clearInterval(timerInterval);
+  clearInterval(qTimerInterval);
+
+  const totalTime = (Date.now() - G.startTime) / 1000;
+  const pct = G.total > 0 ? (G.punts / G.total * 100) : 0;
+
+  // Calculate XP
+  let xp = 0;
+  if (reason === 'repte_win') {
+    xp = G.mode.xpBase;
+  } else if (G.mode.totalQ) {
+    xp = Math.round(G.mode.xpBase * (G.punts / G.mode.totalQ));
+  } else {
+    // Mode lives o contrarellotge: per cada correcte
+    xp = Math.round(G.punts * 1.2);
+  }
+
+  const oldRang = player.rang;
+  player.xp += xp;
+  player.partides++;
+  player.encerts += G.punts;
+  player.errors += G.errors;
+  player.temps_jugat += Math.round(totalTime);
+  player.millor_ratxa = Math.max(player.millor_ratxa, G.millor_ratxa);
+
+  // Stats per mode
+  const modeKey = G.mode.id;
+  if (!player.stats_per_mode[modeKey]) player.stats_per_mode[modeKey] = { p:0, c:0, e:0 };
+  player.stats_per_mode[modeKey].p++;
+  player.stats_per_mode[modeKey].c += G.punts;
+  player.stats_per_mode[modeKey].e += G.errors;
+
+  // Region jugada
+  if (G.region && !player.regions_jugades.includes(G.region)) {
+    player.regions_jugades.push(G.region);
+  }
+
+  // Update rang
+  for (let i = RANGS.length - 1; i >= 0; i--) {
+    if (player.xp >= RANGS[i].xp) {
+      player.rang = RANGS[i].nom;
+      break;
+    }
+  }
+
+  // Historial
+  player.historial.unshift({
+    mode: G.mode.id,
+    type: G.type.id,
+    level: G.level ? G.level.id : null,
+    region: G.region,
+    score: G.punts,
+    total: G.total,
+    xp: xp,
+    pct: Math.round(pct),
+    date: new Date().toISOString().split('T')[0]
+  });
+  if (player.historial.length > 20) player.historial = player.historial.slice(0, 20);
+
+  // Trofeus
+  const newTrophies = checkTrophies();
+
+  saveProfiles();
+
+  // Show rank up
+  if (oldRang !== player.rang) {
+    setTimeout(() => showRankUp(player.rang), 500);
+  }
+
+  // Show results
+  showResults(reason, xp, newTrophies);
+}
+
+function checkTrophies() {
+  const newOnes = [];
+
+  function unlock(id) {
+    if (!player.trofeus[id]) {
+      player.trofeus[id] = true;
+      newOnes.push(id);
+    }
+  }
+
+  // Primer viatge
+  if (player.partides >= 1) unlock('primer_viatge');
+  // Centenari
+  if (player.partides >= 100) unlock('centenari');
+  // Mestre del món
+  if (player.rang === 'Mestre del Món') unlock('mestre_mon');
+  // Sense errors (clàssic 10/10)
+  if (G.mode.id === 0 && G.punts === G.mode.totalQ) unlock('sense_errors');
+  // Velocitat (contrarellotge +20)
+  if (G.mode.id === 1 && G.punts >= 20) unlock('velocitat');
+  // Invencible (vides sense perdre)
+  if (G.mode.id === 2 && G.lives === G.mode.lives && G.total >= 10) unlock('invencible');
+  // Repte complet
+  if (G.mode.id === 3 && G.fase >= 5) unlock('repte_complet');
+  // Ratxa de foc
+  if (G.millor_ratxa >= 10) unlock('ratxa_foc');
+  // Atles mestre
+  if (G.mode.id === 7 && G.punts >= G.mode.totalQ - 1) unlock('atles_mestre');
+  // Banderista (10/10 banderes)
+  if (G.type.id === 1 && G.mode.id === 0 && G.punts === 10) unlock('bandera_pro');
+  // Banderista expert avançat
+  if (G.type.id === 1 && G.level && G.level.id === 2 && G.punts >= 8) unlock('bandera_avancada');
+  // Banderista suprem expert
+  if (G.type.id === 1 && G.level && G.level.id === 3 && G.punts === 10) unlock('bandera_expert');
+  // Capitals pro
+  if (G.type.id === 0 && G.mode.id === 0 && G.punts === 10) unlock('capitals_pro');
+  // Tour europeu (30+ capitals correctes)
+  if (player.capitals_correctes.length >= 30) unlock('tour_europeu');
+  // Expert capitals
+  if (G.type.id === 0 && G.level && G.level.id === 3 && G.punts === 10) unlock('expert_capitals');
+  // Polifacetic (totes regions)
+  if (player.regions_jugades.length >= 7) unlock('tot_regions');
+  // Memoria perfecta
+  if (G.mode.id === 6 && G.punts >= G.mode.totalQ) unlock('memoria_perfecta');
+  // Velocitat extrema
+  if (G.mode.id === 4 && G.punts >= 18) unlock('velocitat_extrema');
+
+  return newOnes;
+}
+
+function showResults(reason, xp_earned, nous_trofeus) {
+  showScreen('screen-results');
+
+  const pct = G.total > 0 ? (G.punts / G.total * 100) : 0;
+  const stars = pct === 100 ? '⭐⭐⭐' : pct >= 80 ? '⭐⭐☆' : pct >= 60 ? '⭐☆☆' : '☆☆☆';
+  document.getElementById('result-stars').textContent = stars;
+
+  if (reason === 'repte_win') {
+    document.getElementById('result-score-big').textContent = '🚀 VICTÒRIA!';
+    document.getElementById('result-label').textContent = 'Repte Progressiu completat!';
+  } else if (reason === 'repte_fail') {
+    document.getElementById('result-score-big').textContent = `${G.punts}`;
+    document.getElementById('result-label').textContent = `Fase ${G.fase + 1} — massa errors`;
+  } else if (reason === 'time_out') {
+    document.getElementById('result-score-big').textContent = `${G.punts}`;
+    document.getElementById('result-label').textContent = '⏱️ Temps esgotat!';
+  } else if (reason === 'lives_out') {
+    document.getElementById('result-score-big').textContent = `${G.punts}`;
+    document.getElementById('result-label').textContent = '❤️ Vides exhaurides';
+  } else if (G.mode.totalQ) {
+    document.getElementById('result-score-big').textContent = `${G.punts}/${G.mode.totalQ}`;
+    document.getElementById('result-label').textContent = 'punts';
+  } else {
+    document.getElementById('result-score-big').textContent = `${G.punts}`;
+    document.getElementById('result-label').textContent = 'correctes';
+  }
+
+  // Frase
+  const grup = pct === 100 ? 100 : pct >= 80 ? 80 : pct >= 60 ? 60 : 0;
+  const genere = player.genere || 'N';
+  const frasesGrup = FRASES[grup][genere] || FRASES[grup].N;
+  document.getElementById('result-phrase').textContent = frasesGrup[Math.floor(Math.random() * frasesGrup.length)];
+
+  document.getElementById('result-xp').textContent = `+${xp_earned} XP → ${player.xp} XP total`;
+
+  // Details
+  const tempsMig = G.temps_respostes.length
+    ? (G.temps_respostes.reduce((a,b)=>a+b,0) / G.temps_respostes.length).toFixed(1)
+    : '—';
+  const totalT = ((Date.now() - G.startTime)/1000).toFixed(0);
+  let html = '';
+  html += `<div class="result-row"><span class="lab">Encerts</span><span class="val">${G.punts}</span></div>`;
+  html += `<div class="result-row"><span class="lab">Errors</span><span class="val">${G.errors}</span></div>`;
+  html += `<div class="result-row"><span class="lab">Millor ratxa</span><span class="val">🔥 ${G.millor_ratxa}</span></div>`;
+  html += `<div class="result-row"><span class="lab">Temps mitjà</span><span class="val">${tempsMig}s</span></div>`;
+  html += `<div class="result-row"><span class="lab">Temps total</span><span class="val">${totalT}s</span></div>`;
+  if (nous_trofeus.length) {
+    const noms = nous_trofeus.map(tid => {
+      const t = TROFEUS.find(t=>t.id===tid);
+      return t ? `${t.icon} ${t.nom}` : tid;
+    }).join(', ');
+    html += `<div class="result-row"><span class="lab">Trofeus nous</span><span class="val">${noms}</span></div>`;
+  }
+  document.getElementById('result-details').innerHTML = html;
+
+  // Tip
+  const tip = generateTip(pct, G);
+  if (tip) {
+    document.getElementById('result-tip').style.display = 'block';
+    document.getElementById('result-tip').textContent = tip;
+  } else {
+    document.getElementById('result-tip').style.display = 'none';
+  }
+
+  // Show trophy notification(s)
+  if (nous_trofeus.length > 0) {
+    setTimeout(() => showTrophyOverlay(nous_trofeus[0]), 1500);
+  }
+}
+
+function generateTip(pct, gameState) {
+  if (pct === 100) return '🌟 Has fet una partida perfecta! Prova un nivell més alt.';
+  if (pct >= 80) return '🎯 Molt bé! Estàs molt a prop de la perfecció.';
+  if (pct >= 60) return '📚 Bona feina. Practica més els paisos que has fallat.';
+  if (gameState.errors > gameState.punts) return '💡 Comença pel nivell Bàsic per agafar confiança.';
+  return '🚀 Cada partida és una oportunitat per millorar.';
+}
+
+// ═══════════════════════════════════════════
+//  ANIMATIONS
+// ═══════════════════════════════════════════
+function showParticles() {
+  const colors = ['#ffd60a','#4ade80','#60a5fa','#a78bfa','#ffffff'];
+  const qbox = document.getElementById('question-box').getBoundingClientRect();
+  const cx = qbox.left + qbox.width/2;
+  const cy = qbox.top + qbox.height/2;
+  for (let i=0; i<14; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.background = colors[Math.floor(Math.random()*colors.length)];
+    p.style.left = cx + 'px';
+    p.style.top  = cy + 'px';
+    const ang = Math.random()*360;
+    const dist = 60 + Math.random()*100;
+    p.style.setProperty('--dx', Math.cos(ang*Math.PI/180)*dist+'px');
+    p.style.setProperty('--dy', Math.sin(ang*Math.PI/180)*dist+'px');
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 900);
+  }
+}
+
+function showStreakBanner(n) {
+  const banner = document.getElementById('streak-banner');
+  document.getElementById('streak-num').textContent = n;
+  document.getElementById('streak-icon').textContent = n >= 10 ? '🌟' : n >= 7 ? '⚡' : '🔥';
+  document.getElementById('streak-text').textContent = n >= 10 ? 'IMPARABLE!' : n >= 7 ? 'INCREÏBLE!' : 'RATXA!';
+  banner.classList.add('show');
+  setTimeout(() => banner.classList.remove('show'), 1600);
+}
+
+function showTrophyOverlay(trophyId) {
+  const t = TROFEUS.find(x => x.id === trophyId);
+  if (!t) return;
+  const el = document.getElementById('trophy-overlay');
+  document.getElementById('trophy-overlay-icon').textContent = t.icon;
+  document.getElementById('trophy-overlay-name').textContent = t.nom;
+  el.classList.add('show');
+  showSerpentines();
+  setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+function showSerpentines() {
+  const colors = ['#ffd60a','#f87171','#60a5fa','#4ade80','#a78bfa','#fb923c','#f472b6','#ffffff'];
+  const count  = 40;
+  const ox = window.innerWidth - 160;
+  const oy = window.innerHeight - 60;
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      const color  = colors[Math.floor(Math.random() * colors.length)];
+      const w  = 5 + Math.random() * 9;
+      const h  = 14 + Math.random() * 20;
+      const dx = (Math.random() - 0.5) * 340;
+      const dy = -(100 + Math.random() * 320);
+      const rot = (Math.random() - 0.5) * 800;
+      const dur = 0.9 + Math.random() * 0.9;
+      el.style.cssText = `
+        position:fixed;pointer-events:none;z-index:400;border-radius:2px;
+        left:${ox + (Math.random() - 0.5) * 120}px;top:${oy}px;
+        width:${w}px;height:${h}px;background:${color};
+        --dx:${dx}px;--dy:${dy}px;--rot:${rot}deg;
+        animation:serpentina-fall ${dur}s ease-out forwards;
+      `;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), dur * 1000 + 50);
+    }, i * 25);
+  }
+}
+
+function showRankUp(rang_nou_nom) {
+  const rang_nou = RANGS.find(r => r.nom === rang_nou_nom) || RANGS[RANGS.length-1];
+  const idx_nou = RANGS.indexOf(rang_nou);
+  const rang_old = RANGS[Math.max(idx_nou - 1, 0)];
+
+  document.getElementById('rankup-rang-old').textContent = rang_old.icon;
+  document.getElementById('rankup-rang-new').textContent = rang_nou.icon;
+  document.getElementById('rankup-title').textContent = rang_nou.nom.toUpperCase() + '!';
+  document.getElementById('rankup-sub').textContent = idx_nou < RANGS.length - 1
+    ? `Continua jugant per arribar a ${RANGS[idx_nou + 1].nom}!`
+    : '🏆 Has assolit el rang màxim!';
+
+  for (let i = 0; i < 24; i++) {
+    setTimeout(() => {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const colors = ['#ffd60a','#4ade80','#60a5fa','#a78bfa','#f87171','#ffffff'];
+      p.style.background = colors[Math.floor(Math.random()*colors.length)];
+      p.style.left = (window.innerWidth/2) + 'px';
+      p.style.top  = (window.innerHeight/2) + 'px';
+      const ang = Math.random()*360;
+      const dist = 100 + Math.random()*200;
+      p.style.setProperty('--dx', Math.cos(ang*Math.PI/180)*dist+'px');
+      p.style.setProperty('--dy', Math.sin(ang*Math.PI/180)*dist+'px');
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 900);
+    }, i * 30);
+  }
+
+  document.getElementById('rankup-overlay').classList.add('show');
+  showSerpentines();
+}
+
+// ═══════════════════════════════════════════
+//  STATS SCREEN
+// ═══════════════════════════════════════════
+function renderStats() {
+  if (!player) return;
+  document.getElementById('stats-avatar').textContent = player.avatar;
+  document.getElementById('stats-nom').textContent = player.nom;
+  const rang = RANGS.find(r => r.nom === player.rang) || RANGS[0];
+  document.getElementById('stats-rang').textContent = `${rang.icon} ${rang.nom}`;
+
+  const idx = RANGS.indexOf(rang);
+  const next = RANGS[idx + 1];
+  if (next) {
+    const pct = ((player.xp - rang.xp) / (next.xp - rang.xp)) * 100;
+    document.getElementById('stats-xp-fill').style.width = Math.min(100, pct) + '%';
+    document.getElementById('stats-xp-text').textContent = `${player.xp} / ${next.xp} XP`;
+  } else {
+    document.getElementById('stats-xp-fill').style.width = '100%';
+    document.getElementById('stats-xp-text').textContent = `🏆 Màxim assolit (${player.xp} XP)`;
+  }
+
+  document.getElementById('stats-partides').textContent = player.partides;
+  document.getElementById('stats-encerts').textContent = player.encerts;
+  const totalQ = player.encerts + player.errors;
+  const prec = totalQ > 0 ? Math.round((player.encerts / totalQ) * 100) : 0;
+  document.getElementById('stats-precisio').textContent = prec + '%';
+  document.getElementById('stats-temps').textContent = formatTime(player.temps_jugat);
+
+  // Chart
+  const chart = document.getElementById('stats-chart');
+  chart.innerHTML = '';
+  const last10 = player.historial.slice(0, 10).reverse();
+  if (last10.length === 0) {
+    chart.innerHTML = '<div style="color:rgba(255,255,255,0.4);width:100%;text-align:center;font-size:0.85rem;">Joga partides per veure el progrés</div>';
+  } else {
+    last10.forEach(h => {
+      const bar = document.createElement('div');
+      bar.className = 'chart-bar';
+      bar.style.height = Math.max(4, h.pct) + '%';
+      bar.dataset.val = h.pct + '%';
+      chart.appendChild(bar);
+    });
+  }
+
+  // Stats per type
+  const byType = document.getElementById('stats-by-type');
+  byType.innerHTML = '';
+  for (let t = 0; t < 4; t++) {
+    const stat = player.stats_per_type[t] || {q:0, c:0};
+    const tdata = QUESTION_TYPES[t];
+    const accuracy = stat.q > 0 ? Math.round((stat.c / stat.q) * 100) : 0;
+    const div = document.createElement('div');
+    div.className = 'stat-box';
+    div.innerHTML = `
+      <div style="font-size:1.4rem;">${tdata.icon}</div>
+      <div class="stat-num" style="font-size:1.2rem;">${accuracy}%</div>
+      <div class="stat-lab">${tdata.nom}<br>${stat.c}/${stat.q}</div>
+    `;
+    byType.appendChild(div);
+  }
+
+  // Stats per mode
+  const byMode = document.getElementById('stats-by-mode');
+  byMode.innerHTML = '';
+  MODES.forEach(m => {
+    const stat = player.stats_per_mode[m.id];
+    if (!stat || stat.p === 0) return;
+    const div = document.createElement('div');
+    div.className = 'stat-box';
+    div.innerHTML = `
+      <div style="font-size:1.4rem;">${m.icon}</div>
+      <div class="stat-num" style="font-size:1.1rem;">${stat.p}</div>
+      <div class="stat-lab">${m.nom}</div>
+    `;
+    byMode.appendChild(div);
+  });
+
+  // Historial
+  const hist = document.getElementById('stats-history');
+  hist.innerHTML = '';
+  if (player.historial.length === 0) {
+    hist.innerHTML = '<div style="color:rgba(255,255,255,0.4);text-align:center;font-size:0.85rem;padding:20px;">Encara no hi ha partides registrades</div>';
+  } else {
+    player.historial.slice(0, 10).forEach(h => {
+      const mode = MODES.find(m => m.id === h.mode);
+      const type = QUESTION_TYPES.find(t => t.id === h.type);
+      const div = document.createElement('div');
+      div.className = 'hist-row';
+      div.innerHTML = `
+        <div class="hist-icon">${mode?.icon||'🎮'}</div>
+        <div class="hist-info">
+          <div class="hist-mode">${mode?.nom||'?'} ${type?.icon||''}</div>
+          <div class="hist-detail">${h.region || (LEVELS.find(l=>l.id===h.level)?.nom||'')} · ${h.date}</div>
+        </div>
+        <div>
+          <div class="hist-score">${h.score}/${h.total||'?'}</div>
+          <div class="hist-xp">+${h.xp} XP</div>
+        </div>
+      `;
+      hist.appendChild(div);
+    });
+  }
+}
+
+function formatTime(sec) {
+  if (sec < 60) return sec + 's';
+  if (sec < 3600) return Math.floor(sec/60) + 'm';
+  return Math.floor(sec/3600) + 'h ' + Math.floor((sec%3600)/60) + 'm';
+}
+
+// ═══════════════════════════════════════════
+//  TROPHIES SCREEN
+// ═══════════════════════════════════════════
+function renderTrophies() {
+  if (!player) return;
+  const unlocked = Object.keys(player.trofeus || {}).filter(k => player.trofeus[k]).length;
+  document.getElementById('trophy-count').textContent = `${unlocked} / ${TROFEUS.length} desbloquejats`;
+
+  const cats = [
+    { id: 'progres', nom: '📈 Progrés' },
+    { id: 'habilit', nom: '⭐ Habilitat' },
+    { id: 'modes', nom: '🎮 Modes' },
+    { id: 'bandera', nom: '🚩 Banderes' },
+    { id: 'capital', nom: '🏛️ Capitals' },
+    { id: 'misteri', nom: '🔮 Especials' }
+  ];
+
+  const wrap = document.getElementById('trophies-content');
+  wrap.innerHTML = '';
+  cats.forEach(cat => {
+    const trofs = TROFEUS.filter(t => t.cat === cat.id);
+    const title = document.createElement('div');
+    title.className = `trophy-section-title cat-${cat.id}`;
+    title.textContent = cat.nom;
+    wrap.appendChild(title);
+
+    const grid = document.createElement('div');
+    grid.className = 'trophies-grid';
+    trofs.forEach(t => {
+      const isUnlocked = !!player.trofeus[t.id];
+      const card = document.createElement('div');
+      card.className = `trophy-card cat-${cat.id} ${isUnlocked ? 'unlocked' : ''}`;
+      card.innerHTML = `
+        <div class="trophy-icon">${t.icon}</div>
+        <div class="trophy-name">${t.nom}</div>
+        <div class="trophy-desc">${t.desc}</div>
+      `;
+      grid.appendChild(card);
+    });
+    wrap.appendChild(grid);
+  });
+}
+
+// ═══════════════════════════════════════════
+//  CREDITS
+// ═══════════════════════════════════════════
+function openCredits() {
+  document.getElementById('credits-modal-bg').classList.add('active');
+}
+function closeCredits() {
+  document.getElementById('credits-modal-bg').classList.remove('active');
+}
+function closeCreditsIfBg(e) {
+  if (e.target.id === 'credits-modal-bg') closeCredits();
+}
+
+// ═══════════════════════════════════════════
+//  THEMES
+// ═══════════════════════════════════════════
+function openThemeModal() {
+  const grid = document.getElementById('theme-grid');
+  grid.innerHTML = '';
+  const currentTheme = localStorage.getItem('paisos_theme') || 'mapa';
+  THEMES.forEach(th => {
+    const card = document.createElement('div');
+    card.className = 'theme-card' + (th.id === currentTheme ? ' active' : '');
+    card.style.background = th.swatch;
+    card.onclick = () => { applyTheme(th); closeThemeModal(); };
+    card.innerHTML = `<div class="theme-card-name">${th.nom}</div>`;
+    grid.appendChild(card);
+  });
+  document.getElementById('theme-modal-bg').classList.add('active');
+}
+function closeThemeModal() {
+  document.getElementById('theme-modal-bg').classList.remove('active');
+}
+
+function applyTheme(theme) {
+  document.body.style.background = theme.bg;
+  document.body.classList.toggle('tema-dia', !!theme.clar);
+  document.documentElement.style.setProperty('--accent', theme.accent);
+  localStorage.setItem('paisos_theme', theme.id);
+}
+
+function loadTheme() {
+  const id = localStorage.getItem('paisos_theme') || 'mapa';
+  const theme = THEMES.find(t => t.id === id) || THEMES[0];
+  applyTheme(theme);
+}
+
+// ═══════════════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════════════
+function goToSelectMode() {
+  selectedMode = null;
+  selectedType = null;
+  selectedLevel = null;
+  selectedRegion = null;
+  showScreen('screen-select-mode');
+}
+
+// ═══════════════════════════════════════════
+//  START
+// ═══════════════════════════════════════════
+init();
+</script>
+</body>
+</html>
