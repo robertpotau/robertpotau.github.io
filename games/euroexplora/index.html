@@ -806,6 +806,52 @@
   .handoff-icon { font-size: 5rem; animation: wave 1s ease-in-out infinite; }
   .handoff-title { font-size: 1.8rem; font-weight: 900; color: var(--accent); margin: 12px 0; }
   .handoff-msg { color: rgba(255,255,255,0.7); margin-bottom: 18px; }
+  /* ── MODAL PROPI ──────────────────────────────────────────────────
+     alert(), confirm() i prompt() queden bloquejats dins d'un WebView
+     (l'APK): el botó es queda mort i l'alumne no en surt. Aquest modal
+     fa la mateixa feina i funciona a tot arreu. */
+  .jm-back {
+    position: fixed; inset: 0; z-index: 99999;
+    background: rgba(0,0,0,0.7);
+    display: none; align-items: center; justify-content: center; padding: 20px;
+  }
+  .jm-back.obert { display: flex; }
+  .jm-card {
+    background: linear-gradient(160deg, #16324f, #0d1f3c);
+    color: #fff;
+    border: 2px solid var(--accent);
+    border-radius: 18px;
+    padding: 24px;
+    width: 100%; max-width: 420px;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+    font-family: inherit;
+    animation: jm-entra 0.22s ease-out;
+  }
+  @keyframes jm-entra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .jm-text { font-size: 1rem; line-height: 1.55; text-align: center; font-weight: 600; }
+  .jm-text small { color: rgba(255,255,255,0.6); }
+  .jm-input {
+    display: none;
+    width: 100%; margin-top: 16px; padding: 12px 14px;
+    font-family: inherit; font-size: 1.05rem; text-align: center; font-weight: 700;
+    color: #fff; background: rgba(255,255,255,0.1);
+    border: 2px solid var(--accent); border-radius: 12px;
+  }
+  .jm-input.visible { display: block; }
+  .jm-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(255,214,10,0.3); }
+  .jm-btns { display: flex; gap: 10px; margin-top: 20px; }
+  .jm-btn {
+    flex: 1; padding: 12px 14px; border-radius: 12px; cursor: pointer;
+    font-family: inherit; font-size: 0.95rem; font-weight: 800;
+    border: 2px solid transparent; transition: 0.18s;
+  }
+  .jm-btn-ok { background: var(--accent); color: #0d1f3c; }
+  .jm-btn-ok:hover { filter: brightness(1.08); }
+  .jm-btn-cancel {
+    background: transparent; color: #fff;
+    border-color: rgba(255,255,255,0.35);
+  }
+  .jm-btn-cancel:hover { border-color: var(--accent); }
 </style>
 </head>
 <body>
@@ -1102,7 +1148,7 @@
 <!-- CREDITS MODAL -->
 <div class="modal-bg" id="credits-modal-bg" onclick="closeCreditsIfBg(event)">
   <div class="credits-modal" onclick="event.stopPropagation()">
-    <h3>ℹ️ Crèdits · <span style="font-weight:400;opacity:0.6;font-size:0.85rem;">v3.0</span></h3>
+    <h3>ℹ️ Crèdits · <span style="font-weight:400;opacity:0.6;font-size:0.85rem;">v3.1 · 31-08-2026</span></h3>
     <div class="credits-row">
       <div class="credits-icon">👨‍🏫</div>
       <div class="credits-info">
@@ -1262,7 +1308,7 @@ const MODES = [
   { id: 2, nom: 'Vides', icon: '❤️', color: 'red', desc: '3 vides, partida infinita', xpBase: 15, lives: 3 },
   { id: 3, nom: 'Repte Progressiu', icon: '🚀', color: 'purple', desc: '5 fases creixent, màx 3 errors', xpBase: 20 },
   { id: 4, nom: 'Geo-Velocitat', icon: '⚡', color: 'orange', desc: '20 preguntes ràpides, 5s cada', xpBase: 18, totalQ: 20, perQTime: 5 },
-  { id: 5, nom: 'Per Regions', icon: '🗺️', color: 'teal', desc: 'Tria una regió específica', xpBase: 14 },
+  { id: 5, nom: 'Per Regions', icon: '🗺️', color: 'teal', desc: '10 preguntes d’una regió que triïs', xpBase: 14, totalQ: 10 },
   { id: 6, nom: 'Memòria Visual', icon: '👁️', color: 'green', desc: 'Visualitza i memoritza', xpBase: 16, totalQ: 10 },
   { id: 7, nom: 'Atles Mestre', icon: '🌟', color: 'pink', desc: 'Combina 3 tipus de preguntes', xpBase: 22, totalQ: 15 }
 ];
@@ -1501,15 +1547,16 @@ function createNewProfile(idx) {
 }
 
 function deleteProfile(idx) {
-  if (!confirm('Estàs segur que vols eliminar aquest perfil? No es pot recuperar.')) return;
-  profiles[idx] = null;
-  // Bugfix: Si s'elimina el perfil actiu, netejar referència
-  if (idx === activeProfileIdx) {
-    player = null;
-    activeProfileIdx = -1;
-  }
-  saveProfiles();
-  renderProfileSlots();
+  jmConfirma('🗑️ Segur que vols eliminar aquest perfil?<br><small>No es pot recuperar.</small>', () => {
+    profiles[idx] = null;
+    // Bugfix: Si s'elimina el perfil actiu, netejar referència
+    if (idx === activeProfileIdx) {
+      player = null;
+      activeProfileIdx = -1;
+    }
+    saveProfiles();
+    renderProfileSlots();
+  }, 'Sí, elimina el perfil');
 }
 
 function activateProfile(idx) {
@@ -1595,7 +1642,7 @@ function updateAvatarPreview() {
 
 function createProfile() {
   const nom = document.getElementById('inp-name').value.trim();
-  if (!nom) { alert('Has d\'escriure el teu nom!'); return; }
+  if (!nom) { jmAvis("✏️ Has d'escriure el teu nom!"); return; }
 
   const newProfile = {
     nom: nom,
@@ -2170,10 +2217,11 @@ function startQuestionTimer() {
 }
 
 function quitGame() {
-  if (!confirm('Segur que vols abandonar la partida? Perdràs el progrés.')) return;
-  clearInterval(timerInterval);
-  clearInterval(qTimerInterval);
-  showScreen('screen-menu');
+  jmConfirma("🚪 Segur que vols abandonar la partida?<br><small>Perdràs el progrés d'aquesta partida.</small>", () => {
+    clearInterval(timerInterval);
+    clearInterval(qTimerInterval);
+    showScreen('screen-menu');
+  }, 'Sí, abandona');
 }
 
 function endGame(reason) {
@@ -2698,5 +2746,90 @@ function goToSelectMode() {
 // ═══════════════════════════════════════════
 init();
 </script>
+<!-- ═══ MODAL PROPI (substitueix alert/confirm/prompt) ═══ -->
+<div id="jm-back" class="jm-back">
+  <div class="jm-card" role="dialog" aria-modal="true" aria-labelledby="jm-text">
+    <div class="jm-text" id="jm-text"></div>
+    <input class="jm-input" id="jm-input" autocomplete="off">
+    <div class="jm-btns" id="jm-btns"></div>
+  </div>
+</div>
+
+<script>
+/* Modal propi: alert(), confirm() i prompt() queden bloquejats dins d'un
+   WebView, i allà el botó que els crida es queda mort. Aquestes tres funcions
+   fan el mateix però amb DOM del joc.
+     jmAvis(text[, quanTanqui])
+     jmConfirma(text, quanSigui[, textOk][, textCancel])
+     jmDemana(text, quanEscrigui[, {placeholder, password, numeric, textOk}])
+   La resposta arriba per callback, no com a valor de retorn. */
+(function () {
+  var cb = null, ambInput = false;
+  function el(id) { return document.getElementById(id); }
+
+  function obre(text, botons, opc) {
+    el('jm-text').innerHTML = text;
+    var inp = el('jm-input');
+    ambInput = !!opc;
+    inp.classList.toggle('visible', ambInput);
+    if (ambInput) {
+      inp.value = opc.valor || '';
+      inp.type = opc.password ? 'password' : 'text';
+      inp.inputMode = opc.numeric ? 'numeric' : 'text';
+      inp.placeholder = opc.placeholder || '';
+    }
+    el('jm-btns').innerHTML = botons;
+    el('jm-back').classList.add('obert');
+    setTimeout(function () {
+      var f = ambInput ? inp : el('jm-btns').querySelector('.jm-btn-ok');
+      if (f) f.focus();
+    }, 40);
+  }
+
+  window.jmAvis = function (text, quanTanqui) {
+    cb = quanTanqui || null;
+    obre(text, "<button type='button' class='jm-btn jm-btn-ok' onclick='jmTanca(true)'>D'acord</button>");
+  };
+
+  window.jmConfirma = function (text, quanSigui, textOk, textCancel) {
+    cb = quanSigui || null;
+    obre(text,
+      '<button type="button" class="jm-btn jm-btn-cancel" onclick="jmTanca(false)">' + (textCancel || 'Cancel·la') + '</button>' +
+      '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">' + (textOk || 'Sí, endavant') + '</button>');
+  };
+
+  window.jmDemana = function (text, quanEscrigui, opc) {
+    opc = opc || {};
+    cb = quanEscrigui || null;
+    obre(text,
+      '<button type="button" class="jm-btn jm-btn-cancel" onclick="jmTanca(false)">' + (opc.textCancel || 'Cancel·la') + '</button>' +
+      '<button type="button" class="jm-btn jm-btn-ok" onclick="jmTanca(true)">' + (opc.textOk || "D'acord") + '</button>',
+      opc);
+  };
+
+  window.jmTanca = function (ok) {
+    var valor = ambInput ? el('jm-input').value : null;
+    el('jm-back').classList.remove('obert');
+    var f = cb; cb = null; ambInput = false;
+    if (ok && f) f(valor);
+  };
+
+  // En fase de captura, perquè les tecles no arribin al joc mentre el modal
+  // és obert.
+  document.addEventListener('keydown', function (e) {
+    var back = el('jm-back');
+    if (!back || !back.classList.contains('obert')) return;
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); jmTanca(false); }
+    else if (e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); jmTanca(true); }
+    else if (e.key === ' ' && document.activeElement !== el('jm-input')) { e.stopPropagation(); }
+  }, true);
+
+  // Clicar el fons fosc equival a cancel·lar.
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.id === 'jm-back') jmTanca(false);
+  });
+})();
+</script>
+
 </body>
 </html>
