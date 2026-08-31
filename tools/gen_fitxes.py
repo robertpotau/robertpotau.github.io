@@ -23,6 +23,7 @@ UI = {
         figcap="Captura del joc — clica-la per jugar-hi", play="Jugar-hi ara ▶",
         what="Què s'hi treballa", feats="Característiques", related="També et pot interessar",
         free="Gratuït", fitxa="ℹ️ Fitxa", jugar="Jugar ▶",
+        play_wip="🚧 Joc en construcció 🚧", jugar_wip="🚧 En construcció 🚧",
         game_in={"ca": "🗣 Joc en català", "en": "🗣 Joc en anglès"},
         note='🔒 El progrés es desa al navegador. La sincronització de classe opcional està desactivada: cap dada surt del dispositiu. 📱 Hi ha versió APK per a Android disponible sota petició. Fet per <a href="/index.html">Robert Potau</a>, professor de secundària de Tecnologia i Digitalització. © 2026 Robert Potau Nuñez — Tots els drets reservats.',
         foot_home="🏫 Robert Potau — inici", foot_kofi="☕ Suporta el projecte",
@@ -32,6 +33,7 @@ UI = {
         figcap="Captura del juego — haz clic para jugar", play="Jugar ahora ▶",
         what="Qué se trabaja", feats="Características", related="También te puede interesar",
         free="Gratis", fitxa="ℹ️ Ficha", jugar="Jugar ▶",
+        play_wip="🚧 Juego en obras 🚧", jugar_wip="🚧 En obras 🚧",
         game_in={"ca": "🗣 Juego en catalán", "en": "🗣 Juego en inglés"},
         note='🔒 El progreso se guarda en el navegador. La sincronización de clase opcional está desactivada: ningún dato sale del dispositivo. 📱 Hay versión APK para Android disponible bajo petición. Hecho por <a href="/es/index.html">Robert Potau</a>, profesor de secundaria de Tecnología y Digitalización. © 2026 Robert Potau Nuñez — Todos los derechos reservados.',
         foot_home="🏫 Robert Potau — inicio", foot_kofi="☕ Apoya el proyecto",
@@ -41,6 +43,7 @@ UI = {
         figcap="Screenshot — click it to play", play="Play now ▶",
         what="What it teaches", feats="Features", related="You may also like",
         free="Free", fitxa="ℹ️ Info", jugar="Play ▶",
+        play_wip="🚧 Under construction 🚧", jugar_wip="🚧 Under construction 🚧",
         game_in={"ca": "🗣 Game in Catalan", "en": "🗣 Game in English"},
         note='🔒 Progress is stored in the browser. The optional class sync is switched off: no data leaves the device. 📱 An Android APK is available on request. Made by <a href="/en/index.html">Robert Potau</a>, secondary school teacher of Technology. © 2026 Robert Potau Nuñez — All rights reserved.',
         foot_home="🏫 Robert Potau — home", foot_kofi="☕ Support the project",
@@ -760,7 +763,7 @@ GAMES = [
         ),
     ),
     dict(
-        slug="euroexplora", entry="index.html", shot="euroexplora", emoji="🗺️",
+        slug="euroexplora", entry="index.html", shot="euroexplora", emoji="🗺️", wip=True,
         name="EuroExplora", game_lang="ca", related=["geometria", "aula-acollida", "quina-hora-es"],
         teaches={"ca": "geografia d'Europa: països, capitals i banderes", "es": "geografía de Europa: países, capitales y banderas", "en": "geography of Europe: countries, capitals and flags"},
         level={"ca": "1r-3r ESO", "es": "1º-3º ESO", "en": "Ages 12-16"},
@@ -856,6 +859,7 @@ h1{font-size:clamp(1.7rem,5vw,2.5rem);font-weight:900;line-height:1.15;margin-bo
 figure figcaption{font-size:12.5px;color:var(--ink-dim);text-align:center;margin-bottom:22px}
 .cta{display:inline-block;font-size:1.15rem;font-weight:900;background:linear-gradient(90deg,var(--accent-hot),var(--accent));color:#fff;padding:14px 38px;border-radius:99px;margin:6px 0 30px;box-shadow:0 6px 24px rgba(154,50,239,0.45)}
 .cta:hover{text-decoration:none;filter:brightness(1.1)}
+.cta.wip{background:linear-gradient(90deg,#ff9f1c,#f7761f);box-shadow:0 6px 24px rgba(247,118,31,0.45)}
 h2{font-size:1.25rem;font-weight:900;margin:26px 0 10px;color:var(--accent)}
 p{margin-bottom:14px}
 ul.features{list-style:none;margin-bottom:14px}
@@ -1004,7 +1008,7 @@ def fitxa_page(g, lang):
   <a href="{play}" data-goatcounter-click="fitxa-{g['slug']}-shot"><img class="shot" src="/screenshots/{g['shot']}.jpg" alt="{g['name']}" loading="lazy"></a>
   <figcaption>{ui["figcap"]}</figcaption>
 </figure>
-<a class="cta" href="{play}" data-goatcounter-click="fitxa-{g['slug']}-play">{ui["play"]}</a>
+<a class="cta{" wip" if g.get("wip") else ""}" href="{play}" data-goatcounter-click="fitxa-{g['slug']}-play">{ui["play_wip"] if g.get("wip") else ui["play"]}</a>
 <h2>{ui["what"]}</h2>
 {paras}
 <h2>{ui["feats"]}</h2>
@@ -1040,7 +1044,7 @@ def hub_page(lang):
       <p>{g['c'][lang]['lead']}</p>
       <div class="links">
         <a href="{prefix}jocs/{g['slug']}.html" data-goatcounter-click="hub-fitxa-{g['slug']}">{ui['fitxa']}</a>
-        <a href="/games/{g['slug']}/{g['entry']}" data-goatcounter-click="hub-play-{g['slug']}">{ui['jugar']}</a>
+        <a href="/games/{g['slug']}/{g['entry']}" data-goatcounter-click="hub-play-{g['slug']}">{ui["jugar_wip"] if g.get("wip") else ui["jugar"]}</a>
       </div>
     </div>
   </div>'''

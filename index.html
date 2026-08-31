@@ -304,6 +304,9 @@
     transition: transform 0.1s;
   }
   .gcard .play:active { transform: translateY(4px); box-shadow: 0 1px 0 #5d0ba3; }
+  /* joc encara en manteniment: mateixa forma, taronja obra */
+  .gcard .play.wip { background: linear-gradient(135deg, #ff9f1c, #f7761f); box-shadow: 0 5px 0 #a8480a; }
+  .gcard .play.wip:active { box-shadow: 0 1px 0 #a8480a; }
   .gcard .fitxa {
     display: block;
     text-align: center;
@@ -657,7 +660,7 @@
           <span class="grade" data-i18n="grade_euroexplora">ESO 1r-3r</span>
           <h3>EuroExplora</h3>
           <p data-i18n="desc_euroexplora">Països, capitals i banderes d'Europa — 8 modes de joc.</p>
-          <a class="play" href="games/euroexplora/index.html" data-i18n="play" data-goatcounter-click="game-euroexplora">Jugar ▶</a>
+          <a class="play wip" href="games/euroexplora/index.html" data-i18n="play_wip" data-goatcounter-click="game-euroexplora">🚧 Joc en construcció 🚧</a>
           <a class="fitxa" href="jocs/euroexplora.html" data-i18n="fitxa" data-goatcounter-click="fitxa-euroexplora">ℹ️ Fitxa del joc</a>
         </div>
       </div>
@@ -772,6 +775,7 @@ const translations = {
     grade_verbquest: "ESO", desc_verbquest: "Verbs anglesos regulars i irregulars — 8 modes de joc.",
     grade_euroexplora: "ESO 1r-3r", desc_euroexplora: "Països, capitals i banderes d'Europa — 8 modes de joc.",
     play: "Jugar ▶",
+    play_wip: "🚧 Joc en construcció 🚧",
     fitxa: "ℹ️ Fitxa del joc",
     b8_kicker: "Després de corregir, quan l'institut calla",
     b8_h: "Aquests jocs els faig als vespres. Les demos seran sempre gratuïtes.",
@@ -823,6 +827,7 @@ const translations = {
     grade_verbquest: "ESO", desc_verbquest: "Verbos ingleses regulares e irregulares — 8 modos de juego.",
     grade_euroexplora: "ESO 1º-3º", desc_euroexplora: "Países, capitales y banderas de Europa — 8 modos de juego.",
     play: "Jugar ▶",
+    play_wip: "🚧 Juego en obras 🚧",
     fitxa: "ℹ️ Ficha del juego",
     b8_kicker: "Después de corregir, cuando el instituto calla",
     b8_h: "Estos juegos los hago por las noches. Las demos siempre serán gratuitas.",
@@ -874,6 +879,7 @@ const translations = {
     grade_verbquest: "Secondary", desc_verbquest: "Regular & irregular English verbs — 8 game modes.",
     grade_euroexplora: "Ages 12-15", desc_euroexplora: "Countries, capitals and flags of Europe — 8 game modes.",
     play: "Play ▶",
+    play_wip: "🚧 Under construction 🚧",
     fitxa: "ℹ️ Game info",
     b8_kicker: "After the marking is done, when the high school goes quiet",
     b8_h: "I build these games in the evenings. The demos will always be free.",

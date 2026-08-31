@@ -233,6 +233,12 @@
     transform: translateY(3px);
     box-shadow: 0 1px 0 var(--primary-press);
   }
+  /* joc encara en manteniment: mateixa forma, taronja obra */
+  .game-card .play-btn.wip {
+    background: linear-gradient(135deg, #ff9f1c, #f7761f);
+    box-shadow: 0 4px 0 #a8480a;
+  }
+  .game-card .play-btn.wip:active { box-shadow: 0 1px 0 #a8480a; }
 
   .game-card .apk-note {
     font-size: 12px;
@@ -556,7 +562,7 @@
           </div>
           <h3>EuroExplora</h3>
           <p class="desc" data-i18n="desc_euroexplora">Els 46 països d'Europa amb les capitals, les banderes i els edificis més coneguts, en 8 modes de joc.</p>
-          <a class="play-btn" href="games/euroexplora/index.html" data-i18n="play" data-goatcounter-click="game-euroexplora">Jugar ▶</a>
+          <a class="play-btn wip" href="games/euroexplora/index.html" data-i18n="play_wip" data-goatcounter-click="game-euroexplora">🚧 Joc en construcció 🚧</a>
         </div>
       </div>
 
@@ -652,7 +658,8 @@ const translations = {
     tag_acollida: "Acollida · Llengua", grade_acollida: "Tots els nivells", title_acollida: "Aula d'Acollida", desc_acollida: "Vocabulari, lectura i jocs per a alumnat nouvingut, organitzats per unitats temàtiques amb progressió d'experiència.",
     tag_vistes: "Dibuix tècnic", grade_vistes: "ESO 3r-4t / Batxillerat", title_vistes: "Vistes", desc_vistes: "Pràctica de projeccions geomètriques: alçat, planta i perfil de figures en 3D.",
     grade_whattime: "Primària 2n-4t", title_whattime: "What time is it", desc_whattime: "Practise telling the time in English on an analogue clock.",
-    play: "Jugar ▶", apk_note: "Versió APK disponible sota petició",
+    play: "Jugar ▶",
+    play_wip: "🚧 Joc en construcció 🚧", apk_note: "Versió APK disponible sota petició",
     process_title: "Com funciona un projecte a mida",
     step1_h: "Contacte", step1_p: "M'expliques la idea, el nivell i l'objectiu didàctic.",
     step2_h: "Definim l'abast", step2_p: "Acordem mecàniques, continguts i termini.",
@@ -685,7 +692,8 @@ const translations = {
     tag_acollida: "Acogida · Lengua", grade_acollida: "Todos los niveles", title_acollida: "Aula de Acogida", desc_acollida: "Vocabulario, lectura y juegos para alumnado recién llegado, organizados por unidades temáticas con progresión de experiencia.",
     tag_vistes: "Dibujo técnico", grade_vistes: "ESO 3º-4º / Bachillerato", title_vistes: "Vistas", desc_vistes: "Práctica de proyecciones geométricas: alzado, planta y perfil de figuras en 3D.",
     grade_whattime: "Primaria 2º-4º", title_whattime: "What time is it", desc_whattime: "Practica cómo decir la hora en inglés con un reloj analógico.",
-    play: "Jugar ▶", apk_note: "Versión APK disponible bajo petición",
+    play: "Jugar ▶",
+    play_wip: "🚧 Juego en obras 🚧", apk_note: "Versión APK disponible bajo petición",
     process_title: "Cómo funciona un proyecto a medida",
     step1_h: "Contacto", step1_p: "Me explicas la idea, el nivel y el objetivo didáctico.",
     step2_h: "Definimos el alcance", step2_p: "Acordamos mecánicas, contenidos y plazo.",
@@ -718,7 +726,8 @@ const translations = {
     tag_acollida: "Newcomer support · Language", grade_acollida: "All levels", title_acollida: "Aula d'Acollida (Welcome classroom)", desc_acollida: "Vocabulary, reading and games for newly arrived students, organised into themed units with XP progression.",
     tag_vistes: "Technical drawing", grade_vistes: "Secondary 3-4 / Baccalaureate", title_vistes: "Vistes (Orthographic views)", desc_vistes: "Practise geometric projections: front, top and side views of 3D shapes.",
     grade_whattime: "Primary grades 2-4", title_whattime: "What time is it", desc_whattime: "Practise telling the time in English on an analogue clock.",
-    play: "Play ▶", apk_note: "Android (APK) version available on request",
+    play: "Play ▶",
+    play_wip: "🚧 Under construction 🚧", apk_note: "Android (APK) version available on request",
     process_title: "How a custom project works",
     step1_h: "Contact", step1_p: "You tell me the idea, the level and the learning goal.",
     step2_h: "Scope it out", step2_p: "We agree on mechanics, content and timeline.",
