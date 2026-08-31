@@ -312,6 +312,24 @@
   }
 
   /* ── LANDMARK DISPLAY ── */
+  .landmark-photo {
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 3px solid rgba(255,255,255,0.25);
+    box-shadow: 0 8px 26px rgba(0,0,0,0.45);
+    margin: 0 auto 10px;
+    display: block;
+    background: rgba(255,255,255,0.06);
+  }
+  .landmark-nom {
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1.2;
+  }
   .landmark-display {
     font-size: 4rem;
     margin-bottom: 12px;
@@ -1148,7 +1166,7 @@
 <!-- CREDITS MODAL -->
 <div class="modal-bg" id="credits-modal-bg" onclick="closeCreditsIfBg(event)">
   <div class="credits-modal" onclick="event.stopPropagation()">
-    <h3>ℹ️ Crèdits · <span style="font-weight:400;opacity:0.6;font-size:0.85rem;">v3.1 · 31-08-2026</span></h3>
+    <h3>ℹ️ Crèdits · <span style="font-weight:400;opacity:0.6;font-size:0.85rem;">v3.2 · 01-09-2026</span></h3>
     <div class="credits-row">
       <div class="credits-icon">👨‍🏫</div>
       <div class="credits-info">
@@ -1183,14 +1201,22 @@
       <div class="credits-icon">🏛️</div>
       <div class="credits-info">
         <strong>Emojis Unicode + OpenMoji</strong>
-        <span>Edificis, monuments i símbols<br><a href="https://openmoji.org" target="_blank" style="color:var(--blue);">openmoji.org</a> · Llicència CC BY-SA 4.0</span>
+        <span>Icones i símbols de la interfície<br><a href="https://openmoji.org" target="_blank" style="color:var(--blue);">openmoji.org</a> · Llicència CC BY-SA 4.0</span>
+      </div>
+    </div>
+    <div class="credits-row">
+      <div class="credits-icon">📸</div>
+      <div class="credits-info">
+        <strong>Fotografies dels monuments</strong>
+        <span>46 fotos de Wikimedia Commons, la majoria CC BY-SA<br>
+        <a href="#" onclick="obreCreditsFotos();return false;" style="color:var(--blue);">Veure autor i llicència de cada foto</a></span>
       </div>
     </div>
     <div class="credits-row">
       <div class="credits-icon">📚</div>
       <div class="credits-info">
         <strong>Dades geogràfiques</strong>
-        <span>Capitals i informació de paisos<br>Font: Viquipèdia · Llicència CC BY-SA 4.0</span>
+        <span>Capitals i informació dels països<br>Font: Viquipèdia · Llicència CC BY-SA 4.0</span>
       </div>
     </div>
     <hr class="credits-divider">
@@ -1200,6 +1226,18 @@
       <span style="font-size:0.8rem;opacity:0.85;">Podeu usar, adaptar i redistribuir aquest material<br>sempre que en citeu l'autoria i mantingueu la mateixa llicència.</span>
     </div>
     <button class="credits-close" onclick="closeCredits()">Tancar</button>
+  </div>
+</div>
+
+<!-- CREDITS DE LES FOTOS -->
+<div class="modal-bg" id="fotos-modal-bg" onclick="if(event.target.id==='fotos-modal-bg')tancaCreditsFotos()">
+  <div class="credits-modal" onclick="event.stopPropagation()">
+    <h3>📸 Fotografies dels monuments</h3>
+    <p style="font-size:0.82rem;color:rgba(255,255,255,0.65);margin-bottom:12px;line-height:1.5;">
+      Totes venen de Wikimedia Commons. La llicència CC BY-SA obliga a citar-ne
+      l'autor: aquí els tens tots.</p>
+    <div id="fotos-llista" style="max-height:50vh;overflow-y:auto;font-size:0.78rem;line-height:1.6;"></div>
+    <button class="credits-close" onclick="tancaCreditsFotos()">Tancar</button>
   </div>
 </div>
 
@@ -1222,52 +1260,52 @@
 
 // Mapping ISO codes per a flag-icons CSS
 const COUNTRIES = {
-  'França': { capital: 'París', code: 'fr', landmark: '🗼', region: 'Europa Occidental' },
-  'Alemanya': { capital: 'Berlín', code: 'de', landmark: '🏛️', region: 'Europa Central' },
-  'Itàlia': { capital: 'Roma', code: 'it', landmark: '🏛️', region: 'Europa Meridional' },
-  'Espanya': { capital: 'Madrid', code: 'es', landmark: '🐂', region: 'Europa Meridional' },
-  'Portugal': { capital: 'Lisboa', code: 'pt', landmark: '⛵', region: 'Europa Meridional' },
-  'Suïssa': { capital: 'Berna', code: 'ch', landmark: '⛰️', region: 'Europa Central' },
-  'Bèlgica': { capital: 'Brussel·les', code: 'be', landmark: '🍫', region: 'Europa Occidental' },
-  'Holanda': { capital: 'Ámsterdam', code: 'nl', landmark: '🌷', region: 'Europa Occidental' },
-  'Dinamarca': { capital: 'Copenhaguen', code: 'dk', landmark: '🧜‍♀️', region: 'Escandinàvia' },
-  'Suècia': { capital: 'Estocolm', code: 'se', landmark: '🛶', region: 'Escandinàvia' },
-  'Noruega': { capital: 'Oslo', code: 'no', landmark: '⛵', region: 'Escandinàvia' },
-  'Finlàndia': { capital: 'Hèlsinki', code: 'fi', landmark: '🦌', region: 'Escandinàvia' },
-  'Polònia': { capital: 'Varsòvia', code: 'pl', landmark: '🏰', region: 'Europa Oriental' },
-  'República Txeca': { capital: 'Praga', code: 'cz', landmark: '🏰', region: 'Europa Central' },
-  'Hongria': { capital: 'Budapest', code: 'hu', landmark: '🌉', region: 'Europa Central' },
-  'Croàcia': { capital: 'Zàgreb', code: 'hr', landmark: '⛵', region: 'Balcans' },
-  'Romania': { capital: 'Bucarest', code: 'ro', landmark: '🦇', region: 'Europa Oriental' },
-  'Bulgària': { capital: 'Sofia', code: 'bg', landmark: '⛪', region: 'Balcans' },
-  'Grècia': { capital: 'Atenes', code: 'gr', landmark: '🏛️', region: 'Europa Meridional' },
-  'Sèrbia': { capital: 'Belgrad', code: 'rs', landmark: '🏛️', region: 'Balcans' },
-  'Albània': { capital: 'Tirana', code: 'al', landmark: '🦅', region: 'Balcans' },
-  'Macedònia': { capital: 'Skopje', code: 'mk', landmark: '🏛️', region: 'Balcans' },
-  'Bòsnia': { capital: 'Sarajevo', code: 'ba', landmark: '🌉', region: 'Balcans' },
-  'Montenegro': { capital: 'Podgorica', code: 'me', landmark: '⛰️', region: 'Balcans' },
-  'Kosovo': { capital: 'Pristina', code: 'xk', landmark: '🏛️', region: 'Balcans' },
-  'Lituània': { capital: 'Vílnius', code: 'lt', landmark: '🏰', region: 'Bàltic' },
-  'Letònia': { capital: 'Riga', code: 'lv', landmark: '🏛️', region: 'Bàltic' },
-  'Estònia': { capital: 'Tallinn', code: 'ee', landmark: '🏰', region: 'Bàltic' },
-  'Eslovàquia': { capital: 'Bratislava', code: 'sk', landmark: '🏰', region: 'Europa Central' },
-  'Eslovènia': { capital: 'Liubliana', code: 'si', landmark: '🐉', region: 'Balcans' },
-  'Andorra': { capital: 'Andorra la Vella', code: 'ad', landmark: '⛰️', region: 'Europa Meridional' },
-  'Luxemburg': { capital: 'Luxemburg', code: 'lu', landmark: '🏰', region: 'Europa Occidental' },
-  'Malta': { capital: 'La Valleta', code: 'mt', landmark: '⛪', region: 'Europa Meridional' },
-  'Xipre': { capital: 'Nicòsia', code: 'cy', landmark: '🌊', region: 'Europa Meridional' },
-  'Irlanda': { capital: 'Dublín', code: 'ie', landmark: '🍀', region: 'Europa Occidental' },
-  'Regne Unit': { capital: 'Londres', code: 'gb', landmark: '🎡', region: 'Europa Occidental' },
-  'Moldàvia': { capital: 'Chișinău', code: 'md', landmark: '🍇', region: 'Europa Oriental' },
-  'Ucraïna': { capital: 'Kíev', code: 'ua', landmark: '⛪', region: 'Europa Oriental' },
-  'Bielorússia': { capital: 'Minsk', code: 'by', landmark: '🏛️', region: 'Europa Oriental' },
-  'Rússia': { capital: 'Moscou', code: 'ru', landmark: '⛪', region: 'Europa Oriental' },
-  'Àustria': { capital: 'Viena', code: 'at', landmark: '🎵', region: 'Europa Central' },
-  'Liechtenstein': { capital: 'Vaduz', code: 'li', landmark: '🏰', region: 'Europa Central' },
-  'Mònaco': { capital: 'Mònaco', code: 'mc', landmark: '🎰', region: 'Europa Occidental' },
-  'San Marino': { capital: 'San Marino', code: 'sm', landmark: '🏰', region: 'Europa Meridional' },
-  'Vaticà': { capital: 'Ciutat del Vaticà', code: 'va', landmark: '⛪', region: 'Europa Meridional' },
-  'Islàndia': { capital: 'Reykjavík', code: 'is', landmark: '🌋', region: 'Escandinàvia' }
+  'França': { capital: 'París', code: 'fr', landmark: { nom: "La Torre Eiffel", ciutat: 'París', emoji: '🗼', foto: 'assets/landmarks/fr.jpg' }, region: 'Europa Occidental' },
+  'Alemanya': { capital: 'Berlín', code: 'de', landmark: { nom: "La Porta de Brandenburg", ciutat: 'Berlín', emoji: '🏛️', foto: 'assets/landmarks/de.jpg' }, region: 'Europa Central' },
+  'Itàlia': { capital: 'Roma', code: 'it', landmark: { nom: "El Colosseu", ciutat: 'Roma', emoji: '🏟️', foto: 'assets/landmarks/it.jpg' }, region: 'Europa Meridional' },
+  'Espanya': { capital: 'Madrid', code: 'es', landmark: { nom: "La Porta d'Alcalà", ciutat: 'Madrid', emoji: '🚪', foto: 'assets/landmarks/es.jpg' }, region: 'Europa Meridional' },
+  'Portugal': { capital: 'Lisboa', code: 'pt', landmark: { nom: "La Torre de Belém", ciutat: 'Lisboa', emoji: '🗼', foto: 'assets/landmarks/pt.jpg' }, region: 'Europa Meridional' },
+  'Suïssa': { capital: 'Berna', code: 'ch', landmark: { nom: "La Zytglogge", ciutat: 'Berna', emoji: '🕰️', foto: 'assets/landmarks/ch.jpg' }, region: 'Europa Central' },
+  'Bèlgica': { capital: 'Brussel·les', code: 'be', landmark: { nom: "L'Atomium", ciutat: 'Brussel·les', emoji: '⚛️', foto: 'assets/landmarks/be.jpg' }, region: 'Europa Occidental' },
+  'Holanda': { capital: 'Ámsterdam', code: 'nl', landmark: { nom: "El Rijksmuseum", ciutat: 'Ámsterdam', emoji: '🖼️', foto: 'assets/landmarks/nl.jpg' }, region: 'Europa Occidental' },
+  'Dinamarca': { capital: 'Copenhaguen', code: 'dk', landmark: { nom: "El port de Nyhavn", ciutat: 'Copenhaguen', emoji: '🏘️', foto: 'assets/landmarks/dk.jpg' }, region: 'Escandinàvia' },
+  'Suècia': { capital: 'Estocolm', code: 'se', landmark: { nom: "El Museu Vasa", ciutat: 'Estocolm', emoji: '🚢', foto: 'assets/landmarks/se.jpg' }, region: 'Escandinàvia' },
+  'Noruega': { capital: 'Oslo', code: 'no', landmark: { nom: "L'Òpera d'Oslo", ciutat: 'Oslo', emoji: '🎭', foto: 'assets/landmarks/no.jpg' }, region: 'Escandinàvia' },
+  'Finlàndia': { capital: 'Hèlsinki', code: 'fi', landmark: { nom: "La Catedral de Hèlsinki", ciutat: 'Hèlsinki', emoji: '⛪', foto: 'assets/landmarks/fi.jpg' }, region: 'Escandinàvia' },
+  'Polònia': { capital: 'Varsòvia', code: 'pl', landmark: { nom: "El Palau de la Cultura i la Ciència", ciutat: 'Varsòvia', emoji: '🏢', foto: 'assets/landmarks/pl.jpg' }, region: 'Europa Oriental' },
+  'República Txeca': { capital: 'Praga', code: 'cz', landmark: { nom: "El Pont de Carles", ciutat: 'Praga', emoji: '🌉', foto: 'assets/landmarks/cz.jpg' }, region: 'Europa Central' },
+  'Hongria': { capital: 'Budapest', code: 'hu', landmark: { nom: "El Parlament de Budapest", ciutat: 'Budapest', emoji: '🏛️', foto: 'assets/landmarks/hu.jpg' }, region: 'Europa Central' },
+  'Croàcia': { capital: 'Zàgreb', code: 'hr', landmark: { nom: "La Catedral de Zagreb", ciutat: 'Zàgreb', emoji: '⛪', foto: 'assets/landmarks/hr.jpg' }, region: 'Balcans' },
+  'Romania': { capital: 'Bucarest', code: 'ro', landmark: { nom: "El Palau del Parlament", ciutat: 'Bucarest', emoji: '🏛️', foto: 'assets/landmarks/ro.jpg' }, region: 'Europa Oriental' },
+  'Bulgària': { capital: 'Sofia', code: 'bg', landmark: { nom: "La Catedral Alexandre Nevski", ciutat: 'Sofia', emoji: '⛪', foto: 'assets/landmarks/bg.jpg' }, region: 'Balcans' },
+  'Grècia': { capital: 'Atenes', code: 'gr', landmark: { nom: "El Partenó", ciutat: 'Atenes', emoji: '🏛️', foto: 'assets/landmarks/gr.jpg' }, region: 'Europa Meridional' },
+  'Sèrbia': { capital: 'Belgrad', code: 'rs', landmark: { nom: "El Temple de Sant Sava", ciutat: 'Belgrad', emoji: '⛪', foto: 'assets/landmarks/rs.jpg' }, region: 'Balcans' },
+  'Albània': { capital: 'Tirana', code: 'al', landmark: { nom: "La Plaça Skanderbeg", ciutat: 'Tirana', emoji: '🦅', foto: 'assets/landmarks/al.jpg' }, region: 'Balcans' },
+  'Macedònia': { capital: 'Skopje', code: 'mk', landmark: { nom: "El Pont de Pedra", ciutat: 'Skopje', emoji: '🌉', foto: 'assets/landmarks/mk.jpg' }, region: 'Balcans' },
+  'Bòsnia': { capital: 'Sarajevo', code: 'ba', landmark: { nom: "El Sebilj", ciutat: 'Sarajevo', emoji: '⛲', foto: 'assets/landmarks/ba.jpg' }, region: 'Balcans' },
+  'Montenegro': { capital: 'Podgorica', code: 'me', landmark: { nom: "El Pont del Mil·lenni", ciutat: 'Podgorica', emoji: '🌉', foto: 'assets/landmarks/me.jpg' }, region: 'Balcans' },
+  'Kosovo': { capital: 'Pristina', code: 'xk', landmark: { nom: "La Biblioteca Nacional de Kosovo", ciutat: 'Pristina', emoji: '📚', foto: 'assets/landmarks/xk.jpg' }, region: 'Balcans' },
+  'Lituània': { capital: 'Vílnius', code: 'lt', landmark: { nom: "La Torre de Gediminas", ciutat: 'Vílnius', emoji: '🏰', foto: 'assets/landmarks/lt.jpg' }, region: 'Bàltic' },
+  'Letònia': { capital: 'Riga', code: 'lv', landmark: { nom: "La Casa dels Caps Negres", ciutat: 'Riga', emoji: '🏛️', foto: 'assets/landmarks/lv.jpg' }, region: 'Bàltic' },
+  'Estònia': { capital: 'Tallinn', code: 'ee', landmark: { nom: "La Catedral Alexandre Nevski de Tallinn", ciutat: 'Tallinn', emoji: '⛪', foto: 'assets/landmarks/ee.jpg' }, region: 'Bàltic' },
+  'Eslovàquia': { capital: 'Bratislava', code: 'sk', landmark: { nom: "El Castell de Bratislava", ciutat: 'Bratislava', emoji: '🏰', foto: 'assets/landmarks/sk.jpg' }, region: 'Europa Central' },
+  'Eslovènia': { capital: 'Liubliana', code: 'si', landmark: { nom: "El Pont dels Dracs", ciutat: 'Liubliana', emoji: '🐉', foto: 'assets/landmarks/si.jpg' }, region: 'Balcans' },
+  'Andorra': { capital: 'Andorra la Vella', code: 'ad', landmark: { nom: "La Casa de la Vall", ciutat: 'Andorra la Vella', emoji: '🏛️', foto: 'assets/landmarks/ad.jpg' }, region: 'Europa Meridional' },
+  'Luxemburg': { capital: 'Luxemburg', code: 'lu', landmark: { nom: "El Pont Adolphe", ciutat: 'Luxemburg', emoji: '🌉', foto: 'assets/landmarks/lu.jpg' }, region: 'Europa Occidental' },
+  'Malta': { capital: 'La Valleta', code: 'mt', landmark: { nom: "La Concatedral de Sant Joan", ciutat: 'La Valleta', emoji: '⛪', foto: 'assets/landmarks/mt.jpg' }, region: 'Europa Meridional' },
+  'Xipre': { capital: 'Nicòsia', code: 'cy', landmark: { nom: "La Porta de Famagusta", ciutat: 'Nicòsia', emoji: '🚪', foto: 'assets/landmarks/cy.jpg' }, region: 'Europa Meridional' },
+  'Irlanda': { capital: 'Dublín', code: 'ie', landmark: { nom: "El Trinity College", ciutat: 'Dublín', emoji: '🍀', foto: 'assets/landmarks/ie.jpg' }, region: 'Europa Occidental' },
+  'Regne Unit': { capital: 'Londres', code: 'gb', landmark: { nom: "El Big Ben", ciutat: 'Londres', emoji: '🕰️', foto: 'assets/landmarks/gb.jpg' }, region: 'Europa Occidental' },
+  'Moldàvia': { capital: 'Chișinău', code: 'md', landmark: { nom: "L'Arc de Triomf de Chisinau", ciutat: 'Chișinău', emoji: '🏛️', foto: 'assets/landmarks/md.jpg' }, region: 'Europa Oriental' },
+  'Ucraïna': { capital: 'Kíev', code: 'ua', landmark: { nom: "La Catedral de Santa Sofia", ciutat: 'Kíev', emoji: '⛪', foto: 'assets/landmarks/ua.jpg' }, region: 'Europa Oriental' },
+  'Bielorússia': { capital: 'Minsk', code: 'by', landmark: { nom: "La Biblioteca Nacional de Bielorússia", ciutat: 'Minsk', emoji: '📚', foto: 'assets/landmarks/by.jpg' }, region: 'Europa Oriental' },
+  'Rússia': { capital: 'Moscou', code: 'ru', landmark: { nom: "La Catedral de Sant Basili", ciutat: 'Moscou', emoji: '⛪', foto: 'assets/landmarks/ru.jpg' }, region: 'Europa Oriental' },
+  'Àustria': { capital: 'Viena', code: 'at', landmark: { nom: "El Palau de Schönbrunn", ciutat: 'Viena', emoji: '🏰', foto: 'assets/landmarks/at.jpg' }, region: 'Europa Central' },
+  'Liechtenstein': { capital: 'Vaduz', code: 'li', landmark: { nom: "El Castell de Vaduz", ciutat: 'Vaduz', emoji: '🏰', foto: 'assets/landmarks/li.jpg' }, region: 'Europa Central' },
+  'Mònaco': { capital: 'Mònaco', code: 'mc', landmark: { nom: "El Palau del Príncep", ciutat: 'Mònaco', emoji: '🏰', foto: 'assets/landmarks/mc.jpg' }, region: 'Europa Occidental' },
+  'San Marino': { capital: 'San Marino', code: 'sm', landmark: { nom: "La Torre Guaita", ciutat: 'San Marino', emoji: '🏰', foto: 'assets/landmarks/sm.jpg' }, region: 'Europa Meridional' },
+  'Vaticà': { capital: 'Ciutat del Vaticà', code: 'va', landmark: { nom: "La Basílica de Sant Pere", ciutat: 'Ciutat del Vaticà', emoji: '⛪', foto: 'assets/landmarks/va.jpg' }, region: 'Europa Meridional' },
+  'Islàndia': { capital: 'Reykjavík', code: 'is', landmark: { nom: "La Hallgrímskirkja", ciutat: 'Reykjavík', emoji: '⛪', foto: 'assets/landmarks/is.jpg' }, region: 'Escandinàvia' }
 };
 
 // Niveles progressius - nous Robert va proposar 4 nivells
@@ -1777,7 +1815,7 @@ function selectRegion() {
       selectedLevel = LEVELS[1];
       startGame();
     };
-    const sample = Object.entries(COUNTRIES).filter(([k,v])=>v.region===r).slice(0,3).map(([k,v])=>v.landmark).join(' ');
+    const sample = Object.entries(COUNTRIES).filter(([k,v])=>v.region===r).slice(0,3).map(([k,v])=>v.landmark.emoji).join(' ');
     card.innerHTML = `
       <div class="icon">🗺️</div>
       <div class="nom">${r}</div>
@@ -1945,6 +1983,38 @@ function generateQuestion() {
   return { country, qType, data };
 }
 
+/* La foto del monument. Si no carrega (fitxer mogut, sense connexió la primera
+   vegada), l'onerror la canvia per l'emoji de sempre: la pregunta continua
+   tenint sentit perquè el nom del monument ja hi és escrit a sota. */
+/* Autoria de cada foto. La CC BY-SA demana citar l'autor allà on es fa servir
+   l'obra, i el joc no té cap altra pàgina on posar-ho. Es genera amb
+   tools/baixa_fotos.py: si canvies una foto, torna a passar l'script. */
+const CREDITS_FOTOS = [{"nom": "El Big Ben","ciutat": "Londres","autor": "Christian David","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Elizabeth_Tower_and_the_north_front_of_the_Palace_of_Westminster,_London.jpg"},{"nom": "El Castell de Bratislava","ciutat": "Bratislava","autor": "C.Stadler/Bwag","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Bratislava_-_Burg_(a).JPG"},{"nom": "El Castell de Vaduz","ciutat": "Vaduz","autor": "A.Savin","llicencia": "FAL","pagina": "https://commons.wikimedia.org/wiki/File:Liechtenstein_asv2022-10_img22_Vaduz_Schloss.jpg"},{"nom": "El Colosseu","ciutat": "Roma","autor": "FeaturedPics","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Colosseo_2020.jpg"},{"nom": "El Museu Vasa","ciutat": "Estocolm","autor": "Hanay","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Vasa_Museum_building_view_from_the_sea_(3).jpg"},{"nom": "El Palau de Schönbrunn","ciutat": "Viena","autor": "Thomas Wolf, www.foto-tw.de","llicencia": "CC BY-SA 3.0 de","pagina": "https://commons.wikimedia.org/wiki/File:Schloss_Sch%C3%B6nbrunn_Wien_2014_(Zuschnitt_2).jpg"},{"nom": "El Palau de la Cultura i la Ciència","ciutat": "Varsòvia","autor": "Adrian Grycuk","llicencia": "CC BY-SA 3.0 pl","pagina": "https://commons.wikimedia.org/wiki/File:Pa%C5%82ac_Kultury_i_Nauki_2019.jpg"},{"nom": "El Palau del Parlament","ciutat": "Bucarest","autor": "Sludge G","llicencia": "CC BY-SA 2.0","pagina": "https://commons.wikimedia.org/wiki/File:Bucure%C5%9Fti_._Palatul_parlamentului_from_Bulevardul_unirii._June_1996_(3402687988).jpg"},{"nom": "El Palau del Príncep","ciutat": "Mònaco","autor": "Jorge Franganillo","llicencia": "CC BY 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Palais_Princier_de_Monaco.jpg"},{"nom": "El Parlament de Budapest","ciutat": "Budapest","autor": "Source: User:Godot13 Derivative: User:MathKnight","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Budapest-Parliament-0001.jpg"},{"nom": "El Partenó","ciutat": "Atenes","autor": "Steve Swayne","llicencia": "CC BY 2.0","pagina": "https://commons.wikimedia.org/wiki/File:The_Parthenon_in_Athens.jpg"},{"nom": "El Pont Adolphe","ciutat": "Luxemburg","autor": "Diego Delso","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Puente_Adolfo,_ciudad_de_Luxemburgo,_Luxemburgo,_2023-12-16,_DD_82.jpg"},{"nom": "El Pont de Carles","ciutat": "Praga","autor": "Tadeáš Gregor","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Charles_Bridge_Covid.jpg"},{"nom": "El Pont de Pedra","ciutat": "Skopje","autor": "Prince Roy","llicencia": "CC BY 2.0","pagina": "https://commons.wikimedia.org/wiki/File:Stone_Bridge_so_Arheolo%C5%A1kiot.jpg"},{"nom": "El Pont del Mil·lenni","ciutat": "Podgorica","autor": "Desemeus","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Millenium_Bridge_2023.jpg"},{"nom": "El Pont dels Dracs","ciutat": "Liubliana","autor": "Thomas Ledl","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Dragons_Bridge,_Ljubljana_2.jpg"},{"nom": "El Rijksmuseum","ciutat": "Amsterdam","autor": "Marco Almbauer","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Rijksmuseum_in_Amsterdam.jpg"},{"nom": "El Sebilj","ciutat": "Sarajevo","autor": "xiquinhosilva","llicencia": "CC BY 2.0","pagina": "https://commons.wikimedia.org/wiki/File:Sebilj_in_Sarajevo_(8269348990).jpg"},{"nom": "El Temple de Sant Sava","ciutat": "Belgrad","autor": "kallerna","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Church_of_Saint_Sava_4.jpg"},{"nom": "El Trinity College","ciutat": "Dublín","autor": "Imelda Casey","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:ImeldaCasey_TrinityatNight.jpg"},{"nom": "El port de Nyhavn","ciutat": "Copenhaguen","autor": "kallerna","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Nyhavn_Copenhagen_2.jpg"},{"nom": "L'Arc de Triomf de Chisinau","ciutat": "Chisinau","autor": "Tony Bowden from Tallinn, Estonia","llicencia": "CC BY-SA 2.0","pagina": "https://commons.wikimedia.org/wiki/File:Arc_de_Triomphe,_Chi%C5%9Fin%C4%83u_(4867173990)_(cropped).jpg"},{"nom": "L'Atomium","ciutat": "Brussel·les","autor": "Zairon","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Laeken_Atomium_06.jpg"},{"nom": "L'Òpera d'Oslo","ciutat": "Oslo","autor": "Christian David","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Oslo_Opera_House_(Den_Norske_Opera_%26_Ballett),_Norway.jpg"},{"nom": "La Basílica de Sant Pere","ciutat": "Ciutat del Vaticà","autor": "Alvesgaspar","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg"},{"nom": "La Biblioteca Nacional de Bielorússia","ciutat": "Minsk","autor": "EuroAsia Vizion from New York","llicencia": "CC BY 2.0","pagina": "https://commons.wikimedia.org/wiki/File:5_50_64_2f_-_Belarus_National_Library,_Minsk_2009_(3901618837).jpg"},{"nom": "La Biblioteca Nacional de Kosovo","ciutat": "Pristina","autor": "Arianselmani","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:NationalLibrary.jpg"},{"nom": "La Casa de la Vall","ciutat": "Andorra la Vella","autor": "Diego Delso","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Casa_de_la_Vall,_Andorra_la_Vieja,_Andorra,_2013-12-30,_DD_01.JPG"},{"nom": "La Casa dels Caps Negres","ciutat": "Riga","autor": "Diliff","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:House_of_Blackheads_and_St._Peter%27s_Church_Tower,_Riga,_Latvia_-_Diliff.jpg"},{"nom": "La Catedral Alexandre Nevski","ciutat": "Sofia","autor": "Plamen Agov (user:MrPanyGoff)","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:AlexanderNevskyCathedral-Sofia-6.jpg"},{"nom": "La Catedral Alexandre Nevski de Tallinn","ciutat": "Tallinn","autor": "Georg Mittenecker, perspektivisch entzerrt von User:Ikiwaner","llicencia": "CC BY-SA 2.5","pagina": "https://commons.wikimedia.org/wiki/File:Alexander-Newski-Kathedrale_full_pc.jpg"},{"nom": "La Catedral de Hèlsinki","ciutat": "Hèlsinki","autor": "Hans Hillewaert","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Lutheran_Cathedral_Helsinki.jpg"},{"nom": "La Catedral de Sant Basili","ciutat": "Moscou","autor": "W. Bulach","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:00_0568_Saint_Basil%27s_Cathedral_-_Moscow.jpg"},{"nom": "La Catedral de Santa Sofia","ciutat": "Kíiv","autor": "Rbrechko","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:80-391-0151_Kyiv_St.Sophia%27s_Cathedral_RB_18_2_(cropped).jpg"},{"nom": "La Catedral de Zagreb","ciutat": "Zàgreb","autor": "VitVit","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Z%C3%A1h%C5%99eb,_katedr%C3%A1la_1.jpg"},{"nom": "La Concatedral de Sant Joan","ciutat": "La Valletta","autor": "Diego Delso","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Concatedral_de_San_Juan,_La_Valeta,_isla_de_Malta,_Malta,_2021-08-25,_DD_246-248_HDR.jpg"},{"nom": "La Hallgrímskirkja","ciutat": "Reykjavík","autor": "Steinninn","llicencia": "CC BY 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Hallgrimskirkja_mai_2026.jpg"},{"nom": "La Plaça Skanderbeg","ciutat": "Tirana","autor": "Pudelek","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Tirana_-_Skanderbeg_Square_(Sheshi_Sk%C3%ABnderbej)_-_by_Pudelek.jpg"},{"nom": "La Porta d'Alcalà","ciutat": "Madrid","autor": "Fernando Pascullo","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Puerta_de_Alcal%C3%A1_2025.jpg"},{"nom": "La Porta de Brandenburg","ciutat": "Berlín","autor": "Thomas Wolf, www.foto-tw.de","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Brandenburger_Tor_morgens.jpg"},{"nom": "La Porta de Famagusta","ciutat": "Nicòsia","autor": "A.Savin","llicencia": "FAL","pagina": "https://commons.wikimedia.org/wiki/File:Nicosia_01-2017_img08_Famagusta_Gate.jpg"},{"nom": "La Torre Eiffel","ciutat": "París","autor": "Benh LIEU SONG","llicencia": "Public domain","pagina": "https://commons.wikimedia.org/wiki/File:Tour_Eiffel_Wikimedia_Commons.jpg"},{"nom": "La Torre Guaita","ciutat": "San Marino","autor": "Diego Delso","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Torre_Guaita,_San_Marino,_2022-09-20,_DD_43.jpg"},{"nom": "La Torre de Belém","ciutat": "Lisboa","autor": "Rehman Abubakr","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Belem_Tower_-_April_2019_(2).jpg"},{"nom": "La Torre de Gediminas","ciutat": "Vílnius","autor": "BigHead","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Gedimino_pilis_by_Augustas_Didzgalvis.jpg"},{"nom": "La Zytglogge","ciutat": "Berna","autor": "Mike Lehmann, Mike Switzerland 13:37, 2 July 2006 (UTC)","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Zytglogge_01.jpg"}];
+
+function obreCreditsFotos() {
+  document.getElementById('fotos-llista').innerHTML = CREDITS_FOTOS.map(f =>
+    `<div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.08);">
+       <strong style="color:var(--accent);">${f.nom}</strong>
+       <span style="opacity:0.6;"> · ${f.ciutat}</span><br>
+       <span style="opacity:0.75;">${f.autor || 'autor no indicat'} · ${f.llicencia}</span>
+       <a href="${f.pagina}" target="_blank" rel="noopener" style="color:var(--blue);margin-left:6px;">foto</a>
+     </div>`).join('');
+  document.getElementById('fotos-modal-bg').classList.add('active');
+}
+
+function tancaCreditsFotos() {
+  document.getElementById('fotos-modal-bg').classList.remove('active');
+}
+
+function fotoMonument(data) {
+  const lm = data.landmark;
+  // L'emoji va primer i amagat: si la foto no carrega, l'onerror amaga la
+  // imatge i ensenya l'emoji. Res de cometes escapades dins de l'atribut.
+  return `<div class="landmark-display" style="display:none">${lm.emoji}</div>` +
+    `<img class="landmark-photo" src="${lm.foto}" alt="${lm.nom}"
+      onerror="this.style.display='none';this.previousElementSibling.style.display='block'">`;
+}
+
 function showQuestion() {
   if (G.mode.totalQ && G.currentQ >= G.mode.totalQ) {
     endGame();
@@ -2005,9 +2075,9 @@ function showQuestion() {
     correctAnswer = q.country;
     answerOptions = generateOptions(correctAnswer, 'country');
   } else if (q.qType === 2) {
-    // edifici → pais
-    promptEl.textContent = '🏰 A QUIN PAIS PERTANY?';
-    visualEl.innerHTML = `<div class="landmark-display">${data.landmark}</div><div style="font-size:1rem;color:rgba(255,255,255,0.6);font-weight:700;">${data.capital}</div>`;
+    // monument → pais
+    promptEl.textContent = '🏛️ DE QUIN PAÍS ÉS AQUEST MONUMENT?';
+    visualEl.innerHTML = fotoMonument(data) + `<div class="landmark-nom">${data.landmark.nom}</div>`;
     textEl.textContent = '';
     correctAnswer = q.country;
     answerOptions = generateOptions(correctAnswer, 'country');
@@ -2019,10 +2089,13 @@ function showQuestion() {
     correctAnswer = q.country;
     answerOptions = generateOptions(correctAnswer, 'country');
   } else if (q.qType === 5) {
-    // edifici/landmark → capital
-    promptEl.textContent = '🏛️ A QUINA CAPITAL ESTÀ?';
-    visualEl.innerHTML = `<div class="landmark-display">${data.landmark}</div>`;
-    textEl.textContent = q.country;
+    // monument → capital
+    promptEl.textContent = '🏛️ EN QUINA CIUTAT ÉS AQUEST MONUMENT?';
+    // Aquí no hi va el nom: molts monuments duen la ciutat a dins ("El Castell
+    // de Bratislava") i seria regalar la resposta. A la pregunta de país sí que
+    // hi és, perquè saber que és a Bratislava encara demana saber de quin país.
+    visualEl.innerHTML = fotoMonument(data);
+    textEl.textContent = '';
     correctAnswer = data.capital;
     answerOptions = generateOptions(correctAnswer, 'capital');
   }
