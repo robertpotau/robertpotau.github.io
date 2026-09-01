@@ -1166,7 +1166,7 @@
 <!-- CREDITS MODAL -->
 <div class="modal-bg" id="credits-modal-bg" onclick="closeCreditsIfBg(event)">
   <div class="credits-modal" onclick="event.stopPropagation()">
-    <h3>ℹ️ Crèdits · <span style="font-weight:400;opacity:0.6;font-size:0.85rem;">v3.2 · 01-09-2026</span></h3>
+    <h3>ℹ️ Crèdits · <span style="font-weight:400;opacity:0.6;font-size:0.85rem;">v3.3 · 01-09-2026</span></h3>
     <div class="credits-row">
       <div class="credits-icon">👨‍🏫</div>
       <div class="credits-info">
@@ -1908,7 +1908,10 @@ function startGame() {
     questions: [],
     currentQ: 0,
     temps_respostes: [],
-    questStartTime: 0
+    questStartTime: 0,
+    bossa: null,
+    bossaPool: null,
+    ultimPais: null
   };
 
   // Generate countries pool
@@ -1959,8 +1962,35 @@ function updateLives() {
   document.getElementById('lives-wrap').textContent = hearts;
 }
 
+/* Barreja a l'atzar sense el biaix de sort(() => Math.random() - 0.5), que
+   deixa els primers elements gairebé on eren. */
+function barreja(llista) {
+  const c = llista.slice();
+  for (let i = c.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [c[i], c[j]] = [c[j], c[i]];
+  }
+  return c;
+}
+
+/* Els països surten d'una bossa barrejada, no d'un Math.random() per pregunta.
+   Abans, amb 12 països i 10 preguntes, TOTES les partides repetien (de mitjana
+   3 preguntes de 10). Ara un país no torna a sortir fins que han sortit tots
+   els altres, i en tornar a omplir la bossa s'evita que el primer de la nova
+   sigui el mateix que l'últim de l'anterior. */
+function treuPais(pool) {
+  if (!G.bossa || !G.bossa.length || G.bossaPool !== pool) {
+    const nova = barreja(pool);
+    if (pool.length > 1 && nova[0] === G.ultimPais) nova.push(nova.shift());
+    G.bossa = nova;
+    G.bossaPool = pool;
+  }
+  G.ultimPais = G.bossa.shift();
+  return G.ultimPais;
+}
+
 function generateQuestion() {
-  const country = G.countries[Math.floor(Math.random() * G.countries.length)];
+  const country = treuPais(G.countries);
   const data = COUNTRIES[country];
   let qType;
 
@@ -2119,7 +2149,7 @@ function generateRepteQuestion() {
   // Fase 0: bàsic, fase 4: expert
   const levelByPhase = [LEVELS[0], LEVELS[0], LEVELS[1], LEVELS[2], LEVELS[3]];
   const phaseLevel = levelByPhase[G.fase];
-  const country = phaseLevel.countries[Math.floor(Math.random() * phaseLevel.countries.length)];
+  const country = treuPais(phaseLevel.countries);
   const data = COUNTRIES[country];
   const types = [0, 1, 2, 4];
   const qType = types[Math.floor(Math.random() * types.length)];
@@ -2130,10 +2160,8 @@ function generateOptions(correct, type) {
   const all = type === 'capital'
     ? Object.values(COUNTRIES).map(c => c.capital)
     : Object.keys(COUNTRIES);
-  const wrong = all.filter(o => o !== correct);
-  const shuffled = wrong.sort(() => Math.random() - 0.5).slice(0, 3);
-  const options = [correct, ...shuffled];
-  return options.sort(() => Math.random() - 0.5);
+  const wrong = barreja(all.filter(o => o !== correct)).slice(0, 3);
+  return barreja([correct, ...wrong]);
 }
 
 function answer(selected, correct, btn) {
