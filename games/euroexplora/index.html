@@ -44,7 +44,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
 <style>
   /* ═══════════════════════════════════════════
-     EUROEXPLORA - Joc de Paisos d'Europa
+     EUROEXPLORA - Joc de Països d'Europa
      Inspirat en CalcuHerois amb temàtica geogràfica
   ═══════════════════════════════════════════ */
 
@@ -309,6 +309,74 @@
   .flag-display.small {
     width: 60px; height: 40px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  /* ── SELECTORS DEL PERFIL ── */
+  .pick-wrap {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    margin-bottom: 4px;
+  }
+  .pick-opt {
+    width: 46px; height: 46px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; line-height: 1;
+    background: rgba(255,255,255,0.07);
+    border: 2px solid transparent; border-radius: 12px;
+    cursor: pointer; transition: 0.15s;
+  }
+  .pick-opt:hover { background: rgba(255,255,255,0.14); }
+  .pick-opt.selected { border-color: var(--accent); background: rgba(255,214,10,0.16); }
+  .titol-wrap { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .titol-opt {
+    padding: 7px 12px; font-size: 0.82rem; font-weight: 800;
+    background: rgba(255,255,255,0.07);
+    border: 2px solid transparent; border-radius: 99px;
+    cursor: pointer; transition: 0.15s;
+  }
+  .titol-opt:hover { background: rgba(255,255,255,0.14); }
+  .titol-opt.selected { border-color: var(--teal); background: rgba(20,184,166,0.18); color: var(--teal); }
+  .avatar-preview-wrap .avatar-extra {
+    display: block; font-size: 1.4rem; line-height: 1; margin-top: 6px;
+    letter-spacing: 4px;
+  }
+  .avatar-titol {
+    display: block; margin-top: 2px;
+    font-size: 0.82rem; font-weight: 800; color: var(--teal);
+  }
+
+  /* ── SPLASH ── */
+  .splash-bar-bg {
+    width: 210px; height: 6px; margin: 32px auto 0;
+    background: rgba(255,255,255,0.15); border-radius: 99px; overflow: hidden;
+  }
+  .splash-bar-fill {
+    height: 100%; width: 0%; border-radius: 99px;
+    background: linear-gradient(90deg, var(--accent), var(--teal));
+    animation: splash-load 3.6s 0.2s ease-out forwards;
+  }
+  @keyframes splash-load { to { width: 100%; } }
+  .splash-frase {
+    max-width: 320px; margin: 22px auto 0;
+    font-size: 0.95rem; font-style: italic; line-height: 1.5;
+    color: rgba(255,255,255,0.55);
+    animation: fadeIn 0.8s 0.5s both;
+  }
+
+  /* ── MEMÒRIA VISUAL ── */
+  .memo-tapat {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px;
+    width: 100%; max-width: 340px; aspect-ratio: 4 / 3;
+    margin: 0 auto;
+    border-radius: 14px;
+    border: 3px dashed rgba(255,255,255,0.28);
+    background: rgba(255,255,255,0.05);
+    font-size: 3rem;
+  }
+  .memo-tapat span { font-size: 0.9rem; font-weight: 800; color: rgba(255,255,255,0.55); }
+  .memo-compte {
+    font-size: 0.85rem; font-weight: 800; color: var(--accent);
+    letter-spacing: 1px; margin-bottom: 8px;
   }
 
   /* ── LANDMARK DISPLAY ── */
@@ -883,9 +951,10 @@
   <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;">
     <div class="logo animate-in">
       <h1>🗺️ EuroExplora</h1>
-      <p class="subtitle">Paisos · Capitals · Banderes</p>
+      <p class="subtitle">Països · Capitals · Banderes</p>
     </div>
-    <div style="margin-top:30px;font-size:0.9rem;color:rgba(255,255,255,0.5);font-weight:700;letter-spacing:2px;">CARREGANT...</div>
+    <div class="splash-bar-bg"><div class="splash-bar-fill"></div></div>
+    <div class="splash-frase" id="splash-frase"></div>
   </div>
 </div>
 
@@ -923,7 +992,9 @@
         <div class="gender-btn" data-g="N" onclick="selectGender(this)">Altres 🧑</div>
       </div>
       <div class="avatar-preview-wrap">
-        <span class="avatar-preview" id="avatar-preview-big">👦</span>
+        <span class="avatar-preview" id="avatar-preview-big">🧑</span>
+        <span class="avatar-extra" id="avatar-preview-extra"></span>
+        <span class="avatar-titol" id="avatar-preview-titol"></span>
       </div>
       <span class="picker-label">Color de pell</span>
       <div class="skin-wrap" id="skin-wrap">
@@ -936,12 +1007,23 @@
       </div>
       <span class="picker-label">Estil de cabell</span>
       <div class="hair-wrap" id="hair-wrap">
-        <div class="hair-swatch selected" data-h="default" onclick="selectHair(this)" title="Fosc">🧑‍🦱</div>
+        <div class="hair-swatch selected" data-h="default" onclick="selectHair(this)" title="Fosc">🧑</div>
+        <div class="hair-swatch" data-h="curly" onclick="selectHair(this)" title="Rull">🧑‍🦱</div>
         <div class="hair-swatch" data-h="blonde" onclick="selectHair(this)" title="Ros">👱</div>
-        <div class="hair-swatch" data-h="red" onclick="selectHair(this)" title="Vermell">🧑‍🦰</div>
-        <div class="hair-swatch" data-h="white" onclick="selectHair(this)" title="Blanc/Gris">🧑‍🦳</div>
-        <div class="hair-swatch" data-h="bald" onclick="selectHair(this)" title="Calb">🧑‍🦲</div>
+        <div class="hair-swatch" data-h="red" onclick="selectHair(this)" title="Pèl-roig">🧑‍🦰</div>
+        <div class="hair-swatch" data-h="white" onclick="selectHair(this)" title="Blanc o gris">🧑‍🦳</div>
+        <div class="hair-swatch" data-h="bald" onclick="selectHair(this)" title="Sense cabell">🧑‍🦲</div>
       </div>
+
+      <span class="picker-label">Equipament d'explorador</span>
+      <div class="pick-wrap" id="gear-wrap"></div>
+
+      <span class="picker-label">Company de viatge</span>
+      <div class="pick-wrap" id="pet-wrap"></div>
+
+      <span class="picker-label">Nom d'explorador</span>
+      <div class="titol-wrap" id="titol-wrap"></div>
+
       <button class="btn btn-yellow" style="margin-top:14px;" onclick="createProfile()">Començar aventura! 🚀</button>
     </div>
   </div>
@@ -996,7 +1078,7 @@
      SCREEN: SELECT TYPE (banderes/capitals/edificis)
 ═══════════════════════════════════════════ -->
 <div class="screen" id="screen-select-type">
-  <button class="back-btn" onclick="showScreen('screen-select-mode')">← Enrere</button>
+  <button class="back-btn" onclick="tornaAModes()">← Enrere</button>
   <div style="margin-top:40px;width:100%;max-width:480px;" class="animate-in">
     <div class="logo">
       <h1 style="font-size:1.8rem;">🎯 Tipus de Pregunta</h1>
@@ -1010,11 +1092,11 @@
      SCREEN: SELECT LEVEL
 ═══════════════════════════════════════════ -->
 <div class="screen" id="screen-select-level">
-  <button class="back-btn" onclick="showScreen('screen-select-type')">← Enrere</button>
+  <button class="back-btn" onclick="tornaEnrereDesDeNivell()">← Enrere</button>
   <div style="margin-top:40px;width:100%;max-width:480px;" class="animate-in">
     <div class="logo">
       <h1 style="font-size:1.8rem;">📍 Nivell</h1>
-      <p class="subtitle">Quants paisos vols incloure?</p>
+      <p class="subtitle">Quants països vols incloure?</p>
     </div>
     <div class="level-grid" style="margin-top:14px;" id="levels-grid"></div>
     <button class="btn btn-yellow" id="btn-start-game" onclick="startGame()" disabled style="margin-top:14px;opacity:0.5;">Selecciona un nivell</button>
@@ -1166,7 +1248,7 @@
 <!-- CREDITS MODAL -->
 <div class="modal-bg" id="credits-modal-bg" onclick="closeCreditsIfBg(event)">
   <div class="credits-modal" onclick="event.stopPropagation()">
-    <h3>ℹ️ Crèdits · <span style="font-weight:400;opacity:0.6;font-size:0.85rem;">v3.3 · 01-09-2026</span></h3>
+    <h3>ℹ️ Crèdits · <span style="font-weight:400;opacity:0.6;font-size:0.85rem;">v3.4 · 01-09-2026</span></h3>
     <div class="credits-row">
       <div class="credits-icon">👨‍🏫</div>
       <div class="credits-info">
@@ -1194,7 +1276,7 @@
       <div class="credits-icon">🚩</div>
       <div class="credits-info">
         <strong>flag-icons (Lipis)</strong>
-        <span>Banderes SVG dels paisos<br><a href="https://github.com/lipis/flag-icons" target="_blank" style="color:var(--blue);">github.com/lipis/flag-icons</a> · Llicència MIT</span>
+        <span>Banderes SVG dels països<br><a href="https://github.com/lipis/flag-icons" target="_blank" style="color:var(--blue);">github.com/lipis/flag-icons</a> · Llicència MIT</span>
       </div>
     </div>
     <div class="credits-row">
@@ -1267,7 +1349,7 @@ const COUNTRIES = {
   'Portugal': { capital: 'Lisboa', code: 'pt', landmark: { nom: "La Torre de Belém", ciutat: 'Lisboa', emoji: '🗼', foto: 'assets/landmarks/pt.jpg' }, region: 'Europa Meridional' },
   'Suïssa': { capital: 'Berna', code: 'ch', landmark: { nom: "La Zytglogge", ciutat: 'Berna', emoji: '🕰️', foto: 'assets/landmarks/ch.jpg' }, region: 'Europa Central' },
   'Bèlgica': { capital: 'Brussel·les', code: 'be', landmark: { nom: "L'Atomium", ciutat: 'Brussel·les', emoji: '⚛️', foto: 'assets/landmarks/be.jpg' }, region: 'Europa Occidental' },
-  'Holanda': { capital: 'Ámsterdam', code: 'nl', landmark: { nom: "El Rijksmuseum", ciutat: 'Ámsterdam', emoji: '🖼️', foto: 'assets/landmarks/nl.jpg' }, region: 'Europa Occidental' },
+  'Països Baixos': { capital: 'Amsterdam', code: 'nl', landmark: { nom: "El Rijksmuseum", ciutat: 'Amsterdam', emoji: '🖼️', foto: 'assets/landmarks/nl.jpg' }, region: 'Europa Occidental' },
   'Dinamarca': { capital: 'Copenhaguen', code: 'dk', landmark: { nom: "El port de Nyhavn", ciutat: 'Copenhaguen', emoji: '🏘️', foto: 'assets/landmarks/dk.jpg' }, region: 'Escandinàvia' },
   'Suècia': { capital: 'Estocolm', code: 'se', landmark: { nom: "El Museu Vasa", ciutat: 'Estocolm', emoji: '🚢', foto: 'assets/landmarks/se.jpg' }, region: 'Escandinàvia' },
   'Noruega': { capital: 'Oslo', code: 'no', landmark: { nom: "L'Òpera d'Oslo", ciutat: 'Oslo', emoji: '🎭', foto: 'assets/landmarks/no.jpg' }, region: 'Escandinàvia' },
@@ -1281,18 +1363,18 @@ const COUNTRIES = {
   'Grècia': { capital: 'Atenes', code: 'gr', landmark: { nom: "El Partenó", ciutat: 'Atenes', emoji: '🏛️', foto: 'assets/landmarks/gr.jpg' }, region: 'Europa Meridional' },
   'Sèrbia': { capital: 'Belgrad', code: 'rs', landmark: { nom: "El Temple de Sant Sava", ciutat: 'Belgrad', emoji: '⛪', foto: 'assets/landmarks/rs.jpg' }, region: 'Balcans' },
   'Albània': { capital: 'Tirana', code: 'al', landmark: { nom: "La Plaça Skanderbeg", ciutat: 'Tirana', emoji: '🦅', foto: 'assets/landmarks/al.jpg' }, region: 'Balcans' },
-  'Macedònia': { capital: 'Skopje', code: 'mk', landmark: { nom: "El Pont de Pedra", ciutat: 'Skopje', emoji: '🌉', foto: 'assets/landmarks/mk.jpg' }, region: 'Balcans' },
-  'Bòsnia': { capital: 'Sarajevo', code: 'ba', landmark: { nom: "El Sebilj", ciutat: 'Sarajevo', emoji: '⛲', foto: 'assets/landmarks/ba.jpg' }, region: 'Balcans' },
+  'Macedònia del Nord': { capital: 'Skopje', code: 'mk', landmark: { nom: "El Pont de Pedra", ciutat: 'Skopje', emoji: '🌉', foto: 'assets/landmarks/mk.jpg' }, region: 'Balcans' },
+  'Bòsnia i Hercegovina': { capital: 'Sarajevo', code: 'ba', landmark: { nom: "El Sebilj", ciutat: 'Sarajevo', emoji: '⛲', foto: 'assets/landmarks/ba.jpg' }, region: 'Balcans' },
   'Montenegro': { capital: 'Podgorica', code: 'me', landmark: { nom: "El Pont del Mil·lenni", ciutat: 'Podgorica', emoji: '🌉', foto: 'assets/landmarks/me.jpg' }, region: 'Balcans' },
   'Kosovo': { capital: 'Pristina', code: 'xk', landmark: { nom: "La Biblioteca Nacional de Kosovo", ciutat: 'Pristina', emoji: '📚', foto: 'assets/landmarks/xk.jpg' }, region: 'Balcans' },
   'Lituània': { capital: 'Vílnius', code: 'lt', landmark: { nom: "La Torre de Gediminas", ciutat: 'Vílnius', emoji: '🏰', foto: 'assets/landmarks/lt.jpg' }, region: 'Bàltic' },
   'Letònia': { capital: 'Riga', code: 'lv', landmark: { nom: "La Casa dels Caps Negres", ciutat: 'Riga', emoji: '🏛️', foto: 'assets/landmarks/lv.jpg' }, region: 'Bàltic' },
   'Estònia': { capital: 'Tallinn', code: 'ee', landmark: { nom: "La Catedral Alexandre Nevski de Tallinn", ciutat: 'Tallinn', emoji: '⛪', foto: 'assets/landmarks/ee.jpg' }, region: 'Bàltic' },
   'Eslovàquia': { capital: 'Bratislava', code: 'sk', landmark: { nom: "El Castell de Bratislava", ciutat: 'Bratislava', emoji: '🏰', foto: 'assets/landmarks/sk.jpg' }, region: 'Europa Central' },
-  'Eslovènia': { capital: 'Liubliana', code: 'si', landmark: { nom: "El Pont dels Dracs", ciutat: 'Liubliana', emoji: '🐉', foto: 'assets/landmarks/si.jpg' }, region: 'Balcans' },
+  'Eslovènia': { capital: 'Ljubljana', code: 'si', landmark: { nom: "El Pont dels Dracs", ciutat: 'Ljubljana', emoji: '🐉', foto: 'assets/landmarks/si.jpg' }, region: 'Balcans' },
   'Andorra': { capital: 'Andorra la Vella', code: 'ad', landmark: { nom: "La Casa de la Vall", ciutat: 'Andorra la Vella', emoji: '🏛️', foto: 'assets/landmarks/ad.jpg' }, region: 'Europa Meridional' },
   'Luxemburg': { capital: 'Luxemburg', code: 'lu', landmark: { nom: "El Pont Adolphe", ciutat: 'Luxemburg', emoji: '🌉', foto: 'assets/landmarks/lu.jpg' }, region: 'Europa Occidental' },
-  'Malta': { capital: 'La Valleta', code: 'mt', landmark: { nom: "La Concatedral de Sant Joan", ciutat: 'La Valleta', emoji: '⛪', foto: 'assets/landmarks/mt.jpg' }, region: 'Europa Meridional' },
+  'Malta': { capital: 'La Valletta', code: 'mt', landmark: { nom: "La Concatedral de Sant Joan", ciutat: 'La Valletta', emoji: '⛪', foto: 'assets/landmarks/mt.jpg' }, region: 'Europa Meridional' },
   'Xipre': { capital: 'Nicòsia', code: 'cy', landmark: { nom: "La Porta de Famagusta", ciutat: 'Nicòsia', emoji: '🚪', foto: 'assets/landmarks/cy.jpg' }, region: 'Europa Meridional' },
   'Irlanda': { capital: 'Dublín', code: 'ie', landmark: { nom: "El Trinity College", ciutat: 'Dublín', emoji: '🍀', foto: 'assets/landmarks/ie.jpg' }, region: 'Europa Occidental' },
   'Regne Unit': { capital: 'Londres', code: 'gb', landmark: { nom: "El Big Ben", ciutat: 'Londres', emoji: '🕰️', foto: 'assets/landmarks/gb.jpg' }, region: 'Europa Occidental' },
@@ -1313,31 +1395,55 @@ const LEVELS = [
   {
     id: 0,
     nom: 'Bàsic',
-    desc: 'Paisos més coneguts',
-    countries: ['França','Alemanya','Itàlia','Espanya','Portugal','Regne Unit','Irlanda','Holanda','Bèlgica','Suïssa','Àustria','Grècia']
+    desc: 'Països més coneguts',
+    countries: ['França','Alemanya','Itàlia','Espanya','Portugal','Regne Unit','Irlanda','Països Baixos','Bèlgica','Suïssa','Àustria','Grècia']
   },
   {
     id: 1,
     nom: 'Intermedi',
     desc: '+ Escandinàvia i Centre',
-    countries: ['França','Alemanya','Itàlia','Espanya','Portugal','Regne Unit','Irlanda','Holanda','Bèlgica','Suïssa','Àustria','Grècia',
+    countries: ['França','Alemanya','Itàlia','Espanya','Portugal','Regne Unit','Irlanda','Països Baixos','Bèlgica','Suïssa','Àustria','Grècia',
       'Dinamarca','Suècia','Noruega','Finlàndia','Polònia','República Txeca','Hongria','Eslovàquia','Eslovènia','Croàcia','Islàndia']
   },
   {
     id: 2,
     nom: 'Avançat',
     desc: '+ Balcans i Bàltic',
-    countries: ['França','Alemanya','Itàlia','Espanya','Portugal','Regne Unit','Irlanda','Holanda','Bèlgica','Suïssa','Àustria','Grècia',
+    countries: ['França','Alemanya','Itàlia','Espanya','Portugal','Regne Unit','Irlanda','Països Baixos','Bèlgica','Suïssa','Àustria','Grècia',
       'Dinamarca','Suècia','Noruega','Finlàndia','Polònia','República Txeca','Hongria','Eslovàquia','Eslovènia','Croàcia','Islàndia',
-      'Romania','Bulgària','Sèrbia','Bòsnia','Albània','Macedònia','Montenegro','Kosovo','Lituània','Letònia','Estònia']
+      'Romania','Bulgària','Sèrbia','Bòsnia i Hercegovina','Albània','Macedònia del Nord','Montenegro','Kosovo','Lituània','Letònia','Estònia']
   },
   {
     id: 3,
     nom: 'Expert',
-    desc: 'Tots els paisos d\'Europa',
+    desc: 'Tots els països d\'Europa',
     countries: Object.keys(COUNTRIES)
   }
 ];
+
+// Països que es diuen igual que la seva capital: no se'ls pot preguntar la
+// capital, seria regalar la resposta
+const TRIVIALS = ['Luxemburg', 'Mònaco', 'San Marino'];
+
+// Tipus de pregunta que realment demanen saber-se una capital
+const CAPITAL_QTYPES = [0, 4, 5];
+
+// Es veuen durant el splash. Són dades del joc, no farciment.
+const FRASES_SPLASH = [
+  "Europa té 46 països… i tu te'ls pots aprendre tots.",
+  "La capital més petita d'Europa és la Ciutat del Vaticà.",
+  "Andorra la Vella és la capital més alta d'Europa: 1.023 m.",
+  "Reykjavík és la capital més al nord del món.",
+  "Berna és la capital de Suïssa, no Zuric ni Ginebra.",
+  "Els Països Baixos tenen la seu del govern a la Haia, però la capital és Amsterdam.",
+  "La Valletta, a Malta, és la capital més petita de la Unió Europea.",
+  "Turquia i Rússia són a cavall entre Europa i Àsia.",
+  "Ljubljana vol dir «l'estimada» en eslovè.",
+  "San Marino és la república més antiga que encara existeix."
+];
+
+// Segons que es veu la imatge al mode Memòria Visual
+const MEMO_SEGONS = 3;
 
 // MODES DE JOC (8 modes)
 const MODES = [
@@ -1347,15 +1453,15 @@ const MODES = [
   { id: 3, nom: 'Repte Progressiu', icon: '🚀', color: 'purple', desc: '5 fases creixent, màx 3 errors', xpBase: 20 },
   { id: 4, nom: 'Geo-Velocitat', icon: '⚡', color: 'orange', desc: '20 preguntes ràpides, 5s cada', xpBase: 18, totalQ: 20, perQTime: 5 },
   { id: 5, nom: 'Per Regions', icon: '🗺️', color: 'teal', desc: '10 preguntes d’una regió que triïs', xpBase: 14, totalQ: 10 },
-  { id: 6, nom: 'Memòria Visual', icon: '👁️', color: 'green', desc: 'Visualitza i memoritza', xpBase: 16, totalQ: 10 },
+  { id: 6, nom: 'Memòria Visual', icon: '👁️', color: 'green', desc: 'Mira la imatge 3s, es tapa i respons', xpBase: 16, totalQ: 10 },
   { id: 7, nom: 'Atles Mestre', icon: '🌟', color: 'pink', desc: 'Combina 3 tipus de preguntes', xpBase: 22, totalQ: 15 }
 ];
 
 // TIPUS DE PREGUNTA
 const QUESTION_TYPES = [
   { id: 0, nom: 'Capitals', icon: '🏛️', color: 'purple', desc: 'Quina és la capital?' },
-  { id: 1, nom: 'Banderes', icon: '🚩', color: 'red', desc: 'Identifica el pais per la bandera' },
-  { id: 2, nom: 'Edificis', icon: '🏰', color: 'orange', desc: 'A quin pais pertany?' },
+  { id: 1, nom: 'Banderes', icon: '🚩', color: 'red', desc: 'Identifica el país per la bandera' },
+  { id: 2, nom: 'Edificis', icon: '🏰', color: 'orange', desc: 'A quin país pertany?' },
   { id: 3, nom: 'Mixt', icon: '🎲', color: 'teal', desc: 'Tots els tipus barrejats' }
 ];
 
@@ -1397,7 +1503,7 @@ const TROFEUS = [
   { id: 'tour_europeu', cat: 'capital', icon: '✈️', nom: 'Tour Europeu', desc: 'Encerts a 30+ capitals' },
   { id: 'expert_capitals', cat: 'capital', icon: '🗽', nom: 'Expert de Capitals', desc: '10/10 Capitals nivell Expert' },
   // Misteris i regions
-  { id: 'tot_regions', cat: 'misteri', icon: '🌐', nom: 'Polifacètic', desc: 'Joga totes les regions' },
+  { id: 'tot_regions', cat: 'misteri', icon: '🌐', nom: 'Polifacètic', desc: 'Juga totes les regions' },
   { id: 'memoria_perfecta', cat: 'misteri', icon: '🧠', nom: 'Memòria Perfecta', desc: '10/10 Memòria Visual' },
   { id: 'velocitat_extrema', cat: 'misteri', icon: '💨', nom: 'Velocitat Extrema', desc: 'Geo-Velocitat 18+ correctes' }
 ];
@@ -1405,9 +1511,9 @@ const TROFEUS = [
 // FRASES MOTIVACIONALS
 const FRASES = {
   100: {
-    M: ['Increïble! Perfecte! 🎉', 'Ets una llegenda viva! ⭐', 'Perfecte! Eres un mestre! 🏆'],
-    F: ['Increïble! Perfecte! 🎉', 'Ets una llegenda viva! ⭐', 'Perfecte! Eres una mestra! 🏆'],
-    N: ['Increïble! Perfecte! 🎉', 'Ets una llegenda viva! ⭐', 'Perfecte! Eres expertesa! 🏆']
+    M: ['Increïble! Perfecte! 🎉', 'Ets una llegenda viva! ⭐', 'Perfecte! Ets tot un mestre! 🏆'],
+    F: ['Increïble! Perfecte! 🎉', 'Ets una llegenda viva! ⭐', 'Perfecte! Ets tota una mestra! 🏆'],
+    N: ['Increïble! Perfecte! 🎉', 'Ets una llegenda viva! ⭐', 'Perfecte! Ets tot un expert! 🏆']
   },
   80: {
     M: ['Fantàstic! Bona feina! 👏', 'Ho has fet molt bé! 💪', 'Excel·lent partida! 🌟'],
@@ -1444,7 +1550,7 @@ let player = null;
 let profiles = []; // 5 perfils slots
 let activeProfileIdx = -1;
 let G = {}; // game state
-let profileCreationData = { genere: 'M', skin: 0, hair: 'default' };
+let profileCreationData = { genere: 'M', skin: 0, hair: 'default', gear: 0, pet: 0, titol: 0 };
 let selectedMode = null;
 let selectedType = null;
 let selectedLevel = null;
@@ -1456,6 +1562,8 @@ let selectedRegion = null;
 function init() {
   loadProfiles();
   loadTheme();
+  const frase = document.getElementById('splash-frase');
+  if (frase) frase.textContent = FRASES_SPLASH[Math.floor(Math.random() * FRASES_SPLASH.length)];
   // Splash → Profile select
   setTimeout(() => {
     if (profiles.filter(p => p).length === 0) {
@@ -1464,7 +1572,7 @@ function init() {
       showScreen('screen-profile-select');
       renderProfileSlots();
     }
-  }, 1200);
+  }, 4100);
 }
 
 // ═══════════════════════════════════════════
@@ -1483,6 +1591,14 @@ function showScreen(id) {
   if (id === 'screen-select-mode') renderModes();
   if (id === 'screen-select-type') renderTypes();
   if (id === 'screen-select-level') renderLevels();
+  // Els selectors d'equipament, company i títol es pinten des de JS, i la
+  // pantalla es pot obrir sense passar pel botó de "crear perfil" (primer
+  // arrencada del joc), o sigui que es pinten aquí.
+  if (id === 'screen-profile-create') { pintaSelectorsPerfil(); updateAvatarPreview(); }
+  // El selector de perfils només es dibuixava des d'init(): si hi arribaves
+  // des del botó Enrere de la creació, la llista es quedava amb el contingut
+  // vell (i el primer cop, buida), o sigui que no es podia fer un segon perfil.
+  if (id === 'screen-profile-select') renderProfileSlots();
 }
 
 // ═══════════════════════════════════════════
@@ -1519,7 +1635,10 @@ function migrateProfile(p) {
     genere: p.genere || 'M',
     skin: p.skin !== undefined ? p.skin : 0,
     hair: p.hair || 'default',
-    avatar: p.avatar || '👦',
+    avatar: p.avatar || '🧑',
+    gear: p.gear || 0,
+    pet: p.pet || 0,
+    titol: p.titol || 0,
     xp: p.xp !== undefined ? p.xp : 0,
     rang: p.rang || 'Aprenent',
     partides: p.partides !== undefined ? p.partides : (p.partides_jugades || 0),
@@ -1552,8 +1671,8 @@ function renderProfileSlots() {
       slot.innerHTML = `
         <div class="profile-slot-avatar">${p.avatar}</div>
         <div class="profile-slot-info">
-          <div class="profile-slot-nom">${p.nom}</div>
-          <div class="profile-slot-rang">${RANGS.find(r=>r.nom===p.rang)?.icon||'🧭'} ${p.rang} · ${p.xp} XP</div>
+          <div class="profile-slot-nom">${p.nom} <span style="font-size:0.85rem;">${EQUIPAMENT[p.gear]||''}${COMPANYS[p.pet]||''}</span></div>
+          <div class="profile-slot-rang">${RANGS.find(r=>r.nom===p.rang)?.icon||'🧭'} ${p.rang} · ${TITOLS[p.titol]||''} · ${p.xp} XP</div>
           <div class="profile-slot-stats">${p.partides} partides · ${p.encerts} encerts</div>
         </div>
         <button class="profile-slot-delete" onclick="event.stopPropagation();deleteProfile(${i})" title="Eliminar perfil">🗑️</button>
@@ -1574,7 +1693,13 @@ function renderProfileSlots() {
 
 function createNewProfile(idx) {
   activeProfileIdx = idx;
-  profileCreationData = { genere: 'M', skin: 0, hair: 'default' };
+  profileCreationData = {
+    genere: 'M', skin: 0, hair: 'default',
+    gear: Math.floor(Math.random() * EQUIPAMENT.length),
+    pet: Math.floor(Math.random() * COMPANYS.length),
+    titol: Math.floor(Math.random() * TITOLS.length)
+  };
+  pintaSelectorsPerfil();
   // Reset selectors
   document.querySelectorAll('.gender-btn').forEach((b,i)=>b.classList.toggle('selected',i===0));
   document.querySelectorAll('.skin-swatch').forEach((b,i)=>b.classList.toggle('selected',i===0));
@@ -1637,45 +1762,83 @@ function selectHair(el) {
   updateAvatarPreview();
 }
 
+/* Avatar: base per gènere + to de pell + cabell per ZWJ, igual que a
+   CalcuHerois. Les bases han de ser adultes (👨/👩/🧑) perquè les seqüències
+   ZWJ de cabell no funcionen amb 👦/👧: amb el nen sortia el modificador solt.
+   El to de pell va SEMPRE entre la base i el modificador, mai al final. */
+const TONS_PELL = ['', '🏻', '🏼', '🏽', '🏾', '🏿'];
+const BASE_GENERE = { M: '👨', F: '👩', N: '🧑' };
+const CABELL_ZWJ = {
+  'default': '',
+  'curly':   '‍🦱',
+  'red':     '‍🦰',
+  'white':   '‍🦳',
+  'bald':    '‍🦲'
+};
+
+/* Els emojis del selector de cabell canvien amb el gènere triat, perquè si no
+   sempre ensenyaven una persona neutra i no s'entenia què s'estava triant. */
+const ICONES_CABELL = {
+  M: { default:'👨', curly:'👨‍🦱', blonde:'👱‍♂️', red:'👨‍🦰', white:'👨‍🦳', bald:'👨‍🦲' },
+  F: { default:'👩', curly:'👩‍🦱', blonde:'👱‍♀️', red:'👩‍🦰', white:'👩‍🦳', bald:'👩‍🦲' },
+  N: { default:'🧑', curly:'🧑‍🦱', blonde:'👱',    red:'🧑‍🦰', white:'🧑‍🦳', bald:'🧑‍🦲' }
+};
+
+const EQUIPAMENT = ['🎒', '🧭', '🔭', '📷', '🗺️', '⛺', '🥾', '🧢'];
+const COMPANYS   = ['🐕', '🐈', '🦜', '🐢', '🦉', '🦊', '🐧', '🐿️'];
+const TITOLS = ['Brúixola viva', "Passaport d'or", 'Ulls de mapa', 'Peus lleugers',
+                'Cap de ruta', 'Ànima nòmada', 'Vent del nord', 'Full de ruta'];
+
 function buildAvatar(genere, skin, hair) {
-  const skinTones = ['', '🏻', '🏼', '🏽', '🏾', '🏿'];
-  const tone = skinTones[skin] || '';
-
-  // Hair-based avatar selection
-  // NOTE: For ZWJ sequences (gendered/hair emojis), skin tone MUST go AFTER base emoji, BEFORE gender modifier
-  if (hair === 'bald') {
-    // 🧑‍🦲 → 🧑{tone}‍🦲
-    return '🧑' + tone + '‍🦲';
-  }
-
-  if (hair === 'white') {
-    if (genere === 'M') return '🧓' + tone;
-    if (genere === 'F') return '👵' + tone;
-    // 🧑‍🦳 → 🧑{tone}‍🦳
-    return '🧑' + tone + '‍🦳';
-  }
-
-  if (hair === 'red') {
-    // 🧑‍🦰 → 🧑{tone}‍🦰
-    return '🧑' + tone + '‍🦰';
-  }
-
+  const to = TONS_PELL[skin] || '';
   if (hair === 'blonde') {
-    // 👱‍♂️ → 👱{tone}‍♂️, 👱‍♀️ → 👱{tone}‍♀️
-    if (genere === 'M') return '👱' + tone + '‍♂️';
-    if (genere === 'F') return '👱' + tone + '‍♀️';
-    return '👱' + tone;
+    if (genere === 'M') return '👱' + to + '‍♂️';
+    if (genere === 'F') return '👱' + to + '‍♀️';
+    return '👱' + to;
   }
+  const base = BASE_GENERE[genere] || BASE_GENERE.N;
+  return base + to + (CABELL_ZWJ[hair] || '');
+}
 
-  // default (dark hair)
-  if (genere === 'M') return '👦' + tone;
-  if (genere === 'F') return '👧' + tone;
-  return '🧑' + tone;
+function pintaIconesCabell(genere) {
+  const icones = ICONES_CABELL[genere] || ICONES_CABELL.N;
+  document.querySelectorAll('#hair-wrap .hair-swatch').forEach(b => {
+    b.textContent = icones[b.dataset.h] || icones.default;
+  });
+}
+
+/* Els tres selectors nous es pinten des de JS: són llistes, i tenir-les al
+   HTML voldria dir repetir el mateix bloc cada cop que se n'hi afegeix un. */
+function pintaSelectorsPerfil() {
+  const cau = (id, valors, camp, classe) => {
+    const wrap = document.getElementById(id);
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    valors.forEach((v, i) => {
+      const el = document.createElement('div');
+      el.className = classe + (profileCreationData[camp] === i ? ' selected' : '');
+      el.textContent = v;
+      el.onclick = () => {
+        profileCreationData[camp] = i;
+        wrap.querySelectorAll('.' + classe).forEach(x => x.classList.remove('selected'));
+        el.classList.add('selected');
+        updateAvatarPreview();
+      };
+      wrap.appendChild(el);
+    });
+  };
+  cau('gear-wrap', EQUIPAMENT, 'gear', 'pick-opt');
+  cau('pet-wrap', COMPANYS, 'pet', 'pick-opt');
+  cau('titol-wrap', TITOLS, 'titol', 'titol-opt');
 }
 
 function updateAvatarPreview() {
-  const av = buildAvatar(profileCreationData.genere, profileCreationData.skin, profileCreationData.hair);
-  document.getElementById('avatar-preview-big').textContent = av;
+  const d = profileCreationData;
+  document.getElementById('avatar-preview-big').textContent = buildAvatar(d.genere, d.skin, d.hair);
+  document.getElementById('avatar-preview-extra').textContent =
+    EQUIPAMENT[d.gear] + ' ' + COMPANYS[d.pet];
+  document.getElementById('avatar-preview-titol').textContent = TITOLS[d.titol];
+  pintaIconesCabell(d.genere);
 }
 
 function createProfile() {
@@ -1687,6 +1850,9 @@ function createProfile() {
     genere: profileCreationData.genere,
     skin: profileCreationData.skin,
     hair: profileCreationData.hair,
+    gear: profileCreationData.gear,
+    pet: profileCreationData.pet,
+    titol: profileCreationData.titol,
     avatar: buildAvatar(profileCreationData.genere, profileCreationData.skin, profileCreationData.hair),
     xp: 0,
     rang: 'Aprenent',
@@ -1720,9 +1886,11 @@ function createProfile() {
 function renderMenu() {
   if (!player) return;
   document.getElementById('menu-avatar').textContent = player.avatar;
-  document.getElementById('menu-nom').textContent = player.nom;
+  document.getElementById('menu-nom').textContent =
+    `${player.nom} ${EQUIPAMENT[player.gear] || ''}${COMPANYS[player.pet] || ''}`;
   const rang = RANGS.find(r => r.nom === player.rang) || RANGS[0];
-  document.getElementById('menu-rang').textContent = `${rang.icon} ${rang.nom} · ${player.xp} XP`;
+  document.getElementById('menu-rang').textContent =
+    `${rang.icon} ${rang.nom} · ${TITOLS[player.titol] || ''} · ${player.xp} XP`;
   // XP bar
   const idxRang = RANGS.indexOf(rang);
   const nextRang = RANGS[idxRang + 1];
@@ -1797,6 +1965,13 @@ function selectMode(id) {
     showScreen('screen-select-level');
     return;
   }
+  if (selectedMode.id === 6) {
+    // Memòria Visual: només té sentit amb preguntes que ensenyin una imatge,
+    // perquè la gràcia és que desaparegui. Amb "Capitals" no hi ha res a tapar.
+    selectedType = QUESTION_TYPES[3];
+    showScreen('screen-select-level');
+    return;
+  }
   showScreen('screen-select-type');
 }
 
@@ -1815,11 +1990,12 @@ function selectRegion() {
       selectedLevel = LEVELS[1];
       startGame();
     };
-    const sample = Object.entries(COUNTRIES).filter(([k,v])=>v.region===r).slice(0,3).map(([k,v])=>v.landmark.emoji).join(' ');
+    const dins = Object.entries(COUNTRIES).filter(([k,v])=>v.region===r);
+    const sample = dins.slice(0,3).map(([k,v])=>v.landmark.emoji).join(' ');
     card.innerHTML = `
       <div class="icon">🗺️</div>
       <div class="nom">${r}</div>
-      <div class="desc">${sample}</div>
+      <div class="desc">${sample}<br>${dins.length} països</div>
     `;
     grid.appendChild(card);
   });
@@ -1865,12 +2041,12 @@ function renderLevels() {
       const startBtn = document.getElementById('btn-start-game');
       startBtn.disabled = false;
       startBtn.style.opacity = '1';
-      startBtn.textContent = `🚀 Començar (${l.countries.length} paisos)`;
+      startBtn.textContent = `🚀 Començar (${l.countries.length} països)`;
     };
     btn.innerHTML = `
       <div class="nivel-num">NIVELL ${l.id + 1}</div>
       <div class="nivel-nom">${l.nom}</div>
-      <div class="nivel-desc">${l.desc}<br>(${l.countries.length} paisos)</div>
+      <div class="nivel-desc">${l.desc}<br>(${l.countries.length} països)</div>
     `;
     grid.appendChild(btn);
   });
@@ -1924,11 +2100,21 @@ function startGame() {
   } else {
     pool = [...selectedLevel.countries];
   }
+  if (selectedType.id === 0 && pool.length > TRIVIALS.length + 3) {
+    pool = pool.filter(c => !TRIVIALS.includes(c));
+  }
   G.countries = pool;
 
+  // Per Regions: el Bàltic només té tres països, i fer-ne 10 preguntes volia
+  // dir repetir-los tres cops cadascun. La partida s'ajusta a la regió, com a
+  // molt dues preguntes per país. Es copia el mode per no tocar la constant.
+  if (selectedMode.id === 5) {
+    G.mode = Object.assign({}, selectedMode, { totalQ: Math.min(10, pool.length * 2) });
+  }
+
   // Generate questions
-  if (selectedMode.totalQ) {
-    for (let i = 0; i < selectedMode.totalQ; i++) {
+  if (G.mode.totalQ) {
+    for (let i = 0; i < G.mode.totalQ; i++) {
       G.questions.push(generateQuestion());
     }
   }
@@ -1994,19 +2180,26 @@ function generateQuestion() {
   const data = COUNTRIES[country];
   let qType;
 
-  if (G.type.id === 3) {
+  if (G.mode.id === 6) {
+    // Memòria Visual: bandera o monument, les dues úniques amb imatge
+    qType = [1, 2][Math.floor(Math.random() * 2)];
+  } else if (G.type.id === 3) {
     // mixt
     qType = Math.floor(Math.random() * 3); // 0,1,2 (no 3)
-    // S'inclou també type 4 (capital→pais) i 5 (edifici→capital)
-    qType = [0, 1, 2, 4, 5][Math.floor(Math.random() * 5)];
+    // S'inclou també type 4 (capital→país) i 5 (edifici→capital)
+    // Luxemburg, Mònaco i San Marino es diuen igual que la seva capital, o
+    // sigui que les preguntes 0 (país→capital) i 4 (capital→país) hi són
+    // regalades: se'ls pregunta la bandera o el monument.
+    const tipus = TRIVIALS.includes(country) ? [1, 2, 5] : [0, 1, 2, 4, 5];
+    qType = tipus[Math.floor(Math.random() * tipus.length)];
   } else if (G.type.id === 0) {
-    // Capitals: pais→capital
+    // Capitals: país→capital
     qType = 0;
   } else if (G.type.id === 1) {
-    // Banderes: bandera→pais
+    // Banderes: bandera→país
     qType = 1;
   } else if (G.type.id === 2) {
-    // Edificis: edifici→pais
+    // Edificis: edifici→país
     qType = 2;
   }
 
@@ -2019,7 +2212,7 @@ function generateQuestion() {
 /* Autoria de cada foto. La CC BY-SA demana citar l'autor allà on es fa servir
    l'obra, i el joc no té cap altra pàgina on posar-ho. Es genera amb
    tools/baixa_fotos.py: si canvies una foto, torna a passar l'script. */
-const CREDITS_FOTOS = [{"nom": "El Big Ben","ciutat": "Londres","autor": "Christian David","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Elizabeth_Tower_and_the_north_front_of_the_Palace_of_Westminster,_London.jpg"},{"nom": "El Castell de Bratislava","ciutat": "Bratislava","autor": "C.Stadler/Bwag","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Bratislava_-_Burg_(a).JPG"},{"nom": "El Castell de Vaduz","ciutat": "Vaduz","autor": "A.Savin","llicencia": "FAL","pagina": "https://commons.wikimedia.org/wiki/File:Liechtenstein_asv2022-10_img22_Vaduz_Schloss.jpg"},{"nom": "El Colosseu","ciutat": "Roma","autor": "FeaturedPics","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Colosseo_2020.jpg"},{"nom": "El Museu Vasa","ciutat": "Estocolm","autor": "Hanay","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Vasa_Museum_building_view_from_the_sea_(3).jpg"},{"nom": "El Palau de Schönbrunn","ciutat": "Viena","autor": "Thomas Wolf, www.foto-tw.de","llicencia": "CC BY-SA 3.0 de","pagina": "https://commons.wikimedia.org/wiki/File:Schloss_Sch%C3%B6nbrunn_Wien_2014_(Zuschnitt_2).jpg"},{"nom": "El Palau de la Cultura i la Ciència","ciutat": "Varsòvia","autor": "Adrian Grycuk","llicencia": "CC BY-SA 3.0 pl","pagina": "https://commons.wikimedia.org/wiki/File:Pa%C5%82ac_Kultury_i_Nauki_2019.jpg"},{"nom": "El Palau del Parlament","ciutat": "Bucarest","autor": "Sludge G","llicencia": "CC BY-SA 2.0","pagina": "https://commons.wikimedia.org/wiki/File:Bucure%C5%9Fti_._Palatul_parlamentului_from_Bulevardul_unirii._June_1996_(3402687988).jpg"},{"nom": "El Palau del Príncep","ciutat": "Mònaco","autor": "Jorge Franganillo","llicencia": "CC BY 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Palais_Princier_de_Monaco.jpg"},{"nom": "El Parlament de Budapest","ciutat": "Budapest","autor": "Source: User:Godot13 Derivative: User:MathKnight","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Budapest-Parliament-0001.jpg"},{"nom": "El Partenó","ciutat": "Atenes","autor": "Steve Swayne","llicencia": "CC BY 2.0","pagina": "https://commons.wikimedia.org/wiki/File:The_Parthenon_in_Athens.jpg"},{"nom": "El Pont Adolphe","ciutat": "Luxemburg","autor": "Diego Delso","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Puente_Adolfo,_ciudad_de_Luxemburgo,_Luxemburgo,_2023-12-16,_DD_82.jpg"},{"nom": "El Pont de Carles","ciutat": "Praga","autor": "Tadeáš Gregor","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Charles_Bridge_Covid.jpg"},{"nom": "El Pont de Pedra","ciutat": "Skopje","autor": "Prince Roy","llicencia": "CC BY 2.0","pagina": "https://commons.wikimedia.org/wiki/File:Stone_Bridge_so_Arheolo%C5%A1kiot.jpg"},{"nom": "El Pont del Mil·lenni","ciutat": "Podgorica","autor": "Desemeus","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Millenium_Bridge_2023.jpg"},{"nom": "El Pont dels Dracs","ciutat": "Liubliana","autor": "Thomas Ledl","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Dragons_Bridge,_Ljubljana_2.jpg"},{"nom": "El Rijksmuseum","ciutat": "Amsterdam","autor": "Marco Almbauer","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Rijksmuseum_in_Amsterdam.jpg"},{"nom": "El Sebilj","ciutat": "Sarajevo","autor": "xiquinhosilva","llicencia": "CC BY 2.0","pagina": "https://commons.wikimedia.org/wiki/File:Sebilj_in_Sarajevo_(8269348990).jpg"},{"nom": "El Temple de Sant Sava","ciutat": "Belgrad","autor": "kallerna","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Church_of_Saint_Sava_4.jpg"},{"nom": "El Trinity College","ciutat": "Dublín","autor": "Imelda Casey","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:ImeldaCasey_TrinityatNight.jpg"},{"nom": "El port de Nyhavn","ciutat": "Copenhaguen","autor": "kallerna","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Nyhavn_Copenhagen_2.jpg"},{"nom": "L'Arc de Triomf de Chisinau","ciutat": "Chisinau","autor": "Tony Bowden from Tallinn, Estonia","llicencia": "CC BY-SA 2.0","pagina": "https://commons.wikimedia.org/wiki/File:Arc_de_Triomphe,_Chi%C5%9Fin%C4%83u_(4867173990)_(cropped).jpg"},{"nom": "L'Atomium","ciutat": "Brussel·les","autor": "Zairon","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Laeken_Atomium_06.jpg"},{"nom": "L'Òpera d'Oslo","ciutat": "Oslo","autor": "Christian David","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Oslo_Opera_House_(Den_Norske_Opera_%26_Ballett),_Norway.jpg"},{"nom": "La Basílica de Sant Pere","ciutat": "Ciutat del Vaticà","autor": "Alvesgaspar","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg"},{"nom": "La Biblioteca Nacional de Bielorússia","ciutat": "Minsk","autor": "EuroAsia Vizion from New York","llicencia": "CC BY 2.0","pagina": "https://commons.wikimedia.org/wiki/File:5_50_64_2f_-_Belarus_National_Library,_Minsk_2009_(3901618837).jpg"},{"nom": "La Biblioteca Nacional de Kosovo","ciutat": "Pristina","autor": "Arianselmani","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:NationalLibrary.jpg"},{"nom": "La Casa de la Vall","ciutat": "Andorra la Vella","autor": "Diego Delso","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Casa_de_la_Vall,_Andorra_la_Vieja,_Andorra,_2013-12-30,_DD_01.JPG"},{"nom": "La Casa dels Caps Negres","ciutat": "Riga","autor": "Diliff","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:House_of_Blackheads_and_St._Peter%27s_Church_Tower,_Riga,_Latvia_-_Diliff.jpg"},{"nom": "La Catedral Alexandre Nevski","ciutat": "Sofia","autor": "Plamen Agov (user:MrPanyGoff)","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:AlexanderNevskyCathedral-Sofia-6.jpg"},{"nom": "La Catedral Alexandre Nevski de Tallinn","ciutat": "Tallinn","autor": "Georg Mittenecker, perspektivisch entzerrt von User:Ikiwaner","llicencia": "CC BY-SA 2.5","pagina": "https://commons.wikimedia.org/wiki/File:Alexander-Newski-Kathedrale_full_pc.jpg"},{"nom": "La Catedral de Hèlsinki","ciutat": "Hèlsinki","autor": "Hans Hillewaert","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Lutheran_Cathedral_Helsinki.jpg"},{"nom": "La Catedral de Sant Basili","ciutat": "Moscou","autor": "W. Bulach","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:00_0568_Saint_Basil%27s_Cathedral_-_Moscow.jpg"},{"nom": "La Catedral de Santa Sofia","ciutat": "Kíiv","autor": "Rbrechko","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:80-391-0151_Kyiv_St.Sophia%27s_Cathedral_RB_18_2_(cropped).jpg"},{"nom": "La Catedral de Zagreb","ciutat": "Zàgreb","autor": "VitVit","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Z%C3%A1h%C5%99eb,_katedr%C3%A1la_1.jpg"},{"nom": "La Concatedral de Sant Joan","ciutat": "La Valletta","autor": "Diego Delso","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Concatedral_de_San_Juan,_La_Valeta,_isla_de_Malta,_Malta,_2021-08-25,_DD_246-248_HDR.jpg"},{"nom": "La Hallgrímskirkja","ciutat": "Reykjavík","autor": "Steinninn","llicencia": "CC BY 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Hallgrimskirkja_mai_2026.jpg"},{"nom": "La Plaça Skanderbeg","ciutat": "Tirana","autor": "Pudelek","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Tirana_-_Skanderbeg_Square_(Sheshi_Sk%C3%ABnderbej)_-_by_Pudelek.jpg"},{"nom": "La Porta d'Alcalà","ciutat": "Madrid","autor": "Fernando Pascullo","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Puerta_de_Alcal%C3%A1_2025.jpg"},{"nom": "La Porta de Brandenburg","ciutat": "Berlín","autor": "Thomas Wolf, www.foto-tw.de","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Brandenburger_Tor_morgens.jpg"},{"nom": "La Porta de Famagusta","ciutat": "Nicòsia","autor": "A.Savin","llicencia": "FAL","pagina": "https://commons.wikimedia.org/wiki/File:Nicosia_01-2017_img08_Famagusta_Gate.jpg"},{"nom": "La Torre Eiffel","ciutat": "París","autor": "Benh LIEU SONG","llicencia": "Public domain","pagina": "https://commons.wikimedia.org/wiki/File:Tour_Eiffel_Wikimedia_Commons.jpg"},{"nom": "La Torre Guaita","ciutat": "San Marino","autor": "Diego Delso","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Torre_Guaita,_San_Marino,_2022-09-20,_DD_43.jpg"},{"nom": "La Torre de Belém","ciutat": "Lisboa","autor": "Rehman Abubakr","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Belem_Tower_-_April_2019_(2).jpg"},{"nom": "La Torre de Gediminas","ciutat": "Vílnius","autor": "BigHead","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Gedimino_pilis_by_Augustas_Didzgalvis.jpg"},{"nom": "La Zytglogge","ciutat": "Berna","autor": "Mike Lehmann, Mike Switzerland 13:37, 2 July 2006 (UTC)","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Zytglogge_01.jpg"}];
+const CREDITS_FOTOS = [{"nom": "El Big Ben","ciutat": "Londres","autor": "Christian David","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Elizabeth_Tower_and_the_north_front_of_the_Palace_of_Westminster,_London.jpg"},{"nom": "El Castell de Bratislava","ciutat": "Bratislava","autor": "C.Stadler/Bwag","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Bratislava_-_Burg_(a).JPG"},{"nom": "El Castell de Vaduz","ciutat": "Vaduz","autor": "A.Savin","llicencia": "FAL","pagina": "https://commons.wikimedia.org/wiki/File:Liechtenstein_asv2022-10_img22_Vaduz_Schloss.jpg"},{"nom": "El Colosseu","ciutat": "Roma","autor": "FeaturedPics","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Colosseo_2020.jpg"},{"nom": "El Museu Vasa","ciutat": "Estocolm","autor": "Hanay","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Vasa_Museum_building_view_from_the_sea_(3).jpg"},{"nom": "El Palau de Schönbrunn","ciutat": "Viena","autor": "Thomas Wolf, www.foto-tw.de","llicencia": "CC BY-SA 3.0 de","pagina": "https://commons.wikimedia.org/wiki/File:Schloss_Sch%C3%B6nbrunn_Wien_2014_(Zuschnitt_2).jpg"},{"nom": "El Palau de la Cultura i la Ciència","ciutat": "Varsòvia","autor": "Adrian Grycuk","llicencia": "CC BY-SA 3.0 pl","pagina": "https://commons.wikimedia.org/wiki/File:Pa%C5%82ac_Kultury_i_Nauki_2019.jpg"},{"nom": "El Palau del Parlament","ciutat": "Bucarest","autor": "Sludge G","llicencia": "CC BY-SA 2.0","pagina": "https://commons.wikimedia.org/wiki/File:Bucure%C5%9Fti_._Palatul_parlamentului_from_Bulevardul_unirii._June_1996_(3402687988).jpg"},{"nom": "El Palau del Príncep","ciutat": "Mònaco","autor": "Jorge Franganillo","llicencia": "CC BY 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Palais_Princier_de_Monaco.jpg"},{"nom": "El Parlament de Budapest","ciutat": "Budapest","autor": "Source: User:Godot13 Derivative: User:MathKnight","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Budapest-Parliament-0001.jpg"},{"nom": "El Partenó","ciutat": "Atenes","autor": "Steve Swayne","llicencia": "CC BY 2.0","pagina": "https://commons.wikimedia.org/wiki/File:The_Parthenon_in_Athens.jpg"},{"nom": "El Pont Adolphe","ciutat": "Luxemburg","autor": "Diego Delso","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Puente_Adolfo,_ciudad_de_Luxemburgo,_Luxemburgo,_2023-12-16,_DD_82.jpg"},{"nom": "El Pont de Carles","ciutat": "Praga","autor": "Tadeáš Gregor","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Charles_Bridge_Covid.jpg"},{"nom": "El Pont de Pedra","ciutat": "Skopje","autor": "Prince Roy","llicencia": "CC BY 2.0","pagina": "https://commons.wikimedia.org/wiki/File:Stone_Bridge_so_Arheolo%C5%A1kiot.jpg"},{"nom": "El Pont del Mil·lenni","ciutat": "Podgorica","autor": "Desemeus","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Millenium_Bridge_2023.jpg"},{"nom": "El Pont dels Dracs","ciutat": "Ljubljana","autor": "Thomas Ledl","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Dragons_Bridge,_Ljubljana_2.jpg"},{"nom": "El Rijksmuseum","ciutat": "Amsterdam","autor": "Marco Almbauer","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Rijksmuseum_in_Amsterdam.jpg"},{"nom": "El Sebilj","ciutat": "Sarajevo","autor": "xiquinhosilva","llicencia": "CC BY 2.0","pagina": "https://commons.wikimedia.org/wiki/File:Sebilj_in_Sarajevo_(8269348990).jpg"},{"nom": "El Temple de Sant Sava","ciutat": "Belgrad","autor": "kallerna","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Church_of_Saint_Sava_4.jpg"},{"nom": "El Trinity College","ciutat": "Dublín","autor": "Imelda Casey","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:ImeldaCasey_TrinityatNight.jpg"},{"nom": "El port de Nyhavn","ciutat": "Copenhaguen","autor": "kallerna","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Nyhavn_Copenhagen_2.jpg"},{"nom": "L'Arc de Triomf de Chisinau","ciutat": "Chișinău","autor": "Tony Bowden from Tallinn, Estonia","llicencia": "CC BY-SA 2.0","pagina": "https://commons.wikimedia.org/wiki/File:Arc_de_Triomphe,_Chi%C5%9Fin%C4%83u_(4867173990)_(cropped).jpg"},{"nom": "L'Atomium","ciutat": "Brussel·les","autor": "Zairon","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Laeken_Atomium_06.jpg"},{"nom": "L'Òpera d'Oslo","ciutat": "Oslo","autor": "Christian David","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Oslo_Opera_House_(Den_Norske_Opera_%26_Ballett),_Norway.jpg"},{"nom": "La Basílica de Sant Pere","ciutat": "Ciutat del Vaticà","autor": "Alvesgaspar","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg"},{"nom": "La Biblioteca Nacional de Bielorússia","ciutat": "Minsk","autor": "EuroAsia Vizion from New York","llicencia": "CC BY 2.0","pagina": "https://commons.wikimedia.org/wiki/File:5_50_64_2f_-_Belarus_National_Library,_Minsk_2009_(3901618837).jpg"},{"nom": "La Biblioteca Nacional de Kosovo","ciutat": "Pristina","autor": "Arianselmani","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:NationalLibrary.jpg"},{"nom": "La Casa de la Vall","ciutat": "Andorra la Vella","autor": "Diego Delso","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Casa_de_la_Vall,_Andorra_la_Vieja,_Andorra,_2013-12-30,_DD_01.JPG"},{"nom": "La Casa dels Caps Negres","ciutat": "Riga","autor": "Diliff","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:House_of_Blackheads_and_St._Peter%27s_Church_Tower,_Riga,_Latvia_-_Diliff.jpg"},{"nom": "La Catedral Alexandre Nevski","ciutat": "Sofia","autor": "Plamen Agov (user:MrPanyGoff)","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:AlexanderNevskyCathedral-Sofia-6.jpg"},{"nom": "La Catedral Alexandre Nevski de Tallinn","ciutat": "Tallinn","autor": "Georg Mittenecker, perspektivisch entzerrt von User:Ikiwaner","llicencia": "CC BY-SA 2.5","pagina": "https://commons.wikimedia.org/wiki/File:Alexander-Newski-Kathedrale_full_pc.jpg"},{"nom": "La Catedral de Hèlsinki","ciutat": "Hèlsinki","autor": "Hans Hillewaert","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Lutheran_Cathedral_Helsinki.jpg"},{"nom": "La Catedral de Sant Basili","ciutat": "Moscou","autor": "W. Bulach","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:00_0568_Saint_Basil%27s_Cathedral_-_Moscow.jpg"},{"nom": "La Catedral de Santa Sofia","ciutat": "Kíev","autor": "Rbrechko","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:80-391-0151_Kyiv_St.Sophia%27s_Cathedral_RB_18_2_(cropped).jpg"},{"nom": "La Catedral de Zagreb","ciutat": "Zàgreb","autor": "VitVit","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Z%C3%A1h%C5%99eb,_katedr%C3%A1la_1.jpg"},{"nom": "La Concatedral de Sant Joan","ciutat": "La Valletta","autor": "Diego Delso","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Concatedral_de_San_Juan,_La_Valeta,_isla_de_Malta,_Malta,_2021-08-25,_DD_246-248_HDR.jpg"},{"nom": "La Hallgrímskirkja","ciutat": "Reykjavík","autor": "Steinninn","llicencia": "CC BY 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Hallgrimskirkja_mai_2026.jpg"},{"nom": "La Plaça Skanderbeg","ciutat": "Tirana","autor": "Pudelek","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Tirana_-_Skanderbeg_Square_(Sheshi_Sk%C3%ABnderbej)_-_by_Pudelek.jpg"},{"nom": "La Porta d'Alcalà","ciutat": "Madrid","autor": "Fernando Pascullo","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Puerta_de_Alcal%C3%A1_2025.jpg"},{"nom": "La Porta de Brandenburg","ciutat": "Berlín","autor": "Thomas Wolf, www.foto-tw.de","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Brandenburger_Tor_morgens.jpg"},{"nom": "La Porta de Famagusta","ciutat": "Nicòsia","autor": "A.Savin","llicencia": "FAL","pagina": "https://commons.wikimedia.org/wiki/File:Nicosia_01-2017_img08_Famagusta_Gate.jpg"},{"nom": "La Torre Eiffel","ciutat": "París","autor": "Benh LIEU SONG","llicencia": "Public domain","pagina": "https://commons.wikimedia.org/wiki/File:Tour_Eiffel_Wikimedia_Commons.jpg"},{"nom": "La Torre Guaita","ciutat": "San Marino","autor": "Diego Delso","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Torre_Guaita,_San_Marino,_2022-09-20,_DD_43.jpg"},{"nom": "La Torre de Belém","ciutat": "Lisboa","autor": "Rehman Abubakr","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Belem_Tower_-_April_2019_(2).jpg"},{"nom": "La Torre de Gediminas","ciutat": "Vílnius","autor": "BigHead","llicencia": "CC BY-SA 4.0","pagina": "https://commons.wikimedia.org/wiki/File:Gedimino_pilis_by_Augustas_Didzgalvis.jpg"},{"nom": "La Zytglogge","ciutat": "Berna","autor": "Mike Lehmann, Mike Switzerland 13:37, 2 July 2006 (UTC)","llicencia": "CC BY-SA 3.0","pagina": "https://commons.wikimedia.org/wiki/File:Zytglogge_01.jpg"}];
 
 function obreCreditsFotos() {
   document.getElementById('fotos-llista').innerHTML = CREDITS_FOTOS.map(f =>
@@ -2088,9 +2281,9 @@ function showQuestion() {
   let correctAnswer = '';
 
   if (q.qType === 0) {
-    // pais → capital
+    // país → capital
     promptEl.textContent = '🏛️ QUINA ÉS LA CAPITAL?';
-    // Mode Clàssic: només el nom del pais, sense bandera
+    // Mode Clàssic: només el nom del país, sense bandera
     visualEl.innerHTML = (G.mode.id === 0)
       ? `<div style="font-size:1.6rem;font-weight:900;margin-top:6px;">${q.country}</div>`
       : `<div class="flag-display fi fi-${data.code}"></div><div style="font-size:1.6rem;font-weight:900;margin-top:6px;">${q.country}</div>`;
@@ -2098,22 +2291,22 @@ function showQuestion() {
     correctAnswer = data.capital;
     answerOptions = generateOptions(correctAnswer, 'capital');
   } else if (q.qType === 1) {
-    // bandera → pais
-    promptEl.textContent = '🚩 QUIN PAIS ÉS AQUESTA BANDERA?';
+    // bandera → país
+    promptEl.textContent = '🚩 QUIN PAÍS ÉS AQUESTA BANDERA?';
     visualEl.innerHTML = `<div class="flag-display fi fi-${data.code} large"></div>`;
     textEl.textContent = '';
     correctAnswer = q.country;
     answerOptions = generateOptions(correctAnswer, 'country');
   } else if (q.qType === 2) {
-    // monument → pais
+    // monument → país
     promptEl.textContent = '🏛️ DE QUIN PAÍS ÉS AQUEST MONUMENT?';
     visualEl.innerHTML = fotoMonument(data) + `<div class="landmark-nom">${data.landmark.nom}</div>`;
     textEl.textContent = '';
     correctAnswer = q.country;
     answerOptions = generateOptions(correctAnswer, 'country');
   } else if (q.qType === 4) {
-    // capital → pais
-    promptEl.textContent = '🌍 DE QUIN PAIS ÉS LA CAPITAL?';
+    // capital → país
+    promptEl.textContent = '🌍 DE QUIN PAÍS ÉS LA CAPITAL?';
     visualEl.innerHTML = `<div style="font-size:2.4rem;font-weight:900;margin:10px 0;color:var(--accent);">${data.capital}</div>`;
     textEl.textContent = '';
     correctAnswer = q.country;
@@ -2143,6 +2336,35 @@ function showQuestion() {
   // Reset feedback
   document.getElementById('feedback-msg').textContent = '';
   document.getElementById('question-box').classList.remove('correct','wrong');
+
+  if (G.mode.id === 6) iniciaMemoria(visualEl, ansGrid);
+}
+
+/* Memòria Visual: la imatge es veu uns segons, després es tapa i només llavors
+   es pot respondre. Sense això el mode era el Clàssic amb un altre nom. */
+let memoInterval = null;
+function iniciaMemoria(visualEl, ansGrid) {
+  clearInterval(memoInterval);
+  const botons = [...ansGrid.querySelectorAll('.answer-btn')];
+  botons.forEach(b => { b.disabled = true; b.style.opacity = '0.45'; });
+
+  const compte = document.createElement('div');
+  compte.className = 'memo-compte';
+  visualEl.prepend(compte);
+
+  let queden = MEMO_SEGONS;
+  compte.textContent = `👁️ MEMORITZA-HO… ${queden}`;
+  memoInterval = setInterval(() => {
+    queden--;
+    if (queden > 0) {
+      compte.textContent = `👁️ MEMORITZA-HO… ${queden}`;
+      return;
+    }
+    clearInterval(memoInterval);
+    memoInterval = null;
+    visualEl.innerHTML = '<div class="memo-tapat">🙈<span>Què hi havia?</span></div>';
+    botons.forEach(b => { b.disabled = false; b.style.opacity = '1'; });
+  }, 1000);
 }
 
 function generateRepteQuestion() {
@@ -2156,10 +2378,17 @@ function generateRepteQuestion() {
   return { country, qType, data };
 }
 
+/* Les respostes errònies surten del mateix conjunt de països que la partida.
+   Abans sortien sempre dels 46: a nivell Bàsic això volia dir que sovint
+   n'hi havia prou de descartar els tres noms que no havies sentit mai.
+   Quan el conjunt és molt petit (el Bàltic en té 3) es completa amb la
+   resta, perquè sempre calen quatre opcions. */
 function generateOptions(correct, type) {
-  const all = type === 'capital'
-    ? Object.values(COUNTRIES).map(c => c.capital)
-    : Object.keys(COUNTRIES);
+  const delNivell = (G && G.countries) ? G.countries : Object.keys(COUNTRIES);
+  const nom = c => type === 'capital' ? COUNTRIES[c].capital : c;
+  const propers = delNivell.map(nom).filter(o => o !== correct);
+  const all = propers.length >= 3 ? propers
+    : propers.concat(Object.keys(COUNTRIES).map(nom).filter(o => o !== correct && !propers.includes(o)));
   const wrong = barreja(all.filter(o => o !== correct)).slice(0, 3);
   return barreja([correct, ...wrong]);
 }
@@ -2189,7 +2418,11 @@ function answer(selected, correct, btn) {
         player.stats_per_type[statKey].c++;
         player.stats_per_type[statKey].q++;
       }
-      if (G.currentQuestion.country && !player.capitals_correctes.includes(G.currentQuestion.country)) {
+      // Només compten per al trofeu "Tour Europeu" les preguntes que van de
+      // capitals de debò (0: país→capital, 4: capital→país, 5: monument→ciutat).
+      // Abans hi sumaven també les banderes i els monuments.
+      if (CAPITAL_QTYPES.includes(tType) && G.currentQuestion.country &&
+          !player.capitals_correctes.includes(G.currentQuestion.country)) {
         player.capitals_correctes.push(G.currentQuestion.country);
       }
     }
@@ -2321,6 +2554,7 @@ function quitGame() {
   jmConfirma("🚪 Segur que vols abandonar la partida?<br><small>Perdràs el progrés d'aquesta partida.</small>", () => {
     clearInterval(timerInterval);
     clearInterval(qTimerInterval);
+    clearInterval(memoInterval);
     showScreen('screen-menu');
   }, 'Sí, abandona');
 }
@@ -2328,6 +2562,7 @@ function quitGame() {
 function endGame(reason) {
   clearInterval(timerInterval);
   clearInterval(qTimerInterval);
+  clearInterval(memoInterval);
 
   const totalTime = (Date.now() - G.startTime) / 1000;
   const pct = G.total > 0 ? (G.punts / G.total * 100) : 0;
@@ -2522,7 +2757,7 @@ function showResults(reason, xp_earned, nous_trofeus) {
 function generateTip(pct, gameState) {
   if (pct === 100) return '🌟 Has fet una partida perfecta! Prova un nivell més alt.';
   if (pct >= 80) return '🎯 Molt bé! Estàs molt a prop de la perfecció.';
-  if (pct >= 60) return '📚 Bona feina. Practica més els paisos que has fallat.';
+  if (pct >= 60) return '📚 Bona feina. Practica més els països que has fallat.';
   if (gameState.errors > gameState.punts) return '💡 Comença pel nivell Bàsic per agafar confiança.';
   return '🚀 Cada partida és una oportunitat per millorar.';
 }
@@ -2834,6 +3069,28 @@ function loadTheme() {
 // ═══════════════════════════════════════════
 //  NAVIGATION
 // ═══════════════════════════════════════════
+/* Tornar enrere ha de desfer el que s'havia triat. Si no, es podia jugar Per
+   Regions, prémer Enrere, triar Clàssic i acabar jugant amb els països de la
+   regió: selectedRegion es quedava posat. */
+function tornaAModes() {
+  selectedType = null;
+  selectedLevel = null;
+  selectedRegion = null;
+  showScreen('screen-select-mode');
+}
+
+/* Des de la tria de nivell: Atles Mestre i Memòria Visual no passen mai per la
+   pantalla de tipus, o sigui que enviar-los-hi seria ensenyar-los una tria que
+   no han fet. Tornen directament als modes. */
+function tornaEnrereDesDeNivell() {
+  if (selectedMode && (selectedMode.id === 6 || selectedMode.id === 7)) {
+    tornaAModes();
+    return;
+  }
+  selectedLevel = null;
+  showScreen('screen-select-type');
+}
+
 function goToSelectMode() {
   selectedMode = null;
   selectedType = null;
