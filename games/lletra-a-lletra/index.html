@@ -1414,11 +1414,20 @@
   // ══════════════════════════════════════════════════════
   //  PERFILS
   // ══════════════════════════════════════════════════════
+  function esc(txt) {
+    // Els noms de perfil els escriu l'alumne (o arriben d'un perfil importat):
+    // mai s'han d'injectar crus dins d'innerHTML.
+    return String(txt == null ? '' : txt)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  
   function renderProfiles() {
     document.getElementById('profiles-grid').innerHTML = profiles.map((p,i) => p
       ? `<div class="profile-slot ${currentProfile?.nom===p.nom?'active-profile':''}" onclick="selectProfile(${i})">
            <div class="avatar">${getDisplayAvatar(p)}</div>
-           <div class="pname">${p.nom}</div>
+           <div class="pname">${esc(p.nom)}</div>
            <div class="pxp">${p.xp} XP</div>
          </div>`
       : `<div class="profile-slot empty" onclick="newProfile(${i})">
@@ -1563,7 +1572,7 @@
           <div class="profile-row">
             <div class="avatar">${getDisplayAvatar(p)}</div>
             <div class="info">
-              <div class="nom">${p.nom}</div>
+              <div class="nom">${esc(p.nom)}</div>
               <div class="stats">
                 ${p.xp} XP · ${p.partides} partides · ${p.perfectes} perfectes · ${p.trofeus?.length||0} trofeus<br>
                 <span style="font-size:0.75rem">
@@ -2049,7 +2058,7 @@
       <div class="stats-hud">
         <div class="stats-hud-avatar">${av}</div>
         <div class="stats-hud-info">
-          <div class="stats-hud-name">${p.nom}</div>
+          <div class="stats-hud-name">${esc(p.nom)}</div>
           <div class="stats-hud-rang">${rang.icon} ${nom}</div>
           <div class="stats-xp-bar"><div class="stats-xp-fill" style="width:${pct}%"></div></div>
           <div class="stats-hud-meta">${xp} XP · ${pct}% del rang actual</div>

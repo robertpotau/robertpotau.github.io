@@ -1703,6 +1703,14 @@ function showProfileSelect() {
   showScreen('screen-profile-select');
 }
 
+function esc(txt) {
+  // Els noms de perfil els escriu l'alumne (o arriben d'un perfil importat):
+  // mai s'han d'injectar crus dins d'innerHTML.
+  return String(txt == null ? '' : txt)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 function renderProfileSlots() {
   const profiles = getProfiles();
   const activeIdx = getActiveIdx();
@@ -1720,7 +1728,7 @@ function renderProfileSlots() {
       div.innerHTML = `
         <div class="profile-slot-avatar">${getAvatarEmoji(p.genere, p.skin, p.hair)}</div>
         <div class="profile-slot-info">
-          <div class="profile-slot-nom">${p.nom}${i===activeIdx?' <span style="font-size:0.65rem;color:var(--accent);vertical-align:middle;">✓ ACTIU</span>':''}</div>
+          <div class="profile-slot-nom">${esc(p.nom)}${i===activeIdx?' <span style="font-size:0.65rem;color:var(--accent);vertical-align:middle;">✓ ACTIU</span>':''}</div>
           <div class="profile-slot-rang">${rang.icon} ${getNomRang(rang, p.genere)}</div>
           <div class="profile-slot-xp">${p.xp||0} XP · ${p.partides||0} partides</div>
         </div>
@@ -1766,7 +1774,7 @@ function deleteProfile(idx) {
   const profiles = getProfiles();
   const p = profiles[idx];
   if (!p) return;
-  jmConfirma(`Vols eliminar el perfil de <strong>${p.nom}</strong>?<br><small>Es perdran totes les dades i no es pot desfer.</small>`, () => {
+  jmConfirma(`Vols eliminar el perfil de <strong>${esc(p.nom)}</strong>?<br><small>Es perdran totes les dades i no es pot desfer.</small>`, () => {
     const llista = getProfiles();
     llista[idx] = null;
     saveProfiles(llista);
@@ -2793,8 +2801,8 @@ function showDuelFinal() {
   const new_rang = getRang(player.xp).xp;
 
   document.getElementById('duel-final-details').innerHTML = `
-    <div class="result-row"><span>${getAvatarEmoji(player.genere, player.skin, player.hair)} ${player.nom}</span><span class="val">${d.score1}/10 · +${xp1} XP</span></div>
-    <div class="result-row"><span>${getAvatarEmoji(D2.genere, D2.skin||0, D2.hair||'default')} ${D2.nom}</span><span class="val">${d.score2}/10</span></div>`;
+    <div class="result-row"><span>${getAvatarEmoji(player.genere, player.skin, player.hair)} ${esc(player.nom)}</span><span class="val">${d.score1}/10 · +${xp1} XP</span></div>
+    <div class="result-row"><span>${getAvatarEmoji(D2.genere, D2.skin||0, D2.hair||'default')} ${esc(D2.nom)}</span><span class="val">${d.score2}/10</span></div>`;
 
   // Restaurar la UI normal del joc
   document.getElementById('duel-scoreboard').style.display = 'none';
@@ -3146,7 +3154,7 @@ function renderTrophies() {
   document.getElementById('profile-trophy-bar').innerHTML = `
     <div class="avatar">${getAvatarEmoji(player.genere, player.skin, player.hair)}</div>
     <div class="info">
-      <div class="name">${player.nom}</div>
+      <div class="name">${esc(player.nom)}</div>
       <div class="rang">${rang.icon} ${getNomRang(rang, player.genere)} · ${player.xp} XP · ${player.partides} partides</div>
     </div>
     <div class="xp-bar-wrap" style="max-width:120px;">
@@ -3218,7 +3226,7 @@ function renderStats() {
       <button class="avatar-edit-btn" onclick="showAvatarEdit()" title="Editar avatar">✏️</button>
     </div>
     <div class="stats-hero-info">
-      <div class="stats-hero-name">${p.nom}</div>
+      <div class="stats-hero-name">${esc(p.nom)}</div>
       <div class="stats-hero-sub">${p.partides} partides · ${p.trofeus.length}/${TROFEUS.length} trofeus</div>
       <div class="stats-xp-row"><span>XP</span><span class="val">${p.xp}${seg?' / '+seg.xp+' → '+getNomRang(seg, p.genere):' · MAX'}</span></div>
       <div class="xp-bar-bg"><div class="xp-bar-fill" style="width:${pct}%"></div></div>
@@ -3403,7 +3411,7 @@ function importarPerfil(event) {
     try {
       const data = JSON.parse(e.target.result);
       if (!data.nom) { jmAvis('Aquest fitxer no és un perfil del joc.'); return; }
-      jmConfirma(`Vols carregar el perfil de <strong>${data.nom}</strong>?<br><small>Se sobreescriurà el perfil actual.</small>`, () => {
+      jmConfirma(`Vols carregar el perfil de <strong>${esc(data.nom)}</strong>?<br><small>Se sobreescriurà el perfil actual.</small>`, () => {
         player = migratePlayer(data);
         savePlayer();
         showScreen('screen-menu');
@@ -3911,7 +3919,7 @@ function renderTeacherDashboard() {
     const ultim = dies === null ? '—' : dies === 0 ? 'Avui' : dies === 1 ? 'Ahir' : `Fa ${dies} dies`;
     html += `<tr>
       <td style="font-size:1.2rem;">${getAvatarEmoji(p.genere, p.skin, p.hair)}</td>
-      <td style="font-weight:700;">${p.nom}</td>
+      <td style="font-weight:700;">${esc(p.nom)}</td>
       <td>${p.xp}</td>
       <td>${p.partides}</td>
       <td class="heat-cell" style="${heatStyle(pct)}">${pct === null ? '—' : pct + '%'}</td>
@@ -3923,7 +3931,7 @@ function renderTeacherDashboard() {
   // ── 2. Mapa per operació ──
   html += '<div class="teacher-card"><h4>🗺️ Encerts per operació</h4><table class="teacher-table"><tr><th>Nom</th><th style="text-align:center;">➕</th><th style="text-align:center;">➖</th><th style="text-align:center;">✖️</th><th style="text-align:center;">➗</th></tr>';
   perfils.forEach(({ p }) => {
-    html += `<tr><td style="font-weight:700;">${p.nom}</td>`;
+    html += `<tr><td style="font-weight:700;">${esc(p.nom)}</td>`;
     ['S','R','M','D'].forEach(op => {
       const pct = pctEncerts(p.stats_op[op]);
       html += `<td class="heat-cell" style="${heatStyle(pct)}">${pct === null ? '—' : pct + '%'}</td>`;
@@ -3961,7 +3969,7 @@ function renderTeacherDashboard() {
     html += '<table class="teacher-table"><tr><th>Data</th><th>Nom</th><th>Mode</th><th>Op</th><th>Resultat</th></tr>';
     partides.slice(0, 15).forEach(h => {
       const opIcon = { S:'➕', R:'➖', M:'✖️', D:'➗' }[h.op] || '—';
-      html += `<tr><td>${h.data || '—'}</td><td style="font-weight:700;">${h.nom}</td><td>${h.mode_nom || '?'}</td><td>${opIcon}</td><td>${h.punts}/${h.total}</td></tr>`;
+      html += `<tr><td>${h.data || '—'}</td><td style="font-weight:700;">${esc(h.nom)}</td><td>${h.mode_nom || '?'}</td><td>${opIcon}</td><td>${h.punts}/${h.total}</td></tr>`;
     });
     html += '</table>';
   }
@@ -4009,19 +4017,19 @@ function generaRecomanacions(perfils) {
       if ((s.partides || 0) >= 2 && pct !== null && pct < feblePct) { feblePct = pct; feble = op; }
     });
     if (feble && feblePct < 60) {
-      recos.push({ ic:'📚', txt:`<b>${p.nom}</b> necessita reforç amb ${OP_NOM[feble]} (${feblePct}%). Suggereix-li el mode Inversa o baixar de nivell.` });
+      recos.push({ ic:'📚', txt:`<b>${esc(p.nom)}</b> necessita reforç amb ${OP_NOM[feble]} (${feblePct}%). Suggereix-li el mode Inversa o baixar de nivell.` });
     }
 
     // Alumne inactiu
     const dies = diesDesDe(p.ultima_partida);
     if (dies !== null && dies >= 7) {
-      recos.push({ ic:'😴', txt:`<b>${p.nom}</b> fa ${dies} dies que no juga. Potser una partida ràpida a classe el reenganxa.` });
+      recos.push({ ic:'😴', txt:`<b>${esc(p.nom)}</b> fa ${dies} dies que no juga. Potser una partida ràpida a classe el reenganxa.` });
     }
 
     // Alumne que domina: proposar repte
     const pctGlobal = pctEncerts({ encerts: p.encerts_total, errors: p.errors_total });
     if (p.partides >= 10 && pctGlobal !== null && pctGlobal >= 90) {
-      recos.push({ ic:'🚀', txt:`<b>${p.nom}</b> domina el joc (${pctGlobal}%). Proposa-li el nivell Expert, el mode Cadena o els bossos.` });
+      recos.push({ ic:'🚀', txt:`<b>${esc(p.nom)}</b> domina el joc (${pctGlobal}%). Proposa-li el nivell Expert, el mode Cadena o els bossos.` });
     }
   });
 

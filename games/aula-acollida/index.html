@@ -3112,13 +3112,21 @@ function initialAvatarSvg(nom, size) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="${s}" height="${s}" aria-hidden="true">
     <defs><linearGradient id="ia${h}" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="${color}"/><stop offset="100%" stop-color="${dark}"/></linearGradient></defs>
     <circle cx="50" cy="50" r="48" fill="url(#ia${h})"/>
-    <text x="50" y="58" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="48" font-weight="800" fill="white">${initial}</text>
+    <text x="50" y="58" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="48" font-weight="800" fill="white">${esc(initial)}</text>
   </svg>`;
 }
 
 function updatePreview() {
   const el = document.getElementById('av-preview');
   if (el) el.textContent = applySkintone(selectedAvatar, selectedSkin);
+}
+
+function esc(txt) {
+  // Els noms de perfil els escriu l'alumne (o arriben d'un perfil importat):
+  // mai s'han d'injectar crus dins d'innerHTML.
+  return String(txt == null ? '' : txt)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 function renderProfileSelect() {
@@ -3138,16 +3146,16 @@ function renderProfileSelect() {
       slot.style.position = 'relative';
       const avMarkup = (p.avatar && p.avatar.trim()) ? p.avatar : initialAvatarSvg(p.nom, 40);
       slot.innerHTML = `<div class="slot-avatar">${avMarkup}</div>
-        <div class="slot-name">${p.nom}</div>
+        <div class="slot-name">${esc(p.nom)}</div>
         <div class="slot-rank">${rang.icon} ${rangNom(rang, p)}</div>
         <div class="slot-xp">${p.xp} XP</div>
-        <button class="slot-delete" data-i="${i}" aria-label="Esborra el perfil ${p.nom}" title="Esborra perfil" style="position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:none;background:rgba(239,68,68,0.12);color:#dc2626;font-size:0.85rem;cursor:pointer;line-height:1;font-weight:800">✕</button>`;
+        <button class="slot-delete" data-i="${i}" aria-label="Esborra el perfil ${esc(p.nom)}" title="Esborra perfil" style="position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:none;background:rgba(239,68,68,0.12);color:#dc2626;font-size:0.85rem;cursor:pointer;line-height:1;font-weight:800">✕</button>`;
       slot.onclick = () => { setActiveIdx(i); renderHUD(p); renderHome(); showScreen('s-home'); pullFromCloudIfLinked(p); };
       slot.querySelector('.slot-delete').onclick = (e) => {
         e.stopPropagation();
         // confirm() natiu queda bloquejat dins d'un WebView: el botó es
         // quedava mort al mòbil
-        jmConfirma(`Vols esborrar el perfil de <strong>${p.nom}</strong>?<br><small>No es pot desfer.</small>`, () => {
+        jmConfirma(`Vols esborrar el perfil de <strong>${esc(p.nom)}</strong>?<br><small>No es pot desfer.</small>`, () => {
           const profs = loadProfiles();
           profs[i] = null;
           saveProfiles(profs);
@@ -3350,7 +3358,7 @@ function importProfile() {
       saveProfiles(profs);
       setActiveIdx(slot);
       renderProfileSelect();
-      jmAvis('✓ Perfil <strong>' + obj.player.nom + '</strong> importat correctament.');
+      jmAvis('✓ Perfil <strong>' + esc(obj.player.nom) + '</strong> importat correctament.');
     } catch(e) {
       jmAvis("No s'ha pogut llegir el codi. Comprova que estigui complet.");
     }
@@ -4315,7 +4323,7 @@ function renderStats() {
   document.getElementById('stats-hud').innerHTML = `
     <div class="stats-hud-avatar" onclick="openAvatarEdit()" title="Edita l'avatar">${player.avatar}</div>
     <div style="flex:1">
-      <div class="stats-hud-name">${player.nom}</div>
+      <div class="stats-hud-name">${esc(player.nom)}</div>
       <div class="stats-hud-rang">${rang.icon} ${rangNom(rang, player)}</div>
       <div class="stats-xp-bar"><div class="stats-xp-fill" style="width:${pct}%"></div></div>
       <div class="stats-hud-meta">${player.xp} XP · ${pct}% del rang actual</div>

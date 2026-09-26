@@ -849,6 +849,14 @@ function checkGlobalTrophies(){
 
 /* ---------- Profiles UI ---------- */
 let delArm=-1,delTimer=null;
+function esc(txt) {
+  // Els noms de perfil els escriu l'alumne (o arriben d'un perfil importat):
+  // mai s'han d'injectar crus dins d'innerHTML.
+  return String(txt == null ? '' : txt)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 function renderProfiles(){
   const g=$("profilesGrid");g.innerHTML="";
   for(let i=0;i<6;i++){
@@ -857,7 +865,7 @@ function renderProfiles(){
     if(p){
       const r=rankFor(p.xp);
       d.innerHTML=`<button class="pdel" data-i="${i}">✖</button><div class="pav">${getAvatar(p)}</div>
-        <div class="pname">${p.name}</div><div class="prank">${r.e} ${rankName(r,p.gender)} · ${p.xp} XP</div>`;
+        <div class="pname">${esc(p.name)}</div><div class="prank">${r.e} ${rankName(r,p.gender)} · ${p.xp} XP</div>`;
       d.addEventListener("click",e=>{
         if(e.target.classList.contains("pdel")){
           e.stopPropagation();
@@ -1455,7 +1463,7 @@ function openDash(){
   let html=`<tr><th>${t("dashName")}</th><th>${t("dashRank")}</th><th>${t("dashXP")}</th><th>${t("dashGames")}</th><th>${t("dashAcc")}</th><th>${t("dashStreak")}</th><th>🏆</th></tr>`;
   profiles.forEach(p=>{
     const r=rankFor(p.xp),tot=p.correct+p.wrong,acc=tot?Math.round(p.correct/tot*100)+"%":"—";
-    html+=`<tr><td>${getAvatar(p)} ${p.name}</td><td>${r.e} ${rankName(r,p.gender)}</td><td>${p.xp}</td><td>${p.games}</td><td>${acc} (${p.correct}/${tot})</td><td>${p.bestStreak}</td><td>${p.trophies.length}/${TROPHIES.length}</td></tr>`;
+    html+=`<tr><td>${getAvatar(p)} ${esc(p.name)}</td><td>${r.e} ${rankName(r,p.gender)}</td><td>${p.xp}</td><td>${p.games}</td><td>${acc} (${p.correct}/${tot})</td><td>${p.bestStreak}</td><td>${p.trophies.length}/${TROPHIES.length}</td></tr>`;
   });
   if(!profiles.length)html+=`<tr><td colspan="7" style="text-align:center;color:var(--text2);">—</td></tr>`;
   tb.innerHTML=html;

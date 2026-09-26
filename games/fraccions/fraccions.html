@@ -3752,6 +3752,14 @@ function saveAllProfiles() {
   localStorage.setItem('fraccions_profiles', JSON.stringify(allProfiles));
 }
 
+function esc(txt) {
+  // Els noms de perfil els escriu l'alumne (o arriben d'un perfil importat):
+  // mai s'han d'injectar crus dins d'innerHTML.
+  return String(txt == null ? '' : txt)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 function renderProfiles() {
   const grid = document.getElementById('profile-grid');
   grid.innerHTML = '';
@@ -3765,7 +3773,7 @@ function renderProfiles() {
       const avatar = getPlayerAvatar(p);
       slot.innerHTML = `
         <div class="profile-avatar">${avatar}</div>
-        <div class="profile-name">${p.nom}</div>
+        <div class="profile-name">${esc(p.nom)}</div>
         <div class="profile-level">${(r => r.icon + ' ' + getNomRang(r, p.genere || p.gender || 'M'))(getRang(p.xp || 0))}</div>
       `;
       slot.onclick = () => selectProfile(i);

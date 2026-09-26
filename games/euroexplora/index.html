@@ -1659,6 +1659,14 @@ function saveProfiles() {
   localStorage.setItem('paisos_profiles_v3', JSON.stringify(profiles));
 }
 
+function esc(txt) {
+  // Els noms de perfil els escriu l'alumne (o arriben d'un perfil importat):
+  // mai s'han d'injectar crus dins d'innerHTML.
+  return String(txt == null ? '' : txt)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 function renderProfileSlots() {
   const list = document.getElementById('profile-slots-list');
   list.innerHTML = '';
@@ -1671,7 +1679,7 @@ function renderProfileSlots() {
       slot.innerHTML = `
         <div class="profile-slot-avatar">${p.avatar}</div>
         <div class="profile-slot-info">
-          <div class="profile-slot-nom">${p.nom} <span style="font-size:0.85rem;">${EQUIPAMENT[p.gear]||''}${COMPANYS[p.pet]||''}</span></div>
+          <div class="profile-slot-nom">${esc(p.nom)} <span style="font-size:0.85rem;">${EQUIPAMENT[p.gear]||''}${COMPANYS[p.pet]||''}</span></div>
           <div class="profile-slot-rang">${RANGS.find(r=>r.nom===p.rang)?.icon||'🧭'} ${p.rang} · ${TITOLS[p.titol]||''} · ${p.xp} XP</div>
           <div class="profile-slot-stats">${p.partides} partides · ${p.encerts} encerts</div>
         </div>

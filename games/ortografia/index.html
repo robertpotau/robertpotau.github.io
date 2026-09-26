@@ -5711,7 +5711,7 @@ function renderMastersDashboardComparative() {
     const acc = p.totalAnswered > 0 ? Math.round((p.totalCorrect || 0) / p.totalAnswered * 100) : 0;
     html += `<div class="history-item" style="padding:12px;border:1px solid var(--border);margin-bottom:8px;">
       <div>
-        <div style="font-weight:700;font-size:1.1rem;">${medals[i] || i+1}° ${p.nom}</div>
+        <div style="font-weight:700;font-size:1.1rem;">${medals[i] || i+1}° ${esc(p.nom)}</div>
         <div style="font-size:0.85rem;color:var(--text-muted);">${p.xp || 0} XP · ${acc}% precisió</div>
       </div>
     </div>`;
