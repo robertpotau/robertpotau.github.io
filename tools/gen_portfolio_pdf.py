@@ -1,3 +1,4 @@
+import os
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.lib import colors
@@ -29,10 +30,11 @@ games = [
     ("Aula d'Acollida", "Vocabulari i jocs per a alumnat nouvingut.", "Tots els nivells"),
     ("Vistes", "Projeccions geomètriques: alçat, planta, perfil.", "ESO 3r-4t / Batxillerat"),
     ("What time is it", "Telling the time in English.", "Primària 2n-4t"),
+    ("Al Mercat!", "Mates amb euros: monedes, bitllets i preus per quilo.", "1r ESO / Acollida"),
 ]
 
 doc = SimpleDocTemplate(
-    r"C:\Users\PC\Documents\claude-code-pcsobretaula\claude-projects\landing-page\robert-potau-portfolio.pdf",
+    os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "robert-potau-portfolio.pdf"),
     pagesize=A4,
     topMargin=22*mm, bottomMargin=18*mm, leftMargin=20*mm, rightMargin=20*mm,
 )

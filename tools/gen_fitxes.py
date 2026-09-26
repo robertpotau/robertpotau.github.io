@@ -22,7 +22,7 @@ UI = {
         home="← Robert Potau", all_games="🎮 Tots els jocs", crumb_home="Inici", crumb_games="Jocs",
         figcap="Captura del joc — clica-la per jugar-hi", play="Jugar-hi ara ▶",
         what="Què s'hi treballa", feats="Característiques", related="També et pot interessar",
-        free="Gratuït", fitxa="ℹ️ Fitxa", jugar="Jugar ▶",
+        free="Gratuït", pdf="📄 Fitxa del professor en PDF", fitxa="ℹ️ Fitxa", jugar="Jugar ▶",
         play_wip="🚧 Joc en construcció 🚧", jugar_wip="🚧 En construcció 🚧",
         game_in={"ca": "🗣 Joc en català", "en": "🗣 Joc en anglès"},
         note='🔒 El progrés es desa al navegador. La sincronització de classe opcional està desactivada: cap dada surt del dispositiu. 📱 Hi ha versió APK per a Android disponible sota petició. Fet per <a href="/index.html">Robert Potau</a>, professor de secundària de Tecnologia i Digitalització. © 2026 Robert Potau Nuñez — Tots els drets reservats.',
@@ -32,7 +32,7 @@ UI = {
         home="← Robert Potau", all_games="🎮 Todos los juegos", crumb_home="Inicio", crumb_games="Juegos",
         figcap="Captura del juego — haz clic para jugar", play="Jugar ahora ▶",
         what="Qué se trabaja", feats="Características", related="También te puede interesar",
-        free="Gratis", fitxa="ℹ️ Ficha", jugar="Jugar ▶",
+        free="Gratis", pdf="📄 Ficha del profesor en PDF", fitxa="ℹ️ Ficha", jugar="Jugar ▶",
         play_wip="🚧 Juego en obras 🚧", jugar_wip="🚧 En obras 🚧",
         game_in={"ca": "🗣 Juego en catalán", "en": "🗣 Juego en inglés"},
         note='🔒 El progreso se guarda en el navegador. La sincronización de clase opcional está desactivada: ningún dato sale del dispositivo. 📱 Hay versión APK para Android disponible bajo petición. Hecho por <a href="/es/index.html">Robert Potau</a>, profesor de secundaria de Tecnología y Digitalización. © 2026 Robert Potau Nuñez — Todos los derechos reservados.',
@@ -42,7 +42,7 @@ UI = {
         home="← Robert Potau", all_games="🎮 All games", crumb_home="Home", crumb_games="Games",
         figcap="Screenshot — click it to play", play="Play now ▶",
         what="What it teaches", feats="Features", related="You may also like",
-        free="Free", fitxa="ℹ️ Info", jugar="Play ▶",
+        free="Free", pdf="📄 Teacher sheet (PDF)", fitxa="ℹ️ Info", jugar="Play ▶",
         play_wip="🚧 Under construction 🚧", jugar_wip="🚧 Under construction 🚧",
         game_in={"ca": "🗣 Game in Catalan", "en": "🗣 Game in English"},
         note='🔒 Progress is stored in the browser. The optional class sync is switched off: no data leaves the device. 📱 An Android APK is available on request. Made by <a href="/en/index.html">Robert Potau</a>, secondary school teacher of Technology. © 2026 Robert Potau Nuñez — All rights reserved.',
@@ -53,9 +53,9 @@ UI = {
 HUB = {
     "ca": dict(
         title="Jocs educatius gratuïts en català — Primària i ESO",
-        meta="11 jocs educatius online gratuïts en català: matemàtiques, ortografia, lectoescriptura, acollida, dibuix tècnic i anglès. Sense registre, sense anuncis, fets per un professor.",
+        meta="12 jocs educatius online gratuïts en català: matemàtiques, ortografia, lectoescriptura, acollida, dibuix tècnic i anglès. Sense registre, sense anuncis, fets per un professor.",
         h1="🎮 Jocs educatius gratuïts en català",
-        lead="Onze jocs per a Primària, ESO i aula d'acollida, fets als vespres per un professor de secundària. Tots funcionen directament al navegador — ordinador, tauleta, mòbil o pissarra digital — sense instal·lar res, sense registre i sense anuncis.",
+        lead="Dotze jocs per a Primària, ESO i aula d'acollida, fets als vespres per un professor de secundària. Tots funcionen directament al navegador — ordinador, tauleta, mòbil o pissarra digital — sense instal·lar res, sense registre i sense anuncis.",
         p2='Cada joc té la seva fitxa amb tota la informació per al docent: què s\'hi treballa, per a quins cursos és adequat i quins modes de joc inclou. Les demos són gratuïtes per sempre; si un joc t\'estalvia una tarda de feina, pots <a href="https://ko-fi.com/robertpotau" data-goatcounter-click="kofi-hub">convidar-me a un cafè</a>.',
         note='🏫 Vols un joc fet a mida per al teu centre o editorial? <a href="/index.html">Escriu-me</a> — el procés és senzill: definim l\'abast, et faig un prototip i l\'iterem junts.',
         coll_name="Jocs educatius gratuïts en català",
@@ -63,9 +63,9 @@ HUB = {
     ),
     "es": dict(
         title="Juegos educativos gratuitos para Primaria y ESO",
-        meta="11 juegos educativos online gratuitos: matemáticas, ortografía catalana, lectoescritura, aula de acogida, dibujo técnico e inglés. Sin registro, sin anuncios, hechos por un profesor.",
+        meta="12 juegos educativos online gratuitos: matemáticas, ortografía catalana, lectoescritura, aula de acogida, dibujo técnico e inglés. Sin registro, sin anuncios, hechos por un profesor.",
         h1="🎮 Juegos educativos gratuitos",
-        lead="Once juegos para Primaria, ESO y aula de acogida, hechos por las tardes por un profesor de secundaria de Cataluña. Todos funcionan directamente en el navegador — ordenador, tableta, móvil o pizarra digital — sin instalar nada, sin registro y sin anuncios. La mayoría están en catalán (son para la escuela catalana); los de inglés, en inglés.",
+        lead="Doce juegos para Primaria, ESO y aula de acogida, hechos por las tardes por un profesor de secundaria de Cataluña. Todos funcionan directamente en el navegador — ordenador, tableta, móvil o pizarra digital — sin instalar nada, sin registro y sin anuncios. La mayoría están en catalán (son para la escuela catalana); los de inglés, en inglés.",
         p2='Cada juego tiene su ficha con toda la información para el docente: qué se trabaja, para qué cursos es adecuado y qué modos de juego incluye. Las demos son gratuitas para siempre; si un juego te ahorra una tarde de trabajo, puedes <a href="https://ko-fi.com/robertpotau" data-goatcounter-click="kofi-hub">invitarme a un café</a>.',
         note='🏫 ¿Quieres un juego a medida para tu centro o editorial? <a href="/es/index.html">Escríbeme</a> — el proceso es sencillo: definimos el alcance, te hago un prototipo y lo iteramos juntos.',
         coll_name="Juegos educativos gratuitos",
@@ -75,7 +75,7 @@ HUB = {
         title="Free educational games for primary and secondary school",
         meta="11 free online educational games: maths, Catalan spelling, literacy, newcomer classes, technical drawing and English. No sign-up, no ads, made by a teacher.",
         h1="🎮 Free educational games",
-        lead="Eleven games for primary school, lower secondary (ESO) and newcomer classes, made in the evenings by a secondary school teacher in Catalonia. They all run right in the browser — computer, tablet, phone or interactive whiteboard — nothing to install, no sign-up, no ads. Most are in Catalan (they were built for Catalan schools); the English-learning ones are in English.",
+        lead="Twelve games for primary school, lower secondary (ESO) and newcomer classes, made in the evenings by a secondary school teacher in Catalonia. They all run right in the browser — computer, tablet, phone or interactive whiteboard — nothing to install, no sign-up, no ads. Most are in Catalan (they were built for Catalan schools); the English-learning ones are in English.",
         p2='Every game has an info page with everything a teacher needs: what it teaches, which ages it suits and which game modes it includes. The demos are free forever; if a game saves you an afternoon of work, you can <a href="https://ko-fi.com/robertpotau" data-goatcounter-click="kofi-hub">buy me a coffee</a>.',
         note='🏫 Want a custom game for your school or publisher? <a href="/en/index.html">Write to me</a> — the process is simple: we define the scope, I build a prototype and we iterate together.',
         coll_name="Free educational games",
@@ -568,6 +568,74 @@ GAMES = [
         ),
     ),
     dict(
+        slug="al-mercat", entry="index.html", shot="al-mercat", emoji="🛒", pdf=True,
+        name="Al Mercat!", game_lang="ca", related=["aula-acollida", "calcuherois", "fraccions"],
+        teaches={"ca": "suma, resta i multiplicació amb euros, decimals simples i preus per quilo", "es": "suma, resta y multiplicación con euros, decimales sencillos y precios por kilo", "en": "addition, subtraction and multiplication with euros, simple decimals and prices per kilo"},
+        level={"ca": "1r ESO — aula d'acollida", "es": "1º ESO — aula de acogida", "en": "Age 12-13 — newcomer classes"},
+        c=dict(
+            ca=dict(
+                seo_title="Al Mercat! — Mates amb euros per a 1r d'ESO i aula d'acollida",
+                meta="Joc gratuït de matemàtiques amb monedes i bitllets d'euro: sumar, restar i multiplicar comprant al mercat. 10 nivells, de l'1 € als preus per quilo, en català, castellà o només icones i veu.",
+                subject="Acollida · Matemàtiques", grade="1r ESO · Aula d'acollida",
+                lead="Compra al mercat amb euros: monedes, bitllets, cèntims i preus per quilo.",
+                paragraphs=[
+                    "Al Mercat! és un joc de matemàtiques per a alumnat de 1r d'ESO amb un nivell baix de matemàtiques o que encara no domina l'idioma. L'alumne compra pa, llet, ous, fruita, botifarra o pernil salat en una parada de mercat i paga posant monedes i bitllets d'euro, dibuixats com els reals, al mostrador: pot arrossegar-los o tocar-los.",
+                    "Els deu nivells avancen molt a poc a poc: de «5 pomes a 1 € cada una» a llistes de la compra, preus amb mig euro i cèntims (1,25 €), el canvi — on l'alumne fa de botiguer — i, finalment, els preus per quilo amb mig quilo i quarts de quilo. Així es treballen la <strong>suma, la resta i la multiplicació</strong> d'una manera concreta i molt visual. Cada dia hi ha un repte nou.",
+                    "Pensat per a l'aula d'acollida: cada alumne tria l'idioma del joc (català, castellà o només icones amb veu que llegeix l'enunciat), hi ha ajudes visuals i un comptador de suport que el professor pot activar o treure. El panell del professor mostra l'evolució de cada alumne i exporta les dades a CSV.",
+                ],
+                features=[
+                    "10 nivells: de l'1 € als preus per quilo",
+                    "Monedes d'1 cèntim a 2 € i bitllets de 5 a 50 €, arrossegables o tocables",
+                    "Botiga catalana: pa, llet, ous, fruita, botifarra, pernil salat…",
+                    "Català, castellà o només icones + veu (per alumne)",
+                    "Perfils, avatars, trofeus i repte del dia",
+                    "Panell del professor amb exportació a CSV",
+                    "Gratuït, sense registre i sense anuncis",
+                ],
+            ),
+            es=dict(
+                seo_title="Al Mercat! — Mates con euros para 1º de ESO y aula de acogida",
+                meta="Juego gratuito de matemáticas con monedas y billetes de euro: sumar, restar y multiplicar comprando en el mercado. 10 niveles, del 1 € a los precios por kilo, en catalán, castellano o solo iconos y voz.",
+                subject="Acogida · Matemáticas", grade="1º ESO · Aula de acogida",
+                lead="Compra en el mercado con euros: monedas, billetes, céntimos y precios por kilo.",
+                paragraphs=[
+                    "Al Mercat! es un juego de matemáticas para alumnado de 1º de ESO con un nivel bajo de matemáticas o que aún no domina el idioma. El alumno compra pan, leche, huevos, fruta, butifarra o jamón en un puesto de mercado y paga poniendo monedas y billetes de euro, dibujados como los reales, en el mostrador: puede arrastrarlos o tocarlos.",
+                    "Los diez niveles avanzan muy poco a poco: de «5 manzanas a 1 € cada una» a listas de la compra, precios con medio euro y céntimos (1,25 €), la vuelta — donde el alumno hace de tendero — y, por último, los precios por kilo con medio kilo y cuartos de kilo. Así se trabajan la <strong>suma, la resta y la multiplicación</strong> de forma concreta y muy visual. Cada día hay un reto nuevo.",
+                    "Pensado para el aula de acogida: cada alumno elige el idioma del juego (catalán, castellano o solo iconos con voz que lee el enunciado), hay ayudas visuales y un contador de apoyo que el profesor puede activar o quitar. El panel del profesor muestra la evolución de cada alumno y exporta los datos a CSV.",
+                ],
+                features=[
+                    "10 niveles: del 1 € a los precios por kilo",
+                    "Monedas de 1 céntimo a 2 € y billetes de 5 a 50 €, arrastrables o tocables",
+                    "Tienda catalana: pan, leche, huevos, fruta, butifarra, jamón…",
+                    "Catalán, castellano o solo iconos + voz (por alumno)",
+                    "Perfiles, avatares, trofeos y reto del día",
+                    "Panel del profesor con exportación a CSV",
+                    "Gratuito, sin registro y sin anuncios",
+                ],
+            ),
+            en=dict(
+                seo_title="Al Mercat! — Maths with euros for newcomer classes and 1st-year ESO",
+                meta="Free maths game with euro coins and notes: add, subtract and multiply while shopping at the market. 10 levels, from €1 to prices per kilo, in Catalan, Spanish or icons and voice only.",
+                subject="Newcomers · Maths", grade="Age 12-13 · Newcomer classes",
+                lead="Shop at the market with euros: coins, notes, cents and prices per kilo.",
+                paragraphs=[
+                    "Al Mercat! is a maths game for 12-13 year-olds with a low level of maths or who do not yet master the language. Students buy bread, milk, eggs, fruit, sausage or ham at a market stall and pay by putting euro coins and notes — drawn like the real ones — on the counter: they can drag them or just tap them.",
+                    "The ten levels move forward very slowly: from “5 apples at €1 each” to shopping lists, prices with half euros and cents (€1.25), giving change — where the student plays the shopkeeper — and finally prices per kilo with half and quarter kilos. It practises <strong>addition, subtraction and multiplication</strong> in a concrete, very visual way. There is a new challenge every day.",
+                    "Designed for newcomer classes: each student picks the game language (Catalan, Spanish, or icons only with a voice reading the task aloud), there are visual aids and a helper counter the teacher can switch on or off. The teacher panel shows each student's progress and exports the data to CSV.",
+                ],
+                features=[
+                    "10 levels: from €1 to prices per kilo",
+                    "Coins from 1 cent to €2 and notes from €5 to €50, drag or tap",
+                    "Catalan-style shop: bread, milk, eggs, fruit, sausage, cured ham…",
+                    "Catalan, Spanish or icons + voice (per student)",
+                    "Profiles, avatars, trophies and a daily challenge",
+                    "Teacher panel with CSV export",
+                    "Free, no sign-up, no ads",
+                ],
+            ),
+        ),
+    ),
+    dict(
         slug="vistes", entry="index.html", shot="vistes", emoji="📐",
         name="Vistes: Planta, Alçat i Perfil", game_lang="ca", related=["geometria", "calcuherois", "fraccions"],
         teaches={"ca": "sistema dièdric, vistes, dibuix tècnic", "es": "sistema diédrico, vistas, dibujo técnico", "en": "orthographic projection, technical drawing"},
@@ -859,6 +927,7 @@ h1{font-size:clamp(1.7rem,5vw,2.5rem);font-weight:900;line-height:1.15;margin-bo
 figure figcaption{font-size:12.5px;color:var(--ink-dim);text-align:center;margin-bottom:22px}
 .cta{display:inline-block;font-size:1.15rem;font-weight:900;background:linear-gradient(90deg,var(--accent-hot),var(--accent));color:#fff;padding:14px 38px;border-radius:99px;margin:6px 0 30px;box-shadow:0 6px 24px rgba(154,50,239,0.45)}
 .cta:hover{text-decoration:none;filter:brightness(1.1)}
+.pdflink{font-weight:800;display:inline-block;margin:-16px 0 22px}
 .cta.wip{background:linear-gradient(90deg,#ff9f1c,#f7761f);box-shadow:0 6px 24px rgba(247,118,31,0.45)}
 h2{font-size:1.25rem;font-weight:900;margin:26px 0 10px;color:var(--accent)}
 p{margin-bottom:14px}
@@ -987,6 +1056,10 @@ def fitxa_page(g, lang):
         f'{BY_SLUG[r]["emoji"]} {BY_SLUG[r]["name"]}<span>{BY_SLUG[r]["c"][lang]["grade"]}</span></a>'
         for r in g["related"]
     )
+    pdf_link = ""
+    if g.get("pdf"):
+        pdf_href = ("/" if lang == "ca" else f"/{lang}/") + f"jocs/{g['slug']}-fitxa.pdf"
+        pdf_link = f'<p><a class="pdflink" href="{pdf_href}" data-goatcounter-click="pdf-{g["slug"]}">{ui["pdf"]}</a></p>'
     return head(lang, c["seo_title"], c["meta"], page, ogimg, [lr, bc]) + f"""
 <nav class="topbar">
   <div class="nav">
@@ -1009,6 +1082,7 @@ def fitxa_page(g, lang):
   <figcaption>{ui["figcap"]}</figcaption>
 </figure>
 <a class="cta{" wip" if g.get("wip") else ""}" href="{play}" data-goatcounter-click="fitxa-{g['slug']}-play">{ui["play_wip"] if g.get("wip") else ui["play"]}</a>
+{pdf_link}
 <h2>{ui["what"]}</h2>
 {paras}
 <h2>{ui["feats"]}</h2>
