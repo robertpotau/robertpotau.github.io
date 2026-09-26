@@ -97,14 +97,14 @@
     position: fixed;
     inset: 0;
     background-image:
-      radial-gradient(2px 2px at 20% 30%, white, transparent),
-      radial-gradient(1px 1px at 60% 70%, white, transparent),
-      radial-gradient(1px 1px at 80% 10%, white, transparent),
-      radial-gradient(2px 2px at 35% 80%, white, transparent),
-      radial-gradient(1px 1px at 90% 45%, white, transparent),
-      radial-gradient(1px 1px at 10% 60%, white, transparent),
-      radial-gradient(1px 1px at 50% 20%, rgba(255,255,255,0.6), transparent);
-    background-size: 200px 200px;
+      radial-gradient(0.125rem 0.125rem at 20% 30%, white, transparent),
+      radial-gradient(0.0625rem 0.0625rem at 60% 70%, white, transparent),
+      radial-gradient(0.0625rem 0.0625rem at 80% 10%, white, transparent),
+      radial-gradient(0.125rem 0.125rem at 35% 80%, white, transparent),
+      radial-gradient(0.0625rem 0.0625rem at 90% 45%, white, transparent),
+      radial-gradient(0.0625rem 0.0625rem at 10% 60%, white, transparent),
+      radial-gradient(0.0625rem 0.0625rem at 50% 20%, rgba(255,255,255,0.6), transparent);
+    background-size: 12.5rem 12.5rem;
     opacity: 0.5;
     pointer-events: none;
     z-index: 0;
@@ -121,7 +121,7 @@
     display: none;
     width: 100%;
     min-height: 100vh;
-    padding: 18px 14px 80px;
+    padding: 1.125rem 0.875rem 5rem;
     position: relative;
     z-index: 1;
   }
@@ -132,72 +132,72 @@
     font-size: clamp(2.2rem, 7vw, 3.6rem);
     font-weight: 900;
     text-align: center;
-    margin: 16px 0 8px;
+    margin: 1rem 0 0.5rem;
     background: linear-gradient(135deg, var(--accent), var(--pink), var(--cyan));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: -1px;
-    text-shadow: 0 0 32px rgba(255,209,102,0.3);
+    letter-spacing: -0.0625rem;
+    text-shadow: 0 0 2rem rgba(255,209,102,0.3);
   }
   .logo-sub {
     text-align: center;
     color: var(--text-dim);
     font-size: 1rem;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
   }
 
   /* ─── TARGETES ─── */
   .card {
     background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 18px;
-    padding: 18px;
+    border: 0.0625rem solid var(--card-border);
+    border-radius: 1.125rem;
+    padding: 1.125rem;
     width: 100%;
-    max-width: 520px;
-    backdrop-filter: blur(8px);
-    margin-bottom: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    max-width: 32.5rem;
+    backdrop-filter: blur(0.5rem);
+    margin-bottom: 0.75rem;
+    box-shadow: 0 0.5rem 2rem rgba(0,0,0,0.18);
   }
 
   /* ─── BOTONS ─── */
   .btn {
     display: block;
     width: 100%;
-    padding: 14px 18px;
+    padding: 0.875rem 1.125rem;
     border: none;
-    border-radius: 14px;
+    border-radius: 0.875rem;
     font-family: inherit;
     font-size: 1.05rem;
     font-weight: 700;
     color: white;
     cursor: pointer;
     transition: transform 0.12s ease, box-shadow 0.12s ease;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    box-shadow: 0 4px 14px rgba(99,102,241,0.35);
+    box-shadow: 0 0.25rem 0.875rem rgba(99,102,241,0.35);
   }
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(99,102,241,0.5); }
+  .btn:hover { transform: translateY(-0.125rem); box-shadow: 0 0.375rem 1.125rem rgba(99,102,241,0.5); }
   .btn:active { transform: translateY(0); }
   .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 
-  .btn-green { background: linear-gradient(135deg, #16a34a, #4ade80); box-shadow: 0 4px 14px rgba(74,222,128,0.35); }
-  .btn-orange { background: linear-gradient(135deg, #ea580c, #fb923c); box-shadow: 0 4px 14px rgba(251,146,60,0.35); }
-  .btn-red { background: linear-gradient(135deg, #dc2626, #f87171); box-shadow: 0 4px 14px rgba(248,113,113,0.35); }
-  .btn-yellow { background: linear-gradient(135deg, #ca8a04, #facc15); color: #1a1148; box-shadow: 0 4px 14px rgba(250,204,21,0.35); }
-  .btn-blue { background: linear-gradient(135deg, #1d4ed8, #60a5fa); box-shadow: 0 4px 14px rgba(96,165,250,0.35); }
-  .btn-pink { background: linear-gradient(135deg, #be185d, #f472b6); box-shadow: 0 4px 14px rgba(244,114,182,0.35); }
-  .btn-cyan { background: linear-gradient(135deg, #0891b2, #22d3ee); box-shadow: 0 4px 14px rgba(34,211,238,0.35); }
-  .btn-purple { background: linear-gradient(135deg, #7c3aed, #a78bfa); box-shadow: 0 4px 14px rgba(167,139,250,0.35); }
+  .btn-green { background: linear-gradient(135deg, #16a34a, #4ade80); box-shadow: 0 0.25rem 0.875rem rgba(74,222,128,0.35); }
+  .btn-orange { background: linear-gradient(135deg, #ea580c, #fb923c); box-shadow: 0 0.25rem 0.875rem rgba(251,146,60,0.35); }
+  .btn-red { background: linear-gradient(135deg, #dc2626, #f87171); box-shadow: 0 0.25rem 0.875rem rgba(248,113,113,0.35); }
+  .btn-yellow { background: linear-gradient(135deg, #ca8a04, #facc15); color: #1a1148; box-shadow: 0 0.25rem 0.875rem rgba(250,204,21,0.35); }
+  .btn-blue { background: linear-gradient(135deg, #1d4ed8, #60a5fa); box-shadow: 0 0.25rem 0.875rem rgba(96,165,250,0.35); }
+  .btn-pink { background: linear-gradient(135deg, #be185d, #f472b6); box-shadow: 0 0.25rem 0.875rem rgba(244,114,182,0.35); }
+  .btn-cyan { background: linear-gradient(135deg, #0891b2, #22d3ee); box-shadow: 0 0.25rem 0.875rem rgba(34,211,238,0.35); }
+  .btn-purple { background: linear-gradient(135deg, #7c3aed, #a78bfa); box-shadow: 0 0.25rem 0.875rem rgba(167,139,250,0.35); }
 
   .btn-ghost {
     background: rgba(255,255,255,0.08);
     box-shadow: none;
-    border: 1px solid var(--card-border);
+    border: 0.0625rem solid var(--card-border);
   }
   .btn-ghost:hover { background: rgba(255,255,255,0.14); box-shadow: none; }
 
-  .btn-small { padding: 10px 14px; font-size: 0.95rem; margin-bottom: 0; }
+  .btn-small { padding: 0.625rem 0.875rem; font-size: 0.95rem; margin-bottom: 0; }
 
   /* ─── INPUT FRACCIÓ ─── */
   .frac-input {
@@ -205,16 +205,16 @@
     flex-direction: column;
     align-items: center;
     background: rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 10px 16px;
-    margin: 0 4px;
-    border: 2px solid var(--card-border);
+    border-radius: 0.75rem;
+    padding: 0.625rem 1rem;
+    margin: 0 0.25rem;
+    border: 0.125rem solid var(--card-border);
   }
   .frac-input input {
-    width: 70px;
-    padding: 6px;
-    border-radius: 8px;
-    border: 1px solid var(--card-border);
+    width: 4.375rem;
+    padding: 0.375rem;
+    border-radius: 0.5rem;
+    border: 0.0625rem solid var(--card-border);
     background: rgba(0,0,0,0.25);
     color: white;
     font-family: inherit;
@@ -234,11 +234,11 @@
     background: rgba(0,0,0,0.4);
   }
   .frac-bar {
-    width: 80px;
-    height: 4px;
+    width: 5rem;
+    height: 0.25rem;
     background: white;
-    border-radius: 2px;
-    margin: 6px 0;
+    border-radius: 0.125rem;
+    margin: 0.375rem 0;
   }
 
   /* ─── FRACCIÓ MOSTRADA (lectura) ─── */
@@ -248,72 +248,72 @@
     align-items: center;
     line-height: 1.05;
     font-weight: 800;
-    margin: 0 6px;
+    margin: 0 0.375rem;
     vertical-align: middle;
   }
   .frac-display .num, .frac-display .den {
     font-size: 2.2rem;
-    padding: 0 10px;
+    padding: 0 0.625rem;
   }
   .frac-display .bar {
     width: 100%;
-    min-width: 50px;
-    height: 4px;
+    min-width: 3.125rem;
+    height: 0.25rem;
     background: var(--accent);
-    border-radius: 2px;
-    margin: 4px 0;
+    border-radius: 0.125rem;
+    margin: 0.25rem 0;
   }
   .frac-display.small .num, .frac-display.small .den { font-size: 1.5rem; }
-  .frac-display.small .bar { height: 3px; }
+  .frac-display.small .bar { height: 0.1875rem; }
 
   /* ─── PANTALLA DE JOC ─── */
   .game-header {
     width: 100%;
-    max-width: 520px;
+    max-width: 32.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
     color: var(--text-dim);
     font-weight: 700;
   }
   .progress-bg {
     width: 100%;
-    max-width: 520px;
-    height: 8px;
+    max-width: 32.5rem;
+    height: 0.5rem;
     background: rgba(255,255,255,0.1);
-    border-radius: 4px;
+    border-radius: 0.25rem;
     overflow: hidden;
-    margin-bottom: 18px;
+    margin-bottom: 1.125rem;
   }
   .progress-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--cyan), var(--accent));
     transition: width 0.3s ease;
-    border-radius: 4px;
+    border-radius: 0.25rem;
   }
 
   .question-box {
     width: 100%;
-    max-width: 520px;
+    max-width: 32.5rem;
     background: rgba(255,255,255,0.06);
-    border: 1px solid var(--card-border);
-    border-radius: 18px;
-    padding: 22px 16px;
+    border: 0.0625rem solid var(--card-border);
+    border-radius: 1.125rem;
+    padding: 1.375rem 1rem;
     text-align: center;
-    margin-bottom: 14px;
+    margin-bottom: 0.875rem;
   }
 
   .question-prompt {
     font-size: 1.2rem;
     font-weight: 700;
-    margin-bottom: 14px;
+    margin-bottom: 0.875rem;
     color: var(--text);
   }
   .question-prompt-sub {
     font-size: 0.9rem;
     color: var(--text-dim);
-    margin-bottom: 14px;
+    margin-bottom: 0.875rem;
   }
 
   /* ─── SVG VISUALITZACIÓ FRACCIONS ─── */
@@ -321,9 +321,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 14px;
+    gap: 0.875rem;
     flex-wrap: wrap;
-    margin: 10px 0 16px;
+    margin: 0.625rem 0 1rem;
   }
   .shape-wrap svg {
     max-width: 100%;
@@ -350,27 +350,27 @@
   .options-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 0.75rem;
     width: 100%;
-    max-width: 520px;
-    margin-bottom: 14px;
+    max-width: 32.5rem;
+    margin-bottom: 0.875rem;
   }
   .option-card {
     background: rgba(255,255,255,0.06);
-    border: 2px solid var(--card-border);
-    border-radius: 14px;
-    padding: 14px;
+    border: 0.125rem solid var(--card-border);
+    border-radius: 0.875rem;
+    padding: 0.875rem;
     cursor: pointer;
     transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
     color: white;
     font-family: inherit;
   }
   .option-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-0.125rem);
     border-color: var(--accent);
     background: rgba(255,255,255,0.1);
   }
@@ -399,13 +399,13 @@
   .compare-options {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 14px;
+    gap: 0.75rem;
+    margin-bottom: 0.875rem;
   }
   .compare-btn {
-    padding: 22px 10px;
-    border-radius: 14px;
-    border: 2px solid var(--card-border);
+    padding: 1.375rem 0.625rem;
+    border-radius: 0.875rem;
+    border: 0.125rem solid var(--card-border);
     background: rgba(255,255,255,0.08);
     color: white;
     font-family: inherit;
@@ -415,7 +415,7 @@
     transition: transform 0.12s ease, background 0.12s ease;
   }
   .compare-btn:hover {
-    transform: translateY(-2px);
+    transform: translateY(-0.125rem);
     background: rgba(255,255,255,0.16);
     border-color: var(--accent);
   }
@@ -423,10 +423,10 @@
   /* ─── FEEDBACK ─── */
   .feedback {
     width: 100%;
-    max-width: 520px;
-    min-height: 50px;
+    max-width: 32.5rem;
+    min-height: 3.125rem;
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
     font-size: 1.1rem;
     font-weight: 700;
     transition: opacity 0.2s ease;
@@ -439,7 +439,7 @@
     font-size: 3.6rem;
     font-weight: 900;
     text-align: center;
-    margin: 12px 0;
+    margin: 0.75rem 0;
     background: linear-gradient(135deg, var(--accent), var(--pink));
     -webkit-background-clip: text;
     background-clip: text;
@@ -449,20 +449,20 @@
     text-align: center;
     font-size: 1.2rem;
     color: var(--text-dim);
-    margin-bottom: 18px;
+    margin-bottom: 1.125rem;
   }
   .result-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 14px;
+    gap: 0.5rem;
+    margin-bottom: 0.875rem;
   }
   .result-stat {
     background: rgba(255,255,255,0.06);
-    padding: 10px 6px;
-    border-radius: 12px;
+    padding: 0.625rem 0.375rem;
+    border-radius: 0.75rem;
     text-align: center;
-    border: 1px solid var(--card-border);
+    border: 0.0625rem solid var(--card-border);
   }
   .result-stat .v { font-size: 1.4rem; font-weight: 900; }
   .result-stat .l { font-size: 0.78rem; color: var(--text-dim); }
@@ -470,16 +470,16 @@
   /* ─── ANIMACIONS ─── */
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
-    20% { transform: translateX(-8px); }
-    40% { transform: translateX(8px); }
-    60% { transform: translateX(-6px); }
-    80% { transform: translateX(6px); }
+    20% { transform: translateX(-0.5rem); }
+    40% { transform: translateX(0.5rem); }
+    60% { transform: translateX(-0.375rem); }
+    80% { transform: translateX(0.375rem); }
   }
   .shake { animation: shake 0.4s ease; }
 
   @keyframes pulse-green {
     0% { box-shadow: 0 0 0 0 rgba(74,222,128,0.6); }
-    70% { box-shadow: 0 0 0 22px rgba(74,222,128,0); }
+    70% { box-shadow: 0 0 0 1.375rem rgba(74,222,128,0); }
     100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
   }
   .pulse-green { animation: pulse-green 0.6s ease; }
@@ -494,8 +494,8 @@
   /* ─── PARTÍCULES ─── */
   .particle {
     position: fixed;
-    width: 10px;
-    height: 10px;
+    width: 0.625rem;
+    height: 0.625rem;
     border-radius: 50%;
     pointer-events: none;
     z-index: 999;
@@ -504,18 +504,18 @@
   /* ─── BARRA SUPERIOR ─── */
   .topbar {
     width: 100%;
-    max-width: 520px;
+    max-width: 32.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 6px;
+    margin-bottom: 0.375rem;
   }
   .topbar .back {
     background: rgba(255,255,255,0.08);
-    border: 1px solid var(--card-border);
+    border: 0.0625rem solid var(--card-border);
     color: white;
-    padding: 8px 14px;
-    border-radius: 10px;
+    padding: 0.5rem 0.875rem;
+    border-radius: 0.625rem;
     font-family: inherit;
     font-size: 0.95rem;
     cursor: pointer;
@@ -524,9 +524,9 @@
   .topbar .back:hover { background: rgba(255,255,255,0.16); }
   .topbar .score-mini {
     background: rgba(255,255,255,0.08);
-    border: 1px solid var(--card-border);
-    border-radius: 10px;
-    padding: 8px 14px;
+    border: 0.0625rem solid var(--card-border);
+    border-radius: 0.625rem;
+    padding: 0.5rem 0.875rem;
     font-weight: 800;
     color: var(--accent);
   }
@@ -535,7 +535,7 @@
     font-size: 1.3rem;
     font-weight: 800;
     text-align: center;
-    margin: 8px 0 10px;
+    margin: 0.5rem 0 0.625rem;
     color: var(--text);
   }
 
@@ -543,16 +543,16 @@
   .records-list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0.375rem;
   }
   .record-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 14px;
+    padding: 0.625rem 0.875rem;
     background: rgba(255,255,255,0.05);
-    border-radius: 10px;
-    border: 1px solid var(--card-border);
+    border-radius: 0.625rem;
+    border: 0.0625rem solid var(--card-border);
   }
   .record-row .name { font-weight: 700; }
   .record-row .val { color: var(--accent); font-weight: 800; }
@@ -561,36 +561,36 @@
   @media (max-width: 480px) {
     .options-grid { grid-template-columns: 1fr; }
     .frac-display .num, .frac-display .den { font-size: 1.8rem; }
-    .compare-btn { font-size: 1.6rem; padding: 18px 8px; }
-    .frac-input input { width: 60px; font-size: 1.4rem; }
+    .compare-btn { font-size: 1.6rem; padding: 1.125rem 0.5rem; }
+    .frac-input input { width: 3.75rem; font-size: 1.4rem; }
   }
 
   /* ─── TROFEUS ─── */
   .trophy-grid {
     width: 100%;
-    max-width: 520px;
+    max-width: 32.5rem;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 0.875rem;
   }
   .trophy-cat-title {
     font-size: 1.1rem;
     font-weight: 800;
-    letter-spacing: 0.5px;
-    padding: 10px 0 6px;
-    border-bottom: 1px solid var(--card-border);
+    letter-spacing: 0.0312rem;
+    padding: 0.625rem 0 0.375rem;
+    border-bottom: 0.0625rem solid var(--card-border);
   }
   .trophy-cat-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 6px;
+    gap: 0.625rem;
+    margin-bottom: 0.375rem;
   }
   .trophy-card {
     background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 12px 8px;
+    border: 0.0625rem solid var(--card-border);
+    border-radius: 0.75rem;
+    padding: 0.75rem 0.5rem;
     text-align: center;
     transition: 0.2s;
   }
@@ -601,7 +601,7 @@
   .trophy-card.locked { opacity: 0.42; }
   .trophy-icon {
     font-size: 2.1rem;
-    margin-bottom: 6px;
+    margin-bottom: 0.375rem;
   }
   .trophy-name {
     font-size: 0.85rem;
@@ -610,19 +610,19 @@
   .trophy-desc {
     font-size: 0.7rem;
     color: var(--text-dim);
-    margin-top: 3px;
+    margin-top: 0.1875rem;
     line-height: 1.3;
   }
   .trophy-stats {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    max-width: 520px;
-    margin-bottom: 14px;
+    max-width: 32.5rem;
+    margin-bottom: 0.875rem;
     background: rgba(255,255,255,0.06);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 12px;
+    border: 0.0625rem solid var(--card-border);
+    border-radius: 0.75rem;
+    padding: 0.75rem;
   }
   .trophy-stat-v {
     font-size: 1.6rem;
@@ -650,18 +650,18 @@
   /* ─── NOTIFICACIÓ TROFEU ─── */
   .trophy-toast {
     position: fixed;
-    bottom: 24px;
+    bottom: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
     background: linear-gradient(135deg, #f59e0b, #ffd166);
     color: #1a1148;
-    border-radius: 16px;
-    padding: 14px 22px;
-    box-shadow: 0 10px 32px rgba(255, 209, 102, 0.5);
+    border-radius: 1rem;
+    padding: 0.875rem 1.375rem;
+    box-shadow: 0 0.625rem 2rem rgba(255, 209, 102, 0.5);
     z-index: 250;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 0.75rem;
     font-weight: 800;
     animation: toast-in 0.4s cubic-bezier(0.2,1.3,0.6,1);
     max-width: 90vw;
@@ -670,20 +670,20 @@
   .trophy-toast .nm { font-size: 0.95rem; }
   .trophy-toast .ds { font-size: 0.78rem; opacity: 0.75; }
   @keyframes toast-in {
-    0% { transform: translate(-50%, 60px); opacity: 0; }
+    0% { transform: translate(-50%, 3.75rem); opacity: 0; }
     100% { transform: translate(-50%, 0); opacity: 1; }
   }
   @keyframes toast-out {
     0% { transform: translate(-50%, 0); opacity: 1; }
-    100% { transform: translate(-50%, 60px); opacity: 0; }
+    100% { transform: translate(-50%, 3.75rem); opacity: 0; }
   }
 
   /* ─── CRÈDITS ─── */
   .credit-section {
     background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 14px;
-    padding: 16px;
+    border: 0.0625rem solid var(--card-border);
+    border-radius: 0.875rem;
+    padding: 1rem;
     transition: 0.2s;
   }
   .credit-section:hover {
@@ -694,29 +694,29 @@
     font-size: 0.95rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.0625rem;
     color: var(--accent);
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid rgba(255, 209, 102, 0.3);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.125rem solid rgba(255, 209, 102, 0.3);
   }
   .credit-person {
-    padding: 12px;
+    padding: 0.75rem;
     background: rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    border-left: 4px solid var(--accent);
+    border-radius: 0.625rem;
+    border-left: 0.25rem solid var(--accent);
   }
   .credit-name {
     font-size: 1.1rem;
     font-weight: 800;
     color: var(--text);
-    margin-bottom: 4px;
+    margin-bottom: 0.25rem;
   }
   .credit-role {
     font-size: 0.85rem;
     color: var(--accent);
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
   }
   .credit-desc {
     font-size: 0.85rem;
@@ -724,10 +724,10 @@
     line-height: 1.5;
   }
   .credit-tech {
-    padding: 12px;
+    padding: 0.75rem;
     background: rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    border-left: 4px solid var(--accent);
+    border-radius: 0.625rem;
+    border-left: 0.25rem solid var(--accent);
   }
   .credit-tech > div {
     font-size: 0.9rem;
@@ -736,30 +736,30 @@
   }
   .credit-footer {
     text-align: center;
-    padding: 20px;
-    border-top: 1px solid var(--card-border);
-    margin-top: 12px;
+    padding: 1.25rem;
+    border-top: 0.0625rem solid var(--card-border);
+    margin-top: 0.75rem;
   }
   .credit-footer .ttl {
     font-size: 0.9rem;
     color: var(--text-dim);
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
     font-weight: 700;
   }
   .credit-footer .ver {
     font-size: 0.78rem;
     color: var(--text-dim);
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
   }
   .credit-footer .lic {
     font-size: 0.78rem;
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
     color: rgba(255, 255, 255, 0.55);
   }
   .credit-footer .lic-sub {
     font-size: 0.72rem;
     color: rgba(255, 255, 255, 0.4);
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
   }
   .credit-footer .heart {
     font-size: 0.78rem;
@@ -769,17 +769,17 @@
   /* ─── EXPORTAR / IMPORTAR ─── */
   .export-import-box {
     background: linear-gradient(135deg, rgba(255,209,102,0.1), rgba(34,211,238,0.1));
-    border: 1px solid var(--card-border);
-    border-radius: 14px;
-    padding: 16px;
+    border: 0.0625rem solid var(--card-border);
+    border-radius: 0.875rem;
+    padding: 1rem;
     display: flex;
-    gap: 10px;
+    gap: 0.625rem;
   }
   .export-btn, .import-btn {
     flex: 1;
-    padding: 14px 16px;
+    padding: 0.875rem 1rem;
     border: none;
-    border-radius: 12px;
+    border-radius: 0.75rem;
     font-family: inherit;
     font-size: 0.95rem;
     font-weight: 800;
@@ -789,30 +789,30 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 0.375rem;
   }
   .export-btn {
     background: linear-gradient(135deg, #10b981, #34d399);
-    box-shadow: 0 4px 14px rgba(52,211,153,0.3);
+    box-shadow: 0 0.25rem 0.875rem rgba(52,211,153,0.3);
   }
   .export-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(52,211,153,0.5);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.375rem 1.25rem rgba(52,211,153,0.5);
   }
   .import-btn {
     background: linear-gradient(135deg, #0891b2, #22d3ee);
-    box-shadow: 0 4px 14px rgba(34,211,238,0.3);
+    box-shadow: 0 0.25rem 0.875rem rgba(34,211,238,0.3);
   }
   .import-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(34,211,238,0.5);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.375rem 1.25rem rgba(34,211,238,0.5);
   }
   .export-btn .ic, .import-btn .ic {
     font-size: 1.6rem;
   }
   .export-btn .tx, .import-btn .tx {
     font-size: 0.8rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.0312rem;
     text-transform: uppercase;
   }
 
@@ -826,8 +826,8 @@
   }
   @keyframes emoji-rise {
     0% { transform: translateY(0) scale(0.5); opacity: 0; }
-    20% { transform: translateY(-20px) scale(1.1); opacity: 1; }
-    100% { transform: translateY(-140px) scale(0.8); opacity: 0; }
+    20% { transform: translateY(-1.25rem) scale(1.1); opacity: 1; }
+    100% { transform: translateY(-8.75rem) scale(0.8); opacity: 0; }
   }
 
   /* ═══════════════════════════════════════════════
@@ -917,13 +917,13 @@
     position: absolute;
     inset: 0;
     background-image:
-      radial-gradient(2px 2px at 20% 30%, white, transparent),
-      radial-gradient(1px 1px at 60% 70%, white, transparent),
-      radial-gradient(1px 1px at 80% 10%, white, transparent),
-      radial-gradient(2px 2px at 35% 80%, white, transparent),
-      radial-gradient(1px 1px at 90% 45%, white, transparent),
-      radial-gradient(1px 1px at 10% 60%, white, transparent);
-    background-size: 200px 200px;
+      radial-gradient(0.125rem 0.125rem at 20% 30%, white, transparent),
+      radial-gradient(0.0625rem 0.0625rem at 60% 70%, white, transparent),
+      radial-gradient(0.0625rem 0.0625rem at 80% 10%, white, transparent),
+      radial-gradient(0.125rem 0.125rem at 35% 80%, white, transparent),
+      radial-gradient(0.0625rem 0.0625rem at 90% 45%, white, transparent),
+      radial-gradient(0.0625rem 0.0625rem at 10% 60%, white, transparent);
+    background-size: 12.5rem 12.5rem;
     opacity: 0.4;
     pointer-events: none;
   }
@@ -934,27 +934,27 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
     animation: splash-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   }
   .splash-sub {
     font-size: 1.1rem;
     color: var(--text-dim);
-    margin-bottom: 32px;
+    margin-bottom: 2rem;
     animation: fadeIn 0.6s ease 0.2s both;
   }
   .splash-bar-bg {
-    width: 200px;
-    height: 6px;
+    width: 12.5rem;
+    height: 0.375rem;
     background: rgba(255,255,255,0.15);
-    border-radius: 99px;
-    margin: 0 auto 28px;
+    border-radius: 6.1875rem;
+    margin: 0 auto 1.75rem;
     overflow: hidden;
   }
   .splash-bar-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--accent), var(--cyan));
-    border-radius: 99px;
+    border-radius: 6.1875rem;
     animation: splash-load 3.4s ease-out 0.2s forwards;
     width: 0%;
   }
@@ -978,7 +978,7 @@
     animation: fadeOut 0.5s ease forwards;
   }
   .splash-phrase {
-    max-width: 280px;
+    max-width: 17.5rem;
     font-size: 0.95rem;
     color: var(--text-dim);
     font-style: italic;
@@ -1002,7 +1002,7 @@
 
   @keyframes frac-float {
     0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
-    50% { transform: translateY(-30px) rotate(15deg) scale(1.1); opacity: 0.6; }
+    50% { transform: translateY(-1.875rem) rotate(15deg) scale(1.1); opacity: 0.6; }
   }
 
   /* ─── PANTALLA SELECCIÓ PERFIL ─── */
@@ -1014,32 +1014,32 @@
   }
   .profile-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(6.875rem, 1fr));
+    gap: 0.75rem;
     width: 100%;
-    max-width: 520px;
-    margin-top: 20px;
+    max-width: 32.5rem;
+    margin-top: 1.25rem;
   }
   .profile-slot {
     background: var(--card-bg);
-    border: 2px dashed var(--card-border);
-    border-radius: 16px;
-    padding: 16px 10px;
+    border: 0.125rem dashed var(--card-border);
+    border-radius: 1rem;
+    padding: 1rem 0.625rem;
     cursor: pointer;
     text-align: center;
     transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    min-height: 120px;
+    gap: 0.5rem;
+    min-height: 7.5rem;
     justify-content: center;
   }
   .profile-slot:hover {
     border-style: solid;
     border-color: var(--accent);
     background: rgba(255,255,255,0.1);
-    transform: translateY(-2px);
+    transform: translateY(-0.125rem);
   }
   .profile-slot.filled {
     border-style: solid;
@@ -1048,7 +1048,7 @@
   }
   .profile-avatar { font-size: 2.4rem; }
   .profile-name { font-size: 0.85rem; font-weight: 700; color: var(--text); }
-  .profile-level { font-size: 0.75rem; color: var(--text-dim); margin-top: 2px; }
+  .profile-level { font-size: 0.75rem; color: var(--text-dim); margin-top: 0.125rem; }
   .profile-plus { font-size: 2rem; opacity: 0.4; }
 
   /* ─── PANTALLA CREACIÓ PERFIL ─── */
@@ -1060,23 +1060,23 @@
   }
   .profile-form {
     width: 100%;
-    max-width: 520px;
+    max-width: 32.5rem;
   }
   .form-group {
-    margin-bottom: 18px;
+    margin-bottom: 1.125rem;
   }
   .form-group label {
     display: block;
     font-size: 0.9rem;
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
   }
   .form-group input {
     width: 100%;
-    padding: 12px 14px;
-    border: 2px solid var(--card-border);
-    border-radius: 12px;
+    padding: 0.75rem 0.875rem;
+    border: 0.125rem solid var(--card-border);
+    border-radius: 0.75rem;
     background: rgba(0,0,0,0.2);
     color: white;
     font-family: inherit;
@@ -1091,14 +1091,14 @@
   .gender-buttons {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 0.625rem;
   }
   .gender-btn {
-    padding: 12px;
-    border: 2px solid var(--card-border);
+    padding: 0.75rem;
+    border: 0.125rem solid var(--card-border);
     background: rgba(0,0,0,0.2);
     color: white;
-    border-radius: 12px;
+    border-radius: 0.75rem;
     font-family: inherit;
     font-weight: 700;
     cursor: pointer;
@@ -1111,7 +1111,7 @@
   }
   .avatar-preview-wrap {
     text-align: center;
-    margin: 20px 0;
+    margin: 1.25rem 0;
   }
   .avatar-preview {
     font-size: 4rem;
@@ -1120,14 +1120,14 @@
   .skin-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
-    margin-bottom: 14px;
+    gap: 0.625rem;
+    margin-bottom: 0.875rem;
   }
   .skin-btn {
     width: 100%;
     aspect-ratio: 1;
-    border-radius: 10px;
-    border: 3px solid transparent;
+    border-radius: 0.625rem;
+    border: 0.1875rem solid transparent;
     cursor: pointer;
     transition: all 0.2s;
   }
@@ -1136,19 +1136,19 @@
   }
   .skin-btn.selected {
     border-color: white;
-    box-shadow: 0 0 0 2px var(--accent);
+    box-shadow: 0 0 0 0.125rem var(--accent);
   }
   .hair-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    margin-bottom: 14px;
+    gap: 0.625rem;
+    margin-bottom: 0.875rem;
   }
   .hair-btn {
-    padding: 10px;
-    border: 2px solid var(--card-border);
+    padding: 0.625rem;
+    border: 0.125rem solid var(--card-border);
     background: rgba(0,0,0,0.2);
-    border-radius: 10px;
+    border-radius: 0.625rem;
     font-size: 2rem;
     cursor: pointer;
     transition: all 0.2s;
@@ -1171,50 +1171,50 @@
   .mode-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 0.75rem;
     width: 100%;
-    max-width: 520px;
-    margin-top: 16px;
+    max-width: 32.5rem;
+    margin-top: 1rem;
   }
   .mode-card {
     position: relative;
     background: var(--card-bg);
-    border: 2px solid var(--card-border);
-    border-radius: 18px;
-    padding: 18px;
+    border: 0.125rem solid var(--card-border);
+    border-radius: 1.125rem;
+    padding: 1.125rem;
     cursor: pointer;
     text-align: left;
     transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    gap: 14px;
+    gap: 0.875rem;
     overflow: hidden;
   }
   .mode-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0;
-    width: 6px;
+    width: 0.375rem;
     height: 100%;
     background: var(--mode-color, var(--accent));
-    border-radius: 18px 0 0 18px;
+    border-radius: 1.125rem 0 0 1.125rem;
   }
   .mode-card::after {
     content: '';
     position: absolute;
-    top: -40px; right: -40px;
-    width: 140px; height: 140px;
+    top: -2.5rem; right: -2.5rem;
+    width: 8.75rem; height: 8.75rem;
     background: radial-gradient(circle, var(--mode-color, var(--accent)) 0%, transparent 70%);
     opacity: 0.15;
     pointer-events: none;
     transition: all 0.3s;
   }
   .mode-card:hover {
-    transform: translateY(-3px) scale(1.01);
+    transform: translateY(-0.1875rem) scale(1.01);
     border-color: var(--mode-color, var(--accent));
     background: rgba(255,255,255,0.1);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 1px var(--mode-color, var(--accent));
+    box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.25), 0 0 0 0.0625rem var(--mode-color, var(--accent));
   }
   .mode-card:hover::after {
     opacity: 0.3;
@@ -1224,21 +1224,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
     flex-shrink: 0;
-    min-width: 80px;
-    padding: 8px;
+    min-width: 5rem;
+    padding: 0.5rem;
   }
   .mode-icon {
-    width: 54px;
-    height: 54px;
+    width: 3.375rem;
+    height: 3.375rem;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--mode-color, var(--accent)), color-mix(in srgb, var(--mode-color, var(--accent)) 60%, white));
-    border-radius: 14px;
+    border-radius: 0.875rem;
     color: white;
-    box-shadow: 0 4px 12px color-mix(in srgb, var(--mode-color, var(--accent)) 40%, transparent);
+    box-shadow: 0 0.25rem 0.75rem color-mix(in srgb, var(--mode-color, var(--accent)) 40%, transparent);
     transition: transform 0.25s;
   }
   .mode-card:hover .mode-icon {
@@ -1250,8 +1250,8 @@
     stroke: currentColor;
   }
   .mode-visual {
-    width: 60px;
-    height: 60px;
+    width: 3.75rem;
+    height: 3.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1259,7 +1259,7 @@
   .mode-visual svg {
     width: 100%;
     height: auto;
-    max-height: 60px;
+    max-height: 3.75rem;
   }
   .mode-content {
     flex: 1;
@@ -1268,19 +1268,19 @@
   .mode-name {
     font-size: 1.1rem;
     font-weight: 900;
-    margin-bottom: 4px;
+    margin-bottom: 0.25rem;
     color: var(--text);
     letter-spacing: -0.01em;
   }
-  .mode-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.4; margin-bottom: 8px; }
+  .mode-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.4; margin-bottom: 0.5rem; }
   .mode-example {
     font-size: 0.78rem;
     color: var(--text-dim);
-    padding: 8px 10px;
+    padding: 0.5rem 0.625rem;
     background: rgba(0,0,0,0.25);
-    border-radius: 10px;
-    margin-top: 6px;
-    border-left: 3px solid var(--mode-color, var(--accent));
+    border-radius: 0.625rem;
+    margin-top: 0.375rem;
+    border-left: 0.1875rem solid var(--mode-color, var(--accent));
   }
   .mode-example strong { color: var(--mode-color, var(--accent)); }
   .mode-tag {
@@ -1291,9 +1291,9 @@
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    padding: 2px 8px;
-    border-radius: 6px;
-    margin-bottom: 6px;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.375rem;
+    margin-bottom: 0.375rem;
   }
 
   /* ─── PANTALLA SELECCIÓ NIVELL ─── */
@@ -1306,44 +1306,44 @@
   .level-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 0.75rem;
     width: 100%;
-    max-width: 520px;
-    margin-top: 24px;
+    max-width: 32.5rem;
+    margin-top: 1.5rem;
   }
   .level-card {
     background: var(--card-bg);
-    border: 2px solid var(--card-border);
-    border-radius: 14px;
-    padding: 16px;
+    border: 0.125rem solid var(--card-border);
+    border-radius: 0.875rem;
+    padding: 1rem;
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
     align-items: flex-start;
-    gap: 16px;
+    gap: 1rem;
   }
   .level-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-0.125rem);
     border-color: var(--accent);
     background: rgba(255,255,255,0.1);
   }
   .level-stars {
     font-size: 2.2rem;
-    min-width: 50px;
+    min-width: 3.125rem;
     flex-shrink: 0;
     display: flex;
-    gap: 4px;
+    gap: 0.25rem;
     align-items: center;
     color: var(--accent);
   }
   .level-stars svg {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
     fill: currentColor;
   }
   .level-info { flex: 1; }
-  .level-name { font-size: 1.05rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
-  .level-desc { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 8px; line-height: 1.4; }
+  .level-name { font-size: 1.05rem; font-weight: 800; color: var(--text); margin-bottom: 0.375rem; }
+  .level-desc { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.5rem; line-height: 1.4; }
   .level-example { font-size: 0.78rem; color: var(--text-dim); font-style: italic; }
 
   /* ─── PANTALLA PREFERÈNCIES ─── */
@@ -1356,23 +1356,23 @@
   .theme-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 0.75rem;
     width: 100%;
-    max-width: 520px;
-    margin-top: 16px;
+    max-width: 32.5rem;
+    margin-top: 1rem;
   }
   .theme-btn {
-    padding: 18px;
-    border: 2px solid var(--card-border);
+    padding: 1.125rem;
+    border: 0.125rem solid var(--card-border);
     background: var(--card-bg);
-    border-radius: 12px;
+    border-radius: 0.75rem;
     cursor: pointer;
     text-align: center;
     transition: all 0.2s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
   }
   .theme-btn:hover {
     border-color: var(--accent);
@@ -1383,8 +1383,8 @@
   }
   .theme-icon {
     font-size: 2.2rem;
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1400,15 +1400,15 @@
   /* ─── BACK BUTTON ─── */
   .back-btn {
     background: rgba(255,255,255,0.08);
-    border: 1px solid var(--card-border);
+    border: 0.0625rem solid var(--card-border);
     color: white;
-    padding: 10px 16px;
-    border-radius: 10px;
+    padding: 0.625rem 1rem;
+    border-radius: 0.625rem;
     font-family: inherit;
     font-size: 0.95rem;
     font-weight: 700;
     cursor: pointer;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
     transition: all 0.2s;
   }
   .back-btn:hover {
@@ -1423,37 +1423,37 @@
     .jm-back {
       position: fixed; inset: 0; z-index: 99999;
       background: rgba(0, 0, 0, 0.65);
-      display: none; align-items: center; justify-content: center; padding: 20px;
+      display: none; align-items: center; justify-content: center; padding: 1.25rem;
     }
     .jm-back.obert { display: flex; }
     .jm-card {
       background: #1a1148;
       color: #ffffff;
-      border: 2px solid #ffd166;
-      border-radius: 16px;
-      padding: 24px;
-      width: 100%; max-width: 420px;
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+      border: 0.125rem solid #ffd166;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      width: 100%; max-width: 26.25rem;
+      box-shadow: 0 1.125rem 3.125rem rgba(0, 0, 0, 0.45);
       font-family: inherit;
       animation: jm-entra 0.22s ease-out;
     }
-    @keyframes jm-entra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    @keyframes jm-entra { from { opacity: 0; transform: translateY(0.875rem); } to { opacity: 1; transform: none; } }
     .jm-text { font-size: 1rem; line-height: 1.55; text-align: center; }
     .jm-text small { color: rgba(255,255,255,0.65); }
     .jm-input {
       display: none;
-      width: 100%; margin-top: 16px; padding: 12px 14px;
+      width: 100%; margin-top: 1rem; padding: 0.75rem 0.875rem;
       font-family: inherit; font-size: 1.05rem; text-align: center;
       color: #ffffff; background: rgba(127, 127, 127, 0.14);
-      border: 2px solid #ffd166; border-radius: 10px;
+      border: 0.125rem solid #ffd166; border-radius: 0.625rem;
     }
     .jm-input.visible { display: block; }
-    .jm-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(127, 127, 127, 0.25); }
-    .jm-btns { display: flex; gap: 10px; margin-top: 20px; }
+    .jm-input:focus { outline: none; box-shadow: 0 0 0 0.1875rem rgba(127, 127, 127, 0.25); }
+    .jm-btns { display: flex; gap: 0.625rem; margin-top: 1.25rem; }
     .jm-btn {
-      flex: 1; padding: 12px 14px; border-radius: 10px; cursor: pointer;
+      flex: 1; padding: 0.75rem 0.875rem; border-radius: 0.625rem; cursor: pointer;
       font-family: inherit; font-size: 0.95rem; font-weight: 800;
-      border: 2px solid transparent; transition: 0.18s;
+      border: 0.125rem solid transparent; transition: 0.18s;
     }
     .jm-btn-ok { background: #ffd166; color: #1a1148; }
     .jm-btn-ok:hover { filter: brightness(1.08); }
@@ -1518,7 +1518,7 @@
 
     <div class="form-group">
       <label>Tria el teu avatar</label>
-      <div id="create-avatar-grid" style="display:grid; grid-template-columns:repeat(6,1fr); gap:8px;"></div>
+      <div id="create-avatar-grid" style="display:grid; grid-template-columns:repeat(6,1fr); gap:0.5rem;"></div>
     </div>
 
     <button class="btn btn-yellow" onclick="saveNewProfile()">Endavant! ⚡</button>
@@ -1561,32 +1561,32 @@
   <div class="logo-sub" id="cloud-status-sub">Desa el progrés al núvol, per si canvies de dispositiu</div>
 
   <div class="card" id="cloud-linked-card" style="display:none;">
-    <div style="font-weight:800; color:var(--text); margin-bottom:6px;">✅ Connectat a la classe <span id="cloud-linked-class"></span></div>
+    <div style="font-weight:800; color:var(--text); margin-bottom:0.375rem;">✅ Connectat a la classe <span id="cloud-linked-class"></span></div>
     <div style="font-size:0.85rem; color:var(--text-dim);">El teu progrés es desa automàticament en acabar cada partida.</div>
   </div>
 
   <div class="card" id="cloud-join-card">
-    <div style="font-weight:800; color:var(--text); margin-bottom:10px;">🚪 Uneix-te a una classe (primer cop)</div>
+    <div style="font-weight:800; color:var(--text); margin-bottom:0.625rem;">🚪 Uneix-te a una classe (primer cop)</div>
     <div class="form-group">
       <label>Codi de classe (te'l dona el profe)</label>
-      <input type="text" id="cloud-join-code" placeholder="p.ex. 3ESO-A26" style="width:100%; padding:12px 14px; border:2px solid var(--card-border); border-radius:12px; background:rgba(0,0,0,0.2); color:white; font-family:inherit; font-size:1rem;">
+      <input type="text" id="cloud-join-code" placeholder="p.ex. 3ESO-A26" style="width:100%; padding:0.75rem 0.875rem; border:0.125rem solid var(--card-border); border-radius:0.75rem; background:rgba(0,0,0,0.2); color:white; font-family:inherit; font-size:1rem;">
     </div>
     <button class="btn btn-green" onclick="cloudJoinClass()">Uneix-te</button>
   </div>
 
   <div class="card" id="cloud-claim-card">
-    <div style="font-weight:800; color:var(--text); margin-bottom:10px;">🔑 Ja tens un codi de recuperació?</div>
-    <div style="font-size:0.85rem; color:var(--text-dim); margin-bottom:10px;">Per continuar en un altre dispositiu, o perquè has esborrat les dades del navegador.</div>
+    <div style="font-weight:800; color:var(--text); margin-bottom:0.625rem;">🔑 Ja tens un codi de recuperació?</div>
+    <div style="font-size:0.85rem; color:var(--text-dim); margin-bottom:0.625rem;">Per continuar en un altre dispositiu, o perquè has esborrat les dades del navegador.</div>
     <div class="form-group">
       <label>Codi de classe</label>
-      <input type="text" id="cloud-claim-class" placeholder="p.ex. 3ESO-A26" style="width:100%; padding:12px 14px; border:2px solid var(--card-border); border-radius:12px; background:rgba(0,0,0,0.2); color:white; font-family:inherit; font-size:1rem; margin-bottom:10px;">
+      <input type="text" id="cloud-claim-class" placeholder="p.ex. 3ESO-A26" style="width:100%; padding:0.75rem 0.875rem; border:0.125rem solid var(--card-border); border-radius:0.75rem; background:rgba(0,0,0,0.2); color:white; font-family:inherit; font-size:1rem; margin-bottom:0.625rem;">
       <label>Codi de recuperació</label>
-      <input type="text" id="cloud-claim-code" placeholder="p.ex. AB3D-9KLM" style="width:100%; padding:12px 14px; border:2px solid var(--card-border); border-radius:12px; background:rgba(0,0,0,0.2); color:white; font-family:inherit; font-size:1rem;">
+      <input type="text" id="cloud-claim-code" placeholder="p.ex. AB3D-9KLM" style="width:100%; padding:0.75rem 0.875rem; border:0.125rem solid var(--card-border); border-radius:0.75rem; background:rgba(0,0,0,0.2); color:white; font-family:inherit; font-size:1rem;">
     </div>
     <button class="btn btn-blue" onclick="cloudClaim()">Recupera el meu progrés</button>
   </div>
 
-  <div id="cloud-feedback" style="width:100%; max-width:520px; text-align:center; margin-top:6px; font-weight:700;"></div>
+  <div id="cloud-feedback" style="width:100%; max-width:32.5rem; text-align:center; margin-top:0.375rem; font-weight:700;"></div>
 </div>
 
 <!-- ─── PANTALLA MENÚ PRINCIPAL ─── -->
@@ -1596,34 +1596,34 @@
 
   <!-- Barra de perfil -->
   <div class="card" style="background: linear-gradient(135deg, rgba(167,139,250,0.15), rgba(34,211,238,0.1));">
-    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+    <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
       <div style="font-size:2.2rem;" id="menu-avatar">👦</div>
       <div style="flex:1;">
         <div style="font-weight:800; font-size:1.1rem; color:var(--text);" id="menu-name">Jugador</div>
-        <div style="font-size:0.85rem; color:var(--text-dim); margin-top:2px;" id="menu-rang">🌱 Aprenent/a</div>
+        <div style="font-size:0.85rem; color:var(--text-dim); margin-top:0.125rem;" id="menu-rang">🌱 Aprenent/a</div>
       </div>
     </div>
     <button class="btn btn-small btn-ghost" onclick="showScreen('screen-select-profile'); renderProfiles();" style="width:100%;">👥 Canviar perfil</button>
   </div>
 
   <!-- Botó gran per jugar -->
-  <button class="btn btn-yellow" style="font-size:1.15rem; padding:18px; max-width:520px;" onclick="showScreen('screen-select-mode'); renderModes();">🎮 Jugar una partida</button>
+  <button class="btn btn-yellow" style="font-size:1.15rem; padding:1.125rem; max-width:32.5rem;" onclick="showScreen('screen-select-mode'); renderModes();">🎮 Jugar una partida</button>
 
   <!-- Stats i trofeus -->
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:520px; margin-top:12px;">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.625rem; max-width:32.5rem; margin-top:0.75rem;">
     <button class="btn btn-blue" onclick="showScreen('screen-stats'); renderStats();">📊 Estadístiques</button>
     <button class="btn btn-pink" onclick="showScreen('screen-trophies'); renderTrophies();">🏆 Trofeus</button>
   </div>
 
   <!-- Preferències i crèdits -->
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:520px; margin-top:10px;">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.625rem; max-width:32.5rem; margin-top:0.625rem;">
     <button class="btn btn-cyan" onclick="showScreen('screen-preferences'); renderThemes();">⚙️ Preferències</button>
     <button class="btn btn-ghost" onclick="showScreen('screen-credits'); unlockCurios();">👨‍💻 Crèdits</button>
   </div>
 
-  <button data-cloud-entry class="btn btn-ghost" style="margin-top:10px; max-width:520px;" onclick="showScreen('screen-cloud'); document.getElementById('cloud-feedback').textContent=''; renderCloudScreen();">☁️ Classe (desar al núvol)</button>
+  <button data-cloud-entry class="btn btn-ghost" style="margin-top:0.625rem; max-width:32.5rem;" onclick="showScreen('screen-cloud'); document.getElementById('cloud-feedback').textContent=''; renderCloudScreen();">☁️ Classe (desar al núvol)</button>
 
-  <div style="text-align:center; color:var(--text-dim); font-size:0.8rem; margin-top:16px;">
+  <div style="text-align:center; color:var(--text-dim); font-size:0.8rem; margin-top:1rem;">
     Versió 2.2 · Domina les fraccions un pas a la vegada
   </div>
 </div>
@@ -1635,11 +1635,11 @@
     <div></div>
   </div>
 
-  <div class="logo" style="font-size:2rem; margin-top:6px;">📊 Estadístiques</div>
+  <div class="logo" style="font-size:2rem; margin-top:0.375rem;">📊 Estadístiques</div>
   <div class="logo-sub">El teu progrés en cada mode i dificultat</div>
 
-  <div style="width:100%; max-width:520px; display:flex; flex-direction:column; gap:12px;">
-    <div style="background:rgba(255,255,255,0.06); border:1px solid var(--card-border); border-radius:12px; padding:14px; display:flex; justify-content:space-between; align-items:center;">
+  <div style="width:100%; max-width:32.5rem; display:flex; flex-direction:column; gap:0.75rem;">
+    <div style="background:rgba(255,255,255,0.06); border:0.0625rem solid var(--card-border); border-radius:0.75rem; padding:0.875rem; display:flex; justify-content:space-between; align-items:center;">
       <div>
         <div style="font-size:1.5rem; font-weight:900; color:var(--accent);" id="st-rang-icon">🌱</div>
         <div style="font-size:0.85rem; color:var(--text-dim);">Rang actual</div>
@@ -1650,28 +1650,28 @@
       </div>
     </div>
 
-    <div style="background:rgba(255,255,255,0.06); border:1px solid var(--card-border); border-radius:12px; padding:14px; text-align:center;">
-      <div style="font-size:1.4rem; font-weight:900; color:var(--accent); margin-bottom:4px;" id="st-partides">0</div>
+    <div style="background:rgba(255,255,255,0.06); border:0.0625rem solid var(--card-border); border-radius:0.75rem; padding:0.875rem; text-align:center;">
+      <div style="font-size:1.4rem; font-weight:900; color:var(--accent); margin-bottom:0.25rem;" id="st-partides">0</div>
       <div style="font-size:0.85rem; color:var(--text-dim);">Partides jugades</div>
     </div>
 
-    <div style="background:rgba(255,255,255,0.06); border:1px solid var(--card-border); border-radius:12px; padding:14px; text-align:center;">
-      <div style="font-size:1.4rem; font-weight:900; color:var(--green); margin-bottom:4px;" id="st-perfectes">0</div>
+    <div style="background:rgba(255,255,255,0.06); border:0.0625rem solid var(--card-border); border-radius:0.75rem; padding:0.875rem; text-align:center;">
+      <div style="font-size:1.4rem; font-weight:900; color:var(--green); margin-bottom:0.25rem;" id="st-perfectes">0</div>
       <div style="font-size:0.85rem; color:var(--text-dim);">Partides perfectes (10/10)</div>
     </div>
 
-    <div style="background:rgba(255,255,255,0.06); border:1px solid var(--card-border); border-radius:12px; padding:14px; text-align:center;">
-      <div style="font-size:1.4rem; font-weight:900; color:var(--orange); margin-bottom:4px;" id="st-ratxa">0</div>
+    <div style="background:rgba(255,255,255,0.06); border:0.0625rem solid var(--card-border); border-radius:0.75rem; padding:0.875rem; text-align:center;">
+      <div style="font-size:1.4rem; font-weight:900; color:var(--orange); margin-bottom:0.25rem;" id="st-ratxa">0</div>
       <div style="font-size:0.85rem; color:var(--text-dim);">Màxima ratxa</div>
     </div>
   </div>
 
-  <div style="width:100%; max-width:520px; margin-top:20px;">
-    <div style="font-weight:800; font-size:1.1rem; color:var(--text); margin-bottom:12px;">📈 Millors puntuacions per mode i dificultat</div>
-    <div id="stats-records" style="display:flex; flex-direction:column; gap:8px;"></div>
+  <div style="width:100%; max-width:32.5rem; margin-top:1.25rem;">
+    <div style="font-weight:800; font-size:1.1rem; color:var(--text); margin-bottom:0.75rem;">📈 Millors puntuacions per mode i dificultat</div>
+    <div id="stats-records" style="display:flex; flex-direction:column; gap:0.5rem;"></div>
   </div>
 
-  <div style="width:100%; max-width:520px; margin-top:20px;">
+  <div style="width:100%; max-width:32.5rem; margin-top:1.25rem;">
     <div class="export-import-box">
       <button class="export-btn" onclick="exportarDades()" title="Descarrega les teves dades en format JSON">
         <div class="ic">⬇️</div>
@@ -1685,7 +1685,7 @@
     </div>
   </div>
 
-  <button class="btn btn-purple" onclick="showScreen('screen-profile'); loadProfileEditor();" style="max-width:520px; margin-top:12px; width:100%;">✏️ Editar perfil</button>
+  <button class="btn btn-purple" onclick="showScreen('screen-profile'); loadProfileEditor();" style="max-width:32.5rem; margin-top:0.75rem; width:100%;">✏️ Editar perfil</button>
 </div>
 
 <!-- ─── PANTALLA EDITAR PERFIL ─── -->
@@ -1695,25 +1695,25 @@
     <div style="font-size:2rem;" id="profile-avatar-display">👤</div>
   </div>
 
-  <div class="logo" style="font-size:2rem; margin-top:6px;">✏️ Editar perfil</div>
+  <div class="logo" style="font-size:2rem; margin-top:0.375rem;">✏️ Editar perfil</div>
   <div class="logo-sub">Personalitza el teu jugador</div>
 
-  <div style="width:100%; max-width:520px; margin-top:20px;">
+  <div style="width:100%; max-width:32.5rem; margin-top:1.25rem;">
     <div class="card">
       <!-- Nom -->
-      <div style="margin-bottom:18px;">
-        <label style="display:block; font-size:0.9rem; color:var(--text-dim); margin-bottom:6px;">Nom:</label>
+      <div style="margin-bottom:1.125rem;">
+        <label style="display:block; font-size:0.9rem; color:var(--text-dim); margin-bottom:0.375rem;">Nom:</label>
         <input type="text" id="profile-nom" placeholder="Escriu el teu nom..." style="
-          width:100%; padding:10px 12px; border:1px solid var(--card-border); border-radius:8px;
+          width:100%; padding:0.625rem 0.75rem; border:0.0625rem solid var(--card-border); border-radius:0.5rem;
           background:rgba(255,255,255,0.04); color:var(--text); font-size:1rem;
           font-family:inherit; box-sizing:border-box;
         " maxlength="30">
       </div>
 
       <!-- Genere -->
-      <div style="margin-bottom:18px;">
-        <label style="display:block; font-size:0.9rem; color:var(--text-dim); margin-bottom:8px;">Genere:</label>
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+      <div style="margin-bottom:1.125rem;">
+        <label style="display:block; font-size:0.9rem; color:var(--text-dim); margin-bottom:0.5rem;">Genere:</label>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem;">
           <button class="btn btn-small btn-orange" id="gen-M" onclick="selectGender('M'); updateProfilePreview();">♂️ Noi</button>
           <button class="btn btn-small btn-ghost" id="gen-F" onclick="selectGender('F'); updateProfilePreview();">♀️ Noia</button>
           <button class="btn btn-small btn-ghost" id="gen-N" onclick="selectGender('N'); updateProfilePreview();">✨ Neutre</button>
@@ -1721,27 +1721,27 @@
       </div>
 
       <!-- Color de pell (només per a humanoides) -->
-      <div style="margin-bottom:18px;" id="skin-selector">
-        <label style="display:block; font-size:0.9rem; color:var(--text-dim); margin-bottom:8px;">Color de pell:</label>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button class="profile-skin-btn selected" onclick="selectSkin(0); updateProfilePreview();" style="background:#ffdbac; width:40px; height:40px; border-radius:8px; border:2px solid rgba(255,255,255,0.3);"></button>
-          <button class="profile-skin-btn" onclick="selectSkin(1); updateProfilePreview();" style="background:#fdbcb4; width:40px; height:40px; border-radius:8px; border:2px solid rgba(255,255,255,0.1);"></button>
-          <button class="profile-skin-btn" onclick="selectSkin(2); updateProfilePreview();" style="background:#f9a825; width:40px; height:40px; border-radius:8px; border:2px solid rgba(255,255,255,0.1);"></button>
-          <button class="profile-skin-btn" onclick="selectSkin(3); updateProfilePreview();" style="background:#d08950; width:40px; height:40px; border-radius:8px; border:2px solid rgba(255,255,255,0.1);"></button>
-          <button class="profile-skin-btn" onclick="selectSkin(4); updateProfilePreview();" style="background:#aa6c39; width:40px; height:40px; border-radius:8px; border:2px solid rgba(255,255,255,0.1);"></button>
-          <button class="profile-skin-btn" onclick="selectSkin(5); updateProfilePreview();" style="background:#6a4423; width:40px; height:40px; border-radius:8px; border:2px solid rgba(255,255,255,0.1);"></button>
+      <div style="margin-bottom:1.125rem;" id="skin-selector">
+        <label style="display:block; font-size:0.9rem; color:var(--text-dim); margin-bottom:0.5rem;">Color de pell:</label>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <button class="profile-skin-btn selected" onclick="selectSkin(0); updateProfilePreview();" style="background:#ffdbac; width:2.5rem; height:2.5rem; border-radius:0.5rem; border:0.125rem solid rgba(255,255,255,0.3);"></button>
+          <button class="profile-skin-btn" onclick="selectSkin(1); updateProfilePreview();" style="background:#fdbcb4; width:2.5rem; height:2.5rem; border-radius:0.5rem; border:0.125rem solid rgba(255,255,255,0.1);"></button>
+          <button class="profile-skin-btn" onclick="selectSkin(2); updateProfilePreview();" style="background:#f9a825; width:2.5rem; height:2.5rem; border-radius:0.5rem; border:0.125rem solid rgba(255,255,255,0.1);"></button>
+          <button class="profile-skin-btn" onclick="selectSkin(3); updateProfilePreview();" style="background:#d08950; width:2.5rem; height:2.5rem; border-radius:0.5rem; border:0.125rem solid rgba(255,255,255,0.1);"></button>
+          <button class="profile-skin-btn" onclick="selectSkin(4); updateProfilePreview();" style="background:#aa6c39; width:2.5rem; height:2.5rem; border-radius:0.5rem; border:0.125rem solid rgba(255,255,255,0.1);"></button>
+          <button class="profile-skin-btn" onclick="selectSkin(5); updateProfilePreview();" style="background:#6a4423; width:2.5rem; height:2.5rem; border-radius:0.5rem; border:0.125rem solid rgba(255,255,255,0.1);"></button>
         </div>
       </div>
 
       <!-- Avatar selector -->
-      <div style="margin-bottom:18px;">
-        <label style="display:block; font-size:0.9rem; color:var(--text-dim); margin-bottom:8px;">Cara:</label>
-        <div id="avatar-grid" style="display:grid; grid-template-columns:repeat(6,1fr); gap:8px;">
+      <div style="margin-bottom:1.125rem;">
+        <label style="display:block; font-size:0.9rem; color:var(--text-dim); margin-bottom:0.5rem;">Cara:</label>
+        <div id="avatar-grid" style="display:grid; grid-template-columns:repeat(6,1fr); gap:0.5rem;">
         </div>
       </div>
 
       <!-- Botones -->
-      <div style="display:flex; gap:10px; margin-top:20px;">
+      <div style="display:flex; gap:0.625rem; margin-top:1.25rem;">
         <button class="btn btn-green" onclick="saveProfile()" style="flex:1;">💾 Guardar</button>
         <button class="btn btn-ghost" onclick="showScreen('screen-stats')" style="flex:1;">Cancel·lar</button>
       </div>
@@ -1751,11 +1751,11 @@
 
 <style>
 .profile-skin-btn { cursor: pointer; transition: border 0.2s; }
-.profile-skin-btn:hover { border: 2px solid rgba(255,255,255,0.5) !important; }
-.profile-skin-btn.selected { border: 2px solid rgba(255,255,255,0.8) !important; box-shadow: 0 0 8px rgba(255,255,255,0.4); }
-.avatar-option { padding:8px; border:2px solid transparent; border-radius:8px; background:rgba(255,255,255,0.04); cursor:pointer; font-size:2rem; transition:all 0.2s; }
-.avatar-option:hover { background:rgba(255,255,255,0.08); border:2px solid var(--card-border); }
-.avatar-option.selected { border:2px solid var(--accent); background:rgba(255,209,102,0.15); box-shadow: 0 0 12px rgba(255,209,102,0.3); }
+.profile-skin-btn:hover { border: 0.125rem solid rgba(255,255,255,0.5) !important; }
+.profile-skin-btn.selected { border: 0.125rem solid rgba(255,255,255,0.8) !important; box-shadow: 0 0 0.5rem rgba(255,255,255,0.4); }
+.avatar-option { padding:0.5rem; border:0.125rem solid transparent; border-radius:0.5rem; background:rgba(255,255,255,0.04); cursor:pointer; font-size:2rem; transition:all 0.2s; }
+.avatar-option:hover { background:rgba(255,255,255,0.08); border:0.125rem solid var(--card-border); }
+.avatar-option.selected { border:0.125rem solid var(--accent); background:rgba(255,209,102,0.15); box-shadow: 0 0 0.75rem rgba(255,209,102,0.3); }
 </style>
 
 <!-- ─── PANTALLA TROFEUS ─── -->
@@ -1765,7 +1765,7 @@
     <div></div>
   </div>
 
-  <div class="logo" style="font-size:2rem; margin-top:6px;">🏆 Trofeus</div>
+  <div class="logo" style="font-size:2rem; margin-top:0.375rem;">🏆 Trofeus</div>
   <div class="logo-sub">El teu progrés com a expert en fraccions</div>
 
   <div class="trophy-stats">
@@ -1793,10 +1793,10 @@
     <div></div>
   </div>
 
-  <div class="logo" style="font-size:2rem; margin-top:6px;">👨‍💻 Crèdits</div>
+  <div class="logo" style="font-size:2rem; margin-top:0.375rem;">👨‍💻 Crèdits</div>
   <div class="logo-sub">Gràcies a tots els que han fet possible aquest joc</div>
 
-  <div style="width:100%; max-width:520px; display:flex; flex-direction:column; gap:16px;">
+  <div style="width:100%; max-width:32.5rem; display:flex; flex-direction:column; gap:1rem;">
 
     <div class="credit-section">
       <div class="credit-title">💻 Desenvolupament</div>
@@ -1844,7 +1844,7 @@
         Tots els drets reservats<br>
         <span>Idea original, disseny i programació: Robert Potau Nuñez amb Claude Code (Anthropic).</span>
       </div>
-      <div style="margin-top:12px;font-size:.66rem;line-height:1.5;opacity:.55;text-align:center">Tipografia <strong>Nunito</strong> — SIL Open Font License 1.1.</div>
+      <div style="margin-top:0.75rem;font-size:.66rem;line-height:1.5;opacity:.55;text-align:center">Tipografia <strong>Nunito</strong> — SIL Open Font License 1.1.</div>
     </div>
   </div>
 </div>
@@ -1881,11 +1881,11 @@
       <div class="result-stat"><div class="v" id="rs-wrong">0</div><div class="l">Errors</div></div>
       <div class="result-stat"><div class="v" id="rs-pct">0%</div><div class="l">Encert</div></div>
     </div>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; padding:8px 12px; background:rgba(255,255,255,0.05); border-radius:10px; border:1px solid var(--card-border);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.625rem; padding:0.5rem 0.75rem; background:rgba(255,255,255,0.05); border-radius:0.625rem; border:0.0625rem solid var(--card-border);">
       <div style="font-size:0.85rem; color:var(--text-dim);">Rang actual</div>
       <div style="font-weight:800; color:var(--text);" id="rs-rang">🌱 Aprenent</div>
     </div>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; padding:8px 12px; background:rgba(255,255,255,0.05); border-radius:10px; border:1px solid var(--card-border);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.375rem; padding:0.5rem 0.75rem; background:rgba(255,255,255,0.05); border-radius:0.625rem; border:0.0625rem solid var(--card-border);">
       <div style="font-size:0.85rem; color:var(--text-dim);">XP guanyat</div>
       <div style="font-weight:900; color:#4ade80;" id="rs-xp">+0 XP</div>
     </div>
@@ -4526,5 +4526,35 @@ window.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
+<script>/* RESPONSIVE-FIT v2: mida base (rem) adaptada a la pantalla; mòbil = 1 */
+(function(){
+var FM=1.6,W0=560,r=document.documentElement,cap=FM,tm=null,seen=new WeakMap();
+function fits(f){r.style.fontSize=(16*f)+'px';return r.scrollHeight<=window.innerHeight+3&&r.scrollWidth<=window.innerWidth+3;}
+function fit(reset){
+  if(reset)cap=FM;
+  var top=Math.max(1,Math.min(cap,window.innerWidth/W0));
+  if(top<=1.001){r.style.fontSize='16px';cap=1;return;}
+  var lo=1,hi=top;
+  if(fits(hi)){lo=hi;}else{for(var i=0;i<6;i++){var mid=(lo+hi)/2;if(fits(mid))lo=mid;else hi=mid;}}
+  r.style.fontSize=(16*lo)+'px';cap=lo;
+}
+function sched(reset){clearTimeout(tm);tm=setTimeout(function(){fit(reset);},110);}
+var SCR=/screen|page|view|scene|panel|modal|overlay|menu|game|home|splash|app/i;
+new MutationObserver(function(ms){
+  var reset=false;
+  for(var i=0;i<ms.length&&!reset;i++){
+    var e=ms[i].target;if(e.nodeType!==1||e===r)continue;
+    if(e.parentElement!==document.body&&!SCR.test((e.id||'')+' '+(typeof e.className==='string'?e.className:'')))continue;
+    var k=(typeof e.className==='string'?e.className:'')+'|'+e.style.display+'|'+e.hidden;
+    if(seen.get(e)!==k){seen.set(e,k);reset=true;}
+  }
+  if(reset)sched(true);
+}).observe(document.body,{attributes:true,attributeFilter:['class','style','hidden'],subtree:true,childList:false});
+window.addEventListener('resize',function(){sched(true);});
+window.addEventListener('orientationchange',function(){sched(true);});
+window.addEventListener('load',function(){sched(true);[1500,4700,6500].forEach(function(t){setTimeout(function(){sched(true);},t);});});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){sched(true);});
+fit(true);
+})();</script>
 </body>
 </html>
