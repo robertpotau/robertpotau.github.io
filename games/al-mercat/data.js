@@ -1,6 +1,6 @@
 "use strict";
 /* Al Mercat! — dades: productes, nivells, textos (ca/es), trofeus, rangs */
-const VERSION="1.2", VERSION_DATE="2026-09-26";
+const VERSION="1.3", VERSION_DATE="2026-09-26";
 
 /* Valors en CÈNTIMS (enters, per evitar errors de coma flotant) */
 const COINS=[1,2,5,10,20,50,100,200];
@@ -207,3 +207,68 @@ const SAY={
  es:{buy:"Compras",each:"cada",perKg:"el kilo",halfKg:"medio kilo",kgs:"kilos",kgOne:"un kilo",grams:"gramos",euro:["euro","euros"],cent:["céntimo","céntimos"],with:"con",
      of:(n)=>"de "+n,minus:"menos",custPays:"El cliente paga con",gives:"Devuélvele la vuelta.",paid:"Paga",q:"¿Cuánto cuesta todo?",costs:"cuesta",purchase:"La compra vale"},
 };
+
+/* ───────── v1.3: meta dels nivells (etiquetes, exemple animat, productes del nivell 1) ───────── */
+const LEVEL_META={
+ 1:{ops:["mul"],acts:["pay"],cats:["pa","fruita","dolc"],ex:{kind:"pay",lines:[{pid:"poma",mode:"u",qty:5,price:100}],coins:[100,100,100,100,100]}},
+ 2:{ops:["mul"],acts:["pay"],ex:{kind:"pay",lines:[{pid:"llet",mode:"u",qty:3,price:200}],coins:[200,200,200]}},
+ 3:{ops:["add","mul"],acts:["total","pay"],ex:{kind:"pay",lines:[{pid:"pa",mode:"u",qty:2,price:100},{pid:"suc",mode:"u",qty:1,price:200}],coins:[200,200]}},
+ 4:{ops:["add","mul","dec"],acts:["total","pay"],ex:{kind:"pay",lines:[{pid:"galetes",mode:"u",qty:3,price:150}],coins:[200,200,50]}},
+ 5:{ops:["add","mul","dec"],acts:["total","pay"],ex:{kind:"pay",lines:[{pid:"poma",mode:"u",qty:3,price:75}],coins:[200,20,5]}},
+ 6:{ops:["sub"],acts:["change"],ex:{kind:"change",lines:[{pid:"suc",mode:"u",qty:1,price:150}],given:500,coins:[200,100,50]}},
+ 7:{ops:["add","mul","sub"],acts:["total","change"],ex:{kind:"change",lines:[{pid:"pa",mode:"u",qty:2,price:125},{pid:"galetes",mode:"u",qty:1,price:150}],given:1000,coins:[500,100]}},
+ 8:{ops:["mul"],acts:["kg","total","pay"],ex:{kind:"pay",lines:[{pid:"poma",mode:"kg",qty:1,price:300,grams:2000}],coins:[200,200,200]}},
+ 9:{ops:["mul","half"],acts:["kg","total","pay"],ex:{kind:"pay",lines:[{pid:"poma",mode:"kg",qty:1,price:300,grams:500}],coins:[100,50]}},
+ 10:{ops:["mul","quarter"],acts:["kg","total","pay"],ex:{kind:"pay",lines:[{pid:"poma",mode:"kg",qty:1,price:400,grams:250}],coins:[100]}},
+};
+LEVELS.forEach(L=>Object.assign(L,LEVEL_META[L.id]));
+LEVELS.forEach(L=>{L.ex.lines.forEach(l=>{l.total=l.mode==="kg"?l.price*l.grams/1000:l.price*l.qty;});L.ex.total=L.ex.lines.reduce((a,l)=>a+l.total,0);if(L.ex.given)L.ex.change=L.ex.given-L.ex.total;});
+
+const LVX={
+ca:[
+ {do:"Compra 2 a 5 productes iguals i paga amb monedes d'1 i 2 €.",learn:"Multiplicar és sumar molts cops: 5 × 1 € = 5 €."},
+ {do:"Compra productes de fins a 10 € i paga amb monedes i bitllets.",learn:"Multiplicar amb preus més grans: 3 × 2 € = 6 €."},
+ {do:"Escriu el total d'una llista de 2 o 3 productes i després paga.",learn:"Sumar preus i multiplicar: 2 × 1 € + 1 × 2 € = 4 €."},
+ {do:"Preus amb mig euro (0,50 €, 1,50 €…). Escriu el total i paga amb monedes de 50 cèntims.",learn:"Decimals fàcils: 3 × 1,50 € = 4,50 €."},
+ {do:"Preus com 1,25 € o 0,75 €. Escriu el total i paga amb monedes de cèntims.",learn:"Sumar i multiplicar amb cèntims: 3 × 0,75 € = 2,25 €."},
+ {do:"Ets el botiguer! El client paga amb un bitllet: torna-li el canvi amb monedes.",learn:"Restar: 5 € − 3,50 € = 1,50 €."},
+ {do:"Calcula el total d'una compra i després torna el canvi al client.",learn:"Sumar, multiplicar i restar, tot junt."},
+ {do:"Compra productes pel seu pes (1, 2 o 3 kg). Escriu el total i paga.",learn:"Preu per quilo: 2 kg × 3 € = 6 €."},
+ {do:"Pesa mig quilo o quilo i mig. Escriu el total i paga.",learn:"Mig quilo és la meitat del preu."},
+ {do:"Pesa 250 g o 750 g. Escriu el total i paga.",learn:"250 g és un quart de quilo: el preu ÷ 4."},
+],
+es:[
+ {do:"Compra de 2 a 5 productos iguales y paga con monedas de 1 y 2 €.",learn:"Multiplicar es sumar muchas veces: 5 × 1 € = 5 €."},
+ {do:"Compra productos de hasta 10 € y paga con monedas y billetes.",learn:"Multiplicar con precios más grandes: 3 × 2 € = 6 €."},
+ {do:"Escribe el total de una lista de 2 o 3 productos y luego paga.",learn:"Sumar precios y multiplicar: 2 × 1 € + 1 × 2 € = 4 €."},
+ {do:"Precios con medio euro (0,50 €, 1,50 €…). Escribe el total y paga con monedas de 50 céntimos.",learn:"Decimales fáciles: 3 × 1,50 € = 4,50 €."},
+ {do:"Precios como 1,25 € o 0,75 €. Escribe el total y paga con monedas de céntimos.",learn:"Sumar y multiplicar con céntimos: 3 × 0,75 € = 2,25 €."},
+ {do:"¡Eres el tendero! El cliente paga con un billete: devuélvele la vuelta con monedas.",learn:"Restar: 5 € − 3,50 € = 1,50 €."},
+ {do:"Calcula el total de una compra y luego devuelve la vuelta al cliente.",learn:"Sumar, multiplicar y restar, todo junto."},
+ {do:"Compra productos por su peso (1, 2 o 3 kg). Escribe el total y paga.",learn:"Precio por kilo: 2 kg × 3 € = 6 €."},
+ {do:"Pesa medio kilo o kilo y medio. Escribe el total y paga.",learn:"Medio kilo es la mitad del precio."},
+ {do:"Pesa 250 g o 750 g. Escribe el total y paga.",learn:"250 g es un cuarto de kilo: el precio ÷ 4."},
+]};
+Object.assign(I18N.ca,{
+ doLbl:"Què faràs",learnLbl:"Què aprens",play:"Juga!",close:"Tanca",
+ opAdd:"Sumar",opMul:"Multiplicar",opSub:"Restar",opDec:"Decimals",opHalf:"Mig quilo",opQuarter:"Quart de quilo",
+ actPay:"Pagar",actTotal:"Calcular el total",actChange:"Fer de botiguer",actKg:"Pesar",
+ payWith:"Amb què jugues",nRounds:"compres",helpOn:"Amb ajuda",helpOff:"Sense ajuda",best:"Millor",
+ grpEuros:"Euros",grpCents:"Cèntims",grpChange:"Canvi",grpKilos:"Quilos",
+ xpMissing:"Et falten {n} XP per a {r}",xpMax:"Has arribat al rang màxim!",
+ dataTitle:"Les meves dades",dataExport:"Exportar",dataImport:"Importar",dataHint:"Desa el teu progrés en un fitxer o recupera'l en un altre dispositiu.",
+ dataExported:"Dades exportades",dataImported:"Perfils importats: {n}",dataBad:"Fitxer no vàlid",dataNoSlot:"No hi ha lloc: elimina un perfil",
+ replay:"Torna a veure",watching:"Mira l'exemple",
+});
+Object.assign(I18N.es,{
+ doLbl:"Qué harás",learnLbl:"Qué aprendes",play:"¡Juega!",close:"Cerrar",
+ opAdd:"Sumar",opMul:"Multiplicar",opSub:"Restar",opDec:"Decimales",opHalf:"Medio kilo",opQuarter:"Cuarto de kilo",
+ actPay:"Pagar",actTotal:"Calcular el total",actChange:"Hacer de tendero",actKg:"Pesar",
+ payWith:"Con qué juegas",nRounds:"compras",helpOn:"Con ayuda",helpOff:"Sin ayuda",best:"Mejor",
+ grpEuros:"Euros",grpCents:"Céntimos",grpChange:"Vuelta",grpKilos:"Kilos",
+ xpMissing:"Te faltan {n} XP para {r}",xpMax:"¡Has llegado al rango máximo!",
+ dataTitle:"Mis datos",dataExport:"Exportar",dataImport:"Importar",dataHint:"Guarda tu progreso en un archivo o recupéralo en otro dispositivo.",
+ dataExported:"Datos exportados",dataImported:"Perfiles importados: {n}",dataBad:"Archivo no válido",dataNoSlot:"No hay sitio: elimina un perfil",
+ replay:"Volver a ver",watching:"Mira el ejemplo",
+});
+SAY.ca.each="Cada";SAY.es.each="Cada";

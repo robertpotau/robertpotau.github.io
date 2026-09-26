@@ -76,7 +76,7 @@ function billSVG(v){
 function dSVG(v){return isBill(v)?billSVG(v):coinSVG(v);}
 function dBox(v,scale){
   const w=DW[v]*(scale||1),h=isBill(v)?w*76/140:w;
-  return `style="width:calc(${w}px*var(--cs));height:calc(${h}px*var(--cs))"`;
+  return `style="width:calc(${w/16}rem*var(--cs));height:calc(${h/16}rem*var(--cs))"`;
 }
 
 /* ───────── So (WebAudio) ───────── */
@@ -91,8 +91,28 @@ function tone(f,d,type,when,vol){
     o.connect(g);g.connect(actx.destination);o.start(t0);o.stop(t0+d+.02);
   }catch(e){}
 }
+let noiseBuf=null;
+function noise(d,when,vol,fq){
+  if(!settings.sound)return;
+  try{
+    actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    if(!noiseBuf){const n=Math.floor(actx.sampleRate*.3);noiseBuf=actx.createBuffer(1,n,actx.sampleRate);const ch=noiseBuf.getChannelData(0);for(let i=0;i<n;i++)ch[i]=Math.random()*2-1;}
+    const buf=noiseBuf;
+    const s=actx.createBufferSource(),f=actx.createBiquadFilter(),gn=actx.createGain(),t0=actx.currentTime+(when||0);
+    s.buffer=buf;f.type="bandpass";f.frequency.value=fq||3000;f.Q.value=.8;
+    gn.gain.setValueAtTime(vol||.1,t0);gn.gain.exponentialRampToValueAtTime(.0001,t0+d);
+    s.connect(f);f.connect(gn);gn.connect(actx.destination);s.start(t0,0,Math.min(d,.3));s.onended=()=>{try{s.disconnect();f.disconnect();gn.disconnect();}catch(e){}};
+  }catch(e){}
+}
 const sfx={
-  coin(){tone(1900,.09,"triangle",0,.1);tone(2600,.12,"triangle",.05,.08);},
+  coin(v){const f=1500+Math.max(0,COINS.indexOf(v))*180;tone(f,.09,"triangle",0,.1);tone(f*1.4,.12,"triangle",.05,.08);},
+  bill(v){const f={500:520,1000:620,2000:740,5000:880}[v]||600;noise(.14,0,.09,2800);noise(.1,.09,.06,3600);tone(f,.12,"sine",.02,.07);tone(f*1.5,.16,"sine",.09,.05);},
+  chaching(){
+    noise(.08,0,.12,5000);tone(1200,.08,"square",0,.06);tone(1600,.18,"triangle",.09,.1);
+    [2093,2637,3136].forEach((f,i)=>tone(f,.7,"sine",.22+i*.02,.07));
+    for(let i=0;i<9;i++)tone(1800+Math.random()*1400,.09,"triangle",.55+i*.07+Math.random()*.03,.07);
+    tone(1568,.5,"sine",1.25,.05);
+  },
   remove(){tone(700,.08,"triangle",0,.08);},
   ok(){[523,659,784,1047].forEach((f,i)=>tone(f,.18,"sine",i*.09,.12));},
   bad(){tone(200,.25,"sawtooth",0,.09);tone(150,.3,"sawtooth",.12,.08);},
@@ -168,11 +188,28 @@ function avatarOf(p){
 }
 
 /* ───────── Pantalles ───────── */
+/* Ajust a la pantalla: la mida base (rem) s'adapta perquè el joc càpiga sense fer scroll */
+let fitCap=1.6;
+function fitScreen(){
+  const root=document.documentElement,act=document.querySelector(".screen.active");if(!act)return;
+  const vw=window.innerWidth,vh=window.innerHeight;
+  if(act.id!=="scrGame"){root.style.fontSize=(16*Math.max(1,Math.min(1.35,vw/1000)))+"px";return;}
+  const two=vw>=900||(vw>vh&&vw>=640),floor=vw<600?.9:.7;
+  const top=Math.min(1.6,fitCap,two?vw/720:vw/390);
+  for(let f=Math.max(top,floor);f>=floor-.001;f-=.05){
+    root.style.fontSize=(16*f)+"px";
+    if(root.scrollHeight<=vh+3&&root.scrollWidth<=vw+3){fitCap=f;return;}
+  }
+  fitCap=floor;root.style.fontSize=(16*floor)+"px";
+}
+window.addEventListener("resize",()=>{fitCap=1.6;fitScreen();});
 function show(id){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   $(id).classList.add("active");
   $("fabs").classList.toggle("hidden",id==="scrSplash"||id==="scrGame");
   window.scrollTo(0,0);
+  if(id==="scrGame")fitCap=1.6;
+  fitScreen();
 }
 function multiClick(elm,cb){
   let n=0,tm=null;
@@ -274,25 +311,87 @@ function richCard(color,icon,title,desc,example,onClick,extra,cls,icx){
     `<div class="rich-desc lbl">${desc}</div>${example?`<div class="rich-example lbl">${example}</div>`:""}${icx?`<div class="icx">${icx}</div>`:""}${extra&&extra.stars!=null?`<div class="stars">${stars(extra.stars)}</div>`:""}</div>`);
   d.style.setProperty("--card-color",color);d.onclick=onClick;return d;
 }
+const LEVEL_GROUPS=[["💶","grpEuros",1,3],["🪙","grpCents",4,5],["🔄","grpChange",6,7],["⚖️","grpKilos",8,10]];
+const OPS={add:["➕","opAdd"],mul:["✖️","opMul"],sub:["➖","opSub"],dec:[",","opDec"],half:["½","opHalf"],quarter:["¼","opQuarter"]};
+const ACTS={pay:["🛒","actPay"],total:["🧮","actTotal"],change:["🔄","actChange"],kg:["⚖️","actKg"]};
+const tagsHTML=L=>L.acts.map(a=>`<span class="tag act">${ACTS[a][0]}<span class="lbl"> ${t(ACTS[a][1])}</span></span>`).join("")+L.ops.map(o=>`<span class="tag">${OPS[o][0]}<span class="lbl"> ${t(OPS[o][1])}</span></span>`).join("");
+const miniHTML=(L,sc)=>L.denoms.map(v=>`<span class="mc" ${dBox(v,sc)}>${dSVG(v)}</span>`).join("");
+const helpFor=lv=>settings.help==="always"||(settings.help==="auto"&&lv<=4);
+function levelCard(L,p,cls){
+  const tx=I18N[tl()].lv[L.id-1],x=LVX[tl()][L.id-1],lvd=p.lv[L.id]||{stars:0},n=settings.rounds||L.rounds;
+  const d=el("div","rich-card lv"+(cls?" "+cls:""),
+    `<div class="rich-icon">${L.icon}<span class="num">${L.id}</span></div><div class="rich-content">`+
+    `<div class="rich-title lbl">${tx.t}</div><div class="tags">${tagsHTML(L)}</div>`+
+    `<div class="dolearn lbl"><b>${t("doLbl")}:</b> ${x.do}<br><b>${t("learnLbl")}:</b> ${x.learn}</div>`+
+    `<div class="icx">${L.ic}</div><div class="mini">${miniHTML(L,.5)}</div>`+
+    `<div class="lvmeta"><span class="stars">${stars(lvd.stars||0)}</span><span>🛒 ${n}<span class="lbl"> ${t("nRounds")}</span></span>`+
+    `<span>🧮<span class="lbl"> ${helpFor(L.id)?t("helpOn"):t("helpOff")}</span></span>${lvd.best?`<span>🏅 ${lvd.best}%</span>`:""}</div></div>`);
+  d.style.setProperty("--card-color",L.color);d.onclick=()=>openBrief(L.id);return d;
+}
+
+/* Presentació del nivell amb exemple animat */
+let briefTm=[];
+function stopBrief(){briefTm.forEach(clearTimeout);briefTm=[];}
+const later=(fn,ms)=>briefTm.push(setTimeout(fn,ms));
+function openBrief(lv){
+  const L=LEVELS[lv-1],tx=I18N[tl()].lv[lv-1],x=LVX[tl()][lv-1];
+  openOv(`<div class="brief"><div class="bh"><div class="rich-icon" style="--card-color:${L.color}">${L.icon}</div><div><h2>${tx.t}</h2><div class="tags">${tagsHTML(L)}</div></div><button class="iconbtn" data-close style="margin-left:auto">✖</button></div>`+
+    `<div class="dolearn lbl" style="margin-top:.6rem;font-size:.95rem"><b>${t("doLbl")}:</b> ${x.do}<br><b>${t("learnLbl")}:</b> ${x.learn}</div>`+
+    `<div class="stage" id="bStage"></div>`+
+    `<div class="zone-title"><span>🪙 <span class="lbl">${t("payWith")}</span></span></div><div class="mini">${miniHTML(L,.8)}</div>`+
+    `<div class="btnrow"><button class="btn ghost" id="bReplay">🔁 <span class="lbl">${t("replay")}</span></button><button class="btn yellow big" id="bPlay">▶ <span class="lbl">${t("play")}</span></button></div></div>`,
+    ()=>{
+      $("bPlay").onclick=()=>{closeOv();startSession(lv,false);};
+      $("bReplay").onclick=()=>runBrief(L);
+      runBrief(L);
+      if(autoReadOn())speak(tx.t+". "+x.do);
+    },true);
+}
+function runBrief(L){
+  stopBrief();
+  const ex=L.ex,st=$("bStage");if(!st)return;
+  const isCh=ex.kind==="change";
+  const cust=isCh?`<div class="customer"><div class="cav">🧑</div><div style="width:calc((${DW[ex.given]})/16*1rem);height:calc((${DW[ex.given]*76/140})/16*1rem)">${billSVG(ex.given)}</div><div style="font-size:1.4rem;font-weight:900">${eur(ex.given)}</div></div>`:"";
+  st.innerHTML=`<div class="lrows">${ex.lines.map(rowHTML).join("")}</div>${isCh?`<div class="totalline">🧾 ${t("purchase")}: ${eur(ex.total)}</div>`:""}${cust}`+
+    `<div class="counter" id="bCounter"><div class="hintdrop">🪙💶</div></div><div class="sumline"><span>${isCh?"🪙 "+t("change"):"💶 "+t("total")}</span><b id="bSum">0 €</b></div><div class="eqline" id="bEq"></div>`;
+  let sum=0,delay=1100;
+  ex.coins.forEach(v=>{
+    later(()=>{
+      const c=$("bCounter");if(!c)return;
+      const h=c.querySelector(".hintdrop");if(h)h.remove();
+      const b=el("span","cItem"+(isBill(v)?" bill":""),dSVG(v));b.setAttribute("style",dBox(v,.8).slice(7,-1));c.appendChild(b);
+      sum+=v;$("bSum").textContent=eur(sum);
+      if(isBill(v))sfx.bill(v);else sfx.coin(v);
+    },delay);
+    delay+=800;
+  });
+  later(()=>{const e=$("bEq");if(e){e.innerHTML="✔ "+equation(ex,isCh?"change":"pay");sfx.register();}},delay+250);
+  later(()=>runBrief(L),delay+4200);
+}
+
 function showMenu(){
   const p=P();applyI18n();show("scrMenu");
   const ri_=rankIdx(p.xp),nx=RANKS[ri_+1];
   const pct=nx?Math.round((p.xp-RANKS[ri_].xp)/(nx.xp-RANKS[ri_].xp)*100):100;
   $("pbar").innerHTML=`<div class="av">${avatarOf(p)}</div><div class="info"><div class="nm">${esc(p.name)}</div><div class="rk">${RANKS[ri_].e} <span class="lbl">${rankName(p,ri_)}</span></div>`+
-    `<div class="xpbar"><i style="width:${pct}%"></i></div><div class="xplbl">${nx?(nx.xp-p.xp)+" XP → "+nx.e:"🏆 MAX"} · ${p.xp} XP</div></div>`;
+    `<div class="xpbar"><i style="width:${pct}%"></i></div><div class="xplbl">${nx?`<span class="lbl">${t("xpMissing",{n:nx.xp-p.xp,r:nx.e+" "+rankName(p,ri_+1)})}</span><span class="icx">${nx.xp-p.xp} XP → ${nx.e}</span>`:`🏆 <span class="lbl">${t("xpMax")}</span>`} · ${p.xp} XP</div></div>`;
   // Repte del dia
   const db=$("dailyBox");db.innerHTML="";
   const done=p.daily.last===todayStr();
   db.appendChild(richCard("#8b5cf6","📅",t("dailyTitle"),done?t("dailyDone"):t("dailyDesc"),p.daily.streak>0?`🔥 ${p.daily.streak} ${t("dailyStreak")}`:"",()=>{if(!done)startSession(0,true);else{sfx.remove();}},{stars:null},done?"":"rec","📅 ×6"+(p.daily.streak>0?" 🔥"+p.daily.streak:"")));
   if(done)db.firstChild.style.opacity=.6;
-  // Nivells
-  const g=$("levelGrid");g.innerHTML="";
+  // Nivells (en 4 blocs)
+  const lg=$("levelGrid");lg.innerHTML="";
   let recDone=false;
-  LEVELS.forEach((L,i)=>{
-    const st=(p.lv[L.id]&&p.lv[L.id].stars)||0;
-    const tx=I18N[tl()].lv[i];
-    let cls="";if(!recDone&&st===0){cls="rec";recDone=true;}
-    g.appendChild(richCard(L.color,L.icon,tx.t,tx.d,tx.e,()=>startSession(L.id,false),{num:L.id,stars:st},cls,L.ic));
+  LEVEL_GROUPS.forEach(([ic,key,a,b])=>{
+    lg.appendChild(el("div","lvgroup",`<i>${ic}</i><span class="lbl">${t(key)}</span><small>${a}–${b}</small>`));
+    const gr=el("div","rich-grid");
+    for(let n=a;n<=b;n++){
+      const L=LEVELS[n-1],st=(p.lv[L.id]&&p.lv[L.id].stars)||0;
+      let cls="";if(!recDone&&st===0){cls="rec";recDone=true;}
+      gr.appendChild(levelCard(L,p,cls));
+    }
+    lg.appendChild(gr);
   });
 }
 $("bSwitch").onclick=()=>{save();show("scrProfiles");renderProfiles();};
@@ -315,6 +414,7 @@ function genRound(lv){
     let ok=true;
     for(let k=0;k<n;k++){
       let pool=productsFor(L.mode).filter(p=>!used.has(p.id));
+      if(L.cats)pool=pool.filter(p=>L.cats.includes(p.cat));
       if(L.mode==="kg")pool=pool.filter(p=>p.kp[0]<=L.kgcap);
       if(!pool.length){ok=false;break;}
       const p=pick(pool);used.add(p.id);
@@ -395,7 +495,7 @@ function renderRound(){
   S.rounds.forEach((_,i)=>{dots.appendChild(el("div","dot"+(i<S.i?(" "+(S.res[i]||"ok")):(i===S.i?" cur":""))));});
   $("lrows").innerHTML=r.lines.map(rowHTML).join("");
   $("kAv").textContent=pick(["🧑‍🌾","👩‍🌾","🧑‍🍳","👨‍🌾","👩‍🍳"]);
-  setStepUI(true);
+  fitCap=1.6;setStepUI(true);fitScreen();
 }
 function setStepUI(speakNow){
   const r=R.r;
@@ -407,7 +507,7 @@ function setStepUI(speakNow){
   $("totalLine").innerHTML=known?`<div class="totalline">🧾 ${t("purchase")}: ${eur(r.total)}</div>`:"";
   const cb=$("custBox");
   if(r.kind==="change"){
-    cb.innerHTML=(R.step==="change")?`<div class="customer"><div class="cav">🧑</div><div><div class="lbl" style="font-size:.85rem">${t("custPays")}</div><div style="width:calc(${DW[r.given]}px*var(--cs));height:calc(${DW[r.given]*76/140}px*var(--cs))">${billSVG(r.given)}</div></div><div style="font-size:1.6rem;font-weight:900">${eur(r.given)}</div></div>`:"";
+    cb.innerHTML=(R.step==="change")?`<div class="customer"><div class="cav">🧑</div><div><div class="lbl" style="font-size:.85rem">${t("custPays")}</div><div style="width:calc(${(DW[r.given])/16}rem*var(--cs));height:calc(${(DW[r.given]*76/140)/16}rem*var(--cs))">${billSVG(r.given)}</div></div><div style="font-size:1.6rem;font-weight:900">${eur(r.given)}</div></div>`:"";
   }else cb.innerHTML="";
   let ico="",txt="";
   if(R.step==="total"){ico="🧮❓";txt=t("qTotal");}
@@ -461,7 +561,7 @@ function checkTotal(){
   if(v===R.r.total){
     sfx.ok();
     R.step=R.r.kind==="change"?"change":"pay";
-    const err=R.err;setStepUI(false);R.err=err;
+    const err=R.err;setStepUI(false);R.err=err;fitScreen();
     $("fb").innerHTML=`<div class="fb ok">✔ ${t("correct")} ${eur(R.r.total)}</div>`;
     if(autoReadOn())speak(speechText());
   }else{
@@ -508,7 +608,7 @@ function bindDrag(btn,v){
 }
 function addMoney(v){
   if(!R||R.done||R.placed.length>=40)return;
-  R.placed.push(v);sfx.coin();renderCounter();
+  R.placed.push(v);if(isBill(v))sfx.bill(v);else sfx.coin(v);renderCounter();
 }
 function removeMoney(v){
   if(!R||R.done)return;
@@ -624,7 +724,7 @@ function finishSession(){
     p.xp+=bonus;S.xp+=bonus;
   }else{
     const cur_=p.lv[S.lv]||{stars:0,plays:0};
-    cur_.plays++;cur_.stars=Math.max(cur_.stars,st);p.lv[S.lv]=cur_;
+    cur_.plays++;cur_.stars=Math.max(cur_.stars,st);cur_.best=Math.max(cur_.best||0,Math.round(ratio*100));p.lv[S.lv]=cur_;
   }
   const newT=checkTrophies(true);
   save();
@@ -644,7 +744,7 @@ function finishSession(){
   $("rAgain").onclick=()=>daily?showMenu():startSession(lv,false);
   if($("rNext"))$("rNext").onclick=()=>startSession(lv+1,false);
   $("rMenu").onclick=showMenu;
-  if(st>=2){sfx.ok();confetti(30);}
+  sfx.chaching();if(st>=2)confetti(30);
   R=null;
 }
 
@@ -658,18 +758,18 @@ function checkTrophies(silent){
   return got;
 }
 let toastTm=null;
-function toast(msg){const tt=$("toast");tt.textContent="🏆 "+msg;tt.classList.add("show");clearTimeout(toastTm);toastTm=setTimeout(()=>tt.classList.remove("show"),3200);}
+function toast(msg,ic){const tt=$("toast");tt.textContent=(ic||"🏆")+" "+msg;tt.classList.add("show");clearTimeout(toastTm);toastTm=setTimeout(()=>tt.classList.remove("show"),3200);}
 
 $("gExit").onclick=()=>{R=null;showMenu();};
 $("gSay").onclick=()=>{if(R)speak(speechText());};
 
 /* ───────── Overlays ───────── */
-function openOv(html,after){
-  $("ovBox").innerHTML=html;$("ov").classList.add("open");
+function openOv(html,after,wide){
+  $("ovBox").className="ovbox"+(wide?" wide":"");$("ovBox").innerHTML=html;$("ov").classList.add("open");
   $("ovBox").querySelectorAll("[data-close]").forEach(b=>b.onclick=closeOv);
   if(after)after();
 }
-function closeOv(){$("ov").classList.remove("open");}
+function closeOv(){stopBrief();$("ov").classList.remove("open");}
 $("ov").addEventListener("pointerdown",e=>{if(e.target===$("ov"))closeOv();});
 const ovHead=(title)=>`<div class="ovhead"><h2>${title}</h2><button class="iconbtn" data-close>✖</button></div>`;
 
@@ -717,6 +817,11 @@ function openSettings(teacher){
   row("📖 "+t("autoRead"),chipRow([["auto",t("auto")],["yes",t("on")],["no",t("off")]],settings.autoRead,v=>{settings.autoRead=v;rerender();}));
   row("🗣️ "+t("voiceLang"),chipRow([["ca","Català"],["es","Castellano"]],settings.voiceLang,v=>{settings.voiceLang=v;rerender();}));
   row("🧮 "+t("help"),chipRow([["auto",t("helpAuto")],["always",t("helpAlways")],["never",t("helpNever")]],settings.help,v=>{settings.help=v;rerender();}));
+  const dr=el("div","datarow");
+  const bE=el("button","btn blue","⬇️ "+t("dataExport"));bE.onclick=exportData;
+  const bI=el("button","btn green","⬆️ "+t("dataImport"));bI.onclick=()=>$("impFile").click();
+  dr.appendChild(bE);dr.appendChild(bI);row("💾 "+t("dataTitle"),dr);
+  wrap.appendChild(el("div","xplbl",t("dataHint")));
   if(teacher){
     row("🛒 "+t("roundsPer"),chipRow([[0,t("auto")],[5,"5"],[8,"8"],[10,"10"],[12,"12"]],settings.rounds,v=>{settings.rounds=v;rerender();}));
     wrap.appendChild(dashTable());
@@ -730,6 +835,58 @@ function openSettings(teacher){
   $("ovBox").appendChild(wrap);
 }
 $("fabSet").onclick=()=>openSettings(false);
+
+/* Exportar / importar dades (JSON) */
+function downloadBlob(name,type,text){
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;
+  document.body.appendChild(a);a.click();a.remove();
+}
+function exportData(){
+  const list=cur!=null?[profiles[cur]]:profiles.filter(Boolean);
+  if(!list.length)return;
+  const nm=cur!=null?profiles[cur].name.replace(/[^A-Za-z0-9À-ÿ-]+/g,"_"):"tots";
+  downloadBlob(`al-mercat-${nm}-${todayStr()}.json`,"application/json",JSON.stringify({app:"al-mercat",v:1,exported:todayStr(),profiles:list},null,1));
+  toast(t("dataExported"),"💾");
+}
+function cleanProfile(o){
+  if(!o||typeof o!=="object")return null;
+  const name=String(o.name||"").trim().slice(0,14);if(!name)return null;
+  const num=v=>Number.isFinite(+v)&&+v>=0?Math.min(Math.floor(+v),1e9):0;
+  const pick_=(v,arr,d)=>arr.includes(v)?v:d;
+  const p={name,gender:pick_(o.gender,["m","f","n"],"n"),skin:Math.min(5,num(o.skin)),lang:pick_(o.lang,["ca","es","ic"],"ca"),xp:num(o.xp),created:(Number.isFinite(+o.created)&&+o.created>0&&+o.created<4e12)?Math.floor(+o.created):Date.now()};
+  p.avatar=typeof o.avatar==="string"?o.avatar.slice(0,16):Math.min(31,num(o.avatar));
+  p.trophies=(Array.isArray(o.trophies)?o.trophies:[]).filter(id=>TROPHIES.some(t=>t.id===id));
+  p.lv={};LEVELS.forEach(L=>{const s=o.lv&&o.lv[L.id];if(s)p.lv[L.id]={stars:Math.min(3,num(s.stars)),plays:num(s.plays),best:Math.min(100,num(s.best))};});
+  const st=o.st||{};p.st={};["sessions","rounds","ok1","ok2","fail","streak","best","changeOk","kgOk","coins","perfect"].forEach(k=>p.st[k]=num(st[k]));
+  const d=o.daily||{};p.daily={last:/^\d{4}-\d\d-\d\d$/.test(d.last||"")?d.last:"",streak:num(d.streak),total:num(d.total)};
+  return p;
+}
+$("impFile").addEventListener("change",e=>{
+  const f=e.target.files[0];e.target.value="";if(!f)return;
+  if(f.size>2e6){toast(t("dataBad"),"⚠️");return;}
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const d=JSON.parse(r.result);
+      const arr=Array.isArray(d.profiles)?d.profiles:[];
+      if(d.app!=="al-mercat"||!arr.length)throw new Error("bad");
+      let n=0,full=false;
+      arr.slice(0,6).forEach(o=>{
+        const c=cleanProfile(o);if(!c)return;
+        let idx=profiles.findIndex(x=>x&&x.name.toLowerCase()===c.name.toLowerCase());
+        if(idx<0)idx=profiles.findIndex(x=>!x);
+        if(idx<0){full=true;return;}
+        profiles[idx]=c;n++;
+      });
+      save();
+      if(n){
+        closeOv();toast(t("dataImported",{n}),"💾");
+        if($("scrProfiles").classList.contains("active"))renderProfiles();else if($("scrMenu").classList.contains("active")&&P())showMenu();
+      }else toast(t(full?"dataNoSlot":"dataBad"),"⚠️");
+    }catch(err){console.error("import",err);toast(t("dataBad"),"⚠️");}
+  };
+  r.readAsText(f);
+});
 
 /* Panell del professor: s'obre amb 5 clics al títol (sense PIN) */
 function openTeacher(){openSettings(true);}
