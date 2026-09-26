@@ -163,6 +163,9 @@ h1 {
   color: #fff;
   background: rgba(255,255,255,0.15);
 }
+/* Mòbil estret: el selector de mode ha de cabre a la pantalla (audit 2026-09-26); a ≤420px es redueix a la 2a regla @media de baix */
+.mode-selector { max-width: 100%; flex-wrap: wrap; justify-content: center; }
+@media (max-width: 450px) { .mode-btn { padding: 8px 10px; font-size: 0.8rem; } }
 
 /* ── Options row (sistema + nivell) ── */
 .opts-row {
@@ -732,7 +735,7 @@ h1 {
   .prompt-text { font-size: 1.45rem; }
   .clock-wrapper, #clock-svg { width: 190px; height: 190px; }
   .answer-btn { font-size: 0.88rem; padding: 12px 6px; }
-  .mode-btn { padding: 8px 13px; font-size: 0.82rem; }
+  .mode-btn { padding: 8px 8px; font-size: 0.78rem; }
   .opt-btn { padding: 6px 9px; font-size: 0.72rem; }
   .opt-group { padding-left: 9px; }
   .opt-label { font-size: 0.62rem; }
