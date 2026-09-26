@@ -700,6 +700,15 @@ h1 {
   .answer-btn { font-size: 0.88rem; padding: 12px 6px; }
   .mode-btn { padding: 8px 13px; font-size: 0.82rem; }
 }
+/* Mòbil: els 3 botons flotants passen al peu de la pàgina (no fixos), més petits, perquè no tapin els botons del joc (audit 2026-09-26) */
+@media (max-width: 640px) {
+  body { padding-bottom: 72px; }
+  .mute-btn, .credits-btn, .skin-btn { position: absolute; width: 42px; height: 42px; bottom: 12px; font-size: 1.15rem; }
+  .mute-btn { left: 12px; }
+  .credits-btn { left: 62px; }
+  .skin-btn { right: 12px; }
+  .skin-panel { bottom: 12px; right: 12px; }
+}
 </style>
 </head>
 <body>
