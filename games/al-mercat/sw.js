@@ -1,6 +1,6 @@
 // Service Worker — Al Mercat! (network-first per a HTML/JS/JSON, cache-first per a la resta)
-const CACHE_NAME = 'almercat-v1.1';
-const ASSETS = ['./', './index.html', './data.js', './game.js', './manifest.json', './fonts/nunito-400.woff2'];
+const CACHE_NAME = 'almercat-v1.2';
+const ASSETS = ['./', './index.html', './data.js', './game.js', './manifest.json', './icon.svg', './fonts/nunito-400.woff2'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));
