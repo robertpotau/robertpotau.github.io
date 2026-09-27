@@ -40,6 +40,9 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 /* ⚠️ el gradient va a html, mai a body */
 html{min-height:100%;background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3)) fixed;}
+/* Chrome mòbil infla el text dins de botons estrets d'ample completa (text autosizing/"font boosting"); desactivar-ho */
+/* Defensa extra (no és la causa real; era una col·lisió de la classe .big amb .btn.big, ja corregida) */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 body{margin:0;min-height:100vh;font-family:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--text);
   font-weight:700;overflow-x:hidden;-webkit-user-select:none;user-select:none;--cs:1;}
 button{font-family:inherit;cursor:pointer;color:inherit;}
@@ -232,7 +235,7 @@ body.ic .icx{display:block;}
 
 /* Resultats */
 .res{max-width:35rem;margin:1.875rem auto;text-align:center;}
-.res .big{font-size:4rem;}
+.res .res-emoji{font-size:4rem;}
 .res .st{font-size:3rem;letter-spacing:0.375rem;margin:0.375rem 0;}
 .res .st .off{opacity:.2;filter:grayscale(1);}
 .res .line{font-size:1.1rem;margin:0.375rem 0;}

@@ -731,7 +731,7 @@ function finishSession(){
   show("scrResult");
   const L=S.daily?null:LEVELS[S.lv-1];
   const starsHTML=Array.from({length:3},(_,i)=>`<span class="${i<st?"":"off"}">⭐</span>`).join("");
-  let html=`<div class="big">${st>=2?"🎉":"👍"}</div><h2>${t("resultTitle")}</h2><div class="st">${starsHTML}</div>`+
+  let html=`<div class="res-emoji">${st>=2?"🎉":"👍"}</div><h2>${t("resultTitle")}</h2><div class="st">${starsHTML}</div>`+
     `<div class="line">✅ <span class="lbl">${t("resultAcc")}:</span> <b>${S.ok1}/${n}</b></div>`+
     `<div class="line">⭐ <span class="lbl">${t("xpGot")}:</span> <b>+${S.xp}</b>${bonus?` (📅 +${bonus})`:""}</div>`;
   if(S.daily&&p.daily.streak>1)html+=`<div class="line">🔥 ${p.daily.streak} ${t("dailyStreak")}</div>`;

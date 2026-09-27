@@ -1,6 +1,6 @@
 "use strict";
 /* Al Mercat! — dades: productes, nivells, textos (ca/es), trofeus, rangs */
-const VERSION="1.3", VERSION_DATE="2026-09-26";
+const VERSION="1.4", VERSION_DATE="2026-09-26";
 
 /* Valors en CÈNTIMS (enters, per evitar errors de coma flotant) */
 const COINS=[1,2,5,10,20,50,100,200];
