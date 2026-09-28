@@ -108,7 +108,7 @@ for lang in ("es", "en"):
         # \n here silently matches nothing on Windows checkouts.
         r"/\* ES/EN live on pre-rendered pages.*?applyLang\('ca'\);\r?\n\}",
         "/* pre-rendered page: language fixed, switcher is plain links */\n"
-        f"localStorage.setItem('landing_lang', '{lang}');",
+        f"sessionStorage.setItem('landing_lang', '{lang}');",
         t, count=1, flags=re.S)
     if "pre-rendered page: language fixed" not in t:
         raise SystemExit(f"{lang}: switcher JS block not found — generator out of sync with index.html")
