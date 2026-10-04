@@ -3,6 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--
+  CalcuHerois — © 2026 Robert Potau Nuñez. Tots els drets reservats / All rights reserved.
+  Codi, gràfics, textos i disseny de joc: obra original de Robert Potau Nuñez (amb Claude Code, Anthropic).
+  Prohibit copiar, modificar, redistribuir, tornar a publicar, extreure'n recursos o fer-ne obres derivades
+  sense permís escrit, també mitjançant eines automàtiques o assistents d'IA, i usar-ho per entrenar models.
+  Copying, modifying, redistributing, republishing, extracting assets from or creating derivative works of
+  this game is not permitted without written permission, including via automated tools or AI assistants.
+  Termes / Terms: https://robertpotau.github.io/termes.html · Contacte: robertpotau@gmail.com
+-->
+<meta name="author" content="Robert Potau Nuñez">
+<meta name="copyright" content="© 2026 Robert Potau Nuñez. Tots els drets reservats.">
+<meta name="robots" content="noai, noimageai">
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%230f0c29%22%2F%3E%3Cg%20fill%3D%22%23f7c948%22%20stroke%3D%22%23f7c948%22%3E%3Cpath%20d%3D%22M50%2014%20L62%2040%20L90%2044%20L70%2063%20L75%2090%20L50%2077%20L25%2090%20L30%2063%20L10%2044%20L38%2040%20Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
 <title>CalcuHerois — Joc de càlcul mental online gratuït</title>
 <meta name="description" content="Practica el càlcul mental convertint-te en un heroi: sumes, restes, multiplicacions, divisions i 17 missions. Joc educatiu gratuït per a Primària i primer cicle d'ESO.">
@@ -35,6 +47,11 @@
     "educationalRole": "student"
   },
   "isAccessibleForFree": true,
+  "copyrightHolder": {
+    "@type": "Person",
+    "name": "Robert Potau Nuñez"
+  },
+  "copyrightYear": 2026,
   "author": {
     "@type": "Person",
     "name": "Robert Potau",
@@ -749,6 +766,9 @@
   .credits-info strong { display: block; font-size: 0.95rem; color: white; font-weight: 700; }
   .credits-info span { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
   .credits-divider { border: none; border-top: 0.0625rem solid rgba(255,255,255,0.12); margin: 1rem 0; }
+  .legal-foot { margin-top: 0.75rem; text-align: center; font-size: 0.7rem; line-height: 1.5; color: rgba(255,255,255,0.45); }
+  .legal-foot a { color: inherit; text-decoration: underline; }
+  body.tema-dia .legal-foot { color: rgba(0,0,0,0.45); }
   .credits-cc { text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
   .credits-cc strong { color: rgba(255,255,255,0.75); }
   .credits-close { margin-top: 1.25rem; width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.12); border: none; border-radius: 0.75rem; color: white; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: background 0.15s; }
@@ -1003,6 +1023,7 @@
     <button class="btn btn-ghost" onclick="showProfileSelect()">👥 Canviar perfil</button>
     <button class="btn btn-ghost" onclick="openCredits()">ℹ️ Crèdits</button>
     <button data-cloud-entry class="btn btn-ghost" onclick="showScreen('screen-cloud'); document.getElementById('cloud-feedback').textContent=''; renderCloudScreen();">☁️ Classe (desar al núvol)</button>
+    <div class="legal-foot">© 2026 Robert Potau Nuñez · Tots els drets reservats · <a href="https://robertpotau.github.io/termes.html" target="_blank" rel="noopener">Termes d'ús</a></div>
   </div>
 </div>
 
@@ -1356,7 +1377,8 @@
       Tots els drets reservats<br>
       <span>Idea original, disseny i programació: Robert Potau Nuñez amb Claude Code (Anthropic).</span>
     </div>
-    <div style="margin-top:0.75rem;font-size:.66rem;line-height:1.5;opacity:.55;text-align:center">Tipografia <strong>Nunito</strong> — SIL Open Font License 1.1.</div>
+    <div style="margin-top:0.75rem;font-size:.66rem;line-height:1.5;opacity:.55;text-align:center">Tipografia <strong>Nunito</strong> — SIL Open Font License 1.1.<br>Desat al núvol: <strong>supabase-js</strong> — llicència MIT.</div>
+    <div style="margin-top:0.5rem;font-size:.7rem;text-align:center"><a href="https://robertpotau.github.io/termes.html" target="_blank" rel="noopener" style="color:inherit;opacity:.8">Termes d'ús</a></div>
     <button class="credits-close" onclick="closeCredits()">Tancar</button>
   </div>
 </div>
@@ -1396,6 +1418,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-sync.js"></script>
 <script>
+/* © 2026 Robert Potau Nuñez — Tots els drets reservats. Vegeu LICENSE i https://robertpotau.github.io/termes.html */
 // ═══════════════════════════════════════════
 //  DATA
 // ═══════════════════════════════════════════

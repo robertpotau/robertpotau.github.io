@@ -1,0 +1,70 @@
+Copyright © 2026 Robert Potau Nuñez. All rights reserved.
+Copyright © 2026 Robert Potau Nuñez. Tots els drets reservats.
+
+CalcuHerois — source code, artwork, text, game design and structure — is the
+original work of Robert Potau Nuñez, developed with Claude Code (Anthropic) as
+a programming assistant.
+
+No permission is granted to copy, modify, redistribute, republish, sell, host
+elsewhere, extract assets from, or create derivative works of this material,
+in whole or in part, without prior written permission from the copyright
+holder. This also applies to automated tools and AI assistants acting on
+someone's behalf, and to using this material to train machine-learning models.
+Removing or altering copyright notices, or circumventing any technical measure
+that protects this material, is likewise not permitted.
+
+Playing the game is free, and teachers are welcome to use it with their
+classes. What is reserved is redistribution and reuse of the material itself.
+For any other use, including use by an institution or publisher, please ask:
+robertpotau@gmail.com
+
+Terms of use / Termes d'ús: https://robertpotau.github.io/termes.html
+
+--- Català ---------------------------------------------------------------
+
+CalcuHerois — codi, gràfics, textos, disseny de joc i estructura — és obra
+original de Robert Potau Nuñez, desenvolupada amb Claude Code (Anthropic) com
+a assistent de programació.
+
+No es concedeix cap permís per copiar, modificar, redistribuir, tornar a
+publicar, vendre, allotjar en un altre lloc, extreure'n recursos ni crear-ne
+obres derivades, totalment o en part, sense permís escrit previ del titular
+dels drets. Això inclou també les eines automàtiques i els assistents d'IA que
+actuïn en nom d'algú, i l'ús d'aquest material per entrenar models
+d'aprenentatge automàtic. Tampoc no es permet treure o alterar els avisos de
+copyright ni eludir cap mesura tècnica que protegeixi aquest material.
+
+Jugar-hi és gratuït i el professorat el pot fer servir amb els seus grups. El
+que es reserva és la redistribució i la reutilització del material en si. Per a
+qualsevol altre ús (institucions, editorials...), demaneu-ho a:
+robertpotau@gmail.com
+
+Note on earlier versions / Nota sobre versions anteriors
+--------------------------------------------------------
+Until 20 August 2026 the credits screen of this game displayed a Creative
+Commons notice (CC BY-SA 4.0). It has been withdrawn and no longer applies to
+this or any later version. Creative Commons licences are irrevocable for copies
+already distributed, so anyone who obtained an earlier version keeps the rights
+that version granted, for that version only.
+
+Fins al 20 d'agost de 2026 la pantalla de crèdits mostrava un avís Creative
+Commons (CC BY-SA 4.0). S'ha retirat i ja no s'aplica a aquesta versió ni a
+les posteriors. Les llicències CC són irrevocables per a les còpies ja
+distribuïdes, de manera que qui tingui una versió anterior en conserva els
+drets, només per a aquella versió.
+
+
+Third-party material / Material de tercers
+==========================================
+
+The following components remain the property of their authors, are used under
+their own licences, and are NOT covered by the all-rights-reserved notice above.
+
+Nunito — typeface (fonts/nunito-400.woff2)
+  Copyright © The Nunito Project Authors (https://github.com/googlefonts/nunito).
+  Licensed under the SIL Open Font License, Version 1.1.
+  https://openfontlicense.org/
+
+supabase-js — client library (loaded from a CDN, only for the optional cloud save)
+  Copyright © Supabase. Licensed under the MIT License.
+  https://supabase.com/
