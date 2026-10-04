@@ -1,7 +1,7 @@
 Copyright © 2026 Robert Potau Nuñez. All rights reserved.
 Copyright © 2026 Robert Potau Nuñez. Tots els drets reservats.
 
-CalcuHerois — source code, artwork, text, game design and structure — is the
+Jocs Aula d'Acollida — source code, artwork, text, game design and structure — is the
 original work and property of Robert Potau Nuñez, developed with Claude Code
 (Anthropic) as a programming assistant. Only the author modifies, improves,
 edits and commercialises it.
@@ -24,7 +24,7 @@ Terms of use / Termes d'ús: https://robertpotau.github.io/termes.html
 
 --- Català ---------------------------------------------------------------
 
-CalcuHerois — codi, gràfics, textos, disseny de joc i estructura — és obra
+Jocs Aula d'Acollida — codi, gràfics, textos, disseny de joc i estructura — és obra
 original i propietat de Robert Potau Nuñez, desenvolupada amb Claude Code
 (Anthropic) com a assistent de programació. Només l'autor el modifica,
 millora, edita i en fa un ús comercial.
@@ -65,11 +65,11 @@ Third-party material / Material de tercers
 The following components remain the property of their authors, are used under
 their own licences, and are NOT covered by the all-rights-reserved notice above.
 
-Nunito — typeface
-  Copyright © The Nunito Project Authors (https://github.com/googlefonts/nunito).
-  Licensed under the SIL Open Font License, Version 1.1.
-  https://openfontlicense.org/
-
 supabase-js — client library (loaded from a CDN, only for the optional cloud save)
   Copyright © Supabase. Licensed under the MIT License.
   https://supabase.com/
+
+OpenMoji — emoji and icon artwork
+  Copyright © OpenMoji, the open-source emoji and icon project.
+  Licensed under Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0).
+  https://openmoji.org/  —  https://creativecommons.org/licenses/by-sa/4.0/

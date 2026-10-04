@@ -1,3 +1,8 @@
+/*
+ * © 2026 Robert Potau Nuñez — Tots els drets reservats / All rights reserved.
+ * Prohibida la còpia, modificació o redistribució sense permís escrit.
+ * Termes: https://robertpotau.github.io/termes.html · Contacte: robertpotau@gmail.com
+ */
 const { chromium } = require('playwright');
 
 (async () => {

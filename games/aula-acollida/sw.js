@@ -1,8 +1,13 @@
+/*
+ * © 2026 Robert Potau Nuñez — Tots els drets reservats / All rights reserved.
+ * Prohibida la còpia, modificació o redistribució sense permís escrit.
+ * Termes: https://robertpotau.github.io/termes.html · Contacte: robertpotau@gmail.com
+ */
 // Service Worker — Jocs Aula d'Acollida
 // Estratègia: network-first amb fallback a cache.
 // Així les actualitzacions del joc arriben sempre que hi hagi connexió,
 // i el joc continua funcionant offline amb l'última versió descarregada.
-const CACHE = 'acollida-v2';
+const CACHE = 'acollida-v2.4.1';
 const ASSETS = [
   './index.html',
   './manifest.json',

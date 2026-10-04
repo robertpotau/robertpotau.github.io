@@ -1,5 +1,10 @@
+/*
+ * © 2026 Robert Potau Nuñez — Tots els drets reservats / All rights reserved.
+ * Prohibida la còpia, modificació o redistribució sense permís escrit.
+ * Termes: https://robertpotau.github.io/termes.html · Contacte: robertpotau@gmail.com
+ */
 // Service Worker — Al Mercat! (network-first per a HTML/JS/JSON, cache-first per a la resta)
-const CACHE_NAME = 'almercat-v1.4';
+const CACHE_NAME = 'almercat-v1.4.1';
 const ASSETS = ['./', './index.html', './data.js', './game.js', './manifest.json', './icon.svg', './fonts/nunito-400.woff2'];
 
 self.addEventListener('install', e => {

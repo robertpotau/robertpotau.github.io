@@ -1,3 +1,8 @@
+/*
+ * © 2026 Robert Potau Nuñez — Tots els drets reservats / All rights reserved.
+ * Prohibida la còpia, modificació o redistribució sense permís escrit.
+ * Termes: https://robertpotau.github.io/termes.html · Contacte: robertpotau@gmail.com
+ */
 "use strict";
 /* Al Mercat! — lògica del joc */
 const $=id=>document.getElementById(id);
@@ -243,7 +248,7 @@ function renderLangbar(){
 }
 function renderProfiles(){
   cur=null;applyI18n();renderLangbar();
-  $("verLine").textContent=`Al Mercat! v${VERSION} — ${VERSION_DATE.slice(0,4)}`;
+  $("verLine").textContent=`Al Mercat! v${VERSION} — ${VERSION_DATE.slice(0,4)} · © Robert Potau Nuñez`;
   const g=$("slots");g.innerHTML="";
   profiles.forEach((p,i)=>{
     if(!p){
@@ -790,7 +795,8 @@ function openCredits(){
   openOv(ovHead("ℹ️ "+t("credits"))+
    `<div class="credits-row"><div class="credits-icon">👨‍🏫</div><div class="credits-info"><strong>Robert Potau Nuñez</strong><span>${t("credRole")}</span></div></div>`+
    `<div class="credits-row"><div class="credits-icon">🤖</div><div class="credits-info"><strong>Claude Code · Anthropic</strong><span>${t("credClaude")}</span></div></div>`+
-   `<div class="center" id="verClick" style="color:var(--text2);font-size:.85rem;margin-top:12px">Al Mercat! v${VERSION} — ${VERSION_DATE}</div>`,
+   `<div class="center" id="verClick" style="color:var(--text2);font-size:.85rem;margin-top:12px">Al Mercat! v${VERSION} — ${VERSION_DATE}</div>`+
+   `<div class="center" style="color:var(--text2);font-size:.7rem;margin-top:10px;line-height:1.5">© 2026 Robert Potau Nuñez · Tots els drets reservats<br><a href="https://robertpotau.github.io/termes.html" target="_blank" rel="noopener" style="color:inherit">Termes d'ús</a></div>`,
    ()=>{multiClick($("verClick"),()=>{closeOv();openTeacher();});});
 }
 const PALS=[["mercat","🧺","Mercat"],["fruita","🍏","Fruita"],["mar","🌊","Mar"],["caramel","🍬","Caramel"],["nit","🌙","Nit"]];

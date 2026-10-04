@@ -1,7 +1,12 @@
+/*
+ * © 2026 Robert Potau Nuñez — Tots els drets reservats / All rights reserved.
+ * Prohibida la còpia, modificació o redistribució sense permís escrit.
+ * Termes: https://robertpotau.github.io/termes.html · Contacte: robertpotau@gmail.com
+ */
 // VerbQuest service worker — offline cache
 // Strategy: network-first for HTML/data (always fresh when online, cache fallback offline);
 // cache-first for the rest. Bump CACHE on every release.
-const CACHE = "verbquest-v1.4";
+const CACHE = "verbquest-v1.5.1";
 const ASSETS = ["./", "./index.html", "./verbs-data.js", "./manifest.json"];
 
 self.addEventListener("install", e => {

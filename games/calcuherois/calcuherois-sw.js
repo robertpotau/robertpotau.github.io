@@ -6,7 +6,7 @@
 // CalcuHerois Service Worker — v1.0
 // Permet funcionar offline i instal·lar com a PWA
 
-const CACHE_NAME = 'calcuherois-v2';
+const CACHE_NAME = 'calcuherois-v3.0.1';
 const ASSETS = [
   './',
   './index.html',

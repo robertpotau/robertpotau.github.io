@@ -1,3 +1,8 @@
+/*
+ * © 2026 Robert Potau Nuñez — Tots els drets reservats / All rights reserved.
+ * Prohibida la còpia, modificació o redistribució sense permís escrit.
+ * Termes: https://robertpotau.github.io/termes.html · Contacte: robertpotau@gmail.com
+ */
 // Verb data extracted from REGULAR-AND-IRREGULAR-VERBS.pdf (source of truth for this game)
 // Structure: { inf, past, pp, es, ca, ipa: { inf, past, pp }, ipaCa }
 //   es    = Spanish translation from the source PDF (kept, unused by default — for a possible future language option)

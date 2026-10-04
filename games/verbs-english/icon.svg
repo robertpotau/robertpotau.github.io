@@ -1,4 +1,5 @@
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<metadata>© 2026 Robert Potau Nuñez — Tots els drets reservats / All rights reserved. robertpotau@gmail.com</metadata>
   <defs><linearGradient id="bg-verbquest" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#1e1b4b"/></linearGradient></defs>
   <rect width="100" height="100" rx="22" fill="url(#bg-verbquest)"/>
   <circle cx="16" cy="84" r="3" fill="rgba(255,255,255,0.35)"/>

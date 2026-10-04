@@ -1,4 +1,9 @@
 /*
+ * © 2026 Robert Potau Nuñez — Tots els drets reservats / All rights reserved.
+ * Prohibida la còpia, modificació o redistribució sense permís escrit.
+ * Termes: https://robertpotau.github.io/termes.html · Contacte: robertpotau@gmail.com
+ */
+/*
  * CloudSync — shared cloud-save module for Robert's educational games.
  *
  * Copy this file next to a game's HTML and include it, AFTER the Supabase
