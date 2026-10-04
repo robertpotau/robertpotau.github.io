@@ -36,6 +36,13 @@ if (-not (Test-Path -LiteralPath $src)) {
 }
 Write-Output "Source root: $src"
 
+# Games whose source folder under claude-projects has a different name than the slug.
+$sourceFolder = @{ "al-mercat" = "joc-mercat" }
+function Get-GameSrc([string]$g) {
+  if ($sourceFolder.ContainsKey($g)) { return (Join-Path $src $sourceFolder[$g]) }
+  return (Join-Path $src $g)
+}
+
 $games = @("calcuherois","aula-acollida","fraccions","lletra-a-lletra","ortografia","vistes","geometria","quina-hora-es","what-time-is-it","verbs-english","euroexplora","al-mercat")
 
 if ($Slug) {
@@ -51,7 +58,7 @@ if ($Slug) {
 # against a missing source would empty the published copy.
 $missing = @()
 foreach ($g in $targets) {
-  if (-not (Test-Path -LiteralPath (Join-Path $src $g))) { $missing += $g }
+  if (-not (Test-Path -LiteralPath (Get-GameSrc $g))) { $missing += $g }
 }
 if ($missing.Count -gt 0) {
   Write-Error "Source folder(s) not found under ${src}: $($missing -join ', '). Nothing was copied."
@@ -61,9 +68,10 @@ foreach ($g in $targets) {
   $dest = Join-Path $here "games\$g"
   New-Item -ItemType Directory -Force -Path $dest | Out-Null
   Write-Output "Syncing $g ..."
-  robocopy "$src\$g" "$dest" /E /MIR `
+  $gsrc = Get-GameSrc $g
+  robocopy "$gsrc" "$dest" /E /MIR `
     /XD .git apk backups pdf `
-    /XF *.py *.md *.pdf *.bak* *_backup_* server.log *.txt review_svgs.html revisio_icones.html figures_revision*.html descarrega_landmarks.html manifest.json .gitignore icones-proposta.html `
+    /XF *.py *.md *.pdf *.bak* *_backup_* server.log *.txt review_svgs.html revisio_icones.html figures_revision*.html descarrega_landmarks.html manifest.json .gitignore icones-proposta.html icon-apk-fullbleed.svg `
     /NFL /NDL /NJH | Out-Null
   # robocopy: 0-7 = success (0 = nothing to do), 8+ = real failure
   if ($LASTEXITCODE -ge 8) {
