@@ -6,7 +6,7 @@
     <polygon points="12,40 26,40 18,96 2,96"/>
     <polygon points="36,40 50,40 46,96 28,96"/>
     <polygon points="60,40 74,40 74,96 56,96"/>
-    <polygon points="84,40 98,40 100,70 100,84 q0 12 -12 12 l-4 0"/>
+    <polygon points="84,40 98,40 100,70 100,84 96,96 80,96"/>
   </g>
   <g transform="translate(58 14)">
     <circle cx="0" cy="0" r="6" fill="#fcd9b8"/>

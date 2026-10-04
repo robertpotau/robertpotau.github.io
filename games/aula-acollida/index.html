@@ -804,6 +804,67 @@
       border-color: rgba(127, 127, 127, 0.45);
     }
     .jm-btn-cancel:hover { border-color: #6366f1; }
+    /* ═══ ESCRIPTORI / PANTALLA AMPLA (>=900px): aprofita tota l'amplada; mòbil no canvia ═══ */
+    @media (min-width: 900px) {
+      body { padding: 1.25rem; }
+      .container { max-width: 92rem; padding: 1.75rem 2.5rem; min-height: calc(100vh - 2.5rem); }
+      /* pantalles de joc: columna còmoda al centre (no s'estiren les preguntes) */
+      .screen:not(#s-splash):not(#s-home):not(#s-modes):not(#s-profile-select):not(#s-trophies):not(#s-stats):not(#s-vocabulari):not(#s-cloud):not(#s-ws-diff) {
+        max-width: 56rem; margin-left: auto; margin-right: auto;
+      }
+      #s-cloud, #s-ws-diff, #s-profile-create { max-width: 42rem; margin-left: auto; margin-right: auto; }
+      .section-title { font-size: 1.6rem; }
+      .section-sub { font-size: 1rem; }
+
+      /* INICI: barra lateral (perfil, accessos) + unitats a la dreta */
+      #s-home.active {
+        display: grid; grid-template-columns: 19rem minmax(0, 1fr);
+        column-gap: 2.5rem; grid-template-rows: auto auto auto auto 1fr; align-items: start;
+      }
+      #s-home > .hud { grid-column: 1; grid-row: 1; margin-bottom: 1rem; padding: 1.25rem 1.25rem; }
+      #s-home .hud-avatar { font-size: 3.4rem; }
+      #s-home > .btn-primary:nth-of-type(1) { grid-column: 1; grid-row: 2; margin-top: 0 !important; }
+      #s-home > .btn-primary:nth-of-type(2) { grid-column: 1; grid-row: 3; margin-top: 0.75rem !important; }
+      #s-home > .home-nav { grid-column: 1; grid-row: 4; flex-direction: column; margin-top: 1rem; }
+      #s-home > .home-nav .nav-btn { flex: none; padding: 0.8rem 1rem; font-size: 0.95rem; justify-content: flex-start; }
+      #s-home > .home-main { grid-column: 2; grid-row: 1 / -1; }
+      #s-home .home-main .units-grid { margin-bottom: 0; }
+      .units-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+      .unit-card { padding: 1.25rem 0.5rem; }
+      .unit-card .unit-icon { font-size: 3.2rem; }
+      .unit-card .unit-title { font-size: 1.02rem; }
+      .unit-card .unit-badge { font-size: 0.72rem; white-space: nowrap; }
+      .unit-card .unit-title { min-height: 2.6em; display: flex; align-items: center; justify-content: center; line-height: 1.2; }
+
+      /* TRIA EL JOC / PERFILS / VOCABULARI */
+      .modes-grid { grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+      .mode-btn { padding: 1.1rem 0.75rem; }
+      .modes-grid > .mode-btn:first-child { padding: 0.9rem 1rem; }
+      .mode-btn .mode-icon { font-size: 2.3rem; margin-bottom: 0.4rem; }
+      .mode-btn .mode-name { font-size: 1rem; }
+      .mode-btn .mode-desc { font-size: 0.8rem; }
+      .profile-grid { grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); }
+      .vocab-grid { grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: 0.875rem; }
+      .mode-cards-grid { grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); }
+
+      /* PANTALLA DE CÀRREGA: a pantalla completa */
+      body:has(#s-splash.active) { padding: 0; }
+      .container:has(#s-splash.active) {
+        max-width: none; padding: 0; background: none; box-shadow: none; border-radius: 0; min-height: 100vh;
+      }
+      #s-splash { min-height: 100vh; border-radius: 0; box-shadow: none; gap: 1.25rem; }
+      #s-splash .splash-logo { font-size: 5.5rem; }
+      #s-splash h1 { font-size: 3rem; }
+      #s-splash .splash-sub { font-size: 1.2rem; }
+      .splash-bar-bg { width: 22rem; height: 0.5rem; }
+      .splash-phrase { max-width: 40rem; font-size: 1.1rem; }
+      #s-splash .splash-btn-wrap .btn-primary { font-size: 1.2rem; padding: 0.9rem 2.6rem; }
+      .splash-elements-container { opacity: 1; }
+      .vocab-float { font-size: 4.5rem; opacity: .3; }
+      .splash-icon { position: absolute; width: 4.5rem; height: 4.5rem; opacity: .26; animation: vocab-float 5s ease-in-out infinite; filter: saturate(.9); }
+      .splash-icon svg { width: 100%; height: 100%; display: block; }
+    }
+    @media (min-width: 1450px) { .container { padding: 2rem 3.5rem; } .units-grid { grid-template-columns: repeat(6, 1fr); } }
   </style>
 </head>
 <body>
@@ -880,9 +941,11 @@
         <div class="hud-xp-num" id="hud-xp-num">0 XP</div>
       </div>
     </div>
+    <div class="home-main">
     <div class="section-title">📖 Unitats</div>
     <p class="section-sub">Tria una unitat per practicar el vocabulari.</p>
     <div class="units-grid" id="units-grid"></div>
+    </div>
     <button class="btn-primary" style="margin-top:0.5rem" onclick="quickPlay()" aria-label="Joc ràpid: unitat i mode aleatoris">🎲 Joc ràpid (unitat i mode aleatoris)</button>
     <button class="btn-primary" style="margin-top:0.5rem;background:linear-gradient(135deg,#f59e0b,#ea580c)" onclick="startRepas()" aria-label="Repàs intel·ligent: practica les paraules que més falles">🎯 Repàs intel·ligent (les teves paraules difícils)</button>
     <div class="home-nav">
@@ -1256,7 +1319,7 @@
     </div>
     <hr class="credits-divider">
     <div class="credits-version" style="text-align:center;font-size:0.78rem;opacity:0.75;margin-bottom:0.5rem;">
-      🎓 Jocs Aula d'Acollida · <strong>v2.3</strong> — 4 d'octubre de 2026
+      🎓 Jocs Aula d'Acollida · <strong>v2.4</strong> — 4 d'octubre de 2026
     </div>
     <div class="credits-cc">
       <strong>© 2026 Robert Potau Nuñez</strong><br>
@@ -1357,7 +1420,7 @@ const SVG_ICONS = {
   "batch6_oncle": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="onc_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0fdfa"/><stop offset="1" stop-color="#ccfbf1"/></linearGradient></defs><rect width="100" height="100" rx="16" fill="url(#onc_bg)"/><ellipse cx="50" cy="90" rx="26" ry="3.5" fill="#0f172a" opacity=".08"/><circle cx="50" cy="26" r="12" fill="#fcd9b8"/><path d="M38 24 q0 -11 12 -11 q12 0 12 11 q-5 -5.5 -12 -5.5 q-7 0 -12 5.5" fill="#1c1917"/><path d="M44 31 q-2 4 1 6 q2 2 5 2 q3 0 5 -2 q3 -2 1 -6 q-3 3 -6 3 q-3 0 -6 -3" fill="#1c1917" opacity="0"/><circle cx="46" cy="26" r="1.6" fill="#1e293b"/><circle cx="54" cy="26" r="1.6" fill="#1e293b"/><path d="M46.5 32 q3.5 2.4 7 0" stroke="#92400e" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M44 20 q2 -2 5 -1 M52 19 q3 -1 5 1" stroke="#1c1917" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M34 68 q-2 -30 16 -30 q18 0 16 30 z" fill="#0d9488"/><path d="M34 68 q-2 -30 16 -30 q5 0 9 3.5 l-9 10.5 z" fill="#14b8a6"/><rect x="38" y="66" width="8" height="22" rx="3.5" fill="#334155"/><rect x="50" y="66" width="8" height="22" rx="3.5" fill="#1e293b"/><path d="M62 44 q8 -2 9 -12" stroke="#fcd9b8" stroke-width="5.5" stroke-linecap="round" fill="none"/><ellipse cx="72" cy="28" rx="4.5" ry="5" fill="#fcd9b8"/><path d="M30 46 q-7 4 -7 13" stroke="#fcd9b8" stroke-width="5.5" stroke-linecap="round" fill="none"/></svg>`,
   "batch6_paleta": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="pal_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/></linearGradient></defs><rect width="100" height="100" rx="16" fill="url(#pal_bg)"/><ellipse cx="46" cy="90" rx="28" ry="3.5" fill="#0f172a" opacity=".08"/><circle cx="40" cy="30" r="11" fill="#fcd9b8"/><path d="M28 27 q0 -8 4 -10 q8 4 16 0 q4 2 4 10 l0 1 h-24 z" fill="#fde047"/><ellipse cx="40" cy="28" rx="14" ry="3" fill="#facc15"/><circle cx="36.5" cy="32" r="1.5" fill="#1e293b"/><circle cx="43.5" cy="32" r="1.5" fill="#1e293b"/><path d="M37 37.5 q3 2 6 0" stroke="#92400e" stroke-width="1.4" stroke-linecap="round" fill="none"/><path d="M26 90 q-2 -27 14 -27 q16 0 14 27 z" fill="#f97316"/><path d="M26 90 q-2 -27 14 -27 q5 0 8 3.5 l-8 10 z" fill="#fb923c"/><path d="M52 68 q9 -1 12 6" stroke="#fcd9b8" stroke-width="5" stroke-linecap="round" fill="none"/><g transform="rotate(-12 72 68)"><polygon points="60,64 84,64 72,76" fill="#94a3b8"/><rect x="69" y="56" width="5" height="8" rx="2" fill="#92400e"/></g><g fill="#dc2626" stroke="#fca5a5" stroke-width="1"><rect x="8" y="78" width="16" height="7" rx="1"/><rect x="26" y="78" width="16" height="7" rx="1"/><rect x="16" y="69" width="16" height="7" rx="1"/><rect x="34" y="69" width="16" height="7" rx="1" opacity="0"/></g></svg>`,
   "batch6_papa": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="pap_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eff6ff"/><stop offset="1" stop-color="#dbeafe"/></linearGradient></defs><rect width="100" height="100" rx="16" fill="url(#pap_bg)"/><ellipse cx="50" cy="90" rx="30" ry="3.5" fill="#0f172a" opacity=".08"/><circle cx="42" cy="26" r="12" fill="#fcd9b8"/><path d="M30 24 q0 -11 12 -11 q12 0 12 11 q-5 -5.5 -12 -5.5 q-7 0 -12 5.5" fill="#44403c"/><path d="M38 28 q1.5 -2 3 0 M45 28 q1.5 -2 3 0" stroke="#1e293b" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M39 32.5 q3 2.4 6 0" stroke="#92400e" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M28 88 q-2 -30 14 -30 q16 0 14 30 z" fill="#2563eb"/><path d="M28 88 q-2 -30 14 -30 q5 0 8 3.5 l-8 10 z" fill="#3b82f6"/><path d="M52 62 q8 4 10 12" stroke="#fcd9b8" stroke-width="6" stroke-linecap="round" fill="none"/><circle cx="68" cy="62" r="8" fill="#fcd9b8"/><path d="M60 60.5 q0 -7.5 8 -7.5 q8 0 8 7.5 q-3.5 -3.7 -8 -3.7 q-4.5 0 -8 3.7" fill="#92400e"/><circle cx="65.5" cy="62" r="1.1" fill="#1e293b"/><circle cx="70.5" cy="62" r="1.1" fill="#1e293b"/><path d="M66 65.5 q2 1.5 4 0" stroke="#92400e" stroke-width="1.1" stroke-linecap="round" fill="none"/><path d="M62 78 q6 -8 12 0 l-2 8 h-8 z" fill="#f97316"/><path d="M80 38 q3 -3.4 6.5 -1 q3 2.5 0 5.5 q-3 3 -6.5 5 q-3.5 -2 -6.5 -5 q-3 -3 0 -5.5 q3.5 -2.4 6.5 1" fill="#ef4444"/></svg>`,
-  "batch6_pas_vianants": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="pvi_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient></defs><rect width="100" height="100" rx="16" fill="url(#pvi_bg)"/><path d="M0 36 h100 v48 q0 16 -16 16 H16 Q0 100 0 84 z" fill="#475569"/><g fill="#f8fafc"><polygon points="12,40 26,40 18,96 2,96"/><polygon points="36,40 50,40 46,96 28,96"/><polygon points="60,40 74,40 74,96 56,96"/><polygon points="84,40 98,40 100,70 100,84 q0 12 -12 12 l-4 0"/></g><g transform="translate(58 14)"><circle cx="0" cy="0" r="6" fill="#fcd9b8"/><path d="M-6 -2 q0 -5.5 6 -5.5 q6 0 6 5.5 q-2.5 -2.7 -6 -2.7 q-3.5 0 -6 2.7" fill="#44403c"/><path d="M-3 8 q3 -3 6 0 l4 14 l-5 1 l-3 -8 l-1 22 h-5 l1 -22 l-6 8 l-4 -3 q4 -8 13 -12" fill="#dc2626" transform="translate(1 0)"/><path d="M4 30 l6 10 l-4 3 l-7 -10 M-4 32 l-2 12 h-5 l2 -13" fill="#1e40af"/></g></svg>`,
+  "batch6_pas_vianants": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="pvi_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient></defs><rect width="100" height="100" rx="16" fill="url(#pvi_bg)"/><path d="M0 36 h100 v48 q0 16 -16 16 H16 Q0 100 0 84 z" fill="#475569"/><g fill="#f8fafc"><polygon points="12,40 26,40 18,96 2,96"/><polygon points="36,40 50,40 46,96 28,96"/><polygon points="60,40 74,40 74,96 56,96"/><polygon points="84,40 98,40 100,70 100,84 96,96 80,96"/></g><g transform="translate(58 14)"><circle cx="0" cy="0" r="6" fill="#fcd9b8"/><path d="M-6 -2 q0 -5.5 6 -5.5 q6 0 6 5.5 q-2.5 -2.7 -6 -2.7 q-3.5 0 -6 2.7" fill="#44403c"/><path d="M-3 8 q3 -3 6 0 l4 14 l-5 1 l-3 -8 l-1 22 h-5 l1 -22 l-6 8 l-4 -3 q4 -8 13 -12" fill="#dc2626" transform="translate(1 0)"/><path d="M4 30 l6 10 l-4 3 l-7 -10 M-4 32 l-2 12 h-5 l2 -13" fill="#1e40af"/></g></svg>`,
   "batch6_passadis": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="pas_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient></defs><rect width="100" height="100" rx="16" fill="url(#pas_bg)"/><polygon points="14,14 86,14 66,86 34,86" fill="#cbd5e1"/><polygon points="34,86 66,86 60,70 40,70" fill="#94a3b8" opacity=".4"/><polygon points="40,40 60,40 58,30 42,30" fill="#818cf8" opacity=".35"/><polygon points="14,14 30,14 38,86 34,86 22,40" fill="#a5b4fc" opacity=".25"/><rect x="18" y="26" width="12" height="26" rx="1" fill="#92400e"/><rect x="19.5" y="28" width="9" height="22" rx="1" fill="#b45309"/><circle cx="27" cy="40" r="1.2" fill="#fbbf24"/><rect x="70" y="26" width="12" height="26" rx="1" fill="#92400e"/><rect x="71.5" y="28" width="9" height="22" rx="1" fill="#b45309"/><circle cx="73" cy="40" r="1.2" fill="#fbbf24"/><rect x="36" y="18" width="28" height="3" rx="1.5" fill="#fde047"/><rect x="43" y="44" width="14" height="20" rx="1.5" fill="#0ea5e9" opacity=".7"/><polygon points="43,64 57,64 56,58 44,58" fill="#0284c7" opacity=".5"/></svg>`,
   "batch6_rebedor": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="reb_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/></linearGradient></defs><rect width="100" height="100" rx="16" fill="url(#reb_bg)"/><ellipse cx="50" cy="88" rx="36" ry="4" fill="#0f172a" opacity=".08"/><rect x="14" y="14" width="28" height="72" rx="3" fill="#92400e"/><rect x="17" y="17" width="22" height="66" rx="2" fill="#b45309"/><circle cx="35" cy="50" r="2" fill="#fbbf24"/><rect x="52" y="22" width="36" height="5" rx="2.5" fill="#78350f"/><g stroke="#57534e" stroke-width="2.5" stroke-linecap="round"><path d="M58 27 v8"/><path d="M70 27 v8"/><path d="M82 27 v8"/></g><path d="M55 35 q4 5 3 12 q-1 5 -6 5 q-4 0 -4 -4 q0 -3 3 -3" fill="none" stroke="#dc2626" stroke-width="2.5"/><path d="M70 35 q-3 6 -2 12" fill="none" stroke="#2563eb" stroke-width="2.5"/><path d="M68 47 q0 5 5 5 q5 0 5 -5 q0 -4 -3 -5" fill="none" stroke="#2563eb" stroke-width="2.5"/><ellipse cx="70" cy="78" rx="16" ry="5" fill="#0d9488" opacity=".6"/><ellipse cx="70" cy="77" rx="12" ry="3.4" fill="#14b8a6" opacity=".7"/><rect x="78" y="52" width="9" height="14" rx="2" fill="#475569"/><rect x="79.5" y="54" width="6" height="8" rx="1" fill="#7dd3fc"/></svg>`,
   "batch6_simpatic": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="smp_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fefce8"/><stop offset="1" stop-color="#fef3c7"/></linearGradient></defs><rect width="100" height="100" rx="16" fill="url(#smp_bg)"/><ellipse cx="50" cy="86" rx="26" ry="4" fill="#0f172a" opacity=".08"/><circle cx="50" cy="48" r="30" fill="#fcd9b8"/><path d="M20 43 q0 -26 30 -26 q30 0 30 26 q-12 -12 -30 -12 q-18 0 -30 12" fill="#57534e"/><path d="M36 46 q3 -3.5 7 0 M57 46 q3 -3.5 7 0" stroke="#1e293b" stroke-width="2.4" stroke-linecap="round" fill="none"/><path d="M36 60 q14 12 28 0" fill="none" stroke="#92400e" stroke-width="3" stroke-linecap="round"/><path d="M38 62 q12 9 24 0 q-5 8 -12 8 q-7 0 -12 -8" fill="#7f1d1d"/><circle cx="30" cy="56" r="4.5" fill="#f9a8d4" opacity=".6"/><circle cx="70" cy="56" r="4.5" fill="#f9a8d4" opacity=".6"/><path d="M82 24 l-3 5 l5 1 l-3 5" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`,
@@ -5626,6 +5689,21 @@ function initSplash() {
     div.style.animationDelay = ['0s', '0.5s', '1s', '1.5s', '0.8s', '1.2s'][i] || '0s';
     container.appendChild(div);
   });
+
+  // Pantalla ampla: icones noves (SVG_ICONS) flotant per tota la pantalla
+  if (window.innerWidth >= 900 && typeof SVG_ICONS !== 'undefined') {
+    const keys = Object.keys(SVG_ICONS);
+    const spots = [[5,4],[26,14],[48,5],[70,12],[88,4],[10,24],[34,28],[60,22],[80,26],[4,46],[22,76],[50,88],[8,88],[90,48],[66,80],[86,78],[92,70],[40,92]];
+    for (let i = spots.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [spots[i], spots[j]] = [spots[j], spots[i]]; }
+    spots.forEach(([t, l], i) => {
+      const d = document.createElement('div');
+      d.className = 'splash-icon';
+      d.innerHTML = SVG_ICONS[keys[Math.floor(Math.random() * keys.length)]];
+      d.style.top = t + '%'; d.style.left = l + '%';
+      d.style.animationDelay = (i * 0.37 % 3) + 's';
+      container.appendChild(d);
+    });
+  }
 
   // Mostrar frase motivadora aleatoria
   const phraseEl = document.getElementById('splash-phrase');
