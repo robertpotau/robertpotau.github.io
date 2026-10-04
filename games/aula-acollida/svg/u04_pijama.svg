@@ -1,42 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Pyjama top -->
-  <!-- Body -->
-  <path d="M28 18 L22 48 L78 48 L72 18 Z" fill="#bae6fd"/>
-  <!-- Left sleeve -->
-  <path d="M28 18 L16 14 L12 36 L24 40 Z" fill="#bae6fd"/>
-  <!-- Right sleeve -->
-  <path d="M72 18 L84 14 L88 36 L76 40 Z" fill="#bae6fd"/>
-  <!-- V-neck -->
-  <path d="M40 18 L50 30 L60 18 L56 18 L50 27 L44 18 Z" fill="#e0f2fe"/>
-  <!-- Button placket -->
-  <line x1="50" y1="30" x2="50" y2="48" stroke="#7dd3fc" stroke-width="1"/>
-  <!-- Buttons -->
-  <circle cx="50" cy="33" r="1.5" fill="#1d4ed8"/>
-  <circle cx="50" cy="39" r="1.5" fill="#1d4ed8"/>
-  <circle cx="50" cy="45" r="1.5" fill="#1d4ed8"/>
-  <!-- Moon/star pattern on top -->
-  <text x="30" y="38" font-size="8" font-family="Arial">🌙</text>
-  <text x="62" y="38" font-size="7" font-family="Arial">⭐</text>
-  <!-- Sleeve cuffs -->
-  <rect x="12" y="34" width="12" height="5" rx="1" fill="#7dd3fc"/>
-  <rect x="76" y="34" width="12" height="5" rx="1" fill="#7dd3fc"/>
-
-  <!-- Pyjama trousers -->
-  <!-- Waistband -->
-  <rect x="22" y="48" width="56" height="5" rx="1" fill="#7dd3fc"/>
-  <!-- Left leg -->
-  <path d="M22 53 L20 82 L44 82 L46 53 Z" fill="#bae6fd"/>
-  <!-- Right leg -->
-  <path d="M54 53 L56 82 L80 82 L78 53 Z" fill="#bae6fd"/>
-  <!-- Trouser divider -->
-  <line x1="50" y1="53" x2="50" y2="82" stroke="#7dd3fc" stroke-width="1.5"/>
-  <!-- Moon patterns on trousers -->
-  <text x="24" y="72" font-size="8" font-family="Arial">🌙</text>
-  <text x="55" y="72" font-size="8" font-family="Arial">🌙</text>
-  <!-- Stripe at trouser bottom -->
-  <rect x="20" y="80" width="24" height="3" rx="1" fill="#7dd3fc"/>
-  <rect x="56" y="80" width="24" height="3" rx="1" fill="#7dd3fc"/>
-  <!-- Elastic waist draw string -->
-  <circle cx="50" cy="50" r="2" fill="#1d4ed8"/>
-
+  <defs><linearGradient id="pij_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e1b4b"/><stop offset="1" stop-color="#312e81"/></linearGradient>
+  <linearGradient id="pij_cos" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a5b4fc"/><stop offset="1" stop-color="#6366f1"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#pij_bg)"/>
+  <path d="M30 14 q10 -6 20 0 l11 7 q3 2 1.5 5 l-3 5 q-1.5 3 -4.5 1.5 l-3 -2 v19.5 h-24 V30.5 l-3 2 q-3 1.5 -4.5 -1.5 l-3 -5 q-1.5 -3 1.5 -5 z" fill="url(#pij_cos)"/>
+  <path d="M40 15 q-5 16 -6 35 h3.5 q1 -17 5.5 -32 z M60 15 q5 16 6 35 h-3.5 q-1 -17 -5.5 -32 z" fill="#e0e7ff" opacity=".8"/>
+  <circle cx="50" cy="28" r="1.4" fill="#312e81"/>
+  <circle cx="50" cy="36" r="1.4" fill="#312e81"/>
+  <circle cx="50" cy="44" r="1.4" fill="#312e81"/>
+  <path d="M38 54 h24 l2 32 h-9 l-4 -22 h-2 l-4 22 h-9 z" fill="#818cf8"/>
+  <path d="M40 56 l-1 28 M60 56 l1 28" stroke="#e0e7ff" stroke-width="1.8" fill="none" opacity=".7"/>
+  <path d="M76 20 a8 8 0 1 0 6 13 a 6.5 6.5 0 0 1 -6 -13" fill="#fde047"/>
+  <circle cx="22" cy="20" r="1.4" fill="#fde047"/><circle cx="82" cy="44" r="1.2" fill="#fde047"/><circle cx="16" cy="38" r="1" fill="#e0e7ff"/>
 </svg>

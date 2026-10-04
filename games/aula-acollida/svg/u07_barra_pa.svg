@@ -1,20 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Background -->
-  <rect width="100" height="100" fill="#fffbeb" rx="12"/>
-  <!-- Baguette body -->
-  <rect x="8" y="38" width="84" height="26" rx="13" fill="#d97706" stroke="#b45309" stroke-width="2.5"/>
-  <!-- Crumb interior (miga) - lighter color center -->
-  <rect x="14" y="44" width="72" height="14" rx="7" fill="#fef3c7" opacity="0.6"/>
-  <!-- Diagonal score marks (talls) -->
-  <line x1="28" y1="36" x2="22" y2="66" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="40" y1="36" x2="34" y2="66" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="52" y1="36" x2="46" y2="66" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="64" y1="36" x2="58" y2="66" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="76" y1="36" x2="70" y2="66" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
-  <!-- Crust sheen along top -->
-  <ellipse cx="50" cy="42" rx="36" ry="4" fill="#f59e0b" opacity="0.5"/>
-  <!-- Pointed ends -->
-  <ellipse cx="8" cy="51" rx="5" ry="8" fill="#b45309"/>
-  <ellipse cx="92" cy="51" rx="5" ry="8" fill="#b45309"/>
-  <!-- Label -->
+  <defs><linearGradient id="bpa_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fefce8"/><stop offset="1" stop-color="#fef3c7"/></linearGradient>
+  <linearGradient id="bpa_cos" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fcd34d"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#bpa_bg)"/>
+  <ellipse cx="50" cy="80" rx="34" ry="5" fill="#0f172a" opacity=".08"/>
+  <g transform="rotate(-32 50 50)">
+    <path d="M50 12 q14 0 16 22 q1 16 -2 32 q-2 14 -14 14 q-12 0 -14 -14 q-3 -16 -2 -32 q2 -22 16 -22" fill="url(#bpa_cos)"/>
+    <path d="M38 28 q-2 24 2 44 q1 6 5 8 q-9 -2 -11 -14 q-3 -16 -2 -30 q1 -8 6 -8" fill="#fde68a" opacity=".7"/>
+    <g stroke="#92400e" stroke-width="2.6" stroke-linecap="round">
+      <path d="M42 24 q8 -3 16 0"/>
+      <path d="M40 38 q10 -3 20 0"/>
+      <path d="M40 52 q10 -3 20 0"/>
+      <path d="M42 66 q8 -3 16 0"/>
+    </g>
+  </g>
 </svg>

@@ -1,35 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Bol d'arròs -->
-  <!-- Bol blanc vist lleugerament de costat -->
-  <!-- Ombra del bol -->
-  <ellipse cx="50" cy="82" rx="30" ry="5" fill="#e2e8f0" opacity="0.7"/>
-  <!-- Cos del bol -->
-  <path d="M 15 52 Q 15 82 50 82 Q 85 82 85 52 Z" fill="#f5f5f5"/>
-  <path d="M 16 52 Q 16 80 50 80 Q 84 80 84 52 Z" fill="white"/>
-  <!-- Vora del bol -->
-  <ellipse cx="50" cy="52" rx="35" ry="9" fill="#f5f5f5"/>
-  <ellipse cx="50" cy="51" rx="35" ry="9" fill="white"/>
-  <ellipse cx="50" cy="50" rx="33" ry="8" fill="#fef9c3"/>
-  <!-- Arròs granulat dins (petits cercles/el·lipses blanques) -->
-  <ellipse cx="38" cy="54" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="44" cy="52" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="50" cy="51" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="56" cy="52" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="62" cy="54" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="35" cy="57" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="41" cy="56" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="47" cy="55" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="53" cy="55" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="59" cy="56" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="65" cy="57" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="37" cy="61" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="43" cy="59" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="50" cy="58" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="57" cy="59" rx="3" ry="1.5" fill="white"/>
-  <ellipse cx="63" cy="61" rx="3" ry="1.5" fill="white"/>
-  <!-- Decoració del bol: línia blava -->
-  <path d="M 17 56 Q 50 60 83 56" fill="none" stroke="#93c5fd" stroke-width="2" opacity="0.6"/>
-  <!-- Brillantor del bol -->
-  <path d="M 18 60 Q 20 72 22 78" fill="none" stroke="white" stroke-width="3" opacity="0.5" stroke-linecap="round"/>
-  <!-- Label -->
+  <defs><linearGradient id="arr_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fefce8"/><stop offset="1" stop-color="#fef3c7"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#arr_bg)"/>
+  <ellipse cx="50" cy="84" rx="32" ry="5" fill="#0f172a" opacity=".1"/>
+  <path d="M18 54 h64 q4 0 4 4 q0 16 -16 22 H30 q-16 -6 -16 -22 q0 -4 4 -4" fill="#0d9488"/>
+  <path d="M18 54 h32 l-2 26 H30 q-16 -6 -16 -22 q0 -4 4 -4" fill="#14b8a6"/>
+  <path d="M22 50 q28 -16 56 0 q2 2 0 4 H22 q-2 -2 0 -4" fill="#f8fafc"/>
+  <g fill="#ffffff" stroke="#e2e8f0" stroke-width=".8">
+    <ellipse cx="36" cy="44" rx="3.4" ry="2.2" transform="rotate(-20 36 44)"/>
+    <ellipse cx="46" cy="40" rx="3.4" ry="2.2" transform="rotate(15 46 40)"/>
+    <ellipse cx="56" cy="42" rx="3.4" ry="2.2" transform="rotate(-12 56 42)"/>
+    <ellipse cx="66" cy="46" rx="3.4" ry="2.2" transform="rotate(18 66 46)"/>
+    <ellipse cx="42" cy="48" rx="3.4" ry="2.2" transform="rotate(28 42 48)"/>
+    <ellipse cx="52" cy="47" rx="3.4" ry="2.2" transform="rotate(-25 52 47)"/>
+    <ellipse cx="61" cy="50" rx="3.2" ry="2" transform="rotate(10 61 50)"/>
+    <ellipse cx="30" cy="49" rx="3.2" ry="2" transform="rotate(-10 30 49)"/>
+  </g>
+  <path d="M50 32 q-3 -6 2 -10 M58 34 q-3 -6 2 -10" stroke="#a8a29e" stroke-width="2" stroke-linecap="round" fill="none"/>
 </svg>

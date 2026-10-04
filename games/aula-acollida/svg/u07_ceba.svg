@@ -1,27 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Onion body layers (outermost) -->
-  <ellipse cx="50" cy="60" rx="28" ry="25" fill="#7e22ce"/>
-  <!-- Layer 2 -->
-  <ellipse cx="50" cy="60" rx="23" ry="20" fill="#9333ea" opacity="0.7"/>
-  <!-- Layer 3 (inner visible) -->
-  <ellipse cx="50" cy="60" rx="17" ry="15" fill="#a855f7" opacity="0.7"/>
-  <!-- Layer lines on outside -->
-  <path d="M28 50 Q26 60 30 72" stroke="#6b21a8" stroke-width="1.5" fill="none"/>
-  <path d="M72 50 Q74 60 70 72" stroke="#6b21a8" stroke-width="1.5" fill="none"/>
-  <path d="M22 60 Q24 68 28 74" stroke="#6b21a8" stroke-width="1" fill="none"/>
-  <path d="M78 60 Q76 68 72 74" stroke="#6b21a8" stroke-width="1" fill="none"/>
-  <!-- Root fibers at bottom -->
-  <line x1="44" y1="83" x2="42" y2="88" stroke="#d1d5db" stroke-width="1"/>
-  <line x1="48" y1="84" x2="47" y2="90" stroke="#d1d5db" stroke-width="1"/>
-  <line x1="50" y1="84" x2="50" y2="90" stroke="#d1d5db" stroke-width="1"/>
-  <line x1="52" y1="84" x2="53" y2="90" stroke="#d1d5db" stroke-width="1"/>
-  <line x1="56" y1="83" x2="58" y2="88" stroke="#d1d5db" stroke-width="1"/>
-  <!-- Green stems at top -->
-  <path d="M44 36 Q43 25 42 18" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <path d="M50 35 Q50 24 51 16" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <path d="M56 36 Q57 25 58 18" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <!-- Neck of onion -->
-  <ellipse cx="50" cy="37" rx="10" ry="5" fill="#6b21a8"/>
-  <!-- Highlight -->
-  <ellipse cx="38" cy="50" rx="7" ry="9" fill="#c084fc" opacity="0.4"/>
+  <defs><linearGradient id="ceb_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#faf5ff"/><stop offset="1" stop-color="#f3e8ff"/></linearGradient>
+  <radialGradient id="ceb_cos" cx=".4" cy=".35" r="1"><stop offset="0" stop-color="#c084fc"/><stop offset="1" stop-color="#7e22ce"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#ceb_bg)"/>
+  <ellipse cx="50" cy="86" rx="24" ry="4" fill="#0f172a" opacity=".08"/>
+  <path d="M50 22 q3 8 10 12 q14 8 14 24 q0 22 -24 22 q-24 0 -24 -22 q0 -16 14 -24 q7 -4 10 -12" fill="url(#ceb_cos)"/>
+  <path d="M50 24 q-2 26 -8 54 M50 24 q2 26 8 54" stroke="#6b21a8" stroke-width="1.6" fill="none" opacity=".55"/>
+  <path d="M50 24 q-12 28 -20 48" stroke="#6b21a8" stroke-width="1.4" fill="none" opacity=".4"/>
+  <path d="M50 24 q12 28 20 48" stroke="#6b21a8" stroke-width="1.4" fill="none" opacity=".4"/>
+  <ellipse cx="38" cy="52" rx="5" ry="9" fill="#d8b4fe" opacity=".6" transform="rotate(-12 38 52)"/>
+  <path d="M46 20 q-2 -7 2 -10 M50 21 q0 -8 0 -11 M54 20 q2 -7 -2 -10" stroke="#a16207" stroke-width="2.2" stroke-linecap="round" fill="none"/>
 </svg>

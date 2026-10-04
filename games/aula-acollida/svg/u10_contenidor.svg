@@ -1,28 +1,15 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <!-- Cos contenidor -->
-  <rect x="12" y="32" width="76" height="52" rx="4" fill="#15803d"/>
-  <!-- Tapa (arrodonida) -->
-  <rect x="10" y="22" width="80" height="14" rx="7" fill="#166534"/>
-  <!-- Frontissa tapa -->
-  <rect x="20" y="20" width="60" height="5" rx="2" fill="#14532d"/>
-  <!-- Símbols de reciclatge (fletxes triangulars) -->
-  <g transform="translate(50,58)" fill="#f0fdf4">
-    <!-- Fletxa 1 -->
-    <polygon points="0,-14 8,0 -8,0" transform="rotate(0)"/>
-    <!-- Fletxa 2 -->
-    <polygon points="0,-14 8,0 -8,0" transform="rotate(120)"/>
-    <!-- Fletxa 3 -->
-    <polygon points="0,-14 8,0 -8,0" transform="rotate(240)"/>
-    <!-- Centre -->
-    <circle cx="0" cy="0" r="5" fill="#15803d"/>
-  </g>
-  <!-- Rodes petites -->
-  <circle cx="28" cy="84" r="5" fill="#166534"/>
-  <circle cx="28" cy="84" r="2" fill="#14532d"/>
-  <circle cx="72" cy="84" r="5" fill="#166534"/>
-  <circle cx="72" cy="84" r="2" fill="#14532d"/>
-  <!-- Nanses laterals -->
-  <rect x="6" y="40" width="8" height="20" rx="4" fill="#166534"/>
-  <rect x="86" y="40" width="8" height="20" rx="4" fill="#166534"/>
-  <!-- Label -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="cntd_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient>
+  <linearGradient id="cntd_cos" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4ade80"/><stop offset="1" stop-color="#15803d"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#cntd_bg)"/>
+  <ellipse cx="50" cy="90" rx="30" ry="3.5" fill="#0f172a" opacity=".1"/>
+  <path d="M22 36 q0 -8 8 -8 h40 q8 0 8 8 v6 H22 z" fill="#16a34a"/>
+  <path d="M24 30 q-6 4 -4 12 l4 0 q-1 -7 2 -10 q0 -2 -2 -2" fill="#15803d" opacity="0"/>
+  <rect x="18" y="40" width="64" height="44" rx="5" fill="url(#cntd_cos)"/>
+  <rect x="18" y="40" width="64" height="12" rx="5" fill="#22c55e"/>
+  <rect x="34" y="33" width="32" height="6" rx="3" fill="#14532d"/>
+  <path d="M50 56 l8 6 h-4 q-1 7 -7 9 q4 -4 3 -9 z" fill="#dcfce7"/>
+  <path d="M44 74 l-8 -6 h4 q1 -7 7 -9 q-4 4 -3 9 z" fill="#dcfce7"/>
+  <rect x="24" y="84" width="8" height="5" rx="2" fill="#1e293b"/>
+  <rect x="68" y="84" width="8" height="5" rx="2" fill="#1e293b"/>
 </svg>

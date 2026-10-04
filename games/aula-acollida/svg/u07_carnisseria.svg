@@ -1,23 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Shop front -->
-  <rect x="8" y="28" width="84" height="66" rx="4" fill="#fef9f0" stroke="#78350f" stroke-width="2.5"/>
-  <!-- Awning -->
-  <path d="M4 28 L96 28 L92 16 L8 16 Z" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
-  <!-- Awning stripes -->
-  <line x1="20" y1="16" x2="16" y2="28" stroke="#fde68a" stroke-width="3"/>
-  <line x1="36" y1="16" x2="32" y2="28" stroke="#fde68a" stroke-width="3"/>
-  <line x1="52" y1="16" x2="48" y2="28" stroke="#fde68a" stroke-width="3"/>
-  <line x1="68" y1="16" x2="64" y2="28" stroke="#fde68a" stroke-width="3"/>
-  <line x1="84" y1="16" x2="80" y2="28" stroke="#fde68a" stroke-width="3"/>
-  <!-- Sign -->
-  <rect x="20" y="6" width="60" height="12" rx="3" fill="#fde68a" stroke="#d97706" stroke-width="1.5"/>
-  <!-- Window with meat display -->
-  <rect x="14" y="34" width="34" height="28" rx="3" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1.5"/>
-  <!-- Meat in window -->
-  <ellipse cx="24" cy="50" rx="7" ry="5" fill="#c2410c" stroke="#7c2d12" stroke-width="1"/>
-  <ellipse cx="38" cy="48" rx="6" ry="4" fill="#dc2626" stroke="#7c2d12" stroke-width="1"/>
-  <!-- Door -->
-  <rect x="54" y="48" width="28" height="46" rx="3" fill="#f5e6d0" stroke="#78350f" stroke-width="2"/>
-  <!-- Door handle -->
-  <circle cx="58" cy="72" r="2.5" fill="#92400e"/>
+  <defs><linearGradient id="crn_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#crn_bg)"/>
+  <ellipse cx="50" cy="89" rx="36" ry="4" fill="#0f172a" opacity=".08"/>
+  <rect x="14" y="34" width="72" height="52" rx="3" fill="#fee2e2"/>
+  <path d="M12 22 h76 v8 q0 6 -6.3 6 q-6.4 0 -6.4 -6 q0 6 -6.3 6 q-6.3 0 -6.3 -6 q0 6 -6.3 6 q-6.4 0 -6.4 -6 q0 6 -6.3 6 q-6.3 0 -6.3 -6 q0 6 -6.4 6 q-6.3 0 -6.3 -6 q0 6 -6.3 6 q-6.4 0 -6.4 -6 z" fill="#b91c1c"/>
+  <path d="M12 22 h12.7 v8 q0 6 -6.4 6 q-6.3 0 -6.3 -6 z M37.4 22 h12.7 v8 q0 6 -6.4 6 q-6.3 0 -6.3 -6 z M62.7 22 h12.7 v8 q0 6 -6.3 6 q-6.4 0 -6.4 -6 z" fill="#f87171"/>
+  <path d="M24 40 v8 M40 40 v10 M58 40 v8 M74 40 v10" stroke="#94a3b8" stroke-width="2"/>
+  <ellipse cx="24" cy="54" rx="6" ry="8" fill="#dc2626"/>
+  <ellipse cx="24" cy="52" rx="3.5" ry="4" fill="#fca5a5" opacity=".7"/>
+  <path d="M36 50 q0 -4 4 -4 q8 6 8 14 q-6 4 -12 0 q-2 -6 0 -10" fill="#f87171"/>
+  <ellipse cx="58" cy="54" rx="6.5" ry="7.5" fill="#b91c1c"/>
+  <path d="M70 46 q8 0 8 9 q0 6 -4 8 q-5 1 -8 -2 q-2 -8 4 -15" fill="#dc2626"/>
+  <rect x="18" y="66" width="64" height="16" rx="2" fill="#f8fafc"/>
+  <ellipse cx="34" cy="73" rx="10" ry="4" fill="#fca5a5"/>
+  <ellipse cx="58" cy="73" rx="8" ry="3.6" fill="#ef4444"/>
+  <circle cx="73" cy="73" r="3.5" fill="#dc2626"/>
 </svg>

@@ -1,35 +1,21 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <!-- Abdomen - èlitres (cobertes alars) -->
-  <ellipse cx="50" cy="65" rx="18" ry="22" fill="#1f2937"/>
-  <!-- Reflexos verd metàl·lic èlitres -->
-  <ellipse cx="44" cy="55" rx="5" ry="8" fill="#065f46" opacity="0.7"/>
-  <ellipse cx="56" cy="55" rx="5" ry="8" fill="#065f46" opacity="0.7"/>
-  <!-- Línia central èlitres -->
-  <line x1="50" y1="44" x2="50" y2="86" stroke="#065f46" stroke-width="1.5"/>
-  <!-- Tòrax -->
-  <ellipse cx="50" cy="45" rx="14" ry="10" fill="#1f2937"/>
-  <!-- Reflexo tòrax -->
-  <ellipse cx="46" cy="42" rx="4" ry="3" fill="#065f46" opacity="0.5"/>
-  <!-- Cap -->
-  <circle cx="50" cy="32" r="11" fill="#1f2937"/>
-  <!-- Ulls -->
-  <circle cx="43" cy="30" r="3" fill="#374151"/>
-  <circle cx="43" cy="30" r="1.5" fill="#065f46"/>
-  <circle cx="57" cy="30" r="3" fill="#374151"/>
-  <circle cx="57" cy="30" r="1.5" fill="#065f46"/>
-  <!-- Banya (escarabat banyut) -->
-  <path d="M50,22 Q50,14 44,10" stroke="#1f2937" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <path d="M50,22 Q50,14 56,10" stroke="#1f2937" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <!-- Antenes -->
-  <path d="M44,24 Q36,16 30,14" stroke="#374151" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <circle cx="30" cy="14" r="1.5" fill="#374151"/>
-  <path d="M56,24 Q64,16 70,14" stroke="#374151" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <circle cx="70" cy="14" r="1.5" fill="#374151"/>
-  <!-- 6 potes -->
-  <path d="M38,46 L26,42 L18,46" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M38,52 L24,52 L16,58" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M38,62 L26,68 L18,72" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M62,46 L74,42 L82,46" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M62,52 L76,52 L84,58" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M62,62 L74,68 L82,72" stroke="#1f2937" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><linearGradient id="esc2_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7fee7"/><stop offset="1" stop-color="#ecfccb"/></linearGradient>
+  <radialGradient id="esc2_cos" cx=".4" cy=".35" r="1"><stop offset="0" stop-color="#4338ca"/><stop offset="1" stop-color="#1e1b4b"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#esc2_bg)"/>
+  <ellipse cx="50" cy="84" rx="26" ry="4" fill="#0f172a" opacity=".08"/>
+  <g stroke="#1e1b4b" stroke-width="2.4" stroke-linecap="round" fill="none">
+    <path d="M34 48 l-14 -6 M32 58 l-14 0 M36 68 l-12 8"/>
+    <path d="M66 48 l14 -6 M68 58 l14 0 M64 68 l12 8"/>
+  </g>
+  <ellipse cx="50" cy="58" rx="22" ry="24" fill="url(#esc2_cos)"/>
+  <path d="M50 36 v46" stroke="#1e1b4b" stroke-width="2.5"/>
+  <path d="M34 44 q16 -6 32 0" stroke="#6366f1" stroke-width="2" fill="none" opacity=".6"/>
+  <circle cx="42" cy="56" r="2.6" fill="#818cf8" opacity=".8"/>
+  <circle cx="58" cy="56" r="2.6" fill="#818cf8" opacity=".8"/>
+  <circle cx="44" cy="68" r="2" fill="#818cf8" opacity=".6"/>
+  <circle cx="56" cy="68" r="2" fill="#818cf8" opacity=".6"/>
+  <circle cx="50" cy="28" r="9" fill="#1e1b4b"/>
+  <circle cx="46.5" cy="26" r="1.8" fill="#a5b4fc"/>
+  <circle cx="53.5" cy="26" r="1.8" fill="#a5b4fc"/>
+  <path d="M44 20 q-4 -5 -9 -6 M56 20 q4 -5 9 -6" stroke="#1e1b4b" stroke-width="2" stroke-linecap="round" fill="none"/>
 </svg>

@@ -1,25 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Got gran d'aigua -->
-  <!-- Got cilíndric transparent -->
-  <path d="M 25 18 L 28 82 L 72 82 L 75 18 Z" fill="#e0f2fe" opacity="0.5"/>
-  <path d="M 25 18 L 28 82 L 72 82 L 75 18 Z" fill="none" stroke="#7dd3fc" stroke-width="3"/>
-  <!-- Tapa superior -->
-  <ellipse cx="50" cy="18" rx="25" ry="6" fill="#bae6fd" opacity="0.6"/>
-  <!-- Aigua blava -->
-  <path d="M 27 35 L 28 82 L 72 82 L 73 35 Z" fill="#60a5fa" opacity="0.7"/>
-  <!-- Glaçons -->
-  <rect x="32" y="42" width="14" height="16" rx="3" fill="#e0f2fe" opacity="0.85"/>
-  <rect x="54" y="38" width="13" height="18" rx="3" fill="#e0f2fe" opacity="0.85"/>
-  <rect x="40" y="56" width="16" height="14" rx="3" fill="#e0f2fe" opacity="0.85"/>
-  <!-- Brillantor glaçons -->
-  <rect x="34" y="44" width="4" height="8" rx="2" fill="white" opacity="0.6"/>
-  <rect x="56" y="40" width="4" height="8" rx="2" fill="white" opacity="0.6"/>
-  <!-- Bombolles d'aire -->
-  <circle cx="45" cy="70" r="3" fill="white" opacity="0.7"/>
-  <circle cx="62" cy="62" r="2" fill="white" opacity="0.7"/>
-  <circle cx="38" cy="65" r="1.5" fill="white" opacity="0.7"/>
-  <circle cx="55" cy="75" r="2.5" fill="white" opacity="0.5"/>
-  <!-- Reflexos del got -->
-  <rect x="27" y="22" width="5" height="55" rx="2" fill="white" opacity="0.35"/>
-  <!-- Label -->
+  <defs><linearGradient id="aigua_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0f9ff"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient>
+  <radialGradient id="aigua_gota" cx=".4" cy=".35" r="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0369a1"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#aigua_bg)"/>
+  <ellipse cx="50" cy="86" rx="26" ry="4" fill="#0f172a" opacity=".08"/>
+  <path d="M50 12 q26 30 26 48 a26 26 0 0 1 -52 0 q0 -18 26 -48" fill="url(#aigua_gota)"/>
+  <path d="M38 56 q-2 14 8 20 q-14 -2 -16 -16 q0 -6 8 -4" fill="#bae6fd" opacity=".7"/>
+  <circle cx="60" cy="44" r="3" fill="#e0f2fe" opacity=".8"/>
+  <path d="M40 36 q4 -8 10 -14" stroke="#bae6fd" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".8"/>
 </svg>

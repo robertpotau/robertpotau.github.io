@@ -1,11 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <ellipse cx="50" cy="78" rx="38" ry="8" fill="#e2e8f0"/>
-  <rect x="15" y="55" width="70" height="28" rx="5" fill="#f5f0e8" stroke="#d4a96a" stroke-width="2"/>
-  <circle cx="32" cy="52" r="10" fill="#ef4444" stroke="#dc2626" stroke-width="1.5"/>
-  <rect x="30" y="42" width="4" height="8" rx="2" fill="#22c55e"/>
-  <rect x="45" y="48" width="28" height="14" rx="3" fill="#fde68a" stroke="#f59e0b" stroke-width="1.5"/>
-  <line x1="51" y1="48" x2="51" y2="62" stroke="#f59e0b" stroke-width="1"/>
-  <line x1="57" y1="48" x2="57" y2="62" stroke="#f59e0b" stroke-width="1"/>
-  <line x1="63" y1="48" x2="63" y2="62" stroke="#f59e0b" stroke-width="1"/>
-  <rect x="48" y="53" width="22" height="2" fill="#f59e0b"/>
+  <defs><linearGradient id="ber_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fed7aa"/><stop offset="1" stop-color="#ffedd5"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#ber_bg)"/>
+  <circle cx="78" cy="22" r="9" fill="#fb923c"/>
+  <circle cx="78" cy="22" r="12" fill="#fb923c" opacity=".3"/>
+  <ellipse cx="46" cy="86" rx="32" ry="4" fill="#0f172a" opacity=".08"/>
+  <g transform="rotate(-8 44 56)">
+    <path d="M18 48 q0 -8 8 -8 h36 q8 0 8 8 l-2 6 q-24 8 -48 0 z" fill="#d97706"/>
+    <path d="M18 48 q0 -8 8 -8 h18 l-4 12 q-12 2 -22 -4" fill="#f59e0b"/>
+    <path d="M16 56 q28 10 56 0 l-1 5 q-27 9 -54 0 z" fill="#16a34a"/>
+    <path d="M14 62 q30 10 60 0 q2 6 -4 8 h-52 q-6 -2 -4 -8" fill="#d97706"/>
+    <path d="M14 62 q15 5 30 6 l-1 6 h-25 q-6 -2 -4 -8 q0 -2 0 -4" fill="#f59e0b" opacity=".7"/>
+  </g>
+  <g transform="rotate(12 74 60)">
+    <path d="M68 44 l10 0 l-2 26 q0 4 -3 4 q-3 0 -3 -4 z" fill="#7f1d1d"/>
+    <path d="M68 44 q-2 -10 5 -16 q7 6 5 16 z" fill="#451a03"/>
+    <path d="M70 42 q-1 -8 3 -12" stroke="#92400e" stroke-width="1.4" fill="none"/>
+  </g>
 </svg>

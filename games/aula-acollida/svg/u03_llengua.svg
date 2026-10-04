@@ -1,17 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Open mouth -->
-  <path d="M15 38 Q14 28 20 22 Q30 14 50 14 Q70 14 80 22 Q86 28 85 38 Q84 55 50 58 Q16 55 15 38 Z" fill="#ffd68a" stroke="#d97706" stroke-width="2"/>
-  <!-- Inside mouth darkness -->
-  <path d="M22 40 Q50 55 78 40 Q78 50 50 54 Q22 50 22 40 Z" fill="#1f2937"/>
-  <!-- Upper teeth -->
-  <path d="M24 36 L24 42 Q30 46 36 42 L36 36 Z" fill="white" stroke="#e5e7eb" stroke-width="0.5"/>
-  <path d="M36 36 L36 43 Q42 47 48 43 L48 36 Z" fill="white" stroke="#e5e7eb" stroke-width="0.5"/>
-  <path d="M48 36 L48 43 Q54 47 60 43 L60 36 Z" fill="white" stroke="#e5e7eb" stroke-width="0.5"/>
-  <path d="M60 36 L60 42 Q66 46 72 42 L72 36 Z" fill="white" stroke="#e5e7eb" stroke-width="0.5"/>
-  <!-- Tongue sticking out -->
-  <path d="M30 46 Q50 42 70 46 Q72 56 70 64 Q60 76 50 78 Q40 76 30 64 Q28 56 30 46 Z" fill="#f43f5e"/>
-  <!-- Tongue center line -->
-  <line x1="50" y1="48" x2="50" y2="72" stroke="#be123c" stroke-width="2" opacity="0.5"/>
-  <!-- Tongue highlight -->
-  <ellipse cx="50" cy="56" rx="10" ry="5" fill="#fb7185" opacity="0.4"/>
+  <defs><linearGradient id="lng_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fdf2f8"/><stop offset="1" stop-color="#fce7f3"/></linearGradient>
+  <linearGradient id="lng_t" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fb7185"/><stop offset="1" stop-color="#e11d48"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#lng_bg)"/>
+  <path d="M22 38 q14 -12 28 -2 q14 -10 28 2 q-4 8 -10 11 h-36 q-6 -3 -10 -11" fill="#dc2626"/>
+  <path d="M26 44 q24 8 48 0 l-4 6 h-40 z" fill="#7f1d1d"/>
+  <path d="M34 46 q0 -3 4 -2 q24 5 24 2 l2 1 q-14 4 -30 -1" fill="#f8fafc" opacity="0"/>
+  <path d="M36 46 q0 28 14 28 q14 0 14 -28 q-7 3 -14 3 q-7 0 -14 -3" fill="url(#lng_t)"/>
+  <path d="M50 50 v20" stroke="#be123c" stroke-width="2.5" stroke-linecap="round"/>
+  <ellipse cx="43" cy="56" rx="3" ry="5" fill="#fda4af" opacity=".6"/>
+  <circle cx="56" cy="60" r="1.2" fill="#fecdd3" opacity=".8"/>
+  <circle cx="45" cy="66" r="1" fill="#fecdd3" opacity=".7"/>
 </svg>

@@ -1,17 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Respatller -->
-  <rect x="18" y="10" width="28" height="52" rx="4" ry="4" fill="#1f2937" stroke="#374151" stroke-width="1.5"/>
-  <!-- Coixí respatller -->
-  <rect x="21" y="14" width="22" height="44" rx="3" fill="#374151"/>
-  <!-- Seient horitzontal -->
-  <rect x="18" y="58" width="52" height="18" rx="4" ry="4" fill="#1f2937" stroke="#374151" stroke-width="1.5"/>
-  <!-- Coixí seient -->
-  <rect x="21" y="61" width="46" height="12" rx="3" fill="#374151"/>
-  <!-- Estructura/cames -->
-  <line x1="28" y1="76" x2="28" y2="90" stroke="#374151" stroke-width="4" stroke-linecap="round"/>
-  <line x1="60" y1="76" x2="60" y2="90" stroke="#374151" stroke-width="4" stroke-linecap="round"/>
-  <line x1="24" y1="88" x2="64" y2="88" stroke="#374151" stroke-width="4" stroke-linecap="round"/>
-  <!-- Riel ajust -->
-  <rect x="24" y="84" width="40" height="5" rx="2" fill="#6b7280"/>
-  <!-- Label -->
+  <defs><linearGradient id="sei_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient>
+  <linearGradient id="sei_cos" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#475569"/><stop offset="1" stop-color="#1e293b"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#sei_bg)"/>
+  <ellipse cx="50" cy="90" rx="26" ry="3.5" fill="#0f172a" opacity=".08"/>
+  <path d="M36 14 q-8 0 -8 10 l2 34 q0 6 6 6 h18 q4 0 4 -4 l-2 -38 q0 -8 -8 -8 z" fill="url(#sei_cos)"/>
+  <path d="M34 20 q-2 0 -2 4 l2 30 q0 3 3 3 h14 l-2 -33 q0 -4 -4 -4 z" fill="#64748b"/>
+  <path d="M36 26 h14 M36 34 h15 M37 42 h14" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+  <path d="M28 62 q-6 2 -6 10 q0 10 10 10 h26 q8 0 8 -8 q0 -8 -8 -8 l-26 -2 q-2 -1 -4 -2" fill="url(#sei_cos)"/>
+  <path d="M26 68 q-2 2 -2 5 q0 7 8 7 h24 q5 0 5 -5 q0 -5 -5 -5 z" fill="#64748b"/>
+  <rect x="40" y="82" width="6" height="8" fill="#334155"/>
+  <rect x="62" y="82" width="6" height="8" fill="#1e293b"/>
 </svg>

@@ -1,31 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Building facade -->
-  <rect x="10" y="30" width="80" height="55" rx="2" fill="#fef9c3"/>
-  <!-- Awning -->
-  <polygon points="5,30 95,30 88,45 12,45" fill="#15803d"/>
-  <line x1="5" y1="30" x2="12" y2="45" stroke="#166534" stroke-width="1"/>
-  <line x1="25" y1="30" x2="26" y2="45" stroke="#166534" stroke-width="1"/>
-  <line x1="45" y1="30" x2="45" y2="45" stroke="#166534" stroke-width="1"/>
-  <line x1="65" y1="30" x2="64" y2="45" stroke="#166534" stroke-width="1"/>
-  <line x1="85" y1="30" x2="83" y2="45" stroke="#166534" stroke-width="1"/>
-  <!-- Sign -->
-  <rect x="20" y="18" width="60" height="14" rx="3" fill="#15803d"/>
-  <!-- Door -->
-  <rect x="38" y="60" width="24" height="25" rx="2" fill="#92400e"/>
-  <circle cx="57" cy="73" r="1.5" fill="#fbbf24"/>
-  <!-- Display shelf -->
-  <rect x="8" y="52" width="84" height="8" rx="2" fill="#a16207"/>
-  <!-- Apples -->
-  <circle cx="22" cy="50" r="6" fill="#ef4444"/>
-  <path d="M22 44 Q24 41 26 43" stroke="#15803d" stroke-width="1.5" fill="none"/>
-  <circle cx="38" cy="50" r="6" fill="#ef4444"/>
-  <path d="M38 44 Q40 41 42 43" stroke="#15803d" stroke-width="1.5" fill="none"/>
-  <!-- Bananas -->
-  <path d="M50 54 Q55 46 62 48 Q60 54 55 56 Q52 56 50 54Z" fill="#fde047"/>
-  <path d="M50 54 Q55 47 62 48" stroke="#a16207" stroke-width="0.8" fill="none"/>
-  <!-- Oranges -->
-  <circle cx="72" cy="50" r="5.5" fill="#f97316"/>
-  <path d="M72 44.5 Q73.5 42 75 43.5" stroke="#15803d" stroke-width="1.5" fill="none"/>
-  <circle cx="83" cy="50" r="5.5" fill="#f97316"/>
-  <path d="M83 44.5 Q84.5 42 86 43.5" stroke="#15803d" stroke-width="1.5" fill="none"/>
+  <defs><linearGradient id="fru_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#fru_bg)"/>
+  <ellipse cx="50" cy="89" rx="36" ry="4" fill="#0f172a" opacity=".08"/>
+  <rect x="14" y="34" width="72" height="52" rx="3" fill="#fef3c7"/>
+  <g>
+    <path d="M12 22 h76 v8 q0 6 -6.3 6 q-6.4 0 -6.4 -6 q0 6 -6.3 6 q-6.3 0 -6.3 -6 q0 6 -6.3 6 q-6.4 0 -6.4 -6 q0 6 -6.3 6 q-6.3 0 -6.3 -6 q0 6 -6.4 6 q-6.3 0 -6.3 -6 q0 6 -6.3 6 q-6.4 0 -6.4 -6 z" fill="#16a34a"/>
+    <path d="M12 22 h12.7 v8 q0 6 -6.4 6 q-6.3 0 -6.3 -6 z M37.4 22 h12.7 v8 q0 6 -6.4 6 q-6.3 0 -6.3 -6 z M62.7 22 h12.7 v8 q0 6 -6.3 6 q-6.4 0 -6.4 -6 z" fill="#4ade80"/>
+  </g>
+  <rect x="20" y="46" width="60" height="34" rx="2" fill="#92400e"/>
+  <rect x="22" y="48" width="56" height="9" fill="#b45309"/>
+  <circle cx="28" cy="52" r="3.6" fill="#ef4444"/><circle cx="36" cy="52" r="3.6" fill="#dc2626"/><circle cx="44" cy="52" r="3.6" fill="#ef4444"/>
+  <rect x="22" y="59" width="56" height="9" fill="#a16207"/>
+  <circle cx="30" cy="63.5" r="3.6" fill="#f97316"/><circle cx="38" cy="63.5" r="3.6" fill="#fb923c"/><circle cx="46" cy="63.5" r="3.6" fill="#f97316"/>
+  <rect x="22" y="70" width="56" height="9" fill="#b45309"/>
+  <path d="M28 70 q3 -4 6 0 q3 4 6 0" stroke="#fde047" stroke-width="4" fill="none"/>
+  <circle cx="64" cy="56" r="5" fill="#fde047"/>
+  <circle cx="70" cy="66" r="4.5" fill="#84cc16"/>
+  <circle cx="62" cy="74" r="4" fill="#a855f7"/>
 </svg>

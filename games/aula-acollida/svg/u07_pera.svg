@@ -1,15 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Pear body (base) -->
-  <ellipse cx="50" cy="68" rx="22" ry="24" fill="#a3e635"/>
-  <!-- Pear neck -->
-  <ellipse cx="50" cy="44" rx="10" ry="12" fill="#a3e635"/>
-  <!-- Shading highlight -->
-  <ellipse cx="43" cy="60" rx="7" ry="10" fill="#d9f99d" opacity="0.6"/>
-  <!-- Stem -->
-  <rect x="49" y="30" width="2.5" height="10" rx="1" fill="#92400e"/>
-  <!-- Leaf -->
-  <ellipse cx="56" cy="33" rx="8" ry="4" fill="#4ade80" transform="rotate(-30,56,33)"/>
-  <line x1="51" y1="33" x2="60" y2="30" stroke="#16a34a" stroke-width="0.8"/>
-  <!-- Center line (subtle) -->
-  <path d="M50 48 Q52 58 51 82" stroke="#84cc16" stroke-width="1" fill="none" opacity="0.5"/>
+  <defs><linearGradient id="per_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7fee7"/><stop offset="1" stop-color="#ecfccb"/></linearGradient>
+  <radialGradient id="per_cos" cx=".35" cy=".3" r="1"><stop offset="0" stop-color="#bef264"/><stop offset="1" stop-color="#65a30d"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#per_bg)"/>
+  <ellipse cx="50" cy="86" rx="24" ry="4" fill="#0f172a" opacity=".08"/>
+  <path d="M50 30 q8 0 9 10 q1 8 6 14 q6 8 5 16 q-2 14 -20 14 q-18 0 -20 -14 q-1 -8 5 -16 q5 -6 6 -14 q1 -10 9 -10" fill="url(#per_cos)"/>
+  <ellipse cx="40" cy="62" rx="7" ry="10" fill="#d9f99d" opacity=".6" transform="rotate(-12 40 62)"/>
+  <path d="M50 30 q-1 -8 4 -14" stroke="#78350f" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M56 18 q10 -4 13 4 q-8 5 -13 -4" fill="#16a34a"/>
+  <circle cx="46" cy="42" r="1.2" fill="#a16207" opacity=".5"/>
+  <circle cx="54" cy="50" r="1.2" fill="#a16207" opacity=".5"/>
+  <circle cx="44" cy="74" r="1.2" fill="#a16207" opacity=".5"/>
 </svg>

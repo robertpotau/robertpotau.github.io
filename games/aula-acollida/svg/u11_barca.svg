@@ -1,20 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Mar ondulat -->
-  <path d="M2 72 Q12 68 22 72 Q32 76 42 72 Q52 68 62 72 Q72 76 82 72 Q92 68 98 72 L98 88 L2 88 Z" fill="#3b82f6"/>
-  <path d="M2 76 Q12 72 22 76 Q32 80 42 76 Q52 72 62 76 Q72 80 82 76 Q92 72 98 76 L98 88 L2 88 Z" fill="#60a5fa"/>
-  <!-- Casc barca (mitja lluna) -->
-  <path d="M15 68 Q18 80 50 82 Q82 80 85 68 Z" fill="#92400e" stroke="#78350f" stroke-width="1.5"/>
-  <!-- Interior barca -->
-  <path d="M20 68 Q22 76 50 78 Q78 76 80 68 Z" fill="#a16207"/>
-  <!-- Pal vertical -->
-  <line x1="50" y1="68" x2="50" y2="22" stroke="#4b3621" stroke-width="3" stroke-linecap="round"/>
-  <!-- Vela triangular gran -->
-  <polygon points="50,24 50,68 82,56" fill="#f5f5f5" stroke="#d1d5db" stroke-width="1.2"/>
-  <!-- Vela petita davantera (trinqueta) -->
-  <polygon points="50,28 50,62 24,52" fill="#e2e8f0" stroke="#d1d5db" stroke-width="1"/>
-  <!-- Botavarant horitzontal -->
-  <line x1="50" y1="68" x2="82" y2="60" stroke="#4b3621" stroke-width="2" stroke-linecap="round"/>
-  <!-- Bandereta al pal -->
-  <polygon points="50,22 58,26 50,30" fill="#ef4444"/>
-  <!-- Label -->
+  <defs><linearGradient id="bar_bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#bae6fd"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#bar_bg)"/>
+  <circle cx="80" cy="18" r="7" fill="#fde047"/>
+  <path d="M0 74 q12 -6 25 0 t25 0 t25 0 t25 0 v10 q0 16 -16 16 H16 Q0 100 0 84 z" fill="#0ea5e9"/>
+  <path d="M50 14 v50" stroke="#92400e" stroke-width="3.5"/>
+  <path d="M53 18 q22 6 24 32 q-14 -4 -24 0 z" fill="#f8fafc"/>
+  <path d="M47 18 q-18 8 -20 32 q11 -3 20 0 z" fill="#e2e8f0"/>
+  <path d="M16 64 h68 l-8 14 q-2 4 -7 4 H31 q-5 0 -7 -4 z" fill="#b45309"/>
+  <path d="M16 64 h22 l-4 18 h-3 q-5 0 -7 -4 z" fill="#d97706"/>
+  <path d="M24 70 h52" stroke="#78350f" stroke-width="2" opacity=".6"/>
 </svg>

@@ -1,24 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Large eye -->
-  <ellipse cx="50" cy="48" rx="38" ry="26" fill="white" stroke="#374151" stroke-width="2.5"/>
-  <!-- Iris - brown -->
-  <circle cx="50" cy="48" r="18" fill="#92400e"/>
-  <circle cx="50" cy="48" r="16" fill="#a16207"/>
-  <!-- Iris lines -->
-  <line x1="50" y1="32" x2="50" y2="64" stroke="#78350f" stroke-width="1" opacity="0.5"/>
-  <line x1="34" y1="48" x2="66" y2="48" stroke="#78350f" stroke-width="1" opacity="0.5"/>
-  <line x1="38" y1="36" x2="62" y2="60" stroke="#78350f" stroke-width="1" opacity="0.4"/>
-  <line x1="62" y1="36" x2="38" y2="60" stroke="#78350f" stroke-width="1" opacity="0.4"/>
-  <!-- Pupil -->
-  <circle cx="50" cy="48" r="8" fill="#1a1a1a"/>
-  <!-- Shine -->
-  <circle cx="44" cy="42" r="4" fill="white" opacity="0.7"/>
-  <!-- Eyelashes -->
-  <line x1="20" y1="42" x2="16" y2="36" stroke="#374151" stroke-width="2"/>
-  <line x1="28" y1="36" x2="26" y2="28" stroke="#374151" stroke-width="2"/>
-  <line x1="38" y1="30" x2="38" y2="22" stroke="#374151" stroke-width="2"/>
-  <line x1="50" y1="26" x2="50" y2="18" stroke="#374151" stroke-width="2"/>
-  <line x1="62" y1="30" x2="62" y2="22" stroke="#374151" stroke-width="2"/>
-  <line x1="72" y1="36" x2="74" y2="28" stroke="#374151" stroke-width="2"/>
-  <line x1="80" y1="42" x2="84" y2="36" stroke="#374151" stroke-width="2"/>
+  <defs><linearGradient id="umr_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/></linearGradient>
+  <radialGradient id="umr_iris" cx=".4" cy=".4" r=".8"><stop offset="0" stop-color="#d6a35c"/><stop offset="1" stop-color="#713f12"/></radialGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#umr_bg)"/>
+  <path d="M10 50 q18 -20 36 0 q-18 20 -36 0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2"/>
+  <path d="M54 50 q18 -20 36 0 q-18 20 -36 0" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2"/>
+  <circle cx="28" cy="50" r="9" fill="url(#umr_iris)"/>
+  <circle cx="28" cy="50" r="4" fill="#0f172a"/>
+  <circle cx="25.5" cy="47" r="2" fill="#fff" opacity=".9"/>
+  <circle cx="72" cy="50" r="9" fill="url(#umr_iris)"/>
+  <circle cx="72" cy="50" r="4" fill="#0f172a"/>
+  <circle cx="69.5" cy="47" r="2" fill="#fff" opacity=".9"/>
+  <path d="M10 50 q18 -20 36 0 M54 50 q18 -20 36 0" fill="none" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M16 38 q12 -8 24 -2 M60 36 q12 -6 24 2" stroke="#44403c" stroke-width="2.5" stroke-linecap="round" fill="none"/>
 </svg>

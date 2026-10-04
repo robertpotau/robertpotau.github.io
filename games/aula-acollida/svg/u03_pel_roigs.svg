@@ -1,25 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Head -->
-  <circle cx="50" cy="46" r="26" fill="#ffd68a" stroke="#d97706" stroke-width="1.5"/>
-  <!-- Red/orange hair -->
-  <path d="M24 40 Q22 20 34 14 Q44 8 50 10 Q58 8 66 14 Q78 20 76 40" fill="#ea580c"/>
-  <!-- Hair detail -->
-  <path d="M24 40 Q26 28 34 22" stroke="#f97316" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <path d="M76 40 Q74 28 66 22" stroke="#f97316" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <!-- Freckles -->
-  <circle cx="38" cy="50" r="2" fill="#f97316" opacity="0.7"/>
-  <circle cx="44" cy="53" r="1.5" fill="#f97316" opacity="0.7"/>
-  <circle cx="56" cy="53" r="1.5" fill="#f97316" opacity="0.7"/>
-  <circle cx="62" cy="50" r="2" fill="#f97316" opacity="0.7"/>
-  <!-- Eyes (green, typical for redheads) -->
-  <ellipse cx="38" cy="44" rx="6" ry="5" fill="white" stroke="#374151" stroke-width="1.5"/>
-  <ellipse cx="62" cy="44" rx="6" ry="5" fill="white" stroke="#374151" stroke-width="1.5"/>
-  <circle cx="38" cy="44" r="3" fill="#16a34a"/>
-  <circle cx="62" cy="44" r="3" fill="#16a34a"/>
-  <circle cx="38" cy="44" r="1.5" fill="#1a1a1a"/>
-  <circle cx="62" cy="44" r="1.5" fill="#1a1a1a"/>
-  <!-- Nose -->
-  <path d="M46 54 Q50 58 54 54" stroke="#c2850a" stroke-width="1.5" fill="none"/>
-  <!-- Smile -->
-  <path d="M40 63 Q50 69 60 63" stroke="#c2850a" stroke-width="2" fill="none"/>
+  <defs><linearGradient id="hpr_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#hpr_bg)"/>
+  <ellipse cx="50" cy="86" rx="24" ry="4" fill="#0f172a" opacity=".08"/>
+  <path d="M30 82 q-2 -16 20 -16 q22 0 20 16 z" fill="#0d9488"/>
+  <circle cx="50" cy="42" r="16" fill="#fcd9b8"/>
+  <path d="M33 38 q0 -16 17 -16 q17 0 17 16 q0 5 -2 9 q-2 1 -3 -2 q-1 -8 -2 -11 q-5 -5 -10 -5 q-5 0 -10 5 q-1 3 -2 11 q-1 3 -3 2 q-2 -4 -2 -9" fill="#ea580c"/>
+  <path d="M38 26 q5 -3 9 -1 M52 24 q6 -1 9 4" stroke="#c2410c" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  <circle cx="44.5" cy="43" r="2" fill="#1e293b"/>
+  <circle cx="55.5" cy="43" r="2" fill="#1e293b"/>
+  <circle cx="40" cy="48" r="1.2" fill="#f59e0b" opacity=".7"/><circle cx="60" cy="48" r="1.2" fill="#f59e0b" opacity=".7"/><circle cx="44" cy="51" r="1" fill="#f59e0b" opacity=".6"/><circle cx="56" cy="51" r="1" fill="#f59e0b" opacity=".6"/>
+  <path d="M46 50 q4 2.6 8 0" fill="none" stroke="#92400e" stroke-width="1.7" stroke-linecap="round"/>
 </svg>

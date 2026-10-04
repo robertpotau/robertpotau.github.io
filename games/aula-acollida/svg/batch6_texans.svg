@@ -1,11 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <path d="M20 10 L80 10 L75 55 L60 55 L55 90 L45 90 L40 55 L25 55 Z" fill="#1d4ed8" stroke="#1e3a8a" stroke-width="2"/>
-  <line x1="50" y1="10" x2="50" y2="55" stroke="#1e3a8a" stroke-width="2"/>
-  <line x1="20" y1="18" x2="80" y2="18" stroke="#1e3a8a" stroke-width="2"/>
-  <circle cx="27" cy="13" r="3" fill="#f59e0b"/>
-  <circle cx="73" cy="13" r="3" fill="#f59e0b"/>
-  <circle cx="50" cy="13" r="3" fill="#f59e0b"/>
-  <path d="M22 14 L28 20 M78 14 L72 20" stroke="#fbbf24" stroke-width="1.5"/>
-  <line x1="26" y1="38" x2="44" y2="53" stroke="#1e3a8a" stroke-width="1.5" opacity="0.5"/>
-  <line x1="74" y1="38" x2="56" y2="53" stroke="#1e3a8a" stroke-width="1.5" opacity="0.5"/>
+  <defs><linearGradient id="tex_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient>
+  <linearGradient id="tex_cos" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#tex_bg)"/>
+  <ellipse cx="50" cy="90" rx="28" ry="4" fill="#0f172a" opacity=".08"/>
+  <path d="M30 14 h40 v14 l-8 60 h-12 l-0.5 -44 h-3 l-0.5 44 h-12 l-8 -60 z" fill="url(#tex_cos)"/>
+  <path d="M30 14 h40 v8 q-20 4 -40 0 z" fill="#1e40af"/>
+  <path d="M30 22 q20 4 40 0" stroke="#fbbf24" stroke-width="1.8" fill="none"/>
+  <path d="M33 28 q5 6 9 0 M58 28 q5 6 9 0" stroke="#fbbf24" stroke-width="1.6" fill="none"/>
+  <circle cx="50" cy="18" r="2" fill="#fbbf24"/>
+  <path d="M48 28 v10 M52 28 v10" stroke="#1e40af" stroke-width="1.6"/>
+  <path d="M38 86 h12 M62 86 h-12" stroke="#93c5fd" stroke-width="0"/>
+  <path d="M36 82 q6 2 12 0 M64 82 q-6 2 -12 0" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" fill="none" opacity="0"/>
+  <path d="M38 80 h11 M51 80 h11" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" opacity=".6"/>
 </svg>

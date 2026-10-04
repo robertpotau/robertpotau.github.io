@@ -1,15 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Upper lip -->
-  <path d="M20 42 Q30 36 40 40 Q50 34 60 40 Q70 36 80 42 Q70 50 50 50 Q30 50 20 42 Z" fill="#f43f5e"/>
-  <!-- Cupid's bow highlight -->
-  <path d="M35 39 Q50 33 65 39" stroke="#fb7185" stroke-width="2" fill="none"/>
-  <!-- Lower lip -->
-  <path d="M20 42 Q30 52 50 58 Q70 52 80 42 Q70 50 50 50 Q30 50 20 42 Z" fill="#e11d48"/>
-  <!-- Lip highlight -->
-  <ellipse cx="50" cy="51" rx="15" ry="4" fill="#fb7185" opacity="0.5"/>
-  <!-- Teeth gap line -->
-  <line x1="20" y1="43" x2="80" y2="43" stroke="#fda4af" stroke-width="1"/>
-  <!-- Arrow -->
-  <line x1="50" y1="70" x2="50" y2="62" stroke="#374151" stroke-width="2" stroke-linecap="round"/>
-  <polygon points="50,58 46,66 54,66" fill="#374151"/>
+  <defs><linearGradient id="llv_bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fdf2f8"/><stop offset="1" stop-color="#fce7f3"/></linearGradient>
+  <linearGradient id="llv_lab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f87171"/><stop offset="1" stop-color="#dc2626"/></linearGradient></defs>
+  <rect width="100" height="100" rx="16" fill="url(#llv_bg)"/>
+  <path d="M20 50 q14 -15 28 -3 q2 2 4 0 q14 -12 28 3 q-3 4 -8 6 q-24 6 -48 0 q-5 -2 -8 -6 z" fill="url(#llv_lab)"/>
+  <path d="M22 49 q13 -12 25 -3 q3 2 6 0 q12 -9 25 3 q-2 2 -4 3.5 q-24 -8 -48 0 q-2 -1.5 -4 -3.5" fill="#fca5a5" opacity=".55"/>
+  <path d="M20 53 q30 8 60 0 q-7 16 -30 16 q-23 0 -30 -16" fill="url(#llv_lab)"/>
+  <path d="M28 60 q22 8 44 0 q-8 7 -22 7 q-14 0 -22 -7" fill="#b91c1c" opacity=".45"/>
+  <path d="M20 52 q30 7 60 0" stroke="#7f1d1d" stroke-width="1.8" fill="none" opacity=".7"/>
+  <ellipse cx="34" cy="62" rx="5" ry="3" fill="#fecaca" opacity=".6" transform="rotate(15 34 62)"/>
 </svg>
