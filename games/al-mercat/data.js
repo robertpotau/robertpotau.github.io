@@ -5,7 +5,7 @@
  */
 "use strict";
 /* Al Mercat! — dades: productes, nivells, textos (ca/es), trofeus, rangs */
-const VERSION="1.4.1", VERSION_DATE="2026-10-04";
+const VERSION="1.5.0", VERSION_DATE="2026-10-08";
 
 /* Valors en CÈNTIMS (enters, per evitar errors de coma flotant) */
 const COINS=[1,2,5,10,20,50,100,200];
@@ -116,6 +116,9 @@ const TROPHIES=[
  {id:"daily1", i:"📅",t:p=>p.daily.total>=1},
  {id:"daily3", i:"🗓️",t:p=>p.daily.streak>=3},
  {id:"all",    i:"👑",t:p=>LEVELS.every(l=>p.lv[l.id]&&p.lv[l.id].stars>=1)},
+ {id:"calc10", i:"🧮",t:p=>(p.st.calcUse||0)>=10},
+ {id:"mental10",i:"🧠",t:p=>(p.st.mental||0)>=10},
+ {id:"mental50",i:"🎓",t:p=>(p.st.mental||0)>=50},
 ];
 
 /* ───────── Textos ───────── */
@@ -140,6 +143,8 @@ ca:{
  rounds:"Compres",precision:"Precisió",bestStreak:"Millor ratxa",coinsUsed:"Monedes posades",sessions:"Partides",trophyCount:"Trofeus",rank:"Rang",xpTotal:"XP total",
  settings:"Configuració",palette:"Colors",sound:"Sons",voice:"Veu",autoRead:"Llegir sol",help:"Comptador d'ajuda",helpAuto:"Automàtic",helpAlways:"Sempre",helpNever:"Mai",
  voiceLang:"Idioma de la veu",on:"Sí",off:"No",close:"Tanca",teacher:"Panell del professor",
+ calc:"Calculadora",calcHint:"Al nivell 1, 2 i 3 és càlcul mental. Si la fas servir, guanyes la meitat d'XP.",calcErr:"Error",calcHalf:"½ XP",
+ calcWarn:"Si fas servir la calculadora no guanyaràs tota l'experiència (només la meitat d'XP).",calcPaper:"Pots fer els càlculs amb paper!",calcBtnPaper:"Ho faré amb paper",calcBtnUse:"Usar calculadora",grpMental:"🧠 Càlcul mental",grpPaper:"✏️ Càlcul amb paper",
  roundsPer:"Compres per partida",auto:"Auto",export:"Exportar CSV",deleteAll:"Esborrar totes les dades",tapAgain:"Toca un altre cop per confirmar",
  tName:"Nom",tRank:"Rang",tXp:"XP",tRounds:"Compres",tAcc:"Precisió",tLevel:"Nivell màx.",noProfiles:"Encara no hi ha jugadors.",
  tapDel:"Toca un altre cop per esborrar",
@@ -159,7 +164,8 @@ ca:{
  tr:{first:["Primera compra","Fes la teva primera compra"],r10:["Client habitual","10 compres fetes"],r50:["Comprador expert","50 compres fetes"],r150:["Rei del mercat","150 compres fetes"],
   perfect:["Partida perfecta","Totes les compres bé a la primera"],streak5:["Ratxa de 5","5 compres seguides a la primera"],coins:["Moneder ple","Posa 200 monedes o bitllets"],
   change:["Botiguer atent","10 canvis ben tornats"],kg:["Mestre del quilo","10 compres per quilo correctes"],cents:["Rei dels cèntims","3 estrelles al nivell 5"],
-  half:["Mig i mig","Supera el nivell 9"],daily1:["Repte superat","Fes un repte del dia"],daily3:["Tres dies seguits","3 dies seguits amb repte"],all:["Tot el mercat","Supera tots els nivells"]},
+  half:["Mig i mig","Supera el nivell 9"],daily1:["Repte superat","Fes un repte del dia"],daily3:["Tres dies seguits","3 dies seguits amb repte"],all:["Tot el mercat","Supera tots els nivells"],
+  calc10:["Amic de la calculadora","10 compres fetes amb la calculadora"],mental10:["Càlcul mental","10 compres bé a la primera sense calculadora (nivell 4 o més)"],mental50:["Cap de calculadora","50 compres bé a la primera sense calculadora"]},
 },
 es:{
  sub:"Mates con monedas y billetes",
@@ -181,6 +187,8 @@ es:{
  rounds:"Compras",precision:"Precisión",bestStreak:"Mejor racha",coinsUsed:"Monedas puestas",sessions:"Partidas",trophyCount:"Trofeos",rank:"Rango",xpTotal:"XP total",
  settings:"Configuración",palette:"Colores",sound:"Sonidos",voice:"Voz",autoRead:"Leer solo",help:"Contador de ayuda",helpAuto:"Automático",helpAlways:"Siempre",helpNever:"Nunca",
  voiceLang:"Idioma de la voz",on:"Sí",off:"No",close:"Cerrar",teacher:"Panel del profesor",
+ calc:"Calculadora",calcHint:"En los niveles 1, 2 y 3 es cálculo mental. Si la usas, ganas la mitad de XP.",calcErr:"Error",calcHalf:"½ XP",
+ calcWarn:"Si usas la calculadora no ganarás toda la experiencia (solo la mitad de XP).",calcPaper:"¡Puedes hacer los cálculos en papel!",calcBtnPaper:"Lo haré en papel",calcBtnUse:"Usar calculadora",grpMental:"🧠 Cálculo mental",grpPaper:"✏️ Cálculo en papel",
  roundsPer:"Compras por partida",auto:"Auto",export:"Exportar CSV",deleteAll:"Borrar todos los datos",tapAgain:"Toca otra vez para confirmar",
  tName:"Nombre",tRank:"Rango",tXp:"XP",tRounds:"Compras",tAcc:"Precisión",tLevel:"Nivel máx.",noProfiles:"Todavía no hay jugadores.",
  tapDel:"Toca otra vez para borrar",
@@ -200,7 +208,8 @@ es:{
  tr:{first:["Primera compra","Haz tu primera compra"],r10:["Cliente habitual","10 compras hechas"],r50:["Comprador experto","50 compras hechas"],r150:["Rey del mercado","150 compras hechas"],
   perfect:["Partida perfecta","Todas las compras bien a la primera"],streak5:["Racha de 5","5 compras seguidas a la primera"],coins:["Monedero lleno","Pon 200 monedas o billetes"],
   change:["Tendero atento","10 vueltas bien devueltas"],kg:["Maestro del kilo","10 compras por kilo correctas"],cents:["Rey de los céntimos","3 estrellas en el nivel 5"],
-  half:["Mitad y mitad","Supera el nivel 9"],daily1:["Reto superado","Haz un reto del día"],daily3:["Tres días seguidos","3 días seguidos con reto"],all:["Todo el mercado","Supera todos los niveles"]},
+  half:["Mitad y mitad","Supera el nivel 9"],daily1:["Reto superado","Haz un reto del día"],daily3:["Tres días seguidos","3 días seguidos con reto"],all:["Todo el mercado","Supera todos los niveles"],
+  calc10:["Amigo de la calculadora","10 compras hechas con la calculadora"],mental10:["Cálculo mental","10 compras bien a la primera sin calculadora (nivel 4 o más)"],mental50:["Cabeza de calculadora","50 compras bien a la primera sin calculadora"]},
  credRole:"Diseño, pedagogía y coordinación del proyecto<br>Profesor, ESO",
 },
 };

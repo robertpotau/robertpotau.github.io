@@ -250,6 +250,24 @@ body.ic .icx{display:block;}
 .numpad button{font-size:1.7rem;font-weight:900;padding:0.75rem 0;border-radius:0.875rem;border:0.125rem solid var(--card-border);background:var(--card);}
 .numpad button:active{background:var(--accent);color:#fff;}
 .numpad .ok{grid-column:span 3;background:linear-gradient(135deg,#4ade80,#16a34a);color:#fff;border:none;}
+/* v1.5 Calculadora: teclat ampliat (pas «Quant costa tot?») i calculadora flotant */
+.numpad.calc{grid-template-columns:repeat(4,1fr);}
+.numpad.calc .ok{grid-column:span 2;}
+.numpad .op,.fcalc .op{background:var(--accent);color:#fff;border-color:transparent;}
+.numpad .clr,.fcalc .clr{background:#fecaca;color:#7f1d1d;}
+.numpad .eq,.fcalc .eq{background:var(--gold);color:#3a2a1a;border-color:transparent;}
+.numdisp .cexpr{font-size:1rem;color:var(--text2);min-height:1.2rem;line-height:1.2rem;}
+.iconbtn.calcon{background:var(--accent);color:#fff;}
+.fcalc{position:fixed;z-index:250;width:15rem;max-width:calc(100vw - 1rem);background:var(--card);backdrop-filter:blur(0.5rem);border:0.1875rem solid var(--card-border);border-radius:1rem;box-shadow:0 0.5rem 1.75rem rgba(0,0,0,.3);overflow:hidden;background-color:var(--bg1);}
+.fcalc-bar{display:flex;align-items:center;justify-content:space-between;gap:0.5rem;padding:0.375rem 0.625rem;background:linear-gradient(135deg,var(--gold),var(--accent));color:#3a2a1a;font-weight:900;cursor:grab;touch-action:none;}
+.fcalc-bar.drag{cursor:grabbing;}
+.fcalc-bar button{border:none;background:rgba(255,255,255,.55);border-radius:50%;width:1.75rem;height:1.75rem;font-weight:900;color:#3a2a1a;}
+.fcalc .numdisp{font-size:1.9rem;min-height:3.4rem;margin:0.5rem 0.5rem 0;border-radius:0.75rem;padding:0.25rem 0.5rem;overflow:hidden;white-space:nowrap;}
+.fcalc .numdisp .cexpr{font-size:.8rem;}
+.fcalc-pad{display:grid;grid-template-columns:repeat(4,1fr);gap:0.375rem;padding:0.5rem;}
+.fcalc-pad button{font-size:1.4rem;font-weight:900;padding:0.5rem 0;border-radius:0.75rem;border:0.125rem solid var(--card-border);background:var(--card);color:var(--text);}
+.fcalc-pad button:active{background:var(--accent);color:#fff;}
+.fcalc-pad .span2{grid-column:span 2;}
 .zone-title{font-weight:900;font-size:.85rem;letter-spacing:0.125rem;text-transform:uppercase;color:var(--text2);margin:0 0 0.375rem;display:flex;justify-content:space-between;align-items:center;}
 .sumbox{font-size:1.3rem;color:var(--accent);letter-spacing:0;text-transform:none;}
 .counter{min-height:8.125rem;border-radius:1rem;border:0.1875rem dashed var(--card-border);background:
@@ -327,6 +345,8 @@ table.dash th{color:var(--text2);}
 .lvgroup{display:flex;align-items:center;gap:.6rem;margin:1.4rem 0 .2rem;font-weight:900;font-size:1.05rem;}
 .lvgroup i{font-style:normal;font-size:1.5rem;}
 .lvgroup small{font-weight:700;color:var(--text2);font-size:.8rem;}
+.lvgroup .lvtag{font-style:normal;font-weight:800;font-size:.72rem;padding:.1rem .55rem;border-radius:1rem;background:var(--card);border:.125rem solid var(--card-border);color:var(--text2);white-space:nowrap;}
+.lvgroup .lvtag.mental{background:#dcfce7;border-color:#86efac;color:#166534;}
 .lvgroup::after{content:'';flex:1;height:2px;background:var(--card-border);border-radius:2px;}
 .rich-card.lv{align-items:flex-start;}
 .rich-card.lv .rich-content{display:flex;flex-direction:column;gap:.3rem;}
@@ -424,6 +444,7 @@ table.dash th{color:var(--text2);}
   <div class="gtop">
     <button class="iconbtn" id="gExit" title="Menú">✖</button>
     <div style="flex:1"><div class="gtitle" id="gTitle"></div><div class="dots" id="gDots"></div></div>
+    <button class="iconbtn hidden" id="gCalc" title="🧮">🧮</button>
     <button class="iconbtn" id="gSay" title="🔊">🔊</button>
   </div>
   <div class="gwrap">
@@ -463,6 +484,11 @@ table.dash th{color:var(--text2);}
 <input type="file" id="impFile" accept=".json,application/json" class="hidden">
 <div id="ov"><div class="ovbox" id="ovBox"></div></div>
 <div id="toast"></div>
+<div class="fcalc hidden" id="fcalc" role="dialog" aria-label="Calculadora">
+  <div class="fcalc-bar" id="fcalcBar"><span>🧮 <span id="fcalcTitle"></span></span><button id="fcalcX" aria-label="✖">✖</button></div>
+  <div class="numdisp" id="fcalcDisp"></div>
+  <div class="fcalc-pad" id="fcalcPad"></div>
+</div>
 <div class="fabs" id="fabs">
   <button class="fab" id="fabPal" title="Colors">🎨</button>
   <button class="fab" id="fabSet" title="⚙️">⚙️</button>

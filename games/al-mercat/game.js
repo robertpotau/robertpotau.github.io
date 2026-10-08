@@ -14,7 +14,7 @@ const store={
   get(k,d){try{const v=localStorage.getItem("mercat."+k);return v?JSON.parse(v):d;}catch(e){return d;}},
   set(k,v){try{localStorage.setItem("mercat."+k,JSON.stringify(v));}catch(e){}}
 };
-let settings=Object.assign({palette:"mercat",sound:true,voice:true,autoRead:"auto",help:"auto",rounds:0,voiceLang:"ca",lastLang:"ca"},store.get("settings",{}));
+let settings=Object.assign({palette:"mercat",sound:true,voice:true,autoRead:"auto",help:"auto",rounds:0,voiceLang:"ca",lastLang:"ca",calc:false},store.get("settings",{}));
 let profiles=store.get("profiles",[null,null,null,null,null,null]);
 while(profiles.length<6)profiles.push(null);
 let cur=null;
@@ -212,6 +212,7 @@ function show(id){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   $(id).classList.add("active");
   $("fabs").classList.toggle("hidden",id==="scrSplash"||id==="scrGame");
+  if(id!=="scrGame")closeFcalc();
   window.scrollTo(0,0);
   if(id==="scrGame")fitCap=1.6;
   fitScreen();
@@ -389,7 +390,7 @@ function showMenu(){
   const lg=$("levelGrid");lg.innerHTML="";
   let recDone=false;
   LEVEL_GROUPS.forEach(([ic,key,a,b])=>{
-    lg.appendChild(el("div","lvgroup",`<i>${ic}</i><span class="lbl">${t(key)}</span><small>${a}–${b}</small>`));
+    lg.appendChild(el("div","lvgroup",`<i>${ic}</i><span class="lbl">${t(key)}</span><small>${a}–${b}</small><em class="lvtag ${a<CALC_MIN_LV?"mental":"paper"}">${t(a<CALC_MIN_LV?"grpMental":"grpPaper")}</em>`));
     const gr=el("div","rich-grid");
     for(let n=a;n<=b;n++){
       const L=LEVELS[n-1],st=(p.lv[L.id]&&p.lv[L.id].stars)||0;
@@ -493,7 +494,8 @@ function rowHTML(l){
 }
 function renderRound(){
   const r=S.rounds[S.i];
-  R={r,step:r.ask?"total":(r.kind==="change"?"change":"pay"),att:0,err:0,placed:[],num:"",done:false,revealed:false};
+  R={r,step:r.ask?"total":(r.kind==="change"?"change":"pay"),att:0,err:0,placed:[],num:"",done:false,revealed:false,cal:null,calcUsed:false,calcAvail:calcOn(r.lv)};
+  fcal=makeCalc();
   const L=LEVELS[r.lv-1];
   $("gTitle").textContent=S.daily?`📅 ${t("dailyTitle")}`:`${L.icon} ${t("level")} ${r.lv}`;
   const dots=$("gDots");dots.innerHTML="";
@@ -527,22 +529,155 @@ function setStepUI(speakNow){
     $("payLbl").textContent=R.step==="pay"?t("pay"):t("giveChange");
     buildTray();renderCounter();
   }
+  syncCalcUI();
   if(speakNow&&autoReadOn())setTimeout(()=>speak(speechText()),350);
 }
 
-/* Teclat numèric */
+/* ───────── v1.5 Calculadora (opcional a ⚙️; nivells 1–3 = càlcul mental, sense calculadora) ───────── */
+const CALC_MIN_LV=4;
+const calcOn=lv=>!!settings.calc&&lv>=CALC_MIN_LV;
+const KEYOPS={"+":"+","-":"−","*":"×","x":"×","/":"÷","=":"=","c":"C","C":"C","Delete":"C"};
+const toCt=s=>{const [i,d=""]=String(s||"0").split(",");return (parseInt(i||"0",10)||0)*100+(parseInt((d+"00").slice(0,2),10)||0);};
+const fmtCt=ct=>{const a=Math.abs(ct),i=Math.floor(a/100),d=a%100;return (ct<0?"-":"")+i+(d?","+(d<10?"0"+d:""+d).replace(/0$/,""):"");};
+/* Motor: tot en centèsims enters (cap error de coma flotant) */
+function makeCalc(){
+  const c={acc:null,op:"",ent:"",typing:false,err:false};
+  const apply=(a,op,b)=>{
+    let r;
+    if(op==="+")r=a+b;else if(op==="−")r=a-b;else if(op==="×")r=Math.round(a*b/100);
+    else if(op==="÷"){if(b===0)return null;r=Math.round(a*100/b);}else r=b;
+    return Math.abs(r)>9999999999?null:r;
+  };
+  c.reset=()=>{c.acc=null;c.op="";c.ent="";c.typing=false;c.err=false;};
+  c.fail=()=>{c.reset();c.err=true;};
+  c.value=()=>c.err?"":(c.typing?c.ent:(c.acc==null?"":fmtCt(c.acc)));
+  c.expr=()=>(!c.err&&c.op&&c.acc!=null)?fmtCt(c.acc)+" "+c.op:"";
+  c.html=()=>`<div class="cexpr">${c.expr()}</div>${c.err?t("calcErr"):(c.value()||"0")}${NB}€`;
+  c.key=k=>{
+    if(c.err)c.reset();
+    if(k==="C")return c.reset();
+    if(k==="⌫"){if(c.typing)c.ent=c.ent.slice(0,-1);else if(!c.op){c.acc=null;c.ent="";}return;}
+    if(k===","||/^[0-9]$/.test(k)){
+      if(!c.typing){c.ent="";c.typing=true;if(!c.op)c.acc=null;}
+      if(k===","){if(!c.ent.includes(","))c.ent=(c.ent||"0")+",";return;}
+      const d=c.ent.split(",")[1];
+      if(d!=null&&d.length>=2)return;
+      if(c.ent.replace(",","").length>=6)return;
+      c.ent=(c.ent==="0"?"":c.ent)+k;return;
+    }
+    if("+−×÷".includes(k)){
+      if(c.typing){
+        const v=toCt(c.ent);
+        if(c.op&&c.acc!=null){const r=apply(c.acc,c.op,v);if(r==null)return c.fail();c.acc=r;}else c.acc=v;
+        c.typing=false;c.ent="";
+      }else if(c.acc==null)c.acc=0;
+      c.op=k;return;
+    }
+    if(k==="="){
+      if(c.typing&&c.op&&c.acc!=null){const r=apply(c.acc,c.op,toCt(c.ent));if(r==null)return c.fail();c.acc=r;}
+      else if(c.typing)c.acc=toCt(c.ent);
+      c.op="";c.typing=false;c.ent="";
+    }
+  };
+  return c;
+}
+let fcal=null,fcPos=null;
+const calcKeyFromEvent=e=>/^[0-9]$/.test(e.key)?e.key:(e.key===","||e.key===".")?",":e.key==="Backspace"?"⌫":(KEYOPS[e.key]||null);
+
+/* Avís i acceptació: l'alumne ha de confirmar que no guanyarà tota l'experiència */
+function syncCalcUI(){
+  const on=!!R&&calcOn(R.r.lv);
+  $("gCalc").classList.toggle("hidden",!on);
+  $("gCalc").classList.toggle("calcon",on&&R.calcUsed);
+  if(!on||R.step==="total")closeFcalc();
+}
+function calcPress(){
+  if(!R||R.done||!calcOn(R.r.lv))return;
+  if(R.calcUsed){if(R.step!=="total")toggleFcalc();return;}
+  openOv(ovHead("🧮 "+t("calc"))+`<div style="font-size:1.1rem;line-height:1.5;margin:.4rem 0 .9rem">⚠️ ${t("calcWarn")}<br>✏️ ${t("calcPaper")}</div>`+
+    `<div style="display:flex;gap:.6rem;flex-wrap:wrap"><button class="btn green" id="cwPaper" style="flex:1">✏️ ${t("calcBtnPaper")}</button><button class="btn orange" id="cwUse" style="flex:1">🧮 ${t("calcBtnUse")}</button></div>`,
+    ()=>{$("cwPaper").onclick=closeOv;$("cwUse").onclick=()=>{closeOv();acceptCalc();};});
+}
+function acceptCalc(){
+  if(!R||R.done)return;
+  R.calcUsed=true;
+  if(R.step==="total"){R.cal=makeCalc();if(R.num){R.cal.ent=R.num;R.cal.typing=true;}buildNumpad();}
+  else openFcalc();
+  syncCalcUI();
+}
+
+/* Calculadora flotant (passos de pagar i canvi): es pot arrossegar per la pantalla */
+function fcalcRender(){$("fcalcDisp").innerHTML=fcal.html();}
+function buildFcalc(){
+  const pad=$("fcalcPad");pad.innerHTML="";
+  ["1","2","3","÷","4","5","6","×","7","8","9","−",",","0","=","+"].forEach(k=>{
+    const b=el("button",k==="="?"eq":"+−×÷".includes(k)?"op":"",k);b.onclick=()=>fcalcKey(k);pad.appendChild(b);
+  });
+  [["C","clr span2"],["⌫","span2"]].forEach(([k,c])=>{const b=el("button",c,k);b.onclick=()=>fcalcKey(k);pad.appendChild(b);});
+  $("fcalcTitle").textContent=t("calc");
+}
+function fcalcKey(k){if(!fcal)return;sfx.key();fcal.key(k);fcalcRender();}
+function placeFcalc(){
+  const f=$("fcalc");if(!fcPos||f.classList.contains("hidden"))return;
+  fcPos.x=Math.min(Math.max(0,fcPos.x),Math.max(0,innerWidth-f.offsetWidth));
+  fcPos.y=Math.min(Math.max(0,fcPos.y),Math.max(0,innerHeight-Math.min(f.offsetHeight,44)));
+  f.style.left=fcPos.x+"px";f.style.top=fcPos.y+"px";
+}
+function openFcalc(){
+  const f=$("fcalc");
+  if(!f.dataset.built){buildFcalc();f.dataset.built="1";}
+  if(!fcal)fcal=makeCalc();
+  f.classList.remove("hidden");
+  if(!fcPos)fcPos={x:Math.max(8,innerWidth-f.offsetWidth-16),y:70};
+  placeFcalc();fcalcRender();
+}
+function closeFcalc(){$("fcalc").classList.add("hidden");}
+function toggleFcalc(){if($("fcalc").classList.contains("hidden"))openFcalc();else closeFcalc();}
+(function(){
+  const bar=$("fcalcBar");let off=null;
+  bar.addEventListener("pointerdown",e=>{
+    if(e.target.closest("button")||!fcPos)return;
+    e.preventDefault();off={x:e.clientX-fcPos.x,y:e.clientY-fcPos.y};bar.setPointerCapture(e.pointerId);bar.classList.add("drag");
+  });
+  bar.addEventListener("pointermove",e=>{if(!off)return;fcPos.x=e.clientX-off.x;fcPos.y=e.clientY-off.y;placeFcalc();});
+  const end=()=>{off=null;bar.classList.remove("drag");};
+  bar.addEventListener("pointerup",end);bar.addEventListener("pointercancel",end);
+  $("fcalcX").onclick=closeFcalc;
+  $("gCalc").onclick=calcPress;
+  window.addEventListener("resize",placeFcalc);
+})();
+
+/* Teclat numèric (amb operacions si l'alumne ha acceptat usar la calculadora) */
 function buildNumpad(){
   const np=$("numPad");np.innerHTML="";
-  ["1","2","3","4","5","6","7","8","9",",","0","⌫"].forEach(k=>{
-    const b=el("button","",k);b.onclick=()=>numKey(k);np.appendChild(b);
+  const cal=!!R.cal;
+  np.classList.toggle("calc",cal);
+  const keys=cal?["1","2","3","÷","4","5","6","×","7","8","9","−",",","0","⌫","+"]:["1","2","3","4","5","6","7","8","9",",","0","⌫"];
+  keys.forEach(k=>{
+    const b=el("button",cal&&"+−×÷".includes(k)?"op":"",k);b.onclick=()=>numKey(k);np.appendChild(b);
   });
+  if(cal){
+    const c=el("button","clr","C");c.onclick=()=>numKey("C");np.appendChild(c);
+    const e=el("button","eq","=");e.onclick=()=>numKey("=");np.appendChild(e);
+  }
   const ok=el("button","ok","✔ OK");ok.onclick=()=>numKey("OK");np.appendChild(ok);
   showNum();
 }
-function showNum(){$("numDisp").textContent=(R.num||"0")+NB+"€";}
+function showNum(){
+  if(R.cal)$("numDisp").innerHTML=R.cal.html();
+  else $("numDisp").textContent=(R.num||"0")+NB+"€";
+}
 function numKey(k){
   if(!R||R.done||R.step!=="total")return;
   sfx.key();
+  if(R.cal){
+    if(k==="OK"){
+      R.cal.key("=");R.num=R.cal.value();showNum();
+      if(R.cal.err)return;
+      return checkTotal();
+    }
+    R.cal.key(k);R.num=R.cal.value();showNum();return;
+  }
   if(k==="⌫")R.num=R.num.slice(0,-1);
   else if(k==="OK")return checkTotal();
   else if(k===","){if(!R.num.includes(",")){R.num=(R.num||"0")+",";}}
@@ -555,11 +690,17 @@ function numKey(k){
   showNum();
 }
 window.addEventListener("keydown",e=>{
-  if(!$("scrGame").classList.contains("active")||!R||R.step!=="total"||R.done||$("ov").classList.contains("open"))return;
-  if(/^[0-9]$/.test(e.key))numKey(e.key);
-  else if(e.key===","||e.key===".")numKey(",");
-  else if(e.key==="Backspace")numKey("⌫");
-  else if(e.key==="Enter")numKey("OK");
+  if(!$("scrGame").classList.contains("active")||!R||R.done||$("ov").classList.contains("open"))return;
+  if(R.step==="total"){
+    if(e.key==="Enter")numKey("OK");
+    else{
+      const k=calcKeyFromEvent(e);
+      if(k&&(R.cal||/^[0-9,⌫]$/.test(k))){e.preventDefault();numKey(k);}
+    }
+  }else if(fcal&&!$("fcalc").classList.contains("hidden")){
+    const k=e.key==="Enter"?"=":calcKeyFromEvent(e);
+    if(k){e.preventDefault();fcalcKey(k);}
+  }
 });
 function checkTotal(){
   const v=Math.round(parseFloat((R.num||"0").replace(",","."))*100);
@@ -683,7 +824,9 @@ function completeRound(){
   const r=R.r,p=P(),L=LEVELS[r.lv-1];
   const failed=R.revealed;
   let base=failed?0:(R.err===0?6:R.err===1?3:1);
-  const xp=Math.round(base*L.mult);
+  let xp=Math.round(base*L.mult);
+  const halved=!!R.calcUsed&&!failed;
+  if(halved&&xp)xp=Math.max(1,Math.round(xp/2));
   S.xp+=xp;p.xp+=xp;
   p.st.rounds++;
   if(failed){p.st.fail++;S.fail++;S.streak=0;p.st.streak=0;}
@@ -693,6 +836,8 @@ function completeRound(){
     p.st.coins+=R.coins||0;
     if(r.kind==="change")p.st.changeOk++;
     if(r.lines[0].mode==="kg")p.st.kgOk++;
+    if(R.calcUsed)p.st.calcUse=(p.st.calcUse||0)+1;
+    else if(R.calcAvail&&R.err===0)p.st.mental=(p.st.mental||0)+1;
   }
   S.res=S.res||[];S.res[S.i]=failed?"bad":(R.err===0?"ok":"ok2");
   save();
@@ -700,7 +845,7 @@ function completeRound(){
   const eq=equation(r,r.kind==="change"?"change":"pay");
   const last=S.i>=S.rounds.length-1;
   $("fb").innerHTML=`<div class="fb ${failed?"info":"ok"}">${failed?`${t("answerIs")}`:"🎉 "+t("correct")}<div class="eq">${eq}</div>`+
-    (xp?`<div class="xpg">+${xp} XP</div>`:"")+`<button class="btn yellow big full" id="bNext">➡️ <span class="lbl">${last?t("finish"):t("next")}</span></button></div>`;
+    (xp?`<div class="xpg">+${xp} XP${halved?` <small>(🧮 ${t("calcHalf")})</small>`:""}</div>`:"")+`<button class="btn yellow big full" id="bNext">➡️ <span class="lbl">${last?t("finish"):t("next")}</span></button></div>`;
   $("bNext").onclick=()=>{if(last)finishSession();else{S.i++;renderRound();}};
   if(!failed){confetti(R.err===0?14:6);floatXp(xp);}
   $("bHint").classList.add("hidden");
@@ -765,7 +910,7 @@ function checkTrophies(silent){
 let toastTm=null;
 function toast(msg,ic){const tt=$("toast");tt.textContent=(ic||"🏆")+" "+msg;tt.classList.add("show");clearTimeout(toastTm);toastTm=setTimeout(()=>tt.classList.remove("show"),3200);}
 
-$("gExit").onclick=()=>{R=null;showMenu();};
+$("gExit").onclick=()=>{R=null;closeFcalc();showMenu();};
 $("gSay").onclick=()=>{if(R)speak(speechText());};
 
 /* ───────── Overlays ───────── */
@@ -823,6 +968,8 @@ function openSettings(teacher){
   row("📖 "+t("autoRead"),chipRow([["auto",t("auto")],["yes",t("on")],["no",t("off")]],settings.autoRead,v=>{settings.autoRead=v;rerender();}));
   row("🗣️ "+t("voiceLang"),chipRow([["ca","Català"],["es","Castellano"]],settings.voiceLang,v=>{settings.voiceLang=v;rerender();}));
   row("🧮 "+t("help"),chipRow([["auto",t("helpAuto")],["always",t("helpAlways")],["never",t("helpNever")]],settings.help,v=>{settings.help=v;rerender();}));
+  row("🔢 "+t("calc"),yn("calc"));
+  wrap.appendChild(el("div","xplbl",t("calcHint")));
   const dr=el("div","datarow");
   const bE=el("button","btn blue","⬇️ "+t("dataExport"));bE.onclick=exportData;
   const bI=el("button","btn green","⬆️ "+t("dataImport"));bI.onclick=()=>$("impFile").click();
@@ -909,8 +1056,8 @@ function dashTable(){
   return el("div","",h+"</table>");
 }
 function exportCSV(){
-  const rows=[["nom","idioma","xp","rang","compres","encerts_primera","encerts_segona","fallades","precisio","millor_ratxa","canvis_ok","quilos_ok","nivell_max","trofeus","repte_ratxa"]];
-  profiles.filter(Boolean).forEach(p=>{const s=profStats(p);rows.push([p.name,p.lang,p.xp,RANKS[s.rk].n,p.st.rounds,p.st.ok1,p.st.ok2,p.st.fail,s.acc+"%",p.st.best,p.st.changeOk,p.st.kgOk,s.maxL,p.trophies.length,p.daily.streak]);});
+  const rows=[["nom","idioma","xp","rang","compres","encerts_primera","encerts_segona","fallades","precisio","millor_ratxa","canvis_ok","quilos_ok","nivell_max","trofeus","repte_ratxa","compres_calculadora","compres_mentals"]];
+  profiles.filter(Boolean).forEach(p=>{const s=profStats(p);rows.push([p.name,p.lang,p.xp,RANKS[s.rk].n,p.st.rounds,p.st.ok1,p.st.ok2,p.st.fail,s.acc+"%",p.st.best,p.st.changeOk,p.st.kgOk,s.maxL,p.trophies.length,p.daily.streak,p.st.calcUse||0,p.st.mental||0]);});
   const csv="﻿"+rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(";")).join("\n");
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download="al-mercat-"+todayStr()+".csv";
   document.body.appendChild(a);a.click();a.remove();
