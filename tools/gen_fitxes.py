@@ -843,11 +843,11 @@ GAMES = [
                 lead="Happy, furious, thrilled: els adjectius i les emocions en anglès, jugats a la pissarra.",
                 paragraphs=[
                     "Adjectivia està pensat per jugar a classe, amb la pissarra digital, de manera que d'un a sis alumnes s'alternen davant de la classe. Hi ha nou modes de joc: l'Escala Daurada de 15 preguntes amb cinc comodins (50:50, preguntar a la classe, trucar a un company, canviar la pregunta i segona oportunitat), Memory, Match-Up, Cares d'emocions, Frases per completar, Ronda ràpida, Hot Seat per practicar l'expressió oral, Globus i un Banc de paraules amb fitxes.",
-                    "El vocabulari té 386 adjectius organitzats en 14 temes — emocions, personalitat, aspecte, mida, sentits, colors, temps… — amb definició en anglès, frase d'exemple, sinònims, oposats i tres nivells. Les emocions es treballen amb cares il·lustrades, i un botó permet veure la traducció al català quan cal.",
+                    "El vocabulari té 387 adjectius organitzats en 14 temes — emocions, personalitat, aspecte, mida, sentits, colors, temps… — amb definició en anglès, frase d'exemple, sinònims, oposats i tres nivells. Les emocions es treballen amb cares il·lustrades, i un botó permet veure la traducció al català quan cal.",
                     "Cada perfil desa els jugadors amb nom i avatar propis, punts d'experiència, set rangs i setze trofeus, i al final de cada partida hi ha un podi i la llista de paraules a repassar. Gratuït i sense registre, com tota la col·lecció.",
                 ],
                 features=[
-                    "386 adjectius i emocions en 14 temes",
+                    "387 adjectius i emocions en 14 temes",
                     "9 modes de joc pensats per a la pissarra",
                     "De 1 a 6 jugadors amb noms i avatars editables",
                     "Cinc comodins a l'Escala Daurada",
@@ -862,11 +862,11 @@ GAMES = [
                 lead="Happy, furious, thrilled: los adjetivos y las emociones en inglés, jugados en la pizarra.",
                 paragraphs=[
                     "Adjectivia está pensado para jugar en clase con la pizarra digital, de modo que de uno a seis alumnos se turnan delante de la clase. Hay nueve modos de juego: la Escalera Dorada de 15 preguntas con cinco comodines (50:50, preguntar a la clase, llamar a un compañero, cambiar la pregunta y segunda oportunidad), Memory, Match-Up, Caras de emociones, Frases para completar, Ronda rápida, Hot Seat para practicar la expresión oral, Globos y un Banco de palabras con fichas.",
-                    "El vocabulario tiene 386 adjetivos organizados en 14 temas — emociones, personalidad, aspecto, tamaño, sentidos, colores, tiempo… — con definición en inglés, frase de ejemplo, sinónimos, opuestos y tres niveles. Las emociones se trabajan con caras ilustradas, y un botón permite ver la traducción al catalán cuando hace falta.",
+                    "El vocabulario tiene 387 adjetivos organizados en 14 temas — emociones, personalidad, aspecto, tamaño, sentidos, colores, tiempo… — con definición en inglés, frase de ejemplo, sinónimos, opuestos y tres niveles. Las emociones se trabajan con caras ilustradas, y un botón permite ver la traducción al catalán cuando hace falta.",
                     "Cada perfil guarda a los jugadores con nombre y avatar propios, puntos de experiencia, siete rangos y dieciséis trofeos, y al final de cada partida hay un podio y la lista de palabras para repasar. Gratuito y sin registro, como toda la colección.",
                 ],
                 features=[
-                    "386 adjetivos y emociones en 14 temas",
+                    "387 adjetivos y emociones en 14 temas",
                     "9 modos de juego pensados para la pizarra",
                     "De 1 a 6 jugadores con nombres y avatares editables",
                     "Cinco comodines en la Escalera Dorada",
@@ -881,11 +881,11 @@ GAMES = [
                 lead="Happy, furious, thrilled: English adjectives and feelings, played on the whiteboard.",
                 paragraphs=[
                     "Adjectivia is made to be played in class on the digital whiteboard, with one to six students taking turns in front of the class. There are nine game modes: the 15-question Golden Ladder with five lifelines (50:50, ask the class, phone a friend, swap the question and double chance), Memory, Match-Up, Emotion Faces, Sentence Gap, Speed Round, Hot Seat for speaking practice, Balloon Pop and a Word Bank with flashcards.",
-                    "The vocabulary has 386 adjectives in 14 topics — feelings, personality, appearance, size, senses, colours, time… — each with an English definition, an example sentence, synonyms, opposites and three levels. Feelings are practised with illustrated faces, and a button shows the Catalan translation when it is needed.",
+                    "The vocabulary has 387 adjectives in 14 topics — feelings, personality, appearance, size, senses, colours, time… — each with an English definition, an example sentence, synonyms, opposites and three levels. Feelings are practised with illustrated faces, and a button shows the Catalan translation when it is needed.",
                     "Every profile saves its players with their own names and avatars, experience points, seven ranks and sixteen trophies, and every game ends with a podium and a list of words to review. Free and sign-up-free, like the whole collection.",
                 ],
                 features=[
-                    "386 adjectives and feelings in 14 topics",
+                    "387 adjectives and feelings in 14 topics",
                     "9 game modes designed for the whiteboard",
                     "1 to 6 players with editable names and avatars",
                     "Five lifelines in the Golden Ladder",
