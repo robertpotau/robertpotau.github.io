@@ -37,13 +37,15 @@ if (-not (Test-Path -LiteralPath $src)) {
 Write-Output "Source root: $src"
 
 # Games whose source folder under claude-projects has a different name than the slug.
-$sourceFolder = @{ "al-mercat" = "joc-mercat" }
+$sourceFolder = @{ "al-mercat" = "joc-mercat"; "eines-del-taller" = "joc-eines" }
+# Extra folders that must NOT be published for a given game (sources, tools, backups).
+$extraXD = @{ "eines-del-taller" = @("src","tools","_backup-original","raw") }
 function Get-GameSrc([string]$g) {
   if ($sourceFolder.ContainsKey($g)) { return (Join-Path $src $sourceFolder[$g]) }
   return (Join-Path $src $g)
 }
 
-$games = @("calcuherois","aula-acollida","fraccions","lletra-a-lletra","ortografia","vistes","geometria","quina-hora-es","what-time-is-it","verbs-english","euroexplora","al-mercat")
+$games = @("calcuherois","aula-acollida","fraccions","lletra-a-lletra","ortografia","vistes","geometria","quina-hora-es","what-time-is-it","verbs-english","euroexplora","al-mercat","eines-del-taller")
 
 if ($Slug) {
   if ($games -notcontains $Slug) {
@@ -69,8 +71,9 @@ foreach ($g in $targets) {
   New-Item -ItemType Directory -Force -Path $dest | Out-Null
   Write-Output "Syncing $g ..."
   $gsrc = Get-GameSrc $g
+  $xd = @(".git","apk","backups","pdf") + $(if ($extraXD.ContainsKey($g)) { $extraXD[$g] } else { @() })
   robocopy "$gsrc" "$dest" /E /MIR `
-    /XD .git apk backups pdf `
+    /XD $xd `
     /XF *.py *.md *.pdf *.bak* *_backup_* server.log *.txt review_svgs.html revisio_icones.html figures_revision*.html descarrega_landmarks.html manifest.json .gitignore icones-proposta.html icon-apk-fullbleed.svg `
     /NFL /NDL /NJH | Out-Null
   # robocopy: 0-7 = success (0 = nothing to do), 8+ = real failure
