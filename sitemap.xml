@@ -103,6 +103,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://robertpotau.github.io/jocs/canvi-dunitat.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://robertpotau.github.io/jocs/al-mercat.html</loc>
     <lastmod>2026-10-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -188,6 +194,12 @@
   </url>
   <url>
     <loc>https://robertpotau.github.io/es/jocs/adjectivia.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://robertpotau.github.io/es/jocs/canvi-dunitat.html</loc>
     <lastmod>2026-10-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -283,6 +295,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://robertpotau.github.io/en/jocs/canvi-dunitat.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://robertpotau.github.io/en/jocs/al-mercat.html</loc>
     <lastmod>2026-10-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -362,6 +380,12 @@
   </url>
   <url>
     <loc>https://robertpotau.github.io/games/adjectivia/index.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://robertpotau.github.io/games/canvi-dunitat/index.html</loc>
     <lastmod>2026-10-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
