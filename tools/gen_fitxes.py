@@ -961,18 +961,18 @@ GAMES = [
         ),
     ),
     dict(
-        slug="mesuraherois", entry="index.html", shot="mesuraherois", emoji="📏", wip=True,
-        name="MesuraHerois", game_lang="ca", related=["calcuherois", "geometria", "fraccions"],
+        slug="canvi-dunitat", entry="index.html", shot="canvi-dunitat", emoji="📏", wip=True,
+        name="Canvi d'Unitat", game_lang="ca", related=["calcuherois", "geometria", "fraccions"],
         teaches={"ca": "unitats de mesura i canvis d'unitat", "es": "unidades de medida y cambios de unidad", "en": "units of measurement and unit conversions"},
         level={"ca": "1r ESO", "es": "1º ESO", "en": "Ages 12-13"},
         c=dict(
             ca=dict(
-                seo_title="MesuraHerois — Joc d'unitats de mesura i conversions",
+                seo_title="Canvi d'Unitat — Joc d'unitats de mesura i conversions",
                 meta="Joc gratuït per practicar les unitats de mesura (longitud, massa, capacitat, superfície i volum) amb escales, conversions i problemes reals. Per a 1r d'ESO, sense registre.",
                 subject="Matemàtiques", grade="1r ESO",
                 lead="Longitud, massa, capacitat, superfície i volum: canvia d'unitat multiplicant i dividint per 10, 100 i 1 000.",
                 paragraphs=[
-                    "MesuraHerois ajuda l'alumnat de 1r d'ESO a dominar els canvis d'unitat. Cada exercici mostra una escala d'unitats on es veu pas a pas com el número es multiplica o es divideix per 10 (longitud, massa i capacitat), per 100 (superfície) o per 1 000 (volum).",
+                    "Canvi d'Unitat ajuda l'alumnat de 1r d'ESO a dominar els canvis d'unitat. Cada exercici mostra una escala d'unitats on es veu pas a pas com el número es multiplica o es divideix per 10 (longitud, massa i capacitat), per 100 (superfície) o per 1 000 (volum).",
                     "Hi ha tres tipus d'exercici: escales (quin factor cal aplicar, quina unitat falta), conversions directes i problemes reals, com ara «la Paula vol caminar 1 km, quants metres ha de caminar?». També es treballa l'equivalència entre capacitat i volum (1 L = 1 dm³).",
                     "Té set modes de joc: Clàssic, Contrarellotge, Vides, Repte Progressiu, Boss Fight, Mode Cadena i Duel per a dos jugadors, amb punts d'experiència, rangs i trofeus. Cada pregunta té una pista amb l'escala i, en acabar, una explicació del procés. Gratuït i sense registre.",
                 ],
@@ -986,12 +986,12 @@ GAMES = [
                 ],
             ),
             es=dict(
-                seo_title="MesuraHerois — Juego de unidades de medida y conversiones",
+                seo_title="Canvi d'Unitat — Juego de unidades de medida y conversiones",
                 meta="Juego gratuito para practicar las unidades de medida (longitud, masa, capacidad, superficie y volumen) con escaleras, conversiones y problemas reales. Para 1º de ESO, sin registro.",
                 subject="Matemáticas", grade="1º ESO",
                 lead="Longitud, masa, capacidad, superficie y volumen: cambia de unidad multiplicando y dividiendo por 10, 100 y 1 000.",
                 paragraphs=[
-                    "MesuraHerois ayuda al alumnado de 1º de ESO a dominar los cambios de unidad. Cada ejercicio muestra una escalera de unidades donde se ve paso a paso cómo el número se multiplica o se divide por 10 (longitud, masa y capacidad), por 100 (superficie) o por 1 000 (volumen).",
+                    "Canvi d'Unitat ayuda al alumnado de 1º de ESO a dominar los cambios de unidad. Cada ejercicio muestra una escalera de unidades donde se ve paso a paso cómo el número se multiplica o se divide por 10 (longitud, masa y capacidad), por 100 (superficie) o por 1 000 (volumen).",
                     "Hay tres tipos de ejercicio: escaleras (qué factor aplicar, qué unidad falta), conversiones directas y problemas reales, como «Paula quiere caminar 1 km, ¿cuántos metros tiene que caminar?». También se trabaja la equivalencia entre capacidad y volumen (1 L = 1 dm³).",
                     "Tiene siete modos de juego: Clásico, Contrarreloj, Vidas, Reto Progresivo, Boss Fight, Modo Cadena y Duelo para dos jugadores, con puntos de experiencia, rangos y trofeos. Cada pregunta tiene una pista con la escalera y, al acabar, una explicación del proceso. Gratuito y sin registro.",
                 ],
@@ -1005,12 +1005,12 @@ GAMES = [
                 ],
             ),
             en=dict(
-                seo_title="MesuraHerois — Free units of measurement and conversions game",
+                seo_title="Canvi d'Unitat — Free units of measurement and conversions game",
                 meta="Free game to practise units of measurement (length, mass, capacity, area and volume) with ladders, conversions and real-life problems. For ages 12-13, no sign-up. In Catalan.",
                 subject="Mathematics", grade="Ages 12-13",
                 lead="Length, mass, capacity, area and volume: change units by multiplying and dividing by 10, 100 and 1,000.",
                 paragraphs=[
-                    "MesuraHerois helps first-year secondary students master unit conversions. Every exercise shows a ladder of units so you can see, step by step, how the number is multiplied or divided by 10 (length, mass and capacity), by 100 (area) or by 1,000 (volume).",
+                    "Canvi d'Unitat helps first-year secondary students master unit conversions. Every exercise shows a ladder of units so you can see, step by step, how the number is multiplied or divided by 10 (length, mass and capacity), by 100 (area) or by 1,000 (volume).",
                     "There are three kinds of exercise: ladders (which factor to apply, which unit is missing), direct conversions and real-life problems such as “Paula wants to walk 1 km, how many metres is that?”. Capacity and volume equivalences are practised too (1 L = 1 dm³).",
                     "It has seven game modes: Classic, Time Attack, Lives, Progressive Challenge, Boss Fight, Chain Mode and a two-player Duel, with experience points, ranks and trophies. Every question has a ladder hint and an explanation afterwards. Free and sign-up-free. The game itself is in Catalan.",
                 ],

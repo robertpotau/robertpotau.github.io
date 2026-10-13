@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MesuraHerois · Unitats de mesura</title>
+<title>Canvi d'Unitat · Unitats de mesura</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
 <style>
@@ -165,7 +165,7 @@ const pow10=n=>'1'+'0'.repeat(n);
 const fmtVal=v=>fmt(String(v));
 
 /* ====== Perfil ====== */
-const KEY='mesuraherois-v1';
+const KEY='canvi-dunitat-v1';
 let P=(()=>{try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&x.v===1)return x}catch(e){}
  return {v:1,name:'',hero:'🦸',xp:0,tro:{},st:{},games:0,correct:0,best:0,mute:false}})();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(P))}catch(e){}};
@@ -237,7 +237,7 @@ function toast(t){const d=document.createElement('div');d.className='toast';d.te
 function topbar(){const r=rankOf(P.xp),nx=RANKS[r+1],pct=nx?Math.round((P.xp-RANKS[r][0])/(nx[0]-RANKS[r][0])*100):100;
  return `<div class="hud card" style="background:rgba(255,255,255,.1);box-shadow:none"><span class="pill">${P.hero} ${P.name||'Heroi'}</span><span class="pill">${RANKS[r][2]} ${RANKS[r][1]}</span><div class="xpbar" title="${P.xp} XP"><i style="width:${pct}%"></i></div><span class="pill">⭐ ${P.xp} XP</span></div>`}
 function home(){clearInterval(timer);G=null;
- app.innerHTML=`<h1 class="title">Mesura<span>Herois</span></h1><p class="sub">Domina les unitats de mesura: longitud, massa, capacitat, superfície i volum</p>${topbar()}
+ app.innerHTML=`<h1 class="title">Canvi d'<span>Unitat</span></h1><p class="sub">Domina les unitats de mesura: longitud, massa, capacitat, superfície i volum</p>${topbar()}
  <div class="card"><div class="row center"><button class="big" onclick="setup()">▶ Jugar</button><button class="ghost big" onclick="trophies()">🏆 Trofeus</button><button class="ghost big" onclick="profile()">🧑 Perfil</button></div></div>
  <div class="card"><h3>Com funciona?</h3><p>Escull una magnitud, el tipus d'exercici i un mode de joc. A cada pregunta pots demanar una <b>pista</b> amb l'escala de conversió, i quan acabes de respondre veuràs com es multiplica o es divideix per múltiples de 10.</p></div>
  <footer>Un joc de <a href="https://robertpotau.github.io/" target="_blank" rel="noopener">robertpotau.github.io</a> · <span onclick="P.mute=!P.mute;save();home()" style="cursor:pointer">${P.mute?'🔇 so desactivat':'🔊 so activat'}</span></footer>`}
