@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MesuraHerois · Unitats de mesura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#14123a;--bg2:#2b1f6b;--ink:#1f1b4d;--card:#fff;--gold:#ffd23f;--c:#f59e0b;--ok:#16a34a;--bad:#dc2626;--soft:#f1f0ff}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{font-family:'Nunito',system-ui,sans-serif;font-weight:600;color:var(--ink);background:linear-gradient(160deg,var(--bg1),var(--bg2)) fixed;padding:14px 14px 40px}
+#app{max-width:880px;margin:0 auto}
+h1,h2,h3{margin:.2em 0;font-weight:900}
+.title{color:#fff;text-align:center;margin:10px 0 4px;font-size:clamp(2rem,6vw,3.2rem);letter-spacing:.5px}
+.title span{color:var(--gold)}
+.sub{color:#cfcaff;text-align:center;margin:0 0 16px}
+.card{background:var(--card);border-radius:20px;padding:18px;margin:12px 0;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.row.center{justify-content:center}
+button{font:inherit;font-weight:800;cursor:pointer;border:0;border-radius:14px;padding:12px 18px;background:var(--c);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.2);transition:transform .08s}
+button:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.2)}
+button.ghost{background:var(--soft);color:var(--ink)}
+button.big{font-size:1.3rem;padding:16px 28px}
+button:disabled{opacity:.5;cursor:default}
+.chip{background:var(--soft);color:var(--ink);padding:10px 14px;border-radius:14px;box-shadow:none;border:3px solid transparent}
+.chip.on{border-color:var(--cc,var(--c));background:#fff;box-shadow:0 0 0 3px var(--cc,var(--c)) inset}
+.hud{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;color:#fff;font-weight:800}
+.pill{background:rgba(255,255,255,.15);padding:6px 12px;border-radius:999px}
+.xpbar{height:12px;background:rgba(255,255,255,.2);border-radius:99px;overflow:hidden;min-width:120px}
+.xpbar i{display:block;height:100%;background:var(--gold)}
+.modes{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.mode{background:var(--soft);color:var(--ink);text-align:left;padding:14px;border-radius:16px;box-shadow:0 4px 0 rgba(0,0,0,.12)}
+.mode b{display:block;font-size:1.15rem}
+.mode small{opacity:.75}
+.mode .ic{font-size:1.8rem}
+.qtag{display:inline-block;background:var(--c);color:#fff;border-radius:99px;padding:3px 12px;font-size:.85rem;font-weight:900}
+.qtxt{font-size:clamp(1.1rem,3.2vw,1.5rem);margin:12px 0;line-height:1.45}
+.eq{font-size:clamp(1.3rem,4vw,2rem);font-weight:900;display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}
+input.ans{font:inherit;font-weight:900;font-size:inherit;width:9em;max-width:100%;border:4px solid var(--c);border-radius:14px;padding:6px 12px;text-align:center;color:var(--ink)}
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:10px}
+.choices button{background:var(--soft);color:var(--ink);font-size:1.2rem}
+.choices button.right{background:var(--ok);color:#fff}
+.choices button.wrong{background:var(--bad);color:#fff}
+.fb{border-radius:14px;padding:10px 14px;font-weight:900;margin-top:10px}
+.fb.ok{background:#dcfce7;color:#14532d}.fb.bad{background:#fee2e2;color:#7f1d1d}
+.expl{background:var(--soft);border-radius:14px;padding:10px 14px;margin-top:10px;line-height:1.5}
+.ladder{display:grid;grid-template-columns:repeat(14,1fr);gap:4px 0;margin:10px 0;text-align:center}
+.ladder .u{grid-row:1;background:#fff;border:3px solid #cbd5e1;border-radius:10px;padding:8px 0;font-weight:900;font-size:clamp(.7rem,2.4vw,1rem);margin:0 2px}
+.ladder .u.path{border-color:var(--c);background:#fff7e0}
+.ladder .u.end{background:var(--c);border-color:var(--c);color:#fff}
+.ladder .u.blank{background:#fde68a;border-style:dashed}
+.ladder .s{grid-row:2;font-size:clamp(.65rem,2.2vw,.9rem);font-weight:900;color:var(--c);border-top:4px solid var(--c);padding-top:2px;position:relative}
+.ladder .s::after{content:'';position:absolute;top:-9px;width:0;height:0;border:7px solid transparent}
+.ladder .s.r::after{right:-4px;border-left-color:var(--c);border-right:0}
+.ladder .s.l::after{left:-4px;border-right-color:var(--c);border-left:0}
+.total{font-weight:900;text-align:center;color:var(--c)}
+.boss{display:flex;align-items:center;gap:12px;margin:8px 0}
+.boss .em{font-size:3rem}
+.hp{flex:1;height:18px;background:#e5e7eb;border-radius:99px;overflow:hidden}
+.hp i{display:block;height:100%;background:var(--bad);transition:width .3s}
+.hp.hero i{background:var(--ok)}
+.shake{animation:sh .35s}
+@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.stars{font-size:3rem;text-align:center;letter-spacing:6px}
+.trophy{display:flex;gap:10px;align-items:center;padding:10px;border-radius:14px;background:var(--soft);margin:6px 0}
+.trophy.locked{opacity:.4;filter:grayscale(1)}
+.trophy .ic{font-size:2rem}
+.toast{position:fixed;left:50%;top:14px;transform:translateX(-50%);background:var(--gold);color:var(--ink);padding:10px 18px;border-radius:14px;font-weight:900;z-index:9;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.bar{height:14px;background:#e5e7eb;border-radius:99px;overflow:hidden;flex:1;min-width:120px}.bar i{display:block;height:100%;background:var(--c)}
+input.txt{font:inherit;font-weight:800;border:3px solid #cbd5e1;border-radius:12px;padding:8px 12px;width:min(260px,100%)}
+footer{color:#9b95e6;text-align:center;font-size:.85rem;margin-top:24px}
+a{color:var(--gold)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+'use strict';
+/* ====== Dades ====== */
+const MAGS={
+ long:{name:'Longitud',ic:'📏',col:'#3b82f6',e:1,cap:6,units:['km','hm','dam','m','dm','cm','mm'],key:'m'},
+ mass:{name:'Massa',ic:'⚖️',col:'#ef4444',e:1,cap:6,units:['kg','hg','dag','g','dg','cg','mg'],key:'g'},
+ cap:{name:'Capacitat',ic:'🧪',col:'#06b6d4',e:1,cap:6,units:['kL','hL','daL','L','dL','cL','mL'],key:'L'},
+ area:{name:'Superfície',ic:'🟩',col:'#22c55e',e:2,cap:5,units:['km²','hm²','dam²','m²','dm²','cm²','mm²'],key:'m²'},
+ vol:{name:'Volum',ic:'🧊',col:'#a855f7',e:3,cap:4,units:['km³','hm³','dam³','m³','dm³','cm³','mm³'],key:'m³'}
+};
+const MIX={name:'Barreja',ic:'🎲',col:'#f59e0b'};
+const NAMES=['Paula','Marc','Aina','Pol','Júlia','Nil','Laia','Biel','Carla','Arnau'];
+/* problemes: m=magnitud, f/to=index d'unitat; o bé fu/tu/exp per a equivalències; r=rang del valor; dec=admet mig */
+const PROBS=[
+ {m:'long',t:'{n} vol caminar {v} km. Quants metres ha de caminar?',f:0,to:3,r:[1,9],dec:1},
+ {m:'long',t:'Una corda mesura {v} m. Quants centímetres són?',f:3,to:5,r:[2,15],dec:1},
+ {m:'long',t:'Un llapis de {n} fa {v} cm. Quants mil·límetres són?',f:5,to:6,r:[8,20],dec:1},
+ {m:'long',t:'De casa de {n} a l\'escola hi ha {v} m. Quants quilòmetres són?',f:3,to:0,r:[300,4500]},
+ {m:'long',t:'La taula de classe fa {v} cm de llarg. Quants metres són?',f:5,to:3,r:[80,240]},
+ {m:'long',t:'{n} ha fet una cursa de {v} hm. Quants metres ha corregut?',f:1,to:3,r:[2,40]},
+ {m:'mass',t:'{n} compra {v} kg de pomes. Quants grams són?',f:0,to:3,r:[1,9],dec:1},
+ {m:'mass',t:'Una pastilla pesa {v} mg. Quants grams són?',f:6,to:3,r:[200,900]},
+ {m:'mass',t:'Un paquet de farina pesa {v} g. Quants quilograms són?',f:3,to:0,r:[250,2500]},
+ {m:'mass',t:'El gos de {n} pesa {v} kg. Quants grams pesa?',f:0,to:3,r:[3,35],dec:1},
+ {m:'mass',t:'Una moneda pesa {v} g. Quants decigrams són?',f:3,to:4,r:[2,12],dec:1},
+ {m:'mass',t:'Un camió porta {v} hg de formatge. Quants quilograms són?',f:1,to:0,r:[20,300]},
+ {m:'cap',t:'Una ampolla té {v} L. Quants mil·lilitres són?',f:3,to:6,r:[1,5],dec:1},
+ {m:'cap',t:'Una llauna de refresc conté {v} cL. Quants litres són?',f:5,to:3,r:[25,50]},
+ {m:'cap',t:'{n} pren {v} mL de xarop. Quants litres són?',f:6,to:3,r:[5,30]},
+ {m:'cap',t:'Una bota de vi té {v} hL. Quants litres són?',f:1,to:3,r:[2,12]},
+ {m:'cap',t:'Un cubell té {v} dL d\'aigua. Quants centilitres són?',f:4,to:5,r:[5,90]},
+ {m:'cap',t:'Un camió cisterna porta {v} kL de llet. Quants litres són?',f:0,to:3,r:[2,12]},
+ {m:'area',t:'L\'habitació de {n} fa {v} m². Quants decímetres quadrats són?',f:3,to:4,r:[8,30]},
+ {m:'area',t:'Un camp fa {v} hm². Quants metres quadrats són?',f:1,to:3,r:[2,9]},
+ {m:'area',t:'Un full de paper fa {v} cm². Quants mil·límetres quadrats són?',f:5,to:6,r:[100,700]},
+ {m:'area',t:'Una pantalla fa {v} dm². Quants metres quadrats són?',f:4,to:3,r:[30,90]},
+ {m:'area',t:'Un parc fa {v} m². Quants hectòmetres quadrats (hectàrees) són?',f:3,to:1,r:[10000,90000]},
+ {m:'area',t:'Una paret de {n} fa {v} m². Quants centímetres quadrats són?',f:3,to:5,r:[3,12]},
+ {m:'vol',t:'Un dipòsit té {v} m³. Quants decímetres cúbics són?',f:3,to:4,r:[2,9]},
+ {m:'vol',t:'Un cub petit té {v} cm³. Quants mil·límetres cúbics són?',f:5,to:6,r:[2,15]},
+ {m:'vol',t:'Una caixa té {v} dm³. Quants centímetres cúbics són?',f:4,to:5,r:[2,12]},
+ {m:'vol',t:'Una habitació té {v} m³ d\'aire. Quants dm³ són?',f:3,to:4,r:[20,60]},
+ {m:'vol',t:'Una piscina té {v} m³ d\'aigua. Quants litres són? (1 dm³ = 1 L)',fu:'m³',tu:'L',exp:3,r:[2,9],info:'1 m³ = 1 000 dm³ i 1 dm³ = 1 L'},
+ {m:'vol',t:'Una xeringa té {v} cm³. Quants mil·lilitres són? (1 cm³ = 1 mL)',fu:'cm³',tu:'mL',exp:0,r:[5,60],info:'1 cm³ = 1 mL'},
+ {m:'cap',t:'Un dipòsit té {v} kL. Quants metres cúbics són? (1 kL = 1 m³)',fu:'kL',tu:'m³',exp:0,r:[2,20],info:'1 kL = 1 m³'},
+ {m:'cap',t:'Un aquari té {v} L. Quants centímetres cúbics són? (1 L = 1 dm³)',fu:'L',tu:'cm³',exp:3,r:[20,120],info:'1 L = 1 dm³ = 1 000 cm³'}
+];
+const RANKS=[[0,'Aprenent','🌱'],[100,'Explorador','🧭'],[300,'Mesurador','📐'],[700,'Mestre de Mesures','🏅'],[1500,'Llegenda de l\'Escala','👑']];
+const TROPHIES=[
+ ['first','🎮','Primera missió','Acaba la teva primera partida'],
+ ['streak10','🔥','Ratxa de foc','10 encerts seguits'],
+ ['perfect','💯','Partida perfecta','Encerta-ho tot en una partida (mín. 8 preguntes)'],
+ ['boss','👹','Caçador de monstres','Derrota un Boss'],
+ ['chain','🔗','Cadena sencera','Acaba el Mode Cadena sense errors'],
+ ['duel','⚔️','Duelista','Juga un Duel'],
+ ['allmags','🌍','Ho domino tot','Practica les 5 magnituds'],
+ ['hundred','🏆','Centenar','100 encerts en total'],
+ ['legend','👑','Llegenda','Arriba al rang més alt']
+];
+const MODES=[
+ ['classic','🎯','Clàssic','10 preguntes'],
+ ['timed','⏱️','Contrarellotge','60 segons, tants encerts com puguis'],
+ ['lives','❤️','Vides','3 vides, la dificultat puja'],
+ ['prog','🪜','Repte Progressiu','5 fases, cada cop més difícil'],
+ ['boss','👹','Boss Fight','Derrota el monstre abans que et derroti'],
+ ['chain','🔗','Mode Cadena','10 conversions encadenades'],
+ ['duel','⚔️','Duel','2 jugadors, per torns']
+];
+const LVL={1:[1,2],2:[2,4],3:[4,5]};
+const HEROES=['🦸','🦸‍♀️','🧙','🦊','🐲','🤖','🐱','🦉'];
+const BOSS={long:['🐉','Drac Quilòmetre'],mass:['🦍','Goril·la Quilogram'],cap:['🐙','Pop Litrot'],area:['🕷️','Aranya Metrequadrada'],vol:['🧌','Ogre Cúbic'],mix:['👹','Monstre de les Mesures']};
+const PRAISE=['Genial!','Fantàstic!','Mesura perfecta!','Ho domines!','Bravo!','Quin crack!'];
+
+/* ====== Utilitats numèriques (decimals exactes amb cadenes) ====== */
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[rnd(0,a.length-1)];
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+function shift(s,n){let[i,f='']=String(s).split('.');let d=i+f,p=i.length+n;
+ if(p<=0){d='0'.repeat(1-p)+d;p=1}else if(p>d.length)d+='0'.repeat(p-d.length);
+ let ip=d.slice(0,p).replace(/^0+(?=\d)/,''),fp=d.slice(p).replace(/0+$/,'');return fp?ip+'.'+fp:ip}
+function norm(t){t=String(t).replace(/\s/g,'').replace(',','.');if(!/^\d+(\.\d+)?$/.test(t))return null;return shift(t,0)}
+function fmt(s){let[i,f]=String(s).split('.');if(i.length>4)i=i.replace(/\B(?=(\d{3})+(?!\d))/g,' ');return f?i+','+f:i}
+const pow10=n=>'1'+'0'.repeat(n);
+const fmtVal=v=>fmt(String(v));
+
+/* ====== Perfil ====== */
+const KEY='mesuraherois-v1';
+let P=(()=>{try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&x.v===1)return x}catch(e){}
+ return {v:1,name:'',hero:'🦸',xp:0,tro:{},st:{},games:0,correct:0,best:0,mute:false}})();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(P))}catch(e){}};
+const rankOf=xp=>{let r=0;RANKS.forEach((x,i)=>{if(xp>=x[0])r=i});return r};
+
+/* ====== So ====== */
+let AC;
+function beep(f,d=.12,t='sine',at=0){if(P.mute)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=t;o.frequency.value=f;g.gain.value=.08;o.connect(g);g.connect(AC.destination);const s=AC.currentTime+at;o.start(s);g.gain.exponentialRampToValueAtTime(.001,s+d);o.stop(s+d)}catch(e){}}
+const sOk=()=>{beep(660,.1,'triangle');beep(880,.15,'triangle',.1)};
+const sBad=()=>beep(180,.3,'sawtooth');
+
+/* ====== Generadors de preguntes ====== */
+function ladderHTML(m,i,j,o={}){const M=MAGS[m];let h='<div class="ladder">';const lo=Math.min(i,j),hi=Math.max(i,j);
+ M.units.forEach((u,k)=>{let c='u';if(o.blank===k)c+=' blank';else{if(i!=null&&k>=lo&&k<=hi)c+=' path';if(k===i||k===j)c+=' end'}
+  h+=`<div class="${c}" style="grid-column:${2*k+1}/span 2">${o.blank===k?'❓':u}</div>`});
+ if(o.chips&&i!=null){const right=j>i,f=Math.pow(10,M.e);for(let k=lo;k<hi;k++)h+=`<div class="s ${right?'r':'l'}" style="grid-column:${2*k+2}/span 2">${right?'×':'÷'} ${fmt(f)}</div>`}
+ h+='</div>';
+ if(o.total&&i!=null&&i!==j){const n=Math.abs(j-i)*M.e;h+=`<div class="total">Total: ${j>i?'×':'÷'} ${fmt(pow10(n))}</div>`}
+ return h}
+function ruleText(m,i,j){const M=MAGS[m],n=Math.abs(j-i),f=pow10(M.e),right=j>i;
+ return `Anem de <b>${M.units[i]}</b> a <b>${M.units[j]}</b>: ${n} ${n==1?'pas':'passos'} cap a la ${right?'dreta (unitats més petites → el número es fa més gran)':'esquerra (unitats més grans → el número es fa més petit)'}.<br>Cada pas ${right?'multiplica':'divideix'} per <b>${fmt(f)}</b>${M.e>1?` (en ${M.name.toLowerCase()} es compta de ${M.e==2?'2 en 2':'3 en 3'} zeros)`:''}, per tant ${right?'multipliquem':'dividim'} per <b>${fmt(pow10(n*M.e))}</b>.`}
+function genVal(right,d){
+ if(right){if(d<=2)return String(rnd(1,d==1?20:99));return Math.random()<.5?String(rnd(1,99)):shift(String(rnd(11,199)),-1)}
+ if(d<=2)return String(rnd(1,99)*Math.pow(10,rnd(0,2)));
+ return Math.random()<.5?String(rnd(1,9999)):shift(String(rnd(11,9999)),-1)}
+function genConvert(m,d,showLadder){const M=MAGS[m];
+ const hi=Math.min(M.cap,d>=5?6:d),lo=d>=4?2:1,s=rnd(Math.min(lo,hi),hi),right=d==1?true:Math.random()<.5;
+ const i=right?rnd(0,6-s):rnd(s,6),j=right?i+s:i-s,v=genVal(right,d),ans=shift(v,(j-i)*M.e);
+ return {kind:'input',m,tag:showLadder?'Escala':'Conversió',pre:'Converteix:',v,fu:M.units[i],tu:M.units[j],ans,i,j,
+  ladder:showLadder?{m,i,j,chips:true}:null,hintLadder:{m,i,j,chips:true},
+  explain:()=>ruleText(m,i,j),full:{m,i,j,chips:true,total:true},meta:{v,i,j,e:M.e}}}
+function genFactor(m,d){const M=MAGS[m];const cap=Math.min(M.cap,d+1,4),s=rnd(1,cap),right=Math.random()<.5;
+ const i=right?rnd(0,6-s):rnd(s,6),j=right?i+s:i-s,n=(j-i)*M.e,sg=Math.sign(n),a=Math.abs(n);
+ let c=[n,-n,sg*(M.e>1?s:a+1),sg*(a+M.e),sg*Math.max(M.e,a-M.e),-sg*(M.e>1?s:a+1)];
+ c=[...new Set(c.filter(x=>x!==0))];const wrong=shuf(c.filter(x=>x!==n)).slice(0,3);const ch=shuf([n,...wrong]);
+ const lab=x=>(x>0?'× ':'÷ ')+fmt(pow10(Math.abs(x)));
+ return {kind:'choice',m,tag:'Escala',pre:`Per passar de <b>${M.units[i]}</b> a <b>${M.units[j]}</b>, què hem de fer amb el número?`,
+  choices:ch.map(lab),ans:ch.indexOf(n),i,j,ladder:{m,i,j,chips:false},hintLadder:{m,i,j,chips:true},
+  explain:()=>ruleText(m,i,j),full:{m,i,j,chips:true,total:true}}}
+function genFill(m){const M=MAGS[m],b=rnd(0,6);const others=shuf(M.units.map((u,k)=>k).filter(k=>k!==b)).slice(0,3);
+ const ch=shuf([b,...others]);
+ return {kind:'choice',m,tag:'Escala',pre:`Quina unitat falta a l'escala de <b>${M.name.toLowerCase()}</b>?`,choices:ch.map(k=>M.units[k]),ans:ch.indexOf(b),
+  ladder:{m,i:null,j:null,blank:b},explain:()=>`A l'escala, de l'esquerra cap a la dreta les unitats són: <b>${M.units.join(' → ')}</b>.`,full:{m,i:null,j:null,blank:null}}}
+function genProblem(m,d){const t=pick(PROBS.filter(p=>p.m===m));const M=MAGS[m];
+ let v=rnd(t.r[0],t.r[1]);v=(t.dec&&d>=3&&Math.random()<.5)?String(v)+'.5':String(v);
+ const text=t.t.replace('{n}',pick(NAMES)).replace('{v}',fmt(v).replace('.',','));
+ if(t.fu){const ans=shift(v,t.exp);return {kind:'input',m,tag:'Problema',text,fu:t.fu,tu:t.tu,v,ans,meta:{v,exp:t.exp},
+  explain:()=>`${t.info}.<br>${fmt(v)} ${t.fu} = <b>${fmt(ans)} ${t.tu}</b>.`,hintText:t.info}}
+ const MM=MAGS[t.m],ans=shift(v,(t.to-t.f)*MM.e);
+ return {kind:'input',m,tag:'Problema',text,v,fu:MM.units[t.f],tu:MM.units[t.to],ans,i:t.f,j:t.to,hintLadder:{m:t.m,i:t.f,j:t.to,chips:true},
+  explain:()=>ruleText(t.m,t.f,t.to),full:{m:t.m,i:t.f,j:t.to,chips:true,total:true},meta:{v,i:t.f,j:t.to,e:MM.e}}}
+function genQ(m,type,d){
+ if(type==='tot')type=pick(['conv','conv','escala','escala','prob','prob']);
+ if(type==='conv')return genConvert(m,d,false);
+ if(type==='prob')return genProblem(m,d);
+ const r=Math.random();return r<.4?genFactor(m,d):r<.7?genFill(m):genConvert(m,d,true)}
+function genChain(ch,lvl){const M=MAGS[ch.m];const reach=lvl==1?1:lvl==2?2:3;
+ let c=[];for(let j=0;j<=6;j++){if(j===ch.i||Math.abs(j-ch.i)>reach)continue;const a=shift(ch.v,(j-ch.i)*M.e),[ip,fp='']=a.split('.');if(ip.length<=9&&fp.length<=3&&a!=='0')c.push(j)}
+ if(!c.length){ch.v=String(rnd(1,99));ch.i=rnd(1,5);return genChain(ch,lvl)}
+ const j=pick(c),ans=shift(ch.v,(j-ch.i)*M.e);
+ return {kind:'input',m:ch.m,tag:`Eslabó ${ch.n+1}/10`,pre:'Converteix:',v:ch.v,fu:M.units[ch.i],tu:M.units[j],ans,i:ch.i,j,
+  hintLadder:{m:ch.m,i:ch.i,j,chips:true},explain:()=>ruleText(ch.m,ch.i,j),full:{m:ch.m,i:ch.i,j,chips:true,total:true},meta:{v:ch.v,i:ch.i,j,e:M.e}}}
+
+/* ====== Estat i pantalles ====== */
+const $=s=>document.querySelector(s);
+const app=$('#app');
+let S={mag:'mix',type:'tot',lvl:2},G=null,timer=null;
+function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+function topbar(){const r=rankOf(P.xp),nx=RANKS[r+1],pct=nx?Math.round((P.xp-RANKS[r][0])/(nx[0]-RANKS[r][0])*100):100;
+ return `<div class="hud card" style="background:rgba(255,255,255,.1);box-shadow:none"><span class="pill">${P.hero} ${P.name||'Heroi'}</span><span class="pill">${RANKS[r][2]} ${RANKS[r][1]}</span><div class="xpbar" title="${P.xp} XP"><i style="width:${pct}%"></i></div><span class="pill">⭐ ${P.xp} XP</span></div>`}
+function home(){clearInterval(timer);G=null;
+ app.innerHTML=`<h1 class="title">Mesura<span>Herois</span></h1><p class="sub">Domina les unitats de mesura: longitud, massa, capacitat, superfície i volum</p>${topbar()}
+ <div class="card"><div class="row center"><button class="big" onclick="setup()">▶ Jugar</button><button class="ghost big" onclick="trophies()">🏆 Trofeus</button><button class="ghost big" onclick="profile()">🧑 Perfil</button></div></div>
+ <div class="card"><h3>Com funciona?</h3><p>Escull una magnitud, el tipus d'exercici i un mode de joc. A cada pregunta pots demanar una <b>pista</b> amb l'escala de conversió, i quan acabes de respondre veuràs com es multiplica o es divideix per múltiples de 10.</p></div>
+ <footer>Un joc de <a href="https://robertpotau.github.io/" target="_blank" rel="noopener">robertpotau.github.io</a> · <span onclick="P.mute=!P.mute;save();home()" style="cursor:pointer">${P.mute?'🔇 so desactivat':'🔊 so activat'}</span></footer>`}
+function setup(){clearInterval(timer);
+ const chips=(items,cur,fn)=>items.map(([k,l,col])=>`<button class="chip ${cur==k?'on':''}" style="--cc:${col||'#f59e0b'}" onclick="${fn}('${k}')">${l}</button>`).join('');
+ app.innerHTML=`<h1 class="title">Prepara la missió</h1>${topbar()}
+ <div class="card"><h3>1. Magnitud</h3><div class="row">${chips([...Object.entries(MAGS).map(([k,v])=>[k,`${v.ic} ${v.name} (${v.units[3]==='g'?'kg':v.units[3]})`,v.col]),['mix',`${MIX.ic} Barreja`,MIX.col]],S.mag,'pickMag')}</div>
+ <h3>2. Tipus d'exercici</h3><div class="row">${chips([['escala','🪜 Escales'],['conv','🔢 Conversions'],['prob','🧩 Problemes reals'],['tot','🎲 Tot barrejat']],S.type,'pickType')}</div>
+ <h3>3. Nivell</h3><div class="row">${chips([[1,'🟢 Fàcil'],[2,'🟡 Mitjà'],[3,'🔴 Difícil']],S.lvl,'pickLvl')}</div></div>
+ <div class="card"><h3>4. Mode de joc</h3><div class="modes">${MODES.map(([id,ic,n,d])=>`<button class="mode" onclick="startGame('${id}')"><span class="ic">${ic}</span><b>${n}</b><small>${d}</small></button>`).join('')}</div>
+<p><small>El Mode Cadena només fa conversions. Els problemes reals fan servir la magnitud triada (o varies si tries Barreja).</small></p></div>
+ <div class="row center"><button class="ghost" onclick="home()">← Inici</button></div>`}
+const pickMag=k=>{S.mag=k;setup()},pickType=k=>{S.type=k;setup()},pickLvl=k=>{S.lvl=+k;setup()};
+
+function startGame(mode){
+ const m=S.mag==='mix'?null:S.mag;
+ G={mode,mag:S.mag,type:S.type,lvl:S.lvl,n:0,correct:0,wrong:0,streak:0,maxStreak:0,score:0,hints:0,lives:3,time:60000,bossHP:20,heroHP:5,hintUsed:false,locked:false,q:null,mags:{},
+  total:{classic:10,prog:15,chain:10,duel:10}[mode]||0,players:null,turn:0};
+ if(mode==='boss'){const b=BOSS[S.mag];G.boss=b}
+ if(mode==='chain'){const cm=m||pick(Object.keys(MAGS));G.chain={m:cm,v:String(rnd(1,99)),i:rnd(1,5),n:0}}
+ if(mode==='duel'){app.innerHTML=`<h1 class="title">⚔️ Duel</h1><div class="card"><p>Noms dels jugadors:</p><div class="row"><input class="txt" id="p1" placeholder="Jugador 1" maxlength="14"><input class="txt" id="p2" placeholder="Jugador 2" maxlength="14"></div><div class="row" style="margin-top:12px"><button onclick="beginDuel()">Comença el duel</button><button class="ghost" onclick="setup()">← Enrere</button></div></div>`;return}
+ begin()}
+function beginDuel(){G.players=[0,1].map(i=>({name:$('#p'+(i+1)).value.trim()||'Jugador '+(i+1),score:0,correct:0}));begin()}
+function begin(){nextQ();if(G.mode==='timed'){G.paused=false;clearInterval(timer);timer=setInterval(()=>{if(G.paused||G.locked)return;G.time-=100;const t=$('#tm');if(t)t.textContent=Math.ceil(G.time/1000)+' s';if(G.time<=0){clearInterval(timer);finish()}},100)}}
+function diff(){const[lo,hi]=LVL[G.lvl];
+ if(G.mode==='prog')return Math.min(5,Math.floor(G.n/3)+1);
+ if(G.mode==='lives')return Math.min(5,lo+Math.floor(G.correct/4));
+ if(G.mode==='boss')return Math.min(5,lo+Math.floor((20-G.bossHP)/6));
+ return rnd(lo,hi)}
+function nextQ(){G.locked=false;G.hintUsed=false;G.paused=false;
+ const d=diff();
+ if(G.mode==='chain'){G.q=genChain(G.chain,G.lvl)}
+ else{const m=G.mag==='mix'?pick(Object.keys(MAGS)):G.mag;G.q=genQ(m,G.type,d)}
+ G.q.d=d;renderGame()}
+function hudHTML(){let a=[];
+ const lab={classic:'Clàssic',timed:'Contrarellotge',lives:'Vides',prog:'Repte Progressiu',boss:'Boss Fight',chain:'Mode Cadena',duel:'Duel'}[G.mode];
+ a.push(`<span class="pill">${lab}</span>`);
+ if(G.total)a.push(`<span class="pill">Pregunta ${Math.min(G.n+1,G.total)}/${G.total}</span>`);
+ if(G.mode==='prog')a.push(`<span class="pill">Fase ${Math.min(5,Math.floor(G.n/3)+1)}/5</span>`);
+ if(G.mode==='timed')a.push(`<span class="pill">⏱️ <span id="tm">${Math.ceil(G.time/1000)} s</span></span>`);
+ if(G.mode==='lives')a.push(`<span class="pill">${'❤️'.repeat(G.lives)||'💀'}</span>`);
+ if(G.mode==='duel')a.push(...G.players.map((p,i)=>`<span class="pill" style="${i==G.turn?'background:var(--gold);color:var(--ink)':''}">${p.name}: ${p.score}</span>`));
+ else a.push(`<span class="pill">⭐ ${G.score}</span>`);
+ if(G.streak>=2)a.push(`<span class="pill">🔥 ${G.streak}</span>`);
+ return `<div class="hud">${a.join('')}</div>`}
+function renderGame(){const q=G.q,M=MAGS[q.m];
+ let boss='';
+ if(G.mode==='boss')boss=`<div class="card"><div class="boss"><span class="em">${G.boss[0]}</span><div style="flex:1"><b>${G.boss[1]}</b> · ${G.bossHP}/20 PV<div class="hp"><i style="width:${G.bossHP*5}%"></i></div></div></div><div class="boss"><span class="em">${P.hero}</span><div style="flex:1"><b>${P.name||'Heroi'}</b> · ${G.heroHP}/5 PV<div class="hp hero"><i style="width:${G.heroHP*20}%"></i></div></div></div></div>`;
+ const turn=G.mode==='duel'?`<p style="margin:0"><b>Torn de ${G.players[G.turn].name}</b></p>`:'';
+ let body='';
+ if(q.kind==='input'){
+  const unitIn=`<input class="ans" id="ans" inputmode="decimal" autocomplete="off" placeholder="?"> <span>${q.tu}</span>`;
+  if(q.text)body=`<div class="qtxt">${q.text}</div><div class="eq">= ${unitIn}</div>`;
+  else body=`<div class="qtxt">${q.pre}</div><div class="eq"><span>${fmt(q.v)} ${q.fu}</span> <span>=</span> ${unitIn}</div>`;
+ }else body=`<div class="qtxt">${q.pre}</div><div class="choices">${q.choices.map((c,i)=>`<button onclick="answer(${i})">${c}</button>`).join('')}</div>`;
+ const lad=q.ladder?ladderHTML(q.ladder.m,q.ladder.i,q.ladder.j,q.ladder):'';
+ app.innerHTML=`${hudHTML()}${boss}<div class="card" style="--c:${M.col}">${turn}<span class="qtag">${M.ic} ${M.name} · ${q.tag}</span>${body}<div id="lad">${lad}</div><div id="fb"></div>
+ <div class="row" id="acts" style="margin-top:12px">${q.kind==='input'?'<button onclick="submit()">OK ✔</button>':''}${(q.hintLadder||q.hintText)?'<button class="ghost" onclick="hint()">💡 Pista</button>':''}<button class="ghost" onclick="quit()">✖ Abandona</button></div></div>`;
+ const a=$('#ans');if(a){a.focus();a.addEventListener('keydown',e=>{if(e.key==='Enter')submit()})}}
+function hint(){if(G.locked)return;G.hintUsed=true;const q=G.q;
+ $('#lad').innerHTML=q.hintLadder?ladderHTML(q.hintLadder.m,q.hintLadder.i,q.hintLadder.j,q.hintLadder):`<div class="expl">💡 ${q.hintText}</div>`}
+function submit(){if(G.locked)return;const a=$('#ans'),v=norm(a.value);
+ if(v===null){a.classList.remove('shake');void a.offsetWidth;a.classList.add('shake');toast('Escriu un número (pots fer servir coma)');return}
+ evaluate(v===G.q.ans,a.value)}
+function answer(i){if(G.locked)return;const bs=document.querySelectorAll('.choices button');
+ bs.forEach((b,k)=>{if(k===G.q.ans)b.classList.add('right');else if(k===i)b.classList.add('wrong')});evaluate(i===G.q.ans,i)}
+function evaluate(ok){G.locked=true;const q=G.q;P.st[q.m]=P.st[q.m]||[0,0];P.st[q.m][1]++;G.mags[q.m]=1;
+ let extra='';
+ if(ok){P.st[q.m][0]++;P.correct++;G.correct++;G.streak++;G.maxStreak=Math.max(G.maxStreak,G.streak);P.best=Math.max(P.best,G.maxStreak);
+  const pts=(G.hintUsed?5:10)+Math.min(G.streak,5);G.score+=pts;if(G.players)G.players[G.turn].score+=pts,G.players[G.turn].correct++;
+  if(G.mode==='boss'){const dmg=G.streak>=3?2:1;G.bossHP=Math.max(0,G.bossHP-dmg);extra=` ${dmg>1?'💥 Cop crític! ':'⚔️ '}−${dmg} PV al monstre.`}
+  sOk()}
+ else{G.wrong++;G.streak=0;if(G.mode==='lives')G.lives--;if(G.mode==='boss'){G.heroHP--;extra=' 💔 El monstre t\'ataca! −1 PV.'}sBad()}
+ if(G.hintUsed)G.hints++;
+ if(G.mode==='chain'){G.chain.v=q.ans;G.chain.i=q.j;G.chain.n++}
+ G.n++;
+ const f=q.full?ladderHTML(q.full.m,q.full.i,q.full.j,q.full):'';
+ const correctText=q.kind==='input'?`${fmt(q.v)} ${q.fu} = <b>${fmt(q.ans)} ${q.tu}</b>`:`<b>${q.choices[q.ans]}</b>`;
+ const fb=$('#fb'),lad=$('#lad');
+ if(q.kind==='input'){const a=$('#ans');if(a){a.disabled=true;a.style.borderColor=ok?'var(--ok)':'var(--bad)'}}
+ if(f)lad.innerHTML=f;else if(q.ladder&&q.ladder.blank!=null)lad.innerHTML=ladderHTML(q.ladder.m,null,null,{});
+ fb.innerHTML=`<div class="fb ${ok?'ok':'bad'}">${ok?'✅ '+pick(PRAISE):'❌ Ho tornarem a provar!'}${extra}<br>${correctText}</div><div class="expl">${q.explain()}</div>`;
+ const done=isOver();
+ $('#acts').innerHTML=`<button id="nx" onclick="after()">${done?'Veure resultats 🏁':'Continua ➜'}</button>`;
+ $('#nx').focus();
+ if(G.mode==='timed')G.paused=true;
+ const hud=document.querySelector('.hud');if(hud)hud.outerHTML=hudHTML();
+ const bs=document.querySelector('.boss');if(bs&&G.mode==='boss'){const cards=document.querySelector('.boss').parentNode;cards.outerHTML=bossHTML()}
+}
+function bossHTML(){return `<div class="card"><div class="boss"><span class="em">${G.boss[0]}</span><div style="flex:1"><b>${G.boss[1]}</b> · ${G.bossHP}/20 PV<div class="hp"><i style="width:${G.bossHP*5}%"></i></div></div></div><div class="boss"><span class="em">${P.hero}</span><div style="flex:1"><b>${P.name||'Heroi'}</b> · ${G.heroHP}/5 PV<div class="hp hero"><i style="width:${G.heroHP*20}%"></i></div></div></div></div>`}
+function isOver(){
+ if(G.mode==='timed')return G.time<=0;
+ if(G.mode==='lives')return G.lives<=0||G.n>=40;
+ if(G.mode==='boss')return G.bossHP<=0||G.heroHP<=0;
+ return G.n>=G.total}
+function after(){if(isOver()){finish();return}if(G.mode==='duel')G.turn=1-G.turn;nextQ()}
+function quit(){if(confirm('Vols abandonar la partida?')){clearInterval(timer);setup()}}
+
+/* ====== Resultats ====== */
+function stars(){const r=G.total?G.correct/G.total:0;const by=(a,b,c,x)=>x>=a?3:x>=b?2:x>=c?1:0;
+ switch(G.mode){case'timed':return by(12,8,4,G.correct);case'lives':return by(15,8,3,G.correct);
+  case'boss':return G.bossHP>0?0:G.heroHP>=4?3:G.heroHP>=2?2:1;
+  case'duel':return 0;default:return r>=.9?3:r>=.7?2:r>=.4?1:0}}
+function finish(){clearInterval(timer);const st=stars();
+ let xp=G.correct*3+st*10+(G.mode==='boss'&&G.bossHP<=0?30:0);
+ const before=rankOf(P.xp);P.xp+=xp;P.games++;
+ const got=[];const give=id=>{if(!P.tro[id]){P.tro[id]=1;const t=TROPHIES.find(x=>x[0]===id);got.push(t)}};
+ give('first');if(G.maxStreak>=10)give('streak10');
+ if(G.total&&G.n>=8&&G.wrong===0&&G.mode!=='duel')give('perfect');
+ if(G.mode==='boss'&&G.bossHP<=0)give('boss');
+ if(G.mode==='chain'&&G.wrong===0&&G.n>=10)give('chain');
+ if(G.mode==='duel')give('duel');
+ if(Object.keys(MAGS).every(k=>(P.st[k]||[0,0])[1]>0))give('allmags');
+ if(P.correct>=100)give('hundred');
+ const after=rankOf(P.xp);if(after>=RANKS.length-1)give('legend');
+ save();
+ let head='';
+ if(G.mode==='duel'){const[a,b]=G.players;head=a.score===b.score?`<h2 class="title" style="font-size:2rem">🤝 Empat!</h2>`:`<h2 class="title" style="font-size:2rem">🏆 Guanya ${(a.score>b.score?a:b).name}!</h2>`;
+  head+=`<div class="card"><div class="row center">${G.players.map(p=>`<div class="pill" style="background:var(--soft);color:var(--ink);font-size:1.2rem">${p.name}: ${p.score} pts (${p.correct} encerts)</div>`).join('')}</div></div>`}
+ else{const msg=G.mode==='boss'?(G.bossHP<=0?'Has derrotat el monstre! 🎉':'El monstre ha guanyat aquest cop…'):['Segueix practicant!','Bon intent!','Molt bé!','Fantàstic!'][st];
+  head=`<div class="card"><div class="stars">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</div><h2 style="text-align:center">${msg}</h2></div>`}
+ app.innerHTML=`<h1 class="title">Resultats</h1>${head}<div class="card"><div class="row center"><span class="pill" style="background:var(--soft);color:var(--ink)">✅ ${G.correct} encerts</span><span class="pill" style="background:var(--soft);color:var(--ink)">❌ ${G.wrong} errors</span><span class="pill" style="background:var(--soft);color:var(--ink)">🔥 ratxa màx. ${G.maxStreak}</span><span class="pill" style="background:var(--soft);color:var(--ink)">⭐ +${xp} XP</span></div>
+ ${after>before?`<h2 style="text-align:center">🎖️ RANG NOU: ${RANKS[after][2]} ${RANKS[after][1]}!</h2>`:''}
+ ${got.map(t=>`<div class="trophy"><span class="ic">${t[1]}</span><div><b>Trofeu desbloquejat: ${t[2]}</b><br><small>${t[3]}</small></div></div>`).join('')}</div>
+ <div class="row center"><button class="big" onclick="startGame('${G.mode}')">↻ Tornar a jugar</button><button class="ghost big" onclick="setup()">Menú</button></div>`}
+function trophies(){app.innerHTML=`<h1 class="title">🏆 Sala de trofeus</h1>${topbar()}<div class="card">${TROPHIES.map(t=>`<div class="trophy ${P.tro[t[0]]?'':'locked'}"><span class="ic">${t[1]}</span><div><b>${t[2]}</b><br><small>${t[3]}</small></div></div>`).join('')}</div><div class="row center"><button class="ghost" onclick="home()">← Inici</button></div>`}
+function profile(){const tot=Object.entries(MAGS).map(([k,M])=>{const[c,t]=P.st[k]||[0,0];const p=t?Math.round(c/t*100):0;return `<div class="row" style="--c:${M.col}"><span style="width:140px">${M.ic} ${M.name}</span><div class="bar"><i style="width:${p}%"></i></div><span>${c}/${t} (${p}%)</span></div>`}).join('');
+ app.innerHTML=`<h1 class="title">🧑 Perfil</h1>${topbar()}<div class="card"><h3>El teu nom</h3><input class="txt" id="nm" maxlength="14" value="${P.name.replace(/"/g,'')}" placeholder="Heroi/ïna" onchange="P.name=this.value.trim();save()"><h3>El teu heroi</h3><div class="row">${HEROES.map(h=>`<button class="chip ${P.hero==h?'on':''}" style="font-size:1.6rem" onclick="P.hero='${h}';save();profile()">${h}</button>`).join('')}</div></div>
+ <div class="card"><h3>Estadístiques</h3><p>Partides: <b>${P.games}</b> · Encerts totals: <b>${P.correct}</b> · Millor ratxa: <b>${P.best}</b></p>${tot}</div>
+ <div class="card"><button class="ghost" onclick="if(confirm('Segur que vols esborrar tot el progrés d\\'aquest dispositiu?')){localStorage.removeItem(KEY);location.reload()}">🗑️ Esborra el progrés</button></div>
+ <div class="row center"><button class="ghost" onclick="P.name=$('#nm').value.trim();save();home()">← Inici</button></div>`}
+
+/* ====== Autotest (?selftest) ====== */
+function selftest(){const out=[];let bad=0;const ok=(c,m)=>{if(!c){bad++;out.push('FAIL '+m)}};
+ ok(shift('5',-2)==='0.05','5/100');ok(shift('12.5',1)==='125','12.5*10');ok(shift('12.5',-1)==='1.25','12.5/10');ok(shift('3500',-3)==='3.5','3500/1000');ok(shift('0.05',3)==='50','0.05*1000');ok(shift('7',0)==='7','id');
+ ok(norm('3 500,50')==='3500.5','norm');ok(norm('abc')===null,'norm null');ok(fmt('1234567.5')==='1 234 567,5','fmt');
+ const chk=q=>{const m=q.meta;if(!m)return;const n=m.exp!=null?m.exp:(m.j-m.i)*m.e;
+  const dec=s=>{const[i,f='']=s.split('.');return[BigInt(i+f),f.length]};const[vi,vd]=dec(m.v),[ai,ad]=dec(q.ans);
+  const lhs=ai*10n**BigInt(vd+Math.max(-n,0)),rhs=vi*10n**BigInt(ad+Math.max(n,0));ok(lhs===rhs,`${m.v} ${q.fu}->${q.tu} n=${n} ans=${q.ans}`)};
+ let cnt=0;for(const m of Object.keys(MAGS))for(const t of['escala','conv','prob','tot'])for(let d=1;d<=5;d++)for(let k=0;k<150;k++){const q=genQ(m,t,d);cnt++;
+  chk(q);if(q.kind==='choice'){ok(q.ans>=0&&q.ans<q.choices.length&&new Set(q.choices).size===q.choices.length,'choices '+JSON.stringify(q.choices))}
+  else ok(norm(q.ans)===q.ans,'ans norm '+q.ans);
+  if(q.i!=null&&q.i===q.j)ok(false,'same unit');
+  if(q.explain)ok(typeof q.explain()==='string','expl')}
+ for(const m of Object.keys(MAGS)){const ch={m,v:'7',i:3,n:0};for(let k=0;k<200;k++){const q=genChain(ch,1+k%3);cnt++;chk(q);ch.v=q.ans;ch.i=q.j;ch.n=(ch.n+1)%10}}
+ app.innerHTML=`<div class="card"><h2>${bad?'❌':'✅'} Autotest: ${cnt} preguntes, ${bad} errors</h2><pre>${out.slice(0,30).join('\n')}</pre></div>`}
+
+if(location.search.includes('selftest'))selftest();else home();
+</script>
+</body>
+</html>
