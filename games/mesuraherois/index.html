@@ -9,37 +9,38 @@
 <style>
 :root{--bg1:#14123a;--bg2:#2b1f6b;--ink:#1f1b4d;--card:#fff;--gold:#ffd23f;--c:#f59e0b;--ok:#16a34a;--bad:#dc2626;--soft:#f1f0ff}
 *{box-sizing:border-box}
+html{font-size:clamp(15px,calc(.55vw + .9vh + 8px),32px)}
 html,body{margin:0;min-height:100%}
-body{font-family:'Nunito',system-ui,sans-serif;font-weight:600;color:var(--ink);background:linear-gradient(160deg,var(--bg1),var(--bg2)) fixed;padding:14px 14px 40px}
-#app{max-width:880px;margin:0 auto}
+body{font-family:'Nunito',system-ui,sans-serif;font-weight:600;color:var(--ink);background:linear-gradient(160deg,var(--bg1),var(--bg2)) fixed;padding:.9rem .9rem 2.5rem}
+#app{max-width:min(66rem,100%);margin:0 auto}
 h1,h2,h3{margin:.2em 0;font-weight:900}
-.title{color:#fff;text-align:center;margin:10px 0 4px;font-size:clamp(2rem,6vw,3.2rem);letter-spacing:.5px}
+.title{color:#fff;text-align:center;margin:10px 0 4px;font-size:clamp(2rem,6vw,3.6rem);letter-spacing:.5px}
 .title span{color:var(--gold)}
 .sub{color:#cfcaff;text-align:center;margin:0 0 16px}
-.card{background:var(--card);border-radius:20px;padding:18px;margin:12px 0;box-shadow:0 8px 24px rgba(0,0,0,.25)}
-.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.card{background:var(--card);border-radius:1.2rem;padding:1.1rem;margin:.75rem 0;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.row{display:flex;flex-wrap:wrap;gap:.65rem;align-items:center}
 .row.center{justify-content:center}
-button{font:inherit;font-weight:800;cursor:pointer;border:0;border-radius:14px;padding:12px 18px;background:var(--c);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.2);transition:transform .08s}
+button{font:inherit;font-weight:800;cursor:pointer;border:0;border-radius:.9rem;padding:.75rem 1.1rem;background:var(--c);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.2);transition:transform .08s}
 button:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.2)}
 button.ghost{background:var(--soft);color:var(--ink)}
 button.big{font-size:1.3rem;padding:16px 28px}
 button:disabled{opacity:.5;cursor:default}
-.chip{background:var(--soft);color:var(--ink);padding:10px 14px;border-radius:14px;box-shadow:none;border:3px solid transparent}
+.chip{background:var(--soft);color:var(--ink);padding:.6rem .9rem;border-radius:.9rem;box-shadow:none;border:3px solid transparent}
 .chip.on{border-color:var(--cc,var(--c));background:#fff;box-shadow:0 0 0 3px var(--cc,var(--c)) inset}
 .hud{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;color:#fff;font-weight:800}
 .pill{background:rgba(255,255,255,.15);padding:6px 12px;border-radius:999px}
 .xpbar{height:12px;background:rgba(255,255,255,.2);border-radius:99px;overflow:hidden;min-width:120px}
 .xpbar i{display:block;height:100%;background:var(--gold)}
-.modes{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.modes{display:grid;grid-template-columns:repeat(auto-fill,minmax(12rem,1fr));gap:12px}
 .mode{background:var(--soft);color:var(--ink);text-align:left;padding:14px;border-radius:16px;box-shadow:0 4px 0 rgba(0,0,0,.12)}
 .mode b{display:block;font-size:1.15rem}
 .mode small{opacity:.75}
 .mode .ic{font-size:1.8rem}
 .qtag{display:inline-block;background:var(--c);color:#fff;border-radius:99px;padding:3px 12px;font-size:.85rem;font-weight:900}
-.qtxt{font-size:clamp(1.1rem,3.2vw,1.5rem);margin:12px 0;line-height:1.45}
-.eq{font-size:clamp(1.3rem,4vw,2rem);font-weight:900;display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}
+.qtxt{font-size:1.35rem;margin:12px 0;line-height:1.45}
+.eq{font-size:1.9rem;font-weight:900;display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}
 input.ans{font:inherit;font-weight:900;font-size:inherit;width:9em;max-width:100%;border:4px solid var(--c);border-radius:14px;padding:6px 12px;text-align:center;color:var(--ink)}
-.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:10px}
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));gap:10px;margin-top:10px}
 .choices button{background:var(--soft);color:var(--ink);font-size:1.2rem}
 .choices button.right{background:var(--ok);color:#fff}
 .choices button.wrong{background:var(--bad);color:#fff}
@@ -47,11 +48,11 @@ input.ans{font:inherit;font-weight:900;font-size:inherit;width:9em;max-width:100
 .fb.ok{background:#dcfce7;color:#14532d}.fb.bad{background:#fee2e2;color:#7f1d1d}
 .expl{background:var(--soft);border-radius:14px;padding:10px 14px;margin-top:10px;line-height:1.5}
 .ladder{display:grid;grid-template-columns:repeat(14,1fr);gap:4px 0;margin:10px 0;text-align:center}
-.ladder .u{grid-row:1;background:#fff;border:3px solid #cbd5e1;border-radius:10px;padding:8px 0;font-weight:900;font-size:clamp(.7rem,2.4vw,1rem);margin:0 2px}
+.ladder .u{grid-row:1;background:#fff;border:3px solid #cbd5e1;border-radius:10px;padding:8px 0;font-weight:900;font-size:.95rem;margin:0 2px}
 .ladder .u.path{border-color:var(--c);background:#fff7e0}
 .ladder .u.end{background:var(--c);border-color:var(--c);color:#fff}
 .ladder .u.blank{background:#fde68a;border-style:dashed}
-.ladder .s{grid-row:2;font-size:clamp(.65rem,2.2vw,.9rem);font-weight:900;color:var(--c);border-top:4px solid var(--c);padding-top:2px;position:relative}
+.ladder .s{grid-row:2;font-size:.85rem;font-weight:900;color:var(--c);border-top:4px solid var(--c);padding-top:2px;position:relative}
 .ladder .s::after{content:'';position:absolute;top:-9px;width:0;height:0;border:7px solid transparent}
 .ladder .s.r::after{right:-4px;border-left-color:var(--c);border-right:0}
 .ladder .s.l::after{left:-4px;border-right-color:var(--c);border-left:0}
@@ -72,6 +73,8 @@ input.ans{font:inherit;font-weight:900;font-size:inherit;width:9em;max-width:100
 input.txt{font:inherit;font-weight:800;border:3px solid #cbd5e1;border-radius:12px;padding:8px 12px;width:min(260px,100%)}
 footer{color:#9b95e6;text-align:center;font-size:.85rem;margin-top:24px}
 a{color:var(--gold)}
+@media (max-width:520px){.ladder .u{padding:.5rem 0;margin:0 1px;font-size:.72rem}.ladder .s{font-size:.62rem}.eq{font-size:1.4rem}.qtxt{font-size:1.1rem}.modes{grid-template-columns:1fr 1fr}.boss .em{font-size:2.2rem}}
+@media (max-height:520px){.title{margin:2px 0;font-size:1.6rem}.sub{display:none}.card{padding:.7rem;margin:.4rem 0}}
 </style>
 </head>
 <body>
