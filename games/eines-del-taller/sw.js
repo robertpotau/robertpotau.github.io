@@ -5,7 +5,7 @@
  */
 // Eines del taller — service worker (offline). El genera tools/build.py a partir d'aquest fitxer.
 // Estratègia: xarxa primer per a HTML/JS/JSON (sempre fresc si hi ha connexió); caché primer per a imatges i fonts.
-const CACHE = "eines-v1.0.2";
+const CACHE = "eines-v1.0.3";
 const ASSETS = [
  "./",
  "./index.html",
@@ -86,7 +86,6 @@ const ASSETS = [
  "./img/esq/13.png",
  "./img/14/1.jpg",
  "./img/14/2.jpg",
- "./img/14/4.jpg",
  "./img/14/5.jpg",
  "./img/esq/14.png",
  "./img/15/1.jpg",
@@ -102,6 +101,7 @@ const ASSETS = [
  "./img/esq/16.png",
  "./img/17/1.jpg",
  "./img/17/2.jpg",
+ "./img/17/7.jpg",
  "./img/esq/17.png",
  "./img/18/1.jpg",
  "./img/18/2.jpg",
@@ -116,6 +116,11 @@ const ASSETS = [
  "./img/esq/19.png",
  "./img/20/1.jpg",
  "./img/20/2.jpg",
+ "./img/20/7.jpg",
+ "./img/20/8.jpg",
+ "./img/20/9.jpg",
+ "./img/20/10.jpg",
+ "./img/20/11.jpg",
  "./img/esq/20.png",
  "./img/21/1.jpg",
  "./img/21/2.jpg",
@@ -136,6 +141,9 @@ const ASSETS = [
  "./img/esq/23.png",
  "./img/24/1.jpg",
  "./img/24/2.jpg",
+ "./img/24/7.jpg",
+ "./img/24/8.jpg",
+ "./img/24/9.jpg",
  "./img/esq/24.png",
  "./img/25/1.jpg",
  "./img/25/2.jpg",

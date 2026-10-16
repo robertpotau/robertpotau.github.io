@@ -447,10 +447,6 @@ const EINES_DATA = {
      "neta": true
     },
     {
-     "f": "img/14/4.jpg",
-     "neta": false
-    },
-    {
      "f": "img/14/5.jpg",
      "neta": false
     }
@@ -524,6 +520,10 @@ const EINES_DATA = {
     {
      "f": "img/17/2.jpg",
      "neta": false
+    },
+    {
+     "f": "img/17/7.jpg",
+     "neta": true
     }
    ],
    "esquema": "img/esq/17.png"
@@ -594,6 +594,26 @@ const EINES_DATA = {
     },
     {
      "f": "img/20/2.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/20/7.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/20/8.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/20/9.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/20/10.jpg",
+     "neta": false
+    },
+    {
+     "f": "img/20/11.jpg",
      "neta": true
     }
    ],
@@ -696,6 +716,18 @@ const EINES_DATA = {
     },
     {
      "f": "img/24/2.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/24/7.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/24/8.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/24/9.jpg",
      "neta": true
     }
    ],
