@@ -200,6 +200,10 @@ const EINES_DATA = {
     {
      "f": "img/05/4.jpg",
      "neta": true
+    },
+    {
+     "f": "img/05/6.jpg",
+     "neta": true
     }
    ],
    "esquema": "img/esq/05.png"
@@ -254,6 +258,10 @@ const EINES_DATA = {
     {
      "f": "img/07/4.jpg",
      "neta": false
+    },
+    {
+     "f": "img/07/6.jpg",
+     "neta": true
     }
    ],
    "esquema": "img/esq/07.png"
@@ -276,6 +284,14 @@ const EINES_DATA = {
     },
     {
      "f": "img/08/3.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/08/4.jpg",
+     "neta": false
+    },
+    {
+     "f": "img/08/6.jpg",
      "neta": true
     }
    ],
@@ -333,6 +349,10 @@ const EINES_DATA = {
     {
      "f": "img/10/5.jpg",
      "neta": true
+    },
+    {
+     "f": "img/10/6.jpg",
+     "neta": true
     }
    ],
    "esquema": "img/esq/10.png"
@@ -354,6 +374,10 @@ const EINES_DATA = {
     {
      "f": "img/11/4.jpg",
      "neta": true
+    },
+    {
+     "f": "img/11/6.jpg",
+     "neta": false
     }
    ],
    "esquema": "img/esq/11.png"
@@ -421,6 +445,14 @@ const EINES_DATA = {
     {
      "f": "img/14/2.jpg",
      "neta": true
+    },
+    {
+     "f": "img/14/4.jpg",
+     "neta": false
+    },
+    {
+     "f": "img/14/5.jpg",
+     "neta": false
     }
    ],
    "esquema": "img/esq/14.png"
@@ -446,6 +478,10 @@ const EINES_DATA = {
     {
      "f": "img/15/4.jpg",
      "neta": false
+    },
+    {
+     "f": "img/15/6.jpg",
+     "neta": true
     }
    ],
    "esquema": "img/esq/15.png"
@@ -512,6 +548,10 @@ const EINES_DATA = {
     },
     {
      "f": "img/18/4.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/18/6.jpg",
      "neta": true
     }
    ],
@@ -632,6 +672,14 @@ const EINES_DATA = {
     {
      "f": "img/23/3.jpg",
      "neta": false
+    },
+    {
+     "f": "img/23/5.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/23/6.jpg",
+     "neta": true
     }
    ],
    "esquema": "img/esq/23.png"
@@ -676,6 +724,10 @@ const EINES_DATA = {
     {
      "f": "img/25/4.jpg",
      "neta": true
+    },
+    {
+     "f": "img/25/6.jpg",
+     "neta": false
     }
    ],
    "esquema": "img/esq/25.png"
@@ -700,6 +752,10 @@ const EINES_DATA = {
     },
     {
      "f": "img/26/4.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/26/6.jpg",
      "neta": true
     }
    ],
@@ -726,6 +782,10 @@ const EINES_DATA = {
     {
      "f": "img/27/4.jpg",
      "neta": true
+    },
+    {
+     "f": "img/27/6.jpg",
+     "neta": true
     }
    ],
    "esquema": "img/esq/27.png"
@@ -746,6 +806,10 @@ const EINES_DATA = {
     },
     {
      "f": "img/28/3.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/28/6.jpg",
      "neta": true
     }
    ],
@@ -772,6 +836,10 @@ const EINES_DATA = {
     {
      "f": "img/29/5.jpg",
      "neta": true
+    },
+    {
+     "f": "img/29/6.jpg",
+     "neta": true
     }
    ],
    "esquema": "img/esq/29.png"
@@ -792,6 +860,14 @@ const EINES_DATA = {
     },
     {
      "f": "img/30/4.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/30/5.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/30/6.jpg",
      "neta": true
     }
    ],
@@ -815,6 +891,18 @@ const EINES_DATA = {
     },
     {
      "f": "img/31/3.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/31/4.jpg",
+     "neta": false
+    },
+    {
+     "f": "img/31/5.jpg",
+     "neta": false
+    },
+    {
+     "f": "img/31/6.jpg",
      "neta": true
     }
    ],
@@ -850,6 +938,22 @@ const EINES_DATA = {
     {
      "f": "img/33/1.jpg",
      "neta": true
+    },
+    {
+     "f": "img/33/3.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/33/4.jpg",
+     "neta": false
+    },
+    {
+     "f": "img/33/5.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/33/6.jpg",
+     "neta": true
     }
    ],
    "esquema": "img/esq/33.png"
@@ -875,6 +979,10 @@ const EINES_DATA = {
     {
      "f": "img/34/5.jpg",
      "neta": false
+    },
+    {
+     "f": "img/34/6.jpg",
+     "neta": false
     }
    ],
    "esquema": "img/esq/34.png"
@@ -896,6 +1004,14 @@ const EINES_DATA = {
     {
      "f": "img/35/3.jpg",
      "neta": true
+    },
+    {
+     "f": "img/35/5.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/35/6.jpg",
+     "neta": true
     }
    ],
    "esquema": "img/esq/35.png"
@@ -908,6 +1024,18 @@ const EINES_DATA = {
    "fotos": [
     {
      "f": "img/36/1.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/36/3.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/36/5.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/36/6.jpg",
      "neta": true
     }
    ],
@@ -934,6 +1062,10 @@ const EINES_DATA = {
     {
      "f": "img/37/4.jpg",
      "neta": false
+    },
+    {
+     "f": "img/37/6.jpg",
+     "neta": true
     }
    ],
    "esquema": "img/esq/37.png"
@@ -959,6 +1091,10 @@ const EINES_DATA = {
     {
      "f": "img/38/4.jpg",
      "neta": true
+    },
+    {
+     "f": "img/38/6.jpg",
+     "neta": false
     }
    ],
    "esquema": "img/esq/38.png"
@@ -983,6 +1119,10 @@ const EINES_DATA = {
     },
     {
      "f": "img/39/5.jpg",
+     "neta": true
+    },
+    {
+     "f": "img/39/6.jpg",
      "neta": true
     }
    ],
