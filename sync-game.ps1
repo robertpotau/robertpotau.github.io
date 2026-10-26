@@ -40,12 +40,15 @@ Write-Output "Source root: $src"
 $sourceFolder = @{ "al-mercat" = "joc-mercat"; "eines-del-taller" = "joc-eines" }
 # Extra folders that must NOT be published for a given game (sources, tools, backups).
 $extraXD = @{ "eines-del-taller" = @("src","tools","_backup-original","raw") }
+# Games whose source lives outside claude-projects (absolute path). biblioteca-magica: Drive copy (also has git).
+$absSource = @{ "biblioteca-magica" = (Join-Path $env:USERPROFILE "Mi unidad (rpotau@insatorroja.cat) (1)\Projectes\llibre-de-lectura") }
 function Get-GameSrc([string]$g) {
+  if ($absSource.ContainsKey($g)) { return $absSource[$g] }
   if ($sourceFolder.ContainsKey($g)) { return (Join-Path $src $sourceFolder[$g]) }
   return (Join-Path $src $g)
 }
 
-$games = @("calcuherois","aula-acollida","fraccions","lletra-a-lletra","ortografia","vistes","geometria","quina-hora-es","what-time-is-it","verbs-english","euroexplora","al-mercat","eines-del-taller")
+$games = @("calcuherois","aula-acollida","fraccions","lletra-a-lletra","ortografia","vistes","geometria","quina-hora-es","what-time-is-it","verbs-english","euroexplora","al-mercat","eines-del-taller","biblioteca-magica")
 
 if ($Slug) {
   if ($games -notcontains $Slug) {
@@ -72,10 +75,17 @@ foreach ($g in $targets) {
   Write-Output "Syncing $g ..."
   $gsrc = Get-GameSrc $g
   $xd = @(".git","apk","backups","pdf") + $(if ($extraXD.ContainsKey($g)) { $extraXD[$g] } else { @() })
+  if ($g -eq "biblioteca-magica") {
+    # only the playable part: src/ + audio/ mp3 (no docs, tools, data, assets, json); keeps LLICENCIA-*.txt
+    robocopy "$gsrc" "$dest" /E /MIR /XD .git docs tools data assets apk `
+      /XF *.md *.bat *.json *.py *.log .gitignore .gitattributes PROJECTE.md LICENSE `
+      /NFL /NDL /NJH | Out-Null
+  } else {
   robocopy "$gsrc" "$dest" /E /MIR `
     /XD $xd `
     /XF *.py *.md *.pdf *.bak* *_backup_* server.log *.txt review_svgs.html revisio_icones.html figures_revision*.html descarrega_landmarks.html manifest.json .gitignore icones-proposta.html icon-apk-fullbleed.svg `
     /NFL /NDL /NJH | Out-Null
+  }
   # robocopy: 0-7 = success (0 = nothing to do), 8+ = real failure
   if ($LASTEXITCODE -ge 8) {
     Write-Error "robocopy failed for '$g' with exit code $LASTEXITCODE"
