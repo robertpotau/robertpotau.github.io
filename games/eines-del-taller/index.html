@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["WebApplication","LearningResource"],"name":"Eines del taller",
-"url":"https://robertpotau.github.io/games/eines-del-taller/index.html","description":"Joc gratuït per aprendre les eines del taller de Tecnologia: foto, nom i família de 39 eines.",
+"url":"https://robertpotau.github.io/games/eines-del-taller/index.html","description":"Joc gratuït per aprendre les eines del taller de Tecnologia: foto, nom i família de les eines del taller.",
 "image":"https://robertpotau.github.io/screenshots/eines-del-taller.jpg","inLanguage":"ca","applicationCategory":"EducationalApplication",
 "learningResourceType":"Game","educationalUse":"practice","educationalLevel":"ESO (lower secondary)","teaches":"Eines del taller de Tecnologia: nom, aspecte i família",
 "audience":{"@type":"EducationalAudience","educationalRole":"student"},"isAccessibleForFree":true,
@@ -509,7 +509,7 @@ img.missing { visibility: hidden; }
   </div>
 </header>
 <main id="app" tabindex="-1"><noscript><p style="padding:2rem;text-align:center">Eines del taller necessita JavaScript. Activa'l al navegador.</p></noscript></main>
-<footer id="foot">© 2026 Robert Potau Nuñez · Tots els drets reservats · <a href="https://robertpotau.github.io/termes.html" target="_blank" rel="noopener">Termes d'ús</a> · Icones: <a href="https://openmoji.org" target="_blank" rel="noopener">OpenMoji</a> (CC BY-SA 4.0) · <span id="ver">v1.0.3 — 2026-10-16</span></footer>
+<footer id="foot">© 2026 Robert Potau Nuñez · Tots els drets reservats · <a href="https://robertpotau.github.io/termes.html" target="_blank" rel="noopener">Termes d'ús</a> · Icones: <a href="https://openmoji.org" target="_blank" rel="noopener">OpenMoji</a> (CC BY-SA 4.0) · <span id="ver">v1.1.0 — 2026-11-01</span></footer>
 <div id="toasts" aria-live="polite"></div>
 <div id="sr-live" class="sr" aria-live="polite"></div>
 <canvas id="fx" aria-hidden="true"></canvas>
@@ -1685,8 +1685,8 @@ const ICONS = {"1F31F":"<svg viewBox=\"0 0 72 72\"><g><polygon fill=\"#FCEA2B\" 
    (c) 2026 Robert Potau Nuñez. Tots els drets reservats. Motor derivat de l'obra pròpia Adjectivia.
    ============================================================ */
 'use strict';
-const VERSION = '1.0.3';
-const BUILD_DATE = '2026-10-16';          // la posa tools/build.py
+const VERSION = '1.1.0';
+const BUILD_DATE = '2026-11-01';          // la posa tools/build.py
 
 /* ---------- tiny DOM helpers ---------- */
 const $ = (s, r = document) => r.querySelector(s);
@@ -1947,7 +1947,10 @@ function openModal(content, onClose, wide) {
 const FAM_ICONS = { percussio: '1F528', tall: '1FA9A', abrasio: '1F9FD', perforacio: '1F573', agafar: '1F5DC', cargolar: '1FA9B', passives: '1F9F1', mesurar: '1F4CF', soldar: '1F525', proteccio: '1F97D' };
 const FAMS = EINES_DATA.families.map(f => Object.assign({}, f, { ic: FAM_ICONS[f.id] }));
 const FAMMAP = new Map(FAMS.map(f => [f.id, f]));
-const TOOLS = EINES_DATA.eines.map(e => Object.assign({}, e, { fam: FAMMAP.get(e.familia) }));
+/** Eines programades però OCULTES (no surten enlloc del joc ni a les preguntes). Per mostrar-les: treure l'id d'aquí,
+ *  pujar VERSION i fer build. Ara: les que no són a la "Presentació visual" que estudien els alumnes (Centenella, Puntes de senyalar). */
+const AMAGADES = new Set(['31', '32']);
+const TOOLS = EINES_DATA.eines.filter(e => !AMAGADES.has(e.id)).map(e => Object.assign({}, e, { fam: FAMMAP.get(e.familia) }));
 const TMAP = new Map(TOOLS.map(t => [t.id, t]));
 const toolById = id => TMAP.get(id);
 const toolsOf = fid => TOOLS.filter(t => t.familia === fid);
@@ -3557,7 +3560,7 @@ function showSplash() {
     h('p', { class: 'tagline' }, 'Reconeix l’eina, el seu nom i la seva família!'),
     h('div', { class: 'splash-faces' }, ['1F528', '1FA9A', '1FA9B', '1F527', '1F4CF', '1F97D', '1F9F0'].map(c => ico(c))),
     h('button', { class: 'btn primary huge', id: 'btn-play', onclick: () => { sfx('start'); if (first) { saveAll(); showProfiles(); } else showHub(); } }, ico('25B6'), ' Juga'),
-    h('p', { class: 'muted' }, 'Tecnologia · 39 eines i 10 famílies · 1 a 6 jugadors'));
+    h('p', { class: 'muted' }, 'Tecnologia · ' + TOOLS.length + ' eines i ' + FAMS.length + ' famílies · 1 a 6 jugadors'));
   render(wrap, '');
   const b = $('#btn-play'); if (b) b.focus({ preventScroll: true });
 }
@@ -3593,7 +3596,7 @@ function runSelfTest() {
   const ok = (cond, s) => { if (!cond) { fails.push(s); out.push('FAIL  ' + s); } };
 
   log('Joc v' + VERSION + ' · eines: ' + TOOLS.length + ' · famílies: ' + FAMS.length);
-  ok(TOOLS.length === 39, 'han de ser 39 eines');
+  ok(TOOLS.length + AMAGADES.size === 39, 'han de ser 39 eines en total (visibles + amagades)');
   ok(FAMS.length === 10, 'han de ser 10 famílies');
   const ids = new Set(), names = new Set();
   TOOLS.forEach(t => {
