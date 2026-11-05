@@ -417,20 +417,21 @@ input[type=range] { width: 11rem; accent-color: var(--gold); }
 .tcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: .8rem; margin: .8rem 0 1.2rem; }
 .tcard { display: flex; flex-direction: column; align-items: center; gap: .3rem; padding: .6rem; border-radius: 1.1rem; text-align: center; background: var(--card); border: .15rem solid color-mix(in srgb, var(--fc) 60%, transparent); transition: .15s; }
 .tcard:hover { transform: translateY(-.25rem); background: var(--card2); border-color: var(--fc); }
-.tc-img { width: 100%; height: 8rem; object-fit: contain; border-radius: .7rem; background: #fff; }
+.tc-img { width: 100%; height: 9rem; object-fit: contain; border-radius: .7rem; background: #fff; }
 .tcard small { color: var(--text2); font-weight: 700; }
 img.missing { visibility: hidden; }
 .tool-sheet .gal { display: flex; flex-direction: column; align-items: center; gap: .4rem; }
-.gal-main { width: 100%; height: 18rem; border-radius: 1rem; background: #fff; display: grid; place-items: center; overflow: hidden; }
+.gal-main { width: 100%; height: clamp(14rem, 40vh, 26rem); border-radius: 1rem; background: #fff; display: grid; place-items: center; overflow: hidden; }
 .gal-main img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .gal-label { color: var(--text2); font-weight: 700; }
 .gal-ths { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center; }
 .gal-th { width: 4.2rem; height: 4.2rem; border-radius: .6rem; overflow: hidden; background: #fff; border: .15rem solid transparent; }
 .gal-th.on { border-color: var(--fc); box-shadow: 0 0 .7rem var(--fc); } .gal-th img { width: 100%; height: 100%; object-fit: contain; }
 .tool-fam { display: flex; flex-direction: column; gap: .3rem; align-items: flex-start; margin: .6rem 0; }
-.fcard.tall { height: 30rem; }
+.flash { max-width: 60rem; }
+.fcard.tall { height: clamp(26rem, 66vh, 42rem); }
 .fcard.tall .fc-face { border: .3rem solid var(--fc); overflow: hidden; }
-.fc-big { max-width: 100%; max-height: 20rem; min-height: 0; object-fit: contain; flex: 1 1 auto; }
+.fc-big { width: 100%; max-width: 100%; min-height: 0; object-fit: contain; flex: 1 1 0; }
 .fc-fam { display: flex; flex-direction: column; align-items: center; gap: .3rem; } .fc-fam small { font-size: .85rem; max-width: 34rem; }
 .fc-mini { display: flex; gap: .6rem; height: 8rem; } .fc-mini img { height: 100%; width: auto; max-width: 14rem; object-fit: contain; border-radius: .5rem; background: #fff; border: 1px solid #ccd; }
 .fc-face .fam-chip { color: #fff; } .fc-face .wd-ca { color: #b45309; }
@@ -439,14 +440,27 @@ img.missing { visibility: hidden; }
 .hub-title.grp { color: var(--mc); display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: 1.4rem; }
 .mode-card.soon { opacity: .45; filter: grayscale(.6); cursor: not-allowed; } .mode-card.soon:hover { transform: none; box-shadow: none; }
 .mode-card.hot::after { content: none; }
-@media (max-width: 40rem) { .fcard.tall { height: 34rem; } .gal-main { height: 13rem; } }
+@media (max-width: 40rem) { .fcard.tall { height: clamp(28rem, 72vh, 40rem); } .gal-main { height: clamp(11rem, 34vh, 16rem); } }
 
 /* Classifica */
-.classify { max-width: 62rem; margin: 0 auto; display: flex; flex-direction: column; gap: .7rem; align-items: center; }
+.classify { max-width: 80rem; margin: 0 auto; display: flex; flex-direction: column; gap: .7rem; align-items: stretch; container-type: inline-size; }
+.classify > .cls-count, .classify > .cls-turn, .classify > .scorebar { align-self: center; }
 .cls-count { text-align: center; } .cls-turn { display: flex; align-items: center; gap: .4rem; padding: .2rem .9rem; border-radius: 99rem; border: .13rem solid var(--pc); background: color-mix(in srgb, var(--pc) 20%, transparent); }
 .classify .fc-prog { width: 100%; }
-.cls-card { display: flex; flex-direction: column; align-items: center; gap: .3rem; padding: .8rem 1.2rem; border-radius: 1.4rem; background: linear-gradient(160deg, #fff, #dfe4ff); color: #1a1a4a; box-shadow: 0 .8rem 2rem rgba(0,0,0,.4); width: min(30rem, 100%); }
-.cls-img { width: 100%; height: 13rem; object-fit: contain; } .cls-card h2 { font-size: 2rem; text-align: center; }
+.cls-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: .8rem; width: 100%; }
+.cls-left, .cls-right { min-width: 0; display: flex; flex-direction: column; gap: .7rem; justify-content: center; }
+.cls-card { display: flex; flex-direction: column; align-items: center; gap: .3rem; padding: .8rem 1.2rem; border-radius: 1.4rem; background: linear-gradient(160deg, #fff, #dfe4ff); color: #1a1a4a; box-shadow: 0 .8rem 2rem rgba(0,0,0,.4); width: 100%; }
+.cls-img { width: 100%; height: clamp(10rem, 28vh, 20rem); object-fit: contain; }
+@container (min-width: 46rem) {
+  .cls-grid { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 1.4rem; align-items: center; }
+  .cls-img { height: clamp(14rem, 42vh, 30rem); }
+}
+.classify .bucket { min-height: 4.2rem; padding: .45rem .4rem; }
+/* menys espai perdut a dalt (perquè la pregunta i les respostes càpiguen a la pantalla) */
+.rounds .who-banner.slim, .hotseat > .who-banner, .classify .who-banner { margin-bottom: .4rem; }
+.rounds .scorebar, .hotseat .scorebar, .classify .scorebar { margin-bottom: .4rem; }
+.speed-stat { margin-bottom: .3rem; }
+@media (max-height: 760px) { .rounds .who-banner.slim { padding: .25rem .8rem .25rem .4rem; } .rounds .who-banner .avatar { width: 2.2rem; height: 2.2rem; } } .cls-card h2 { font-size: 2rem; text-align: center; }
 .cls-buckets { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .6rem; width: 100%; }
 .bucket { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .25rem; padding: .7rem .5rem; min-height: 5rem; text-align: center; border-radius: 1rem; border: .17rem solid var(--fc); background: color-mix(in srgb, var(--fc) 22%, #15153f); transition: .15s; }
 .bucket:hover:not(:disabled) { transform: translateY(-.2rem); background: color-mix(in srgb, var(--fc) 38%, #15153f); }
@@ -466,32 +480,66 @@ img.missing { visibility: hidden; }
 .mcard .face { overflow: hidden; }
 .mcard .front.pic img { position: absolute; inset: .25rem; width: calc(100% - .5rem); height: calc(100% - .5rem); max-width: none; max-height: none; object-fit: contain; }
 
-/* Preguntes (Escala i altres modes de 4 opcions) */
-.q-imgbox { width: min(24rem, 90%); height: 14rem; background: #fff; border-radius: 1.2rem; display: grid; place-items: center; overflow: hidden; box-shadow: 0 .6rem 1.6rem rgba(0,0,0,.4); }
-.q-imgbox img { width: 100%; height: 100%; object-fit: contain; } .q-imgbox.draw img { padding: .4rem; }
+/* Preguntes (Escala i altres modes de 4 opcions).
+   Disseny en dues zones segons l'ample DISPONIBLE (container query, així també va bé dins l'Escala amb la columna de premis):
+   - ample (>= 46rem): foto/esquema/text a l'ESQUERRA (gran) i les 4 opcions a la DRETA, una sota l'altra.
+   - estret (mòbil, tauleta vertical): la foto a dalt i les opcions a sota.
+   La caixa de la foto no té una forma fixa: es fa tan alta com cal i la foto s'hi veu sencera (object-fit: contain), tant si és vertical com apaïsada. */
+.qv { max-width: 80rem; container-type: inline-size; }
+.qv-grid { display: grid; gap: .8rem; grid-template-columns: minmax(0, 1fr); }
+.qv-left, .qv-right { min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+.qv-left .q-big { margin: .2rem 0 .4rem; }
+.qv-right .q-hint { margin-top: .6rem; }
+.q-imgbox { position: relative; width: 100%; height: clamp(11rem, 36vh, 24rem); background: #fff; border-radius: 1.2rem; overflow: hidden; box-shadow: 0 .6rem 1.6rem rgba(0,0,0,.4); }
+.q-imgbox img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; } .q-imgbox.draw img { padding: .4rem; }
 .q-text { font-size: clamp(1.8rem, 4.5vw, 3rem); } .q-text.def { font-size: clamp(1.2rem, 3vw, 1.9rem); color: var(--text); font-weight: 800; max-width: 40rem; }
-.opt .olabel { font-size: 1.25rem; }
-.q-opts.imgs .opt { justify-content: center; padding: .5rem; } .opt-img { width: 100%; height: 7.5rem; object-fit: contain; background: #fff; border-radius: .8rem; }
+.opt .olabel { font-size: 1.25rem; min-width: 0; overflow-wrap: anywhere; }
+.q-opts.imgs .opt { justify-content: center; padding: .4rem; position: relative; }
+.q-opts.imgs .opt .letter { position: absolute; top: .35rem; left: .35rem; z-index: 1; box-shadow: 0 0 0 .15rem rgba(255,255,255,.85); }
+.opt-img { width: 100%; height: clamp(6rem, 15vh, 11rem); object-fit: contain; background: #fff; border-radius: .8rem; }
 .sum-img { height: 3.2rem; width: auto; vertical-align: middle; background: #fff; border-radius: .4rem; }
-@media (max-width: 40rem) { .q-imgbox { height: 10rem; } .opt-img { height: 5rem; } .opt .olabel { font-size: 1.05rem; } }
+@container (min-width: 30rem) { .q-opts { grid-template-columns: 1fr 1fr; } }
+@container (max-width: 29.99rem) { .q-opts { grid-template-columns: 1fr; } .opt .olabel { font-size: 1.1rem; } .q-opts.imgs { grid-template-columns: 1fr 1fr; gap: .5rem; } }
+@container (min-width: 46rem) {
+  .qv { text-align: left; }
+  .qv-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 1.4rem; align-items: stretch; }
+  .qv-left { text-align: center; }
+  .q-opts { grid-template-columns: minmax(0, 1fr); gap: .7rem; }
+  .qv-right .opt { min-height: 4.8rem; }
+  .q-imgbox { height: 100%; min-height: clamp(16rem, 48vh, 34rem); }
+  /* opcions amb fotos: pregunta curta a l'esquerra i les 4 fotos en quadrícula 2x2 a la dreta */
+  .qv.imgopts .qv-grid { grid-template-columns: minmax(0, .8fr) minmax(0, 1.5fr); }
+  .qv.imgopts .q-opts { grid-template-columns: 1fr 1fr; gap: .8rem; }
+  .qv.imgopts .opt-img { height: clamp(7rem, calc((100vh - 26rem) / 2), 17rem); }
+  .qv.imgopts .q-imgbox { min-height: 0; }
+}
+@media (max-height: 40rem) { .qv-right .opt { min-height: 3.6rem !important; } }
+.speed-area .qv-right .opt { min-height: 4rem; font-size: 1.3rem; }
 
 /* Uneix */
 .matchgame { max-width: 56rem; margin: 0 auto; display: flex; flex-direction: column; gap: .7rem; }
 .mt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; } .mt-col { display: flex; flex-direction: column; gap: .6rem; }
-.mt { display: flex; align-items: center; justify-content: center; gap: .4rem; min-height: 5.2rem; padding: .4rem .6rem; border-radius: 1rem; background: var(--card2); border: .17rem solid var(--line); font-weight: 800; font-size: 1.2rem; text-align: center; transition: .15s; }
+.mt { display: flex; align-items: center; justify-content: center; gap: .4rem; min-height: 6.4rem; padding: .4rem .6rem; border-radius: 1rem; background: var(--card2); border: .17rem solid var(--line); font-weight: 800; font-size: 1.2rem; text-align: center; transition: .15s; }
 .mt:hover:not(.done) { border-color: #fff; transform: translateY(-.1rem); }
 .mt.sel { border-color: var(--gold); background: rgba(255,210,63,.22); box-shadow: 0 0 1rem rgba(255,210,63,.4); }
 .mt.done { border-color: var(--pc); background: color-mix(in srgb, var(--pc) 30%, #15153f); opacity: .75; cursor: default; }
 .mt.wrong { border-color: var(--bad); background: rgba(255,107,107,.3); animation: shake .35s; }
-.mt-img { height: 4.6rem; max-width: 100%; object-fit: contain; background: #fff; border-radius: .6rem; }
+.mt-img { height: 5.6rem; max-width: 100%; object-fit: contain; background: #fff; border-radius: .6rem; }
 /* Quina eina és? */
-.hotseat { max-width: 44rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: .7rem; text-align: center; }
-.hs-stage { width: min(26rem, 100%); height: 17rem; border-radius: 1.2rem; background: #fff; overflow: hidden; display: grid; place-items: center; box-shadow: 0 .8rem 2rem rgba(0,0,0,.45); }
-.hs-img { width: 100%; height: 100%; object-fit: contain; transition: filter .6s; }
+.hotseat { max-width: 80rem; margin: 0 auto; display: flex; flex-direction: column; align-items: stretch; gap: .7rem; text-align: center; container-type: inline-size; }
+.hotseat > .who-banner, .hotseat > .scorebar { align-self: center; }
+.hs-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: .8rem; }
+.hs-left, .hs-right { min-width: 0; display: flex; flex-direction: column; gap: .6rem; justify-content: center; align-items: center; }
+.hs-stage { position: relative; width: 100%; height: clamp(12rem, 34vh, 24rem); border-radius: 1.2rem; background: #fff; overflow: hidden; box-shadow: 0 .8rem 2rem rgba(0,0,0,.45); }
+.hs-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: filter .6s; }
+@container (min-width: 46rem) {
+  .hs-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 1.4rem; align-items: center; }
+  .hs-left { align-self: stretch; } .hs-left .hs-stage { flex: 1; min-height: clamp(16rem, 46vh, 32rem); height: auto; }
+}
 .hs-dots { display: flex; gap: .5rem; } .hs-dot { padding: .2rem .7rem; border-radius: 99rem; border: .12rem solid var(--line); font-weight: 800; font-size: .9rem; color: var(--text2); }
 .hs-dot.on { border-color: var(--gold); color: #2b1a00; background: var(--gold); } .hs-dot.past { opacity: .35; text-decoration: line-through; }
 .hs-info { min-height: 2.2rem; } .hs-answer { font-size: 1.5rem; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; justify-content: center; }
-@media (max-width: 40rem) { .mt-grid { gap: .5rem; } .mt { font-size: 1rem; min-height: 4.4rem; } .hs-stage { height: 13rem; } }
+@media (max-width: 40rem) { .mt-grid { gap: .5rem; } .mt { font-size: 1rem; min-height: 4.4rem; } }
 
 .credits { margin-top: .8rem; padding-top: .6rem; border-top: 1px solid var(--line); font-size: .85rem; } .credits p { margin: .25rem 0; } .credits a { color: var(--sky); }
 
@@ -509,7 +557,7 @@ img.missing { visibility: hidden; }
   </div>
 </header>
 <main id="app" tabindex="-1"><noscript><p style="padding:2rem;text-align:center">Eines del taller necessita JavaScript. Activa'l al navegador.</p></noscript></main>
-<footer id="foot">© 2026 Robert Potau Nuñez · Tots els drets reservats · <a href="https://robertpotau.github.io/termes.html" target="_blank" rel="noopener">Termes d'ús</a> · Icones: <a href="https://openmoji.org" target="_blank" rel="noopener">OpenMoji</a> (CC BY-SA 4.0) · <span id="ver">v1.1.0 — 2026-11-01</span></footer>
+<footer id="foot">© 2026 Robert Potau Nuñez · Tots els drets reservats · <a href="https://robertpotau.github.io/termes.html" target="_blank" rel="noopener">Termes d'ús</a> · Icones: <a href="https://openmoji.org" target="_blank" rel="noopener">OpenMoji</a> (CC BY-SA 4.0) · <span id="ver">v1.2.0 — 2026-11-05</span></footer>
 <div id="toasts" aria-live="polite"></div>
 <div id="sr-live" class="sr" aria-live="polite"></div>
 <canvas id="fx" aria-hidden="true"></canvas>
@@ -1685,8 +1733,8 @@ const ICONS = {"1F31F":"<svg viewBox=\"0 0 72 72\"><g><polygon fill=\"#FCEA2B\" 
    (c) 2026 Robert Potau Nuñez. Tots els drets reservats. Motor derivat de l'obra pròpia Adjectivia.
    ============================================================ */
 'use strict';
-const VERSION = '1.1.0';
-const BUILD_DATE = '2026-11-01';          // la posa tools/build.py
+const VERSION = '1.2.0';
+const BUILD_DATE = '2026-11-05';          // la posa tools/build.py
 
 /* ---------- tiny DOM helpers ---------- */
 const $ = (s, r = document) => r.querySelector(s);
@@ -2052,19 +2100,17 @@ function makeQuestion(ctx) {
 /* ---------- vista de la pregunta ---------- */
 /** onPick(i) quan s'escull una opció (clic o tecla A-D / 1-4). Retorna ajudes per marcar el resultat. */
 function qView(q, onPick) {
-  const wrap = h('div', { class: 'qv t-' + q.type });
-  wrap.append(h('div', { class: 'q-lead' }, q.lead));
-  const bigBox = h('div', { class: 'q-big' }, q.big);
-  if (ttsReady() && q.speakText && q.type !== 'nom-foto' && q.type !== 'nom-fam' && q.type !== 'def-fam') { /* no es llegeix el nom si és la resposta */ }
-  wrap.append(bigBox);
+  /* Dues zones: a l'esquerra la pregunta (foto/esquema/text gran) i a la dreta les 4 opcions.
+     Si l'espai és estret (mòbil, tauleta vertical) es posen una sobre l'altra: vegeu «.qv-grid» a style-eines.css. */
   const hasImg = q.options.some(o => o.img);
+  const wrap = h('div', { class: 'qv t-' + q.type + (hasImg ? ' imgopts' : '') });
+  const left = h('div', { class: 'qv-left' }, h('div', { class: 'q-lead' }, q.lead), h('div', { class: 'q-big' }, q.big));
   const opts = h('div', { class: 'q-opts' + (hasImg ? ' imgs' : '') });
   const btns = q.options.map((o, i) => h('button', { class: 'opt c' + i, 'data-i': i, onclick: () => { if (!btns[i].disabled) onPick(i); } },
     h('span', { class: 'letter' }, LETTERS[i]), o.img ? pic(o.img, o.alt || '', 'opt-img') : h('span', { class: 'olabel' }, o.label)));
   btns.forEach(b => opts.append(b));
-  wrap.append(opts);
   const hint = h('div', { class: 'q-hint' });
-  wrap.append(hint);
+  wrap.append(h('div', { class: 'qv-grid' }, left, h('div', { class: 'qv-right' }, opts, hint)));
   const keyFn = e => {
     const k = e.key.toLowerCase();
     let i = ['a', 'b', 'c', 'd'].indexOf(k); if (i < 0) i = ['1', '2', '3', '4'].indexOf(k);
@@ -2766,15 +2812,17 @@ function startClassifica(cfg, pids) {
       if (pids.length > 1) wrap.append(h('div', { class: 'cls-turn', style: '--pc:' + PCOLORS[pid] }, avatar(pid, 'sm'), h('b', null, ' Torn de ' + pname(pid))));
       wrap.append(h('div', { class: 'muted cls-count' }, 'Eina ' + Math.min(done + 1, total) + ' de ' + total));
       wrap.append(h('div', { class: 'fc-prog' }, h('i', { style: 'width:' + (100 * done / total) + '%' })));
-      wrap.append(h('div', { class: 'cls-card' }, pic(photoOf(t, true), t.nom, 'cls-img'), h('h2', null, t.nom)));
-      if (cfg.timer) { cd = countdown(cfg.timer, () => answer(null), { tick: true }); wrap.append(cd.el); }
+      const left = h('div', { class: 'cls-left' }, h('div', { class: 'cls-card' }, pic(photoOf(t, true), t.nom, 'cls-img'), h('h2', null, t.nom)));
+      const right = h('div', { class: 'cls-right' });
+      if (cfg.timer) { cd = countdown(cfg.timer, () => answer(null), { tick: true }); right.append(cd.el); }
       const grid = h('div', { class: 'cls-buckets' });
       fams.forEach((f, i) => {
         const b = h('button', { class: 'bucket', style: '--fc:' + f.color, onclick: () => answer(f.id) },
           h('span', { class: 'bk-key' }, i === 9 ? '0' : String(i + 1)), famDot(f), h('b', null, f.nom), hint ? h('small', null, f.def) : null);
         bucketEls[f.id] = b; grid.append(b);
       });
-      wrap.append(grid, fb);
+      right.append(grid, fb);
+      wrap.append(h('div', { class: 'cls-grid' }, left, right));
       wrap.append(h('div', { class: 'actions' }, h('button', { class: 'btn small', onclick: () => showHub() }, '← Surt')));
       Keys.on(e => {
         if (e.key === 'Enter' || e.key === ' ') { const nb = $('#cls-next'); if (nb) { nb.click(); return true; } return false; }
@@ -3491,7 +3539,9 @@ function startHotSeat(cfg, pids) {
       const banner = h('div', { class: 'who-banner slim', style: '--pc:' + PCOLORS[pid] }, avatar(pid, 'md'),
         h('div', null, h('b', null, pname(pid)), h('small', null, 'Eina ' + (i + 1) + ' de ' + total)));
       Keys.on(e => { const nb = $('#hs-next'); if (nb && (e.key === 'Enter' || e.key === ' ')) { nb.click(); return true; } return false; });
-      return h('div', { class: 'hotseat' }, bar, banner, h('div', { class: 'q-lead' }, 'Quina eina és?'), stage, dots, info, btns);
+      return h('div', { class: 'hotseat' }, bar, banner, h('div', { class: 'hs-grid' },
+        h('div', { class: 'hs-left' }, h('div', { class: 'q-lead' }, 'Quina eina és?'), stage),
+        h('div', { class: 'hs-right' }, dots, info, btns)));
     }, 'Quina eina és?');
     bar.update(G.scores, pid);
     paint();
