@@ -543,6 +543,18 @@ img.missing { visibility: hidden; }
 
 .credits { margin-top: .8rem; padding-top: .6rem; border-top: 1px solid var(--line); font-size: .85rem; } .credits p { margin: .25rem 0; } .credits a { color: var(--sky); }
 
+/* Portada: tot cap a la pantalla sense scroll, a qualsevol mida (mides limitades també per l'alçada, en vh) */
+#app:has(> .splash) { display: flex; flex-direction: column; }
+.splash { flex: 1; justify-content: center; padding-top: 0; gap: min(.9rem, 1.8vh); }
+.splash .owl .ico { width: min(9rem, 22vh); height: min(9rem, 22vh); }
+.splash h1 { font-size: clamp(1.8rem, min(9vw, 12vh), 6.5rem); line-height: 1.05; max-width: 100%; }
+.splash .tagline { font-size: clamp(1rem, min(1.6rem, 3.4vh), 1.6rem); }
+.splash-faces { flex-wrap: wrap; justify-content: center; margin: 0; }
+.splash-faces { gap: .4rem; } .splash-faces .ico { width: min(3rem, 7.5vh, 11vw); height: min(3rem, 7.5vh, 11vw); }
+.splash .btn.huge { font-size: clamp(1.2rem, min(2rem, 5vh), 2rem); padding: min(1rem, 2vh) min(3rem, 8vw); }
+.splash .muted { font-size: clamp(.8rem, min(1rem, 2.6vh), 1rem); }
+@media (max-height: 460px) { .splash .owl { display: none; } #topbar { padding-top: .2rem; padding-bottom: .2rem; } #foot { padding: .2rem 1rem .4rem; } }
+
 </style>
 </head>
 <body>
@@ -557,7 +569,7 @@ img.missing { visibility: hidden; }
   </div>
 </header>
 <main id="app" tabindex="-1"><noscript><p style="padding:2rem;text-align:center">Eines del taller necessita JavaScript. Activa'l al navegador.</p></noscript></main>
-<footer id="foot">© 2026 Robert Potau Nuñez · Tots els drets reservats · <a href="https://robertpotau.github.io/termes.html" target="_blank" rel="noopener">Termes d'ús</a> · Icones: <a href="https://openmoji.org" target="_blank" rel="noopener">OpenMoji</a> (CC BY-SA 4.0) · <span id="ver">v1.2.0 — 2026-11-05</span></footer>
+<footer id="foot">© 2026 Robert Potau Nuñez · Tots els drets reservats · <a href="https://robertpotau.github.io/termes.html" target="_blank" rel="noopener">Termes d'ús</a> · Icones: <a href="https://openmoji.org" target="_blank" rel="noopener">OpenMoji</a> (CC BY-SA 4.0) · <span id="ver">v1.2.1 — 2026-11-05</span></footer>
 <div id="toasts" aria-live="polite"></div>
 <div id="sr-live" class="sr" aria-live="polite"></div>
 <canvas id="fx" aria-hidden="true"></canvas>
@@ -1733,7 +1745,7 @@ const ICONS = {"1F31F":"<svg viewBox=\"0 0 72 72\"><g><polygon fill=\"#FCEA2B\" 
    (c) 2026 Robert Potau Nuñez. Tots els drets reservats. Motor derivat de l'obra pròpia Adjectivia.
    ============================================================ */
 'use strict';
-const VERSION = '1.2.0';
+const VERSION = '1.2.1';
 const BUILD_DATE = '2026-11-05';          // la posa tools/build.py
 
 /* ---------- tiny DOM helpers ---------- */
