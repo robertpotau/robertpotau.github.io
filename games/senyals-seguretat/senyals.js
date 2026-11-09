@@ -1,9 +1,9 @@
 /* © 2026 Robert Potau Nuñez — Tots els drets reservats. Catàleg i renderitzador dels senyals de «Detectiu de Senyals».
    Els pictogrames (PICTOS) deriven d'ISO 7010 via Wikimedia Commons (domini públic/CC0); vegeu PICTOGRAMES.md i LICENSE. */
-const SENYALS_VERSION = "1.0.0";
+const SENYALS_VERSION = "1.1.0";
 const COLORS = { vermell:"#C8102E", groc:"#F9C80E", blau:"#005387", verd:"#237F52", blanc:"#FFFFFF", negre:"#1A1A1A" };
 const TIPUS = {
-  prohibicio: { nom:"Senyal de prohibició", emoji:"🚫", forma:"rodona", shape:"circle", fons:"blanc", picto:"negre", vorell:"vermell", banda:true,
+  prohibicio: { nom:"Senyal de prohibició", emoji:"🚫", forma:"circular", shape:"circle", fons:"blanc", picto:"negre", vorell:"vermell", banda:true,
     color:"vermell", significat:"Senyal de prohibició", indicacio:"Comportament perillós", contrast:"blanc",
     frase:"Assenyalen accions prohibides que poden comportar un perill per a la persona si es duen a terme." },
   incendis: { nom:"Senyal d'equips de lluita contra incendis", emoji:"🧯", forma:"rectangular o quadrada", shape:"rect", fons:"vermell", picto:"blanc", vorell:null, banda:false,
@@ -12,7 +12,7 @@ const TIPUS = {
   advertencia: { nom:"Senyal d'advertència", emoji:"⚠️", forma:"triangular", shape:"triangle", fons:"groc", picto:"negre", vorell:"negre", banda:false,
     color:"groc", significat:"Senyal d'advertència", indicacio:"Atenció, precaució, verificació", contrast:"negre",
     frase:"Ens alerten d'un risc per a les persones. Aquest risc no es pot evitar mitjançant prohibicions. Hem d'anar amb compte." },
-  obligacio: { nom:"Senyal d'obligació", emoji:"🔵", forma:"rodona", shape:"circle", fons:"blau", picto:"blanc", vorell:null, banda:false,
+  obligacio: { nom:"Senyal d'obligació", emoji:"🔵", forma:"circular", shape:"circle", fons:"blau", picto:"blanc", vorell:null, banda:false,
     color:"blau", significat:"Senyal d'obligació", indicacio:"Comportament o acció específica. Obligació", contrast:"blanc",
     frase:"Ens indiquen quins elements o eines de protecció són obligatòries per evitar els perills." },
   salvament: { nom:"Senyal de salvament o socors", emoji:"🟢", forma:"rectangular o quadrada", shape:"rect", fons:"verd", picto:"blanc", vorell:null, banda:false,
@@ -102,9 +102,21 @@ function renderSignal(o) {
   let pic = "";
   const P = o.picto && !o.hidePicto && PICTOS[o.picto];
   if (P) pic = `<svg x="${box[0]}" y="${box[1]}" width="${box[2]}" height="${box[3]}" viewBox="${P.bb.join(" ")}" preserveAspectRatio="xMidYMid meet" style="color:${ink};--hole:${fill}">${P.body.replace(/id="([^"]+)"/g, `id="${uid}$1"`).replace(/url\(#([^)]+)\)/g, `url(#${uid}$1)`)}</svg>`;
-  const band = o.band ? `<line x1="21" y1="21" x2="79" y2="79" stroke="${bord || c("vermell")}" stroke-width="9"/>` : "";
+  /* Banda transversal adaptada a cada forma: circular = diagonal entre els dos punts del vorell; rectangular = diagonal de cantonada a cantonada;
+     triangular = diagonal pel centre que s'escurça fins a tocar els costats (es retalla amb la mateixa forma). */
+  let band = "", defs = "";
+  if (o.band) {
+    const bc = bord || (fill === c("vermell") ? c("blanc") : c("vermell"));
+    if (o.shape === "triangle") {
+      defs = `<defs><clipPath id="${uid}k"><path d="M50 6L95 90H5Z"/></clipPath></defs>`;
+      band = `<g clip-path="url(#${uid}k)"><line x1="14" y1="26" x2="86" y2="98" stroke="${bc}" stroke-width="8"/></g>`;
+    } else if (o.shape === "rect") {
+      defs = `<defs><clipPath id="${uid}k"><rect x="2" y="2" width="96" height="96" rx="6"/></clipPath></defs>`;
+      band = `<g clip-path="url(#${uid}k)"><line x1="-4" y1="-4" x2="104" y2="104" stroke="${bc}" stroke-width="11"/></g>`;
+    } else band = `<line x1="21" y1="21" x2="79" y2="79" stroke="${bc}" stroke-width="9"/>`;
+  }
   const sz = o.size ? ` width="${o.size}" height="${o.size}"` : "";
-  return `<svg class="sig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"${sz} role="img" aria-label="${o.title || ""}">${base}${pic}${band}</svg>`;
+  return `<svg class="sig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"${sz} role="img" aria-label="${o.title || ""}">${defs}${base}${pic}${band}</svg>`;
 }
 /* Senyal del catàleg en: 'color' (oficial), 'bn' (blanc i negre: tot en negre sobre blanc) o 'sil' (només el pictograma, en negre). */
 function signalHTML(id, mode, size) {
@@ -114,3 +126,14 @@ function signalHTML(id, mode, size) {
   if (mode === "sil") return renderSignal({shape:"rect", fill:"blanc", border:null, picto:s.iso, ink:"negre", size, title:"Silueta"}).replace(/<rect[^>]*\/>/, "");
   return renderSignal({shape:t.shape, fill:t.fons, border:t.vorell, band:t.banda, ink:t.picto, picto:s.iso, size, title:s.nom});
 }
+/* Icones per als tipus: 'rep' = senyal representatiu del tipus (amb pictograma); 'blank' = la plantilla buida (forma, fons, vorell i banda); 'bn' = plantilla en blanc i negre. */
+const TIPUS_REP = {prohibicio:"pro-fumar", incendis:"inc-extintor", advertencia:"adv-electric", obligacio:"obl-cap", salvament:"soc-sortida"};
+function tipusHTML(k, mode, size) {
+  const t = TIPUS[k];
+  if (mode === "rep") return signalHTML(TIPUS_REP[k], "color", size);
+  const o = {shape:t.shape, fill:t.fons, border:t.vorell, band:t.banda, ink:t.picto, size, title:t.nom};
+  if (mode === "bn") return renderSignal(Object.assign(o, {fill:"blanc", border:"negre", ink:"negre"})).replace(/stroke="#C8102E"/g, 'stroke="#1A1A1A"');
+  return renderSignal(o);
+}
+/* Silueta neutra d'una forma (circle|triangle|rect) per a icones de resposta. */
+function shapeHTML(shape, size) { return renderSignal({shape, fill:"#cbd5e1", border:null, size, title:shape}); }

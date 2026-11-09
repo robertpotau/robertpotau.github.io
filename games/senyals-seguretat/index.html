@@ -18,17 +18,27 @@
 <meta name="author" content="Robert Potau Nuñez">
 <meta name="copyright" content="© 2026 Robert Potau Nuñez. Tots els drets reservats.">
 <meta name="robots" content="noai, noimageai">
-<meta name="description" content="Detectiu de Senyals: joc per aprendre els senyals de seguretat (colors, formes i pictogrames) a Tecnologia de 1r d'ESO.">
-<title>Detectiu de Senyals</title>
+<meta name="description" content="Joc gratuït per aprendre els senyals de seguretat del taller i l'obra: colors, formes i pictogrames. Catàleg, flashcards i 8 modes de joc, també contrarellotge (1r ESO).">
+<title>Detectiu de Senyals — joc de senyals de seguretat online gratuït (1r ESO)</title>
+<link rel="canonical" href="https://robertpotau.github.io/games/senyals-seguretat/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Detectiu de Senyals — joc de senyals de seguretat online gratuït (1r ESO)">
+<meta property="og:description" content="Aprèn els senyals de seguretat del taller i l'obra: estudia amb catàleg i flashcards i practica amb 8 modes de joc.">
+<meta property="og:image" content="https://robertpotau.github.io/screenshots/senyals-seguretat.jpg">
+<meta property="og:url" content="https://robertpotau.github.io/games/senyals-seguretat/index.html">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#302b63">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Senyals">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Detectiu de Senyals","inLanguage":"ca","educationalLevel":"1r ESO",
- "learningResourceType":"Joc educatiu","about":"Senyals de seguretat",
- "copyrightHolder":{"@type":"Person","name":"Robert Potau Nuñez"},"copyrightYear":2026}
+{"@context":"https://schema.org","@type":["WebApplication","LearningResource"],"name":"Detectiu de Senyals",
+"url":"https://robertpotau.github.io/games/senyals-seguretat/index.html","description":"Joc gratuït per aprendre els senyals de seguretat del taller i l'obra: colors, formes i pictogrames.",
+"image":"https://robertpotau.github.io/screenshots/senyals-seguretat.jpg","inLanguage":"ca","applicationCategory":"EducationalApplication",
+"learningResourceType":"Game","educationalUse":"practice","educationalLevel":"ESO (lower secondary)","teaches":"Senyals de seguretat: color, forma, pictograma i significat",
+"audience":{"@type":"EducationalAudience","educationalRole":"student"},"isAccessibleForFree":true,
+"author":{"@type":"Person","name":"Robert Potau","url":"https://robertpotau.github.io/"},"copyrightHolder":{"@type":"Person","name":"Robert Potau Nuñez"},"copyrightYear":2026}
 </script>
 <style>
 @font-face{font-family:'Nunito';font-style:normal;font-weight:400 900;font-display:swap;src:url('fonts/nunito-400.woff2') format('woff2');}
@@ -95,8 +105,9 @@ h1,h2,h3{font-weight:900;letter-spacing:-.5px;}
 @keyframes splash-pop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
 @keyframes splash-load{to{width:100%}}
 .splash-decos{position:absolute;inset:0;opacity:.3;pointer-events:none;}
-.deco{position:absolute;width:clamp(46px,12vw,72px);animation:deco-float 4.5s ease-in-out infinite;}
+.deco{position:absolute;width:56px;animation:deco-float 4.5s ease-in-out infinite;}
 .deco svg{width:100%;height:auto;display:block;}
+.deco.pic{background:#fff;border-radius:12px;padding:5px;box-shadow:0 4px 12px rgba(0,0,0,.3);}
 @keyframes deco-float{0%,100%{transform:translateY(0) rotate(0) scale(1);opacity:.55}50%{transform:translateY(-28px) rotate(6deg) scale(1.08);opacity:1}}
 /* Perfils */
 .profiles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:14px 0;}
@@ -134,7 +145,6 @@ input[type=text]:focus{outline:none;border-color:var(--accent);}
 .xp-bg{height:8px;background:rgba(255,255,255,.14);border-radius:99px;margin-top:5px;overflow:hidden;}
 .xp-fill{height:100%;background:linear-gradient(90deg,#f7c948,#f59e0b);border-radius:99px;transition:width .5s;}
 .xp-lbl{font-size:.7rem;color:var(--text2);margin-top:2px;}
-.mode-list{display:flex;flex-direction:column;gap:10px;}
 .rich-card{position:relative;background:rgba(255,255,255,.05);border:2px solid var(--card-border);border-radius:16px;padding:12px 14px;cursor:pointer;text-align:left;display:flex;align-items:center;gap:14px;overflow:hidden;width:100%;
   transition:transform .2s cubic-bezier(.34,1.56,.64,1),border-color .2s,background .2s;}
 .rich-card:hover{transform:translateY(-2px);border-color:var(--card-color,var(--accent));background:rgba(255,255,255,.08);}
@@ -237,12 +247,6 @@ input[type=text]:focus{outline:none;border-color:var(--accent);}
 .picto-grid{display:grid!important;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;}
 .pbtn{background:#fff;color:#222;border:3px solid transparent;border-radius:12px;padding:4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.6rem;font-weight:800;line-height:1.1;min-height:84px;}
 .pbtn svg{width:100%;max-width:64px;height:auto;}.pbtn.on{border-color:#f59e0b;background:#fff7d6;}
-.mem-grid{display:grid;gap:8px;}
-.mcard{position:relative;aspect-ratio:1/1.05;border-radius:12px;border:2px solid var(--card-border);background:linear-gradient(135deg,var(--bg2),var(--accent));cursor:pointer;padding:3px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.mcard .mf{display:none;width:100%;}.mcard .mb{font-size:1.6rem;}
-.mcard.up{background:#fff;color:#1a1a2e;}.mcard.up .mf{display:flex;justify-content:center;}.mcard.up .mb{display:none;}
-.mcard.gone{opacity:.45;background:#e8ffe8;border-color:#22c55e;}
-.mcard svg.sig{width:100%;height:auto;}.mname{font-size:clamp(.55rem,2.6vw,.72rem);font-weight:900;line-height:1.1;text-align:center;}
 .ins-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px;}
 .zone{background:var(--card);border:2px solid var(--card-border);border-radius:16px;padding:10px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:132px;}
 .zone.active{border-color:var(--gold);}.zone.filled{border-color:#22c55e;background:rgba(34,197,94,.12);}.zone.flag{border-color:#f59e0b;background:rgba(245,158,11,.18);}
@@ -252,7 +256,190 @@ input[type=text]:focus{outline:none;border-color:var(--accent);}
 .bank{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;}
 .bsig{background:transparent;border:2px solid var(--card-border);border-radius:12px;padding:4px;cursor:pointer;color:var(--text);font-size:.62rem;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:3px;}
 .bsig.on{border-color:var(--gold);background:rgba(247,201,72,.2);}.bsig svg{width:100%;height:auto;}
-@media (min-width:700px){.mode-list{display:grid;grid-template-columns:1fr 1fr}.screen{max-width:640px}}
+/* ═══ v1.1.0 — disposició responsive (mòbil → escriptori), configuració en horitzontal, Estudia, Repte ═══ */
+.wide{max-width:560px;}
+.muted{color:var(--text2);font-size:.85rem;}
+.btn.small{width:auto;min-height:40px;padding:8px 16px;margin:0;font-size:.9rem;}
+/* Pictogrames dins de les targetes dels menús */
+.rich-card{flex-wrap:wrap;}
+.rich-pics,.pic-strip{display:flex;gap:6px;align-items:center;flex-shrink:0;}
+.rich-pics{width:100%;padding-left:60px;margin-top:-4px;}
+.pic-strip{margin-top:8px;}
+.rich-pics svg,.pic-strip svg{width:30px;height:30px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.35));}
+.menu-strip{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:2px 0 12px;}
+.menu-strip svg{width:clamp(30px,5vw,46px);height:auto;filter:drop-shadow(0 3px 6px rgba(0,0,0,.4));animation:deco-float 5s ease-in-out infinite;}
+.group-title{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1rem;margin:18px 0 8px;letter-spacing:.5px;}
+.group-title::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--gc,var(--accent)),transparent);border-radius:2px;}
+.group-title .gp{display:flex;gap:4px;}.group-title .gp svg{width:24px;height:24px;}
+.mode-list{display:grid;grid-template-columns:1fr;gap:10px;}
+/* Configuració: dificultat i tipus de prova en horitzontal; l'opció triada es veu clarament */
+.cfg-desc{color:var(--text2);font-size:.92rem;margin-bottom:2px;}
+.cfg-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+.cfg-grid .rich-card{margin:0;}
+.rich-card.sel{border-color:var(--card-color,var(--accent));background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.08));box-shadow:0 0 0 3px var(--card-color,var(--accent)),0 8px 24px rgba(0,0,0,.4);transform:translateY(-2px);}
+.cfg-grid .rich-card:not(.sel){opacity:.62;filter:saturate(.7);}
+.cfg-grid .rich-card:not(.sel):hover{opacity:1;filter:none;}
+.sel-badge{position:absolute;top:8px;right:8px;background:var(--card-color,var(--accent));color:#10101e;font-weight:900;font-size:.72rem;padding:3px 10px;border-radius:99px;box-shadow:0 2px 8px rgba(0,0,0,.35);}
+.rich-card.sel .rich-title{color:#fff;}
+.cfg-grid.mini .rich-card{padding:10px 12px;}
+.cfg-grid.mini .rich-icon{width:38px;height:38px;font-size:1.2rem;}
+.cfg-play{margin-top:16px;}
+@media (min-width:900px) and (max-height:820px){
+  .cfg .card{padding:12px 16px;}.cfg .section-title{margin:10px 0 6px;}.cfg .rich-card{padding:8px 12px;}
+  .cfg .rich-pics svg{width:24px;height:24px;}.cfg .rich-example{margin-top:4px;padding:3px 8px;}.cfg .cfg-play{margin-top:10px;min-height:44px;}
+}
+/* Partida de preguntes: pregunta a l'esquerra, respostes a la dreta (a pantalla ampla) */
+.g-layout{display:block;}
+.q-vis .zemo{font-size:clamp(3rem,16vw,5.5rem);line-height:1.1;}
+.q-tag{display:inline-block;font-size:.7rem;font-weight:900;background:rgba(255,255,255,.14);border-radius:99px;padding:2px 10px;margin-bottom:6px;color:var(--text2);}
+.q-card .q-text{display:block;}
+.s-time{font-weight:900;font-size:1.05rem;color:#fcd34d;background:rgba(0,0,0,.25);border-radius:99px;padding:2px 14px;}
+.s-time.low{color:#fff;background:var(--err);animation:pop .5s ease infinite;}
+.ans.ico{flex-direction:row;justify-content:flex-start;text-align:left;gap:12px;}
+.ans.ico .aic{flex:0 0 46px;width:46px;display:flex;}.ans.ico .aic svg{width:46px;height:46px;}
+.ans .aname{font-size:.78rem;line-height:1.2;}
+.ans .combo{display:flex;gap:4px;justify-content:center;width:100%;}.ans .combo .paper{padding:3px;flex:1;max-width:80px;}
+.ans.vis .paper{background:#fff;border-radius:12px;padding:5px;width:100%;max-width:130px;}
+.paper svg.sig{display:block;width:100%;height:auto;}
+.feedback{font-size:.9rem;}
+/* Construeix / Inspector / Memòria */
+.cons-layout,.ins-layout{display:block;}
+.chip-shape{width:22px;height:22px;display:inline-flex;}.chip-shape svg{width:22px;height:22px;}
+.fixsig{display:inline-block;margin-top:6px;width:120px;}
+.explain{background:rgba(56,189,248,.12);border:2px solid rgba(56,189,248,.45);border-radius:16px;padding:12px 14px;margin:10px 0;font-size:.9rem;line-height:1.45;}
+.explain h3{font-size:1.05rem;margin-bottom:6px;}
+.explain ol{padding-left:20px;margin:6px 0;}.explain li{margin:3px 0;}
+.ex-row{display:flex;gap:10px;margin:8px 0 4px;}
+.ex-zone{flex:1;border:2px solid var(--card-border);border-radius:12px;padding:6px;text-align:center;font-size:.74rem;font-weight:800;background:rgba(0,0,0,.2);}
+.ex-zone.ok{border-color:#22c55e;background:rgba(34,197,94,.16);}.ex-zone.bad{border-color:#ef4444;background:rgba(239,68,68,.16);}
+.ex-e{font-size:1.4rem;line-height:1;}.ex-s{width:48px;margin:4px auto;}.ex-s svg{width:100%;height:auto;}
+.ex-note{font-size:.8rem;color:var(--text2);}
+.zbadge{font-size:.68rem;font-weight:800;background:rgba(255,255,255,.12);border-radius:99px;padding:2px 8px;}
+.zbadge.flag{background:#f59e0b;color:#1a1a2e;}.zbadge.ok{background:rgba(34,197,94,.35);}.zbadge.no{background:rgba(239,68,68,.45);}
+.zfix{font-size:.7rem;text-align:center;color:#fde68a;line-height:1.2;}
+.side-hint{text-align:center;color:var(--text2);font-weight:800;}
+.mem-top{padding:8px 12px;margin-bottom:8px;}.mem-top .q-text{font-size:clamp(.95rem,3.4vw,1.1rem);}
+.mem-grid{display:grid;gap:8px;}
+.mcard{aspect-ratio:auto;perspective:700px;background:none;border:none;padding:0;container-type:size;overflow:visible;cursor:pointer;min-height:0;min-width:0;}
+.mcard .mi{position:relative;display:block;width:100%;height:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,.2,.2,1);}
+.mcard.up .mi{transform:rotateY(180deg);}
+.mcard .mf,.mcard .mb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:14px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:2px solid var(--card-border);overflow:hidden;}
+.mcard .mb{background:linear-gradient(135deg,var(--bg2),var(--accent));font-size:clamp(1.4rem,38cqmin,3.4rem);box-shadow:0 4px 12px rgba(0,0,0,.3);}
+.mcard .mf{background:#fff;color:#1a1a2e;transform:rotateY(180deg);padding:6%;}
+.mcard .mf svg.sig{width:100%;height:100%;}
+.mcard .mname{font-size:clamp(.7rem,13cqmin,1.5rem);line-height:1.15;font-weight:900;text-align:center;}
+.mcard:hover:not(.up):not(.gone) .mi{transform:translateY(-4px) rotate(-1.5deg);}
+.mcard.tap .mi{animation:mtap .45s ease;}
+@keyframes mtap{0%{transform:rotateY(0) scale(1)}40%{transform:rotateY(90deg) scale(1.12)}100%{transform:rotateY(180deg) scale(1)}}
+.mcard.gone .mf{background:#e8ffe8;border-color:#22c55e;}.mcard.gone{opacity:1;}
+.mcard.match .mi{animation:mmatch .7s ease;}
+@keyframes mmatch{0%{transform:rotateY(180deg) scale(1)}35%{transform:rotateY(180deg) scale(1.18)}70%{transform:rotateY(180deg) scale(.96)}100%{transform:rotateY(180deg) scale(1)}}
+.mcard.match .mf{box-shadow:0 0 0 4px #22c55e,0 0 24px rgba(34,197,94,.8);}
+.mcard.nope .mi{animation:mnope .6s ease;}
+.mcard.nope .mf{box-shadow:0 0 0 4px #ef4444;}
+@keyframes mnope{0%,100%{transform:rotateY(180deg) translateX(0)}20%{transform:rotateY(180deg) translateX(-9px) rotate(-3deg)}40%{transform:rotateY(180deg) translateX(9px) rotate(3deg)}60%{transform:rotateY(180deg) translateX(-6px)}80%{transform:rotateY(180deg) translateX(6px)}}
+/* Estudia: catàleg i flashcards */
+.est-head h2{font-size:1.3rem;margin:6px 0 8px;}
+.est-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px;}
+.est-tools input{flex:1;min-width:160px;max-width:380px;}
+.est-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
+.est-chips .chip.on{border-color:var(--tc,var(--gold));background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.07));box-shadow:0 0 0 2px var(--tc,var(--gold));}
+.chip-sig{display:inline-flex;width:26px;height:26px;flex:0 0 26px;}.chip-sig svg{width:26px;height:26px;}.chip-sig.big{width:56px;height:56px;flex-basis:56px;}.chip-sig.big svg{width:56px;height:56px;}
+.est-banner{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--card-border);border-left:6px solid var(--tc);border-radius:14px;padding:10px 14px;margin-bottom:12px;font-size:.88rem;}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
+.tcard{background:var(--card);border:2px solid var(--card-border);border-top:5px solid var(--tc);border-radius:14px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;color:var(--text);text-align:center;transition:transform .15s,border-color .15s;}
+.tcard:hover{transform:translateY(-3px);border-color:var(--tc);}
+.tcard .paper{background:#fff;border-radius:12px;padding:6px;width:min(100%,92px);}
+.tcard b{font-size:.78rem;line-height:1.2;}.tcard small{font-size:.68rem;color:var(--text2);}
+.sheet{display:grid;grid-template-columns:1fr;gap:14px;}
+.sheet-vis{text-align:center;}.paper.big{background:#fff;border-radius:18px;padding:12px;width:min(70vw,230px);margin:0 auto 10px;}
+.sheet-views{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;}
+.sheet-info h3{text-align:left;font-size:1.25rem;margin-bottom:6px;border-left:6px solid var(--tc);padding-left:10px;}
+.sheet-tipus{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.sheet-frase{font-size:.9rem;margin-bottom:8px;color:var(--text2);}
+.sheet-row{display:flex;flex-direction:column;font-size:.85rem;margin:6px 0;}.sheet-row b{color:var(--gold);font-size:.78rem;}
+.sheet-actions{display:flex;gap:10px;margin-top:14px;}.sheet-actions .btn{margin:0;}.sheet-actions .btn.yellow{flex:3;}.sheet-actions .btn.ghost{flex:1;}
+.modal.wide-modal{max-width:720px;}
+.fl-actions{display:flex;gap:8px;align-items:center;margin:8px 0;}
+.est-nav{margin-top:14px;}
+.flash{max-width:760px;margin:0 auto;text-align:center;}
+.fc-prog{height:8px;background:rgba(255,255,255,.14);border-radius:99px;margin:6px 0 12px;overflow:hidden;}.fc-prog i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--accent));transition:width .4s;}
+.fcard{perspective:1000px;height:clamp(300px,52vh,430px);cursor:pointer;margin-bottom:12px;}
+.fc-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.2,.2,1);}
+.fcard.flipped .fc-in{transform:rotateY(180deg);}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;border:3px solid var(--tc);background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.05));backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.35);}
+.fc-face.back{transform:rotateY(180deg);}
+.fc-face .paper.big{width:min(52vw,min(210px,34vh));margin:0;}
+.fc-face small{color:var(--text2);font-size:.78rem;}.fc-def{max-width:520px;}
+.fc-word{font-size:clamp(1.15rem,3.4vw,1.6rem);font-weight:900;line-height:1.2;}.fc-word.big{font-size:clamp(1.6rem,5vw,2.6rem);}
+.fc-tipus{display:flex;align-items:center;gap:8px;}.fc-how{font-size:.82rem;background:rgba(0,0,0,.28);border-radius:10px;padding:6px 10px;max-width:520px;}
+.fc-btns{display:flex;gap:12px;}.fc-btns .btn{margin:0;}
+.fl-end{max-width:560px;margin:20px auto;text-align:center;}.fl-end h2{margin-bottom:8px;}.fl-end p{margin-bottom:12px;color:var(--text2);}
+.fl-again{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:14px;}.paper.mini{background:#fff;border-radius:10px;padding:4px;width:56px;}
+/* ═══ Pantalles amples (ordinadors, pissarres, mòbils en horitzontal) ═══ */
+@media (min-width:700px){
+  .screen{max-width:760px;}
+  .screen.wide{max-width:1280px;}
+  .cfg-grid.three{grid-template-columns:repeat(3,1fr);}.cfg-grid.two{grid-template-columns:repeat(2,1fr);}.cfg-grid.six{grid-template-columns:repeat(6,1fr);}
+  .rich-card{flex-wrap:nowrap;}.rich-pics{width:auto;padding-left:0;margin-top:0;}
+  .cfg-grid .rich-card{align-items:flex-start;flex-wrap:wrap;}.cfg-grid .rich-pics{width:100%;padding-left:60px;margin-top:0;}
+  .mode-list{grid-template-columns:1fr 1fr;}
+  .sheet{grid-template-columns:240px 1fr;}
+  .modal.wide-modal{padding:26px;}
+}
+@media (min-width:1050px){
+  .mode-list{grid-template-columns:repeat(3,1fr);}
+  .cat-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));}
+}
+@media (min-width:1500px){.mode-list{grid-template-columns:repeat(4,1fr);}}
+@media (min-width:900px) and (orientation:landscape){
+  .screen.wide{padding-top:10px;padding-bottom:16px;}
+  .screen.wide .game-top{margin-bottom:0;}.screen.wide .back-btn{margin-bottom:4px;}
+  .screen.wide .game-mode{margin-bottom:4px;}
+  /* partida de preguntes */
+  #scrGame .g-layout{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:20px;align-items:stretch;}
+  #scrGame .g-left .q-card{height:100%;margin-bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;}
+  #scrGame .g-right{display:flex;flex-direction:column;justify-content:center;min-width:0;}
+  #scrGame .q-vis svg.sig{width:auto;height:min(40vh,300px);max-width:100%;}
+  #scrGame .q-vis .sw-big{width:min(30vh,170px);}
+  #scrGame .q-vis .paper svg.sig{height:min(36vh,260px);}
+  #scrGame .q-vis .paper{display:inline-block;}
+  #scrGame .q-vis .zemo{font-size:min(20vh,6.5rem);}
+  #scrGame .q-text{font-size:clamp(1.15rem,2vw,1.55rem);}
+  #scrGame .answers{margin-bottom:10px;gap:10px;}
+  #scrGame .ans{min-height:58px;font-size:1.02rem;}
+  #scrGame.imgopts .ans.vis{padding:8px;}
+  #scrGame.imgopts .ans.vis .paper{width:auto;max-width:none;display:flex;justify-content:center;}
+  #scrGame.imgopts .ans.vis svg.sig{width:auto;max-width:100%;height:clamp(60px,calc((100vh - 420px) / 2),150px);}
+  #scrGame.imgopts .ans .combo .paper{width:auto;flex:1;}
+  #scrGame.imgopts .ans .combo svg.sig{height:clamp(50px,calc((100vh - 420px) / 2),110px);width:100%;}
+  #scrGame .feedback{margin-bottom:8px;padding:8px 12px;font-size:.9rem;}
+  #scrGame .btn{min-height:46px;margin-bottom:4px;}
+  /* Construeix: model a l'esquerra, característiques a la dreta */
+  .cons-layout{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);grid-template-areas:"left right" "actions right";grid-template-rows:auto 1fr;gap:12px 20px;align-items:start;}
+  .cons-left{grid-area:left;}.cons-right{grid-area:right;}.cons-actions{grid-area:actions;}
+  .cons-left .q-card{margin-bottom:0;}
+  .cons-left .q-vis svg.sig{width:auto;height:min(34vh,260px);}
+  .cons-panel{margin-top:0;padding:10px 14px;}.cons-row{margin-bottom:8px;}
+  .chip{min-height:38px;padding:5px 11px;}
+  .picto-grid{grid-template-columns:repeat(6,1fr);}.pbtn{min-height:66px;}.pbtn svg{max-width:46px;}
+  /* Inspector */
+  .ins-layout{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);grid-template-areas:"info main" "info side";grid-template-rows:auto 1fr;gap:12px 20px;align-items:start;}
+  .ins-info{grid-area:info;}.ins-main{grid-area:main;}.ins-side{grid-area:side;}
+  .ins-grid{grid-template-columns:repeat(3,1fr);margin-top:0;}
+  .zone{min-height:150px;}
+  .ins-title{padding:10px;margin-bottom:0;}
+  .explain{margin:8px 0;font-size:.85rem;padding:10px 12px;}
+  .side-card{margin-bottom:0;}
+  .bank{grid-template-columns:repeat(auto-fill,minmax(90px,1fr));}
+  /* Estudia */
+  .est-banner{margin-bottom:10px;}
+}
+@media (max-height:700px) and (min-width:900px){
+  .ins-grid .zone{min-height:128px;}.zsig{width:46px;}
+}
+@media (max-width:420px){.rich-pics{padding-left:0;}.cfg-grid.six{grid-template-columns:repeat(2,1fr);}}
+@media (min-width:421px) and (max-width:699px){.cfg-grid.six{grid-template-columns:repeat(3,1fr);}}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -300,15 +487,15 @@ input[type=text]:focus{outline:none;border-color:var(--accent);}
 </div>
 
 <!-- MENÚ -->
-<div id="scrMenu" class="screen">
+<div id="scrMenu" class="screen wide">
   <div class="logo"><h1>🔍 <span class="gr">Detectiu de Senyals</span></h1></div>
+  <div class="menu-strip" id="menuStrip"></div>
   <div class="profile-bar">
     <div class="av" id="mAv">🧒</div>
     <div class="info"><div class="nm" id="mNom">—</div><div class="rg" id="mRang">—</div>
       <div class="xp-bg"><div class="xp-fill" id="mXp" style="width:0%"></div></div><div class="xp-lbl" id="mXpLbl"></div></div>
   </div>
-  <div class="section-title">Jugar</div>
-  <div class="mode-list" id="modeList"></div>
+  <div id="modeGroups"></div>
   <div class="section-title">Perfil</div>
   <div class="btn-grid">
     <button class="btn blue" onclick="showScreen('scrTrophies')">🏆 Trofeus</button>
@@ -320,27 +507,37 @@ input[type=text]:focus{outline:none;border-color:var(--accent);}
 </div>
 
 <!-- CONFIGURACIÓ DE MODE -->
-<div id="scrConfig" class="screen">
+<div id="scrConfig" class="screen wide cfg">
   <button class="back-btn" onclick="showScreen('scrMenu')">← Menú</button>
   <div class="card"><h2 id="cfgTitle"></h2><div id="cfgBody"></div></div>
 </div>
 
 <!-- PARTIDA (compartida pels modes de preguntes) -->
-<div id="scrGame" class="screen">
+<div id="scrGame" class="screen wide">
   <div class="game-top"><button class="back-btn" id="gExit" onclick="gameExit(this)">✕</button><div class="game-mode" id="gMode"></div></div>
-  <div class="score-bar"><span class="s-ok">✅ <b id="gOk">0</b></span><span id="gProg" class="s-prog">1 / 10</span><span class="s-err">❌ <b id="gErr">0</b></span></div>
+  <div class="score-bar"><span class="s-ok">✅ <b id="gOk">0</b></span><span id="gProg" class="s-prog">1 / 10</span><span id="gTime" class="s-time" style="display:none"></span><span class="s-err">❌ <b id="gErr">0</b></span></div>
   <div class="progress-bar"><div class="progress-fill" id="gBar" style="width:0%"></div></div>
-  <div class="q-card"><div class="q-vis" id="qVis"></div><div class="q-text" id="qText"></div></div>
-  <div class="answers" id="qAns"></div>
-  <div class="feedback" id="qFb" style="display:none"></div>
-  <button class="btn yellow" id="qNext" style="display:none" onclick="gameNext()">Següent →</button>
+  <div class="g-layout">
+    <div class="g-left"><div class="q-card"><div class="q-vis" id="qVis"></div><div class="q-text" id="qText"></div></div></div>
+    <div class="g-right">
+      <div class="answers" id="qAns"></div>
+      <div class="feedback" id="qFb" style="display:none"></div>
+      <button class="btn yellow" id="qNext" style="display:none" onclick="gameNext()">Següent →</button>
+    </div>
+  </div>
 </div>
 
 <!-- PARTIDA DELS MODES AMB PANTALLA PRÒPIA (Construeix, Memòria, Inspector) -->
-<div id="scrPlay" class="screen">
+<div id="scrPlay" class="screen wide">
   <div class="game-top"><button class="back-btn" onclick="gameExit(this)">✕</button><div class="game-mode" id="pMode"></div></div>
   <div class="score-bar"><span class="s-ok">✅ <b id="pOk">0</b></span><span id="pProg" class="s-prog"></span><span class="s-err">❌ <b id="pErr">0</b></span></div>
   <div id="playBody"></div>
+</div>
+
+<!-- ESTUDIA: catàleg i flashcards -->
+<div id="scrEstudia" class="screen wide">
+  <button class="back-btn" onclick="showScreen('scrMenu')">← Menú</button>
+  <div id="estBody"></div>
 </div>
 
 <!-- RESULTATS -->
@@ -381,6 +578,7 @@ input[type=text]:focus{outline:none;border-color:var(--accent);}
 </div>
 
 <!-- MODALS -->
+<div class="modal-bg" id="mdSig" onclick="if(event.target===this)closeModal('mdSig')"><div class="modal wide-modal" id="sigSheet"></div></div>
 <div class="modal-bg" id="mdPal" onclick="if(event.target===this)closeModal('mdPal')"><div class="modal"><h3>🎨 Tria els colors del joc</h3><div class="pal-grid" id="palGrid"></div><button class="btn ghost" style="margin-top:16px" onclick="closeModal('mdPal')">Tancar</button></div></div>
 <div class="modal-bg" id="mdSet" onclick="if(event.target===this)closeModal('mdSet')"><div class="modal"><h3>⚙️ Configuració</h3>
   <button class="btn ghost" id="btnSound" onclick="toggleSound()">🔊 So: activat</button>
@@ -391,7 +589,7 @@ input[type=text]:focus{outline:none;border-color:var(--accent);}
   <div class="credits-row"><div class="credits-icon">🤖</div><div class="credits-info"><strong>Claude Code · Anthropic</strong><span>Programació i implementació tècnica</span></div></div>
   <div class="credits-small">
     <strong>© 2026 Robert Potau Nuñez</strong> · Tots els drets reservats · <a href="https://robertpotau.github.io/termes.html" target="_blank" rel="noopener">Termes d'ús</a><br>
-    <span id="verLine" style="cursor:default;user-select:none">v1.0.0 — 2026-11-08</span><br><br>
+    <span id="verLine" style="cursor:default;user-select:none">v1.1.0 — 2026-11-09</span><br><br>
     Material de tercers (no cobert per la reserva de drets): pictogrames de senyalització ISO 7010 via Wikimedia Commons (domini públic / CC0; autors com MaxxL, Maxxl2, ISO i Clemenspool), tipografia Nunito (SIL OFL 1.1). Continguts basats en el Reial decret 485/1997 i el Full monogràfic 25 de l'Institut de Seguretat i Salut Laboral (Generalitat de Catalunya).
     Joc educatiu: per a la senyalització real, consulteu la normativa vigent.
   </div>
@@ -404,7 +602,7 @@ input[type=text]:focus{outline:none;border-color:var(--accent);}
 if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(()=>{});
 
 /* ═══════ CONSTANTS ═══════ */
-const VERSION = 'v1.0.0', VERSION_DATE = '2026-11-08';
+const VERSION = 'v1.1.0', VERSION_DATE = '2026-11-09';
 const KEY_PROF = 'senyals.profiles', KEY_ACT = 'senyals.active', KEY_SET = 'senyals.settings';
 const MAX_SLOTS = 6;
 const AVATARS = {
@@ -427,14 +625,18 @@ const RANGS = [ // de més alt a més baix
   {xp:0,icon:'🌱',noms:{M:'Aprenent',F:'Aprenenta',N:'Aprenent/a'}}
 ];
 const MODES = [
-  {id:'colors',icon:'🎨',color:'#ef4444',nom:'Colors i significat',desc:'Color de seguretat, significat i color de contrast.',ex:'Vermell → <strong>prohibició</strong>'},
-  {id:'forma',icon:'🔷',color:'#f59e0b',nom:'Forma i característiques',desc:'Forma, fons, vorell, banda transversal i pictograma.',ex:'Triangle groc → <strong>advertència</strong>'},
-  {id:'construeix',icon:'🛠️',color:'#22c55e',nom:'Construeix el senyal',desc:'Munta el senyal triant forma, fons, vorell i pictograma.',ex:'Obligació: rodona, <strong>blava</strong>, pictograma blanc'},
-  {id:'siluetes',icon:'⚫',color:'#94a3b8',nom:'Siluetes (blanc i negre)',desc:'Endevina el senyal sense color i després pinta\'l.',ex:'⚡ → <strong>Risc elèctric</strong>'},
-  {id:'memoria',icon:'🧠',color:'#a78bfa',nom:'Memòria',desc:'Parelles: senyal i nom, senyal i tipus.',ex:'🃏 ↔ <strong>Extintor</strong>'},
-  {id:'inspector',icon:'🔍',color:'#38bdf8',nom:'Inspector del taller',desc:'Col·loca cada senyal al lloc del taller o de l\'obra que toca.',ex:'Quadre elèctric → <strong>Risc elèctric</strong>'},
-  {id:'epi',icon:'🛡️',color:'#f472b6',nom:'Perill → EPI',desc:'Quin senyal d\'obligació et protegeix d\'aquest perill?',ex:'Càrregues en suspensió → <strong>cap</strong>'}
+  {id:'catalog',group:'estudia',icon:'📚',color:'#4cc9f0',nom:'Catàleg',desc:'Tots els senyals per tipus: color, blanc i negre i pictograma, amb la seva fitxa.',ex:'Toca un senyal → <strong>la seva fitxa</strong>',pics:['pro-fumar','adv-electric','obl-cap','soc-sortida']},
+  {id:'flash',group:'estudia',icon:'📖',color:'#38bdf8',nom:'Flashcards',desc:'Targetes per estudiar. Els senyals que falles tornen més sovint.',ex:'Senyal → <strong>nom i tipus</strong>',pics:['obl-vista','inc-manega','adv-laser','soc-llitera']},
+  {id:'colors',group:'practica',icon:'🎨',color:'#ef4444',nom:'Colors i significat',desc:'Color de seguretat, significat i color de contrast.',ex:'Vermell → <strong>prohibició</strong>',pics:['pro-foc','adv-inflamables','obl-general','soc-primers-auxilis']},
+  {id:'forma',group:'practica',icon:'🔷',color:'#f59e0b',nom:'Forma i característiques',desc:'Forma, fons, vorell, banda transversal i pictograma.',ex:'Triangle groc → <strong>advertència</strong>',pics:['adv-carregues','obl-peus','pro-vehicles','inc-escala']},
+  {id:'construeix',group:'practica',icon:'🛠️',color:'#22c55e',nom:'Construeix el senyal',desc:'Munta el senyal triant forma, fons, vorell i pictograma.',ex:'Obligació: circular, <strong>blava</strong>, pictograma blanc',pics:['obl-mans','adv-caiguda','pro-no-toqueu','soc-telefon']},
+  {id:'siluetes',group:'practica',icon:'⚫',color:'#94a3b8',nom:'Siluetes (blanc i negre)',desc:'Endevina el senyal sense color i després pinta\'l.',ex:'⚡ → <strong>Risc elèctric</strong>',pics:['adv-radioactives','obl-oida','pro-mobil','inc-telefon']},
+  {id:'memoria',group:'practica',icon:'🧠',color:'#a78bfa',nom:'Memòria',desc:'Parelles: senyal i nom, senyal i tipus.',ex:'🃏 ↔ <strong>Extintor</strong>',pics:['adv-biologic','obl-cos','pro-aigua-foc','soc-dutxa']},
+  {id:'inspector',group:'practica',icon:'🔍',color:'#38bdf8',nom:'Inspector del taller',desc:'Col·loca cada senyal al lloc del taller o de l\'obra que toca.',ex:'Quadre elèctric → <strong>Risc elèctric</strong>',pics:['adv-vehicles','obl-caigudes','pro-entrada','soc-rentada-ulls']},
+  {id:'epi',group:'practica',icon:'🛡️',color:'#f472b6',nom:'Perill → EPI',desc:'Quin senyal d\'obligació et protegeix d\'aquest perill?',ex:'Càrregues en suspensió → <strong>cap</strong>',pics:['adv-corrosives','obl-respiratories','adv-explosives','obl-cara']},
+  {id:'repte',group:'repte',icon:'⏱️',color:'#ffd23f',nom:'Repte contrarellotge',desc:'Barreja de totes les preguntes. Tria el temps total i respon-ne tantes com puguis!',ex:'3 minuts → <strong>quantes en encertes?</strong>',pics:['adv-temp-baixa','obl-vianants','pro-ascensor','soc-sortida']}
 ];
+const MENU_GROUPS = [{id:'estudia',ic:'📚',nom:'Estudia',color:'#4cc9f0',pics:['obl-vista','adv-electric']},{id:'practica',ic:'🎯',nom:'Practica',color:'#3ddc97',pics:['obl-cap','pro-fumar']},{id:'repte',ic:'🏆',nom:'Competeix contra el temps',color:'#ffd23f',pics:['inc-extintor','adv-perill-general']}];
 const MODES_READY = {}; // s'activaran a la Fase 3+
 const TROFEUS = [
   {id:'ull-perill',ic:'🔴',nom:'Ull de perill',desc:'20 encerts en senyals de prohibició',cond:p=>tk(p,'prohibicio')>=20},
@@ -449,11 +651,13 @@ const TROFEUS = [
   {id:'inspector-or',ic:'🔍',nom:'Inspector/a d\'or',desc:'Inspector amb 100%',cond:p=>!!p.flags.inspector100},
   {id:'cap-a-peus',ic:'🪖',nom:'De cap a peus',desc:'10 Perill→EPI seguits',cond:p=>(p.flags.epiRatxa||0)>=10},
   {id:'ratxa-10',ic:'🔥',nom:'Ratxa de 10',desc:'10 encerts seguits',cond:p=>(p.ratxaMax||0)>=10},
-  {id:'constancia',ic:'📅',nom:'Constància',desc:'Jugar 5 dies diferents',cond:p=>(p.dies||[]).length>=5}
+  {id:'constancia',ic:'📅',nom:'Constància',desc:'Jugar 5 dies diferents',cond:p=>(p.dies||[]).length>=5},
+  {id:'rata-biblioteca',ic:'📚',nom:'Rata de biblioteca',desc:'Mira 30 senyals diferents al Catàleg o a les Flashcards',cond:p=>((p.estudi||{}).vistos||[]).length>=30},
+  {id:'contrarellotge',ic:'⏱️',nom:'Més ràpid que el temps',desc:'20 encerts en un sol Repte contrarellotge',cond:p=>(p.flags.repteMillor||0)>=20}
 ];
 const FRASES = ['Vermell, groc, blau o verd? Ho tens clar? 🚦','Un bon detectiu no es deixa enganyar per la forma! 🔍',
   'Casc, ulleres i guants: tot a punt? 🪖','Els senyals parlen, tu només has de saber escoltar! ⚠️',
-  'Abans de tocar res al taller... mira el senyal! 🛠️','Rodó, triangle o rectangle? Aquesta és la qüestió! 🔷'];
+  'Abans de tocar res al taller... mira el senyal! 🛠️','Circular, triangle o rectangle? Aquesta és la qüestió! 🔷'];
 const PALETTES = [{id:'cosmic',nom:'Còsmic',c:'#a78bfa'},{id:'sunset',nom:'Posta',c:'#fb923c'},{id:'forest',nom:'Bosc',c:'#4ade80'},{id:'ocean',nom:'Oceà',c:'#38bdf8'},{id:'candy',nom:'Caramel',c:'#f472b6'}];
 
 /* ═══════ UTILITATS ═══════ */
@@ -475,7 +679,7 @@ function beep(f, d = .12, type = 'sine', v = .08, delay = 0) {
     o.connect(g); g.connect(AC.destination); o.start(AC.currentTime + delay); o.stop(AC.currentTime + delay + d + .02);
   } catch (e) {}
 }
-const sfx = {ok:()=>{beep(660,.1);beep(880,.14,'sine',.08,.09)}, err:()=>beep(180,.28,'sawtooth',.06), trophy:()=>{[523,659,784,1047].forEach((f,i)=>beep(f,.16,'triangle',.08,i*.1))}, click:()=>beep(440,.05,'square',.03)};
+const sfx = {ok:()=>{beep(660,.1);beep(880,.14,'sine',.08,.09)}, err:()=>beep(180,.28,'sawtooth',.06), trophy:()=>{[523,659,784,1047].forEach((f,i)=>beep(f,.16,'triangle',.08,i*.1))}, click:()=>beep(440,.05,'square',.03), flip:()=>{beep(520,.05,'triangle',.07);beep(760,.07,'triangle',.06,.05)}};
 
 /* ═══════ NAVEGACIÓ ═══════ */
 function showScreen(id) {
@@ -609,9 +813,9 @@ function checkTrophies() {
 }
 
 /* ═══════ MENÚ ═══════ */
-function richCard(color, icon, title, desc, example, onClick, extra) {
+function richCard(color, icon, title, desc, example, onClick, extra, pics) {
   const d = document.createElement('div'); d.className = 'rich-card'; d.style.setProperty('--card-color', color); d.setAttribute('role', 'button'); d.tabIndex = 0;
-  d.innerHTML = `<div class="rich-icon">${icon}</div><div class="rich-content"><div class="rich-title">${title}${extra || ''}</div><div class="rich-desc">${desc}</div>${example ? `<div class="rich-example"><strong>Ex:</strong> ${example}</div>` : ''}</div>`;
+  d.innerHTML = `<div class="rich-icon">${icon}</div><div class="rich-content"><div class="rich-title">${title}${extra || ''}</div><div class="rich-desc">${desc}</div>${example ? `<div class="rich-example"><strong>Ex:</strong> ${example}</div>` : ''}</div>${pics ? `<div class="rich-pics">${pics}</div>` : ''}`;
   d.addEventListener('click', onClick); d.addEventListener('keydown', e => { if (e.key === 'Enter') onClick(); }); return d;
 }
 function renderMenu() {
@@ -620,8 +824,14 @@ function renderMenu() {
   $('mAv').textContent = avatarOf(player); $('mNom').textContent = player.nom;
   $('mRang').textContent = `${r.icon} ${rangNom(r, player.genere)}`;
   $('mXp').style.width = getXpPct(player.xp) + '%'; $('mXpLbl').textContent = n ? `${player.xp} XP · ${n.xp - player.xp} XP per al següent rang` : `${player.xp} XP · rang màxim!`;
-  const L = $('modeList'); L.innerHTML = '';
-  MODES.forEach(m => L.appendChild(richCard(m.color, m.icon, m.nom, m.desc, m.ex, () => startMode(m.id), MODES_READY[m.id] ? '' : '<span class="soon">aviat</span>')));
+  $('menuStrip').innerHTML = ['pro-fumar','adv-electric','obl-cap','soc-sortida','inc-extintor','adv-radioactives','obl-vista','pro-no-toqueu'].map((id, i) => `<span style="animation-delay:${i * .35}s">${signalHTML(id, 'color')}</span>`).join('');
+  const GH = $('modeGroups'); GH.innerHTML = '';
+  MENU_GROUPS.forEach(g => {
+    GH.insertAdjacentHTML('beforeend', `<div class="group-title" style="--gc:${g.color}">${g.ic} ${g.nom}<span class="gp">${g.pics.map(i => signalHTML(i, 'color')).join('')}</span></div>`);
+    const L = document.createElement('div'); L.className = 'mode-list';
+    MODES.filter(m => m.group === g.id).forEach(m => L.appendChild(richCard(m.color, m.icon, m.nom, m.desc, m.ex, () => startMode(m.id), MODES_READY[m.id] ? '' : '<span class="soon">aviat</span>', m.pics.map(i => signalHTML(i, 'color')).join(''))));
+    GH.appendChild(L);
+  });
 }
 function startMode(id) {
   sfx.click();
@@ -681,10 +891,17 @@ $('profTitle').addEventListener('click', secretClick); $('verLine').addEventList
 /* ═══════ SPLASH (4,1 s · barra 3,4 s · fade 0,48 s: estàndard fix) ═══════ */
 function initSplash() {
   $('splashPhrase').textContent = FRASES[Math.floor(Math.random() * FRASES.length)];
-  const ids = ['adv-electric','pro-fumar','obl-cap','soc-sortida','inc-extintor','adv-radioactives','obl-vista','pro-no-toqueu'];
-  const pos = [{top:'9%',left:'7%',delay:'0s'},{top:'16%',right:'9%',delay:'.5s'},{bottom:'24%',left:'11%',delay:'1s'},{top:'34%',right:'18%',delay:'1.5s'},
-    {bottom:'14%',right:'8%',delay:'.8s'},{top:'48%',left:'4%',delay:'1.2s'},{bottom:'36%',right:'30%',delay:'.3s'},{top:'7%',left:'38%',delay:'1.7s'}];
-  ids.forEach((id, i) => { const d = document.createElement('div'); d.className = 'deco'; Object.assign(d.style, pos[i]); d.style.animationDelay = pos[i].delay; d.innerHTML = signalHTML(id, 'color'); $('splashDecos').appendChild(d); });
+  /* 24 senyals i pictogrames repartits per tota la pantalla (abans eren 8); al voltant del títol queda lliure en horitzontal */
+  const ids = SENYALS.map(s => s.id).sort(() => Math.random() - .5), land = innerWidth >= innerHeight, cols = land ? 8 : 4, rows = land ? 4 : 6, cells = [];
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) { if (land && c >= 2 && c <= 5 && (r === 1 || r === 2)) continue; cells.push([r, c]); }
+  cells.sort(() => Math.random() - .5);
+  cells.slice(0, 24).forEach(([r, c], i) => {
+    const d = document.createElement('div'); d.className = 'deco' + (i % 3 === 0 ? ' pic' : '');
+    const w = (40 + Math.random() * 26) * Math.min(1.8, Math.max(1, innerWidth / 1000)); d.style.width = w.toFixed(0) + 'px';
+    d.style.left = ((c + .1 + Math.random() * .55) / cols * 100) + '%'; d.style.top = ((r + .1 + Math.random() * .55) / rows * 100) + '%';
+    d.style.animationDelay = (Math.random() * 3).toFixed(2) + 's'; d.style.animationDuration = (3.8 + Math.random() * 2.2).toFixed(2) + 's';
+    d.innerHTML = signalHTML(ids[i], i % 3 === 0 ? 'sil' : 'color'); $('splashDecos').appendChild(d);
+  });
   setTimeout(() => { const sp = $('scrSplash'); sp.classList.add('fadeout');
     setTimeout(() => { sp.classList.remove('active', 'fadeout'); sp.style.display = 'none'; showScreen('scrProfiles'); }, 480); }, 4100);
 }
@@ -696,5 +913,6 @@ initSplash();
 </script>
 <script src="game.js"></script>
 <script src="modes2.js"></script>
+<script src="estudia.js"></script>
 </body>
 </html>
