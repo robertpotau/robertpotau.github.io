@@ -31,6 +31,7 @@ games = [
     ("Vistes", "Projeccions geomètriques: alçat, planta, perfil.", "ESO 3r-4t / Batxillerat"),
     ("What time is it", "Telling the time in English.", "Primària 2n-4t"),
     ("Al Mercat!", "Mates amb euros: monedes, bitllets i preus per quilo.", "1r ESO / Acollida"),
+    ("Detectiu de Senyals", "Senyals de seguretat: colors, formes i pictogrames. Catàleg, flashcards i 8 modes.", "ESO 1r"),
 ]
 
 doc = SimpleDocTemplate(
