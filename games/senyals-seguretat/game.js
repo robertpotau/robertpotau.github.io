@@ -100,11 +100,11 @@ function openConfig(mode) {
   }
   sec("Dificultat");
   mkGroup(grid("three"), DIFFS, d => G.diff === d.id, d => { G.diff = d.id; },
-    (d, on) => richCard(d.color, d.icon, d.nom, d.desc, MODE_EX[mode][d.id - 1], on, ` <span class="soon">×${d.mult} XP</span>`, picStrip(PICS_DIFF[d.id])));
+    (d, on) => richCard(d.color, d.icon, d.nom, d.desc, MODE_EX[mode][d.id - 1], on, ` <span class="soon">×${d.mult} XP</span>`));
   if (mode !== "colors") {
     sec("Quins senyals?");
     mkGroup(grid("three"), FILTERS, f => G.filter === f.id, f => { G.filter = f.id; },
-      (f, on) => richCard(f.color, f.icon, f.nom, f.desc, f.ex, on, "", picStrip(PICS_FILTER[f.id])));
+      (f, on) => richCard(f.color, f.icon, f.nom, f.desc, f.ex, on, ""));
   }
   const b = document.createElement("button"); b.className = "btn yellow cfg-play"; b.textContent = mode === "repte" ? "Comença el compte enrere! ⏱️" : "Jugar! 🚀"; b.onclick = startGame; body.appendChild(b);
   showScreen("scrConfig");
