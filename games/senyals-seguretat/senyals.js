@@ -83,6 +83,9 @@ const PICTOS = {"E001":{"bb":[21.73,8.74,71.35,92.2],"body":" <defs id=\"E001def
 
 /* Caixa (en un lienç 100x100) on s'ajusta el pictograma segons la forma. */
 const PICTO_BOX = { triangle:[30,38,40,40], circle:[16,16,68,68], ring:[22,22,56,56], rect:[10,10,80,80] };
+/* Correcció òptica (en unitats del lienç 100x100) per als pictogrames que dins del triangle semblen desplaçats: [dx, dy]. Només s'aplica a la forma triangular.
+   W008 (caiguda a diferent nivell): la figura pesa a dalt a la dreta i la cornisa és una línia fina a baix a l'esquerra; es baixa i s'esquerra una mica. */
+const PICTO_ADJ = { W008:[-2.5,3.5] };
 let _sigUid = 0;
 /* renderSignal(opts) -> text SVG. Cada part és opcional i independent (el mode «Construeix» les tria una a una).
    opts: {shape:'circle'|'triangle'|'rect', fill, border (color del vorell o null), band (bool), picto (codi ISO, p.ex. 'W012'),
@@ -101,7 +104,8 @@ function renderSignal(o) {
   } else base = `<rect x="2" y="2" width="96" height="96" rx="6" fill="${fill}"${bord ? ` stroke="${bord}" stroke-width="3"` : ""}/>`;
   let pic = "";
   const P = o.picto && !o.hidePicto && PICTOS[o.picto];
-  if (P) pic = `<svg x="${box[0]}" y="${box[1]}" width="${box[2]}" height="${box[3]}" viewBox="${P.bb.join(" ")}" preserveAspectRatio="xMidYMid meet" style="color:${ink};--hole:${fill}">${P.body.replace(/id="([^"]+)"/g, `id="${uid}$1"`).replace(/url\(#([^)]+)\)/g, `url(#${uid}$1)`)}</svg>`;
+  const adj = (P && o.shape === "triangle" && PICTO_ADJ[o.picto]) || [0, 0];
+  if (P) pic = `<svg x="${box[0] + adj[0]}" y="${box[1] + adj[1]}" width="${box[2]}" height="${box[3]}" viewBox="${P.bb.join(" ")}" preserveAspectRatio="xMidYMid meet" style="color:${ink};--hole:${fill}">${P.body.replace(/id="([^"]+)"/g, `id="${uid}$1"`).replace(/url\(#([^)]+)\)/g, `url(#${uid}$1)`)}</svg>`;
   /* Banda transversal adaptada a cada forma: circular = diagonal entre els dos punts del vorell; rectangular = diagonal de cantonada a cantonada;
      triangular = diagonal pel centre que s'escurça fins a tocar els costats (es retalla amb la mateixa forma). */
   let band = "", defs = "";
