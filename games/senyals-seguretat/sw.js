@@ -1,6 +1,6 @@
 /* © 2026 Robert Potau Nuñez — Tots els drets reservats / All rights reserved. robertpotau@gmail.com */
 // Service worker — Detectiu de Senyals. Network-first per a HTML/JS/JSON (mai cache-first: serviria versions velles).
-const CACHE = 'senyals-v1.1.1'; // el sufix és SEMPRE la versió del joc
+const CACHE = 'senyals-v1.2.0'; // el sufix és SEMPRE la versió del joc
 const ASSETS = ['./', './index.html', './senyals.js', './game.js', './modes2.js', './estudia.js', './manifest.json', './icon.svg', './fonts/nunito-400.woff2'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS))); self.skipWaiting(); });
 self.addEventListener('activate', e => {

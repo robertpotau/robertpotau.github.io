@@ -181,6 +181,7 @@ function answer(i) {
   if (G.mode === "epi") { if (ok) { if (G.streak > (player.flags.epiRatxa || 0)) Game.flag("epiRatxa", G.streak); } }
   $("gOk").textContent = G.ok; $("gErr").textContent = G.err;
   const fb = $("qFb"); fb.className = "feedback " + (ok ? "ok" : "bad"); fb.innerHTML = (ok ? "✅ <strong>Correcte!</strong> " : "❌ <strong>Ho sento.</strong> ") + (q.exp || ""); fb.style.display = "block";
+  if (ok && !G.timer && autoVoice()) speak(plainText(q.exp)); // lectura automàtica de l'explicació (interruptor als ajustos)
   const timed = !!G.timer, last = !timed && G.i === G.qs.length - 1, nx = $("qNext"); nx.textContent = last ? "Veure resultats 🏁" : "Següent →"; nx.style.display = "flex";
   /* Contrarellotge: l'encert passa sol a la pregunta següent; l'error mostra la solució i el temps no s'atura. */
   if (timed && ok) { const idx = G.i; G.autoNext = setTimeout(() => { if (G.timer && G.i === idx) gameNext(); }, 900); }
@@ -196,6 +197,9 @@ function finishGame() {
 }
 /* Pantalla de resultats compartida per tots els modes. o: {ok, err, total, xp, perfect, score?} */
 function showResults(o) {
+  /* Marques per als trofeus: partida perfecta (per mode i per dificultat) i partida sencera amb el so apagat */
+  if (G.mode && o.perfect) { Game.flag("perf_" + G.mode, true); Game.flag("perf_" + G.mode + "_" + G.diff, true); }
+  if (G.mode && !settings.sound && lastBeep < G.t0) Game.flag("silenci", true);
   const secs = Math.round((Date.now() - G.t0) / 1000), p = Math.round(o.ok / Math.max(1, o.total) * 100);
   $("rEmoji").textContent = p === 100 ? "🏆" : p >= 80 ? "🎉" : p >= 50 ? "👍" : "💪";
   $("rScore").textContent = o.score || `${o.ok}/${o.total}`;

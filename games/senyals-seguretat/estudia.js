@@ -6,6 +6,12 @@
 const TIPUS_CURT = {prohibicio: "Prohibició", advertencia: "Advertència", obligacio: "Obligació", salvament: "Salvament o socors", incendis: "Contra incendis"};
 const TIPUS_COLOR = {prohibicio: "#ef4444", advertencia: "#f9c80e", obligacio: "#3b82f6", salvament: "#22c55e", incendis: "#f87171"};
 const CTX_NOM = {T: "Taller", O: "Obra", F: "Fàbrica", Q: "Laboratori i productes químics", E: "Instal·lacions elèctriques", R: "Radiació", G: "Qualsevol lloc"};
+/* Text que es llegeix en veu alta: nom, tipus, definició del tipus i, si n'hi ha, de què ens protegeix i el «Compte!» */
+function signalSpeech(s) { const t = TIPUS[s.tipus]; return [s.nom + ".", TIPUS_CURT[s.tipus] + ".", t.frase, s.protegeix ? "Ens protegeix de " + s.protegeix + "." : "", s.nota || ""].filter(Boolean).join(" "); }
+function sayBtn(id) {
+  return hasVoice() ? `<button class="btn blue small say" onclick="speak(signalSpeech(SENYAL_BY_ID['${id}']))" aria-label="Escolta el senyal">🔊 Escolta</button>`
+    : `<button class="btn ghost small say" disabled aria-label="Escolta el senyal (no disponible)">🔊 Escolta</button><small class="say-warn">Aquest dispositiu no té veu en català.</small>`;
+}
 const normT = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 
 /* Progrés d'estudi del perfil: caixes de repàs (1-5) per senyal i senyals vistos (trofeu «Rata de biblioteca») */
@@ -55,7 +61,7 @@ function showSig(id, view) {
   $("sigSheet").innerHTML = `<div class="sheet" style="--tc:${TIPUS_COLOR[s.tipus]}">
     <div class="sheet-vis"><div class="paper big">${signalHTML(id, view)}</div>
       <div class="sheet-views">${views.map(v => `<button class="chip${v[0] === view ? " on" : ""}" onclick="_sigView('${v[0]}')">${v[1]}</button>`).join("")}</div></div>
-    <div class="sheet-info"><h3>${esc(s.nom)}</h3>
+    <div class="sheet-info"><h3>${esc(s.nom)}</h3>${sayBtn(id)}
       <div class="sheet-tipus"><span class="chip-sig">${tipusHTML(s.tipus, "blank")}</span><b>${t.nom}</b></div>
       <p class="sheet-frase">${t.frase}</p>
       ${row("Com és", descTipus(s.tipus))}${row("Colors", `Color de seguretat: ${t.color} · color de contrast: ${t.contrast}`)}${row("On el trobem", ctx)}
@@ -112,7 +118,7 @@ function flNext() {
         <button class="btn yellow" onclick="flRepass()">Repassa-les</button><button class="btn ghost" onclick="showCatalog()">Catàleg</button></div>`;
       return;
     }
-    sfx.trophy(); confetti(40);
+    sfx.trophy(); confetti(40); if (FS.total >= 10) Game.bump("flashRondes");
     body.innerHTML = `<div class="fl-end"><h2>🎉 Totes les targetes fetes!</h2><p>${FS.total} ${FS.total === 1 ? "senyal repassat" : "senyals repassats"}.</p>
       <button class="btn yellow" onclick="setupFlash()">Una altra ronda</button><button class="btn ghost" onclick="showCatalog()">Catàleg</button></div>`;
     return;
@@ -126,11 +132,12 @@ function flNext() {
   const done = FS.known + FS.again.length;
   body.innerHTML = `<div class="flash"><div class="muted">Targeta ${done + 1} de ${FS.total} · caixa ${boxOf(s.id)}/5</div><div class="fc-prog"><i style="width:${100 * FS.known / FS.total}%"></i></div>
     <div class="fcard" id="fcard" role="button" tabindex="0" aria-label="Gira la targeta" style="--tc:${TIPUS_COLOR[s.tipus]}"><div class="fc-in"><div class="fc-face front">${front}</div><div class="fc-face back">${back}</div></div></div>
+    <div class="fc-say">${sayBtn(s.id)}</div>
     <div class="fc-btns"><button class="btn red" onclick="flMark(false)">✗ Un altre cop</button><button class="btn green" onclick="flMark(true)">✓ Ja el sé</button></div>
     <div class="est-nav"><button class="back-btn" onclick="FL.live=false;showCatalog()">← Catàleg</button></div></div>`;
   $("fcard").onclick = flFlip;
 }
-function flFlip() { FS.flipped = !FS.flipped; $("fcard").classList.toggle("flipped", FS.flipped); sfx.flip(); }
+function flFlip() { FS.flipped = !FS.flipped; $("fcard").classList.toggle("flipped", FS.flipped); sfx.flip(); if (FS.flipped && autoVoice()) speak(signalSpeech(FS.deck[0])); }
 function flMark(ok) { const s = FS.deck.shift(); noteResult(s.id, ok); if (ok) FS.known++; else FS.again.push(s); ok ? sfx.ok() : sfx.err(); flNext(); }
 function flRepass() { FS.deck = shuffle(FS.again); FS.again = []; FL.live = true; flNext(); }
 document.addEventListener("keydown", e => {

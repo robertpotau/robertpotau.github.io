@@ -112,6 +112,7 @@ function memFlip(i) {
     const ea = $("mc" + a.i), eb = $("mc" + b.i);
     if (match) {
       a.gone = b.gone = true; MEM.found++; MEM.open = []; award(a.t, true); memSync();
+      if (autoVoice()) { const sid = SENYAL_BY_ID[a.g] ? a.g : (a.kind === "a" ? a.k : b.k).slice(1); speak(SENYAL_BY_ID[a.g] ? SENYAL_BY_ID[sid].nom : `${SENYAL_BY_ID[sid].nom}: ${tipusNom(a.g)}`); }
       [ea, eb].forEach(e => { e.classList.remove("tap"); void e.offsetWidth; e.classList.add("match"); });
       MEM.lock = false; if (MEM.found === MEM.pairs) setTimeout(memEnd, 900);
     } else {
