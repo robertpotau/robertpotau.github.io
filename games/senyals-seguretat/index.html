@@ -391,6 +391,7 @@ input[type=text]:focus{outline:none;border-color:var(--accent);}
 .ms-row{display:grid;grid-template-columns:minmax(120px,1.4fr) repeat(3,minmax(54px,1fr));gap:6px;align-items:center;background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:8px 12px;font-size:.82rem;}
 .ms-row.head{background:transparent;border:0;color:var(--text2);font-size:.7rem;font-weight:800;padding:0 12px;}
 .ms-row b{font-weight:800;}.ms-row span{text-align:center;}.ms-row .ms-n{text-align:left;}.ms-row .none{color:var(--text2);}
+.ex-sig{display:inline-block;width:24px;vertical-align:middle;margin:-3px 3px -2px;}.ex-sig svg{width:100%;height:auto;display:block;}
 .say{margin:8px 0 2px;}.say-warn{display:block;font-size:.72rem;color:var(--text2);margin:2px 0 6px;}
 .fc-say{text-align:center;margin:10px 0 0;}.fc-say .btn{margin:0 auto;}
 /* ═══ Pantalles amples (ordinadors, pissarres, mòbils en horitzontal) ═══ */
@@ -613,7 +614,7 @@ input[type=text]:focus{outline:none;border-color:var(--accent);}
   <div class="credits-row"><div class="credits-icon">🤖</div><div class="credits-info"><strong>Claude Code · Anthropic</strong><span>Programació i implementació tècnica</span></div></div>
   <div class="credits-small">
     <strong>© 2026 Robert Potau Nuñez</strong> · Tots els drets reservats · <a href="https://robertpotau.github.io/termes.html" target="_blank" rel="noopener">Termes d'ús</a><br>
-    <span id="verLine" style="cursor:default;user-select:none">v1.2.1 — 2026-11-09</span><br><br>
+    <span id="verLine" style="cursor:default;user-select:none">v1.2.2 — 2026-11-09</span><br><br>
     Material de tercers (no cobert per la reserva de drets): pictogrames de senyalització ISO 7010 via Wikimedia Commons (domini públic / CC0; autors com MaxxL, Maxxl2, ISO i Clemenspool), tipografia Nunito (SIL OFL 1.1). Continguts basats en el Reial decret 485/1997 i el Full monogràfic 25 de l'Institut de Seguretat i Salut Laboral (Generalitat de Catalunya).
     Joc educatiu: per a la senyalització real, consulteu la normativa vigent.
   </div>
@@ -626,7 +627,7 @@ input[type=text]:focus{outline:none;border-color:var(--accent);}
 if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(()=>{});
 
 /* ═══════ CONSTANTS ═══════ */
-const VERSION = 'v1.2.1', VERSION_DATE = '2026-11-09';
+const VERSION = 'v1.2.2', VERSION_DATE = '2026-11-09';
 const KEY_PROF = 'senyals.profiles', KEY_ACT = 'senyals.active', KEY_SET = 'senyals.settings';
 const MAX_SLOTS = 6;
 const AVATARS = {
@@ -654,8 +655,8 @@ const MODES = [
   {id:'colors',group:'practica',icon:'🎨',color:'#ef4444',nom:'Colors i significat',desc:'Color de seguretat, significat i color de contrast.',ex:'Vermell → <strong>prohibició</strong>',pics:['pro-foc','adv-inflamables','obl-general','soc-primers-auxilis']},
   {id:'forma',group:'practica',icon:'🔷',color:'#f59e0b',nom:'Forma i característiques',desc:'Forma, fons, vorell, banda transversal i pictograma.',ex:'Triangle groc → <strong>advertència</strong>',pics:['adv-carregues','obl-peus','pro-vehicles','inc-escala']},
   {id:'construeix',group:'practica',icon:'🛠️',color:'#22c55e',nom:'Construeix el senyal',desc:'Munta el senyal triant forma, fons, vorell i pictograma.',ex:'Obligació: circular, <strong>blava</strong>, pictograma blanc',pics:['obl-mans','adv-caiguda','pro-no-toqueu','soc-telefon']},
-  {id:'siluetes',group:'practica',icon:'⚫',color:'#94a3b8',nom:'Siluetes (blanc i negre)',desc:'Endevina el senyal sense color i després pinta\'l.',ex:'⚡ → <strong>Risc elèctric</strong>',pics:['adv-radioactives','obl-oida','pro-mobil','inc-telefon']},
-  {id:'memoria',group:'practica',icon:'🧠',color:'#a78bfa',nom:'Memòria',desc:'Parelles: senyal i nom, senyal i tipus.',ex:'🃏 ↔ <strong>Extintor</strong>',pics:['adv-biologic','obl-cos','pro-aigua-foc','soc-dutxa']},
+  {id:'siluetes',group:'practica',icon:'⚫',color:'#94a3b8',nom:'Siluetes (blanc i negre)',desc:'Endevina el senyal sense color i després pinta\'l.',ex:'[[bn:adv-electric]] → <strong>Risc elèctric</strong>',pics:['adv-radioactives','obl-oida','pro-mobil','inc-telefon']},
+  {id:'memoria',group:'practica',icon:'🧠',color:'#a78bfa',nom:'Memòria',desc:'Parelles: senyal i nom, senyal i tipus.',ex:'[[color:inc-extintor]] ↔ <strong>Extintor</strong>',pics:['adv-biologic','obl-cos','pro-aigua-foc','soc-dutxa']},
   {id:'inspector',group:'practica',icon:'🔍',color:'#38bdf8',nom:'Inspector del taller',desc:'Col·loca cada senyal al lloc del taller o de l\'obra que toca.',ex:'Quadre elèctric → <strong>Risc elèctric</strong>',pics:['adv-vehicles','obl-caigudes','pro-entrada','soc-rentada-ulls']},
   {id:'epi',group:'practica',icon:'🛡️',color:'#f472b6',nom:'Perill → EPI',desc:'Quin senyal d\'obligació et protegeix d\'aquest perill?',ex:'Càrregues en suspensió → <strong>cap</strong>',pics:['adv-corrosives','obl-respiratories','adv-explosives','obl-cara']},
   {id:'repte',group:'repte',icon:'⏱️',color:'#ffd23f',nom:'Repte contrarellotge',desc:'Barreja de totes les preguntes. Tria el temps total i respon-ne tantes com puguis!',ex:'3 minuts → <strong>quantes en encertes?</strong>',pics:['adv-temp-baixa','obl-vianants','pro-ascensor','soc-sortida']}
@@ -881,7 +882,7 @@ function checkTrophies() {
 /* ═══════ MENÚ ═══════ */
 function richCard(color, icon, title, desc, example, onClick, extra, pics) {
   const d = document.createElement('div'); d.className = 'rich-card'; d.style.setProperty('--card-color', color); d.setAttribute('role', 'button'); d.tabIndex = 0;
-  d.innerHTML = `<div class="rich-icon">${icon}</div><div class="rich-content"><div class="rich-title">${title}${extra || ''}</div><div class="rich-desc">${desc}</div>${example ? `<div class="rich-example"><strong>Ex:</strong> ${example}</div>` : ''}</div>${pics ? `<div class="rich-pics">${pics}</div>` : ''}`;
+  d.innerHTML = `<div class="rich-icon">${icon}</div><div class="rich-content"><div class="rich-title">${title}${extra || ''}</div><div class="rich-desc">${desc}</div>${example ? `<div class="rich-example"><strong>Ex:</strong> ${example.replace(/\[\[(\w+):([\w-]+)\]\]/g, (_, md, id) => `<span class="ex-sig">${signalHTML(id, md)}</span>`)}</div>` : ''}</div>${pics ? `<div class="rich-pics">${pics}</div>` : ''}`;
   d.addEventListener('click', onClick); d.addEventListener('keydown', e => { if (e.key === 'Enter') onClick(); }); return d;
 }
 function renderMenu() {
@@ -973,11 +974,11 @@ function initSplash() {
   for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) { if (land && c >= 2 && c <= 5 && (r === 1 || r === 2)) continue; cells.push([r, c]); }
   cells.sort(() => Math.random() - .5);
   cells.slice(0, 24).forEach(([r, c], i) => {
-    const d = document.createElement('div'); d.className = 'deco' + (i % 3 === 0 ? ' pic' : '');
+    const d = document.createElement('div'); d.className = 'deco';
     const w = (40 + Math.random() * 26) * Math.min(1.8, Math.max(1, innerWidth / 1000)); d.style.width = w.toFixed(0) + 'px';
     d.style.left = ((c + .1 + Math.random() * .55) / cols * 100) + '%'; d.style.top = ((r + .1 + Math.random() * .55) / rows * 100) + '%';
     d.style.animationDelay = (Math.random() * 3).toFixed(2) + 's'; d.style.animationDuration = (3.8 + Math.random() * 2.2).toFixed(2) + 's';
-    d.innerHTML = signalHTML(ids[i], i % 3 === 0 ? 'sil' : 'color'); $('splashDecos').appendChild(d);
+    d.innerHTML = signalHTML(ids[i], 'color'); $('splashDecos').appendChild(d);
   });
   setTimeout(() => { const sp = $('scrSplash'); sp.classList.add('fadeout');
     setTimeout(() => { sp.classList.remove('active', 'fadeout'); sp.style.display = 'none'; showScreen('scrProfiles'); }, 480); }, 4100);

@@ -36,8 +36,8 @@ function consDraw() {
   const opt = (label, on, js, extra) => `<button class="chip${on ? " on" : ""}" onclick="${js}"${CONS.done ? " disabled" : ""}>${extra || ""}${label}</button>`;
   const sw = col => `<span class="dot" style="background:${COLORS[col]}"></span>`;
   $("cPanel").innerHTML =
-    `<div class="cons-row"><b>1. Forma</b><div>${FORMES.map(f => opt(f[1], c.shape === f[0], `consSet('shape','${f[0]}')`, `<span class="chip-shape">${shapeHTML(f[0])}</span>`)).join("")}</div></div>
-     <div class="cons-row"><b>2. Color del fons</b><div>${["vermell", "groc", "blau", "verd", "blanc"].map(k => opt(COLOR_NAMES[k], c.fill === k, `consSet('fill','${k}')`, sw(k))).join("")}</div></div>
+    `<div class="cons-row"><b>1. Color del fons</b><div>${["vermell", "groc", "blau", "verd", "blanc"].map(k => opt(COLOR_NAMES[k], c.fill === k, `consSet('fill','${k}')`, sw(k))).join("")}</div></div>
+     <div class="cons-row"><b>2. Forma</b><div>${FORMES.map(f => opt(f[1], c.shape === f[0], `consSet('shape','${f[0]}')`, `<span class="chip-shape">${shapeHTML(f[0])}</span>`)).join("")}</div></div>
      <div class="cons-row"><b>3. Vorell</b><div>${[[null, "Sense vorell"], ["vermell", "Vermell"], ["negre", "Negre"]].map(o => opt(o[1], c.border === o[0], `consSet('border',${o[0] ? "'" + o[0] + "'" : "null"})`, o[0] ? sw(o[0]) : "")).join("")}</div></div>
      <div class="cons-row"><b>4. Banda transversal</b><div>${opt("Sí", c.band, "consSet('band',true)")}${opt("No", !c.band, "consSet('band',false)")}</div></div>
      <div class="cons-row"><b>5. Color del pictograma</b><div>${["blanc", "negre"].map(k => opt(COLOR_NAMES[k], c.ink === k, `consSet('ink','${k}')`, sw(k))).join("")}</div></div>
@@ -46,8 +46,8 @@ function consDraw() {
 function consSet(k, v) { if (CONS.done) return; CONS.sel[k] = v; sfx.click(); consDraw(); }
 function consCheck() {
   const s = CONS.s, t = TIPUS[s.tipus], c = CONS.sel, bad = [];
-  if (c.shape !== t.shape) bad.push("la forma");
   if (c.fill !== t.fons) bad.push("el color del fons");
+  if (c.shape !== t.shape) bad.push("la forma");
   if ((c.border || null) !== (t.vorell || null)) bad.push("el vorell");
   if (!!c.band !== !!t.banda) bad.push("la banda transversal");
   if (c.ink !== t.picto) bad.push("el color del pictograma");
