@@ -41,7 +41,7 @@ $sourceFolder = @{ "al-mercat" = "joc-mercat"; "eines-del-taller" = "joc-eines";
 # Extra folders that must NOT be published for a given game (sources, tools, backups).
 $extraXD = @{ "eines-del-taller" = @("src","tools","_backup-original","raw"); "senyals-seguretat" = @("pictogrames","eines") }
 # Games whose source lives outside claude-projects (absolute path). biblioteca-magica: Drive copy (also has git).
-$absSource = @{ "biblioteca-magica" = (Join-Path $env:USERPROFILE "Mi unidad (rpotau@insatorroja.cat) (1)\Projectes\llibre-de-lectura") }
+$absSource = @{ "biblioteca-magica" = (Join-Path $env:USERPROFILE "Mi unidad (robertpotau@gmail.com)\_Claude projects\llibre-de-lectura") }
 function Get-GameSrc([string]$g) {
   if ($absSource.ContainsKey($g)) { return $absSource[$g] }
   if ($sourceFolder.ContainsKey($g)) { return (Join-Path $src $sourceFolder[$g]) }
