@@ -77,7 +77,7 @@ foreach ($g in $targets) {
   $xd = @(".git","apk","backups","pdf") + $(if ($extraXD.ContainsKey($g)) { $extraXD[$g] } else { @() })
   if ($g -eq "biblioteca-magica") {
     # only the playable part: src/ + audio/ mp3 (no docs, tools, data, assets, json); keeps LLICENCIA-*.txt
-    robocopy "$gsrc" "$dest" /E /MIR /XD .git docs tools data assets apk `
+    robocopy "$gsrc" "$dest" /E /MIR /XD .git .claude node_modules docs tools data assets apk `
       /XF *.md *.bat *.json *.py *.log .gitignore .gitattributes PROJECTE.md LICENSE `
       /NFL /NDL /NJH | Out-Null
   } else {
