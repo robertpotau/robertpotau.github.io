@@ -6,8 +6,8 @@
 const TIPUS_CURT = {prohibicio: "Prohibició", advertencia: "Advertència", obligacio: "Obligació", salvament: "Salvament o socors", incendis: "Contra incendis"};
 const TIPUS_COLOR = {prohibicio: "#ef4444", advertencia: "#f9c80e", obligacio: "#3b82f6", salvament: "#22c55e", incendis: "#f87171"};
 const CTX_NOM = {T: "Taller", O: "Obra", F: "Fàbrica", Q: "Laboratori i productes químics", E: "Instal·lacions elèctriques", R: "Radiació", G: "Qualsevol lloc"};
-/* Text que es llegeix en veu alta: nom, tipus, definició del tipus i, si n'hi ha, de què ens protegeix i el «Compte!» */
-function signalSpeech(s) { const t = TIPUS[s.tipus]; return [s.nom + ".", TIPUS_CURT[s.tipus] + ".", t.frase, s.protegeix ? "Ens protegeix de " + s.protegeix + "." : "", s.nota || ""].filter(Boolean).join(" "); }
+/* Text que es llegeix en veu alta: només el nom (el text) del senyal. */
+function signalSpeech(s) { return s.nom; }
 function sayBtn(id) {
   return hasVoice() ? `<button class="btn blue small say" onclick="speak(signalSpeech(SENYAL_BY_ID['${id}']))" aria-label="Escolta el senyal">🔊 Escolta</button>`
     : `<button class="btn ghost small say" disabled aria-label="Escolta el senyal (no disponible)">🔊 Escolta</button><small class="say-warn">Aquest dispositiu no té veu en català.</small>`;

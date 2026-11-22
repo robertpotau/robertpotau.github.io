@@ -181,7 +181,7 @@ function answer(i) {
   if (G.mode === "epi") { if (ok) { if (G.streak > (player.flags.epiRatxa || 0)) Game.flag("epiRatxa", G.streak); } }
   $("gOk").textContent = G.ok; $("gErr").textContent = G.err;
   const fb = $("qFb"); fb.className = "feedback " + (ok ? "ok" : "bad"); fb.innerHTML = (ok ? "✅ <strong>Correcte!</strong> " : "❌ <strong>Ho sento.</strong> ") + (q.exp || ""); fb.style.display = "block";
-  if (ok && !G.timer && autoVoice()) speak(plainText(q.exp)); // lectura automàtica de l'explicació (interruptor als ajustos)
+  /* v1.2.3: ja no es llegeix en veu alta l'explicació; només sona el nom del senyal (Estudia i Memòria). */
   const timed = !!G.timer, last = !timed && G.i === G.qs.length - 1, nx = $("qNext"); nx.textContent = last ? "Veure resultats 🏁" : "Següent →"; nx.style.display = "flex";
   /* Contrarellotge: l'encert passa sol a la pregunta següent; l'error mostra la solució i el temps no s'atura. */
   if (timed && ok) { const idx = G.i; G.autoNext = setTimeout(() => { if (G.timer && G.i === idx) gameNext(); }, 900); }
