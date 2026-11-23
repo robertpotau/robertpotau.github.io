@@ -39,7 +39,7 @@ Write-Output "Source root: $src"
 # Games whose source folder under claude-projects has a different name than the slug.
 $sourceFolder = @{ "al-mercat" = "joc-mercat"; "eines-del-taller" = "joc-eines"; "senyals-seguretat" = "joc-senyals-seguretat" }
 # Extra folders that must NOT be published for a given game (sources, tools, backups).
-$extraXD = @{ "eines-del-taller" = @("src","tools","_backup-original","raw"); "senyals-seguretat" = @("pictogrames","eines") }
+$extraXD = @{ "eines-del-taller" = @("src","tools","_backup-original","raw"); "senyals-seguretat" = @("pictogrames","eines"); "energia-en-cadena" = @("fotos") }
 # Games whose source lives outside claude-projects (absolute path). biblioteca-magica: Drive copy (also has git).
 $absSource = @{ "biblioteca-magica" = (Join-Path $env:USERPROFILE "Mi unidad (robertpotau@gmail.com)\_Claude projects\llibre-de-lectura") }
 function Get-GameSrc([string]$g) {
@@ -48,7 +48,7 @@ function Get-GameSrc([string]$g) {
   return (Join-Path $src $g)
 }
 
-$games = @("calcuherois","aula-acollida","fraccions","lletra-a-lletra","ortografia","vistes","geometria","quina-hora-es","what-time-is-it","verbs-english","euroexplora","al-mercat","eines-del-taller","biblioteca-magica","senyals-seguretat")
+$games = @("calcuherois","aula-acollida","fraccions","lletra-a-lletra","ortografia","vistes","geometria","quina-hora-es","what-time-is-it","verbs-english","euroexplora","al-mercat","eines-del-taller","biblioteca-magica","senyals-seguretat","energia-en-cadena")
 
 if ($Slug) {
   if ($games -notcontains $Slug) {
