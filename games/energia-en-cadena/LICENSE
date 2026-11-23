@@ -1,0 +1,72 @@
+Copyright © 2026 Robert Potau Nuñez. All rights reserved.
+Copyright © 2026 Robert Potau Nuñez. Tots els drets reservats.
+
+Energia en Cadena — source code, artwork, text, game design and structure — is the
+original work and property of Robert Potau Nuñez, developed with Claude Code
+(Anthropic) as a programming assistant. Only the author modifies, improves,
+edits and commercialises it.
+
+No permission is granted to copy, modify, redistribute, republish, sell, host
+elsewhere, extract assets from, or create derivative works of this material,
+in whole or in part, without prior written permission from the copyright
+holder. This also applies to automated tools and AI assistants acting on
+someone's behalf, and to using this material to train machine-learning models.
+Removing or altering copyright notices, or circumventing any technical measure
+that protects this material, is likewise not permitted.
+
+Playing the game is free, and teachers are welcome to use it in schools,
+as long as it is accessed through the official website
+(https://robertpotau.github.io) or the official app. Translations, adaptations
+and customised versions (for example with a school's logo) are possible, but
+only as a paid commission arranged by e-mail: robertpotau@gmail.com
+
+Terms of use / Termes d'ús: https://robertpotau.github.io/termes.html
+
+--- Català ---------------------------------------------------------------
+
+Energia en Cadena — codi, gràfics, textos, disseny de joc i estructura — és obra
+original i propietat de Robert Potau Nuñez, desenvolupada amb Claude Code
+(Anthropic) com a assistent de programació. Només l'autor el modifica,
+millora, edita i en fa un ús comercial.
+
+No es concedeix cap permís per copiar, modificar, redistribuir, tornar a
+publicar, vendre, allotjar en un altre lloc, extreure'n recursos ni crear-ne
+obres derivades, totalment o en part, sense permís escrit previ del titular
+dels drets. Això inclou també les eines automàtiques i els assistents d'IA que
+actuïn en nom d'algú, i l'ús d'aquest material per entrenar models
+d'aprenentatge automàtic. Tampoc no es permet treure o alterar els avisos de
+copyright ni eludir cap mesura tècnica que protegeixi aquest material.
+
+Jugar-hi és gratuït i es pot fer servir als centres educatius sense cap
+problema, sempre que s'hi accedeixi per la web oficial
+(https://robertpotau.github.io) o per l'aplicació oficial. Les traduccions,
+adaptacions i versions a mida (per exemple amb el logo d'un centre) són
+possibles, però només com a encàrrec retribuït i per correu electrònic:
+robertpotau@gmail.com
+
+Third-party material / Material de tercers
+==========================================
+
+The following components remain the property of their authors, are used under
+their own licences, and are NOT covered by the all-rights-reserved notice above.
+(Deixar només els que el joc realment fa servir.)
+
+Photographs of power plants — Wikimedia Commons (embedded in the game file)
+  - Presa de Mequinensa — Gmfbdn — CC BY-SA 3.0
+    https://commons.wikimedia.org/wiki/File:Presa_de_Mequinensa.jpg
+  - Parc eòlic de la Serra del Tallat — Sergi Esteve — CC BY-SA 3.0
+    https://commons.wikimedia.org/wiki/File:Parc_Eolic_Serra_del_Tallat_01.JPG
+  - Parc fotovoltaic de Bellpuig — Chixoy — CC BY-SA 3.0
+    https://commons.wikimedia.org/wiki/File:Parc_fotovoltaic_de_Bellpuig_I.JPG
+  - Gemasolar — kallerna — CC BY-SA 4.0
+    https://commons.wikimedia.org/wiki/File:Gemasolar_Thermosolar_Plant_1.jpg
+  - Les Tres Xemeneies, Sant Adrià de Besòs — Jordiferrer — CC BY-SA 4.0
+    https://commons.wikimedia.org/wiki/File:2016_Central_t%C3%A8rmica_de_Sant_Adri%C3%A0_de_Bes%C3%B2s_02.jpg
+  - Central nuclear d'Ascó — Héctor Blanco de Frutos — CC BY 2.5
+    https://commons.wikimedia.org/wiki/File:Asc%C3%B3_nuclear_power_plant_-_smokestack.JPG
+  The photos were only resized. https://creativecommons.org/licenses/
+
+Outfit — typeface (loaded from Google Fonts when online)
+  Copyright © The Outfit Project Authors (https://github.com/Outfitio/Outfit-Fonts).
+  Licensed under the SIL Open Font License, Version 1.1.
+  https://openfontlicense.org/
