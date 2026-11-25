@@ -833,7 +833,7 @@ const BANC = [
 /* ============================================================
    CONFIGURACIÓ
    ============================================================ */
-const VERSION = "v1.1.1 — 2026-11-25";
+const VERSION = "v1.2.0 — 2026-11-25";
 const CENTRALS = {
   general:{n:"Totes (comparar)",e:"⚡"},
   hidro:{n:"Hidroelèctrica",e:"💧"},
@@ -1018,7 +1018,7 @@ function renderSetup(){
       </div>
       <p style="margin:0;color:var(--muted);font-size:clamp(15px,1.25vw,20px);max-width:640px;line-height:1.45">
         Com es mou i es transforma l'energia dins de cada central? És sostenible? Quin impacte té?
-        ${g ? "Responeu per torns: si falles, el següent jugador té l'oportunitat de rebot."
+        ${g ? (cfg.nPlayers>1 ? "Responeu per torns: si falles, el següent jugador té l'oportunitat de rebot." : "Jugues sol: respon totes les preguntes i el joc corregeix sol.")
             : "Responeu per equips: el professor/a assigna cada equip a l'opció que diu i el joc corregeix sol."}</p>
       <div class="studyBox">
         <div class="studyTxt">
@@ -1046,7 +1046,7 @@ function renderSetup(){
       <div>
         <h3>${g?"Jugadors":"Equips"}</h3>
         <div class="row" style="margin-bottom:.7em">
-          <div class="seg" id="segTeams">${(g?[3,4,5,6]:[2,3,4,5,6]).map(n=>`<button data-n="${n}" class="${n===(g?cfg.nPlayers:cfg.nTeams)?"on":""}">${n}</button>`).join("")}</div>
+          <div class="seg" id="segTeams">${[1,2,3,4,5,6].map(n=>`<button data-n="${n}" class="${n===(g?cfg.nPlayers:cfg.nTeams)?"on":""}">${n}</button>`).join("")}</div>
         </div>
         <div class="teamsEdit">
           ${people.map((t,i)=>`<label><span class="dot" style="background:${t.color}"></span>
@@ -1082,9 +1082,9 @@ function renderSetup(){
         <h3>Regles</h3>
         <ul class="rules">
           <li>Encert a la primera: <b>1000</b> punts${cfg.gSpeed?" si respons de seguida; com més trigues, menys (mínim 500)":""}.</li>
-          <li>Si falles, <b>rebot</b>: respon el jugador següent per la meitat (no passa a Vertader o fals, Ordena ni Relaciona).</li>
+          ${cfg.nPlayers>1?`<li>Si falles, <b>rebot</b>: respon el jugador següent per la meitat (no passa a Vertader o fals, Ordena ni Relaciona).</li>`:""}
           <li>Ordena i Relaciona: punts segons quants n'encertes.</li>
-          <li>🤝 Cada jugador té <b>1 comodí</b> per consultar el grup: aquella pregunta val la meitat.</li>
+          ${cfg.nPlayers>1?`<li>🤝 Cada jugador té <b>1 comodí</b> per consultar el grup: aquella pregunta val la meitat.</li>`:""}
         </ul>
       </div>` : `
       <div class="row" style="gap:2.5em">
@@ -1495,7 +1495,7 @@ function renderBoard(){
 }
 
 /* ============================================================
-   MODE GRUP · un ordinador, 3-6 jugadors que responen per torns
+   MODE GRUP · un ordinador, 1-6 jugadors que responen per torns
    - Cada pregunta és d'un jugador (rotatiu). Encert: 1000 punts.
    - Si falla, rebot per al següent jugador (500 punts), excepte a
      Vertader o fals, Ordena i Relaciona.
@@ -1513,7 +1513,7 @@ function startGroup(){
   G = {
     group:true, phase:"play", teams:P,
     qs:pickQuestions(cfg.perP*P.length), i:0,
-    scores:P.map(()=>0), hits:P.map(()=>0), helps:P.map(()=>1)
+    scores:P.map(()=>0), hits:P.map(()=>0), helps:P.map(()=>P.length>1?1:0)   // amb 1 jugador no hi ha comodí ni rebot
   };
   startGroupQ();
 }
@@ -1551,7 +1551,7 @@ function attempt(ok,key){
   if(ok){ G.log.push({p:G.cur,ok:true,pts:award(1)}); G.done=true; }
   else{
     G.wrong.add(key); G.log.push({p:G.cur,ok:false,pts:0});
-    if(!G.rebound && canRebound(q)){ G.rebound=true; G.cur=(G.owner+1)%G.teams.length; G.t0=performance.now(); }
+    if(!G.rebound && G.teams.length>1 && canRebound(q)){ G.rebound=true; G.cur=(G.owner+1)%G.teams.length; G.t0=performance.now(); }
     else G.done=true;
   }
   renderGroupQ();
