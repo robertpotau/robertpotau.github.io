@@ -292,6 +292,177 @@ button.cand:hover:not(:disabled){background:rgba(255,210,63,.14)}
 .credBox p,.credBox li{font-size:clamp(13px,1vw,16px);color:#d5ddf0}
 .credBox ul{padding-left:1.2em;margin:.4em 0}
 .credBox .small{color:var(--muted);font-size:clamp(12px,.9vw,14px)}
+
+/* ---------- RESPONSIVE (v1.0.1) ----------
+   1) Els blocs de la zona de pregunta mai s'encongeixen: així no es poden solapar.
+   2) fitStage() (JS) redueix la zona de pregunta amb zoom fins que hi cap tot.
+   3) Explicació i foto de costat a les pantalles amples, apilades a les estretes. */
+.stage>*{flex-shrink:0}
+.answers{flex:1 0 auto}
+.stage.measuring .answers{flex-grow:0}
+.tiles{height:auto;min-height:0}
+.revealInfo{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.2vw;align-items:stretch}
+.revealInfo:not(:has(.photo)){grid-template-columns:1fr}
+.revealInfo .photo img{max-width:45%}
+.solution{overflow-wrap:anywhere}
+.errSentence{overflow-wrap:anywhere}
+.turn{min-width:0}
+@media (max-width:1100px){
+  .revealInfo{grid-template-columns:1fr}
+  .top .mini{display:none}
+}
+@media (max-height:820px){
+  .top{padding:.8vh 1.6vw;gap:.5em}
+  .icon-btn{width:36px;height:36px;font-size:16px}
+  .stage{padding:1.4vh 2.4vw .6vh;gap:1.4vh}
+  .bottom{padding:.9vh 1.6vw 1.2vh}
+  .qtext{font-size:clamp(20px,min(2.5vw,4.6vh),44px)}
+  .clock{width:clamp(56px,min(7vw,11vh),118px);height:clamp(56px,min(7vw,11vh),118px);font-size:clamp(22px,min(2.9vw,5vh),50px)}
+  .mitem{min-height:0}
+  .errSentence{line-height:1.9;padding:2vh 2.4vw}
+  .photo img{height:clamp(70px,13vh,150px)}
+  .setup{padding:2.4vh 3vw;gap:2.4vw}
+  .card{padding:1.8vh 1.6vw;gap:1.5vh}
+  .card h3{margin-bottom:.4em}
+  .hero{gap:1.6vh}
+  .logo{font-size:clamp(36px,min(5.2vw,9vh),86px)}
+  .typesList div{padding:.4em .7em}
+  .seg button{padding:.35em .9em}
+  .teamsEdit input{padding:.2em 0}
+}
+.card{align-self:safe center}
+.hero{justify-content:safe center}
+
+/* ---------- ZONA D'ESTUDI (v1.1.0) ---------- */
+.studyBox{display:flex;align-items:center;gap:1.2em;max-width:640px;padding:1em 1.2em;border-radius:16px;
+  background:linear-gradient(120deg,rgba(61,99,214,.22),rgba(47,191,113,.12));border:1px solid #3a5a9e}
+.studyTxt{flex:1;min-width:0}
+.studyTtl{font-weight:800;font-size:clamp(16px,1.35vw,22px)}
+.studyDesc{color:#c9d3ea;font-size:clamp(13px,1.02vw,16px);line-height:1.4;margin-top:.25em}
+.btn.study{background:#3d63d6;border-color:transparent;color:#fff;box-shadow:0 5px 0 #263f8f;white-space:nowrap}
+.btn.study:active{box-shadow:0 2px 0 #263f8f;transform:translateY(3px)}
+.sBack{font-size:clamp(14px,1.1vw,18px);padding:.45em 1em}
+.studyWrap{flex:1;min-height:0;overflow:auto;padding:2.4vh 3vw 3vh;display:flex;flex-direction:column;gap:2vh}
+.sHead h2{margin:0;font-size:clamp(26px,2.8vw,46px)}
+.sHead p{margin:.4em 0 0;color:var(--muted);font-size:clamp(14px,1.2vw,20px);max-width:900px;line-height:1.45}
+.sModes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.6vh 1.4vw}
+.sMode{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:1em;row-gap:.3em;text-align:left;align-items:center;
+  background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.4em 1.5em;transition:background .15s,transform .1s}
+.sMode:hover{background:var(--panel2);transform:translateY(-2px)}
+.sMode .sEm{grid-row:1/3;font-size:clamp(34px,3.2vw,54px)}
+.sMode .sT{font-weight:800;font-size:clamp(18px,1.7vw,28px)}
+.sMode .sD{color:#c9d3ea;font-size:clamp(13px,1.05vw,17px);line-height:1.4}
+.sTip{margin:0;color:var(--muted);font-size:clamp(13px,1.05vw,17px)}
+.sFilter{flex:none}
+/* teoria */
+.tWrap{flex-direction:row;gap:1.6vw;padding:0 0 0 2vw;overflow:hidden}
+.tNav{flex:none;width:clamp(190px,17vw,260px);display:flex;flex-direction:column;gap:.4em;padding:2vh 0;overflow:auto}
+.tNav button{text-align:left;border:1px solid transparent;background:transparent;border-radius:12px;padding:.6em .8em;font-weight:600;font-size:clamp(14px,1.1vw,18px);color:var(--muted)}
+.tNav button:hover{background:var(--panel)}
+.tNav button.on{background:var(--panel2);border-color:#4a5f92;color:var(--text)}
+.tMain{flex:1;min-width:0;overflow:auto;padding:2vh 3vw 4vh 0}
+.tDoc{max-width:1100px;display:flex;flex-direction:column;gap:2.4vh;font-size:clamp(15px,1.15vw,19px);line-height:1.5}
+.tDoc h2{margin:0;font-size:clamp(26px,2.6vw,42px)}
+.tDoc h3{margin:0 0 .5em;font-size:clamp(16px,1.3vw,22px);color:var(--accent)}
+.tDoc p{margin:0}
+.tDoc .lead{color:#d5ddf0}
+.tags{display:flex;flex-wrap:wrap;gap:.5em}
+.tags .chip{white-space:normal}
+.tQue{display:grid;grid-template-columns:1fr minmax(0,1fr);gap:1.4vw;align-items:center}
+.tPhoto img{max-width:48%}
+.sChain{justify-content:flex-start;margin:0 0 1vh}
+.via{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2em;min-width:5.5em}
+.via .vl{font-size:clamp(12px,.9vw,15px);color:var(--accent);font-weight:700;text-align:center;line-height:1.2;max-width:8em}
+.read{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:.7em 1em;color:#d5ddf0}
+.steps{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:.35em}
+.steps li::marker{color:var(--accent);font-weight:800}
+.kv{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6em}
+.kv li{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.6em .9em;display:flex;flex-direction:column;gap:.15em}
+.kv li b{color:var(--text)}
+.kv li span{color:#c9d3ea}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:1.2vw}
+.pc>div{border-radius:14px;padding:.8em 1em}
+.pc ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:.3em}
+.pro{background:rgba(47,191,113,.08);border:1px solid rgba(47,191,113,.45)}
+.pro h3{color:#7ff0b0}
+.con{background:rgba(229,72,77,.08);border:1px solid rgba(229,72,77,.45)}
+.con h3{color:#ff9a9a}
+.resum{background:rgba(255,210,63,.08);border:1px solid rgba(255,210,63,.4);border-radius:14px;padding:.8em 1em}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:.5em}
+.fstep{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.6em .8em;display:flex;flex-direction:column;max-width:13em}
+.fstep span{color:var(--muted);font-size:.85em;line-height:1.3}
+.tblWrap{overflow-x:auto}
+.tbl{border-collapse:collapse;width:100%;font-size:.92em}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:.55em .7em;text-align:left;vertical-align:top}
+.tbl th{color:var(--muted);font-weight:700}
+.tLinks{display:flex;flex-wrap:wrap;align-items:center;gap:.6em;padding-top:1vh;border-top:1px solid var(--line)}
+.tLinks span{color:var(--muted)}
+.tLinks .btn{font-size:clamp(14px,1.05vw,17px);padding:.5em 1em}
+/* targetes */
+.cardArea{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:safe center;gap:2vh;min-height:0}
+.prog{display:flex;align-items:center;gap:1em;width:min(820px,100%);color:var(--muted);font-size:clamp(13px,1vw,16px)}
+.pbar{flex:1;height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.pbar span{display:block;height:100%;background:var(--ok);transition:width .3s}
+.fcard{position:relative;width:min(820px,100%);min-height:clamp(240px,42vh,440px);border:0;padding:0;background:none;perspective:1400px;font:inherit;color:inherit;cursor:pointer}
+.fside{position:absolute;inset:0;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4vh;
+  padding:2.4vh 2.4vw;text-align:center;backface-visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1);overflow:auto}
+.fside.front{background:linear-gradient(150deg,#1d2b4f,#141e36);border:2px solid #3a5a9e}
+.fside.back{background:linear-gradient(150deg,#163a2c,#122a22);border:2px solid rgba(47,191,113,.6);transform:rotateY(180deg)}
+.fcard.flipped .front{transform:rotateY(-180deg)}
+.fcard.flipped .back{transform:rotateY(0)}
+.ftag{font-size:clamp(12px,.95vw,15px);color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.ftxt{font-size:clamp(19px,1.9vw,32px);font-weight:600;line-height:1.35;max-width:36em}
+.back .ftxt{font-size:clamp(16px,1.5vw,25px);font-weight:500}
+.ftxt ul{text-align:left;margin:0;padding-left:1.2em}
+.ftxt small{display:block;margin-top:.6em;font-size:.72em;color:#bfe9d1}
+.fhint{color:var(--muted);font-size:clamp(12px,.95vw,15px)}
+.cBtns{display:flex;gap:1em}
+.cBtns .btn{font-size:clamp(16px,1.35vw,22px)}
+.cBtns small{opacity:.6;font-weight:500}
+.cNo{background:rgba(229,72,77,.15);border-color:rgba(229,72,77,.6)}
+.cYes{background:rgba(47,191,113,.18);border-color:rgba(47,191,113,.7)}
+.hiddenV{visibility:hidden}
+.sDone{margin:auto;text-align:center;display:flex;flex-direction:column;gap:1.2vh;max-width:760px;font-size:clamp(15px,1.2vw,20px);line-height:1.45}
+.sDone h2{margin:0;font-size:clamp(24px,2.4vw,40px)}
+.sDone p{margin:0;color:#d5ddf0}
+/* cadena */
+.chTitle{margin:0;font-size:clamp(22px,2.2vw,36px)}
+.build{justify-content:center;margin:1vh 0}
+.ebox.slot{font:inherit;color:inherit;cursor:pointer}
+.ebox.slot.good{border-color:var(--ok);background:rgba(47,191,113,.14)}
+.ebox.slot.bad,.dslot.bad{border-color:var(--ko)!important;background:rgba(229,72,77,.16)!important}
+.dslot{font:inherit;font-weight:700;font-size:clamp(12px,.95vw,15px);color:var(--accent);background:var(--panel);border:2px solid var(--line);border-radius:10px;padding:.35em .6em;max-width:9em;line-height:1.2;cursor:pointer}
+.dslot.empty{border-style:dashed;border-color:var(--accent);color:var(--accent);min-width:3em}
+.dslot.good{border-color:var(--ok);background:rgba(47,191,113,.14);color:#7ff0b0}
+.optGrid{display:flex;flex-wrap:wrap;justify-content:center;gap:.7em}
+.opt{border:1px solid #4a5f92;background:var(--panel2);border-radius:12px;padding:.6em 1em;font-weight:700;font-size:clamp(15px,1.3vw,22px)}
+.opt:hover:not(:disabled){filter:brightness(1.2)}
+.opt.used{opacity:.3;cursor:default}
+.opt.dev{font-size:clamp(14px,1.15vw,19px)}
+.chBtns{justify-content:center}
+@media (max-width:900px){
+  .tWrap{flex-direction:column;padding:0}
+  .tNav{width:auto;flex-direction:row;overflow-x:auto;padding:1vh 3vw}
+  .tNav button{white-space:nowrap}
+  .tMain{padding:1vh 4vw 4vh}
+  .tQue,.pc,.kv,.sModes{grid-template-columns:1fr}
+  .studyBox{flex-direction:column;align-items:stretch}
+}
+@media (max-width:600px){
+  .sChain{flex-direction:column;align-items:center;flex-wrap:nowrap}
+  .sChain .ebox{width:min(260px,100%)}
+  .via{flex-direction:row;gap:.6em;min-width:0}
+  .via .carr{transform:rotate(90deg)}
+  .via .vl{max-width:none}
+}
+@media (max-width:700px){
+  .bottom{flex-wrap:wrap}
+  .bottom .btn.primary{width:100%}
+  .chip{font-size:12px}
+  .pair{grid-template-columns:1fr auto 1fr auto}
+  .podium{gap:2vw}
+  .pod{width:30vw}
+}
 </style>
 </head>
 <body>
@@ -654,7 +825,7 @@ const BANC = [
 /* ============================================================
    CONFIGURACIÓ
    ============================================================ */
-const VERSION = "v1.0.0 — 2026-11-23";
+const VERSION = "v1.1.0 — 2026-11-25";
 const CENTRALS = {
   general:{n:"Totes (comparar)",e:"⚡"},
   hidro:{n:"Hidroelèctrica",e:"💧"},
@@ -815,6 +986,7 @@ function pickQuestions(n){
    ============================================================ */
 function renderSetup(){
   stopTick();
+  S = null;                // surt de la Zona d'estudi
   const avail = availableQs().length;
   const g = grup();
   const people = g ? players() : teams();
@@ -839,8 +1011,12 @@ function renderSetup(){
         Com es mou i es transforma l'energia dins de cada central? És sostenible? Quin impacte té?
         ${g ? "Responeu per torns: si falles, el següent jugador té l'oportunitat de rebot."
             : "Responeu per equips: el professor/a assigna cada equip a l'opció que diu i el joc corregeix sol."}</p>
-      <div class="typesList">
-        ${Object.values(TYPES).map(t=>`<div>${t.e} ${t.n}</div>`).join("")}
+      <div class="studyBox">
+        <div class="studyTxt">
+          <div class="studyTtl">📚 Estudia pel teu compte</div>
+          <div class="studyDesc">Teoria de cada central, targetes, pràctica amb correcció al moment i cadenes d'energia. Sense punts ni rànquings.</div>
+        </div>
+        <button class="btn study" id="btnStudy">📚 Zona d'estudi</button>
       </div>
       <footer class="legal-foot">© 2026 Robert Potau Nuñez · Tots els drets reservats · <a href="https://robertpotau.github.io/termes.html" target="_blank" rel="noopener">Termes d'ús</a> ·
         <button class="linkBtn" id="btnCred">Crèdits</button> · ${VERSION}</footer>
@@ -922,6 +1098,7 @@ function renderSetup(){
     </section>
   </div>`;
   $("#btnCred").onclick = showCredits;
+  $("#btnStudy").onclick = renderStudyHome;
 
   document.querySelectorAll("#segPlay button").forEach(b=>b.onclick=()=>{cfg.play=b.dataset.k;renderSetup();});
   document.querySelectorAll("#segPerP button").forEach(b=>b.onclick=()=>{cfg.perP=+b.dataset.n;renderSetup();});
@@ -935,6 +1112,7 @@ function renderSetup(){
   document.querySelectorAll("#segLen button").forEach(b=>b.onclick=()=>{cfg.len=+b.dataset.n;renderSetup();});
   document.querySelectorAll("#segTimer button").forEach(b=>b.onclick=()=>{cfg.timer=b.dataset.k;renderSetup();});
   $("#btnStart").onclick = g ? startGroup : startGame;
+  fitSetup();
 }
 
 /* ============================================================
@@ -1016,7 +1194,7 @@ function renderQuestion(){
         <div class="clock ${cfg.timer==="off"?"off":""}" id="clock">${cfg.timer==="off"?"sense<br>temps":""}</div>
       </div>
       <div class="answers">${renderAnswers(q,rev)}</div>
-      ${rev?`<div class="explain">💡 ${q.exp}</div>${photoHtml(q)}`:""}
+      ${rev?`<div class="revealInfo"><div class="explain">💡 ${q.exp}</div>${photoHtml(q)}</div>`:""}
     </div>
     <div class="bottom">
       <div class="teamBar">
@@ -1037,7 +1215,34 @@ function renderQuestion(){
   $("#btnFull").onclick = toggleFull;
   $("#btnExit").onclick = ()=>{ if(confirm("Vols sortir de la partida? Es perdrà la puntuació.")) renderSetup(); };
   const bp=$("#btnPause"); if(bp) bp.onclick=togglePause;
+  fitStage();
 }
+
+/* Ajusta la zona de pregunta a la pantalla: si no hi cap, la redueix amb zoom
+   (fins al 60 %). Així el joc s'adapta a l'ordinador i a qualsevol projector. */
+function fitSetup(){
+  const s = document.querySelector(".setup"); if(!s || innerWidth<=900) return;   // al mòbil, es fa scroll
+  let z = 1; s.style.zoom = 1;
+  while(s.scrollHeight > s.clientHeight+1 && z > 0.75){
+    z = Math.round((z-0.03)*100)/100;
+    s.style.zoom = z;
+  }
+}
+function fitStage(){
+  fitSetup();
+  const s = document.querySelector(".stage"); if(!s || !s.lastElementChild) return;
+  let z = 1; s.style.zoom = 1;
+  s.classList.add("measuring");               // el bloc de respostes ocupa només el que necessita
+  const fits = ()=> s.lastElementChild.getBoundingClientRect().bottom <= s.getBoundingClientRect().bottom + 1;
+  while(!fits() && z > 0.6){
+    z = Math.round((z-0.04)*100)/100;
+    s.style.zoom = z;
+  }
+  s.classList.remove("measuring");
+}
+let fitT = null;
+window.addEventListener("resize", ()=>{ clearTimeout(fitT); fitT = setTimeout(fitStage,120); });
+document.addEventListener("fullscreenchange", ()=>setTimeout(fitStage,150));
 
 /* Preguntes amb opcions: el professor/a assigna cada equip a l'opció que diu i el joc corregeix sol.
    Ordena i Relaciona: el professor/a marca qui encerta després de mostrar la resposta. */
@@ -1207,6 +1412,7 @@ function refreshChips(){
   const rev = G.phase==="reveal";
   document.querySelector(".teamChips").innerHTML = G.teams.map((t,i)=>teamChip(t,i,rev)).join("");
   document.querySelectorAll(".tchip").forEach(b=>b.onclick=()=>teamAction(+b.dataset.i));
+  fitStage();
 }
 function mainAction(){
   if(G.phase==="question") reveal();
@@ -1384,7 +1590,7 @@ function renderGroupQ(){
       ${turnBanner()}
       <div class="qhead"><div class="qtext">${q.q}</div></div>
       <div class="answers">${groupAnswers(q)}</div>
-      ${D?`<div class="explain">💡 ${q.exp}</div>${photoHtml(q)}`:""}
+      ${D?`<div class="revealInfo"><div class="explain">💡 ${q.exp}</div>${photoHtml(q)}</div>`:""}
     </div>
     <div class="bottom">
       <div class="teamBar">
@@ -1414,6 +1620,7 @@ function renderGroupQ(){
     if(G.sel!==null){ G.link[G.sel]=r; G.sel=null; }
     renderGroupQ();
   });
+  fitStage();
 }
 
 function turnBanner(){
@@ -1529,6 +1736,470 @@ function renderFinal(){
   $("#btnFull").onclick = toggleFull;
 }
 
+/* ============================================================
+   ZONA D'ESTUDI (v1.1.0) · per estudiar sol, sense punts, trofeus ni perfils
+   - 📖 Teoria: fitxa de cada central (i l'esquema comú)
+   - 🃏 Targetes: es generen a partir de THEORY
+   - ✏️ Practica sol: el banc del joc, correcció al moment, els errors tornen a sortir
+   - ⛓️ Construeix la cadena: energies en ordre + on passa cada transformació
+   Mateix contingut que el joc: sense ubicacions a Catalunya, rendiments,
+   tipus de turbines ni apartats «Tipus de…». Font: UD1_Teoria_Centrals i UD1_Centrals_electriques.
+   ============================================================ */
+let S = null;   // estat de la Zona d'estudi (null = fora)
+
+const THEORY_GENERAL = {
+  esquema:[["Font d'energia","aigua, vent, Sol, combustible o urani"],["Turbina","la mou un fluid: aigua, vent o vapor"],["Alternador","unit a la turbina, genera l'electricitat"],["Transformador","puja la tensió per transportar-la"],["Xarxa elèctrica","distribueix l'electricitat"]],
+  gira:[["💧 Hidroelèctrica","L'aigua que cau"],["🌬️ Parc eòlic","El vent"],["🔆 Termosolar, 🔥 tèrmica i ⚛️ nuclear","El vapor d'aigua"],["☀️ Fotovoltaica","Cap turbina: les cèl·lules de silici transformen la llum directament en electricitat"]],
+  conceptes:[
+    ["Energia renovable","Es renova de manera natural i no s'esgota encara que la fem servir: l'aigua, el vent i el Sol. Que sigui renovable no vol dir que no tingui impacte."],
+    ["L'energia es transforma","Les centrals no creen energia: la transformen d'un tipus a un altre. Pel camí, una part sempre es perd en forma de calor."],
+    ["Turbina","La mou un fluid (aigua, vent o vapor) i transforma el seu moviment en rotació."],
+    ["Alternador o generador","Està unit a l'eix de la turbina: quan gira, transforma l'energia mecànica en energia elèctrica."],
+    ["Transformador","Puja la tensió de l'electricitat perquè es pugui transportar lluny perdent menys energia."],
+    ["CO₂ i efecte hivernacle","Cremar combustibles fòssils emet CO₂, un gas que reforça l'efecte hivernacle i el canvi climàtic."]
+  ]
+};
+
+const THEORY = {
+  hidro:{
+    name:"Central hidroelèctrica", font:"L'aigua (d'un riu o d'un embassament)", renov:true, co2:"No emet CO₂",
+    que:"Una central hidroelèctrica aprofita l'energia de l'aigua d'un riu o d'un embassament per produir electricitat. S'aprofita el desnivell del riu.",
+    chain:["potencial","cinetica","mecanica","electrica"], sub:["aigua a l'embassament","aigua que cau","rotació de la turbina","electricitat"],
+    via:["Canonada forçada","Turbina","Alternador"],
+    llegir:"L'aigua de dalt té energia guardada; en caure s'accelera, fa girar la turbina i l'alternador la converteix en electricitat.",
+    passos:["La presa reté l'aigua del riu i forma l'embassament: l'aigua acumulada té energia potencial.","S'obre la comporta i l'aigua entra a la canonada forçada.","L'aigua cau per la canonada, agafa velocitat i guanya energia cinètica.","L'aigua xoca contra les pales de la turbina i la fa girar.","L'eix de la turbina fa girar l'alternador, que produeix electricitat.","El transformador puja la tensió, les línies porten l'electricitat i l'aigua torna al riu pel desguàs."],
+    comps:[["Embassament","Guarda l'aigua; l'aigua de dalt té energia potencial. També serveix per regar i abastir poblacions."],["Presa","Barrera de formigó o pedra que reté l'aigua del riu."],["Comportes i sobreeixidor","Deixen sortir l'aigua que sobra sense passar per les turbines, perquè l'embassament no es desbordi."],["Canonada forçada","Porta l'aigua a pressió fins a la turbina. Com més desnivell (salt), més energia."],["Turbina","L'aigua fa girar les pales: el moviment de l'aigua es converteix en rotació."],["Alternador","Unit a l'eix de la turbina, genera electricitat (corrent altern) en girar."],["Transformador","Puja la tensió perquè l'electricitat es pugui transportar perdent menys energia."],["Desguàs","Torna l'aigua al riu un cop ha passat per la turbina. L'aigua no es gasta: només es desvia."]],
+    avant:["És renovable: l'aigua es renova amb el cicle de l'aigua.","No emet CO₂ ni fums en funcionar.","Arrenca i s'atura ràpid: ajuda a regular la xarxa.","L'embassament guarda aigua per regar, abastir i evitar riuades.","Dura molts anys i té poc cost d'explotació."],
+    inconv:["Construir-la és car i lent.","Depèn de la pluja: amb sequera, produeix menys.","L'embassament inunda terres i pot fer desaparèixer pobles.","Canvia el riu i afecta els peixos i altres éssers vius.","Si fallés la presa, l'accident seria greu (és molt poc habitual)."],
+    impacte:[["Cabal alterat","L'aigua es guarda i es deixa anar quan convé: el riu deixa de seguir el seu ritme natural."],["Barrera per als peixos","La presa talla el riu i els peixos no poden remuntar-lo per reproduir-se."],["Sediments retinguts","El fang i la sorra queden a l'embassament i no arriben a la desembocadura."],["Terres inundades","L'embassament cobreix valls, camps, camins i de vegades pobles sencers."],["Paisatge i clima local","Canvia el paisatge i pot canviar la humitat i la temperatura de la zona."],["Balanç amb l'aire","No emet CO₂ quan funciona: ajuda a lluitar contra el canvi climàtic."]],
+    mesura:"Deixar un cabal ecològic al riu i construir escales per als peixos.",
+    resum:"La hidroelèctrica aprofita l'aigua per produir electricitat renovable i sense emissions, i a més guarda energia a l'embassament. És neta en emissions, però no té impacte zero."
+  },
+  eolica:{
+    name:"Parc eòlic", font:"El vent", renov:true, co2:"No emet CO₂",
+    que:"Un parc eòlic és un conjunt d'aerogeneradors que aprofiten la força del vent per produir electricitat.",
+    chain:["cinetica","mecanica","electrica"], sub:["el vent","rotació de pales i rotor","electricitat"],
+    via:["Pales i rotor","Generador"],
+    llegir:"El vent té energia cinètica i fa girar les pales i el rotor. El multiplicador només augmenta la velocitat de gir i el generador converteix la rotació en electricitat.",
+    passos:["L'anemòmetre mesura el vent: si és prou fort, l'aerogenerador es connecta.","El controlador orienta la gòndola perquè el rotor miri el vent.","El vent fa girar les pales i el rotor, lentament.","El multiplicador fa girar l'eix ràpid unes 50 vegades més de pressa.","El generador produeix electricitat i el transformador en puja la tensió.","Els cables porten l'electricitat a la subestació del parc i d'allà a la xarxa."],
+    comps:[["Pales","Capten l'energia del vent i la transmeten al rotor."],["Rotor","Uneix les pales amb l'eix i transforma el moviment del vent en rotació. Com més gran el diàmetre, més potència."],["Gòndola","Carcassa a dalt de la torre que protegeix el multiplicador, el generador i el control."],["Torre","Sosté la gòndola i el rotor. Com més alta, més vent aprofita (el vent augmenta amb l'altura)."],["Multiplicador","Engranatges que fan girar l'eix ràpid més de pressa que l'eix lent. No augmenta l'energia, només la velocitat."],["Generador","Transforma l'energia mecànica de rotació en energia elèctrica (fa la feina de l'alternador)."],["Orientació i control","El controlador orienta la gòndola cap al vent; l'anemòmetre mesura el vent."],["Transformador","Puja la tensió perquè es perdi menys energia fins a la xarxa."]],
+    avant:["És renovable i abundant: el vent no s'acaba.","No emet CO₂ ni contaminants a l'aire quan funciona.","No produeix residus sòlids ni abocaments d'aigua.","Ajuda a reduir la dependència dels combustibles fòssils.","Un cop instal·lat, no necessita combustible."],
+    inconv:["El vent no és constant: necessita el suport d'altres fonts.","Impacte visual: molts aerogeneradors junts es veuen de lluny.","Poden afectar les aus, segons on es posin.","Fan soroll, semblant al d'altres màquines industrials.","Poden interferir en la ràdio, la telefonia i la televisió."],
+    impacte:[["Aus","L'impacte depèn d'on es posa el parc: cal vigilar les zones sensibles."],["Hàbitat","Les obres i el soroll poden canviar l'hàbitat i el comportament d'alguns animals."],["Erosió","En obrir camins i accessos es remou terra i el terreny es pot erosionar."],["Impacte visual","Una gran concentració de màquines es veu de lluny i canvia el paisatge."],["Soroll","És semblant al d'altres màquines industrials, però a l'aire lliure."],["Interferències","Poden afectar la ràdio, la telefonia i la televisió quan les pales giren."]],
+    mesura:"Estudiar el terreny abans de fer els accessos, vigilar les aus amb programes de seguiment i triar bé el lloc, el color de les torres i la distribució del parc.",
+    resum:"Un parc eòlic transforma l'energia del vent en electricitat sense emissions, però depèn del vent i s'ha de situar amb cura."
+  },
+  fv:{
+    name:"Central solar fotovoltaica", font:"El Sol (la seva llum)", renov:true, co2:"No emet CO₂ en funcionar",
+    que:"Una central fotovoltaica obté electricitat directament de la llum del Sol amb panells de cèl·lules fotovoltaiques. No té turbina.",
+    chain:["radiant","electrica"], sub:["la llum del Sol","corrent continu"],
+    via:["Cèl·lules fotovoltaiques"],
+    llegir:"Les cèl·lules de silici transformen directament la llum en electricitat: no hi ha turbina ni calor pel mig.",
+    passos:["La llum del Sol arriba a les cèl·lules fotovoltaiques dels panells.","Els electrons del silici absorbeixen l'energia de la llum i es mouen: apareix un corrent elèctric.","Les cèl·lules s'agrupen en mòduls i els mòduls, en panells.","El corrent continu va a l'armari de corrent continu.","L'inversor el converteix en corrent altern.","El centre de transformació l'adapta a la xarxa elèctrica."],
+    comps:[["Cèl·lula fotovoltaica","Converteix la llum del Sol en corrent elèctric. És de silici, un material semiconductor."],["Panell (mòdul)","Agrupa moltes cèl·lules connectades entre elles; les seves tensions se sumen."],["Estructura o seguidor","Subjecta els panells; un seguidor els gira durant el dia per seguir el Sol i captar més llum."],["Cablejat i proteccions","Porten el corrent i protegeixen la instal·lació."],["Armari de corrent continu","Recull el corrent continu que produeixen els panells."],["Inversor","Passa el corrent continu a corrent altern, el que fan servir la xarxa i els endolls."],["Centre de transformació","Adapta la tensió i la intensitat a la xarxa de transport."],["Bateries (opcionals)","Guarden energia per als moments sense sol."]],
+    avant:["No emet contaminants a l'aire quan funciona.","Evita cremar combustibles fòssils.","Fa servir una font renovable i inesgotable: el Sol.","Pot funcionar en llocs on no arriba la xarxa elèctrica.","Es pot instal·lar a les teulades per autoconsumir l'energia."],
+    inconv:["Els panells, al final de la vida, generen residus que cal tractar.","Els grans parcs ocupen molt de terreny.","Només produeix quan hi ha llum solar.","Cal tenir bateries o una altra font quan no fa sol."],
+    impacte:[["Ús del terreny","Els parcs grans ocupen molt d'espai. L'agrovoltaica combina plaques i cultius al mateix terreny."],["Paisatge","Els camps de panells canvien l'aspecte del territori."],["Fauna","Pot afectar les aus: de vegades cal reduir un projecte per protegir espècies com l'àliga cuabarrada."],["Residus dels panells","Al final de la vida útil cal tractar-los i reciclar-los."],["Fabricació","Fabricar els panells necessita energia i materials."],["Sense emissions","Quan funciona no emet contaminants a l'aire ni crema combustibles."]],
+    mesura:"Posar els panells a teulades i edificis, o combinar-los amb cultius (agrovoltaica).",
+    resum:"Una central fotovoltaica transforma directament la llum del Sol en electricitat, sense emissions i sense turbina. És neta quan funciona, però cal reciclar bé els panells i fabricar-los amb poca energia."
+  },
+  ts:{
+    name:"Central termosolar", font:"El Sol (la seva calor)", renov:true, co2:"No emet CO₂ en funcionar",
+    que:"Una central termosolar concentra la llum del Sol amb miralls per escalfar un fluid; amb la seva calor es fa vapor que mou una turbina. Pot guardar la calor en sals foses i produir electricitat de nit.",
+    chain:["radiant","termica","mecanica","electrica"], sub:["la llum del Sol","calor de la sal i vapor","gir de la turbina","electricitat"],
+    via:["Heliòstats i receptor","Turbina","Alternador"],
+    llegir:"La llum del Sol es converteix en calor, que es guarda a la sal; el vapor mou la turbina i l'alternador produeix electricitat.",
+    passos:["Els heliòstats reflecteixen la llum del Sol cap a la torre.","El receptor escalfa la sal fins a uns 565 ºC.","La sal calenta es guarda en un tanc aïllat.","La sal calenta escalfa l'aigua al generador de vapor.","El vapor fa girar la turbina i l'alternador produeix electricitat.","La sal, ja refredada, torna al tanc fred. De nit es fa servir la sal calenta guardada."],
+    comps:[["Heliòstats","Miralls orientables que segueixen el Sol i reflecteixen la llum cap a la torre."],["Torre i receptor","El receptor, dalt de la torre, absorbeix la llum concentrada i escalfa la sal."],["Sals foses","Guarden la calor en un tanc calent i un de fred."],["Generador de vapor","La sal calenta cedeix la calor a l'aigua, que es converteix en vapor."],["Turbina","El vapor a pressió la fa girar: transforma la calor del vapor en moviment."],["Alternador","Unit a la turbina, converteix l'energia mecànica en elèctrica."],["Condensador i refrigeració","Converteixen el vapor en aigua perquè el cicle es repeteixi."],["Transformador","Puja la tensió per injectar l'electricitat a la xarxa."]],
+    avant:["Guarda la calor i pot produir electricitat de nit o sense sol.","Aporta estabilitat a la xarxa: la turbina i l'alternador giren amb inèrcia.","És renovable i neta: no emet CO₂ quan funciona.","Redueix la dependència del petroli i del gas que s'importen.","Crea feina (uns 50 llocs fixos per planta)."],
+    inconv:["Té un cost d'operació alt i és menys competitiva.","Depèn de la radiació solar i del clima.","Necessita molta superfície de miralls i es veu de lluny.","L'emmagatzematge de calor encara es pot millorar.","La sal ha de mantenir-se per sobre de 280 ºC per no solidificar."],
+    impacte:[["Ús del terreny","Necessita molta superfície: unes quantes centrals poden ocupar centenars d'hectàrees."],["Aus i llum","La llum concentrada pot ferir les aus que hi volen a prop."],["Paisatge","Els camps de miralls es veuen de lluny i canvien el paisatge."],["Aigua de refrigeració","El condensador gasta aigua; la refrigeració en sec en redueix molt el consum."],["Materials","Fer miralls, acer i formigó també té impacte ambiental."],["Sals foses","Un vessament de nitrats podria contaminar el sòl i l'aigua."]],
+    mesura:"Triar llocs fora de zones protegides i d'ocells, integrar la planta al paisatge, refrigerar en sec, posar dipòsits de contenció i controlar les fuites de sal.",
+    resum:"Una central termosolar fa calor amb miralls, la guarda en sals foses i la converteix en electricitat amb una turbina, fins i tot de nit."
+  },
+  termica:{
+    name:"Central tèrmica", font:"Un combustible (per exemple, gas natural)", renov:false, co2:"Emet CO₂",
+    que:"Una central tèrmica produeix electricitat fent girar una turbina amb el vapor d'aigua que s'obté cremant un combustible.",
+    chain:["quimica","termica","mecanica","electrica"], sub:["el combustible","calor i vapor","gir de la turbina","electricitat"],
+    via:["Caldera","Turbina","Alternador"],
+    llegir:"El combustible es crema i fa vapor; el vapor fa girar la turbina i l'alternador produeix electricitat.",
+    passos:["El combustible es crema a la caldera i escalfa l'aigua fins a fer vapor a molta pressió.","El vapor fa girar la turbina.","La turbina fa girar l'alternador, que produeix electricitat.","El transformador puja la tensió perquè l'electricitat es pugui transportar.","El vapor que surt de la turbina passa pel condensador i torna a ser aigua.","L'aigua torna a la caldera i el cicle comença de nou."],
+    comps:[["Dipòsit de combustible","Guarda el combustible que es crema. El gas arriba per gasoducte."],["Caldera o cambra de combustió","Crema el combustible i escalfa l'aigua fins a fer vapor a molta pressió."],["Turbina de vapor","El vapor la fa girar, a unes 3.000 voltes per minut."],["Alternador","Unit a l'eix de la turbina, produeix electricitat en girar."],["Condensador i refrigeració","Converteixen el vapor en aigua perquè torni a la caldera. Fan servir aigua de mar o de riu."],["Xemeneia","Expulsa els gasos de la combustió; si és molt alta, es dispersen i queden menys concentrats."],["Transformador","Puja la tensió per transportar l'electricitat perdent menys energia."]],
+    avant:["És flexible: arrenca i regula la potència segons la demanda.","Ocupa poc terreny i es construeix més de pressa.","No depèn del sol, del vent ni de la pluja."],
+    inconv:["Crema combustibles fòssils, que no són renovables.","Emet CO₂, que reforça l'efecte hivernacle.","Depèn del preu i de l'arribada del gas natural.","Emet gasos com el SO₂ i partícules que cal tractar abans de la xemeneia.","Escalfa l'aigua de refrigeració que torna al riu o al mar."],
+    impacte:[["CO₂ i efecte hivernacle","Cremar combustible emet CO₂, un gas que reforça l'efecte hivernacle."],["SO₂ i partícules","La combustió pot emetre òxids de sofre i partícules, que cal tractar."],["Gasos de la combustió","Surten per la xemeneia, que els dispersa a gran altura."],["Aigua de refrigeració","Torna al riu o al mar més calenta, i això pot afectar els éssers vius."],["Paisatge i soroll","Els edificis i les xemeneies es veuen de lluny i la central fa soroll."],["Combustible fòssil","Es consumeix un recurs que no es renova i que cal portar de lluny."]],
+    mesura:"Instal·lar filtres i desulfuració, refredar l'aigua abans de tornar-la i triar tecnologies que emetin menys CO₂ per kWh.",
+    resum:"Una central tèrmica transforma l'energia química d'un combustible en electricitat passant per la calor, el vapor i la turbina. No és renovable i emet CO₂."
+  },
+  nuclear:{
+    name:"Central nuclear", font:"L'urani", renov:false, co2:"No emet CO₂ en funcionar · genera residus radioactius",
+    que:"Una central nuclear produeix electricitat amb la calor que desprèn la fissió dels àtoms d'urani dins d'un reactor.",
+    chain:["nuclear","termica","mecanica","electrica"], sub:["urani-235","calor del reactor i vapor","gir de la turbina","electricitat"],
+    via:["Reactor","Turbina","Alternador"],
+    llegir:"La fissió de l'urani escalfa l'aigua; el vapor fa girar la turbina i l'alternador produeix electricitat. Una gran part de la calor es perd a la torre de refrigeració o a l'aigua.",
+    passos:["Els àtoms d'urani-235 es trenquen (fissió) dins del reactor i alliberen calor.","La calor escalfa l'aigua del circuit primari, que està a molta pressió.","Aquesta aigua passa pel generador de vapor i escalfa l'aigua d'un segon circuit.","L'aigua del segon circuit es converteix en vapor a alta pressió.","El vapor fa girar la turbina, unida a l'alternador, que produeix electricitat.","El vapor es torna a convertir en aigua i la calor que sobra va a la torre de refrigeració o a l'aigua del riu o del mar."],
+    comps:[["Reactor","Conté el combustible d'urani, on es fa la fissió controlada. Té sistemes per començar, mantenir i aturar la reacció."],["Generador de vapor","Passa la calor de l'aigua del reactor a una altra aigua, que es converteix en vapor. Separa els dos circuits."],["Edifici de contenció","Estructura estanca d'acer dins d'un edifici de formigó que protegeix el reactor."],["Piscina de combustible","Guarda sota l'aigua el combustible gastat mentre perd activitat."],["Turbina","El vapor a pressió la fa girar."],["Alternador","Gira unit a la turbina i converteix l'energia mecànica en elèctrica."],["Condensador i torre de refrigeració","Converteixen el vapor en aigua i expulsen la calor que sobra."],["Transformador","Puja la tensió perquè l'electricitat arribi a la xarxa perdent menys energia."]],
+    avant:["Produeix electricitat de manera contínua, de dia i de nit.","No emet CO₂ quan funciona.","Necessita molt poc combustible: una pastilla d'urani equival a una tona de carbó."],
+    inconv:["Genera residus radioactius que cal guardar amb seguretat durant molt de temps.","Té risc d'accident: poc probable, però amb conseqüències greus.","L'urani és un recurs limitat (no és renovable).","Desmantellar una central és un procés molt llarg.","Necessita molta aigua per refrigerar-se, d'un riu o del mar."],
+    impacte:[["Residus radioactius","Es guarden a la mateixa central, en piscines i contenidors; els de baixa activitat van a un magatzem a part (El Cabril)."],["Risc d'accident","És poc probable, però existeix: per això hi ha tres barreres de seguretat."],["Vigilància","El Consell de Seguretat Nuclear (CSN) controla les centrals i els residus."],["Aigua de refrigeració","L'aigua que torna al riu o al mar en surt més calenta."],["Sense CO₂ en funcionar","No emet CO₂ quan produeix electricitat: ajuda a reduir les emissions."],["Desmantellament","Quan una central tanca, desmantellar-la dura molts anys."]],
+    mesura:"Tres barreres de seguretat (beina del combustible, vas del reactor i edifici de contenció) i control permanent del CSN.",
+    resum:"Una central nuclear transforma la calor de la fissió de l'urani en electricitat, sense emetre CO₂ però generant residus radioactius que cal gestionar durant molt de temps."
+  }
+};
+const STUDY_ORDER = ["hidro","eolica","fv","ts","termica","nuclear"];
+const DEVICES = ["Canonada forçada","Turbina","Alternador","Pales i rotor","Generador","Cèl·lules fotovoltaiques","Heliòstats i receptor","Caldera","Reactor","Transformador","Condensador","Inversor","Multiplicador"];
+const cName = k => k==="general" ? "Esquema comú" : CENTRALS[k].n;
+const cEmoji = k => CENTRALS[k].e;
+const eName = k => ENERGY[k][1];
+const chainText = t => t.chain.map(eName).join(" → ");
+
+/* ---------- capçalera comuna de la Zona d'estudi ---------- */
+function studyTop(title, back){
+  return `<div class="top">
+      <span class="mini"><span class="bolt">⚡</span> Energia en Cadena</span>
+      <span class="chip type">📚 Zona d'estudi</span>
+      ${title?`<span class="chip">${title}</span>`:""}
+      <span class="spacer"></span>
+      <button class="btn ghost sBack" id="btnBack">${back==="home"?"← Zona d'estudi":"← Tornar al joc"}</button>
+    </div>`;
+}
+function bindBack(back){ $("#btnBack").onclick = back==="home" ? renderStudyHome : renderSetup; }
+function centralChips(sel, withAll, withGeneral){
+  const keys = [...(withAll?["all"]:[]), ...STUDY_ORDER, ...(withGeneral?["general"]:[])];
+  return `<div class="toggles sFilter">${keys.map(k=>`<button data-c="${k}" class="${k===sel?"on":""}">${
+    k==="all"?"🔀 Totes":k==="general"?"⚡ Comparar":cEmoji(k)+" "+cName(k)}</button>`).join("")}</div>`;
+}
+
+/* ---------- inici de la Zona d'estudi ---------- */
+function renderStudyHome(){
+  stopTick(); G = null; S = {view:"home"};
+  const modes = [
+    ["theory","📖","Teoria","Repassa cada central: què és, la cadena d'energia, com funciona pas a pas, components, avantatges i inconvenients i impacte ambiental."],
+    ["cards","🃏","Targetes","Una pregunta per una cara i la resposta per l'altra. Si encara no la saps, et tornarà a sortir d'aquí a poc."],
+    ["practice","✏️","Practica sol","Les preguntes del joc, sense punts ni temps. Et diu al moment si és correcte i per què. Les que falles tornen a sortir al final."],
+    ["chain","⛓️","Construeix la cadena","Posa en ordre les energies de cada central i on passa cada transformació. És el més important del tema."]
+  ];
+  $("#app").innerHTML = studyTop("", "game") + `
+    <div class="studyWrap">
+      <div class="sHead"><h2>📚 Zona d'estudi</h2>
+        <p>Estudia al teu ritme. Aquí no hi ha punts, ni rànquings, ni ningú que et miri: pots equivocar-te tantes vegades com vulguis.</p></div>
+      <div class="sModes">${modes.map(([k,e,t,d])=>`<button class="sMode" data-m="${k}"><span class="sEm">${e}</span><span class="sT">${t}</span><span class="sD">${d}</span></button>`).join("")}</div>
+      <p class="sTip">💡 Consell: comença per la <b>Teoria</b>, després fes <b>Construeix la cadena</b> i les <b>Targetes</b>, i acaba amb <b>Practica sol</b>.</p>
+    </div>`;
+  bindBack("game");
+  document.querySelectorAll(".sMode").forEach(b=>b.onclick=()=>{
+    const m=b.dataset.m;
+    if(m==="theory") renderTheory("general");
+    else if(m==="cards") startCards("all");
+    else if(m==="practice") startPractice("all");
+    else startChain(0);
+  });
+}
+
+/* ---------- 📖 TEORIA ---------- */
+function chainHtml(t, withVia=true){
+  return `<div class="chain sChain">${t.chain.map((e,i)=>{
+    const [em,n]=ENERGY[e];
+    const box = `<div class="ebox"><div class="em">${em}</div><div class="en">${n}</div><div class="es">${t.sub[i]}</div></div>`;
+    if(i===0) return box;
+    return `<div class="via"><span class="carr">➜</span>${withVia?`<span class="vl">${t.via[i-1]}</span>`:""}</div>${box}`;
+  }).join("")}</div>`;
+}
+function renderTheory(k){
+  S = {view:"theory", k};
+  const nav = `<nav class="tNav">${["general",...STUDY_ORDER].map(c=>`<button data-c="${c}" class="${c===k?"on":""}">${cEmoji(c)} ${cName(c)}</button>`).join("")}</nav>`;
+  let body;
+  if(k==="general"){
+    const T = THEORY_GENERAL;
+    body = `<article class="tDoc">
+      <h2>⚡ Esquema comú de les centrals</h2>
+      <p class="lead">Totes les centrals funcionen igual, <b>excepte la fotovoltaica</b>, que no té turbina.</p>
+      <section><h3>El camí de l'energia</h3>
+        <div class="flow">${T.esquema.map(([a,b],i)=>`${i?'<span class="carr">➜</span>':""}<div class="fstep"><b>${a}</b><span>${b}</span></div>`).join("")}</div></section>
+      <section><h3>Què fa girar la turbina?</h3>
+        <ul class="kv">${T.gira.map(([a,b])=>`<li><b>${a}</b><span>${b}</span></li>`).join("")}</ul></section>
+      <section><h3>Comparació de les sis centrals</h3>
+        <div class="tblWrap"><table class="tbl"><thead><tr><th>Central</th><th>Font</th><th>Renovable</th><th>Cadena d'energia</th><th>Emissions</th></tr></thead>
+        <tbody>${STUDY_ORDER.map(c=>{const t=THEORY[c];return `<tr><td>${cEmoji(c)} ${cName(c)}</td><td>${t.font}</td><td>${t.renov?"✅ Sí":"❌ No"}</td><td>${chainText(t)}</td><td>${t.co2}</td></tr>`;}).join("")}</tbody></table></div></section>
+      <section><h3>Conceptes clau</h3>
+        <ul class="kv">${T.conceptes.map(([a,b])=>`<li><b>${a}</b><span>${b}</span></li>`).join("")}</ul></section>
+      ${theoryLinks("general")}
+    </article>`;
+  } else {
+    const t = THEORY[k], p = PHOTOS[k];
+    body = `<article class="tDoc">
+      <h2>${cEmoji(k)} ${t.name}</h2>
+      <div class="tags"><span class="chip">Font: ${t.font}</span><span class="chip">${t.renov?"✅ Renovable":"❌ No renovable"}</span><span class="chip">${t.co2}</span></div>
+      <section class="tQue"><div><h3>Què és?</h3><p>${t.que}</p></div>
+        ${p?`<figure class="photo tPhoto" style="margin:0"><img src="${p.src}" alt="${esc(p.alt)}" onerror="this.closest('figure').remove()"><figcaption>${p.cap}<small>${p.credit}</small></figcaption></figure>`:""}</section>
+      <section><h3>Transformació d'energies</h3>${chainHtml(t)}<p class="read">📖 <b>Com ho llegim:</b> ${t.llegir}</p></section>
+      <section><h3>Com funciona? Pas a pas</h3><ol class="steps">${t.passos.map(s=>`<li>${s}</li>`).join("")}</ol></section>
+      <section><h3>Components</h3><ul class="kv">${t.comps.map(([a,b])=>`<li><b>${a}</b><span>${b}</span></li>`).join("")}</ul></section>
+      <section class="pc"><div class="pro"><h3>👍 Avantatges</h3><ul>${t.avant.map(s=>`<li>${s}</li>`).join("")}</ul></div>
+        <div class="con"><h3>👎 Inconvenients</h3><ul>${t.inconv.map(s=>`<li>${s}</li>`).join("")}</ul></div></section>
+      <section><h3>🌍 Impacte ambiental</h3><ul class="kv">${t.impacte.map(([a,b])=>`<li><b>${a}</b><span>${b}</span></li>`).join("")}</ul>
+        <p class="read">🛠️ <b>Mesures que ajuden:</b> ${t.mesura}</p></section>
+      <section class="resum"><h3>En resum</h3><p>${t.resum}</p></section>
+      ${theoryLinks(k)}
+    </article>`;
+  }
+  $("#app").innerHTML = studyTop("📖 Teoria","home") + `<div class="studyWrap tWrap">${nav}<div class="tMain">${body}</div></div>`;
+  bindBack("home");
+  document.querySelectorAll(".tNav button").forEach(b=>b.onclick=()=>{ renderTheory(b.dataset.c); });
+  document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{
+    const [m,c]=b.dataset.go.split(":");
+    if(m==="cards") startCards(c); else if(m==="practice") startPractice(c); else startChain(Math.max(0,STUDY_ORDER.indexOf(c)));
+  });
+  document.querySelector(".tMain").scrollTo(0,0);
+}
+function theoryLinks(k){
+  return `<div class="tLinks"><span>Ara posa-ho a prova:</span>
+    <button class="btn" data-go="cards:${k}">🃏 Targetes${k==="general"?" de comparar":" d'aquesta central"}</button>
+    <button class="btn" data-go="practice:${k}">✏️ Practica${k==="general"?" comparant":" aquesta central"}</button>
+    ${k!=="general"?`<button class="btn" data-go="chain:${k}">⛓️ Construeix la cadena</button>`:""}</div>`;
+}
+
+/* ---------- 🃏 TARGETES ---------- */
+function buildCards(filter){
+  const cards = [];
+  const add = (c,f,b)=>cards.push({c,f,b});
+  if(filter==="all"||filter==="general"){
+    const T=THEORY_GENERAL;
+    add("general","Quin és l'esquema comú de les centrals amb turbina?",T.esquema.map(x=>x[0]).join(" → "));
+    add("general","Quina central NO té turbina? Com produeix l'electricitat?","La <b>fotovoltaica</b>: les cèl·lules de silici transformen la llum directament en electricitat.");
+    add("general","Què fa girar la turbina a la nuclear, la tèrmica i la termosolar?","El <b>vapor d'aigua</b>. Només canvia com s'aconsegueix la calor: fissió, combustió o Sol.");
+    T.conceptes.forEach(([a,b])=>add("general",`Concepte: <b>${a}</b>`,b));
+    add("general","Quines de les sis centrals NO són renovables?","La <b>tèrmica</b> (combustibles fòssils) i la <b>nuclear</b> (l'urani és limitat).");
+    add("general","Quina de les sis centrals emet CO₂ quan funciona?","La <b>tèrmica</b>, perquè crema un combustible.");
+  }
+  for(const k of STUDY_ORDER){
+    if(filter!=="all" && filter!==k) continue;
+    const t=THEORY[k], n=cName(k);
+    add(k,`Què és una <b>${n.toLowerCase()}</b>?`,t.que);
+    add(k,`Cadena d'energia: <b>${n}</b>`,`${chainText(t)}<br><small>${t.via.map((v,i)=>`${eName(t.chain[i])} → ${eName(t.chain[i+1])}: <b>${v}</b>`).join(" · ")}</small>`);
+    add(k,`<b>${n}</b>: quina és la font d'energia? És renovable?`,`${t.font}. ${t.renov?"Sí, és renovable":"No és renovable"}. ${t.co2}.`);
+    t.comps.forEach(([a,b])=>add(k,`${cEmoji(k)} Quina funció té: <b>${a}</b>?`,b));
+    add(k,`${cEmoji(k)} Digues tres <b>avantatges</b> de la ${n.toLowerCase()}.`,"<ul>"+t.avant.slice(0,4).map(s=>`<li>${s}</li>`).join("")+"</ul>");
+    add(k,`${cEmoji(k)} Digues tres <b>inconvenients</b> de la ${n.toLowerCase()}.`,"<ul>"+t.inconv.slice(0,4).map(s=>`<li>${s}</li>`).join("")+"</ul>");
+    t.impacte.forEach(([a,b])=>add(k,`${cEmoji(k)} Impacte ambiental: <b>${a}</b>. Què vol dir?`,b));
+    add(k,`${cEmoji(k)} Quines mesures redueixen l'impacte de la ${n.toLowerCase()}?`,t.mesura);
+  }
+  return shuffle(cards);
+}
+function startCards(filter){
+  S = {view:"cards", filter, deck:buildCards(filter), flipped:false, known:0, again:0};
+  S.total = S.deck.length;
+  renderCards();
+}
+function flipCard(){     // gira la targeta amb animació (sense tornar a dibuixar la pantalla)
+  S.flipped = !S.flipped;
+  $("#fcard")?.classList.toggle("flipped", S.flipped);
+  $(".cBtns")?.classList.toggle("hiddenV", !S.flipped);
+}
+function cardAnswer(knew){
+  if(!S.flipped) return;
+  const card = S.deck.shift();
+  if(knew) S.known++;
+  else { S.again++; S.deck.splice(Math.min(3,S.deck.length),0,card); }   // torna a sortir d'aquí a 3 targetes
+  S.flipped=false; renderCards();
+}
+function renderCards(){
+  const card = S.deck[0];
+  let main;
+  if(!card){
+    main = `<div class="sDone"><h2>✔ Has repassat totes les targetes</h2>
+      <p>${S.total} targetes${S.again?` · ${S.again} vegades has dit «Encara no»: és normal, és així com s'aprèn.`:""}</p>
+      <div class="row" style="justify-content:center"><button class="btn primary" id="btnAgainC">Torna a començar ↻</button>
+      <button class="btn" id="btnTheoryC">📖 Repassar la teoria</button></div></div>`;
+  } else {
+    main = `<div class="cardArea">
+      <div class="prog"><div class="pbar"><span style="width:${S.known/S.total*100}%"></span></div><span>${S.known} / ${S.total} sabudes</span></div>
+      <button class="fcard ${S.flipped?"flipped":""}" id="fcard" aria-label="Gira la targeta">
+        <div class="fside front"><span class="ftag">${cEmoji(card.c)} ${cName(card.c)}</span><div class="ftxt">${card.f}</div><span class="fhint">Pensa la resposta i toca per girar-la (o prem Espai)</span></div>
+        <div class="fside back"><span class="ftag">Resposta</span><div class="ftxt">${card.b}</div></div>
+      </button>
+      <div class="cBtns ${S.flipped?"":"hiddenV"}">
+        <button class="btn cNo" id="btnNo">🔁 Encara no <small>(←)</small></button>
+        <button class="btn cYes" id="btnYes">✔ Ja ho sé <small>(→)</small></button>
+      </div></div>`;
+  }
+  $("#app").innerHTML = studyTop("🃏 Targetes","home") + `<div class="studyWrap">${centralChips(S.filter,true,true)}${main}</div>`;
+  bindBack("home");
+  document.querySelectorAll(".sFilter button").forEach(b=>b.onclick=()=>startCards(b.dataset.c));
+  if(card){
+    $("#fcard").onclick = flipCard;
+    $("#btnNo").onclick = ()=>cardAnswer(false);
+    $("#btnYes").onclick = ()=>cardAnswer(true);
+  } else {
+    $("#btnAgainC").onclick = ()=>startCards(S.filter);
+    $("#btnTheoryC").onclick = ()=>renderTheory(S.filter==="all"?"general":S.filter);
+  }
+}
+
+/* ---------- ✏️ PRACTICA SOL ----------
+   Fa servir groupAnswers() del mode grup (respostes clicables). G conté l'estat de la pregunta. */
+function startPractice(filter){
+  const pool = filter==="all" ? BANC : BANC.filter(q=>q.c===filter);
+  S = {view:"practice", filter, first:0, fails:new Set()};
+  const savedMode = cfg.mode; cfg.mode = "mix";                 // la tria equilibrada fa servir tot el banc
+  const qs = filter==="all" ? pickQuestions(15) : shuffle(pool).map(prep);
+  cfg.mode = savedMode;
+  S.total = qs.length;
+  G = {study:true, qs, i:0};
+  newPracticeQ();
+}
+function newPracticeQ(){
+  Object.assign(G,{done:false, ok:false, wrong:new Set(), seq:[], sel:null, link:{}});
+  renderPractice();
+}
+function practiceResult(ok){
+  if(G.done) return;
+  const q=G.qs[G.i];
+  G.done=true; G.ok=ok;
+  if(ok && !q.again) S.first++;
+  if(!ok){ S.fails.add(q.c); G.qs.push({...prep(q), again:true}); }  // torna a sortir al final
+  renderPractice();
+}
+function practiceNext(){
+  if(!G.done){ const q=G.qs[G.i]; if((q.t==="order"&&G.seq.length===q.items.length)||(q.t==="match"&&Object.keys(G.link).length===q.pairs.length)) practiceCheck(); return; }
+  G.i++;
+  if(G.i>=G.qs.length) renderPracticeEnd(); else newPracticeQ();
+}
+function practiceCheck(){
+  const q=G.qs[G.i];
+  if(q.t==="order") practiceResult(G.seq.every((v,i)=>q.view[v]===q.items[i]));
+  else if(q.t==="match") practiceResult(q.pairs.every((p,i)=>q.right[G.link[i]]===p[1]));
+}
+function renderPractice(){
+  const q=G.qs[G.i], ty=TYPES[q.t], ce=CENTRALS[q.c], D=G.done;
+  const left = G.qs.length - G.i;
+  const needCheck = (q.t==="order"||q.t==="match") && !D;
+  const ready = (q.t==="order"&&G.seq.length===q.items.length)||(q.t==="match"&&Object.keys(G.link).length===q.pairs.length);
+  const hint = D ? "" : CHOICE.includes(q.t) ? "Toca la resposta."
+    : q.t==="order" ? "Toca els passos en ordre (1, 2, 3…). Toca'n un altre cop per treure'l."
+    : q.t==="match" ? "Toca un element de l'esquerra i després la seva parella de la dreta."
+    : "Toca la paraula que és un error.";
+  const fb = !D ? "" : G.ok
+    ? `<div class="turn" style="--pc:var(--ok)">✅ <b>Correcte!</b></div>`
+    : `<div class="turn" style="--pc:var(--ko)">❌ <b>No és correcte.</b> <span class="pv">Llegeix l'explicació: aquesta pregunta tornarà a sortir al final.</span></div>`;
+  $("#app").innerHTML = studyTop("✏️ Practica sol","home") + `
+    <div class="stage ${D?"revealed":""}">
+      ${centralChips(S.filter,true,true)}
+      ${fb}
+      <div class="qhead"><div class="qtext">${q.again?'<span class="chip" style="font-size:.5em;vertical-align:middle">🔁 Repàs</span> ':""}${q.q}</div></div>
+      <div class="answers">${groupAnswers(q)}</div>
+      ${D?`<div class="revealInfo"><div class="explain">💡 ${q.exp}</div>${photoHtml(q)}</div>`:""}
+    </div>
+    <div class="bottom">
+      <div class="teamBar"><div class="hint">${ce.e} ${ce.n==="Totes (comparar)"?"Totes les centrals":ce.n} · ${ty.e} ${ty.n}${hint?" · "+hint:""}</div>
+        <div class="hint">Queden ${left} pregunta${left===1?"":"s"} · encertades a la primera: ${S.first}</div></div>
+      ${D ? `<button class="btn primary" id="btnMain">${G.i===G.qs.length-1?"Acabar ✔":"Següent ▶"}</button>`
+          : needCheck ? `<button class="btn primary" id="btnMain" ${ready?"":"disabled"}>Comprova ✓</button>` : ""}
+    </div>`;
+  bindBack("home");
+  document.querySelectorAll(".sFilter button").forEach(b=>b.onclick=()=>startPractice(b.dataset.c));
+  const bm=$("#btnMain"); if(bm) bm.onclick = ()=> D ? practiceNext() : practiceCheck();
+  document.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>{ const o=+b.dataset.o; if(o!==q.correct) G.wrong.add(o); practiceResult(o===q.correct); });
+  document.querySelectorAll("[data-e]").forEach(b=>b.onclick=()=>{ const e=b.dataset.e; if(e!==q.correctLetter) G.wrong.add(e); practiceResult(e===q.correctLetter); });
+  document.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>{ const v=+b.dataset.v, k=G.seq.indexOf(v); if(k>=0) G.seq.splice(k,1); else G.seq.push(v); renderPractice(); });
+  document.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{ const l=+b.dataset.l; G.sel = G.sel===l ? null : l; renderPractice(); });
+  document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{
+    const r=+b.dataset.r;
+    for(const k of Object.keys(G.link)) if(G.link[k]===r) delete G.link[k];
+    if(G.sel!==null){ G.link[G.sel]=r; G.sel=null; }
+    renderPractice();
+  });
+  fitStage();
+}
+function renderPracticeEnd(){
+  const fails=[...S.fails];
+  $("#app").innerHTML = studyTop("✏️ Practica sol","home") + `<div class="studyWrap"><div class="sDone">
+    <h2>✔ Has acabat la pràctica</h2>
+    <p>Has encertat a la primera <b>${S.first}</b> de ${S.total} preguntes, i al final les has resolt totes.</p>
+    ${fails.length?`<p>Et convé repassar la teoria de:</p><div class="row" style="justify-content:center">${fails.map(c=>`<button class="btn" data-th="${c}">📖 ${cEmoji(c)} ${cName(c)}</button>`).join("")}</div>`
+      :`<p>No has fallat cap pregunta. Molt bé!</p>`}
+    <div class="row" style="justify-content:center;margin-top:1em"><button class="btn primary" id="btnAgainP">Practica més ↻</button></div>
+  </div></div>`;
+  G = null;
+  bindBack("home");
+  document.querySelectorAll("[data-th]").forEach(b=>b.onclick=()=>renderTheory(b.dataset.th));
+  $("#btnAgainP").onclick = ()=>startPractice(S.filter);
+}
+
+/* ---------- ⛓️ CONSTRUEIX LA CADENA ---------- */
+function startChain(idx){
+  const k = STUDY_ORDER[idx], t = THEORY[k];
+  const extraE = shuffle(Object.keys(ENERGY).filter(e=>!t.chain.includes(e))).slice(0, Math.max(2, 6-t.chain.length));
+  const extraD = shuffle(DEVICES.filter(d=>!t.via.includes(d))).slice(0, Math.max(3, 6-t.via.length));
+  S = {view:"chain", idx, k, e:Array(t.chain.length).fill(null), d:Array(t.via.length).fill(null),
+       optE:shuffle([...new Set(t.chain), ...extraE]), optD:shuffle([...new Set(t.via), ...extraD]), checked:false, tries:0};
+  renderChain();
+}
+function chainPhase(){ return S.e.includes(null) ? "e" : "d"; }
+function chainSolved(){ const t=THEORY[S.k]; return S.e.every((x,i)=>x===t.chain[i]) && S.d.every((x,i)=>x===t.via[i]); }
+function renderChain(){
+  const t=THEORY[S.k], ph=chainPhase(), full=!S.e.includes(null)&&!S.d.includes(null);
+  const solved = S.checked && chainSolved();
+  const slotE = i => {
+    const v=S.e[i]; const st = S.checked ? (v===t.chain[i]?"good":"bad") : "";
+    if(!v) return `<button class="ebox slot blank" data-se="${i}"><div class="em">❓</div><div class="en">${i+1}</div></button>`;
+    const [em,n]=ENERGY[v];
+    return `<button class="ebox slot ${st}" data-se="${i}"><div class="em">${em}</div><div class="en">${n}</div>${solved?`<div class="es">${t.sub[i]}</div>`:""}</button>`;
+  };
+  const slotD = i => {
+    const v=S.d[i]; const st = S.checked ? (v===t.via[i]?"good":"bad") : "";
+    return `<div class="via"><span class="carr">➜</span><button class="dslot ${v?"":"empty"} ${st}" data-sd="${i}">${v||"?"}</button></div>`;
+  };
+  const slots = `<div class="chain sChain build">${t.chain.map((_,i)=>(i?slotD(i-1):"")+slotE(i)).join("")}</div>`;
+  const opts = solved ? "" : ph==="e"
+    ? `<p class="howto">1️⃣ Toca les <b>energies</b> en ordre, de la primera a l'última. ${t.chain.length} caselles.</p>
+       <div class="optGrid">${S.optE.map(e=>{const [em,n]=ENERGY[e]; const used=S.e.includes(e); return `<button class="opt ${used?"used":""}" data-oe="${e}" ${used?"disabled":""}>${em} ${n}</button>`;}).join("")}</div>`
+    : `<p class="howto">2️⃣ Ara toca <b>on passa</b> cada transformació (les fletxes), d'esquerra a dreta.</p>
+       <div class="optGrid">${S.optD.map(d=>{const used=S.d.includes(d)&&t.via.filter(x=>x===d).length<=S.d.filter(x=>x===d).length; return `<button class="opt dev ${used?"used":""}" data-od="${esc(d)}" ${used?"disabled":""}>${d}</button>`;}).join("")}</div>`;
+  const msg = !S.checked ? "" : solved
+    ? `<div class="turn" style="--pc:var(--ok)">✅ <b>Perfecte!</b> <span class="pv">${t.llegir}</span></div>`
+    : `<div class="turn" style="--pc:var(--ko)">❌ Hi ha caselles en vermell. Toca-les per treure-les i torna-ho a provar.</div>`;
+  $("#app").innerHTML = studyTop("⛓️ Construeix la cadena","home") + `
+    <div class="studyWrap">
+      <div class="toggles sFilter">${STUDY_ORDER.map((c,i)=>`<button data-ci="${i}" class="${i===S.idx?"on":""}">${cEmoji(c)} ${cName(c)}</button>`).join("")}</div>
+      <h2 class="chTitle">${cEmoji(S.k)} ${t.name}</h2>
+      ${msg}
+      ${slots}
+      ${opts}
+      <div class="row chBtns">
+        ${solved ? `<button class="btn" data-th="${S.k}">📖 Veure la teoria</button>
+                    <button class="btn primary" id="btnNextC">${S.idx<STUDY_ORDER.length-1?"Següent central ▶":"Tornar a començar ↻"}</button>`
+                 : `<button class="btn" id="btnReset">Esborra-ho tot</button>
+                    <button class="btn primary" id="btnCheck" ${full?"":"disabled"}>Comprova ✓</button>`}
+      </div>
+    </div>`;
+  bindBack("home");
+  document.querySelectorAll("[data-ci]").forEach(b=>b.onclick=()=>startChain(+b.dataset.ci));
+  document.querySelectorAll("[data-oe]").forEach(b=>b.onclick=()=>{ const i=S.e.indexOf(null); if(i>=0){ S.e[i]=b.dataset.oe; S.checked=false; renderChain(); } });
+  document.querySelectorAll("[data-od]").forEach(b=>b.onclick=()=>{ const i=S.d.indexOf(null); if(i>=0){ S.d[i]=b.dataset.od; S.checked=false; renderChain(); } });
+  if(!solved){
+    document.querySelectorAll("[data-se]").forEach(b=>b.onclick=()=>{ S.e[+b.dataset.se]=null; S.checked=false; renderChain(); });
+    document.querySelectorAll("[data-sd]").forEach(b=>b.onclick=()=>{ S.d[+b.dataset.sd]=null; S.checked=false; renderChain(); });
+  }
+  const bc=$("#btnCheck"); if(bc) bc.onclick=()=>{ S.checked=true; S.tries++; renderChain(); };
+  const br=$("#btnReset"); if(br) br.onclick=()=>startChain(S.idx);
+  const bn=$("#btnNextC"); if(bn) bn.onclick=()=>startChain((S.idx+1)%STUDY_ORDER.length);
+  document.querySelectorAll("[data-th]").forEach(b=>b.onclick=()=>renderTheory(b.dataset.th));
+}
+
+/* ---------- teclat de la Zona d'estudi ---------- */
+function studyKey(e){
+  if(e.key==="Escape"){ S.view==="home" ? renderSetup() : renderStudyHome(); return; }
+  if(e.key==="f"||e.key==="F"){ toggleFull(); return; }
+  if(S.view==="cards" && S.deck?.length){
+    if(e.key===" "||e.key==="Enter"){ e.preventDefault(); flipCard(); }
+    else if(e.key==="ArrowLeft") cardAnswer(false);
+    else if(e.key==="ArrowRight") cardAnswer(true);
+  } else if(S.view==="practice" && G?.study){
+    if(e.key==="Enter"||e.key==="ArrowRight"){ e.preventDefault(); practiceNext(); }
+  }
+}
+
 function toggleFull(){
   if(!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(()=>{});
   else document.exitFullscreen?.();
@@ -1538,6 +2209,7 @@ function toggleFull(){
 document.addEventListener("keydown",e=>{
   if(e.target.tagName==="INPUT") return;
   const cred=document.querySelector(".credBg"); if(cred){ if(e.key==="Escape") cred.remove(); return; }
+  if(S){ studyKey(e); return; }
   if(!G || G.phase==="final"){ if(e.key==="f"||e.key==="F") toggleFull(); return; }
   if(G.group){
     if(e.key==="Enter"||e.key==="ArrowRight"){ e.preventDefault(); groupMain(); }
