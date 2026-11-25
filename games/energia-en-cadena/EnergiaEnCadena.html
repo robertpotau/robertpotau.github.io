@@ -833,7 +833,7 @@ const BANC = [
 /* ============================================================
    CONFIGURACIÓ
    ============================================================ */
-const VERSION = "v1.2.0 — 2026-11-25";
+const VERSION = "v1.2.1 — 2026-11-25";
 const CENTRALS = {
   general:{n:"Totes (comparar)",e:"⚡"},
   hidro:{n:"Hidroelèctrica",e:"💧"},
@@ -1231,13 +1231,42 @@ function renderQuestion(){
 
 /* Ajusta la zona de pregunta a la pantalla: si no hi cap, la redueix amb zoom
    (fins al 60 %). Així el joc s'adapta a l'ordinador i a qualsevol projector. */
-function fitSetup(){
-  const s = document.querySelector(".setup"); if(!s || innerWidth<=900) return;   // al mòbil, es fa scroll
+/* Zoom de la pantalla inicial (v1.2.1): es calcula UNA sola vegada per mida de finestra,
+   amb el cas més llarg (els dos modes de joc, els dos modes de preguntes i 6 equips/jugadors),
+   perquè la mida no canviï en clicar «Projectar a classe», «Jugar en grup», el nombre d'equips… */
+let setupZoom = {}, fittingSetup = false;
+function neededSetupZoom(s){
   let z = 1; s.style.zoom = 1;
   while(s.scrollHeight > s.clientHeight+1 && z > 0.75){
     z = Math.round((z-0.03)*100)/100;
     s.style.zoom = z;
   }
+  return z;
+}
+function fitSetup(){
+  if(fittingSetup) return;
+  const s = document.querySelector(".setup"); if(!s) return;
+  if(innerWidth<=900){ s.style.zoom = 1; return; }   // al mòbil, es fa scroll
+  const key = innerWidth+"x"+innerHeight;
+  if(setupZoom[key]===undefined){
+    const keep = {play:cfg.play, mode:cfg.mode, nTeams:cfg.nTeams, nPlayers:cfg.nPlayers}, foc = document.activeElement?.id;
+    let z = 1; fittingSetup = true;
+    try{
+      for(const play of ["classe","grup"]) for(const mode of ["mix","custom"]){
+        Object.assign(cfg, {play, mode, nTeams:6, nPlayers:6});
+        renderSetup();
+        z = Math.min(z, neededSetupZoom(document.querySelector(".setup")));
+      }
+    } finally {
+      Object.assign(cfg, keep);
+      renderSetup();
+      fittingSetup = false;
+    }
+    setupZoom[key] = z;
+    if(foc) document.getElementById(foc)?.focus();
+  }
+  const el = document.querySelector(".setup"); el.style.zoom = setupZoom[key];
+  if(el.scrollHeight > el.clientHeight+1) neededSetupZoom(el);   // per si de cas (no hauria de passar)
 }
 function fitStage(){
   fitSetup();
@@ -1253,6 +1282,7 @@ function fitStage(){
 }
 let fitT = null;
 window.addEventListener("resize", ()=>{ clearTimeout(fitT); fitT = setTimeout(fitStage,120); });
+document.fonts?.ready.then(()=>{ setupZoom = {}; fitSetup(); });   // la tipografia canvia les mides: es torna a calcular
 document.addEventListener("fullscreenchange", ()=>setTimeout(fitStage,150));
 
 /* Preguntes amb opcions: el professor/a assigna cada equip a l'opció que diu i el joc corregeix sol.
