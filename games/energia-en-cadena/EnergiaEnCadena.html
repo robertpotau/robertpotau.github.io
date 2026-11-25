@@ -128,7 +128,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 .tile{position:relative;border-radius:16px;display:flex;align-items:center;gap:1vw;padding:1.4vh 1.4vw;color:#fff;
   font-size:clamp(17px,1.75vw,31px);font-weight:600;line-height:1.2;box-shadow:0 6px 0 rgba(0,0,0,.28);transition:opacity .3s,transform .3s,filter .3s}
 .tiles.one .tile{font-size:clamp(15px,1.45vw,25px);font-weight:500}
-.tile .shape{flex:none;width:clamp(34px,3vw,54px);height:clamp(34px,3vw,54px);display:grid;place-items:center;font-size:clamp(20px,1.9vw,34px);background:rgba(0,0,0,.18);border-radius:10px}
+.tile .shape{font-weight:800;flex:none;width:clamp(34px,3vw,54px);height:clamp(34px,3vw,54px);display:grid;place-items:center;font-size:clamp(20px,1.9vw,34px);background:rgba(0,0,0,.18);border-radius:10px}
 .tile.k0{background:var(--c0)}.tile.k1{background:var(--c1)}.tile.k2{background:var(--c2)}.tile.k3{background:var(--c3)}
 .tile .mark{margin-left:auto;font-size:1.3em;opacity:0}
 .revealed .tile.dim{opacity:.28;filter:grayscale(.6)}
@@ -330,6 +330,14 @@ button.cand:hover:not(:disabled){background:rgba(255,210,63,.14)}
   .seg button{padding:.35em .9em}
   .teamsEdit input{padding:.2em 0}
 }
+/* Botó de pantalla completa (v1.1.1): ⛶ per entrar, 🗗 per sortir; a la pantalla inicial, flotant a dalt a la dreta */
+.fsOut{display:none}
+:root:fullscreen .fsIn{display:none}
+:root:fullscreen .fsOut{display:inline}
+:root:fullscreen #btnFull{border-color:var(--accent)}
+.card{position:relative}
+.fullFloat{position:absolute;top:10px;right:10px;width:34px;height:34px;font-size:15px;z-index:2}
+.card>.fullFloat+div{padding-right:40px}   /* la primera fila no passa per sota del botó */
 .card{align-self:safe center}
 .hero{justify-content:safe center}
 
@@ -825,7 +833,7 @@ const BANC = [
 /* ============================================================
    CONFIGURACIÓ
    ============================================================ */
-const VERSION = "v1.1.0 — 2026-11-25";
+const VERSION = "v1.1.1 — 2026-11-25";
 const CENTRALS = {
   general:{n:"Totes (comparar)",e:"⚡"},
   hidro:{n:"Hidroelèctrica",e:"💧"},
@@ -850,7 +858,7 @@ const ENERGY = {
   electrica:["⚡","Elèctrica"], termica:["🌡️","Tèrmica"], quimica:["🧪","Química"],
   nuclear:["⚛️","Nuclear"], radiant:["☀️","Radiant"]
 };
-const SHAPES = ["▲","◆","●","■"];
+const SHAPES = ["A","B","C","D"];   // lletres de les opcions (v1.1.1: abans eren formes ▲ ◆ ● ■)
 const LETTERS = "ABCDEFGH";
 const TEAM_COLORS = ["#2ec4b6","#9b5de5","#ff8c42","#f15bb5","#a3d930","#4cc9f0"];
 const DEFAULT_NAMES = ["Protons","Electrons","Neutrons","Fotons","Volts","Watts"];
@@ -987,6 +995,7 @@ function pickQuestions(n){
 function renderSetup(){
   stopTick();
   S = null;                // surt de la Zona d'estudi
+  G = null;                // i de la partida: les tecles ja no actuen sobre una partida vella
   const avail = availableQs().length;
   const g = grup();
   const people = g ? players() : teams();
@@ -1023,6 +1032,7 @@ function renderSetup(){
     </section>
 
     <section class="card">
+      <button class="icon-btn fullFloat" id="btnFull" title="Posa o treu la pantalla completa (F)" aria-label="Pantalla completa"><span class="fsIn">⛶</span><span class="fsOut">🗗</span></button>
       <div>
         <h3>Com jugueu?</h3>
         <div class="seg playSeg" id="segPlay">
@@ -1099,6 +1109,7 @@ function renderSetup(){
   </div>`;
   $("#btnCred").onclick = showCredits;
   $("#btnStudy").onclick = renderStudyHome;
+  $("#btnFull").onclick = toggleFull;
 
   document.querySelectorAll("#segPlay button").forEach(b=>b.onclick=()=>{cfg.play=b.dataset.k;renderSetup();});
   document.querySelectorAll("#segPerP button").forEach(b=>b.onclick=()=>{cfg.perP=+b.dataset.n;renderSetup();});
@@ -1184,7 +1195,7 @@ function renderQuestion(){
       <span class="spacer"></span>
       ${cfg.timer!=="off" && !rev ? `<button class="icon-btn" id="btnPause" title="Pausa (P)">${G.paused?"▶":"⏸"}</button>`:""}
       <button class="icon-btn" id="btnSkip" title="Saltar pregunta">⏭</button>
-      <button class="icon-btn" id="btnFull" title="Pantalla completa (F)">⛶</button>
+      <button class="icon-btn" id="btnFull" title="Posa o treu la pantalla completa (F)" aria-label="Pantalla completa"><span class="fsIn">⛶</span><span class="fsOut">🗗</span></button>
       <button class="icon-btn" id="btnExit" title="Sortir">✕</button>
     </div>
     <div class="timerbar ${cfg.timer==="off"?"hidden":""}" id="tbar"><div class="fill" id="tfill"></div></div>
@@ -1462,7 +1473,7 @@ function renderBoard(){
   $("#app").innerHTML = `
     <div class="top"><span class="mini"><span class="bolt">⚡</span> Energia en Cadena</span>
       <span class="chip">Després de la pregunta ${G.i+1} / ${G.qs.length}</span><span class="spacer"></span>
-      <button class="icon-btn" id="btnFull" title="Pantalla completa (F)">⛶</button>
+      <button class="icon-btn" id="btnFull" title="Posa o treu la pantalla completa (F)" aria-label="Pantalla completa"><span class="fsIn">⛶</span><span class="fsOut">🗗</span></button>
       <button class="icon-btn" id="btnExit" title="Sortir">✕</button></div>
     <div class="board">
       <h2>📊 Classificació</h2>
@@ -1583,7 +1594,7 @@ function renderGroupQ(){
       <span class="chip type">${ty.e} ${ty.n}</span>
       <span class="spacer"></span>
       <button class="icon-btn" id="btnSkip" title="Saltar pregunta">⏭</button>
-      <button class="icon-btn" id="btnFull" title="Pantalla completa (F)">⛶</button>
+      <button class="icon-btn" id="btnFull" title="Posa o treu la pantalla completa (F)" aria-label="Pantalla completa"><span class="fsIn">⛶</span><span class="fsOut">🗗</span></button>
       <button class="icon-btn" id="btnExit" title="Sortir">✕</button>
     </div>
     <div class="stage ${D?"revealed":""}">
@@ -1720,7 +1731,7 @@ function renderFinal(){
   const rest = order.slice(3).map((ti,k)=>`${k+4}. ${esc(G.teams[ti].name)} · ${G.scores[ti]} punts`).join(" &nbsp;·&nbsp; ");
   $("#app").innerHTML = `
     <div class="top"><span class="mini"><span class="bolt">⚡</span> Energia en Cadena</span><span class="spacer"></span>
-      <button class="icon-btn" id="btnFull" title="Pantalla completa (F)">⛶</button></div>
+      <button class="icon-btn" id="btnFull" title="Posa o treu la pantalla completa (F)" aria-label="Pantalla completa"><span class="fsIn">⛶</span><span class="fsOut">🗗</span></button></div>
     <div class="board">
       <h2>🏆 Resultats finals</h2>
       <div class="sub">${G.qs.length} preguntes sobre les centrals elèctriques</div>
@@ -1860,10 +1871,11 @@ function studyTop(title, back){
       <span class="chip type">📚 Zona d'estudi</span>
       ${title?`<span class="chip">${title}</span>`:""}
       <span class="spacer"></span>
+      <button class="icon-btn" id="btnFull" title="Posa o treu la pantalla completa (F)" aria-label="Pantalla completa"><span class="fsIn">⛶</span><span class="fsOut">🗗</span></button>
       <button class="btn ghost sBack" id="btnBack">${back==="home"?"← Zona d'estudi":"← Tornar al joc"}</button>
     </div>`;
 }
-function bindBack(back){ $("#btnBack").onclick = back==="home" ? renderStudyHome : renderSetup; }
+function bindBack(back){ $("#btnBack").onclick = back==="home" ? renderStudyHome : renderSetup; $("#btnFull").onclick = toggleFull; }
 function centralChips(sel, withAll, withGeneral){
   const keys = [...(withAll?["all"]:[]), ...STUDY_ORDER, ...(withGeneral?["general"]:[])];
   return `<div class="toggles sFilter">${keys.map(k=>`<button data-c="${k}" class="${k===sel?"on":""}">${
